@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dream Counsellor — career compass for Indian medical students</title>
+<meta name="description" content="Three honest questions, then every funded research programme, scholarship, conference and frontier field open to an Indian medico — matched to who you actually are and what you can actually afford." />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#" id="brandHome">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">Dream<em>Counsellor</em></span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <button type="button" class="navlink" data-goto="intro">Start</button>
+      <button type="button" class="navlink" data-goto="browse">Browse all</button>
+      <button type="button" class="navlink" data-goto="frontiers">Frontier fields</button>
+      <button type="button" class="navlink" data-goto="calendar">Deadlines</button>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+        <span class="theme-dot"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<section class="view is-active" id="view-intro">
+  <div class="hero">
+    <div class="wrap hero-in">
+      <p class="eyebrow">For students of medicine in India</p>
+      <h1 class="hero-h">
+        You were told there were two options.<br />
+        <span class="hero-em">There are about four hundred.</span>
+      </h1>
+      <p class="hero-lede">
+        Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the
+        USMLE. Both are real. Neither is the whole territory. There are funded research programmes
+        you can hold in second year, doctorates that pay you a salary, scholarships that cover
+        everything including your flight, and entire scientific fields nobody mentioned once in five
+        years of lectures.
+      </p>
+      <p class="hero-lede">
+        This asks you three questions that have nothing to do with marks — and then does the
+        research you do not have time to do.
+      </p>
+
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
+        <button type="button" class="btn btn-ghost" data-goto="browse">Just show me everything</button>
+      </div>
+
+      <dl class="hero-stats">
+        <div><dt>Programmes indexed</dt><dd id="statTotal">—</dd></div>
+        <div><dt>Cost you nothing</dt><dd id="statFree">—</dd></div>
+        <div><dt>Open to current MBBS students</dt><dd id="statStudent">—</dd></div>
+        <div><dt>Countries covered</dt><dd id="statCountries">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="wrap band">
+    <h2 class="band-h">Three questions, and why these three</h2>
+    <div class="triptych">
+      <article class="tri">
+        <span class="tri-num">Question one</span>
+        <h3>What do people come to you for?</h3>
+        <p>Not what you are good at on paper. What people actually knock on your door about. That is
+        your real skill, and it is usually invisible to you because it costs you no effort.</p>
+      </article>
+      <article class="tri">
+        <span class="tri-num">Question two</span>
+        <h3>What angers you about this world?</h3>
+        <p>Anger is the most reliable compass anyone has. The thing that makes you furious at 2 a.m.
+        is the thing you will still care about in fifteen years, when the prestige has worn off.</p>
+      </article>
+      <article class="tri">
+        <span class="tri-num">Question three</span>
+        <h3>What makes time stop?</h3>
+        <p>The task where you look up and three hours have gone. Flow is not a mood, it is data —
+        it tells you which method you belong in, regardless of which subject you love.</p>
+      </article>
+    </div>
+    <p class="band-foot">
+      Skill, anger, flow. Where the three overlap is not a personality quiz result — it is a
+      shortlist of real programmes with real deadlines, filtered by what you can actually afford,
+      where you can actually live, and what you are actually eligible for today.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════ SURVEY ══════════════════ -->
+<section class="view" id="view-survey">
+  <div class="survey-shell">
+    <div class="progress" role="progressbar" aria-label="Survey progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="wrap survey-wrap">
+      <div id="questionSlot"></div>
+      <div class="survey-nav">
+        <button type="button" class="btn btn-ghost" id="backBtn">Back</button>
+        <span class="survey-count" id="qCount"></span>
+        <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ RESULTS ══════════════════ -->
+<section class="view" id="view-results">
+  <div class="wrap">
+    <div id="resultsSlot"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ BROWSE ══════════════════ -->
+<section class="view" id="view-browse">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">The full index</p>
+      <h2>Everything, unfiltered</h2>
+      <p class="page-lede">Every programme in the database, with no profile applied. Use the filters
+      if you already know what you are looking for.</p>
+    </header>
+    <div class="filters" id="filters"></div>
+    <p class="result-count" id="browseCount"></p>
+    <div class="cards" id="browseCards"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ FRONTIERS ══════════════════ -->
+<section class="view" id="view-frontiers">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Fields nobody mentioned in five years of lectures</p>
+      <h2>The frontier</h2>
+      <p class="page-lede">
+        Every one of these is a real discipline with journals, funding and people currently hiring.
+        Most Indian medical students graduate without hearing any of them named once. Each entry
+        includes one thing you could start this week, from where you are, with what you have.
+      </p>
+    </header>
+    <div class="frontier-grid" id="frontierGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ CALENDAR ══════════════════ -->
+<section class="view" id="view-calendar">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">The year, laid out</p>
+      <h2>Deadline calendar</h2>
+      <p class="page-lede">
+        Most opportunities are missed for one reason: the application window opened while you were
+        revising for an exam and closed before you looked up. Deadlines shift year to year — always
+        confirm on the official page before you plan around a date.
+      </p>
+    </header>
+    <div class="calendar" id="calendarGrid"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-note">
+      <strong>Dream Counsellor</strong> — built for Indian medical students, starting with one.
+      Every deadline and figure here is a starting point for your own check, not a substitute for it:
+      programmes change their rules, and the official page is always the authority. Nothing on this
+      site is affiliated with any institution listed.
+    </p>
+    <p class="foot-note foot-small">
+      If you are struggling right now, that is not a career problem and it does not wait for a
+      deadline. Tele-MANAS, India's free national mental health helpline: <strong>14416</strong>.
+    </p>
+  </div>
+</footer>
+
+<script src="assets/data-study.js"></script>
+<script src="assets/data-funding.js"></script>
+<script src="assets/data-research.js"></script>
+<script src="assets/data-frontiers.js"></script>
+<script src="assets/data-countries.js"></script>
+<script src="assets/data-impact.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
