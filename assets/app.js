@@ -932,6 +932,14 @@
     });
     h += "</div></section>";
 
+    /* specialty routes matched to the profile */
+    const specs = rankSpecialties(p);
+    h += '<section class="actions-block"><h2 class="sec-h">Specialties that fit what you said</h2>';
+    h += '<p class="sec-sub">The three closest to your answers, out of thirteen route maps. Each one shows the day-to-day reality, the Indian and international entry routes, where it leads, and the thing nobody tells you before you commit three years to it.</p>';
+    h += '<div class="routes">' + specs.slice(0, 3).map((x, i) => specialtyHTML(x.s, "Closest fit " + (i + 1))).join("") + "</div>";
+    h += '<p class="sec-sub" style="margin-top:20px"><button type="button" class="btn btn-ghost" data-goto="routes">See all thirteen specialty routes</button></p>';
+    h += "</section>";
+
     /* frontier fields */
     const fr = (window.DB.frontiers || []).map(function (f) {
       let s = 0;
@@ -981,6 +989,48 @@
     const redo = $("#redoBtn");
     if (redo) redo.addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
     bindGoto(slot);
+  }
+
+  function specialtyHTML(s, rankLabel) {
+    let h = '<article class="route">';
+    h += '<header class="route-head">';
+    h += "<h3>" + esc(s.name) + "</h3>";
+    if (rankLabel) h += '<span class="cty-score">' + esc(rankLabel) + "</span>";
+    h += '<p class="route-one">' + esc(s.oneLine) + "</p>";
+    h += "</header>";
+
+    h += '<div class="route-body">';
+    h += '<div class="route-col">';
+    h += '<p class="mini-h">What the day looks like</p><p class="route-p">' + esc(s.day) + "</p>";
+    h += '<p class="mini-h">Entering it in India</p><p class="route-p">' + esc(s.india) + "</p>";
+    h += '<p class="mini-h">Entering it abroad</p><ul class="route-ul">';
+    s.abroad.forEach((x) => { h += "<li>" + esc(x) + "</li>"; });
+    h += "</ul>";
+    h += '<p class="mini-h">Where it leads</p><p class="route-tags">' +
+         s.supers.map((x) => '<span class="chip">' + esc(x) + "</span>").join("") + "</p>";
+    h += "</div>";
+
+    h += '<div class="route-col">';
+    h += '<p class="mini-h">The research frontier inside it</p><ul class="route-ul">';
+    s.research.forEach((x) => { h += "<li>" + esc(x) + "</li>"; });
+    h += "</ul>";
+    h += '<p class="mini-h">Degrees that pair with it</p><p class="route-tags">' +
+         s.masters.map((x) => '<span class="chip">' + esc(x) + "</span>").join("") + "</p>";
+    h += '<p class="route-fit"><b>This fits you if</b>' + esc(s.fitIf) + "</p>";
+    h += "</div>";
+    h += "</div>";
+
+    h += '<p class="route-truth"><b>What nobody tells you</b>' + esc(s.truth) + "</p>";
+    h += "</article>";
+    return h;
+  }
+
+  function rankSpecialties(p) {
+    return (window.DB.specialties || []).map(function (s) {
+      let sc = 0;
+      (s.fields || []).forEach((f) => { if (p.fields[f]) sc += p.fields[f]; });
+      return { s: s, score: sc };
+    }).sort((a, b) => b.score - a.score);
   }
 
   function frontierHTML(f) {
@@ -1077,6 +1127,7 @@
         if (t === "browse") renderBrowse();
         if (t === "calendar") renderCalendar();
         if (t === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
+        if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
         showView(t);
       });
     });
