@@ -591,13 +591,40 @@ body {
 .cty-honest { margin: 16px 0 0; padding: 14px 16px; background: var(--paper-2); border-left: 2px solid var(--accent); font-size: .92rem; color: var(--ink); }
 
 /* ─────────────── misc ─────────────── */
-.restart { margin: 10px 0 70px; display: flex; gap: 12px; flex-wrap: wrap; }
+.restart { margin: 10px 0 70px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.save-note { flex: 1 1 100%; font-size: .84rem; color: var(--ink-3); margin: 8px 0 0; max-width: 76ch; }
 .empty { border: 1px dashed var(--line); padding: 40px; text-align: center; color: var(--ink-2); border-radius: var(--r); }
 
 .foot { border-top: 1px solid var(--line-soft); background: var(--paper-2); padding: 34px 0 46px; }
 .foot-note { font-size: .87rem; color: var(--ink-2); max-width: 78ch; margin: 0 0 12px; }
 .foot-small { font-size: .84rem; color: var(--ink-3); margin-bottom: 0; }
 .foot-note strong { color: var(--ink); }
+
+/* ─────────────── print: the plan, on paper ─────────────── */
+@media print {
+  :root {
+    --paper: #fff; --paper-2: #fff; --surface: #fff;
+    --ink: #000; --ink-2: #222; --ink-3: #555;
+    --line: #bbb; --line-soft: #ddd;
+    --accent: #0A4F53; --accent-wash: #fff; --signal: #8C1E3F; --signal-wash: #fff;
+    --shadow: none;
+  }
+  .topbar, .restart, .survey-nav, .progress, .foot-small { display: none !important; }
+  body { font-size: 11pt; background: #fff; }
+  .wrap { max-width: none; padding-inline: 0; }
+  .view { display: none !important; }
+  .view.is-active { display: block !important; }
+  .card, .route, .fcard, .cty, .read, .skip-card, .month {
+    break-inside: avoid; page-break-inside: avoid;
+    border-color: #bbb; box-shadow: none;
+  }
+  .sec-h, .read h2 { break-after: avoid; page-break-after: avoid; }
+  .disclose { display: block; }
+  .disclose[open] .disclose-body, .disclose-body { display: block !important; }
+  .disclose summary { color: #000; }
+  .card-link::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; word-break: break-all; }
+  a { text-decoration: none; color: #000; }
+}
 
 @media (max-width: 640px) {
   body { font-size: 16px; }

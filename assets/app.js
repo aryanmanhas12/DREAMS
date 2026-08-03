@@ -979,15 +979,35 @@
     }
 
     h += '<div class="restart">';
+    h += '<button type="button" class="btn btn-primary" id="copyPlanBtn">Copy my plan as text</button>';
+    h += '<button type="button" class="btn btn-ghost" id="printBtn">Print or save as PDF</button>';
     h += '<button type="button" class="btn btn-ghost" id="redoBtn">Answer again</button>';
     h += '<button type="button" class="btn btn-ghost" data-goto="browse">Browse everything</button>';
-    h += '<button type="button" class="btn btn-ghost" data-goto="calendar">See the deadline calendar</button>';
+    h += '<button type="button" class="btn btn-ghost" data-goto="calendar">Deadline calendar</button>';
+    h += '<p class="save-note" id="saveNote">Your answers are saved in this browser and written into the page address — bookmark it, or send yourself the link, and this plan comes back exactly as it is. Nothing is uploaded anywhere.</p>';
     h += "</div>";
 
     slot.innerHTML = h;
+    persist();
 
     const redo = $("#redoBtn");
     if (redo) redo.addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
+
+    const printBtn = $("#printBtn");
+    if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+    const copyBtn = $("#copyPlanBtn");
+    if (copyBtn) copyBtn.addEventListener("click", function () {
+      const text = planAsText(p, ranked, plan, specs);
+      const done = function () {
+        copyBtn.textContent = "Copied — paste it anywhere";
+        setTimeout(function () { copyBtn.textContent = "Copy my plan as text"; }, 2600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+      } else { fallbackCopy(text, done); }
+    });
+
     bindGoto(slot);
   }
 
@@ -1111,10 +1131,91 @@
     items.forEach(function (i) {
       if (["Any", "Global", "Online", "Europe", "Asia", "Nordics"].indexOf(i.country) === -1) countries[i.country] = 1;
     });
-    $("#statTotal").textContent = items.length + (window.DB.frontiers || []).length;
+    const total = items.length + (window.DB.frontiers || []).length + (window.DB.specialties || []).length;
+    $("#statTotal").textContent = total;
+    const hc = $("#heroCount");
+    if (hc) hc.textContent = total;
     $("#statFree").textContent = items.filter((i) => i.zeroCost).length;
     $("#statStudent").textContent = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
     $("#statCountries").textContent = Object.keys(countries).length;
+  }
+
+  /* Clipboard without the async API — file:// and older browsers need this. */
+  function fallbackCopy(text, done) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:absolute;left:-9999px;top:0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) { /* nothing more to try */ }
+    document.body.removeChild(ta);
+  }
+
+  /* ───────────────── save, resume, share, export ───────────────── */
+  function encodeAnswers() {
+    try {
+      const json = JSON.stringify(answers);
+      return btoa(unescape(encodeURIComponent(json))).replace(/=+$/, "");
+    } catch (e) { return ""; }
+  }
+
+  function decodeAnswers(str) {
+    try {
+      const json = decodeURIComponent(escape(atob(str)));
+      const obj = JSON.parse(json);
+      return obj && typeof obj === "object" ? obj : null;
+    } catch (e) { return null; }
+  }
+
+  function persist() {
+    const code = encodeAnswers();
+    if (!code) return;
+    try { history.replaceState(null, "", "#p=" + code); } catch (e) { /* file:// */ }
+    try { localStorage.setItem("dc-answers", code); } catch (e) { /* private mode */ }
+  }
+
+  function restore() {
+    let code = "";
+    const m = (location.hash || "").match(/#p=([A-Za-z0-9+/]+)/);
+    if (m) code = m[1];
+    if (!code) { try { code = localStorage.getItem("dc-answers") || ""; } catch (e) { /* ignore */ } }
+    if (!code) return false;
+    const obj = decodeAnswers(code);
+    if (!obj) return false;
+    Object.keys(obj).forEach((k) => { answers[k] = obj[k]; });
+    return Object.keys(obj).length > 3;
+  }
+
+  /* A plan you can paste into a notes app, a document, or an email to a mentor. */
+  function planAsText(p, ranked, plan, specs) {
+    const L = [];
+    L.push("DREAM COUNSELLOR — MY PLAN");
+    L.push("Generated " + new Date().toDateString());
+    L.push("");
+    L.push("MY PROFILE");
+    L.push("- Stage: " + STAGE_LABEL[p.stage]);
+    L.push("- Strongest fields: " + p.topFields.slice(0, 3).map((f) => FIELDS[f]).join(", "));
+    L.push("- Eligible programmes found: " + ranked.length);
+    L.push("");
+    L.push("DO THESE, IN THIS ORDER");
+    plan.forEach(function (s, i) {
+      L.push((i + 1) + ". [" + s.when + "] " + s.what.replace(/<[^>]+>/g, ""));
+    });
+    L.push("");
+    L.push("TOP MATCHES");
+    ranked.slice(0, 15).forEach(function (r, i) {
+      const imp = impactOf(r.item);
+      L.push((i + 1) + ". " + r.item.name + " — " + r.item.org);
+      L.push("   Tier " + imp.t + " · " + r.item.country + " · " + (r.item.window || "rolling"));
+      L.push("   " + r.item.url);
+    });
+    L.push("");
+    L.push("SPECIALTY ROUTES CLOSEST TO MY ANSWERS");
+    specs.slice(0, 3).forEach(function (x, i) { L.push((i + 1) + ". " + x.s.name + " — " + x.s.oneLine); });
+    L.push("");
+    L.push("Deadlines change every cycle. Confirm each one on its official page.");
+    return L.join("\n");
   }
 
   /* ───────────────── wiring ───────────────── */
@@ -1162,6 +1263,16 @@
     $("#backBtn").addEventListener("click", function () {
       if (qIndex > 0) { qIndex--; renderQuestion(); }
     });
+
+    // A returning visitor, or someone opening a shared link, lands on their plan.
+    if (restore()) {
+      renderResults();
+      showView("results");
+      const note = $("#saveNote");
+      if (note) note.textContent =
+        "Picked up where you left off — these are the answers you gave last time. " +
+        "Answer again to change any of them.";
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
