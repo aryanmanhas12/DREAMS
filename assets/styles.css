@@ -151,14 +151,58 @@ body {
 :root[data-theme="light"] .shortlist-count { color: #fff; }
 .shortlist-count:empty { display: none; }
 
+.topbar-controls { display: flex; align-items: center; gap: 8px; flex: none; }
+
 .theme-toggle {
-  width: 32px; height: 32px; margin-left: 6px; padding: 0;
+  width: 32px; height: 32px; padding: 0;
   border: 1px solid var(--line); background: var(--surface);
   border-radius: 50%; cursor: pointer;
   display: grid; place-items: center;
 }
 .theme-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ink-2);
   box-shadow: inset -4px -2px 0 0 var(--surface); }
+
+/* Hamburger toggle — hidden entirely above the collapse breakpoint, where
+   .topnav lays out inline and there is nothing to toggle. */
+.nav-toggle {
+  display: none; width: 36px; height: 36px; padding: 0; margin: 0;
+  border: 1px solid var(--line); background: var(--surface); border-radius: var(--r);
+  cursor: pointer; place-items: center;
+}
+.nav-toggle-bars { position: relative; width: 16px; height: 11px; display: block; }
+.nav-toggle-bars span {
+  position: absolute; left: 0; width: 100%; height: 1.5px; background: var(--ink);
+  border-radius: 1px; transition: transform .18s ease, opacity .18s ease, top .18s ease;
+}
+.nav-toggle-bars span:nth-child(1) { top: 0; }
+.nav-toggle-bars span:nth-child(2) { top: 5px; }
+.nav-toggle-bars span:nth-child(3) { top: 10px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
+@media (max-width: 760px) {
+  .nav-toggle { display: grid; }
+
+  /* Collapsed by default: a full-width panel anchored under the bar,
+     shown only once .is-open is toggled by JS. display:none (rather than
+     visibility/opacity) also removes it from the tab order for free, so a
+     keyboard user tabbing through a closed menu skips straight past it. */
+  .topnav {
+    display: none; position: absolute; left: 0; right: 0; top: 100%; z-index: 40;
+    flex-direction: column; align-items: stretch; gap: 1px; padding: 8px;
+    background: var(--paper); border-bottom: 1px solid var(--line-soft);
+    box-shadow: var(--shadow); max-height: calc(100vh - 62px); overflow-y: auto;
+  }
+  .topnav.is-open { display: flex; }
+  .navlink {
+    font-size: .92rem; padding: 14px 14px; border-radius: var(--r);
+    text-align: left; display: flex; align-items: center;
+    min-height: 46px; border-top: 1px solid var(--line-soft);
+  }
+  .navlink:first-child { border-top: 0; }
+  .navlink[aria-current="true"] { background: var(--accent-wash); }
+}
 
 /* ─────────────── views ─────────────── */
 .view { display: none; }
@@ -274,7 +318,10 @@ body {
 .opt-body span { display: block; color: var(--ink-2); font-size: .84rem; margin-top: 2px; }
 
 .q-free {
-  width: 100%; font: inherit; font-size: .95rem; color: var(--ink);
+  /* 1rem, not smaller: any text input under 16px triggers Safari's
+     forced zoom-on-focus on iOS, which yanks the whole layout every time
+     someone taps in to type. */
+  width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--r); padding: 13px 15px; margin-top: 6px; resize: vertical;
 }
@@ -528,7 +575,8 @@ body {
 .browse-tools { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 4px 0 18px; }
 .search-wrap { flex: 1 1 320px; min-width: 0; }
 .search-input {
-  width: 100%; font: inherit; font-size: .95rem; color: var(--ink);
+  /* 1rem: same iOS zoom-on-focus reasoning as .q-free above. */
+  width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   padding: 11px 15px;
 }
@@ -544,7 +592,9 @@ body {
   letter-spacing: .1em; color: var(--ink-3);
 }
 .sort-select {
-  font: inherit; font-family: var(--font-mono); font-size: .82rem; color: var(--ink);
+  /* 1rem: same iOS zoom-on-focus reasoning as .q-free above — a <select>
+     triggers it too, not just text inputs. */
+  font: inherit; font-family: var(--font-mono); font-size: 1rem; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   padding: 8px 12px; cursor: pointer;
 }
@@ -560,6 +610,16 @@ body {
 .fbtn:hover { border-color: var(--accent); color: var(--accent); }
 .fbtn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 :root[data-theme="light"] .fbtn[aria-pressed="true"] { color: #fff; }
+
+/* Comfortable thumb targets: 44px is the standard minimum recommendation
+   (iOS HIG / WCAG 2.5.5) and the desktop sizes below it are fine for a
+   cursor but fiddly to tap precisely, especially the small circular
+   star/theme buttons sitting right next to body text. */
+@media (max-width: 640px) {
+  .star-btn { width: 40px; height: 40px; }
+  .theme-toggle { width: 40px; height: 40px; }
+  .fbtn { padding: 9px 15px; font-size: .78rem; }
+}
 
 .result-count { font-family: var(--font-mono); font-size: .76rem; color: var(--ink-3); margin: 0 0 18px; letter-spacing: .05em; }
 
@@ -625,7 +685,14 @@ body {
 .month.is-now h3 { color: var(--signal); }
 .month .m-count { font-family: var(--font-display); font-size: 1.7rem; color: var(--accent); line-height: 1; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
 .month ul { list-style: none; margin: 0; padding: 0; }
-.month li { font-size: .86rem; color: var(--ink-2); padding: 5px 0; border-top: 1px solid var(--line-soft); }
+.month li {
+  font-size: .86rem; color: var(--ink-2); padding: 5px 0; border-top: 1px solid var(--line-soft);
+  /* Kept to one line — a long programme name in a ~270px-wide card wraps to
+     3-4 lines on a phone (fine on a wide desktop column), which turned
+     twelve compact month cards into a many-thousand-pixel scroll. Full
+     names are one tap away in Browse; this is a glance list. */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .month li:first-child { border-top: 0; }
 
 /* ─────────────── country fit ─────────────── */

@@ -1180,7 +1180,7 @@
       h += "<h3>" + esc(MONTHS[m - 1]) + (m === now ? " · now" : "") + "</h3>";
       h += '<p class="m-count">' + inMonth.length + "</p>";
       h += "<ul>";
-      inMonth.slice(0, 9).forEach((i) => { h += "<li>" + esc(i.name) + "</li>"; });
+      inMonth.slice(0, 9).forEach((i) => { h += '<li title="' + esc(i.name) + '">' + esc(i.name) + "</li>"; });
       if (inMonth.length > 9) h += "<li>+ " + (inMonth.length - 9) + " more</li>";
       if (!inMonth.length) h += '<li style="color:var(--ink-3)">Nothing closing</li>';
       h += "</ul></article>";
@@ -1353,7 +1353,44 @@
         if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
         if (t === "shortlist") renderShortlist();
         showView(t);
+        closeMobileNav();
       });
+    });
+  }
+
+  /* ───────────────── mobile nav ─────────────────
+     Below the collapse breakpoint the primary nav becomes a full-width panel
+     toggled by a hamburger button, closed by: picking a destination (via the
+     bindGoto hook above), tapping outside it, or Escape. Above the
+     breakpoint this is inert — the toggle is hidden and .topnav lays out
+     inline as normal, so nothing here runs on desktop. */
+  function closeMobileNav() {
+    const nav = $("#topnav"), toggle = $("#navToggle");
+    if (!nav || !nav.classList.contains("is-open")) return;
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  function initMobileNav() {
+    const nav = $("#topnav"), toggle = $("#navToggle");
+    toggle.addEventListener("click", function () {
+      const open = !nav.classList.contains("is-open");
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("is-open")) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      closeMobileNav();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMobileNav();
+    });
+    // A resize past the breakpoint (rotating to landscape, or a folded/
+    // resizable window) shouldn't leave the panel stuck open under desktop
+    // layout rules.
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 760) closeMobileNav();
     });
   }
 
@@ -1374,6 +1411,7 @@
   function init() {
     renderStats();
     initTheme();
+    initMobileNav();
     bindGoto(document);
     loadShortlist();
     updateShortlistCount();
@@ -1388,7 +1426,7 @@
     });
 
     $("#startBtn").addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
-    $("#brandHome").addEventListener("click", function (e) { e.preventDefault(); showView("intro"); });
+    $("#brandHome").addEventListener("click", function (e) { e.preventDefault(); showView("intro"); closeMobileNav(); });
 
     // Wired once: these inputs live in the static shell (not inside the
     // #filters/#browseCards nodes renderBrowse() replaces), so re-rendering

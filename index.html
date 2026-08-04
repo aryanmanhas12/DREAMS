@@ -17,7 +17,7 @@
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text">Dream<em>Counsellor</em></span>
     </a>
-    <nav class="topnav" aria-label="Primary">
+    <nav class="topnav" id="topnav" aria-label="Primary">
       <button type="button" class="navlink" data-goto="intro">Start</button>
       <button type="button" class="navlink" data-goto="browse">Browse all</button>
       <button type="button" class="navlink" data-goto="routes">Specialty routes</button>
@@ -26,10 +26,15 @@
       <button type="button" class="navlink navlink-shortlist" data-goto="shortlist">
         Shortlist<span class="shortlist-count" id="shortlistCount"></span>
       </button>
+    </nav>
+    <div class="topbar-controls">
       <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
         <span class="theme-dot"></span>
       </button>
-    </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="topnav" aria-label="Open menu">
+        <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
   </div>
 </header>
 
