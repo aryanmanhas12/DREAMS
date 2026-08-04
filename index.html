@@ -23,6 +23,9 @@
       <button type="button" class="navlink" data-goto="routes">Specialty routes</button>
       <button type="button" class="navlink" data-goto="frontiers">Frontier fields</button>
       <button type="button" class="navlink" data-goto="calendar">Deadlines</button>
+      <button type="button" class="navlink navlink-shortlist" data-goto="shortlist">
+        Shortlist<span class="shortlist-count" id="shortlistCount"></span>
+      </button>
       <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
         <span class="theme-dot"></span>
       </button>
@@ -127,12 +130,41 @@
     <header class="page-head">
       <p class="eyebrow">The full index</p>
       <h2>Everything, unfiltered</h2>
-      <p class="page-lede">Every programme in the database, with no profile applied. Use the filters
-      if you already know what you are looking for.</p>
+      <p class="page-lede">Every programme in the database, with no profile applied. Search, filter and
+      sort if you already know roughly what you are looking for.</p>
     </header>
+    <div class="browse-tools">
+      <div class="search-wrap">
+        <input type="search" id="browseSearch" class="search-input"
+               placeholder="Search by name, institution or field — try &quot;Germany&quot;, &quot;psychiatry&quot;, &quot;free&quot;…"
+               aria-label="Search programmes" />
+      </div>
+      <div class="sort-wrap">
+        <label for="browseSort">Sort</label>
+        <select id="browseSort" class="sort-select">
+          <option value="tier">Impact tier</option>
+          <option value="deadline">Deadline — soonest first</option>
+          <option value="az">A–Z</option>
+        </select>
+      </div>
+    </div>
     <div class="filters" id="filters"></div>
     <p class="result-count" id="browseCount"></p>
     <div class="cards" id="browseCards"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ SHORTLIST ══════════════════ -->
+<section class="view" id="view-shortlist">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Yours, kept</p>
+      <h2>Your shortlist</h2>
+      <p class="page-lede">Every programme you have starred, anywhere on the site — while comparing
+      options across sessions, or just building a list to sit with for a few days before deciding.
+      Saved in this browser only.</p>
+    </header>
+    <div id="shortlistSlot"></div>
   </div>
 </section>
 

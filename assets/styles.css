@@ -142,6 +142,15 @@ body {
 .navlink:hover { color: var(--ink); background: var(--paper-2); }
 .navlink[aria-current="true"] { color: var(--accent); }
 
+.shortlist-count {
+  display: inline-block; min-width: 15px; margin-left: 6px; padding: 0 4px;
+  font-size: .68rem; line-height: 15px; text-align: center;
+  background: var(--accent); color: var(--paper); border-radius: 100px;
+  font-variant-numeric: tabular-nums;
+}
+:root[data-theme="light"] .shortlist-count { color: #fff; }
+.shortlist-count:empty { display: none; }
+
 .theme-toggle {
   width: 32px; height: 32px; margin-left: 6px; padding: 0;
   border: 1px solid var(--line); background: var(--surface);
@@ -410,6 +419,16 @@ body {
 }
 .card-org { font-size: .88rem; color: var(--ink-2); margin: 2px 0 0; }
 
+.star-btn {
+  flex: none; align-self: center; width: 30px; height: 30px; padding: 0; margin-left: auto;
+  border: 1px solid var(--line); background: var(--surface); border-radius: 50%;
+  color: var(--ink-3); cursor: pointer;
+  display: grid; place-items: center; transition: border-color .14s, color .14s, transform .1s;
+}
+.star-btn:hover { border-color: var(--accent); color: var(--accent); }
+.star-btn:active { transform: scale(.92); }
+.star-btn.is-saved { color: var(--accent); border-color: var(--accent); background: var(--accent-wash); }
+
 /* impact tier badge — the judgement layer, visually distinct from the facts */
 .tier {
   font-family: var(--font-mono); font-size: .65rem; letter-spacing: .07em;
@@ -504,6 +523,32 @@ body {
 }
 .flag-free { background: var(--accent-wash); color: var(--accent); }
 .flag-warn { background: var(--signal-wash); color: var(--signal); }
+
+/* ─────────────── search + sort ─────────────── */
+.browse-tools { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 4px 0 18px; }
+.search-wrap { flex: 1 1 320px; min-width: 0; }
+.search-input {
+  width: 100%; font: inherit; font-size: .95rem; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 11px 15px;
+}
+.search-input::placeholder { color: var(--ink-3); }
+.search-input:focus-visible { border-color: var(--accent); }
+/* Native search-field decorations (the browser's own clear-x) inherit the
+   theme's text color instead of defaulting to platform grey. */
+.search-input::-webkit-search-cancel-button { filter: none; }
+
+.sort-wrap { display: flex; align-items: center; gap: 9px; flex: none; }
+.sort-wrap label {
+  font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--ink-3);
+}
+.sort-select {
+  font: inherit; font-family: var(--font-mono); font-size: .82rem; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 8px 12px; cursor: pointer;
+}
+.sort-select:focus-visible { border-color: var(--accent); }
 
 /* ─────────────── filters ─────────────── */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line-soft); }

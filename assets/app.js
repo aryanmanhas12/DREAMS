@@ -703,6 +703,12 @@
     return '<p class="record">' + bits.join('<span class="sep">/</span>') + '</p>';
   }
 
+  const STAR_PATH = "M10 1.5l2.47 5.51 5.98.55-4.53 4.06 1.35 5.94L10 14.6l-5.27 2.96 1.35-5.94L1.55 7.56l5.98-.55z";
+  function starSVG(saved) {
+    return '<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="' + STAR_PATH +
+      '" fill="' + (saved ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/></svg>';
+  }
+
   function cardHTML(entry, idx) {
     const item = entry.item || entry;
     const urg = entry.urg || urgency(item);
@@ -710,6 +716,7 @@
 
     const imp = impactOf(item);
     const tierName = (window.DB.tierInfo[imp.t] || {}).name || "";
+    const saved = isShortlisted(item.id);
 
     let h = '<article class="card" data-urg="' + urg + '" data-tier="' + imp.t + '">';
     h += '<div class="card-in">';
@@ -718,6 +725,10 @@
     h += '<h3>' + esc(item.name) + '</h3>';
     h += '<span class="tier tier-' + imp.t + '" title="' + esc(tierName) + '">Tier ' + imp.t +
          ' · ' + esc(tierName) + '</span>';
+    h += '<button type="button" class="star-btn' + (saved ? " is-saved" : "") +
+         '" data-star="' + esc(item.id) + '" aria-pressed="' + saved +
+         '" title="' + (saved ? "Remove from shortlist" : "Save to shortlist") + '">' +
+         starSVG(saved) + '</button>';
     h += '</div>';
     h += '<p class="card-org">' + esc(item.org) + '</p>';
     h += recordLine(item, urg);
@@ -1082,8 +1093,41 @@
     return h;
   }
 
-  /* ───────────────── browse ───────────────── */
+  /* ───────────────── browse: filter, search, sort ───────────────── */
   let activeFilter = "all";
+  let searchQuery = "";
+  let sortMode = "tier";
+
+  function matchesSearch(item, q) {
+    if (!q) return true;
+    const hay = [
+      item.name, item.org, item.why, item.money, item.country, item.city,
+      TYPE_LABEL[item.type], (item.fields || []).map((f) => FIELDS[f]).join(" ")
+    ].filter(Boolean).join(" • ").toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+
+  // Months from now until an item's nearest deadline; no fixed deadline sorts last.
+  function monthsUntilDeadline(item) {
+    const dm = item.deadlineMonths;
+    if (!dm || !dm.length || dm.length >= 12) return Infinity;
+    const now = new Date().getMonth() + 1;
+    let best = Infinity;
+    dm.forEach(function (m) {
+      let diff = m - now;
+      if (diff < 0) diff += 12;
+      if (diff < best) best = diff;
+    });
+    return best;
+  }
+
+  function sortList(list) {
+    if (sortMode === "az") return list.slice().sort((a, b) => a.name.localeCompare(b.name));
+    if (sortMode === "deadline")
+      return list.slice().sort((a, b) => monthsUntilDeadline(a) - monthsUntilDeadline(b) || impactOf(a).t - impactOf(b).t);
+    return list.slice().sort((a, b) => impactOf(a).t - impactOf(b).t); // "tier", the default
+  }
+
   function renderBrowse() {
     const types = ["all"].concat(Object.keys(TYPE_LABEL));
     let fh = types.map(function (t) {
@@ -1110,14 +1154,19 @@
       list = list.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1));
     else if (activeFilter !== "all") list = list.filter((i) => i.type === activeFilter);
 
-    // best-first within a filtered view
-    list.sort((a, b) => impactOf(a).t - impactOf(b).t);
+    const preSearchCount = list.length;
+    list = list.filter((i) => matchesSearch(i, searchQuery));
+    list = sortList(list);
 
-    $("#browseCount").textContent = list.length + " programme" + (list.length === 1 ? "" : "s") +
-      (activeFilter === "all" ? " · sorted by impact tier" : "");
+    const SORT_LABEL = { tier: "sorted by impact tier", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
+    let countText = list.length + " programme" + (list.length === 1 ? "" : "s");
+    if (searchQuery) countText += " matching “" + searchQuery + "” of " + preSearchCount;
+    countText += " · " + SORT_LABEL[sortMode];
+    $("#browseCount").textContent = countText;
+
     $("#browseCards").innerHTML = list.length
       ? list.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("")
-      : '<p class="empty">Nothing matches that filter.</p>';
+      : '<p class="empty">Nothing matches' + (searchQuery ? ' "' + esc(searchQuery) + '"' : " that filter") + '. Try a broader term or clear the filters.</p>';
   }
 
   /* ───────────────── calendar ───────────────── */
@@ -1153,6 +1202,51 @@
     $("#statFree").textContent = items.filter((i) => i.zeroCost).length;
     $("#statStudent").textContent = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
     $("#statCountries").textContent = Object.keys(countries).length;
+  }
+
+  /* ───────────────── shortlist ───────────────── */
+  let shortlist = new Set();
+  function loadShortlist() {
+    try {
+      const raw = localStorage.getItem("dc-shortlist");
+      if (raw) shortlist = new Set(JSON.parse(raw));
+    } catch (e) { /* private mode or corrupt data — start empty */ }
+  }
+  function saveShortlist() {
+    try { localStorage.setItem("dc-shortlist", JSON.stringify([...shortlist])); } catch (e) { /* ignore */ }
+  }
+  function isShortlisted(id) { return shortlist.has(id); }
+  function toggleShortlist(id) {
+    if (shortlist.has(id)) shortlist.delete(id); else shortlist.add(id);
+    saveShortlist();
+    updateShortlistCount();
+  }
+  function shortlistedItems() {
+    return allOpportunities().filter((i) => shortlist.has(i.id));
+  }
+  function updateShortlistCount() {
+    const n = $("#shortlistCount");
+    if (n) n.textContent = shortlist.size ? String(shortlist.size) : "";
+    $$(".star-btn").forEach(function (b) {
+      const saved = isShortlisted(b.dataset.star);
+      b.setAttribute("aria-pressed", String(saved));
+      b.classList.toggle("is-saved", saved);
+      b.title = saved ? "Remove from shortlist" : "Save to shortlist";
+      b.innerHTML = starSVG(saved);
+    });
+  }
+
+  function renderShortlist() {
+    const slot = $("#shortlistSlot");
+    const items = shortlistedItems();
+    if (!items.length) {
+      slot.innerHTML = '<p class="empty">Nothing saved yet. Click the star on any programme, anywhere on the site, to keep it here — ' +
+        'useful while you are comparing options across several browsing sessions. Saved locally in this browser; nothing is uploaded.</p>';
+      return;
+    }
+    let h = '<p class="result-count">' + items.length + ' saved</p>';
+    h += '<div class="cards">' + items.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("") + '</div>';
+    slot.innerHTML = h;
   }
 
   /* Clipboard without the async API — file:// and older browsers need this. */
@@ -1228,6 +1322,19 @@
     L.push("");
     L.push("SPECIALTY ROUTES CLOSEST TO MY ANSWERS");
     specs.slice(0, 3).forEach(function (x, i) { L.push((i + 1) + ". " + x.s.name + " — " + x.s.oneLine); });
+
+    const saved = shortlistedItems();
+    if (saved.length) {
+      L.push("");
+      L.push("MY SHORTLIST (" + saved.length + " starred)");
+      saved.forEach(function (item, i) {
+        const imp = impactOf(item);
+        L.push((i + 1) + ". " + item.name + " — " + item.org);
+        L.push("   Tier " + imp.t + " · " + item.country + " · " + (item.window || "rolling"));
+        L.push("   " + item.url);
+      });
+    }
+
     L.push("");
     L.push("Deadlines change every cycle. Confirm each one on its official page.");
     return L.join("\n");
@@ -1244,6 +1351,7 @@
         if (t === "calendar") renderCalendar();
         if (t === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
         if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
+        if (t === "shortlist") renderShortlist();
         showView(t);
       });
     });
@@ -1267,9 +1375,37 @@
     renderStats();
     initTheme();
     bindGoto(document);
+    loadShortlist();
+    updateShortlistCount();
+
+    // One delegated listener covers every star button on every card, in every
+    // view, present now or rendered later — no per-card rewiring needed.
+    document.addEventListener("click", function (e) {
+      const btn = e.target.closest(".star-btn");
+      if (!btn) return;
+      toggleShortlist(btn.dataset.star);
+      if ($("#view-shortlist").classList.contains("is-active")) renderShortlist();
+    });
 
     $("#startBtn").addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
     $("#brandHome").addEventListener("click", function (e) { e.preventDefault(); showView("intro"); });
+
+    // Wired once: these inputs live in the static shell (not inside the
+    // #filters/#browseCards nodes renderBrowse() replaces), so re-rendering
+    // the list on every keystroke never disturbs focus or cursor position.
+    let searchDebounce;
+    $("#browseSearch").addEventListener("input", function () {
+      clearTimeout(searchDebounce);
+      const val = this.value;
+      searchDebounce = setTimeout(function () {
+        searchQuery = val.trim().toLowerCase();
+        renderBrowse();
+      }, 120);
+    });
+    $("#browseSort").addEventListener("change", function () {
+      sortMode = this.value;
+      renderBrowse();
+    });
 
     $("#nextBtn").addEventListener("click", function () {
       if (qIndex === QUESTIONS.length - 1) { renderResults(); showView("results"); return; }
