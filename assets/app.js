@@ -757,13 +757,26 @@
     return h;
   }
 
+  /* Move keyboard/screen-reader focus to a view's heading after a navigation
+     that doesn't come from clicking that heading directly — otherwise focus
+     silently falls back to <body> and a keyboard user has to tab in from
+     the very top of the page after every click. tabindex="-1" makes an
+     element programmatically focusable without adding it to the tab order. */
+  function focusHeading(container) {
+    const h = container && container.querySelector("h1, h2");
+    if (!h) return;
+    if (!h.hasAttribute("tabindex")) h.setAttribute("tabindex", "-1");
+    h.focus({ preventScroll: true });
+  }
+
   /* ───────────────── views ───────────────── */
   function showView(name) {
     $$(".view").forEach((v) => v.classList.remove("is-active"));
     const v = $("#view-" + name);
     if (v) v.classList.add("is-active");
     $$(".navlink").forEach((b) => b.setAttribute("aria-current", b.dataset.goto === name ? "true" : "false"));
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "auto" : "auto" });
+    window.scrollTo(0, 0);
+    if (v) focusHeading(v);
   }
 
   /* ───────────────── survey rendering ───────────────── */
@@ -793,6 +806,8 @@
     if (q.type === "multi") h += '<p class="q-note">Choose as many as are true. None is also an answer.</p>';
 
     slot.innerHTML = h;
+    window.scrollTo(0, 0);
+    focusHeading(slot);
 
     $$(".opt", slot).forEach(function (btn) {
       btn.addEventListener("click", function () {
