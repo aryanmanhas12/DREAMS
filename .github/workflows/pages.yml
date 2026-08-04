@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+# The site is plain static files at the repo root (index.html + assets/),
+# so there is nothing to build — this just uploads the repo as-is.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the workflow to publish Pages, but nothing more.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; if pushes land quickly, let the in-flight
+# one finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sanity-check that the entry point and its assets exist
+        run: |
+          test -f index.html || { echo "index.html missing"; exit 1; }
+          test -d assets    || { echo "assets/ missing"; exit 1; }
+          for f in assets/app.js assets/styles.css; do
+            test -f "$f" || { echo "$f missing"; exit 1; }
+          done
+          echo "Static site looks intact."
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

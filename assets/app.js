@@ -1244,9 +1244,132 @@
         'useful while you are comparing options across several browsing sessions. Saved locally in this browser; nothing is uploaded.</p>';
       return;
     }
-    let h = '<p class="result-count">' + items.length + ' saved</p>';
+    const datedCount = items.filter(hasFixedWindow).length;
+    let h = '<div class="shortlist-bar">';
+    h += '<p class="result-count">' + items.length + ' saved</p>';
+    if (datedCount) {
+      h += '<button type="button" class="btn btn-ghost btn-sm" id="icsBtn">' +
+           'Add ' + datedCount + ' deadline' + (datedCount === 1 ? '' : 's') + ' to my calendar</button>';
+    }
+    h += '</div>';
+    if (datedCount) {
+      h += '<p class="ics-note">Downloads a calendar file you can open in Google Calendar, Apple Calendar or Outlook. ' +
+           'These are <strong>month-level reminders</strong> set to the first of each opening month, not exact dates — ' +
+           'windows shift every cycle, so each reminder carries the official page to confirm against.</p>';
+    }
     h += '<div class="cards">' + items.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("") + '</div>';
     slot.innerHTML = h;
+
+    const icsBtn = $("#icsBtn");
+    if (icsBtn) icsBtn.addEventListener("click", function () { downloadICS(items); });
+  }
+
+  /* ───────────────── calendar export ─────────────────
+     The data carries deadline MONTHS, not exact dates — windows move every
+     cycle, so inventing a precise day would be false precision. Each event
+     is therefore an all-day reminder on the 1st of the opening month, with
+     the real window text and the official URL in the body. */
+  function hasFixedWindow(item) {
+    return !!(item.deadlineMonths && item.deadlineMonths.length && item.deadlineMonths.length < 12);
+  }
+
+  function icsEscape(s) {
+    // RFC 5545: backslash, semicolon, comma are escaped; newlines become \n.
+    return String(s == null ? "" : s)
+      .replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,")
+      .replace(/\r?\n/g, "\\n");
+  }
+
+  /* RFC 5545 caps lines at 75 OCTETS, not characters — and this content is
+     full of multi-byte UTF-8 (≈, £, ·, —, en dashes in every money field),
+     so folding on string length silently produces over-long lines. Measure
+     in bytes, and iterate code points (for...of) so a surrogate pair is
+     never split down the middle. Continuation lines carry a leading space,
+     which costs one of the 75. */
+  function icsFold(line) {
+    const enc = new TextEncoder();
+    if (enc.encode(line).length <= 74) return line;
+    const parts = [];
+    let cur = "", curBytes = 0, limit = 74;
+    for (const ch of line) {
+      const b = enc.encode(ch).length;
+      if (curBytes + b > limit) {
+        parts.push(cur);
+        cur = ""; curBytes = 0; limit = 73;
+      }
+      cur += ch; curBytes += b;
+    }
+    if (cur) parts.push(cur);
+    return parts.map((s, i) => (i === 0 ? s : " " + s)).join("\r\n");
+  }
+
+  function nextDateForMonth(month) {
+    // The next occurrence of that month, so a January window on a December
+    // visit lands next year rather than in the past.
+    const now = new Date();
+    const y = month >= now.getMonth() + 1 ? now.getFullYear() : now.getFullYear() + 1;
+    return { y: y, m: month };
+  }
+
+  function downloadICS(items) {
+    const pad = (n) => String(n).padStart(2, "0");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Dream Counsellor//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+
+    items.filter(hasFixedWindow).forEach(function (item) {
+      const earliest = item.deadlineMonths.slice().sort(function (a, b) {
+        const now = new Date().getMonth() + 1;
+        return ((a - now + 12) % 12) - ((b - now + 12) % 12);
+      })[0];
+      const d = nextDateForMonth(earliest);
+      const start = d.y + pad(d.m) + "01";
+      const endDate = new Date(Date.UTC(d.y, d.m - 1, 2));
+      const end = endDate.getUTCFullYear() + pad(endDate.getUTCMonth() + 1) + pad(endDate.getUTCDate());
+      const imp = impactOf(item);
+
+      const desc = [
+        item.org,
+        "",
+        "Application window: " + (item.window || "rolling"),
+        item.money ? "Funding: " + item.money : "",
+        imp.t ? "Impact tier " + imp.t + ((window.DB.tierInfo[imp.t] || {}).name ? " — " + window.DB.tierInfo[imp.t].name : "") : "",
+        imp.odds ? "Odds: " + imp.odds : "",
+        "",
+        "Confirm the exact date on the official page — windows shift every cycle:",
+        item.url
+      ].filter(Boolean).join("\n");
+
+      L.push("BEGIN:VEVENT");
+      L.push("UID:" + item.id + "-" + d.y + "@dream-counsellor");
+      L.push("DTSTAMP:" + stamp);
+      L.push("DTSTART;VALUE=DATE:" + start);
+      L.push("DTEND;VALUE=DATE:" + end);
+      L.push(icsFold("SUMMARY:" + icsEscape("Window opens: " + item.name)));
+      L.push(icsFold("DESCRIPTION:" + icsEscape(desc)));
+      L.push(icsFold("URL:" + icsEscape(item.url)));
+      // Nudge a week ahead of the month opening, so it is actionable.
+      L.push("BEGIN:VALARM", "TRIGGER:-P7D", "ACTION:DISPLAY",
+             icsFold("DESCRIPTION:" + icsEscape(item.name + " — application window opens soon")), "END:VALARM");
+      L.push("END:VEVENT");
+    });
+
+    L.push("END:VCALENDAR");
+    const blob = new Blob([L.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "dream-counsellor-deadlines.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+    const btn = $("#icsBtn");
+    if (btn) {
+      const original = btn.textContent;
+      btn.textContent = "Calendar file downloaded";
+      setTimeout(function () { btn.textContent = original; }, 2600);
+    }
   }
 
   /* Clipboard without the async API — file:// and older browsers need this. */
