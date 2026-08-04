@@ -28,8 +28,28 @@ To serve it locally instead:
 python3 -m http.server 8000
 ```
 
-Everything runs client-side. No answers leave the browser; nothing is stored or sent
-anywhere.
+Everything runs client-side. Nothing is ever sent to a server — the only place your
+answers and shortlist are kept is this browser's own `localStorage`, and (for your survey
+answers only) encoded into the page URL so a bookmark or a link you send yourself brings
+the plan back exactly as it was.
+
+## What it does
+
+- **Three questions, then a plan.** Skill, anger, flow — weighted, cross-referenced with
+  budget, stage, category-based Indian schemes, age ceilings, climate tolerance, diet and
+  support needs — into a ranked, honest, dated list with a written counsellor's read.
+- **Shortlist.** Star anything, anywhere it appears (survey results, the full index, or the
+  shortlist itself). Persists across sessions, shows a live count in the nav, and folds
+  into the exported plan.
+- **Search and sort** the full index by name, institution, field, cost or country; sort by
+  impact tier, nearest deadline, or A–Z.
+- **Save, resume, export.** A finished plan lives in the URL and in local storage — reload,
+  bookmark, or send yourself the link and it comes back. "Copy as text" for a notes app or
+  an email to a mentor; a print stylesheet that expands every collapsed section for a
+  usable offline PDF.
+- **Specialty route maps** for 13 post-MBBS paths, each with the Indian and international
+  entry routes, the research frontier inside it, and the thing nobody says out loud before
+  you commit three years.
 
 ## What is indexed
 
@@ -41,6 +61,7 @@ anywhere.
 | Conferences | Meetings that fund delegates from low- and middle-income countries |
 | Skills | The free stack — almost none of this costs anything |
 | Residency | Clinical licensing routes: USMLE, UKMLA, German Approbation, AMC, NEET-PG |
+| Specialty routes | 13 full maps: what each specialty is day to day, Indian and international entry, where it leads, the honest trade-offs |
 | Frontiers | Disciplines that exist and are hiring, and that nobody names in an Indian medical college |
 
 ### Impact tiers
