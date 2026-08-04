@@ -99,7 +99,6 @@ window.DB.impact = {
   "jncasr-srfp":       { t: 2, odds: "~15 %", effort: "8 hrs, free to apply", note: "A real molecular neuroscience laboratory, open from first year, with travel paid. A two-month, zero-risk experiment." },
   "embl-embo":         { t: 2, odds: "Course-dependent", effort: "10 hrs", note: "EMBO explicitly funds participants from lower-income countries. Always tick the fellowship box when applying — you usually cannot ask afterwards." },
   "stipendium-hungaricum": { t: 2, odds: "~200 Indian places a year", effort: "20 hrs, two parallel submissions", note: "For the money involved, the least-known major scholarship available to Indians." },
-  "gates-cambridge-x": { t: 2, odds: "", effort: "", note: "" },
 
   /* ─────── Tier 3 — solid foundation ─────── */
   "ccmb-medsrt":       { t: 3, odds: "~20 %", effort: "6 hrs, free to apply", note: "Designed specifically for medical students, board and lodging covered. Two weeks that can change what you think you want to do." },

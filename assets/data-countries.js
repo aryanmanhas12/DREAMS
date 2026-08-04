@@ -188,6 +188,34 @@ window.DB.countries = {
     allergy: "Dry climate, low mould. Spring pollen is moderate.",
     honest: "Weizmann is one of the finest research institutes in the world and its summer school is fully funded including flights. Check your government's current travel advisory and your own comfort with regional security before committing — that is a personal judgement nobody else can make for you."
   },
+  Czechia: {
+    name: "Czechia (Czech Republic)",
+    climate: "cold", winter: "−1 to 5 °C", summer: "20–28 °C",
+    daylight: "8 hours in December in Prague",
+    cost: "₹45,000–75,000/month — one of the cheapest capitals in the EU",
+    diaspora: "small", vegFood: "moderate",
+    food: "Traditional cuisine is meat- and dumpling-heavy, but Prague has a growing vegetarian scene and a small Indian and South Asian community around the university areas.",
+    mentalHealth: "University counselling exists but English-language provision is limited outside the largest faculties. Private English-speaking therapists are available in Prague at a real cost.",
+    people: "Reserved with strangers, direct once you know them. A large international and Erasmus student population in Prague makes the first year socially easier than the language would suggest.",
+    visa: "Long-term residence permit for study, processed through the Czech embassy in Delhi. EU degree with EU-wide recognition and a path to a job-seeker extension after graduating.",
+    work: "Permitted with hour restrictions during term for non-EU students.",
+    allergy: "Birch and grass pollen in spring; otherwise unremarkable air quality by European standards.",
+    honest: "One of the most overlooked routes into Europe: one of the oldest universities on the continent, tuition close to zero if you study in Czech, a real scholarship for Indians specifically, and living costs a fraction of the UK's. The trade is a genuinely difficult language for anything beyond the classroom and a smaller, quieter social world than Berlin or London."
+  },
+  Italy: {
+    name: "Italy",
+    climate: "temperate", winter: "2–10 °C, milder in the south", summer: "24–34 °C",
+    daylight: "9 hours in December",
+    cost: "₹65,000–1 lakh/month; Milan and Rome higher, smaller cities much lower",
+    diaspora: "small", vegFood: "easy",
+    food: "Vegetarian eating is genuinely easy — pasta, pizza and produce-based cooking make it one of the more accommodating European food cultures. Indian groceries are limited to the larger cities.",
+    mentalHealth: "University services exist but are inconsistent between institutions. English-speaking therapists are concentrated in Rome, Milan and Trieste.",
+    people: "Warm and expressive once a relationship starts, though bureaucracy is a genuine daily obstacle — Italian administrative processes are slower than almost anywhere else in Western Europe.",
+    visa: "National (D) visa for study, then a residence permit (permesso di soggiorno) applied for within days of arrival — a notoriously bureaucratic step that catches almost every first-time arrival off guard.",
+    work: "Limited hours permitted for non-EU students during term.",
+    allergy: "Grass and olive pollen in spring; generally good air quality outside the largest cities.",
+    honest: "The reason to come here specifically is ICTP in Trieste — a UN-affiliated institute built to fund scientists from countries like India, with quantitative-biology and neuroscience schools that cost a participant almost nothing. Outside that, Italy is not a major English-taught research destination, so treat it as a place for a specific funded programme rather than for a degree search."
+  },
   Hungary: {
     name: "Hungary",
     climate: "cold", winter: "−2 to 5 °C", summer: "22–32 °C",
