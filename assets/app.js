@@ -1577,11 +1577,19 @@
      bindGoto hook above), tapping outside it, or Escape. Above the
      breakpoint this is inert — the toggle is hidden and .topnav lays out
      inline as normal, so nothing here runs on desktop. */
+  // aria-expanded carries the state, but the accessible NAME is what most
+  // screen readers announce on activation — leaving it as "Open menu" while
+  // the menu is open describes the wrong action.
+  function setNavToggleState(toggle, open) {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+
   function closeMobileNav() {
     const nav = $("#topnav"), toggle = $("#navToggle");
     if (!nav || !nav.classList.contains("is-open")) return;
     nav.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
+    setNavToggleState(toggle, false);
   }
 
   function initMobileNav() {
@@ -1589,7 +1597,7 @@
     toggle.addEventListener("click", function () {
       const open = !nav.classList.contains("is-open");
       nav.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
+      setNavToggleState(toggle, open);
     });
     document.addEventListener("click", function (e) {
       if (!nav.classList.contains("is-open")) return;
