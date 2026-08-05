@@ -1097,6 +1097,11 @@
   let activeFilter = "all";
   let searchQuery = "";
   let sortMode = "tier";
+  // Set by picking a country on the hero globe. Kept separate from searchQuery
+  // on purpose: a text search for "india" also matches every programme whose
+  // description mentions Indian students, which is useful when you typed it but
+  // wrong when the globe just told you the country holds 16 programmes.
+  let countryFilter = "";
 
   function matchesSearch(item, q) {
     if (!q) return true;
@@ -1154,15 +1159,32 @@
       list = list.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1));
     else if (activeFilter !== "all") list = list.filter((i) => i.type === activeFilter);
 
+    if (countryFilter) list = list.filter((i) => i.country === countryFilter);
+
     const preSearchCount = list.length;
     list = list.filter((i) => matchesSearch(i, searchQuery));
     list = sortList(list);
 
     const SORT_LABEL = { tier: "sorted by impact tier", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
     let countText = list.length + " programme" + (list.length === 1 ? "" : "s");
+    if (countryFilter) countText += " in " + countryFilter;
     if (searchQuery) countText += " matching “" + searchQuery + "” of " + preSearchCount;
     countText += " · " + SORT_LABEL[sortMode];
     $("#browseCount").textContent = countText;
+
+    // A country filter arrives from the globe, not from the visible controls, so
+    // it needs its own visible, dismissible affordance — otherwise the list looks
+    // inexplicably short with nothing on screen explaining why.
+    const chipSlot = $("#activeCountry");
+    if (chipSlot) {
+      chipSlot.innerHTML = countryFilter
+        ? '<button type="button" class="country-chip" id="clearCountry">' +
+          'Showing ' + esc(countryFilter) + ' only <span aria-hidden="true">×</span>' +
+          '<span class="sr-only">, clear this filter</span></button>'
+        : "";
+      const clear = $("#clearCountry");
+      if (clear) clear.addEventListener("click", function () { countryFilter = ""; renderBrowse(); });
+    }
 
     $("#browseCards").innerHTML = list.length
       ? list.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("")
@@ -1629,10 +1651,33 @@
     });
   }
 
+  /* The globe is an enhancement, never the only route: picking a country just
+     drives the same search the Browse box does, so nothing here is reachable
+     only by pointing at a canvas. */
+  function initHeroGlobe() {
+    const canvas = $("#globeCanvas");
+    if (!canvas || typeof window.initGlobe !== "function") return;
+    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) {
+      countryFilter = country;
+      searchQuery = "";
+      activeFilter = "all";
+      const box = $("#browseSearch");
+      if (box) box.value = "";
+      renderBrowse();
+      showView("browse");
+    });
+    // Theme switches change every colour the globe draws with.
+    if (globe) {
+      const btn = $("#themeToggle");
+      if (btn) btn.addEventListener("click", function () { setTimeout(globe.redraw, 30); });
+    }
+  }
+
   function init() {
     renderStats();
     initTheme();
     initMobileNav();
+    initHeroGlobe();
     bindGoto(document);
     loadShortlist();
     updateShortlistCount();

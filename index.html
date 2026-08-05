@@ -44,26 +44,36 @@
 <section class="view is-active" id="view-intro">
   <div class="hero">
     <div class="wrap hero-in">
-      <p class="eyebrow">For students of medicine in India</p>
-      <h1 class="hero-h">
-        You were told there were two options.<br />
-        <span class="hero-em">This page has <span id="heroCount">—</span> of them.</span>
-      </h1>
-      <p class="hero-lede">
-        Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the
-        USMLE. Both are real. Neither is the whole territory. There are funded research programmes
-        you can hold in second year, doctorates that pay you a salary, scholarships that cover
-        everything including your flight, and entire scientific fields nobody mentioned once in five
-        years of lectures.
-      </p>
-      <p class="hero-lede">
-        This asks you three questions that have nothing to do with marks — and then does the
-        research you do not have time to do.
-      </p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">For students of medicine in India</p>
+          <h1 class="hero-h">
+            You were told there were two options.<br />
+            <span class="hero-em">This page has <span id="heroCount">—</span> of them.</span>
+          </h1>
+          <p class="hero-lede">
+            Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for
+            the USMLE. Both are real. Neither is the whole territory. There are funded research
+            programmes you can hold in second year, doctorates that pay you a salary, scholarships
+            that cover everything including your flight, and entire scientific fields nobody
+            mentioned once in five years of lectures.
+          </p>
+          <p class="hero-lede">
+            This asks you three questions that have nothing to do with marks — and then does the
+            research you do not have time to do.
+          </p>
 
-      <div class="hero-actions">
-        <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
-        <button type="button" class="btn btn-ghost" data-goto="browse">Just show me everything</button>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
+            <button type="button" class="btn btn-ghost" data-goto="browse">Just show me everything</button>
+          </div>
+        </div>
+
+        <figure class="hero-globe">
+          <canvas id="globeCanvas" role="img"
+                  aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
+          <figcaption class="globe-label" id="globeLabel">Drag to spin · tap a country</figcaption>
+        </figure>
       </div>
 
       <dl class="hero-stats">
@@ -154,6 +164,7 @@
       </div>
     </div>
     <div class="filters" id="filters"></div>
+    <div id="activeCountry"></div>
     <p class="result-count" id="browseCount"></p>
     <div class="cards" id="browseCards"></div>
   </div>
@@ -249,6 +260,7 @@
 <script src="assets/data-expansion.js"></script>
 <script src="assets/data-india-funding.js"></script>
 <script src="assets/data-specialties.js"></script>
+<script src="assets/globe.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>
