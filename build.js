@@ -9,7 +9,22 @@ const path = require("path");
 const root = __dirname;
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 
-const css = fs.readFileSync(path.join(root, "assets/styles.css"), "utf8");
+let css = fs.readFileSync(path.join(root, "assets/styles.css"), "utf8");
+
+// Inline the self-hosted fonts. The published artifact runs under a CSP that
+// blocks every external request, and a bundle handed to someone as a single
+// file has no assets/ directory beside it — so url("fonts/x.woff2") has to
+// become a data URI or the page silently falls back to system serif.
+let fontsInlined = 0;
+css = css.replace(/url\("fonts\/([^"]+)"\)/g, function (whole, file) {
+  const p = path.join(root, "assets/fonts", file);
+  if (!fs.existsSync(p)) {
+    console.warn("  ! missing font, left as a URL: " + file);
+    return whole;
+  }
+  fontsInlined++;
+  return 'url("data:font/woff2;base64,' + fs.readFileSync(p).toString("base64") + '")';
+});
 
 // Preserve load order exactly as index.html declares it.
 const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map((m) => m[1]);
@@ -32,4 +47,5 @@ fs.mkdirSync(dest, { recursive: true });
 fs.writeFileSync(path.join(dest, "dream-counsellor.html"), out);
 
 const kb = (Buffer.byteLength(out) / 1024).toFixed(0);
-console.log("Bundled " + scripts.length + " scripts + stylesheet -> dist/dream-counsellor.html (" + kb + " KB)");
+console.log("Bundled " + scripts.length + " scripts + stylesheet + " + fontsInlined +
+            " fonts -> dist/dream-counsellor.html (" + kb + " KB)");

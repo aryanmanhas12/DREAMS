@@ -1,34 +1,81 @@
 /* ════════════════════════════════════════════════════════════════
    Dream Counsellor
-   Ground: cool archival bone. Ink: deep petrol.
-   Accent: instrument teal. Signal magenta is reserved for deadlines only.
-   Type: serif asks the human questions, mono reads the instruments.
+
+   Type — three roles, self-hosted so nothing depends on a CDN:
+     Cormorant Garamond  calligraphic old-style serif. Asks the human
+                         questions. High contrast, small x-height, genuinely
+                         elegant at display size — and needs generous size
+                         and loose tracking to earn that, which the scale below
+                         gives it.
+     IBM Plex Sans       body. Chosen over Inter deliberately: Plex has real
+                         character in its terminals and its 'a' and 'g', so
+                         paragraphs do not read as default-UI.
+     IBM Plex Mono       the instrument layer — tags, dates, counts, country
+                         codes. Same superfamily as the body, so the two
+                         agree structurally while reading as different voices.
+   All three are variable fonts: one file each covers the whole weight range.
+
+   Colour — deep teal-green ground, warm ivory ink, with a vivid coral signal
+   reserved exclusively for deadlines and a jade accent for everything
+   interactive. Every value is a token on :root, so swapping the palette is a
+   six-line edit, not a refactor.
    ════════════════════════════════════════════════════════════════ */
 
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("fonts/cormorant-garamond.woff2") format("woff2");
+  font-weight: 300 700;            /* variable axis — let the browser interpolate */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("fonts/cormorant-garamond-italic.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/ibm-plex-sans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/ibm-plex-mono.woff2") format("woff2");
+  font-weight: 300 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --paper:      #E9EBE6;
-  --paper-2:    #F3F4F0;
-  --surface:    #FDFDFB;
-  --line:       #C9CFC9;
-  --line-soft:  #DDE1DC;
+  /* Light: warm ivory ground with a faint green cast, so it sits beside the
+     jade accent rather than fighting it. Not a pure grey anywhere. */
+  --paper:      #F2F1EA;
+  --paper-2:    #FAF9F3;
+  --surface:    #FFFEFA;
+  --line:       #CFD2C4;
+  --line-soft:  #E2E3D8;
 
-  --ink:        #0D1E24;
-  --ink-2:      #3E555C;
-  --ink-3:      #6B8188;
+  --ink:        #0B211F;
+  --ink-2:      #3A5450;
+  --ink-3:      #6C8480;
 
-  --accent:     #0E6B70;
-  --accent-2:   #0A4F53;
-  --accent-wash:#DCE8E6;
+  --accent:     #0B6E62;   /* jade — everything interactive */
+  --accent-2:   #084F47;
+  --accent-wash:#D6E8E1;
 
-  --signal:     #B32450;
-  --signal-wash:#F5DFE6;
+  --signal:     #C0392B;   /* vermilion — deadlines only, never decoration */
+  --signal-wash:#F8E2DE;
 
   --ok:         #2C6A4F;
-  --warn:       #8A6212;
+  --warn:       #9A6410;
 
-  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-display: "Cormorant Garamond", Georgia, "Iowan Old Style", Palatino, serif;
+  --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --r: 3px;
   --maxw: 1180px;
@@ -37,49 +84,53 @@
   --shadow: 0 1px 2px rgba(13,30,36,.06), 0 8px 24px -12px rgba(13,30,36,.18);
 }
 
+/* Dark: a deep teal-green ground rather than neutral charcoal, and warm ivory
+   text rather than grey — the warmth is what stops a dark UI reading as cold
+   and machine-made. Accent and signal both brighten to hold contrast on the
+   darker ground. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #071316;
-    --paper-2:    #0C1E23;
-    --surface:    #0F262C;
-    --line:       #23434A;
-    --line-soft:  #1A343A;
+    --paper:      #06171A;
+    --paper-2:    #0B2226;
+    --surface:    #0E2B2F;
+    --line:       #21474A;
+    --line-soft:  #17383C;
 
-    --ink:        #DCE7E5;
-    --ink-2:      #9DB3B4;
-    --ink-3:      #6E8A8C;
+    --ink:        #EDE7DA;
+    --ink-2:      #A9BDB6;
+    --ink-3:      #7A948F;
 
-    --accent:     #4FBFB8;
-    --accent-2:   #7ED6CE;
-    --accent-wash:#123338;
+    --accent:     #48D6BE;
+    --accent-2:   #86EBD6;
+    --accent-wash:#10393A;
 
-    --signal:     #FF7A9E;
-    --signal-wash:#3A1826;
+    --signal:     #FF8A6B;
+    --signal-wash:#3E1D18;
 
-    --ok:         #5FBF8E;
-    --warn:       #D8A93F;
+    --ok:         #62CE97;
+    --warn:       #E0B44A;
 
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+    --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px -16px rgba(0,0,0,.75);
   }
 }
 
 :root[data-theme="dark"] {
-  --paper:#071316; --paper-2:#0C1E23; --surface:#0F262C;
-  --line:#23434A; --line-soft:#1A343A;
-  --ink:#DCE7E5; --ink-2:#9DB3B4; --ink-3:#6E8A8C;
-  --accent:#4FBFB8; --accent-2:#7ED6CE; --accent-wash:#123338;
-  --signal:#FF7A9E; --signal-wash:#3A1826;
-  --ok:#5FBF8E; --warn:#D8A93F;
-  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  --paper:#06171A; --paper-2:#0B2226; --surface:#0E2B2F;
+  --line:#21474A; --line-soft:#17383C;
+  --ink:#EDE7DA; --ink-2:#A9BDB6; --ink-3:#7A948F;
+  --accent:#48D6BE; --accent-2:#86EBD6; --accent-wash:#10393A;
+  --signal:#FF8A6B; --signal-wash:#3E1D18;
+  --ok:#62CE97; --warn:#E0B44A;
+  --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px -16px rgba(0,0,0,.75);
 }
 :root[data-theme="light"] {
-  --paper:#E9EBE6; --paper-2:#F3F4F0; --surface:#FDFDFB;
-  --line:#C9CFC9; --line-soft:#DDE1DC;
-  --ink:#0D1E24; --ink-2:#3E555C; --ink-3:#6B8188;
-  --accent:#0E6B70; --accent-2:#0A4F53; --accent-wash:#DCE8E6;
-  --signal:#B32450; --signal-wash:#F5DFE6;
-  --ok:#2C6A4F; --warn:#8A6212;
-  --shadow: 0 1px 2px rgba(13,30,36,.06), 0 8px 24px -12px rgba(13,30,36,.18);
+  --paper:#F2F1EA; --paper-2:#FAF9F3; --surface:#FFFEFA;
+  --line:#CFD2C4; --line-soft:#E2E3D8;
+  --ink:#0B211F; --ink-2:#3A5450; --ink-3:#6C8480;
+  --accent:#0B6E62; --accent-2:#084F47; --accent-wash:#D6E8E1;
+  --signal:#C0392B; --signal-wash:#F8E2DE;
+  --ok:#2C6A4F; --warn:#9A6410;
+  --shadow: 0 1px 2px rgba(11,33,31,.06), 0 8px 24px -12px rgba(11,33,31,.16);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -129,7 +180,7 @@ body {
   content: ""; position: absolute; inset: 3px auto 3px 50%;
   width: 1px; background: var(--accent); transform: translateX(-50%);
 }
-.brand-text { font-family: var(--font-display); font-size: 1.12rem; letter-spacing: -.01em; }
+.brand-text { font-family: var(--font-display); font-size: 1.34rem; font-weight: 600; letter-spacing: 0; }
 .brand-text em { font-style: italic; color: var(--accent); }
 
 .topnav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
@@ -287,8 +338,8 @@ body {
 
 .hero-h {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 5.6vw, 3.7rem);
-  line-height: 1.08; letter-spacing: -.022em;
+  font-size: clamp(2.6rem, 6.4vw, 4.5rem);
+  line-height: 1.04; letter-spacing: -.018em;
   margin: 0 0 26px; font-weight: 400; text-wrap: balance;
 }
 .hero-em { font-style: italic; color: var(--accent); }
@@ -323,13 +374,15 @@ body {
   letter-spacing: .1em; color: var(--ink-3); margin: 0 0 6px;
 }
 .hero-stats dd {
-  margin: 0; font-family: var(--font-display); font-size: 1.9rem; line-height: 1;
-  font-variant-numeric: tabular-nums; color: var(--accent);
+  margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 2.4rem; line-height: 1;
+  /* Cormorant defaults to old-style figures, which descend below the baseline —
+     lovely in a sentence, wrong in a data tile. Force lining figures here. */
+  font-variant-numeric: lining-nums tabular-nums; color: var(--accent);
 }
 
 /* ─────────────── band / triptych ─────────────── */
 .band { padding: 52px 24px 90px; border-top: 1px solid var(--line-soft); margin-top: 60px; }
-.band-h { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; margin: 0 0 30px; }
+.band-h { font-family: var(--font-display); font-weight: 600; font-size: 2rem; margin: 0 0 30px; letter-spacing: -.005em; }
 
 .triptych { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(255px, 100%), 1fr)); gap: 26px; }
 .tri { border-top: 2px solid var(--accent); padding-top: 18px; }
@@ -337,7 +390,7 @@ body {
   font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
   letter-spacing: .13em; color: var(--ink-3);
 }
-.tri h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.3rem; margin: 10px 0 10px; line-height: 1.25; }
+.tri h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.62rem; margin: 10px 0 10px; line-height: 1.2; }
 .tri p { margin: 0; color: var(--ink-2); font-size: .95rem; }
 .band-foot { max-width: var(--readw); margin: 38px 0 0; color: var(--ink-2); font-size: .97rem; }
 
@@ -354,7 +407,7 @@ body {
 }
 .q-title {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(1.65rem, 4.2vw, 2.65rem); line-height: 1.14; letter-spacing: -.018em;
+  font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -.012em;
   margin: 0 0 14px; text-wrap: balance;
 }
 .q-help { color: var(--ink-2); max-width: 62ch; margin: 0 0 30px; font-size: 1rem; }
@@ -405,7 +458,7 @@ body {
 .page-head { padding: 54px 0 30px; max-width: 780px; }
 .page-head h2 {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(1.8rem, 4.2vw, 2.6rem); line-height: 1.12;
+  font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.08;
   letter-spacing: -.018em; margin: 0 0 14px;
 }
 .page-lede { color: var(--ink-2); margin: 0; max-width: var(--readw); }
@@ -439,8 +492,8 @@ body {
 .read-rail .rr span { text-align: right; color: var(--ink); }
 .rr-note { font-size: .76rem; color: var(--ink-3); margin: 14px 0 0; line-height: 1.5; }
 .read h2 {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.55rem;
-  margin: 0 0 16px; letter-spacing: -.012em;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.95rem;
+  margin: 0 0 16px; letter-spacing: -.005em;
 }
 .read p { margin: 0 0 14px; max-width: var(--readw); color: var(--ink-2); }
 .read p:last-child { margin-bottom: 0; }
@@ -457,8 +510,8 @@ body {
 /* ─────────────── action list ─────────────── */
 .actions-block { margin: 44px 0 0; }
 .sec-h {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.45rem;
-  margin: 0 0 6px; letter-spacing: -.012em;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.82rem;
+  margin: 0 0 6px; letter-spacing: -.005em;
 }
 .sec-sub { color: var(--ink-2); margin: 0 0 22px; font-size: .95rem; max-width: var(--readw); }
 
@@ -528,8 +581,8 @@ body {
   letter-spacing: .05em; flex: none;
 }
 .card h3 {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.28rem;
-  margin: 0; letter-spacing: -.01em; line-height: 1.25; flex: 1 1 260px;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.56rem;
+  margin: 0; letter-spacing: -.005em; line-height: 1.2; flex: 1 1 260px;
 }
 .card-org { font-size: .88rem; color: var(--ink-2); margin: 2px 0 0; }
 
@@ -577,7 +630,7 @@ body {
   border: 1px solid var(--line); border-left: 3px solid var(--signal);
   background: var(--surface); border-radius: var(--r); padding: 20px 22px;
 }
-.skip-card h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.1rem; margin: 0 0 9px; line-height: 1.3; }
+.skip-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.34rem; margin: 0 0 9px; line-height: 1.25; }
 .skip-card p { margin: 0; font-size: .91rem; color: var(--ink-2); }
 
 .record {
@@ -750,7 +803,7 @@ body {
 /* ─────────────── frontier ─────────────── */
 .frontier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 18px; margin-bottom: 70px; }
 .fcard { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 24px 26px; }
-.fcard h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.32rem; margin: 0 0 4px; letter-spacing: -.01em; }
+.fcard h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.62rem; margin: 0 0 4px; letter-spacing: -.005em; }
 .fcard .f-tag { font-family: var(--font-mono); font-size: .72rem; color: var(--accent); letter-spacing: .04em; margin: 0 0 15px; }
 .fcard p { font-size: .93rem; color: var(--ink-2); margin: 0 0 13px; }
 .fcard .f-why { border-left: 2px solid var(--accent); padding-left: 14px; color: var(--ink); }
@@ -766,12 +819,12 @@ body {
 }
 .route-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-bottom: 22px; }
 .route-head h3 {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.42rem;
-  margin: 0; letter-spacing: -.012em; flex: 1 1 auto;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.74rem;
+  margin: 0; letter-spacing: -.005em; flex: 1 1 auto;
 }
 .route-one {
   flex: 1 1 100%; margin: 0; font-family: var(--font-display); font-style: italic;
-  font-size: 1.06rem; color: var(--accent); line-height: 1.45; max-width: var(--readw);
+  font-size: 1.28rem; color: var(--accent); line-height: 1.38; max-width: var(--readw);
 }
 .route-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr)); gap: 26px 40px; }
 .route-col > .mini-h { margin-top: 20px; }
@@ -807,7 +860,7 @@ body {
   letter-spacing: .14em; margin: 0 0 4px; color: var(--ink-2);
 }
 .month.is-now h3 { color: var(--signal); }
-.month .m-count { font-family: var(--font-display); font-size: 1.7rem; color: var(--accent); line-height: 1; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
+.month .m-count { font-family: var(--font-display); font-weight: 600; font-size: 2.1rem; color: var(--accent); line-height: 1; margin: 0 0 12px; font-variant-numeric: lining-nums tabular-nums; }
 .month ul { list-style: none; margin: 0; padding: 0; }
 .month li {
   font-size: .86rem; color: var(--ink-2); padding: 5px 0; border-top: 1px solid var(--line-soft);
@@ -823,7 +876,7 @@ body {
 .countries { display: grid; gap: 14px; margin: 0 0 50px; }
 .cty { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 20px 24px; }
 .cty-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
-.cty h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.22rem; margin: 0; flex: 1 1 auto; }
+.cty h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0; flex: 1 1 auto; }
 .cty-score { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 2px; }
 .cty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 12px 22px; margin: 16px 0 0; }
 .cty-grid div { font-size: .87rem; color: var(--ink-2); }
@@ -836,6 +889,29 @@ body {
 .empty { border: 1px dashed var(--line); padding: 40px; text-align: center; color: var(--ink-2); border-radius: var(--r); }
 
 .foot { border-top: 1px solid var(--line-soft); background: var(--paper-2); padding: 34px 0 46px; }
+.privacy {
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  background: var(--surface); border-radius: var(--r);
+  margin: 0 0 24px; max-width: 82ch;
+}
+.privacy > summary {
+  cursor: pointer; list-style: none; padding: 14px 18px;
+  font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: 9px;
+}
+.privacy > summary::-webkit-details-marker { display: none; }
+.privacy > summary::before { content: "+"; font-size: 1rem; line-height: 1; }
+.privacy[open] > summary::before { content: "–"; }
+.privacy-body { padding: 0 18px 16px; }
+.privacy-body p, .privacy-body li { font-size: .89rem; color: var(--ink-2); }
+.privacy-body p { margin: 0 0 12px; }
+.privacy-body ul { margin: 0 0 12px; padding-left: 20px; }
+.privacy-body li { margin-bottom: 9px; }
+.privacy-body li::marker { color: var(--accent); }
+.privacy-body strong { color: var(--ink); }
+.privacy-small { font-size: .84rem !important; color: var(--ink-3) !important; margin-bottom: 0 !important; }
+
 .foot-note { font-size: .87rem; color: var(--ink-2); max-width: 78ch; margin: 0 0 12px; }
 .foot-small { font-size: .84rem; color: var(--ink-3); margin-bottom: 0; }
 .foot-note strong { color: var(--ink); }

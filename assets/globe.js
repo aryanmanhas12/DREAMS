@@ -113,10 +113,35 @@
       ctx.lineWidth = 1;
       ctx.stroke();
 
+      // Coastlines first, so the graticule reads as an overlay on the land
+      // rather than the land floating on a grid. Each ring is stroked only
+      // where it faces us; crossing the limb starts a new sub-path, which is
+      // what stops a landmass smearing across the sphere as it rotates.
+      const coast = window.DB && window.DB.coast;
+      if (coast) {
+        ctx.strokeStyle = ink;
+        ctx.globalAlpha = 0.34;
+        ctx.lineWidth = 0.9;
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        for (let r = 0; r < coast.length; r++) {
+          const ring = coast[r];
+          let started = false;
+          for (let i = 0; i < ring.length; i += 2) {
+            const p = project(ring[i + 1], ring[i], spin, tilt, R, cx, cy);
+            if (p.z > 0) {
+              if (started) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y);
+              started = true;
+            } else started = false;
+          }
+        }
+        ctx.stroke();
+      }
+
       // Graticule. Only the near hemisphere is stroked, so the sphere reads as
       // solid without any shading.
       ctx.strokeStyle = accent;
-      ctx.globalAlpha = 0.22;
+      ctx.globalAlpha = 0.16;
       ctx.lineWidth = 1;
 
       for (let lon = -180; lon < 180; lon += 30) {       // meridians

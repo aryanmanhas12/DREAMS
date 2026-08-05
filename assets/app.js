@@ -57,7 +57,14 @@
         { v: "numbers",  t: "Numbers and spotting patterns",      d: "You see the thing in the data", f: ["compbio","pubhealth"] },
         { v: "write",    t: "Writing",                            d: "People send you their drafts", f: ["global"] },
         { v: "calm",     t: "Staying calm when it goes wrong",    d: "You are who they want in an emergency", f: ["clinical"] },
-        { v: "connect",  t: "Introducing people to each other",   d: "You are the node in the network", f: ["global","systems"] }
+        { v: "connect",  t: "Introducing people to each other",   d: "You are the node in the network", f: ["global","systems"] },
+        { v: "hands2",   t: "Anything needing steady hands",      d: "Sutures, cannulas, the fiddly practical thing", f: ["clinical","onco"] },
+        { v: "detail",   t: "Catching what everyone else missed", d: "The error on page four; the sign nobody examined for", f: ["clinical","pubhealth"] },
+        { v: "reliable", t: "Being the one who never drops it",   d: "If you said you would, it is done", f: ["systems","clinical"] },
+        { v: "mediate",  t: "Getting people who disagree to agree", d: "You are who they send into the difficult conversation", f: ["systems","global"] },
+        { v: "memory",   t: "Remembering things nobody wrote down", d: "Facts, faces, who said what in which meeting", f: ["clinical","biochem"] },
+        { v: "make",     t: "Making things look and feel right",  d: "Design, layout, the aesthetics of a thing", f: ["global","compbio"] },
+        { v: "comfort",  t: "Making frightened people feel safe", d: "Children, the very ill, families in a corridor", f: ["clinical","psych","repro"] }
       ]
     },
     {
@@ -76,7 +83,14 @@
         { v: "climate",  t: "Air, heat and a poisoned environment",       d: "The health cost nobody counts", f: ["env","pubhealth"] },
         { v: "unsolved", t: "Diseases nobody has solved yet",             d: "We still do not know what schizophrenia is", f: ["biochem","neuro","genomics","onco"] },
         { v: "misinfo",  t: "Confident nonsense drowning out evidence",   d: "Misinformation as a health emergency", f: ["global","pubhealth"] },
-        { v: "mentor",   t: "Talent wasted for lack of a single mentor",  d: "Brilliant people with nobody to open a door", f: ["global","systems"] }
+        { v: "mentor",   t: "Talent wasted for lack of a single mentor",  d: "Brilliant people with nobody to open a door", f: ["global","systems"] },
+        { v: "rural",    t: "Travelling 200 km for something basic",      d: "Where you live deciding whether you are treated", f: ["pubhealth","systems","global"] },
+        { v: "doctors",  t: "How the system treats its own doctors",      d: "Violence on duty, unpaid stipends, burnout as a rite of passage", f: ["systems","psych"] },
+        { v: "children", t: "Children dying of things a vaccine prevents", d: "Solved problems that keep killing anyway", f: ["repro","infect","pubhealth"] },
+        { v: "elderly",  t: "Old people quietly abandoned",               d: "By families, by wards, by the whole design of care", f: ["clinical","psych"] },
+        { v: "pain",     t: "How little we still understand pain",        d: "Dismissed, undertreated, barely measured", f: ["neuro","clinical"] },
+        { v: "paywall",  t: "Knowledge locked behind paywalls",           d: "Research that Indian institutions cannot afford to read", f: ["global","compbio"] },
+        { v: "quack",    t: "Untrained people treating the desperate",    d: "Because nothing real was within reach or affordable", f: ["pubhealth","systems"] }
       ]
     },
     {
@@ -94,7 +108,14 @@
         { v: "hands",    t: "Working with my hands in a lab",       d: "Pipettes, slides, protocols", f: ["biochem","genomics"] },
         { v: "data",     t: "Finding the pattern in a dataset",     d: "The plot that finally makes sense", f: ["compbio","pubhealth"] },
         { v: "arguing",  t: "Arguing an idea out with someone",     d: "Until one of you changes your mind", f: ["global","systems"] },
-        { v: "designing",t: "Designing a study properly",           d: "Sample size, controls, confounders", f: ["pubhealth","compbio"] }
+        { v: "designing",t: "Designing a study properly",           d: "Sample size, controls, confounders", f: ["pubhealth","compbio"] },
+        { v: "procedure",t: "Repeating a procedure until it is clean", d: "Until your hands know it without you", f: ["clinical","onco"] },
+        { v: "sitting",  t: "Sitting with someone who is frightened", d: "Not fixing anything — just staying", f: ["psych","clinical"] },
+        { v: "takeapart",t: "Taking something apart to see how it works", d: "A machine, a pathway, an argument", f: ["biochem","genomics","compbio"] },
+        { v: "curious",  t: "Reading with no exam attached to it",   d: "Down a rabbit hole nobody assigned", f: ["neuro","biochem","genomics"] },
+        { v: "team",     t: "Getting a group to actually function",  d: "The rota works, everyone knows their part", f: ["systems","global"] },
+        { v: "making",   t: "Making something with my hands",        d: "Drawing, cooking, building, playing an instrument", f: ["clinical","compbio"] },
+        { v: "outdoors", t: "Being out in the field, not the building", d: "Villages, camps, sites, households", f: ["pubhealth","global","env"] }
       ]
     },
     {
