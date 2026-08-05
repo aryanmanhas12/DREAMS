@@ -15,10 +15,16 @@
                          agree structurally while reading as different voices.
    All three are variable fonts: one file each covers the whole weight range.
 
-   Colour — deep teal-green ground, warm ivory ink, with a vivid coral signal
-   reserved exclusively for deadlines and a jade accent for everything
-   interactive. Every value is a token on :root, so swapping the palette is a
-   six-line edit, not a refactor.
+   Colour — "Citrus & Slate". Deep midnight blue ground in dark, warm ceramic
+   bone in light; never pure black or white, so the extremes stay tinted and
+   organic. Slate teal carries everything interactive. Citrus is the single
+   high-energy tone and is spent only on deadlines — the one thing on this site
+   that is genuinely time-critical — so it never becomes decoration. Shadows are
+   warm-tinted rather than neutral grey.
+
+   Every value is a token on :root, redefined in the dark media query and in both
+   [data-theme] overrides. Swapping the palette is a token edit; no component
+   ever hard-codes a colour.
    ════════════════════════════════════════════════════════════════ */
 
 @font-face {
@@ -51,24 +57,26 @@
 }
 
 :root {
-  /* Light: warm ivory ground with a faint green cast, so it sits beside the
-     jade accent rather than fighting it. Not a pure grey anywhere. */
-  --paper:      #F2F1EA;
-  --paper-2:    #FAF9F3;
-  --surface:    #FFFEFA;
-  --line:       #CFD2C4;
-  --line-soft:  #E2E3D8;
+  /* Citrus & Slate, light. Ground is warm ceramic bone — never pure white, and
+     warm rather than grey, so the page reads as paper instead of screen. Ink is
+     a deep midnight blue rather than black, which keeps the darkest value on the
+     page tinted and organic. */
+  --paper:      #EDE8DF;
+  --paper-2:    #F6F2EA;
+  --surface:    #FFFCF6;
+  --line:       #D4CBBD;
+  --line-soft:  #E4DDD1;
 
-  --ink:        #0B211F;
-  --ink-2:      #3A5450;
-  --ink-3:      #6C8480;
+  --ink:        #16202E;
+  --ink-2:      #44536A;
+  --ink-3:      #78859A;
 
-  --accent:     #0B6E62;   /* jade — everything interactive */
-  --accent-2:   #084F47;
-  --accent-wash:#D6E8E1;
+  --accent:     #0B6B72;   /* slate teal — everything interactive */
+  --accent-2:   #085259;
+  --accent-wash:#D7E7E7;
 
-  --signal:     #C0392B;   /* vermilion — deadlines only, never decoration */
-  --signal-wash:#F8E2DE;
+  --signal:     #C24417;   /* citrus — deadlines only, the one high-energy tone */
+  --signal-wash:#FAE1D3;
 
   --ok:         #2C6A4F;
   --warn:       #9A6410;
@@ -90,47 +98,50 @@
    darker ground. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #06171A;
-    --paper-2:    #0B2226;
-    --surface:    #0E2B2F;
-    --line:       #21474A;
-    --line-soft:  #17383C;
+    --paper:      #0D1622;
+    --paper-2:    #14202F;
+    --surface:    #182739;
+    --line:       #2C3D52;
+    --line-soft:  #223146;
 
-    --ink:        #EDE7DA;
-    --ink-2:      #A9BDB6;
-    --ink-3:      #7A948F;
+    --ink:        #F0E9DC;   /* warm bone text, not grey — this is what stops a
+                                dark UI reading as cold and machine-made */
+    --ink-2:      #ABB8C8;
+    --ink-3:      #7E8C9E;
 
-    --accent:     #48D6BE;
-    --accent-2:   #86EBD6;
-    --accent-wash:#10393A;
+    --accent:     #45D4CC;
+    --accent-2:   #7FE6DE;
+    --accent-wash:#10333C;
 
-    --signal:     #FF8A6B;
-    --signal-wash:#3E1D18;
+    --signal:     #FF8A4C;
+    --signal-wash:#3B2114;
 
-    --ok:         #62CE97;
-    --warn:       #E0B44A;
+    --ok:         #5FCB92;
+    --warn:       #E5B44F;
 
-    --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px -16px rgba(0,0,0,.75);
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
   }
 }
 
 :root[data-theme="dark"] {
-  --paper:#06171A; --paper-2:#0B2226; --surface:#0E2B2F;
-  --line:#21474A; --line-soft:#17383C;
-  --ink:#EDE7DA; --ink-2:#A9BDB6; --ink-3:#7A948F;
-  --accent:#48D6BE; --accent-2:#86EBD6; --accent-wash:#10393A;
-  --signal:#FF8A6B; --signal-wash:#3E1D18;
-  --ok:#62CE97; --warn:#E0B44A;
-  --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px -16px rgba(0,0,0,.75);
+  --paper:#0D1622; --paper-2:#14202F; --surface:#182739;
+  --line:#2C3D52; --line-soft:#223146;
+  --ink:#F0E9DC; --ink-2:#ABB8C8; --ink-3:#7E8C9E;
+  --accent:#45D4CC; --accent-2:#7FE6DE; --accent-wash:#10333C;
+  --signal:#FF8A4C; --signal-wash:#3B2114;
+  --ok:#5FCB92; --warn:#E5B44F;
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
 }
 :root[data-theme="light"] {
-  --paper:#F2F1EA; --paper-2:#FAF9F3; --surface:#FFFEFA;
-  --line:#CFD2C4; --line-soft:#E2E3D8;
-  --ink:#0B211F; --ink-2:#3A5450; --ink-3:#6C8480;
-  --accent:#0B6E62; --accent-2:#084F47; --accent-wash:#D6E8E1;
-  --signal:#C0392B; --signal-wash:#F8E2DE;
+  --paper:#EDE8DF; --paper-2:#F6F2EA; --surface:#FFFCF6;
+  --line:#D4CBBD; --line-soft:#E4DDD1;
+  --ink:#16202E; --ink-2:#44536A; --ink-3:#78859A;
+  --accent:#0B6B72; --accent-2:#085259; --accent-wash:#D7E7E7;
+  --signal:#C24417; --signal-wash:#FAE1D3;
   --ok:#2C6A4F; --warn:#9A6410;
-  --shadow: 0 1px 2px rgba(11,33,31,.06), 0 8px 24px -12px rgba(11,33,31,.16);
+  /* Warm-tinted shadow rather than neutral black — a grey shadow on a warm
+     ground is the flat, synthetic look worth avoiding. */
+  --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
