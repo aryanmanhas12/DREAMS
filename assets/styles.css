@@ -209,6 +209,45 @@ body {
 .view.is-active { display: block; animation: fade .32s ease both; }
 @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
+/* ─────────────── motion ───────────────
+   Four deliberate moments, not effects sprinkled everywhere:
+     1. the hero assembles itself once, on arrival
+     2. the stat numbers count up, so "150" registers as a quantity
+     3. the three questions rise as you reach them — they are the thesis
+     4. each survey question arrives, so answering reads as a conversation
+   Every one of them is off entirely under prefers-reduced-motion; the
+   reveal states in particular must fall back to fully visible, never to
+   permanently transparent. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-copy > *, .hero-globe {
+  animation: rise .62s cubic-bezier(.22,.68,.3,1) both;
+}
+.hero-copy > *:nth-child(1) { animation-delay: .04s; }
+.hero-copy > *:nth-child(2) { animation-delay: .12s; }
+.hero-copy > *:nth-child(3) { animation-delay: .20s; }
+.hero-copy > *:nth-child(4) { animation-delay: .26s; }
+.hero-copy > *:nth-child(5) { animation-delay: .32s; }
+.hero-globe { animation-delay: .18s; animation-duration: .9s; }
+
+.reveal { opacity: 0; transform: translateY(18px); }
+.reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity .66s cubic-bezier(.22,.68,.3,1), transform .66s cubic-bezier(.22,.68,.3,1);
+}
+.reveal.is-in:nth-child(2) { transition-delay: .08s; }
+.reveal.is-in:nth-child(3) { transition-delay: .16s; }
+
+.q-anim { animation: rise .4s cubic-bezier(.22,.68,.3,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > *, .hero-globe, .q-anim { animation: none; }
+  .reveal, .reveal.is-in { opacity: 1; transform: none; transition: none; }
+}
+
 /* ─────────────── hero ─────────────── */
 .hero { padding: 68px 0 34px; }
 .hero-in { max-width: 1120px; }

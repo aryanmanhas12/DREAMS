@@ -817,6 +817,11 @@
     if (q.type === "multi") h += '<p class="q-note">Choose as many as are true. None is also an answer.</p>';
 
     slot.innerHTML = h;
+    // Retrigger the arrival animation on every question, so the survey reads
+    // as a sequence of things being asked rather than a form being repainted.
+    slot.classList.remove("q-anim");
+    void slot.offsetWidth; // force reflow so the animation restarts
+    slot.classList.add("q-anim");
     window.scrollTo(0, 0);
     focusHeading(slot);
 
@@ -1210,6 +1215,44 @@
     $("#calendarGrid").innerHTML = h;
   }
 
+  /* ───────────────── motion ───────────────── */
+  const prefersReduced = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Count a number up to its target. The point is that "150" lands as a
+  // quantity rather than as a label you skim past — so it eases out, and
+  // under reduced-motion it simply appears.
+  function countUp(el, target) {
+    if (prefersReduced || target <= 0) { el.textContent = String(target); return; }
+    const dur = 900, t0 = performance.now();
+    (function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = String(target);
+    })(t0);
+  }
+
+  // Reveal-on-scroll. Falls back to visible when IntersectionObserver is
+  // missing, so content is never left stranded at opacity 0.
+  function initReveals() {
+    const els = $$(".reveal");
+    if (!els.length) return;
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("is-in"));
+      return;
+    }
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("is-in");
+        io.unobserve(en.target);   // reveal once; re-animating on scroll-back is noise
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+  }
+
   /* ───────────────── stats ───────────────── */
   function renderStats() {
     const items = allOpportunities();
@@ -1218,12 +1261,19 @@
       if (["Any", "Global", "Online", "Europe", "Asia", "Nordics"].indexOf(i.country) === -1) countries[i.country] = 1;
     });
     const total = items.length + (window.DB.frontiers || []).length + (window.DB.specialties || []).length;
-    $("#statTotal").textContent = total;
+    const free = items.filter((i) => i.zeroCost).length;
+    const student = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
+    const nCountries = Object.keys(countries).length;
+
+    // The headline number appears immediately — it is part of a sentence and
+    // must not read as "This page has — of them" for a beat. The stat tiles,
+    // being data rather than prose, count up.
     const hc = $("#heroCount");
     if (hc) hc.textContent = total;
-    $("#statFree").textContent = items.filter((i) => i.zeroCost).length;
-    $("#statStudent").textContent = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
-    $("#statCountries").textContent = Object.keys(countries).length;
+    countUp($("#statTotal"), total);
+    countUp($("#statFree"), free);
+    countUp($("#statStudent"), student);
+    countUp($("#statCountries"), nCountries);
   }
 
   /* ───────────────── shortlist ───────────────── */
@@ -1678,6 +1728,7 @@
     initTheme();
     initMobileNav();
     initHeroGlobe();
+    initReveals();
     bindGoto(document);
     loadShortlist();
     updateShortlistCount();
