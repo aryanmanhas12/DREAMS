@@ -1257,11 +1257,91 @@
            'These are <strong>month-level reminders</strong> set to the first of each opening month, not exact dates — ' +
            'windows shift every cycle, so each reminder carries the official page to confirm against.</p>';
     }
+    h += prepListHTML(items);
     h += '<div class="cards">' + items.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("") + '</div>';
     slot.innerHTML = h;
 
     const icsBtn = $("#icsBtn");
     if (icsBtn) icsBtn.addEventListener("click", function () { downloadICS(items); });
+  }
+
+  /* ───────────────── prep list ─────────────────
+     Requirements live as free prose on each programme, which reads well on a
+     card but means someone with eight things shortlisted has to re-read
+     forty sentences to work out what to actually go and obtain. This scans
+     those strings for the handful of things that recur across programmes and
+     collapses them into one checklist, so the shared work (one IELTS sitting,
+     one set of references, one credential evaluation) is visible as shared
+     rather than repeated per programme.
+
+     Keyword matching, deliberately: the prose is human-written and varies, so
+     this errs toward catching a requirement and naming which programmes it
+     came from, rather than silently missing it. The card's own text stays the
+     authority — this is a summary, and says so. */
+  const PREP_RULES = [
+    { id: "english", label: "An English test score",
+      hint: "IELTS or TOEFL results take about two weeks. One sitting covers every programme here.",
+      re: /IELTS|TOEFL|OET|English proficiency|English language/i },
+    { id: "docs", label: "Passport and visa paperwork",
+      hint: "A fresh passport takes three to six weeks in India. Nothing else moves without it.",
+      re: /passport|visa|blocked account|Sperrkonto|proof of funds|financial proof/i },
+    { id: "refs", label: "Academic references",
+      hint: "Ask early and ask people who supervised you on something real, not just taught you.",
+      re: /reference|recommendation|referee|letters? of support|LOR/i },
+    { id: "transcripts", label: "Transcripts and credential evaluation",
+      hint: "WES, ECE and uni-assist verification of Indian transcripts takes weeks — start before you need it.",
+      re: /transcript|WES|ECE|credential|ANABIN|uni-assist|degree certificate|attested/i },
+    { id: "experience", label: "Documented work experience",
+      hint: "Internship, paid research and voluntary work usually all count — but you have to be able to evidence the hours.",
+      re: /years? of (?:relevant )?(?:full-time |professional |post-bachelor's )?experience|work experience|professional experience|\d[\d,]* hours/i },
+    { id: "research", label: "A research record",
+      hint: "One finished project with an output beats five certificates of attendance.",
+      re: /research (?:experience|record|capacity|track record)|publication|thesis|prior lab|demonstrated research/i },
+    { id: "supervisor", label: "A supervisor or invitation letter",
+      hint: "This is the real gate on most European routes. Start emailing months before the deadline.",
+      re: /supervisor|invitation letter|host institution|willing (?:professor|PI)|sponsor|agreed to (?:take|host)/i },
+    { id: "language", label: "A second language",
+      hint: "Almost every research programme here is taught in English — this is for living and clinical work, not admission.",
+      re: /\b(?:German|French|Japanese|Czech)\b|\b[ABC][12]\b|Fachsprachprüfung|language certificate/i },
+    { id: "category", label: "Category and income certificates",
+      hint: "District offices are slow, and these two documents decide the entire application.",
+      re: /category certificate|income certificate|Scheduled (?:Caste|Tribe)|\bSC\b|\bST\b|\bOBC\b|\bEWS\b|family income/i },
+    { id: "exam", label: "An entrance examination",
+      hint: "These run on fixed annual cycles — the exam date, not the application date, sets your timeline.",
+      re: /NEET|INI-CET|entrance (?:exam|test)|written exam|olympiad|\bGRE\b|\bMCQ\b|BET|JRF|NET/i },
+    { id: "ethics", label: "Ethics or GCP training",
+      hint: "CITI and NIH Good Clinical Practice training are free and take an afternoon. Many placements require them.",
+      re: /ethics|\bGCP\b|CITI|IEC|Good Clinical Practice|institutional review/i }
+  ];
+
+  function buildPrepList(items) {
+    return PREP_RULES.map(function (rule) {
+      const needed = items.filter(function (item) {
+        return (item.reqs || []).some((r) => rule.re.test(r));
+      });
+      return { rule: rule, items: needed };
+    }).filter((g) => g.items.length > 0)
+      .sort((a, b) => b.items.length - a.items.length);
+  }
+
+  function prepListHTML(items) {
+    const groups = buildPrepList(items);
+    if (!groups.length) return "";
+    let h = '<details class="prep"><summary>What you need to prepare — ' + groups.length +
+            ' thing' + (groups.length === 1 ? '' : 's') + ' across ' + items.length + ' saved</summary>';
+    h += '<div class="prep-body">';
+    h += '<p class="prep-intro">Pulled from the requirements on the programmes you saved, so the shared work shows up as shared. ' +
+         'Each card’s own text is the authority — this is a summary to plan around, not a substitute for reading them.</p>';
+    groups.forEach(function (g) {
+      h += '<div class="prep-row">';
+      h += '<div class="prep-head"><strong>' + esc(g.rule.label) + '</strong>' +
+           '<span class="prep-count">' + g.items.length + ' of ' + items.length + '</span></div>';
+      h += '<p class="prep-hint">' + esc(g.rule.hint) + '</p>';
+      h += '<p class="prep-for">' + g.items.map((i) => '<span class="chip">' + esc(i.name) + '</span>').join("") + '</p>';
+      h += '</div>';
+    });
+    h += '</div></details>';
+    return h;
   }
 
   /* ───────────────── calendar export ─────────────────
@@ -1456,6 +1536,16 @@
         L.push("   Tier " + imp.t + " · " + item.country + " · " + (item.window || "rolling"));
         L.push("   " + item.url);
       });
+
+      const prep = buildPrepList(saved);
+      if (prep.length) {
+        L.push("");
+        L.push("WHAT I NEED TO PREPARE");
+        prep.forEach(function (g) {
+          L.push("[ ] " + g.rule.label + " (" + g.items.length + " of " + saved.length + ")");
+          L.push("    " + g.rule.hint);
+        });
+      }
     }
 
     L.push("");

@@ -634,6 +634,35 @@ body {
 }
 .ics-note strong { color: var(--ink-2); }
 
+/* prep list — the shared work across a shortlist, collapsed by default so it
+   never competes with the cards themselves for first attention */
+.prep {
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  background: var(--surface); border-radius: var(--r); margin: 0 0 22px;
+}
+.prep > summary {
+  cursor: pointer; list-style: none; padding: 15px 20px;
+  font-family: var(--font-mono); font-size: .76rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: 9px;
+}
+.prep > summary::-webkit-details-marker { display: none; }
+.prep > summary::before { content: "+"; font-size: 1rem; line-height: 1; }
+.prep[open] > summary::before { content: "–"; }
+.prep-body { padding: 0 20px 18px; }
+.prep-intro { font-size: .87rem; color: var(--ink-3); margin: 0 0 18px; max-width: var(--readw); }
+.prep-row { padding: 14px 0; border-top: 1px solid var(--line-soft); }
+.prep-row:first-of-type { border-top: 0; padding-top: 0; }
+.prep-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+.prep-head strong { font-size: 1rem; font-weight: 600; }
+.prep-count {
+  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em;
+  color: var(--accent); border: 1px solid var(--accent); border-radius: 100px;
+  padding: 2px 9px; font-variant-numeric: tabular-nums;
+}
+.prep-hint { font-size: .9rem; color: var(--ink-2); margin: 6px 0 10px; max-width: var(--readw); }
+.prep-for { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
+
 /* ─────────────── frontier ─────────────── */
 .frontier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 18px; margin-bottom: 70px; }
 .fcard { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 24px 26px; }
