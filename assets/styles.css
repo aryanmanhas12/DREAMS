@@ -119,6 +119,11 @@
   --readw: 64ch;   /* 68ch measured long once the base size went up */
 
   --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
+
+  /* Tells the browser to paint scrollbars, native form controls and the
+     pre-paint background to match. Without it a dark page still flashes a
+     white scrollbar and a white gutter. */
+  color-scheme: light;
 }
 
 /* Dark: a deep petrol ground with real chroma in it, not neutral navy — the
@@ -154,6 +159,7 @@
     --warn:       #F2C24E;
 
     --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
+    color-scheme: dark;
   }
 }
 
@@ -166,6 +172,7 @@
   --gold:#F5C046; --gold-wash:#3A2C08; --gold-ink:#241A02;
   --ok:#5FE0A4; --warn:#F2C24E;
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
+  color-scheme: dark;
 }
 :root[data-theme="light"] {
   --paper:#F2EFE4; --paper-2:#FBF8F0; --surface:#FFFEF9;
@@ -178,9 +185,20 @@
   /* Warm-tinted shadow rather than neutral black — a grey shadow on a warm
      ground is the flat, synthetic look worth avoiding. */
   --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+
+/* Kills the ~300ms delay iOS adds to every tap while it waits to see whether a
+   second tap is coming. Pinch-zoom is unaffected — this only opts out of
+   double-tap-to-zoom on controls, never out of zooming the page. */
+button, a, summary, label, select, .opt, .fbtn { touch-action: manipulation; }
+
+/* Headings should not strand a single word on the last line. Applied to the
+   display faces only — balance is expensive on long running text and does
+   nothing useful there. */
+h1, h2, h3, .hero-h, .band-h, .sec-h, .card-h { text-wrap: balance; }
 
 /* Root size in percent, never px, so a reader who has raised their browser's
    default still gets it. 17px on phones, 18px from tablet up: this is a site
@@ -209,7 +227,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 24px; }
+/* Full-bleed layout, so the gutter has to clear the notch and the rounded
+   corners in landscape. max() rather than a bare add, or portrait gains 24px of
+   padding it does not need. */
+.wrap {
+  width: 100%; max-width: var(--maxw); margin-inline: auto;
+  padding-inline: max(24px, env(safe-area-inset-left)) max(24px, env(safe-area-inset-right));
+}
 
 .skip {
   position: absolute; left: -9999px; top: 0; z-index: 100;
@@ -319,6 +343,7 @@ body {
     flex-direction: column; align-items: stretch; gap: 1px; padding: 8px;
     background: var(--paper); border-bottom: 1px solid var(--line-soft);
     box-shadow: var(--shadow); max-height: calc(100vh - 62px); overflow-y: auto;
+    overscroll-behavior: contain;   /* do not scroll the page behind the drawer */
   }
   .topnav.is-open { display: flex; }
   .navlink {
@@ -392,17 +417,38 @@ body {
 }
 .hero-in { max-width: 1120px; position: relative; }
 
-/* The argument on the left, the world on the right. Below the breakpoint the
-   globe drops under the copy rather than shrinking into uselessness. */
-.hero-grid { display: grid; gap: 40px; align-items: center; }
-.hero-copy { max-width: 860px; min-width: 0; }
+/* One column on a phone, and the source order is the order you read: headline,
+   globe, what it is, what to do. The globe sits second on purpose — it is the
+   fastest possible answer to "what is this", and it arrives before any prose.
+   From 920px it moves into its own column and the copy runs beside it. */
+.hero-grid {
+  display: grid; gap: 22px; align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+}
+.hero-grid > * { min-width: 0; }
+
 @media (min-width: 920px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    column-gap: 56px; row-gap: 24px; align-items: center;
+    grid-template-areas:
+      "eyebrow globe"
+      "title   globe"
+      "lede    globe"
+      "actions globe"
+      "how     how";
+  }
+  .hero-grid > .eyebrow      { grid-area: eyebrow; }
+  .hero-grid > .hero-h       { grid-area: title; }
+  .hero-grid > .hero-globe   { grid-area: globe; }
+  .hero-grid > .hero-lede    { grid-area: lede; }
+  .hero-grid > .hero-actions { grid-area: actions; }
+  .hero-grid > .how          { grid-area: how; margin-top: 18px; }
 }
 
-.hero-globe { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.hero-globe { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 #globeCanvas {
-  width: 100%; max-width: 380px; aspect-ratio: 1; display: block;
+  width: 100%; max-width: 360px; aspect-ratio: 1; display: block;
   cursor: grab; touch-action: none; /* we handle the drag ourselves */
   -webkit-tap-highlight-color: transparent;
 }
@@ -417,7 +463,40 @@ body {
 .globe-label.is-active { color: var(--accent); }
 
 @media (max-width: 640px) {
-  #globeCanvas { max-width: 280px; }
+  #globeCanvas { max-width: 232px; }
+  .hero-grid { gap: 16px; }
+  .hero-globe { gap: 8px; }
+}
+
+/* How it works. Numbered because it is genuinely sequential — you cannot get
+   the shortlist without answering first — so the numerals encode order rather
+   than decorate. Counter rather than list-style so the marker can be styled as
+   part of the instrument layer. */
+.how {
+  list-style: none; counter-reset: how; margin: 4px 0 0; padding: 0;
+  display: grid; gap: 14px;
+}
+.how li {
+  counter-increment: how;
+  display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 4px 12px;
+  align-items: baseline;
+}
+.how li::before {
+  content: counter(how);
+  grid-row: 1 / span 2;
+  font-family: var(--font-mono); font-size: .78rem; font-variant-numeric: lining-nums;
+  color: var(--accent); border: 1px solid var(--line);
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; align-self: start;
+}
+.how b { font-size: .95rem; font-weight: 600; color: var(--ink); }
+.how span { color: var(--ink-2); font-size: .92rem; line-height: 1.5; }
+
+@media (min-width: 920px) {
+  .how {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px; padding-top: 22px; border-top: 1px solid var(--line-soft);
+  }
 }
 
 .eyebrow {
@@ -433,9 +512,9 @@ body {
 }
 .hero-em { font-style: italic; color: var(--accent); }
 
-.hero-lede { max-width: var(--readw); color: var(--ink-2); font-size: 1.06rem; margin: 0 0 18px; }
+.hero-lede { max-width: var(--readw); color: var(--ink-2); font-size: 1.06rem; margin: 0; }
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; }
 
 .btn {
   font: inherit; font-size: .93rem; cursor: pointer;
@@ -1030,7 +1109,13 @@ body {
 .save-note { flex: 1 1 100%; font-size: .84rem; color: var(--ink-3); margin: 8px 0 0; max-width: 76ch; }
 .empty { border: 1px dashed var(--line); padding: 40px; text-align: center; color: var(--ink-2); border-radius: var(--r); }
 
-.foot { border-top: 1px solid var(--line-soft); background: var(--paper-2); padding: 34px 0 46px; }
+/* The bottom padding has to clear the home indicator on a gesture-nav phone.
+   It goes in the shorthand, not after it — a following `padding` shorthand
+   would silently reset a separate padding-bottom declared above it. */
+.foot {
+  border-top: 1px solid var(--line-soft); background: var(--paper-2);
+  padding: 34px 0 calc(46px + env(safe-area-inset-bottom));
+}
 .privacy {
   border: 1px solid var(--line); border-left: 3px solid var(--accent);
   background: var(--surface); border-radius: var(--r);
@@ -1087,7 +1172,11 @@ body {
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .wrap { padding-inline: 18px; }
-  .hero { padding-top: 44px; }
+  .hero { padding-top: 22px; padding-bottom: 26px; }
+  /* The headline is the tallest block above the fold; a step down here buys
+     two lines back without making it stop reading as the headline. */
+  .hero-h { font-size: 2.05rem; }
+  .hero-lede { font-size: 1rem; }
   .card-in { padding: 20px 20px 20px 22px; }
   .read { padding: 24px 20px; }
   .steps-now li { flex-direction: column; gap: 5px; }

@@ -48,6 +48,20 @@ steps. Static, client-side, no backend.
 - **A script face sets far wider than a serif at the same nominal size.** The wordmark that
   fits at 390px pushes the topbar controls off a 320px screen; step the size down under
   400px rather than truncating, because a clipped wordmark reads as broken.
+- **Do not add `<link rel="preload">` for the fonts.** A font preload needs
+  `crossorigin` or HTTP fetches each file twice; with `crossorigin` the request is
+  CORS-mode, which a `file://` page (origin `null`) may not make, so it errors on
+  every local open. This page must work from the filesystem, and the published
+  bundle inlines every face as a data URI, so there is nothing to win. Tried and
+  reverted once already.
+- **The hero grid is flat, and that is deliberate.** `eyebrow / h1 / globe / lede /
+  actions / how` are direct grid children so the source order *is* the phone order,
+  with `grid-template-areas` moving the globe into a second column from 920px.
+  Do not reintroduce a `.hero-copy` wrapper or reach for `order:` — `order` would
+  desync tab order from reading order, which is the thing this layout avoids.
+- **Space in the hero belongs to the grid `gap`, not to element margins.** Both
+  `.hero-lede` and `.hero-actions` carried bottom/top margins that doubled with the
+  row gap and pushed the primary button below the fold on a 390×844 phone.
 - **`REGIONS` in `app.js` must list every non-place `country` value**, and every country it
   does *not* exclude must have coordinates in `globe.js`. Counted-but-unplottable makes the
   stat tile and the globe disagree on screen — the same class of bug as the old India 16-vs-65.

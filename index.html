@@ -28,6 +28,13 @@
 <meta name="twitter:description" content="126 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
+<!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
+     `crossorigin` or the browser fetches the file twice over HTTP — and with
+     `crossorigin` the request is CORS-mode, which a file:// page (origin
+     "null") is not allowed to make, so it errors on every local open. This
+     page has to work from the filesystem, and the published bundle inlines
+     every face as a data URI anyway, so the preload would buy nothing there.
+     The faces are same-origin and discovered one hop after this stylesheet. -->
 <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -67,36 +74,55 @@
 <section class="view is-active" id="view-intro">
   <div class="hero">
     <div class="wrap hero-in">
+      <!-- Flat grid rather than nested columns, so the DOM order IS the phone
+           order: headline, globe, what it is, what to do. Desktop moves the
+           globe into a second column with grid-template-areas. Doing it this
+           way rather than with `order` keeps tab order identical to reading
+           order — reordering visually with `order` desyncs the two. -->
       <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">For students of medicine in India</p>
-          <h1 class="hero-h">
-            You were told there were two options.<br />
-            <span class="hero-em">This page has <span id="heroCount">—</span> of them.</span>
-          </h1>
-          <p class="hero-lede">
-            Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for
-            the USMLE. Both are real. Neither is the whole territory. There are funded research
-            programmes you can hold in second year, doctorates that pay you a salary, scholarships
-            that cover everything including your flight, and entire scientific fields nobody
-            mentioned once in five years of lectures.
-          </p>
-          <p class="hero-lede">
-            This asks you three questions that have nothing to do with marks — and then does the
-            research you do not have time to do.
-          </p>
+        <p class="eyebrow">For students of medicine in India</p>
 
-          <div class="hero-actions">
-            <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
-            <button type="button" class="btn btn-ghost" data-goto="browse">Just show me everything</button>
-          </div>
-        </div>
+        <h1 class="hero-h">
+          You were told there were two options.<br />
+          <span class="hero-em">This page has <span id="heroCount">—</span> of them.</span>
+        </h1>
 
         <figure class="hero-globe">
           <canvas id="globeCanvas" role="img"
                   aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
           <figcaption class="globe-label" id="globeLabel">Drag to spin · tap a country</figcaption>
         </figure>
+
+        <p class="hero-lede">
+          Funded research you can hold in second year, doctorates that pay a salary, and
+          scholarships that cover the flight — indexed for Indian medical students, graded
+          honestly, every one linked to its official page.
+        </p>
+
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="startBtn">Answer the Three Questions</button>
+          <button type="button" class="btn btn-ghost" data-goto="browse">Just Show Me Everything</button>
+        </div>
+
+        <!-- An ordered list because it genuinely is a sequence — you cannot get
+             step 3 without step 1. That is what earns the numbering. -->
+        <ol class="how">
+          <li>
+            <b>Three questions</b>
+            <span>About what people come to you for, what angers you and what makes time
+            stop. Nothing about marks.</span>
+          </li>
+          <li>
+            <b>Your real constraints</b>
+            <span>Money in the bank, cold tolerance, year of study, category. The things that
+            actually decide what is open to you.</span>
+          </li>
+          <li>
+            <b>A ranked shortlist</b>
+            <span>Graded by how much each one would change, with deadlines, true cost and the
+            steps to apply.</span>
+          </li>
+        </ol>
       </div>
 
       <dl class="hero-stats">
