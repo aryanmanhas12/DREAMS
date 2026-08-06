@@ -45,3 +45,13 @@ jobs:
 
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Default is 10 minutes, and on timeout this action does not merely
+          # report failure — it CANCELS the in-flight Pages deployment. A slow
+          # Pages backend then turns a perfectly good publish into a red X and a
+          # rolled-back deploy. Observed on 9b0338a: ten minutes of
+          # `deployment_in_progress`, then `Timeout reached, aborting!` and
+          # `Canceling Pages deployment`, even though the content did land.
+          # Thirty minutes costs nothing when things are healthy — the step
+          # still exits as soon as the deployment reports complete.
+          timeout: 1800000
