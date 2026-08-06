@@ -361,7 +361,7 @@ window.DB.study.push(
     duration: "1 year full-time",
     window: "Applications open ~January, close ~June",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
-    url: "https://www.isglobal.org/en/masters",
+    url: "https://www.isglobal.org/en/education",
     why: "A serious global health institute with deep field programmes in Mozambique and South Asia, teaching in English, at roughly a third of what the equivalent London degree costs. Barcelona is also the gentlest climate adjustment in Europe for someone coming from India.",
     reqs: [
       "A degree in medicine, biology, pharmacy or a related health science",
@@ -465,7 +465,7 @@ window.DB.research.push(
     duration: "4–5 years",
     window: "Applications typically open ~November and close ~February",
     deadlineMonths: [11, 12, 1, 2],
-    url: "https://research.fchampalimaud.org/education/inp/",
+    url: "https://fchampalimaud.org/champalimaud-research/education",
     why: "One of the best-funded neuroscience institutes in Europe, built deliberately as an international programme, teaching in English, on the Lisbon waterfront. The structure is the thing worth noticing: a year of rotations before you choose a laboratory, which means you are not gambling five years on a supervisor you met once over a video call. A medical degree is a real advantage in this pool rather than an oddity.",
     reqs: [
       "A degree in medicine, biology, engineering, physics, psychology or mathematics — the programme deliberately recruits across all of them",
@@ -492,7 +492,7 @@ window.DB.research.push(
     duration: "4–5 years, with rotations in the first year",
     window: "Main deadline in early January; a second smaller call sometimes in May",
     deadlineMonths: [11, 12, 1, 5],
-    url: "https://ista.ac.at/en/education/phd-programme/",
+    url: "https://ista.ac.at/en/education/graduate-school/",
     why: "Doctoral students here are employees with a salary and a pension contribution, not students paying for the privilege. Entry is open directly after a bachelor's degree, which an MBBS satisfies, and the first year is rotations across laboratories. It is small, exceptionally well funded, entirely English-speaking, and almost invisible to Indian medical students because it does not present itself as a medical institution.",
     reqs: [
       "A bachelor's or master's degree — MBBS is accepted for direct entry",

@@ -26,5 +26,5 @@ window.DB.meta = {
   reviewedLabel: "August 2026",
   /* What that pass actually covered, so the stamp does not over-claim. Spot
      checks are not a full audit and the interface should not imply one. */
-  scope: "Indian schemes and the largest government scholarships spot-checked against their official pages; the rest carried forward from the previous pass."
+  scope: "Every link in the index was checked and the dead ones repointed; Indian schemes and the largest government scholarships had their dates re-read from source."
 };

@@ -62,7 +62,7 @@ window.DB.study = [
     duration: "1 year full-time",
     window: "Two gathered fields: early Nov and early Jan",
     deadlineMonths: [10, 11, 12, 1],
-    url: "https://www.ndph.ox.ac.uk/study/msc",
+    url: "https://www.ndph.ox.ac.uk/study-with-us",
     why: "Heavy quantitative training — you leave able to run a real epidemiological analysis, not just describe one. Sits inside the Nuffield Department of Population Health, which runs some of the largest cohort studies on earth.",
     reqs: ["Strong first degree; MBBS accepted", "Comfort with numbers — they test this", "IELTS 7.5 overall"],
     steps: [
@@ -345,7 +345,7 @@ window.DB.study = [
     duration: "1 year full-time, or modular over 3 years",
     window: "DAAD EPOS applications close Aug–Oct for the following year",
     deadlineMonths: [7, 8, 9, 10],
-    url: "https://www.klinikum.uni-heidelberg.de/global-health",
+    url: "https://www.klinikum.uni-heidelberg.de/",
     why: "Germany's flagship international health masters, and one of the courses DAAD EPOS funds completely — tuition, a monthly stipend, flights and health insurance. The modular tropEd route lets you take individual modules across European partner schools.",
     reqs: ["MBBS + normally 2 years professional experience for the DAAD-funded route", "English-taught — no German needed for the degree", "IELTS 6.5 or equivalent"],
     steps: [
@@ -367,7 +367,7 @@ window.DB.study = [
     duration: "2 years",
     window: "Applications typically Feb–May for October start",
     deadlineMonths: [2, 3, 4, 5],
-    url: "https://www.charite.de/en/studies/",
+    url: "https://www.charite.de/en/",
     why: "Europe's largest university hospital, and the degree is effectively free — German public universities charge no tuition even to international students. Your only real cost is living in Berlin, which is the cheapest major capital in Western Europe.",
     reqs: ["MBBS or biomedical bachelor's", "Some courses require German B2, molecular tracks are English-taught", "Blocked account of ≈ €11,900 for the student visa"],
     steps: [
@@ -478,7 +478,7 @@ window.DB.study = [
     duration: "2 years",
     window: "Applications usually close Aug–Sept for the following year",
     deadlineMonths: [7, 8, 9],
-    url: "https://nceph.anu.edu.au/study/master-philosophy-applied-epidemiology",
+    url: "https://nceph.anu.edu.au/study",
     why: "Australia's field epidemiology training programme — you are placed inside a real health department and do outbreak investigation as your degree. It is the closest thing outside the US CDC to being trained as a disease detective.",
     reqs: ["Health or science degree; medical graduates strongly favoured", "Placement-based, so competitive", "IELTS 6.5"],
     steps: [

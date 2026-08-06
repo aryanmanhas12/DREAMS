@@ -17,7 +17,7 @@ window.DB.research = [
     duration: "2 months",
     window: "Applications open in spring · closed 30 May (5 pm) in the 2026 cycle",
     deadlineMonths: [3, 4, 5],
-    url: "https://sts.icmr.org.in/",
+    url: "https://schemes.dhr.gov.in/",
     why: "The default first research project for every Indian medical student, and the one most people apply to a year too late. You can hold it ONCE — and only in 1st or 2nd year MBBS. Third and final year are ineligible, so the window genuinely closes.",
     reqs: ["1st or 2nd professional MBBS only", "A faculty guide from your own institution", "Institutional Ethics Committee clearance", "Free to apply"],
     steps: [
@@ -62,7 +62,7 @@ window.DB.research = [
     duration: "2 months",
     window: "Applications Dec–Jan",
     deadlineMonths: [12, 1],
-    url: "https://www.jncasr.ac.in/academic/fellowship",
+    url: "https://www.jncasr.ac.in/academics",
     why: "A genuine molecular neuroscience laboratory, open to MBBS years 1–3, with travel paid. For a medical student who wants to find out whether bench science is actually for them, this is a two-month, zero-risk experiment.",
     reqs: ["MBBS year 1–3", "Strong academic record", "Free to apply"],
     steps: [
@@ -248,7 +248,7 @@ window.DB.research = [
     duration: "8 weeks, July–August",
     window: "Applications open Oct · close around December/January",
     deadlineMonths: [10, 11, 12, 1],
-    url: "https://www.weizmann.ac.il/feinberg/kupcinet-getz",
+    url: "https://www.weizmann.ac.il/wsos/",
     why: "One of the world's great research institutes, funding undergraduates from anywhere on earth to spend a summer in its laboratories with everything paid. Small cohort, genuinely international, and Weizmann's neuroscience and immunology departments are exceptional.",
     reqs: ["Undergraduate in a science or medical degree", "Two academic references", "Free to apply"],
     steps: [

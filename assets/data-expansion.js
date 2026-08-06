@@ -63,7 +63,7 @@ window.DB.study.push(
     duration: "3–4 years",
     window: "Annual call, typically opening in the first quarter",
     deadlineMonths: [1, 2, 3, 4],
-    url: "https://www.pasteur.fr/en/education/phd-programs",
+    url: "https://www.pasteur.fr/en/education",
     why: "Institut Pasteur is one of the great research institutions in the history of medicine, and it explicitly designs this programme to bridge clinical practice and fundamental research. Infectious disease and global health work here is world-leading and directly relevant to Indian disease burden.",
     reqs: ["Medical degree", "Research project aligned with a Pasteur unit", "English is sufficient for the science; French helps for life in Paris"],
     steps: [
@@ -394,7 +394,7 @@ window.DB.research.push(
     duration: "2–12 months",
     window: "Rolling — depends entirely on the host institution",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/traineeships-abroad",
+    url: "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students",
     why: "Most Indian students assume Erasmus+ is only for EU nationals. Traineeship funding is administered by the host institution, and third-country participants are eligible for several strands. If a European lab wants you, there is often money attached that neither of you knew about — so ask.",
     reqs: ["A host institution willing to take you", "Eligibility depends on the specific strand and host — ask them directly", "No fixed cycle"],
     steps: [

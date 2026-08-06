@@ -121,8 +121,19 @@ steps. Static, client-side, no backend.
   first each cycle — they are the most used and they move the most.
 - **This sandbox's proxy denies CONNECT to almost everything** (403), so `node`-based link
   checking and `WebFetch` both fail on live sites. That is the network policy, not a dead
-  link — never record a URL as broken on that evidence. `WebSearch` still works and is the
-  only way to verify a fact from here.
+  link — never record a URL as broken on that evidence. `WebSearch` works, and the Composio
+  `COMPOSIO_REMOTE_BASH_TOOL` runs `curl` from an unrestricted host, which is how the link
+  sweep actually gets done. Use `curl -s -o /dev/null -L -w '%{http_code} %{url_effective}'`
+  with a real browser User-Agent.
+- **Reading the sweep's output is the hard part, and three codes are NOT failures.**
+  `403`/`405`/`406` is bot protection — LSHTM, Oxford, JHU, Emory, Otago, GMC, ifmsa and
+  UK Biobank all serve it to curl and are perfectly fine in a browser. `000` means the
+  connection never completed and needs diagnosing before it means anything: `nimhans.ac.in`
+  returns an incomplete TLS chain that browsers tolerate, and most Indian government hosts
+  (`dbtindia`, `online-inspire`, `tribal.nic.in`, `nosmsje`) simply refuse foreign IPs. Only
+  a hard `404`, or a `200` that renders an error page, is evidence of a dead link. Follow
+  redirects and read `url_effective` too — that is how the ICMR-STS portal move from
+  `sts.icmr.org.in` to `schemes.dhr.gov.in` surfaced.
 - Data integrity check lives in the scratchpad, not the repo; recreate it if needed. It should
   assert unique ids, that every `data-impact.js` key resolves to a real programme, that every
   field/stage tag is in the taxonomy, that every URL is https, and that every referenced

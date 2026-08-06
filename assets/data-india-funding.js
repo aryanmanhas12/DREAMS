@@ -148,7 +148,7 @@ window.DB.research.push(
     duration: "10 weeks (visiting programme) to 4 years (doctorate)",
     window: "KAUST VSRP applications typically close in the first quarter; degree admissions are rolling with January and August intakes",
     deadlineMonths: [1, 2, 3, 4, 11, 12],
-    url: "https://www.kaust.edu.sa/en/study/vsrp",
+    url: "https://www.kaust.edu.sa/en/study",
     why: "Four hours from India, extremely well funded, English-speaking, and almost entirely absent from Indian medical students' mental map. KAUST's stipends are generous by any standard and its bioscience and computational groups are genuinely strong. Sidra Medicine in Qatar runs serious genomics work on Middle Eastern and South Asian populations, which is directly relevant if consanguinity genetics interests you.",
     reqs: ["Strong academic record", "English only — no Arabic required", "KAUST's visiting programme is open to enrolled undergraduates including MBBS students"],
     steps: [
@@ -169,7 +169,7 @@ window.DB.research.push(
     duration: "3 months – 2 years",
     window: "Rolling recruitment",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://www.msf.org/work-with-us",
+    url: "https://www.msf.org/",
     why: "The most direct way to become a global health researcher is to do global health research, and these institutions hire medical graduates into real field posts. icddr,b in Dhaka and KEMRI-Wellcome in Kilifi are internationally significant research units that publish in the best journals, and both are more reachable from India than any Western institution.",
     reqs: ["Medical or public health degree", "Field tolerance — these are genuinely demanding postings", "Some roles require prior research experience"],
     steps: [
