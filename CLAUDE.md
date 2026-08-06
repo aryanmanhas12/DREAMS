@@ -62,6 +62,10 @@ steps. Static, client-side, no backend.
 - **Space in the hero belongs to the grid `gap`, not to element margins.** Both
   `.hero-lede` and `.hero-actions` carried bottom/top margins that doubled with the
   row gap and pushed the primary button below the fold on a 390×844 phone.
+- **Quote marks on `.statement` mean "this is a claim", and only that.** The three
+  intro cards carry them because they are positions the site asserts; the survey
+  question reuses the same card shape *without* them, because a question is not a
+  quotation and the mark would misdescribe the text. Do not add them there.
 - **`REGIONS` in `app.js` must list every non-place `country` value**, and every country it
   does *not* exclude must have coordinates in `globe.js`. Counted-but-unplottable makes the
   stat tile and the globe disagree on screen — the same class of bug as the old India 16-vs-65.

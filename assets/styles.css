@@ -516,10 +516,15 @@ body {
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; }
 
+/* 48px floor on every button — below that a thumb misses it. Pill radius on
+   phones, where the buttons go full-width and a square corner reads as a slab;
+   the sharper corner returns on desktop where they sit inline. */
 .btn {
-  font: inherit; font-size: .93rem; cursor: pointer;
-  padding: 13px 24px; border-radius: var(--r);
-  border: 1px solid transparent; transition: background .15s, color .15s, border-color .15s;
+  font: inherit; font-size: .95rem; cursor: pointer;
+  padding: 14px 24px; border-radius: var(--r);
+  min-height: 48px;
+  border: 1px solid transparent;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
 }
 .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
@@ -554,6 +559,77 @@ body {
   font-variant-numeric: lining-nums tabular-nums; color: var(--accent);
 }
 
+/* ─────────────── statement cards ───────────────
+   One assertion per card, set large and centred, on a filled ground so it reads
+   as a thing being said rather than as body copy. The quote marks are the whole
+   point of the form: they mark this as a claim the site is making and can be
+   held to. They are NOT used on survey questions — a question is not a
+   quotation, and the mark would be a lie about what the text is. */
+.claims { padding: 12px 0 8px; }
+.claims .sec-h { margin-bottom: 22px; }
+
+.statement {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 34px 26px;
+  background: var(--accent-2);
+  border-radius: 6px;
+  isolation: isolate;
+}
+.statement p {
+  margin: 0; text-align: center; text-wrap: balance;
+  color: var(--paper-2);
+  font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+  font-weight: 500; line-height: 1.45;
+}
+/* b, not a colour change alone — the emphasis has to survive being read by
+   someone who cannot separate these two tones. */
+.statement b { color: #fff; font-weight: 700; }
+
+/* Quote marks sit outside the corners, as in a pull quote. aria-hidden via
+   ::before/::after means they are never announced as characters. */
+.statement::before,
+.statement::after {
+  position: absolute; z-index: -1;
+  font-family: var(--font-display); font-size: 4.6rem; line-height: 1;
+  color: var(--accent); font-weight: 700;
+}
+.statement::before { content: "\201C"; top: -.18em; left: 8px; }
+.statement::after  { content: "\201D"; bottom: -.52em; right: 12px; }
+
+@media (prefers-color-scheme: dark) {
+  .statement { background: var(--surface); border: 1px solid var(--line); }
+  .statement p { color: var(--ink); }
+  .statement b { color: var(--accent-2); }
+}
+:root[data-theme="dark"] .statement { background: var(--surface); border: 1px solid var(--line); }
+:root[data-theme="dark"] .statement p { color: var(--ink); }
+:root[data-theme="dark"] .statement b { color: var(--accent-2); }
+:root[data-theme="light"] .statement { background: var(--accent-2); border: 0; }
+:root[data-theme="light"] .statement p { color: var(--paper-2); }
+:root[data-theme="light"] .statement b { color: #fff; }
+
+.claims-cta { text-align: center; margin: 26px 0 4px; }
+.claims-note {
+  font-family: var(--font-mono); font-size: .72rem; color: var(--ink-3);
+  margin: 12px 0 0; letter-spacing: .03em;
+}
+
+/* Large pill for the primary action. Thumb-sized on a phone without becoming a
+   slab on desktop. */
+.btn-lg {
+  border-radius: 100px; padding: 16px 34px; font-size: 1rem;
+  min-height: 54px; width: 100%; max-width: 420px;
+}
+@media (min-width: 640px) { .btn-lg { width: auto; } }
+
+@media (min-width: 760px) {
+  .claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .claims .sec-h { grid-column: 1 / -1; }
+  .statement { margin: 0; height: 100%; display: grid; align-items: center; }
+  .claims-cta { grid-column: 1 / -1; }
+}
+
 /* ─────────────── band / triptych ─────────────── */
 .band { padding: 52px 24px 90px; border-top: 1px solid var(--line-soft); margin-top: 60px; }
 .band-h { font-family: var(--font-display); font-weight: 600; font-size: 1.85rem; margin: 0 0 30px; letter-spacing: -.005em; }
@@ -579,26 +655,40 @@ body {
   font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
   letter-spacing: .15em; color: var(--accent); margin: 0 0 16px;
 }
+/* The question gets the same card shape as a claim, so the survey and the
+   intro read as one system — but deliberately without the quote marks, which
+   would assert that a question is a quotation. */
 .q-title {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(1.8rem, 4.3vw, 2.8rem); line-height: 1.12; letter-spacing: -.012em;
-  margin: 0 0 14px; text-wrap: balance;
+  font-size: clamp(1.65rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -.012em;
+  margin: 0 0 16px; text-wrap: balance;
+  background: var(--paper-2); border: 1px solid var(--line-soft);
+  border-radius: 6px; padding: 26px 24px; text-align: center;
 }
 .q-help { color: var(--ink-2); max-width: 62ch; margin: 0 0 30px; font-size: 1rem; }
 .q-help em { color: var(--ink); font-style: italic; }
 
-.opts { display: grid; gap: 9px; margin: 0 0 22px; }
+.opts { display: grid; gap: 10px; margin: 0 0 22px; }
 .opts.two { grid-template-columns: repeat(auto-fit, minmax(min(255px, 100%), 1fr)); }
 
+/* 56px minimum so every option is a comfortable thumb target on a phone —
+   this is the single biggest mobile win in the survey, which is 16 screens of
+   nothing but these. Transitions name their properties; `all` would animate
+   layout too. */
 .opt {
   display: flex; align-items: flex-start; gap: 12px;
   border: 1px solid var(--line); background: var(--surface);
-  padding: 14px 16px; border-radius: var(--r); cursor: pointer;
+  padding: 16px 18px; border-radius: 10px; cursor: pointer;
+  min-height: 56px;
   text-align: left; font: inherit; color: var(--ink);
-  transition: border-color .14s, background .14s;
+  transition: border-color .14s ease, background-color .14s ease, box-shadow .14s ease;
 }
+.opt:active { transform: none; background: var(--accent-wash); }
 .opt:hover { border-color: var(--accent); }
-.opt[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-wash); }
+.opt[aria-pressed="true"] {
+  border-color: var(--accent); background: var(--accent-wash);
+  box-shadow: inset 0 0 0 1px var(--accent);   /* selection survives without colour */
+}
 .opt-box {
   width: 15px; height: 15px; flex: none; margin-top: 4px;
   border: 1.5px solid var(--ink-3); border-radius: 2px; position: relative;
@@ -608,7 +698,7 @@ body {
   content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px;
   border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(42deg);
 }
-.opt-body strong { display: block; font-weight: 600; font-size: .95rem; }
+.opt-body strong { display: block; font-weight: 600; font-size: 1rem; }
 .opt-body span { display: block; color: var(--ink-2); font-size: .84rem; margin-top: 2px; }
 
 .q-free {
@@ -622,9 +712,30 @@ body {
 .q-free::placeholder { color: var(--ink-3); }
 .q-note { font-size: .84rem; color: var(--ink-3); margin: 12px 0 0; font-family: var(--font-mono); }
 
+/* The forward action is the one people reach for 16 times in a row, so on a
+   phone it becomes a full-width pill pinned to the bottom of the flow with the
+   count between it and Back. Back stays smaller — it is the rarer action and
+   should not compete. */
 .survey-nav {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   border-top: 1px solid var(--line-soft); padding-top: 22px; margin-top: 12px;
+}
+@media (max-width: 640px) {
+  .survey-nav {
+    display: grid; grid-template-columns: auto 1fr;
+    grid-template-areas: "back count" "next next";
+    gap: 14px 12px; align-items: center;
+  }
+  .survey-nav #backBtn { grid-area: back; }
+  .survey-nav .survey-count { grid-area: count; text-align: right; }
+  .survey-nav #nextBtn {
+    grid-area: next; width: 100%;
+    border-radius: 100px; min-height: 54px; font-size: 1rem;
+  }
+  /* Same treatment for the pair on the intro, so the primary action is one
+     full-width target rather than two half-width ones. */
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; border-radius: 100px; min-height: 54px; }
 }
 .survey-count { font-family: var(--font-mono); font-size: .76rem; color: var(--ink-3); letter-spacing: .06em; }
 
