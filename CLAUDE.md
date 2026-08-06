@@ -108,6 +108,21 @@ steps. Static, client-side, no backend.
 - Develop and push to `claude/career-platform-indian-students-nc6yiq`; keep `main` in sync.
 - Run `node build.js` before committing if any asset changed, then re-verify the bundle
   separately — the bundle has broken while the source was fine.
+- **`data-meta.js` carries the review date, and it is rendered from data, never written into
+  the HTML.** Bump it only when entries have genuinely been re-checked against their official
+  pages, and narrow `scope` to what was actually covered. Backdating or over-claiming makes
+  the stamp worse than having none. When the meta is absent the UI says the page is unstamped
+  rather than rendering a reassuring blank.
+- **Deadlines move, and a wrong date is worse than no date** — a student who believes STS
+  closes in January will not look again in May. Three were found stale in one pass: ICMR-STS
+  had moved from a ~10 Jan close to **30 May**; the IAS-INSA-NASI summer fellowship runs to
+  **31 January**, not mid-December; and NOS runs a first round **late April to early June**
+  with a second round in Sept–Oct only when slots go unfilled. Re-check the Indian schemes
+  first each cycle — they are the most used and they move the most.
+- **This sandbox's proxy denies CONNECT to almost everything** (403), so `node`-based link
+  checking and `WebFetch` both fail on live sites. That is the network policy, not a dead
+  link — never record a URL as broken on that evidence. `WebSearch` still works and is the
+  only way to verify a fact from here.
 - Data integrity check lives in the scratchpad, not the repo; recreate it if needed. It should
   assert unique ids, that every `data-impact.js` key resolves to a real programme, that every
   field/stage tag is in the taxonomy, that every URL is https, and that every referenced

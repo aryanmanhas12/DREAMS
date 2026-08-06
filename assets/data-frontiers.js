@@ -335,8 +335,8 @@ window.DB.equity = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + annual maintenance (≈ US$15,400 or £9,900) + airfare + visa fees + contingency",
     duration: "Masters (up to 3 yrs) or PhD (up to 4 yrs)",
-    window: "Opens around Feb–Mar · closes Mar–Apr",
-    deadlineMonths: [2, 3, 4],
+    window: "First round ~April to early June · a second round opens Sept–Oct only when slots go unfilled",
+    deadlineMonths: [4, 5, 6, 9, 10],
     url: "https://nosmsje.gov.in/",
     why: "Fully funded overseas masters or PhD for students from Scheduled Caste, Denotified/Nomadic/Semi-Nomadic tribe, landless agricultural labourer and traditional artisan families. Total family income must be under ₹8 lakh. It is one of the most generous awards available to any Indian student and it is routinely under-subscribed — places go unfilled in some years.",
     reqs: [
@@ -346,7 +346,8 @@ window.DB.equity = [
       "Admission to a foreign institution ranked in the top 500 QS/THE"
     ],
     steps: [
-      "Apply on the NOS portal in the February–April window.",
+      "Apply on the NOS portal in the first round, which in the 2026 cycle ran from late April to 2 June.",
+      "If you miss it, watch for the second round. The scheme reopens the portal for about 40 days in September or October in any year where slots are left unfilled — which is the clearest evidence there is that this award is under-subscribed.",
       "You need an admission offer or a conditional offer from a top-500 ranked institution.",
       "There is a separate parallel scheme for Scheduled Tribe candidates run by the Ministry of Tribal Affairs — check that one too if it applies.",
       "The income ceiling and category certificate are the two documents that decide the application. Get them issued well in advance; district offices are slow."

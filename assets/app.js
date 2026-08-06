@@ -1754,8 +1754,33 @@
     }
   }
 
+  /* The review stamp. Rendered from data rather than written into the HTML in
+     two places, so the footer and the calendar can never disagree about how
+     fresh this is. If the meta is missing the stamp says so plainly instead of
+     rendering an empty reassuring blank — an unstamped page should look
+     unstamped. */
+  function renderReviewed() {
+    const meta = (window.DB && window.DB.meta) || null;
+    const targets = [
+      [$("#reviewedFoot"), true],
+      [$("#reviewedCal"), false]
+    ];
+    targets.forEach(function (pair) {
+      const el = pair[0];
+      if (!el) return;
+      if (!meta || !meta.reviewedLabel) {
+        el.textContent = "These entries carry no review date, so treat every figure as unverified.";
+        return;
+      }
+      el.textContent = pair[1]
+        ? "Entries last checked against their official pages in " + meta.reviewedLabel + ". " + (meta.scope || "")
+        : "Last checked " + meta.reviewedLabel + " — confirm any date below on the official page before you plan around it.";
+    });
+  }
+
   function init() {
     renderStats();
+    renderReviewed();
     initTheme();
     initMobileNav();
     initHeroGlobe();

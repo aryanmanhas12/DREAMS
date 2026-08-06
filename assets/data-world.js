@@ -94,7 +94,7 @@ Object.assign(window.DB.countries, {
     visa: "Student residence permit, which requires proof you hold roughly NOK 150,000 for living costs — this financial requirement stops more people than the academic one.",
     work: "20 hours/week permitted.",
     allergy: "Birch pollen in spring is severe. Very low pollution otherwise.",
-    honest: "Read this before you build a plan on old advice: Norway charged non-EU students no tuition for decades and stopped in autumn 2023. Public universities now charge international students real fees. Norway remains outstanding for global health at Bergen and for a working culture that protects your evenings, but the free-tuition Norway that circulates in student forums no longer exists. Verify current fees on the university's own page."
+    honest: "Read this before you build a plan on old advice, because it has changed twice. Norway charged non-EU students no tuition for decades and stopped in autumn 2023; fees have run roughly NOK 130,000–390,000 a year since. But from 2025 institutions were allowed to set their own fees rather than charge full cost, and several cut them sharply — so the number varies enormously by university now, and a figure you read anywhere, including here, may be a year out of date in either direction. Norway remains outstanding for global health at Bergen and for a working culture that protects your evenings. Get the fee from the specific university's own page for the specific intake, and from nowhere else."
   },
 
   Denmark: {
