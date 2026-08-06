@@ -13,14 +13,30 @@
      IBM Plex Mono       the instrument layer — tags, dates, counts, country
                          codes. Same superfamily as the body, so the two
                          agree structurally while reading as different voices.
-   All three are variable fonts: one file each covers the whole weight range.
+     Petit Formal Script the counsellor's own hand. Used ONLY where the site is
+                         speaking to you personally — the wordmark, the salutation
+                         on your read, the closing line. It is never used for
+                         anything you have to scan or compare, because a script
+                         is slower to read and this one has a job that is worth
+                         the cost. Chosen over Pinyon and Parisienne on x-height:
+                         those two go thin and vanish at wordmark size.
+   The first three are variable fonts: one file each covers the whole weight
+   range. The script ships a single weight, which is all a script needs.
 
-   Colour — "Citrus & Slate". Deep midnight blue ground in dark, warm ceramic
-   bone in light; never pure black or white, so the extremes stay tinted and
-   organic. Slate teal carries everything interactive. Citrus is the single
-   high-energy tone and is spent only on deadlines — the one thing on this site
-   that is genuinely time-critical — so it never becomes decoration. Shadows are
-   warm-tinted rather than neutral grey.
+   Colour — "Citrus & Slate", turned up. Deep petrol ground in dark, bright
+   ceramic bone in light; never pure black or white, so the extremes stay tinted
+   and organic. The earlier version of this palette sat at low chroma and read
+   flat, so every hue here carries more saturation and the dark ground was moved
+   off neutral navy onto a genuine teal-black that has colour in it.
+
+   Four roles, and each owns its meaning exclusively:
+     --accent  teal      everything interactive
+     --signal  citrus    deadlines, and nothing else — the only truly
+                         time-critical thing on the site
+     --gold              tier 1 only. The rarest grade gets the rarest colour,
+                         which is also what keeps --signal off the tier badges
+                         where it used to leak.
+     --ok/--warn         verdict states inside a card
 
    Every value is a token on :root, redefined in the dark media query and in both
    [data-theme] overrides. Swapping the palette is a token edit; no component
@@ -55,90 +71,110 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Petit Formal Script";
+  src: url("fonts/petit-formal-script.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* Citrus & Slate, light. Ground is warm ceramic bone — never pure white, and
      warm rather than grey, so the page reads as paper instead of screen. Ink is
      a deep midnight blue rather than black, which keeps the darkest value on the
-     page tinted and organic. */
-  --paper:      #EDE8DF;
-  --paper-2:    #F6F2EA;
-  --surface:    #FFFCF6;
-  --line:       #D4CBBD;
-  --line-soft:  #E4DDD1;
+     page tinted and organic. Brightened from the first version of this palette,
+     which sat low enough to read as dusty. */
+  --paper:      #F2EFE4;
+  --paper-2:    #FBF8F0;
+  --surface:    #FFFEF9;
+  --line:       #D8CFBC;
+  --line-soft:  #E8E1D2;
 
-  --ink:        #16202E;
-  --ink-2:      #44536A;
-  --ink-3:      #78859A;
+  --ink:        #131E2C;
+  --ink-2:      #46566E;
+  --ink-3:      #5E6B7B;
 
-  --accent:     #0B6B72;   /* slate teal — everything interactive */
-  --accent-2:   #085259;
-  --accent-wash:#D7E7E7;
+  --accent:     #00787E;   /* slate teal — everything interactive */
+  --accent-2:   #005C63;
+  --accent-wash:#CDE8E6;
 
-  --signal:     #C24417;   /* citrus — deadlines only, the one high-energy tone */
-  --signal-wash:#FAE1D3;
+  --signal:     #C63A0E;   /* citrus — deadlines only, the one high-energy tone */
+  --signal-wash:#FADFCF;
 
-  --ok:         #2C6A4F;
-  --warn:       #9A6410;
+  --gold:       #8A6206;   /* tier 1 only */
+  --gold-wash:  #F6E6BE;
+  --gold-ink:   #FFFDF7;   /* text on a filled gold chip */
+
+  --ok:         #1E7A50;
+  --warn:       #8A5A05;
 
   --font-display: "Cormorant Garamond", Georgia, "Iowan Old Style", Palatino, serif;
   --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-script: "Petit Formal Script", "Snell Roundhand", "Apple Chancery", cursive;
 
   --r: 3px;
   --maxw: 1180px;
-  --readw: 68ch;
+  --readw: 64ch;   /* 68ch measured long once the base size went up */
 
-  --shadow: 0 1px 2px rgba(13,30,36,.06), 0 8px 24px -12px rgba(13,30,36,.18);
+  --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
 }
 
-/* Dark: a deep teal-green ground rather than neutral charcoal, and warm ivory
-   text rather than grey — the warmth is what stops a dark UI reading as cold
-   and machine-made. Accent and signal both brighten to hold contrast on the
-   darker ground. */
+/* Dark: a deep petrol ground with real chroma in it, not neutral navy — the
+   earlier #0D1622 was so close to grey that the whole dark theme read flat.
+   Text stays warm ivory rather than grey; that warmth is what stops a dark UI
+   reading as cold and machine-made. Accent and signal both brighten to hold
+   contrast on the darker ground. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #0D1622;
-    --paper-2:    #14202F;
-    --surface:    #182739;
-    --line:       #2C3D52;
-    --line-soft:  #223146;
+    --paper:      #061A22;
+    --paper-2:    #0B2831;
+    --surface:    #103440;
+    --line:       #245460;
+    --line-soft:  #1A404B;
 
-    --ink:        #F0E9DC;   /* warm bone text, not grey — this is what stops a
+    --ink:        #F3EDE1;   /* warm bone text, not grey — this is what stops a
                                 dark UI reading as cold and machine-made */
-    --ink-2:      #ABB8C8;
-    --ink-3:      #7E8C9E;
+    --ink-2:      #B2C3C7;
+    --ink-3:      #93A5AD;
 
-    --accent:     #45D4CC;
-    --accent-2:   #7FE6DE;
-    --accent-wash:#10333C;
+    --accent:     #3FE8D8;
+    --accent-2:   #8DF4EA;
+    --accent-wash:#0C3D42;
 
-    --signal:     #FF8A4C;
-    --signal-wash:#3B2114;
+    --signal:     #FF7A45;
+    --signal-wash:#40200F;
 
-    --ok:         #5FCB92;
-    --warn:       #E5B44F;
+    --gold:       #F5C046;
+    --gold-wash:  #3A2C08;
+    --gold-ink:   #241A02;
+
+    --ok:         #5FE0A4;
+    --warn:       #F2C24E;
 
     --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
   }
 }
 
 :root[data-theme="dark"] {
-  --paper:#0D1622; --paper-2:#14202F; --surface:#182739;
-  --line:#2C3D52; --line-soft:#223146;
-  --ink:#F0E9DC; --ink-2:#ABB8C8; --ink-3:#7E8C9E;
-  --accent:#45D4CC; --accent-2:#7FE6DE; --accent-wash:#10333C;
-  --signal:#FF8A4C; --signal-wash:#3B2114;
-  --ok:#5FCB92; --warn:#E5B44F;
+  --paper:#061A22; --paper-2:#0B2831; --surface:#103440;
+  --line:#245460; --line-soft:#1A404B;
+  --ink:#F3EDE1; --ink-2:#B2C3C7; --ink-3:#93A5AD;
+  --accent:#3FE8D8; --accent-2:#8DF4EA; --accent-wash:#0C3D42;
+  --signal:#FF7A45; --signal-wash:#40200F;
+  --gold:#F5C046; --gold-wash:#3A2C08; --gold-ink:#241A02;
+  --ok:#5FE0A4; --warn:#F2C24E;
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
 }
 :root[data-theme="light"] {
-  --paper:#EDE8DF; --paper-2:#F6F2EA; --surface:#FFFCF6;
-  --line:#D4CBBD; --line-soft:#E4DDD1;
-  --ink:#16202E; --ink-2:#44536A; --ink-3:#78859A;
-  --accent:#0B6B72; --accent-2:#085259; --accent-wash:#D7E7E7;
-  --signal:#C24417; --signal-wash:#FAE1D3;
-  --ok:#2C6A4F; --warn:#9A6410;
+  --paper:#F2EFE4; --paper-2:#FBF8F0; --surface:#FFFEF9;
+  --line:#D8CFBC; --line-soft:#E8E1D2;
+  --ink:#131E2C; --ink-2:#46566E; --ink-3:#5E6B7B;
+  --accent:#00787E; --accent-2:#005C63; --accent-wash:#CDE8E6;
+  --signal:#C63A0E; --signal-wash:#FADFCF;
+  --gold:#8A6206; --gold-wash:#F6E6BE; --gold-ink:#FFFDF7;
+  --ok:#1E7A50; --warn:#8A5A05;
   /* Warm-tinted shadow rather than neutral black — a grey shadow on a warm
      ground is the flat, synthetic look worth avoiding. */
   --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
@@ -146,7 +182,18 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+/* Root size in percent, never px, so a reader who has raised their browser's
+   default still gets it. 17px on phones, 18px from tablet up: this is a site
+   people read for a long time on a small screen, and the readability work is
+   consistent that text-heavy medical content wants 18–20px rather than the
+   16px default. Everything else in the sheet is rem, so this one declaration
+   moves the whole scale. */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  font-size: 106.25%;
+}
+@media (min-width: 700px) { html { font-size: 112.5%; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
@@ -157,8 +204,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-ui);
-  font-size: 16.5px;
-  line-height: 1.62;
+  font-size: 1rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -181,6 +228,16 @@ body {
 }
 .topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 62px; }
 
+/* A script face sets much wider than a serif at the same nominal size, so the
+   wordmark that fits at 390px pushes the theme and menu buttons off a 320px
+   screen. Step it down rather than truncating it — a clipped wordmark looks
+   broken, a smaller one does not. */
+@media (max-width: 400px) {
+  .topbar-in { gap: 10px; }
+  .brand { min-width: 0; }
+  .brand-text { font-size: 1.02rem; }
+}
+
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
 .brand-mark {
   width: 15px; height: 15px; flex: none; border-radius: 50%;
@@ -191,8 +248,15 @@ body {
   content: ""; position: absolute; inset: 3px auto 3px 50%;
   width: 1px; background: var(--accent); transform: translateX(-50%);
 }
-.brand-text { font-family: var(--font-display); font-size: 1.34rem; font-weight: 600; letter-spacing: 0; }
-.brand-text em { font-style: italic; color: var(--accent); }
+.brand-text { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; letter-spacing: 0; }
+/* "Dream" is set upright in the display serif and "Counsellor" in the script —
+   the name is two different voices because the site is two things: a catalogue,
+   and someone talking to you. The script runs 1.18× because its cap-height is
+   smaller than Cormorant's at the same nominal size. */
+.brand-text em {
+  font-family: var(--font-script); font-style: normal; font-weight: 400;
+  font-size: 1.18em; color: var(--accent); padding-left: .12em;
+}
 
 .topnav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .navlink {
@@ -311,8 +375,22 @@ body {
 }
 
 /* ─────────────── hero ─────────────── */
-.hero { padding: 68px 0 34px; }
-.hero-in { max-width: 1120px; }
+/* Two very wide, very low-opacity washes — accent behind the globe on the right,
+   a warm one bleeding up from the lower left. They are what stop the hero
+   reading as text on a flat rectangle, and they are the reason the dark theme
+   now has depth instead of one uniform slab. Kept under 10% so neither reads as
+   a gradient; you should feel light in the room, not see a graphic. */
+.hero { padding: 68px 0 34px; position: relative; isolation: isolate; }
+.hero::before {
+  /* Never bleed sideways. A decorative overlay wider than its container is a
+     horizontal scrollbar on every phone, which is exactly what -5% here caused.
+     The gradient's own falloff does the softening; the box does not need to. */
+  content: ""; position: absolute; inset: -10% 0 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(58% 62% at 78% 30%, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 62%),
+    radial-gradient(52% 48% at 8% 92%, color-mix(in srgb, var(--signal) 8%, transparent) 0%, transparent 66%);
+}
+.hero-in { max-width: 1120px; position: relative; }
 
 /* The argument on the left, the world on the right. Below the breakpoint the
    globe drops under the copy rather than shrinking into uselessness. */
@@ -349,7 +427,7 @@ body {
 
 .hero-h {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.4vw, 4.5rem);
+  font-size: clamp(2.25rem, 5.5vw, 3.85rem);
   line-height: 1.04; letter-spacing: -.018em;
   margin: 0 0 26px; font-weight: 400; text-wrap: balance;
 }
@@ -379,13 +457,19 @@ body {
   gap: 1px; margin: 52px 0 0; padding: 0;
   background: var(--line-soft); border: 1px solid var(--line-soft);
 }
-.hero-stats > div { background: var(--paper); padding: 18px 16px; }
+/* Column with the label on top and the figure pushed to the bottom, so the four
+   numbers share a baseline even when one label wraps to two lines and the others
+   do not. Aligning them by natural flow does not survive a longer label. */
+.hero-stats > div {
+  background: var(--paper); padding: 18px 16px;
+  display: flex; flex-direction: column; gap: 6px;
+}
 .hero-stats dt {
   font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--ink-3); margin: 0 0 6px;
+  letter-spacing: .1em; color: var(--ink-3); margin: 0;
 }
 .hero-stats dd {
-  margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 2.4rem; line-height: 1;
+  margin: auto 0 0; font-family: var(--font-display); font-weight: 600; font-size: 2.15rem; line-height: 1;
   /* Cormorant defaults to old-style figures, which descend below the baseline —
      lovely in a sentence, wrong in a data tile. Force lining figures here. */
   font-variant-numeric: lining-nums tabular-nums; color: var(--accent);
@@ -393,7 +477,7 @@ body {
 
 /* ─────────────── band / triptych ─────────────── */
 .band { padding: 52px 24px 90px; border-top: 1px solid var(--line-soft); margin-top: 60px; }
-.band-h { font-family: var(--font-display); font-weight: 600; font-size: 2rem; margin: 0 0 30px; letter-spacing: -.005em; }
+.band-h { font-family: var(--font-display); font-weight: 600; font-size: 1.85rem; margin: 0 0 30px; letter-spacing: -.005em; }
 
 .triptych { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(255px, 100%), 1fr)); gap: 26px; }
 .tri { border-top: 2px solid var(--accent); padding-top: 18px; }
@@ -401,7 +485,7 @@ body {
   font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
   letter-spacing: .13em; color: var(--ink-3);
 }
-.tri h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.62rem; margin: 10px 0 10px; line-height: 1.2; }
+.tri h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 10px 0 10px; line-height: 1.2; }
 .tri p { margin: 0; color: var(--ink-2); font-size: .95rem; }
 .band-foot { max-width: var(--readw); margin: 38px 0 0; color: var(--ink-2); font-size: .97rem; }
 
@@ -418,7 +502,7 @@ body {
 }
 .q-title {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -.012em;
+  font-size: clamp(1.8rem, 4.3vw, 2.8rem); line-height: 1.12; letter-spacing: -.012em;
   margin: 0 0 14px; text-wrap: balance;
 }
 .q-help { color: var(--ink-2); max-width: 62ch; margin: 0 0 30px; font-size: 1rem; }
@@ -469,16 +553,36 @@ body {
 .page-head { padding: 54px 0 30px; max-width: 780px; }
 .page-head h2 {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.08;
+  font-size: clamp(1.95rem, 4.3vw, 2.8rem); line-height: 1.1;
   letter-spacing: -.018em; margin: 0 0 14px;
 }
 .page-lede { color: var(--ink-2); margin: 0; max-width: var(--readw); }
 
 /* ─────────────── counsellor read ─────────────── */
+/* This block is the one place on the site that talks to you rather than at you,
+   so it is drawn as a note someone left rather than as a UI panel: a warm wash
+   in the corner behind the salutation, no hard accent rail. */
 .read {
-  border: 1px solid var(--line); border-left: 3px solid var(--accent);
-  background: var(--surface); padding: 30px 32px; margin: 40px 0 12px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(120% 90% at 0% 0%, var(--accent-wash) 0%, transparent 58%),
+    var(--surface);
+  padding: 30px 32px; margin: 40px 0 12px;
   border-radius: var(--r);
+}
+/* Specificity, not !important: .read p is (0,1,1) and would otherwise win on
+   margin, max-width and colour. .read .salutation is (0,2,1) and wins cleanly. */
+/* The last thing on the page is a line in the same hand that opened your read.
+   It is the only decorative text on the site and it is there so the page ends
+   like a letter rather than like a footer. */
+.foot-sign {
+  font-family: var(--font-script); font-size: 1.5rem; line-height: 1.3;
+  color: var(--accent); margin: 30px 0 0; max-width: none;
+}
+
+.read .salutation {
+  font-family: var(--font-script); font-size: 1.6rem; line-height: 1.15;
+  color: var(--accent-2); margin: 0 0 4px; max-width: none;
 }
 @media (min-width: 900px) {
   .read { display: grid; grid-template-columns: minmax(0, 1fr) 268px; column-gap: 40px; }
@@ -503,7 +607,7 @@ body {
 .read-rail .rr span { text-align: right; color: var(--ink); }
 .rr-note { font-size: .76rem; color: var(--ink-3); margin: 14px 0 0; line-height: 1.5; }
 .read h2 {
-  font-family: var(--font-display); font-weight: 600; font-size: 1.95rem;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.78rem;
   margin: 0 0 16px; letter-spacing: -.005em;
 }
 .read p { margin: 0 0 14px; max-width: var(--readw); color: var(--ink-2); }
@@ -521,7 +625,7 @@ body {
 /* ─────────────── action list ─────────────── */
 .actions-block { margin: 44px 0 0; }
 .sec-h {
-  font-family: var(--font-display); font-weight: 600; font-size: 1.82rem;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.68rem;
   margin: 0 0 6px; letter-spacing: -.005em;
 }
 .sec-sub { color: var(--ink-2); margin: 0 0 22px; font-size: .95rem; max-width: var(--readw); }
@@ -592,7 +696,7 @@ body {
   letter-spacing: .05em; flex: none;
 }
 .card h3 {
-  font-family: var(--font-display); font-weight: 600; font-size: 1.56rem;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.44rem;
   margin: 0; letter-spacing: -.005em; line-height: 1.2; flex: 1 1 260px;
 }
 .card-org { font-size: .88rem; color: var(--ink-2); margin: 2px 0 0; }
@@ -613,11 +717,19 @@ body {
   text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
   border: 1px solid currentColor; white-space: nowrap; flex: none;
 }
-.tier-1 { color: var(--signal); background: var(--signal-wash); }
-.tier-2 { color: var(--accent); background: var(--accent-wash); }
-.tier-3 { color: var(--ink-2); background: var(--paper-2); }
-.tier-4 { color: var(--ink-3); background: transparent; }
-.tier-5 { color: var(--ink-3); background: transparent; opacity: .75; }
+/* An ordinal scale, so it is drawn as one: the badge loses weight as the grade
+   drops. Tier 1 is the only filled chip on the page, which is what lets you find
+   the handful of genuinely transformative things by scanning rather than
+   reading. It uses --gold rather than --signal — vermilion belongs to deadlines
+   and nothing else, and it used to leak here. */
+.tier-1 {
+  color: var(--gold-ink); background: var(--gold); border-color: var(--gold);
+  font-weight: 600;
+}
+.tier-2 { color: var(--accent-2); background: var(--accent-wash); border-color: var(--accent-wash); }
+.tier-3 { color: var(--ink-2); background: var(--paper-2); border-color: var(--line-soft); }
+.tier-4 { color: var(--ink-3); background: transparent; border-color: var(--line); }
+.tier-5 { color: var(--ink-3); background: transparent; border-style: dashed; border-color: var(--line); }
 
 .odds-line { margin-top: 7px !important; color: var(--ink-2); }
 
@@ -641,7 +753,7 @@ body {
   border: 1px solid var(--line); border-left: 3px solid var(--signal);
   background: var(--surface); border-radius: var(--r); padding: 20px 22px;
 }
-.skip-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.34rem; margin: 0 0 9px; line-height: 1.25; }
+.skip-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.24rem; margin: 0 0 9px; line-height: 1.25; }
 .skip-card p { margin: 0; font-size: .91rem; color: var(--ink-2); }
 
 .record {
@@ -654,7 +766,10 @@ body {
    was pushing narrow viewports into horizontal overflow. flex-wrap on
    .record already breaks cleanly between spans, so the short badges
    (type, country, duration) never needed it either. */
-.record .sep { padding: 0 9px; color: var(--line); }
+/* --line is a border tone and sat at 1.5:1 as text — invisible to plenty of
+   people on a bright screen. This separator carries no meaning, but a separator
+   nobody can see is not doing its job either, so it takes the muted text tone. */
+.record .sep { padding: 0 9px; color: var(--ink-3); opacity: .65; }
 .record .r-deadline { color: var(--signal); }
 .record .r-free { color: var(--ok); }
 
@@ -717,7 +832,12 @@ body {
    theme's text color instead of defaulting to platform grey. */
 .search-input::-webkit-search-cancel-button { filter: none; }
 
-.sort-wrap { display: flex; align-items: center; gap: 9px; flex: none; }
+/* A <select> is sized by its longest option and will not shrink below it unless
+   told to, and `flex: none` made that intrinsic width binding. On a 320px phone
+   that pushed 18px of horizontal scroll onto every view. min-width:0 is the part
+   that actually does the work — without it the flex item refuses to go below its
+   content, whatever the basis says. */
+.sort-wrap { display: flex; align-items: center; gap: 9px; flex: 1 1 auto; min-width: 0; }
 .sort-wrap label {
   font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
   letter-spacing: .1em; color: var(--ink-3);
@@ -728,6 +848,7 @@ body {
   font: inherit; font-family: var(--font-mono); font-size: 1rem; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   padding: 8px 12px; cursor: pointer;
+  flex: 1 1 auto; min-width: 0; max-width: 100%;
 }
 .sort-select:focus-visible { border-color: var(--accent); }
 

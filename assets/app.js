@@ -23,6 +23,14 @@
     env:       "Planetary & environmental health"
   };
 
+  /* Values of `country` that name a region rather than a place. They are
+     excluded from the "countries covered" tile, because the globe can only plot
+     somewhere it has coordinates for — and a tile claiming 33 while the globe
+     shows 31 is the same contradiction that made the old India count read 16 in
+     one place and 65 in another. The scratchpad data check asserts that every
+     non-region country here has globe coordinates, so the two cannot drift. */
+  const REGIONS = ["Any", "Global", "Online", "Europe", "Asia", "Nordics", "Baltics", "Gulf"];
+
   const STAGE_LABEL = {
     pre:    "1st–2nd professional MBBS",
     clin:   "3rd–final professional MBBS",
@@ -887,7 +895,9 @@
 
     /* counsellor's read, with the profile it was derived from alongside it */
     h += '<div class="read">';
-    h += '<div class="read-main"><h2>What your answers actually say</h2>';
+    h += '<div class="read-main">';
+    h += '<p class="salutation">Alright. Here is what I see.</p>';
+    h += "<h2>What your answers actually say</h2>";
     counsellorRead(p, ranked, ctys).forEach((para) => { h += "<p>" + para + "</p>"; });
     if (p.topFields.length) {
       h += '<div class="chips">';
@@ -1279,7 +1289,7 @@
     const items = allOpportunities();
     const countries = {};
     items.forEach(function (i) {
-      if (["Any", "Global", "Online", "Europe", "Asia", "Nordics"].indexOf(i.country) === -1) countries[i.country] = 1;
+      if (REGIONS.indexOf(i.country) === -1 && i.country) countries[i.country] = 1;
     });
     const total = items.length + (window.DB.frontiers || []).length + (window.DB.specialties || []).length;
     const free = items.filter((i) => i.zeroCost).length;

@@ -33,6 +33,24 @@
     India:       [21.0,   78.0],
     Czechia:     [49.8,   15.5],
     Italy:       [42.8,   12.5],
+    Belgium:     [50.6,    4.6],
+    Austria:     [47.6,   14.1],
+    Portugal:    [39.5,   -8.0],
+    Spain:       [40.2,   -3.7],
+    Poland:      [52.0,   19.4],
+    Lithuania:   [55.2,   23.9],
+    Norway:      [61.0,    9.0],
+    Denmark:     [56.0,    9.5],
+    "South Korea": [36.5, 127.9],
+    China:       [35.0,  104.0],
+    Taiwan:      [23.7,  121.0],
+    Thailand:    [15.0,  101.0],
+    "South Africa": [-29.0, 24.5],
+    "New Zealand":  [-41.5, 172.5],
+    // Regions, plotted as one dot each because that is honest about what they
+    // are. They are deliberately NOT counted in the "countries covered" tile —
+    // see REGIONS in app.js. Plotted-but-not-counted is fine; the reverse is the
+    // bug, and the data check enforces that direction.
     Gulf:        [24.0,   45.0],
     Baltics:     [57.0,   25.0]
   };
@@ -43,6 +61,21 @@
   function readCssVar(name, fallback) {
     const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     return v || fallback;
+  }
+
+  /* Gradient stops need per-stop alpha, which globalAlpha cannot give, so the
+     token has to be converted rather than used as-is. Every palette token is
+     hex, but a computed custom property is not guaranteed to be — if it comes
+     back as anything else, fall back to color-mix and let the browser do it.
+     (A previous contrast checker on this project broke by assuming hex and
+     silently mis-parsing `color(srgb …)`; this one degrades instead.) */
+  function withAlpha(c, a) {
+    const m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(c);
+    if (!m) return "color-mix(in srgb, " + c + " " + (a * 100).toFixed(1) + "%, transparent)";
+    let h = m[1];
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    const n = parseInt(h, 16);
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
   }
 
   function project(lat, lon, spin, tilt, R, cx, cy) {
@@ -105,6 +138,29 @@
       const line = readCssVar("--line", "#C9CFC9");
 
       ctx.clearRect(0, 0, W, H);
+
+      // Atmosphere. A sphere drawn as pure wireframe sits flat on the page; a
+      // faint halo just outside the limb is what gives it air around it and
+      // reads as a planet rather than a diagram. Two stops only, both weak — the
+      // moment this is visible as a ring it looks like a glow effect.
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.86, cx, cy, R * 1.2);
+      halo.addColorStop(0, withAlpha(accent, 0.16));
+      halo.addColorStop(0.55, withAlpha(accent, 0.06));
+      halo.addColorStop(1, withAlpha(accent, 0));
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Body: a barely-there fill so the near hemisphere is a surface the
+      // graticule sits on, offset towards the upper left as if lit from there.
+      const body = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
+      body.addColorStop(0, withAlpha(accent, 0.1));
+      body.addColorStop(1, withAlpha(accent, 0.02));
+      ctx.fillStyle = body;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fill();
 
       // Limb — the sphere's silhouette.
       ctx.beginPath();

@@ -39,8 +39,22 @@ steps. Static, client-side, no backend.
   16), which contradicts the count the globe shows.
 - **Cormorant Garamond defaults to old-style figures** that descend below the baseline. Right
   inside a sentence, wrong in a data tile — force `lining-nums` on stat tiles and counts.
+- **Decorative overlays must never use a negative horizontal inset.** `.hero::before` with
+  `inset: -10% -5% 0` put 20px of horizontal scroll on every phone. Bleed vertically if you
+  must; sideways is always a scrollbar. Let the gradient's own falloff do the softening.
+- **A `<select>` in a flex row needs `min-width: 0`.** It is sized by its longest option and
+  will not shrink below it — `flex: none` on `.sort-wrap` made that intrinsic width binding
+  and broke 320px. `min-width: 0` is the part that does the work, not the flex basis.
+- **A script face sets far wider than a serif at the same nominal size.** The wordmark that
+  fits at 390px pushes the topbar controls off a 320px screen; step the size down under
+  400px rather than truncating, because a clipped wordmark reads as broken.
+- **`REGIONS` in `app.js` must list every non-place `country` value**, and every country it
+  does *not* exclude must have coordinates in `globe.js`. Counted-but-unplottable makes the
+  stat tile and the globe disagree on screen — the same class of bug as the old India 16-vs-65.
+  Plotted-but-not-counted is fine and deliberate (`Gulf`, `Baltics`). The data check enforces
+  the one direction that matters.
 
-## Test-harness rules (four false failures came from ignoring these)
+## Test-harness rules (six false failures came from ignoring these)
 
 - **Always scope selectors.** `[data-goto="x"]` matches several elements across views, some
   hidden. Use `#topnav .navlink[data-goto="x"]`.
@@ -50,23 +64,42 @@ steps. Static, client-side, no backend.
   auto-rotation moves the point between the assertion and the click.
 - **Re-query after any re-render.** Clicking a filter or un-starring rebuilds the DOM and
   detaches previously collected element handles.
+- **Contrast checkers must handle `color(srgb 0.94 0.93 0.89 / 0.88)`.** Those are 0–1 floats;
+  reading them as 0–255 turns near-white into near-black and invents failures. Distinguish by
+  the function name, never by magnitude — `rgb(0,0,1)` is a legitimate near-black.
+- **iOS zoom-on-focus is a text-entry behaviour.** Only `input`, `select` and `textarea`
+  trigger it. Flagging every `<button>` under 16px buried two real findings under 190 lines
+  of noise.
 - Playwright is installed; Chromium at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - `github.io` is blocked by this sandbox's proxy (403 on CONNECT). A failed fetch there says
   nothing about whether the site is live — never report it as a site problem.
 
 ## Design system
 
-- **Fonts are self-hosted variable woff2 in `assets/fonts/`** — no CDN. Cormorant Garamond
-  (display, calligraphic), IBM Plex Sans (body), IBM Plex Mono (instrument layer: tags, dates,
-  counts). `build.js` inlines them as data URIs because the published artifact runs under a
-  CSP that blocks external requests.
+- **Fonts are self-hosted woff2 in `assets/fonts/`** — no CDN. Cormorant Garamond (display),
+  IBM Plex Sans (body), IBM Plex Mono (instrument layer: tags, dates, counts), Petit Formal
+  Script (`--font-script`). The first three are variable; the script ships one weight.
+  `build.js` inlines all of them as data URIs because the published artifact runs under a CSP
+  that blocks external requests.
+- **The script is the counsellor's voice and nothing else** — wordmark, the salutation on your
+  read, the closing line. Never on anything the reader has to scan or compare. It was chosen
+  over Pinyon and Parisienne on x-height; both of those vanish at wordmark size.
+- **Root size is a percentage, and display sizes do not follow it.** `html` is 106.25% on
+  phones and 112.5% from 700px, so a reader who raised their browser default still gets it.
+  Raising that root inflated every `rem` display size by the same 12.5% and the hero went
+  oversized — the display scale was hand-retuned down ~10% afterwards. Change one, check the
+  other.
 - **Do not use Inter.** It is the single font that most makes a page read as AI-generated.
   Same caution applies to the warm-cream + terracotta + serif combination.
 - **Palette is entirely `:root` custom properties**, defined three times: `:root`, the
   `prefers-color-scheme: dark` media query, and both `:root[data-theme=…]` overrides. Swapping
   the palette is a token edit — never hard-code a colour in a component.
-- **Vermilion `--signal` is reserved for deadlines only.** Jade `--accent` is for anything
-  interactive. Do not spend the signal colour on decoration.
+- **Vermilion `--signal` is reserved for deadlines only.** Teal `--accent` is for anything
+  interactive, and `--gold` is tier 1 and nothing else. Signal used to leak onto the tier-1
+  badge; `--gold` exists so it does not. Do not spend the signal colour on decoration.
+- **Tier badges are an ordinal scale and are drawn as one** — tier 1 is the only filled chip
+  on the page, and weight drops with the grade down to a dashed outline at tier 5. That is
+  what lets someone find the handful of transformative entries by scanning.
 - **All motion must be disabled under `prefers-reduced-motion`**, and reveal states must fall
   back to *visible* — never stranded at `opacity: 0` when `IntersectionObserver` is missing.
 
@@ -82,7 +115,9 @@ steps. Static, client-side, no backend.
 
 ## Open with the user
 
-- **Colour palette**: they are researching one and will send hex values. Until then, keep the
-  current identity — a vibrancy pass was applied, but no new brand hue was chosen.
+- **Colour palette**: settled. They picked "Citrus & Slate" from their own research, then asked
+  for it turned up; the chroma was raised across both themes and the dark ground moved off
+  neutral navy onto a real petrol. They have signed off on the result — do not change hues
+  again without being asked.
 - **GitHub Pages**: `.github/workflows/pages.yml` is committed but needs a one-time manual
   toggle at Settings → Pages → Source: GitHub Actions. Never confirmed live.
