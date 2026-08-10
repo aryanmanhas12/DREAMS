@@ -174,6 +174,20 @@ window.DB.countries = {
     allergy: "Cedar pollen (kafunsho) from February to April is genuinely severe and affects a large share of the population, including newcomers. Take this seriously if you have any allergic tendency.",
     honest: "MEXT is one of the most generous scholarships on earth and attracts a fraction of the applications that Western programmes do. The research is excellent. Food and social isolation are the real costs, and they are higher for a strict vegetarian than for anyone else on this list."
   },
+  China: {
+    name: "China",
+    climate: "varies", winter: "−5 to 5 °C in Beijing, damp cold in the south", summer: "25–35 °C, humid in the south",
+    daylight: "9–10 hours in December in Beijing",
+    cost: "₹25,000–45,000/month outside the two biggest cities; noticeably higher in Beijing and Shanghai",
+    diaspora: "small", vegFood: "moderate",
+    food: "Vegetarian dishes exist everywhere but pork stock and fish sauce turn up in things that read as vegetarian on the menu — learn the phrase for 'no meat' (不要肉) and expect to double-check. Halal food is easy to find near most university campuses.",
+    mentalHealth: "Counselling exists at major universities but English-language support is inconsistent outside the top-tier institutions. Mental health remains a more private subject in wider society than in India.",
+    people: "Curious about outsiders and generally welcoming to international students once introduced, though the language barrier does most of the work of keeping early friendships shallow. University international-student offices are active and used to placing incoming students.",
+    visa: "X1 (long-term) or X2 (short-term) student visa arranged through the host university once an admission letter and, for scholarship holders, a JW202 form are issued.",
+    work: "Off-campus part-time work is not generally permitted on a student visa; on-campus roles need university sign-off. Fully funded programmes are built around this — budget as if work income will not exist.",
+    allergy: "Spring pollen (March–May) is significant in northern cities including Beijing. Air quality on high-pollution days affects anyone with asthma or seasonal allergies more than the pollen itself does.",
+    honest: "Chinese-government and Tsinghua-badged scholarships (CSC, Schwarzman) are among the most generously funded in this entire index and drastically under-applied-to from India. The trade-off is real: the language barrier is steeper than anywhere else on this list, and a strict vegetarian needs to actively manage food rather than assume it will sort itself out."
+  },
   Israel: {
     name: "Israel",
     climate: "warm", winter: "10–18 °C", summer: "28–35 °C",
