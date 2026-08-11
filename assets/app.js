@@ -996,10 +996,14 @@
 
     /* specialty routes matched to the profile */
     const specs = rankSpecialties(p);
+    // Counted, not spelled out. This read "thirteen" while the data held
+    // eighteen — the same drift the claim cards had, and the reason no number
+    // on this site is written by hand where the data can supply it.
+    const nSpecs = (window.DB.specialties || []).length;
     h += '<section class="actions-block"><h2 class="sec-h">Specialties that fit what you said</h2>';
-    h += '<p class="sec-sub">The three closest to your answers, out of thirteen route maps. Each one shows the day-to-day reality, the Indian and international entry routes, where it leads, and the thing nobody tells you before you commit three years to it.</p>';
+    h += '<p class="sec-sub">The three closest to your answers, out of ' + nSpecs + ' route maps. Each one shows the day-to-day reality, the Indian and international entry routes, where it leads, and the thing nobody tells you before you commit three years to it.</p>';
     h += '<div class="routes">' + specs.slice(0, 3).map((x, i) => specialtyHTML(x.s, "Closest fit " + (i + 1))).join("") + "</div>";
-    h += '<p class="sec-sub" style="margin-top:20px"><button type="button" class="btn btn-ghost" data-goto="routes">See all thirteen specialty routes</button></p>';
+    h += '<p class="sec-sub" style="margin-top:20px"><button type="button" class="btn btn-ghost" data-goto="routes">See all ' + nSpecs + ' specialty routes</button></p>';
     h += "</section>";
 
     /* frontier fields */

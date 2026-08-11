@@ -15,8 +15,8 @@ window.DB.research = [
     stages: ["pre", "clin"], funding: "stipend",
     money: "₹60,000 stipend · free to apply · no travel needed",
     duration: "2 months",
-    window: "Applications open in spring · closed 30 May (5 pm) in the 2026 cycle",
-    deadlineMonths: [3, 4, 5],
+    window: "Opens in spring · advertised close 30 May, extended to 10 June (5 pm) in the 2026 cycle",
+    deadlineMonths: [3, 4, 5, 6],
     url: "https://schemes.dhr.gov.in/",
     why: "The default first research project for every Indian medical student, and the one most people apply to a year too late. You can hold it ONCE — and only in 1st or 2nd year MBBS. Third and final year are ineligible, so the window genuinely closes.",
     reqs: ["1st or 2nd professional MBBS only", "A faculty guide from your own institution", "Institutional Ethics Committee clearance", "Free to apply"],
@@ -24,7 +24,8 @@ window.DB.research = [
       "Find your guide in the term BEFORE you need them. A professor who already knows your face says yes; an emailed stranger does not.",
       "Write the proposal around a question you can actually answer in two months with the patients your hospital already sees.",
       "Start IEC clearance immediately — ethics committees are the slowest part of the chain and they gate publication whether or not ICMR funds you.",
-      "Check the date on the ICMR site every year rather than trusting any secondhand figure, including this one. This cycle has moved: it used to close around 10 January, and the 2026 round closed on 30 May at 5 pm. Late submissions are refused absolutely.",
+      "Check the date on the DHR portal every year rather than trusting any secondhand figure, including this one. This cycle moves constantly: it used to close around 10 January, the 2026 round advertised 30 May, and DHR then extended it to 10 June at 5 pm.",
+      "Expect an extension and never plan for one. DHR extended almost every 2026-27 call by one to two weeks — STS and MD Thesis to 10 June, the main HRD research call to 15 June, the Young Medical Faculty PhD to 14 July. The extension is announced days before the original date, always as a PDF notice on the portal and nowhere else, so the only way to benefit is to be already watching. Aim for the advertised date; treat the extra fortnight as a reprieve if your ethics clearance slips, not as your plan.",
       "Even if you are not selected, finish the study. The stipend is the smallest part of the value; the publication is the whole point."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "medium", workExp: 0

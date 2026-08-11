@@ -335,7 +335,7 @@ window.DB.equity = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + annual maintenance (≈ US$15,400 or £9,900) + airfare + visa fees + contingency",
     duration: "Masters (up to 3 yrs) or PhD (up to 4 yrs)",
-    window: "First round ~April to early June · a second round opens Sept–Oct only when slots go unfilled",
+    window: "2026-27 round opened 24 April and closed 2 June · corrections 4–7 June · second round Sept–Oct only if slots go unfilled",
     deadlineMonths: [4, 5, 6, 9, 10],
     url: "https://nosmsje.gov.in/",
     why: "Fully funded overseas masters or PhD for students from Scheduled Caste, Denotified/Nomadic/Semi-Nomadic tribe, landless agricultural labourer and traditional artisan families. Total family income must be under ₹8 lakh. It is one of the most generous awards available to any Indian student and it is routinely under-subscribed — places go unfilled in some years.",

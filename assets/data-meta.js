@@ -33,6 +33,17 @@ window.DB.meta = {
      not a link one: DAAD WISE and PMRF are both closed to MBBS students by
      rules that are not on their front pages, and this index was recommending
      the first of them. Both are now named in the skip list instead. Deadlines
-     were re-read for the Indian schemes; ICMR-STS holds at 30 May. */
-  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students were removed from the index and named; ICMR-STS and the Indian scheme dates re-read from source."
+     were re-read for the Indian schemes against the DHR and ministry portals
+     rather than against aggregators. ICMR-STS advertised 30 May and was then
+     extended to 10 June, which is the pattern across DHR's 2026-27 calls —
+     the main HRD research call went to 15 June and the Young Medical Faculty
+     PhD to 14 July. That is now written into the STS entry, with the warning
+     that the extension is announced days beforehand and must never be planned
+     around. IAS-SRFP holds at 31 January. NOS opened 24 April and closed
+     2 June with a correction window to the 7th.
+
+     One link was worth the whole sweep: lancetglobalsurgery.org has lapsed
+     and now redirects to a gambling site. It was never in the index, but it
+     is the first result for global surgery and students will find it. */
+  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme deadlines re-read from the government portals, including the ICMR-STS extension to 10 June."
 };
