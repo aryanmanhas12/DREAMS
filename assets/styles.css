@@ -301,13 +301,36 @@ body {
 :root[data-theme="light"] .shortlist-count { color: #fff; }
 .shortlist-count:empty { display: none; }
 
-.topbar-controls { display: flex; align-items: center; gap: 8px; flex: none; }
+/* 12px, not 8px: the two controls carry 44px touch targets that are wider
+   than their visible boxes, and at an 8px gap those targets overlapped by a
+   couple of pixels — so a tap aimed at the very edge of the theme toggle
+   opened the menu instead. Widening the gap separates the hit areas cleanly
+   and still clears 320px. */
+.topbar-controls { display: flex; align-items: center; gap: 12px; flex: none; }
 
 .theme-toggle {
   width: 32px; height: 32px; padding: 0;
   border: 1px solid var(--line); background: var(--surface);
   border-radius: 50%; cursor: pointer;
   display: grid; place-items: center;
+  position: relative;
+}
+
+/* Both topbar controls draw at 32–36px because the bar has to survive a
+   320px screen alongside a script wordmark that sets far wider than a serif
+   — growing the boxes is what pushes the controls off that screen. So the
+   VISUAL size stays and the TOUCH target grows underneath it: a centred
+   pseudo-element takes the hit area to the 44px minimum without occupying a
+   single pixel of layout. Nothing reflows, and a thumb no longer misses.
+   Keep them transparent and unstyled; this is hit area, not decoration. */
+.theme-toggle::after,
+.nav-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
 }
 .theme-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ink-2);
   box-shadow: inset -4px -2px 0 0 var(--surface); }
@@ -318,6 +341,7 @@ body {
   display: none; width: 36px; height: 36px; padding: 0; margin: 0;
   border: 1px solid var(--line); background: var(--surface); border-radius: var(--r);
   cursor: pointer; place-items: center;
+  position: relative;
 }
 .nav-toggle-bars { position: relative; width: 16px; height: 11px; display: block; }
 .nav-toggle-bars span {

@@ -72,7 +72,17 @@ steps. Static, client-side, no backend.
   Plotted-but-not-counted is fine and deliberate (`Gulf`, `Baltics`). The data check enforces
   the one direction that matters.
 
+- **Check eligibility before impact — a programme you cannot enter is worse than one you never listed.** DAAD WISE was in the index for months telling MBBS students "MBBS qualifies from year 2". It does not: WISE is restricted to Engineering, Maths and Science, to a 4-year bachelor's or 5-year integrated masters, and to a fixed institution list, so a medical student fails three separate tests. PMRF fails the same way — science and technology streams from the IITs, IISc, NITs and IISERs. Neither says no on its front page; you find out after weeks of cold-emailing for an invitation letter. **Before adding any entry, find the eligibility PDF and search it for the degree list. If MBBS is not named, assume excluded until the programme office says otherwise.** Both now live in `skipList`, which is where "looks open, is not" belongs.
+- **Aggregator listicles recycle these traps.** Every "fully funded internships for Indian students" roundup still lists WISE for medics. Aggregators are fine for *finding* candidates and worthless for *verifying* them — always land on the programme's own eligibility page before writing an entry.
+- **The `<head>` social-card counts cannot be rendered from data.** Link scrapers read raw HTML and never run the script, so those two numbers are typed by hand — and therefore have to be *asserted* by the data check, which is the only thing standing between a share card and last month's number. The three claim cards in the body are the opposite case: they render from data, because nothing scrapes them.
+- **Touch targets grow under the visual box, never through it.** The topbar has to survive 320px next to a script wordmark that sets far wider than a serif, so the theme and menu buttons stay 32–36px visually and get to 44px via a centred `::after`. That adds zero layout. Two cautions: keep `.topbar-controls` gap at 12px or the two hit areas overlap and an edge tap on the theme toggle opens the menu instead; and always re-check 320px afterwards, because this is exactly the horizontally-bleeding overlay the `.hero::before` rule above warns about.
+
 ## Test-harness rules (six false failures came from ignoring these)
+
+- **The data check must load `data-*.js` in `index.html`'s order, not alphabetically.** Several files do `window.DB.study = window.DB.study || []` then push, while `data-study.js` does a bare `window.DB.study = [...]`. Load alphabetically and `data-abroad.js` pushes first, then `data-study.js` wipes it — 39 entries vanish and a dozen impact keys look orphaned. Parse the script tags out of `index.html` and follow them; that also catches a data file that exists on disk but is never loaded.
+- **Playwright must open the mobile nav before clicking a navlink.** Below 760px `#topnav` is collapsed and a scoped `#topnav .navlink[data-goto=…]` click times out on "element is not visible", which reads like a broken view and is not. Click `#navToggle` first when the link is not visible.
+- **Tap-target checks must probe `elementFromPoint`, not `getBoundingClientRect`.** The rect is the *visual* box and cannot see the `::after` that takes the topbar controls to 44px. Measuring the rect reports `36×36` on a button that is genuinely fine — a seventh false failure of the same family. Probe ±21px in all four directions and only report if a probe misses.
+- **The survey is 16 questions, not 14.** A completion loop that stops early reports "never reached results" — a harness limit that looks exactly like a dead end in the flow. Give it headroom and assert on `#view-results.is-active`.
 
 - **Always scope selectors.** `[data-goto="x"]` matches several elements across views, some
   hidden. Use `#topnav .navlink[data-goto="x"]`.
@@ -123,7 +133,8 @@ steps. Static, client-side, no backend.
 
 ## Workflow
 
-- Develop and push to `claude/career-platform-indian-students-nc6yiq`; keep `main` in sync.
+- **Branching: work on the feature branch, and keep `main` identical to it.** `.github/workflows/pages.yml` deploys on push to `main` **only**, so nothing a feature branch alone can do will ever reach the live site. The sequence that has worked every time: commit to the feature branch → push it → fast-forward `main` to it → push `main` (that push is what triggers the deploy). Never commit directly on `main`, and never let the two diverge — a divergence means the published site and the branch you are reviewing are different pages, which is the most confusing state this repo can be in. The branch name changes per work session and does not matter; the invariant is that `main` is a fast-forward of it when you finish.
+- Earlier sessions used `claude/career-platform-indian-students-nc6yiq`; the current one is `claude/wellness-journal-architecture-n8i82l`. Both are the same site — the branch name is just a session label.
 - Run `node build.js` before committing if any asset changed, then re-verify the bundle
   separately — the bundle has broken while the source was fine.
 - **`data-meta.js` carries the review date, and it is rendered from data, never written into

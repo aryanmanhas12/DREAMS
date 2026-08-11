@@ -25,6 +25,14 @@ window.DB.meta = {
   reviewed: "2026-08",
   reviewedLabel: "August 2026",
   /* What that pass actually covered, so the stamp does not over-claim. Spot
-     checks are not a full audit and the interface should not imply one. */
-  scope: "Every link in the index was checked and the dead ones repointed; Indian schemes and the largest government scholarships had their dates re-read from source."
+     checks are not a full audit and the interface should not imply one.
+
+     This cycle swept all 161 links again from an unrestricted host. No entry
+     was dead, but eighteen had drifted to a new address and two were pointing
+     somewhere actively wrong. The more useful finding was an eligibility one,
+     not a link one: DAAD WISE and PMRF are both closed to MBBS students by
+     rules that are not on their front pages, and this index was recommending
+     the first of them. Both are now named in the skip list instead. Deadlines
+     were re-read for the Indian schemes; ICMR-STS holds at 30 May. */
+  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students were removed from the index and named; ICMR-STS and the Indian scheme dates re-read from source."
 };
