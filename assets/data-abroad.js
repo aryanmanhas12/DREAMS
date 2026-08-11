@@ -62,8 +62,8 @@ window.DB.research.push(
     stages: ["clin", "intern"], funding: "full",
     money: "Salary, travel and accommodation covered for the eight weeks",
     duration: "8 weeks, July to August",
-    window: "Opens mid-November · closes 31 January, 23:59 CET",
-    deadlineMonths: [11, 12, 1],
+    window: "Annual deadline 15 November, for the following July–August",
+    deadlineMonths: [9, 10, 11],
     url: "https://www.epfl.ch/schools/sv/education/summer-research-program/",
     why: "Eight paid weeks inside one of Europe's strongest life-science schools — the Brain Mind Institute, the Global Health Institute, ISREC for cancer research — with travel and housing covered. Eight weeks fits an Indian summer vacation without needing leave from your college, which is what makes it far more practical mid-MBBS than a four-month placement. The bar is academic standing: they ask for roughly the top 5–10 per cent of your class.",
     reqs: [
@@ -76,7 +76,7 @@ window.DB.research.push(
     ],
     steps: [
       "Read the participating units before you register and name real preferences. 'Life sciences' as a stated interest reads as no interest.",
-      "Register on the EPFL programs recruiting portal when applications open in mid-November. The window is about ten weeks and closes hard at 23:59 CET on 31 January.",
+      "The annual deadline is 15 NOVEMBER, for a programme running the following July and August. That is eight months of lead time and it is the single most misquoted date in this index — aggregator sites still repeat a January deadline that is not EPFL's. Confirm it on the School of Life Sciences page each year.",
       "Enter your referee's email as soon as you register, so the letter is not the thing that misses the deadline.",
       "Say plainly in the essay that you are a medical student. A clinical perspective is a differentiator in a pool of biology undergraduates, not a handicap.",
       "Eight weeks in July and August maps onto the Indian summer break — check your own college calendar against it before applying, not after."
@@ -144,7 +144,7 @@ window.DB.study.push(
       "Inlet one, and the one you control: produce something presentable. An ICMR-STS project, a departmental audit, a case series. It does not need to be novel; it needs to exist and to have a supervisor's name on it.",
       "Submit that abstract to an international conference with a student category. Acceptance rates for student posters are far higher than people assume, and an acceptance letter is the key that unlocks the government travel grants.",
       "The moment it is accepted, file for ICMR, CSIR or ANRF/SERB travel support — 60 to 90 days ahead, with the Dean's letter and a government travel-agent quote. This is the cheapest, highest-probability route abroad that exists for an Indian medical student.",
-      "Inlet two, running in parallel: apply to the summer research programmes that pay. EPFL closes 31 January; OIST closes 15 October and 15 April; the IISER and IAS summer fellowships run on similar timelines inside India as a fallback.",
+      "Inlet two, running in parallel: apply to the summer research programmes that pay. EPFL closes 15 November for the following summer; OIST runs two intakes; the IISER and IAS summer fellowships run on similar timelines inside India as a fallback. Note how early that EPFL date is — an Indian summer break in June needs an application submitted the previous November.",
       "Inlet three: ask. Email three researchers abroad whose papers you have actually read, with one specific question and a concrete offer of what you would do for eight weeks. A self-funded 'no' costs nothing to receive, and unfunded lab invitations are what many travel grants are then used for.",
       "Negotiate college permission before you need it. For anything longer than a summer break, the Dean's sign-off is the real bottleneck — not admission, not money.",
       "Keep every acceptance letter, certificate and abstract-book page. The second trip is much easier than the first, and this is the evidence that makes it so."

@@ -50,7 +50,7 @@ window.DB.funding.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Full cost of any Stanford graduate degree — tuition, housing, a living stipend, health insurance and one round-trip flight a year, for up to three years",
     duration: "Length of the Stanford graduate degree, up to 3 years of KHS funding",
-    window: "Opens roughly May · closes early October",
+    window: "Opens roughly May · KHS closed 6 October, 1 pm Pacific · the Stanford programme has its OWN, often earlier, deadline",
     deadlineMonths: [5, 6, 7, 8, 9, 10],
     url: "https://knight-hennessy.stanford.edu/admission/before-you-apply/eligibility",
     why: "This is not a scholarship you apply to on its own — you win a place in a Stanford graduate programme (an MS, a PhD, an MPP, occasionally the MD) and Knight-Hennessy then funds all of it, badged with a two-year leadership curriculum on top. No nationality restriction and no requirement that your first degree be American. The two-step nature — get into Stanford, then get funded — is exactly why almost nobody outside the US even considers it.",
@@ -61,7 +61,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Identify the actual Stanford graduate programme first — an MS in Epidemiology, Health Policy, or a relevant PhD track are the realistic entry points for a medical graduate, not the MD.",
-      "The KHS application and the Stanford programme application are two separate submissions on two separate systems; both are due by the KHS deadline in early October.",
+      "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes in early October; the Stanford programme is due by its own deadline or 1 December, whichever falls first — and for many programmes that is earlier than the KHS date. Look up your specific programme's deadline before you plan around October, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
       "Because this funds up to three years and stacks a leadership cohort of ~70 scholars from every country on top, treat it as the single highest-ceiling entry in this whole index if your graduate plan is Stanford-shaped.",
       "Confirm the current cohort's exact age and degree-date cut-offs on the eligibility page before investing the months this application takes."
     ],

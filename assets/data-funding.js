@@ -14,7 +14,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + monthly stipend + flights + arrival allowance. India is the largest Chevening cohort in the world.",
     duration: "1-year UK masters",
-    window: "Opens early Aug · closes 6 October, 11:00 UTC — no extensions, ever",
+    window: "Opened 4 Aug · closes 6 October, 11:00 UTC — that is 4:30 pm IST, and there are no extensions, ever",
     deadlineMonths: [8, 9, 10],
     url: "https://www.chevening.org/scholarships/",
     why: "The largest fully-funded route from India to the UK. Roughly 8–10 % of Indian applicants are selected, which sounds brutal until you realise most applications are visibly rushed — the leadership and networking essays are where people lose, and they are the two you can actually prepare for.",
@@ -28,7 +28,7 @@ window.DB.funding = [
       "Count your 2,800 hours honestly and early — this is the criterion that silently disqualifies most medical applicants. Your MBBS internship year alone is usually enough.",
       "Four essays: leadership, networking, choice of course, career plan. Draft them in August, not September.",
       "Pick three DIFFERENT universities, not three courses at one. Selectors read the spread as judgement.",
-      "Submit at least 48 hours before the deadline. The portal closes at 12:00 UTC exactly and has crashed in past years.",
+      "Submit at least 48 hours before the deadline. The portal closes at 11:00 UTC — 4:30 pm IST — exactly, and has crashed under load in past years.",
       "Interviews at the British High Commission run Feb–Apr; results in June."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 2
@@ -42,7 +42,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + stipend + airfare + warm-clothing allowance + thesis grant",
     duration: "1-year masters (PhD route also exists)",
-    window: "Opens Sept · closes Oct–Dec depending on scheme",
+    window: "Opens ~Aug–Sept · Master's deadline around mid-October; Shared Scholarships vary by university",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://cscuk.fcdo.gov.uk/scholarships/",
     why: "Explicitly designed for people from lower- and middle-income Commonwealth countries who cannot otherwise afford UK study — which means, unusually, that limited financial means is an advantage rather than something to hide. Health and wellbeing is one of its six named priority themes.",
@@ -54,6 +54,8 @@ window.DB.funding = [
     ],
     steps: [
       "Understand which of the two schemes you want. Master's Scholarships go through a nominating body in India; Shared Scholarships go through the UK university directly.",
+      "For the Master's route from India you must submit through TWO portals in the same cycle — the CSC's own system and the Ministry of Education's SAKSHAT portal. Completing only one disqualifies the application outright, and it is the most common way an otherwise strong Indian application is thrown out before anyone reads it.",
+      "Check the Indian nominating body's internal deadline, not just the CSC one. National nominating bodies routinely close earlier than the CSC date, and the CSC deadline is the one every listicle quotes.",
       "For Shared Scholarships, check cscuk.fcdo.gov.uk's eligible-course list first — it changes yearly and LSHTM, UCL, Liverpool and Warwick usually feature.",
       "The development-impact statement is the whole application. Write about a specific problem in a specific Indian district, not about India's health system in general.",
       "Apply to the UK course AND the scholarship in parallel. The course deadline is usually later — do not let it set your pace."
@@ -137,6 +139,7 @@ window.DB.funding = [
       "Open the official EACEA catalogue and filter by field. Spend an evening on it; this is the single highest-value hour in this whole guide.",
       "Programmes worth knowing for a medic: Europubhealth+, IMSOGLO (global one health), Neurasmus (neuroscience), and several infectious-disease and bioinformatics consortia.",
       "One application per consortium covers admission and the scholarship together.",
+      "Check that the intake you are applying to actually has a scholarship round. A consortium's EU funding runs in multi-year editions, and some intakes admit on a self-funded basis only — the course page stays up either way, so it is entirely possible to write a full application for a year in which there is no money to win.",
       "Choose your three carefully and honestly rank fit over prestige — consortia reject people who obviously applied everywhere."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
@@ -150,8 +153,8 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full cost of study + maintenance allowance + family, fieldwork and conference allowances",
     duration: "Full length of an MPhil or PhD",
-    window: "International deadline early December",
-    deadlineMonths: [9, 10, 11, 12],
+    window: "International round closes 3 Dec OR 7 Jan — it depends on your course, so check the course directory",
+    deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.gatescambridge.org/apply/how-to-apply/",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
     reqs: [
@@ -176,7 +179,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full Oxford fees + £19,000+ annual stipend + flights, for 2–3 years",
     duration: "2–3 years at Oxford",
-    window: "Opens ~June · closes ~end July for India",
+    window: "India round opened 1 June and closed 23 July, 23:59 IST — 53 days, and the earliest major deadline of the year",
     deadlineMonths: [6, 7],
     url: "https://www.rhodeshouse.ox.ac.uk/scholarships/",
     why: "Five or six Indians a year. The bar is not just marks — it is a demonstrated record of using energy on behalf of other people. Medical students who have organised, built or campaigned for something are structurally well placed here; medical students with only a transcript are not.",
@@ -419,14 +422,14 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "CHF 1,920/month for research fellows, plus housing allowance, insurance and fee waiver",
     duration: "12 months research · full PhD in some cases",
-    window: "Opens Aug · Indian deadline usually early September",
-    deadlineMonths: [8, 9],
+    window: "Opens ~20 Aug · country deadlines run Sept–Dec, and India's recent cycle closed 10 November",
+    deadlineMonths: [8, 9, 10, 11, 12],
     url: "https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships",
     why: "Switzerland pays doctoral researchers more than anywhere else on earth, and this scheme has a dedicated India quota that is chronically under-subscribed compared to its value. The research-fellowship track accepts medical graduates directly.",
     reqs: ["Indian citizen with a masters or MBBS/MD", "A Swiss supervisor who has agreed in writing to host you", "Under 35 for most tracks"],
     steps: [
       "Secure the Swiss supervisor's letter of support first — nothing proceeds without it. Start emailing in June.",
-      "Applications go through the Swiss Embassy in New Delhi with a hard early-September deadline.",
+      "Applications go through the Swiss Embassy in New Delhi, and the deadline is country-specific rather than global — India's recent cycle opened in early August and closed on 10 November. Do not trust a date quoted for another country, and do not trust a September date you saw repeated on aggregator sites; check the India page each year.",
       "The research-fellowship route is open to medical graduates; the PhD route usually expects a masters."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0

@@ -44,6 +44,17 @@ window.DB.meta = {
 
      One link was worth the whole sweep: lancetglobalsurgery.org has lapsed
      and now redirects to a gambling site. It was never in the index, but it
-     is the first result for global surgery and students will find it. */
-  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme deadlines re-read from the government portals, including the ICMR-STS extension to 10 June."
+     is the first result for global surgery and students will find it.
+
+     A second pass then re-read the major international awards against their
+     own pages rather than aggregators, and found two wrong dates and one
+     wrong instruction. EPFL's summer research programme closes 15 November,
+     not 31 January — the old date was repeated in three places here and would
+     have cost a reader the whole cycle. The Swiss Government Excellence
+     deadline is country-specific and India's fell on 10 November, not early
+     September. And Knight-Hennessy's Stanford programme application does NOT
+     share the scholarship's October deadline. Chevening (6 Oct, 11:00 UTC),
+     Rhodes India (23 July), Mitacs (16 Sept), Amgen (1 Feb), OIST (15 Oct),
+     IAS-SRFP (31 Jan) and Fulbright all verified correct as written. */
+  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme dates re-read from the government portals including the ICMR-STS extension to 10 June; the major international awards re-checked against their own pages, correcting the EPFL and Swiss Excellence deadlines."
 };
