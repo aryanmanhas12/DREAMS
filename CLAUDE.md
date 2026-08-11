@@ -174,5 +174,10 @@ steps. Static, client-side, no backend.
   for it turned up; the chroma was raised across both themes and the dark ground moved off
   neutral navy onto a real petrol. They have signed off on the result — do not change hues
   again without being asked.
-- **GitHub Pages**: `.github/workflows/pages.yml` is committed but needs a one-time manual
-  toggle at Settings → Pages → Source: GitHub Actions. Never confirmed live.
+- **GitHub Pages**: settled and confirmed live. The one-time Settings → Pages → Source:
+  GitHub Actions toggle was evidently done — `pages.yml` has run green on every push to
+  `main` since 6 August, including this pass (run 31526653499, commit `e2d64de`). A
+  successful `actions/deploy-pages@v4` step is itself the proof, because it errors when
+  the source is not set to Actions, so a green run cannot happen without the toggle.
+  Trust the workflow conclusion, not a fetch: `github.io` is blocked by this sandbox's
+  proxy, and a failed fetch there says nothing about whether the site is up.
