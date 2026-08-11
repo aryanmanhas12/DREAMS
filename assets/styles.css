@@ -540,6 +540,13 @@ body {
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; }
 
+/* Explains the two survey lengths. No top margin: hero spacing belongs to the
+   grid gap, and adding margins here is exactly what once pushed the primary
+   button below the fold on a 390x844 phone. */
+.hero-choice-note {
+  margin: 0; font-size: .88rem; line-height: 1.5; color: var(--ink-2); max-width: 60ch;
+}
+
 /* 48px floor on every button — below that a thumb misses it. Pill radius on
    phones, where the buttons go full-width and a square corner reads as a slab;
    the sharper corner returns on desktop where they sit inline. */
@@ -638,6 +645,23 @@ body {
   font-family: var(--font-mono); font-size: .72rem; color: var(--ink-3);
   margin: 12px 0 0; letter-spacing: .03em;
 }
+
+/* The "you took the short version" panel on the results page. Uses --accent
+   rather than --signal: this is an offer, not a deadline, and the signal
+   colour is reserved for things that expire. */
+.upgrade {
+  margin: 26px 0 4px; padding: 22px 22px 24px;
+  background: var(--surface-2, var(--surface));
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r);
+}
+.upgrade h3 {
+  margin: 0 0 10px; font-family: var(--font-display);
+  font-size: 1.25rem; line-height: 1.2; color: var(--ink);
+}
+.upgrade p { margin: 0 0 12px; font-size: .95rem; line-height: 1.6; color: var(--ink-2); }
+.upgrade .btn { margin-top: 4px; }
 
 /* Large pill for the primary action. Thumb-sized on a phone without becoming a
    slab on desktop. */

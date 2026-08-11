@@ -301,6 +301,33 @@
   const answers = {};
   let qIndex = 0;
 
+  /* Two lengths of the same survey.
+
+     "short" asks only skill, anger and flow — the three questions the site is
+     named for, and the only three that are about who you are rather than what
+     you can currently afford. "full" adds the thirteen practical constraints
+     that decide what is actually open to you.
+
+     The three come first in QUESTIONS precisely so this is a slice rather than
+     a filter, which keeps qIndex meaning the same thing in both modes and lets
+     someone upgrade mid-flow without re-answering anything.
+
+     The mode rides inside `answers` so it survives the URL and localStorage
+     round-trip for free — a shared short plan reopens as a short plan. It is
+     underscore-prefixed because buildProfile reads answers by question id and
+     nothing should ever mistake this for one. */
+  const CORE_COUNT = 3;
+  function surveyMode() { return answers._mode === "short" ? "short" : "full"; }
+  function activeQuestions() {
+    return surveyMode() === "short" ? QUESTIONS.slice(0, CORE_COUNT) : QUESTIONS;
+  }
+  function startSurvey(mode, fromIndex) {
+    answers._mode = mode === "short" ? "short" : "full";
+    qIndex = fromIndex || 0;
+    renderQuestion();
+    showView("survey");
+  }
+
   const $  = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
   const esc = (s) => String(s == null ? "" : s)
@@ -383,6 +410,20 @@
     p.topFields = Object.keys(p.fields).sort((a, b) => p.fields[b] - p.fields[a]);
     p.exp = p.stage === "pg" ? 4 : p.stage === "grad" ? 2 : p.stage === "intern" ? 1 : 0;
     p.needsFree = p.money === "none" || p.abroad === "funded";
+
+    /* Which constraints the reader ACTUALLY answered, as opposed to which ones
+       have a default above. Every field on `p` is populated either way — that
+       is what keeps ranking working on a three-question run — but the prose is
+       a different matter. "You told me you cannot pay" attributed to someone
+       who was never asked about money is a fabrication, and it is the exact
+       failure this site exists to avoid. So: rank on the defaults, speak only
+       from `asked`. */
+    p.short = surveyMode() === "short";
+    p.asked = {};
+    QUESTIONS.forEach(function (q) {
+      const a = answers[q.id];
+      p.asked[q.id] = Array.isArray(a) ? a.length > 0 : a != null && a !== "";
+    });
     return p;
   }
 
@@ -615,26 +656,26 @@
 
     // the honest structural read
     let mid = "";
-    if (p.money === "none") {
+    if (p.asked.money && p.money === "none") {
       mid += "You told me you cannot pay, so everything below has been reordered around that and nothing has been quietly dropped. " +
         "The thing worth understanding is that the funded routes are not the consolation prize — a funded doctorate pays you a salary, " +
         "German public universities charge no tuition at all, and a self-funded masters is the <em>worst</em>-value option on this entire site, not the best. ";
-    } else if (p.money === "loan") {
+    } else if (p.asked.money && p.money === "loan") {
       mid += "You would consider a loan, so here is the arithmetic nobody offers: ₹50 lakh at 10 % is roughly ₹65,000 a month for ten years. " +
         "That is survivable if the degree leads to income in that currency and punishing if it does not. Take the funded routes first and treat the loan as what closes a gap, not what opens a door. ";
     }
-    if (p.category === "sc" || p.category === "st") {
+    if (p.asked.category && (p.category === "sc" || p.category === "st")) {
       mid += "Given what you told me about your background, the National Overseas Scholarship is at the top of your list for a reason: " +
         "it funds a full masters or doctorate abroad including flights, and in most years places go <strong>unfilled</strong> because almost nobody applies. " +
         "That is the single highest-value item on your page. ";
     }
-    if (p.stage === "pre") {
+    if (p.asked.stage && p.stage === "pre") {
       mid += "Being in your first two years is the widest window you will ever have: ICMR STS is open to you now and closes permanently after second year, " +
-        "and DAAD WISE, Mitacs and Charpak Lab all take currently-enrolled students. Most people discover these in final year, when three of them have already closed. ";
-    } else if (p.stage === "clin") {
+        "and Mitacs Globalink, Charpak Lab and the Science Academies' summer fellowship all take currently-enrolled students. Most people discover these in final year, when three of them have already closed. ";
+    } else if (p.asked.stage && p.stage === "clin") {
       mid += "You are in the years where the international research internships open — Khorana specifically wants pre-final-year MBBS students and lowers its marks bar for them. " +
         "ICMR STS has closed to you, so MedEngage and the summer fellowships are the substitutes that keep the record moving. ";
-    } else if (p.stage === "grad" || p.stage === "pg") {
+    } else if (p.asked.stage && (p.stage === "grad" || p.stage === "pg")) {
       mid += "With the degree finished, the funded doctorate becomes the main event — and the misconception worth killing early is that you need a masters first. " +
         "You usually do not. US, German, Swiss and Australian doctoral programmes take medical graduates directly and pay them. ";
     }
@@ -643,7 +684,13 @@
     // readiness
     let ready = "";
     const hasNothing = p.record.indexOf("nothing") !== -1 || p.record.length === 0;
-    if (hasNothing) {
+    if (!p.asked.record) {
+      // Never asked what they already have, so claim nothing about it. The
+      // order-of-operations point below holds regardless of the answer.
+      ready = "I have not asked what you already have — and on a three-question run I am not going to pretend I know. " +
+        "What holds either way is the order of operations: credentials are not what gets you in, a finished thing is. " +
+        "One completed project with an output beats five certificates of attendance, every time.";
+    } else if (hasNothing) {
       ready = "You ticked nothing under what you already have, which is the normal starting position and not a problem — but it does set the order of operations. " +
         "Credentials are not what gets you in; a finished thing is. One completed project with an output beats five certificates of attendance, every time. " +
         "Start with the free skill stack and one small piece of research at your own institution.";
@@ -660,12 +707,12 @@
     paras.push(ready);
 
     // country note
-    if (p.abroad !== "india" && ctys.length) {
+    if (p.asked.abroad && p.abroad !== "india" && ctys.length) {
       const best = ctys[0];
       let cn = "On where: your answers about climate, food and what you need around you point first at <strong>" + esc(best.c.name) + "</strong>. ";
       cn += esc(best.c.honest);
       paras.push(cn);
-    } else if (p.abroad === "india") {
+    } else if (p.asked.abroad && p.abroad === "india") {
       paras.push("You said you want to build something here, and that is a legitimate strategy rather than a fallback. " +
         "The strongest version of it is specific: NIMHANS and AIIMS have cohorts and biobanks no Western centre can access, GenomeIndia has put thousands of Indian genomes " +
         "into the public domain, and the India Alliance funds clinicians to lead their own research <em>without</em> a doctorate. " +
@@ -674,10 +721,10 @@
 
     // closing, calibrated to time
     let close = "";
-    if (p.time === "t2") {
+    if (p.asked.time && p.time === "t2") {
       close = "You have under two hours a week, so the plan has to survive a bad month. Do not start three things. " +
         "Take the single item at the top of the list, and give it twenty minutes at a time.";
-    } else if (p.time === "t20") {
+    } else if (p.asked.time && p.time === "t20") {
       close = "You have real time available, which is the rarest resource here. Use it on the thing that produces an artefact — " +
         "a finished analysis, a submitted proposal, a working tool — rather than on more reading. Output is legible from anywhere; preparation is not.";
     } else {
@@ -821,7 +868,9 @@
 
   /* ───────────────── survey rendering ───────────────── */
   function renderQuestion() {
-    const q = QUESTIONS[qIndex];
+    const QS = activeQuestions();
+    if (qIndex >= QS.length) qIndex = QS.length - 1;   // mode switched under us
+    const q = QS[qIndex];
     const slot = $("#questionSlot");
     const chosen = answers[q.id] || (q.type === "multi" ? [] : null);
 
@@ -872,10 +921,10 @@
     const ft = $("#freeText");
     if (ft) ft.addEventListener("input", function () { answers[q.id + "_text"] = ft.value; });
 
-    $("#qCount").textContent = "Question " + (qIndex + 1) + " of " + QUESTIONS.length;
+    $("#qCount").textContent = "Question " + (qIndex + 1) + " of " + QS.length;
     $("#backBtn").disabled = qIndex === 0;
-    $("#nextBtn").textContent = qIndex === QUESTIONS.length - 1 ? "See what fits me" : "Continue";
-    const pct = (qIndex / QUESTIONS.length) * 100;
+    $("#nextBtn").textContent = qIndex === QS.length - 1 ? "See what fits me" : "Continue";
+    const pct = (qIndex / QS.length) * 100;
     $("#progressBar").style.width = pct + "%";
     $(".progress").setAttribute("aria-valuenow", String(Math.round(pct)));
   }
@@ -899,6 +948,26 @@
     h += '<p class="salutation">Alright. Here is what I see.</p>';
     h += "<h2>What your answers actually say</h2>";
     counsellorRead(p, ranked, ctys).forEach((para) => { h += "<p>" + para + "</p>"; });
+
+    /* On a three-question run, say plainly what this read is missing rather
+       than letting it pass as the finished article. The ranking below is real
+       but it is running on defaults for money, category, year and climate —
+       and those are the four things that most change what is actually open to
+       someone. Naming the gap is also the honest version of an upsell. */
+    if (p.short) {
+      h += '<div class="upgrade">';
+      h += "<h3>This is the short read</h3>";
+      h += "<p>You answered the three questions about who you are, and that is enough to point at fields, " +
+           "specialties and a starting list. What it cannot do is tell you what you can <em>reach</em>. " +
+           "The ranking below is currently assuming you are in your first two years, that money is not the " +
+           "binding constraint, and that you are open to anywhere — because you have not told me otherwise.</p>";
+      h += "<p>Thirteen more questions cover money, category, year of study, climate, health, language and the " +
+           "hours you actually have. They take about three minutes, they change the order of nearly everything " +
+           "below, and they unlock the category-specific funding that most people never find. " +
+           "Your three answers are kept.</p>";
+      h += '<button type="button" class="btn btn-primary" id="continueFullBtn">Answer the other thirteen</button>';
+      h += "</div>";
+    }
     if (p.topFields.length) {
       h += '<div class="chips">';
       p.topFields.slice(0, 6).forEach((f, i) => {
@@ -1058,6 +1127,12 @@
 
     const redo = $("#redoBtn");
     if (redo) redo.addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
+
+    // Continue straight into question four rather than restarting — the three
+    // answers are already in `answers`, and making someone retype them is how
+    // you turn an upgrade into an abandonment.
+    const contFull = $("#continueFullBtn");
+    if (contFull) contFull.addEventListener("click", function () { startSurvey("full", CORE_COUNT); });
 
     const printBtn = $("#printBtn");
     if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
@@ -1814,7 +1889,11 @@
       if ($("#view-shortlist").classList.contains("is-active")) renderShortlist();
     });
 
-    $("#startBtn").addEventListener("click", function () { qIndex = 0; renderQuestion(); showView("survey"); });
+    $("#startBtn").addEventListener("click", function () { startSurvey("short", 0); });
+    const startFull = $("#startFullBtn");
+    if (startFull) startFull.addEventListener("click", function () { startSurvey("full", 0); });
+    const startShort2 = $("#startShortBtn2");
+    if (startShort2) startShort2.addEventListener("click", function () { startSurvey("short", 0); });
     $("#brandHome").addEventListener("click", function (e) { e.preventDefault(); showView("intro"); closeMobileNav(); });
 
     // Wired once: these inputs live in the static shell (not inside the
@@ -1835,7 +1914,7 @@
     });
 
     $("#nextBtn").addEventListener("click", function () {
-      if (qIndex === QUESTIONS.length - 1) { renderResults(); showView("results"); return; }
+      if (qIndex === activeQuestions().length - 1) { renderResults(); showView("results"); return; }
       qIndex++; renderQuestion();
     });
     $("#backBtn").addEventListener("click", function () {
