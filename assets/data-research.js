@@ -336,10 +336,11 @@ window.DB.research = [
     duration: "4 weeks",
     window: "Exchange application rounds mostly Jan–Apr for summer placements",
     deadlineMonths: [1, 2, 3, 4],
-    url: "https://ifmsa.org/exchanges",
+    url: "https://ifmsa.org/student-exchange-program/",
     why: "The cheapest way for a medical student to get a month abroad. SCORE is the research track, SCOPE is clinical. Accommodation and often meals are covered by the host committee, so beyond flights the marginal cost is small.",
     reqs: ["Membership of MSAI (India's IFMSA national member organisation)", "Your college needs a Local Committee — or you help start one", "Some countries require a language certificate"],
     steps: [
+      "Start at MSAI rather than at IFMSA. India applies through its national member organisation and the outgoing calls, fees and timelines are published there — msaindia.org/exchanges — not on the international site.",
       "Join MSAI first. If your college has no Local Committee, founding one is itself a leadership credential worth having.",
       "SCORE for research, SCOPE for clinical. If you want a lab, do not accidentally apply for the ward.",
       "Apply in the January–April rounds for summer placements.",

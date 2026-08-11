@@ -60,7 +60,7 @@ window.DB.funding.push(
     duration: "15–24 months (masters) · 11 weeks (professional development certificate)",
     window: "One annual round, closing 15 May; Peace Centre assignments announced the following November",
     deadlineMonths: [3, 4, 5],
-    url: "https://www.rotary.org/en/our-programs/peace-fellowships",
+    url: "https://www.rotary.org/get-involved/our-programs/peace-fellowships",
     why: "The most under-applied full scholarship open to a doctor whose anger is about conflict, displacement or health in emergencies. Because it is framed as peacebuilding rather than health, medics rarely look at it — and yet the fellows who work on health in conflict zones are exactly who the programme wants. The certificate route at Chulalongkorn or Makerere is the unusual part: eleven weeks, fully funded, and designed for people already working, so it does not require you to abandon a job for two years.",
     reqs: [
       "Proficiency in English, and a bachelor's degree — MBBS qualifies",
