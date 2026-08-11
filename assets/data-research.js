@@ -186,32 +186,6 @@ window.DB.research = [
     zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 0
   },
   {
-    id: "daad-wise",
-    name: "DAAD WISE — Working Internships in Science and Engineering",
-    org: "German Academic Exchange Service (India-specific)",
-    type: "research", country: "Germany", city: "German host institute",
-    fields: ["biochem", "neuro", "genomics", "compbio", "env"],
-    stages: ["pre", "clin", "intern"], funding: "full",
-    money: "€934/month + travel subsidy + insurance · free to apply",
-    duration: "2–3 months, summer",
-    window: "Applications open Aug · close late Oct/early Nov",
-    deadlineMonths: [8, 9, 10, 11],
-    url: "https://www.daad.in/en/study-research-in-germany/scholarships/",
-    why: "Built exclusively for students enrolled at Indian institutions — you are not competing with the world, only with India. Fully funded summer research in a German laboratory, and you can apply from the second year of MBBS.",
-    reqs: [
-      "Enrolled full-time at an Indian institution — MBBS qualifies from year 2",
-      "An invitation letter from a German professor",
-      "Free to apply · no German language requirement"
-    ],
-    steps: [
-      "The invitation letter is the entire application. Start emailing German PIs in July for an October deadline.",
-      "Use the DAAD database and the Max Planck / Helmholtz institute directories to find groups, then write to the group leader — not the general office.",
-      "Your email should be four sentences: who you are, what of theirs you read, what you can do, what you are asking for. Attach a one-page CV.",
-      "Expect a low reply rate and send twenty. This is a numbers game and everyone who succeeds at it played it that way."
-    ],
-    zeroCost: true, indiaSpecific: true, competitiveness: "medium", workExp: 0
-  },
-  {
     id: "mitacs",
     name: "Mitacs Globalink Research Internship",
     org: "Mitacs, Canada",
@@ -359,7 +333,7 @@ window.DB.research = [
     duration: "4 weeks",
     window: "Exchange application rounds mostly Jan–Apr for summer placements",
     deadlineMonths: [1, 2, 3, 4],
-    url: "https://ifmsa.org/exchanges/",
+    url: "https://ifmsa.org/exchanges",
     why: "The cheapest way for a medical student to get a month abroad. SCORE is the research track, SCOPE is clinical. Accommodation and often meals are covered by the host committee, so beyond flights the marginal cost is small.",
     reqs: ["Membership of MSAI (India's IFMSA national member organisation)", "Your college needs a Local Committee — or you help start one", "Some countries require a language certificate"],
     steps: [
@@ -425,7 +399,7 @@ window.DB.research = [
     duration: "4–6 days",
     window: "Abstract deadlines usually 5–7 months before the meeting",
     deadlineMonths: [1, 2, 3, 4, 5, 10, 11, 12],
-    url: "https://ibro.org/funding/",
+    url: "https://ibro.org/grants/",
     why: "You do not attend these by paying — you attend them by submitting an abstract and applying for the travel award in the same breath. IBRO in particular exists to fund neuroscientists from countries like India, and its schemes are chronically under-applied.",
     reqs: ["An accepted abstract, usually", "Trainee status", "Travel award applications are separate and have earlier deadlines"],
     steps: [
@@ -535,7 +509,7 @@ window.DB.research = [
     duration: "Days to weeks",
     window: "Always open",
     deadlineMonths: [],
-    url: "https://training.cochrane.org/",
+    url: "https://www.cochrane.org/learn",
     why: "A first-year medical student can be the first author on a systematic review. It requires no laboratory, no funding, no ethics clearance and no permission — only method and persistence. This is the fastest legitimate route from zero publications to one.",
     reqs: ["Access to PubMed", "A specific, answerable question", "A co-author or two"],
     steps: [

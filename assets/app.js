@@ -1301,6 +1301,18 @@
     // being data rather than prose, count up.
     const hc = $("#heroCount");
     if (hc) hc.textContent = total;
+
+    // The three claim cards quote the same figures inside prose. They are
+    // written from data for the same reason the review stamp is: a number
+    // typed into the HTML drifts on the next commit and then disagrees with
+    // the stat tile a few inches above it. Prose does not count up — it would
+    // read as a slot machine mid-sentence — so these are set directly.
+    const claims = { "#claimTotal": total, "#claimFree": free, "#claimCountries": nCountries };
+    Object.keys(claims).forEach(function (sel) {
+      const el = $(sel);
+      if (el) el.textContent = String(claims[sel]);
+    });
+
     countUp($("#statTotal"), total);
     countUp($("#statFree"), free);
     countUp($("#statStudent"), student);

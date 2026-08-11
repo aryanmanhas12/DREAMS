@@ -333,7 +333,7 @@ window.DB.study.push(
     duration: "1 year, plus an optional preceding diploma year",
     window: "Scholarship applications typically close ~January–February for the following September",
     deadlineMonths: [11, 12, 1, 2],
-    url: "https://www.itg.be/en/study",
+    url: "https://www.itg.be/en/study/studying-at-itm",
     why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds seats specifically for doctors from countries like India. A fully funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices — and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
     reqs: [
       "A medical degree (MBBS qualifies) or an equivalent health-sciences degree",

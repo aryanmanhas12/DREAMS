@@ -42,7 +42,7 @@ window.DB.study.push(
     duration: "3–4 years",
     window: "Annual call, typically closing in the first half of the year",
     deadlineMonths: [1, 2, 3, 4, 5],
-    url: "https://www.fmi.ch/training/phd-program/",
+    url: "https://www.fmi.ch/education-careers/programs/",
     why: "Built for medical students and physicians who want serious bench or computational research, affiliated with the Novartis research institutes and the Basel medical faculty. The combination of a clinical degree, a Swiss salary and industry proximity is rare.",
     reqs: ["Medical degree or final-year medical student", "Strong research motivation and ideally some prior lab exposure", "English only"],
     steps: [

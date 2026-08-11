@@ -152,7 +152,7 @@ window.DB.funding = [
     duration: "Full length of an MPhil or PhD",
     window: "International deadline early December",
     deadlineMonths: [9, 10, 11, 12],
-    url: "https://www.gatescambridge.org/apply/",
+    url: "https://www.gatescambridge.org/apply/how-to-apply/",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
     reqs: [
       "Citizen of any country outside the UK",
@@ -373,7 +373,7 @@ window.DB.funding = [
     duration: "12–36 months",
     window: "Institutions nominate; internal deadlines run Oct–Jan",
     deadlineMonths: [10, 11, 12, 1],
-    url: "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence",
+    url: "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program",
     why: "You cannot apply directly — the French university nominates you. That sounds like a barrier and is actually an advantage: it means the number of competitors is capped by how many each institution puts forward, and simply asking the admissions office whether they will nominate you puts you ahead of everyone who did not ask.",
     reqs: ["Non-French citizen, under 25 for masters level", "Applying to a French institution", "Must be nominated by the institution — apply to them first"],
     steps: [
@@ -421,7 +421,7 @@ window.DB.funding = [
     duration: "12 months research · full PhD in some cases",
     window: "Opens Aug · Indian deadline usually early September",
     deadlineMonths: [8, 9],
-    url: "https://www.sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants/swiss-government-excellence-scholarships.html",
+    url: "https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships",
     why: "Switzerland pays doctoral researchers more than anywhere else on earth, and this scheme has a dedicated India quota that is chronically under-subscribed compared to its value. The research-fellowship track accepts medical graduates directly.",
     reqs: ["Indian citizen with a masters or MBBS/MD", "A Swiss supervisor who has agreed in writing to host you", "Under 35 for most tracks"],
     steps: [
@@ -562,21 +562,22 @@ window.DB.funding = [
   },
   {
     id: "holland-orange",
-    name: "Holland Scholarship & Orange Knowledge Programme",
+    name: "NL Scholarship (formerly the Holland Scholarship)",
     org: "Dutch Government / Nuffic",
     type: "scholarship", country: "Netherlands", city: "Various",
     fields: ["pubhealth", "global", "compbio", "systems"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "Holland Scholarship €5,000 first year · OKP full funding for eligible countries",
+    money: "€5,000 in the first year only · not renewable, and not a full ride",
     duration: "1–2 years",
-    window: "Holland Scholarship deadline 1 Feb or 1 May depending on institution",
+    window: "Deadline 1 Feb or 1 May depending on the institution",
     deadlineMonths: [1, 2, 3, 4, 5],
-    url: "https://www.studyinnl.org/finances/holland-scholarship",
-    why: "Dutch universities teach almost everything in English at masters level and Rotterdam, Amsterdam and Maastricht are serious names in epidemiology and health policy. The Holland Scholarship is small but easy; the Orange Knowledge Programme is large but country-restricted, so check India's current status.",
+    url: "https://www.studyinnl.org/finances/nl-scholarship",
+    why: "Dutch universities teach almost everything in English at masters level and Rotterdam, Amsterdam and Maastricht are serious names in epidemiology and health policy. The award itself is small and deliberately easy to apply for — treat it as a discount on a plan you can already almost afford, never as the thing that makes the Netherlands possible.",
     reqs: ["Non-EEA national", "Applying to a participating Dutch institution", "First time studying in the Netherlands"],
     steps: [
-      "Apply to the university first, then to the Holland Scholarship through that university by 1 February.",
-      "Check whether India is currently on the Orange Knowledge Programme country list — it changes.",
+      "Apply to the university first, then to the NL Scholarship through that university by 1 February.",
+      "Search for the award under its current name. It was renamed from the Holland Scholarship, and most of the blog posts and listicles still carry the old name and the old link.",
+      "The Orange Knowledge Programme, which older guides pair with this one, closed to new applications — do not build a plan around finding it.",
       "Dutch tuition for non-EU students is €15,000–20,000, so a €5,000 award is a real dent but not a solution on its own."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
@@ -609,21 +610,26 @@ window.DB.funding = [
   },
   {
     id: "wellcome-emcr",
-    name: "Wellcome Trust International Training Fellowships & Early-Career Awards",
+    name: "Wellcome Early-Career and Career Development Awards",
     org: "Wellcome Trust, UK",
     type: "fellowship", country: "UK", city: "Various / home country",
     fields: ["global", "infect", "pubhealth", "neuro", "genomics"],
     stages: ["pg"], funding: "full",
-    money: "Salary + research costs, held in your home country or split with a UK institution",
-    duration: "3–5 years",
-    window: "Rolling calls; check the funding schemes page quarterly",
+    money: "Salary + research costs, held at an eligible host organisation",
+    duration: "5 years (Early-Career), 8 years (Career Development)",
+    window: "Distinct calls with fixed closing dates; check the scheme page each quarter",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://wellcome.org/research-funding",
-    why: "Wellcome funds researchers in low- and middle-income countries to stay and work there, rather than requiring relocation. For a doctor who wants to build a research career from India rather than emigrate permanently, this is the flagship route.",
-    reqs: ["Health-related research", "A host institution and a sponsor", "Usually a doctorate OR equivalent clinical research experience"],
+    why: "Wellcome funds researchers to build a group where they already are, rather than requiring permanent relocation. For a doctor who wants a research career without emigrating, this is the model — but read the next line before you spend a month on it.",
+    reqs: [
+      "Health-related research with a specific, answerable question",
+      "An eligible host organisation and a sponsor",
+      "A doctorate OR equivalent clinical research experience"
+    ],
     steps: [
-      "Track the Wellcome funding schemes page — calls open and close throughout the year.",
-      "Build the relationship with a host institution long before the call opens.",
+      "If you are based in India, start at India Alliance, not here. Wellcome's own guidance routes India-based applicants there, and the International Training Fellowship that older guides point you to is closed — the page for it now exists only to say so.",
+      "Wellcome's India route is the DBT/Wellcome India Alliance, which is separately listed on this site and whose clinical stream does not require a PhD. That is the entry worth your month.",
+      "Come back to Wellcome direct once you hold a position at an eligible host organisation outside India, or a joint appointment that gives you one.",
       "Wellcome cares intensely about the research question. Vague proposals about 'AI in healthcare' do not survive triage; a specific, answerable question does."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 3

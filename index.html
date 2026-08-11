@@ -17,7 +17,7 @@
      first impression more often than the page is. -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Dream Counsellor — you were told there were two options" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 183 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 187 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="Dream Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Dream Counsellor — you were told there were two options" />
-<meta name="twitter:description" content="183 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:description" content="187 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -140,9 +140,16 @@
   <section class="wrap claims" aria-labelledby="claims-h">
     <h2 class="sec-h" id="claims-h">What this is built on</h2>
 
+    <!-- The numbers in these three claims are filled in from the data at run
+         time, never typed here. A count written into the HTML is a count that
+         goes stale on the next commit and then quietly contradicts the stat
+         tile six inches above it — which is the same class of bug as the old
+         India 16-vs-65. Em dashes are the pre-script placeholder, matching
+         #heroCount, so nothing reads as a broken template if JS never runs. -->
     <blockquote class="statement reveal">
       <p>Funded research you can hold in second year, doctorates that pay a salary, and
-      scholarships that cover the flight. <b>183 of them, across 31 countries.</b></p>
+      scholarships that cover the flight. <b><span id="claimTotal">—</span> of them, across
+      <span id="claimCountries">—</span> countries.</b></p>
     </blockquote>
 
     <blockquote class="statement reveal">
@@ -151,8 +158,8 @@
     </blockquote>
 
     <blockquote class="statement reveal">
-      <p>Built around what you can afford, tolerate and reach. <b>25 of these cost
-      nothing at all</b>, and the ones gated by money say so plainly.</p>
+      <p>Built around what you can afford, tolerate and reach. <b><span id="claimFree">—</span>
+      of these cost nothing at all</b>, and the ones gated by money say so plainly.</p>
     </blockquote>
 
     <div class="claims-cta">
@@ -372,6 +379,7 @@
 <script src="assets/data-india-events.js"></script>
 <script src="assets/data-abroad.js"></script>
 <script src="assets/data-newroutes.js"></script>
+<script src="assets/data-2026.js"></script>
 <script src="assets/data-meta.js"></script>
 <script src="assets/data-coast.js"></script>
 <script src="assets/globe.js"></script>

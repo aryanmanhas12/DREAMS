@@ -126,7 +126,7 @@ window.DB.study = [
     duration: "1 year full-time",
     window: "Opens Oct · closes Mar–Jun by programme",
     deadlineMonths: [10, 11, 12, 1, 2, 3, 4, 5],
-    url: "https://www.ucl.ac.uk/prospective-students/graduate",
+    url: "https://www.ucl.ac.uk/study/prospective-students/graduate",
     why: "UCL's Institute for Global Health is a genuine policy pipeline — students routinely move into WHO, MSF and national health ministries. The Queen Square neurology campus next door is the largest neuroscience centre in Europe.",
     reqs: ["2:1 equivalent; MBBS accepted", "IELTS 7.0", "Relevant experience valued but not required"],
     steps: [
@@ -147,7 +147,7 @@ window.DB.study = [
     duration: "1 year on-campus · 3 years online part-time",
     window: "Opens Sept · rolling to Jun",
     deadlineMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
-    url: "https://www.ed.ac.uk/studying/postgraduate",
+    url: "https://study.ed.ac.uk/postgraduate",
     why: "Edinburgh's online masters programmes are the best-value route to a top-25 university degree while you are still working in India. You can start it during internship and finish it before you leave.",
     reqs: ["2:1 equivalent", "IELTS 7.0", "Online route has identical entry standards"],
     steps: [
@@ -257,7 +257,7 @@ window.DB.study = [
     duration: "2 years (advanced-standing 1 year for physicians)",
     window: "Opens Sept · deadline Jan",
     deadlineMonths: [9, 10, 11, 12, 1],
-    url: "https://ysph.yale.edu/admissions/",
+    url: "https://ysph.yale.edu/admissions-financial-aid/",
     why: "Yale offers advanced standing to applicants who already hold a medical degree, compressing the MPH to one year. Its Social & Behavioral Sciences track is where mental health, stigma and health behaviour actually live.",
     reqs: ["MBBS qualifies for advanced standing consideration", "TOEFL 100", "GRE optional"],
     steps: [
@@ -389,7 +389,7 @@ window.DB.study = [
     duration: "3–4 years",
     window: "IMPRS calls usually open Sept–Nov and Mar–May",
     deadlineMonths: [3, 4, 5, 9, 10, 11],
-    url: "https://www.imprs.mpg.de/",
+    url: "https://www.mpg.de/en/imprs",
     why: "The International Max Planck Research Schools are free to apply to, taught entirely in English, fully funded, and take applicants directly from a medical degree. The Max Planck Institute of Psychiatry in Munich is one of the few places in the world doing exactly the molecular-plus-clinical psychiatry you would otherwise have to invent for yourself.",
     reqs: ["MBBS accepted; some schools ask for a masters, many do not for medical graduates", "No German required", "Research experience matters far more than marks"],
     steps: [
@@ -545,7 +545,7 @@ window.DB.study = [
     duration: "1–2 years, modular",
     window: "Rolling with intake rounds; summer programme each August",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
-    url: "https://www.nihes.com/",
+    url: "https://www.erasmusmc.nl/en/graduate-school/nihes",
     why: "The Netherlands Institute for Health Sciences trains clinicians to become epidemiologists, and its modular structure means you can take a three-week summer course to test the field before committing to a degree. The Rotterdam Study, run here, is one of the longest-running population cohorts in existence.",
     reqs: ["Medical or health science degree", "IELTS 6.5", "Modules can be taken individually"],
     steps: [

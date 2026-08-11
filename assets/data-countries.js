@@ -244,6 +244,20 @@ window.DB.countries = {
     allergy: "Ragweed pollen in late summer is among the most severe in Europe — Hungary has notably high sensitisation rates. Relevant if you have hay fever.",
     honest: "Stipendium Hungaricum gives India roughly 200 fully-funded places a year and remains one of the least-known major scholarships available. Low cost of living, EU degree, English-taught. The language is difficult and the country is small — but as a funded route into Europe it is unusually accessible."
   },
+  Turkey: {
+    name: "Türkiye",
+    climate: "varies", winter: "0–8 °C in Ankara and the interior, snow on the Anatolian plateau; 8–15 °C on the coasts", summer: "28–35 °C, and genuinely hot in the south-east",
+    daylight: "9.5 hours in December — noticeably more winter light than northern Europe",
+    cost: "₹35,000–60,000/month, and covered outright if you are on Türkiye Bursları",
+    diaspora: "small", vegFood: "easy",
+    food: "One of the easiest countries in Europe or West Asia to eat vegetarian in without planning — mezze, lentil soup, börek and grilled vegetables are ordinary menu items rather than special requests. Meat is almost entirely halal by default. Actual Indian restaurants are rare outside Istanbul, so this is a place to learn to cook.",
+    mentalHealth: "State universities have counselling centres, though English-language provision is thin outside Istanbul and Ankara. Türkiye Bursları scholars get health insurance, which covers psychiatric care in the state system.",
+    people: "Warm and direct, and hospitality towards guests is close to a civic norm rather than a courtesy. Indian students are uncommon enough to be a curiosity rather than a category, which cuts both ways. The scholarship cohort itself is the ready-made community — several thousand international students arrive together each year.",
+    visa: "Student residence permit, arranged after arrival. Türkiye Bursları handles most of the paperwork, which removes the step that defeats people elsewhere.",
+    work: "Restricted during study — postgraduate students may work with permission, undergraduates largely may not. Do not plan on earning; plan on the stipend.",
+    allergy: "Olive and grass pollen are heavy in spring along the Aegean and Mediterranean coasts. Air quality in Ankara in winter is poor enough to matter if you have asthma.",
+    honest: "The funded language year is the whole decision. If your programme is Turkish-medium you will spend a year learning a language you may never use again, in exchange for a fully paid degree — that is a real trade and it is worth making deliberately rather than discovering. Turkish medicine is strong in transplant, cardiology and emergency care, and the country's own health system reform is genuinely studied worldwide. Recognition of a Turkish medical qualification in India or the UK requires the same screening exams as anywhere else, so choose this for the training and the funding, not as a shortcut home."
+  },
   Russia: {
     name: "Russia",
     climate: "cold", winter: "−10 to −25 °C", summer: "18–28 °C",

@@ -45,6 +45,7 @@
     China:       [35.0,  104.0],
     Taiwan:      [23.7,  121.0],
     Thailand:    [15.0,  101.0],
+    Turkey:      [39.0,   35.0],
     "South Africa": [-29.0, 24.5],
     "New Zealand":  [-41.5, 172.5],
     // Regions, plotted as one dot each because that is honest about what they

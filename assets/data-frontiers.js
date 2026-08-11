@@ -63,7 +63,7 @@ window.DB.frontiers = [
     entry: "MPH or MSc in health services research. Career paths run through WHO, the Gates Foundation, PATH, national health missions and university global health departments.",
     where: ["LSHTM", "Johns Hopkins", "University of Washington (Global Health)", "PHFI / Indian Institutes of Public Health", "George Institute India"],
     startNow: "Pick one national guideline and audit its adherence in your own hospital. That is a publishable implementation study and it costs nothing but time.",
-    url: "https://implementationscience.biomedcentral.com/"
+    url: "https://link.springer.com/journal/13012"
   },
   {
     id: "precisionpsych",
@@ -75,7 +75,7 @@ window.DB.frontiers = [
     entry: "Pharmacogenomics sits between biochemistry, psychiatry and data science. An MSc in clinical pharmacology or genomics is the standard route; clinical trial units also hire medical graduates directly.",
     where: ["Mayo Clinic (pharmacogenomics)", "Max Planck Munich", "Vanderbilt", "NIMHANS", "CSIR-IGIB Delhi"],
     startNow: "Read the PharmGKB annotations for one commonly prescribed antidepressant and check what the guideline assumes about metabolism. The gap will be obvious within an hour.",
-    url: "https://www.pharmgkb.org/"
+    url: "https://www.clinpgx.org/"
   },
   {
     id: "nutripsych",
@@ -407,7 +407,7 @@ window.DB.equity = [
     duration: "Repayment over 10–15 years",
     window: "Apply once you hold an admission offer",
     deadlineMonths: [],
-    url: "https://sbi.co.in/web/personal-banking/loans/education-loans",
+    url: "https://sbi.bank.in/web/personal-banking/loans/education-loans",
     why: "Included here because pretending loans do not exist helps nobody — but so is the arithmetic. A ₹50 lakh loan at 10 % costs roughly ₹65,000 a month for ten years. If the degree does not clearly lead to income in that currency, a funded PhD or a free German masters is not a lesser option, it is a better one.",
     reqs: ["Admission offer", "Co-applicant, usually a parent", "Collateral for larger amounts; up to ₹7.5 lakh can be collateral-free"],
     steps: [

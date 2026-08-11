@@ -33,7 +33,7 @@ window.DB.research.push(
     duration: "4–6 months (minimum 120 days)",
     window: "Two cycles a year — closes 15 October and 15 April",
     deadlineMonths: [10, 4],
-    url: "https://admissions.oist.jp/research-internship",
+    url: "https://www.oist.jp/research-internship-program",
     why: "A fully funded four-to-six-month placement in a real laboratory, open to undergraduates, at an English-language graduate university with world-class neuroscience and computational biology. Two intakes a year rather than one, so missing a deadline costs six months instead of twelve. The catch that filters most Indian applicants is not academic: it is that you need written permission from your medical college to be away for four months, and that has to be negotiated long before the deadline.",
     reqs: [
       "Enrolled in the final two years of an undergraduate degree — for MBBS this means 2nd or 3rd professional year",

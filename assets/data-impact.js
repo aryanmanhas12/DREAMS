@@ -64,7 +64,6 @@ window.DB.impact = {
 
   /* ─────── Tier 2 — strong signal ─────── */
   "icmr-sts":          { t: 2, odds: "~20–25 %", effort: "30 hrs including ethics clearance", note: "The default first project, and the window closes permanently after second year. The stipend is the smallest part of the value — the publication is the point." },
-  "daad-wise":         { t: 2, odds: "~15 %, Indians only", effort: "25 hrs, mostly spent securing the invitation", note: "You compete only against other Indian students, not the world. The invitation letter is the whole application." },
   "ias-srfp":          { t: 2, odds: "~15 %", effort: "10 hrs, free to apply", note: "Train fare reimbursed, so the real cost is close to zero. MBBS students are eligible and rarely apply." },
   "neuromatch":        { t: 2, odds: "Accepts most prepared applicants", effort: "3 weeks full-time", note: "The cheapest credential that makes a cold email to a computational lab actually land. Tuition waivers available on request." },
   "ictp":              { t: 2, odds: "Moderate — designed for developing-country scientists", effort: "10 hrs", note: "Exists specifically to fund people from countries like yours. Almost no Indian medical students know it exists." },
@@ -143,6 +142,10 @@ window.DB.impact = {
 /* Things that consume time and produce nothing verifiable.
    Included because a list of what to pursue is only half the advice. */
 window.DB.skipList = [
+  {
+    name: "DAAD WISE, and the other 'open to Indian undergraduates' schemes that are not open to you",
+    why: "WISE is the one people send you most often, and an MBBS student cannot win it. It is restricted to Engineering, Mathematics and Science, to a 4-year bachelor's or 5-year integrated master's, and to a fixed list of institutions — a medical college is not on it and MBBS is not one of those degrees. PMRF has the same shape: science and technology streams from the IITs, IISc, NITs and IISERs. Neither will tell you no on the front page; you find out after you have spent three weeks cold-emailing German professors for an invitation letter. Before you spend a cycle on any 'Indian undergraduates' scheme, find the eligibility PDF and search it for the degree list. If MBBS is not named, assume it is excluded and write to the programme office to confirm. Germany itself is wide open to medics — through Dr. med. positions, the IMPRS doctoral schools and DAAD EPOS, all of which are in this index. It is this one door that is shut."
+  },
   {
     name: "Paid 'international observerships' sold by agencies",
     why: "Agencies charge ₹50,000–3,00,000 to arrange a two-week hospital shadowing placement you could have arranged by email for free. A certificate that says you watched is not evidence that you did anything. If you want clinical exposure abroad, IFMSA exchanges cost a fraction and carry an actual federation's name."
