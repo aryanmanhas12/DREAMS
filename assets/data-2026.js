@@ -135,6 +135,58 @@ window.DB.research.push(
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 1
   },
   {
+    id: "icgeb-falaschi",
+    name: "Arturo Falaschi Fellowships (PhD, short-term and postdoctoral)",
+    org: "ICGEB — International Centre for Genetic Engineering and Biotechnology",
+    type: "fellowship", country: "India", city: "New Delhi, Trieste (Italy) or Cape Town (South Africa)",
+    fields: ["genomics", "biochem", "infect", "compbio", "onco"],
+    stages: ["grad", "pg"], funding: "full",
+    money: "Full stipend, health insurance and travel · free to apply",
+    duration: "1–12 months (short-term) · 3–4 years (full PhD) · 2 years (postdoctoral)",
+    window: "Main call closes 31 March; a second short-term round runs to 30 September",
+    deadlineMonths: [1, 2, 3, 8, 9],
+    url: "https://www.icgeb.org/fellowship/",
+    why: "An intergovernmental research centre with one of its three laboratories in New Delhi — which makes this the rare world-class fellowship you can hold without leaving India, and the rare Indian position that comes with an automatic route to Trieste or Cape Town. India is a founding member state, so Indian nationals are inside the priority group rather than competing as foreign applicants. Almost no medical students have heard of it, because it recruits through biotechnology departments and never through medical colleges.",
+    reqs: [
+      "A degree in life sciences, medicine or a related field — MBBS is accepted",
+      "A written statement of support from the ICGEB group leader you want to work with. This is mandatory and there is no way around it.",
+      "For the short-term route, current enrolment in a PhD elsewhere; the long-term route is the PhD itself"
+    ],
+    steps: [
+      "Choose the group before the fellowship. Read the ICGEB New Delhi group pages, find two or three whose actual published work you can discuss, and write to those group leaders directly.",
+      "The supporting statement from the group leader is the application's spine. Allow two months to secure it — this is the step that fails, not the form.",
+      "If you are still in MBBS, the short-term route is not yet open to you; build toward it by finishing a real project first, then apply as a PhD student or a graduate.",
+      "Note the two windows. The main call closes at the end of March, and a separate short-term round runs through to the end of September, so a missed deadline is not a missed year."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "icddrb",
+    name: "icddr,b research fellowships, internships and short courses",
+    org: "icddr,b — International Centre for Diarrhoeal Disease Research, Bangladesh",
+    type: "research", country: "Bangladesh", city: "Dhaka and Matlab",
+    fields: ["infect", "pubhealth", "global", "nutrition", "repro"],
+    stages: ["grad", "pg"], funding: "partial",
+    money: "Fellowships are stipended; short courses are paid but cost a fraction of the European equivalents",
+    duration: "Weeks (courses) to 1–2 years (fellowships)",
+    window: "Courses run through the year; fellowship and internship calls are posted as they open",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://www.icddrb.org/knowledge-sharing/education-and-training/internship",
+    why: "The most consequential public health research institute in South Asia, and the one an Indian medical graduate can most easily reach — a short flight, no visa ordeal, and disease patterns that are actually the ones you will spend your career on. Oral rehydration solution was proven here, and the Matlab field site is the longest-running demographic surveillance system in the developing world. If you want field epidemiology rather than a lecture about it, this is a far better use of a year than a European summer school, and it costs a fraction as much.",
+    reqs: [
+      "Fellowships: within about three years of your last degree — a recent MBBS or a masters both qualify",
+      "Internships are open earlier and are the realistic entry point for a student",
+      "Short courses in epidemiology, biostatistics and research ethics are open to anyone who can pay the fee"
+    ],
+    steps: [
+      "Start with a short course if you are still studying. They are open-enrolment, genuinely taught by working researchers, and they put your name in front of the people who run the fellowships.",
+      "For the research fellowship, the three-year window after your last degree is the constraint that catches people — if you are in your internship year, diarise this now rather than discovering it after your MD.",
+      "Ask about the Matlab field site specifically. Fieldwork there is the part of this that no other institution in the region can offer, and it is what makes the year legible on an application afterwards.",
+      "Costs are in taka and are low by international standards, but funding is not automatic for every route. Confirm what your specific programme covers before booking anything."
+    ],
+    indiaSpecific: false, competitiveness: "medium", workExp: 0
+  },
+  {
     id: "ev4gh",
     name: "Emerging Voices for Global Health (EV4GH)",
     org: "Health Systems Global and partner institutions",
@@ -189,6 +241,18 @@ window.DB.impact["tdr-implementation-research"] = {
   odds: "Competitive but narrowly targeted",
   effort: "15 hrs, free to apply",
   note: "The formal training for the exact frustration a rural posting produces — why the thing that works in the trial does not work in the district. Free, hosted in the global South, and a credible route into WHO-adjacent work."
+};
+window.DB.impact["icgeb-falaschi"] = {
+  t: 1,
+  odds: "Small intake per laboratory, but a founding-member-state field",
+  effort: "20 hrs, free to apply, plus two months to secure the group leader's statement",
+  note: "A world-class intergovernmental fellowship with a laboratory in New Delhi, which means you can hold it without emigrating and still be inside an international system. Recruits through biotechnology departments, so medical students almost never see it — that thin field is the whole opportunity."
+};
+window.DB.impact["icddrb"] = {
+  t: 2,
+  odds: "Realistic — internships and short courses are genuinely accessible",
+  effort: "10 hrs for a course, more for a fellowship",
+  note: "The best field epidemiology available to an Indian medic per rupee and per hour of travel, on the disease patterns you will actually work on. Matlab is the longest-running demographic surveillance site in the developing world and there is no European equivalent to it."
 };
 window.DB.impact["ev4gh"] = {
   t: 2,

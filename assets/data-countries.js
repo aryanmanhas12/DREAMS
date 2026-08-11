@@ -244,6 +244,20 @@ window.DB.countries = {
     allergy: "Ragweed pollen in late summer is among the most severe in Europe — Hungary has notably high sensitisation rates. Relevant if you have hay fever.",
     honest: "Stipendium Hungaricum gives India roughly 200 fully-funded places a year and remains one of the least-known major scholarships available. Low cost of living, EU degree, English-taught. The language is difficult and the country is small — but as a funded route into Europe it is unusually accessible."
   },
+  Bangladesh: {
+    name: "Bangladesh",
+    climate: "hot", winter: "12–25 °C and dry — the pleasant season", summer: "28–36 °C with very high humidity; monsoon June to October",
+    daylight: "About 10.5 hours in December. Close enough to home that nothing about the light will surprise you.",
+    cost: "₹25,000–45,000/month in Dhaka — among the cheapest places on this site to live",
+    diaspora: "n/a — you are in the region, not away from it", vegFood: "easy",
+    food: "Rice, dal, fish and vegetables, seasoned much as in West Bengal. Vegetarian eating is straightforward, though fish is treated as a default rather than a meat. If you are from eastern India this is not a foreign cuisine at all.",
+    mentalHealth: "Provision is thin, as it is across the region, and you should not plan on institutional support. The advantage is proximity: you are two hours from home by air and in the same time zone, which for many people matters more than a counselling service would.",
+    people: "Warm, and Bangla is close enough to Hindi in rhythm that most Indians pick up functional phrases quickly. English is the working language of research institutions. Indians are unremarkable here, which makes ordinary life easy.",
+    visa: "Indian nationals get a straightforward visa, often on a relatively short turnaround. This is the least visa friction of any international entry on this site.",
+    work: "You are there on a fellowship or a course, not to earn. Do not plan otherwise.",
+    allergy: "Dhaka's air quality is among the worst in the world in the dry winter months, which is genuinely disqualifying if you have significant asthma. Take it seriously before committing to a year.",
+    honest: "This is the entry on this site with the worst prestige-to-value ratio, and that is the point. Nobody at home will be impressed that you went to Dhaka. But icddr,b proved oral rehydration therapy, runs the longest continuous demographic surveillance in the developing world at Matlab, and works on exactly the diseases that fill Indian wards. A year of real field epidemiology here will teach you more than a European summer school and cost a tenth as much. Choose it if you want the skill; do not choose it if you want the name."
+  },
   Turkey: {
     name: "Türkiye",
     climate: "varies", winter: "0–8 °C in Ankara and the interior, snow on the Anatolian plateau; 8–15 °C on the coasts", summer: "28–35 °C, and genuinely hot in the south-east",
