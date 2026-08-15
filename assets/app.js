@@ -1747,6 +1747,251 @@
     return L.join("\n");
   }
 
+  /* ═══════════════════════ THE TOUR ═══════════════════════
+     A guided walk through what this page actually does, because the honest
+     problem with this site is that it looks like a list and is not one.
+
+     Runs itself ONCE per browser, then never again unless asked. That is a
+     deliberate limit and the interface says so: there is no account here, so
+     "seen it" lives in this browser's local storage and nowhere else. A
+     different phone, a different browser, or cleared site data all count as a
+     first visit — which is why the trigger in the hero is permanent rather
+     than something that disappears after the first run.
+
+     Steps may name a view; the tour switches to it exactly the way the nav
+     does, so nothing here is a special case that can drift from the real
+     navigation. Steps may name a target to spotlight, and when that target is
+     not on screen — the nav collapses below 760px — the step degrades to a
+     centred card rather than pointing at nothing. */
+
+  const TOUR_KEY = "dc-tour-seen";
+
+  const TOUR = [
+    {
+      title: "This is not a list of links",
+      body: "It is an index of " + "%TOTAL%" + " real programmes, each one graded by how much it would actually change for you, and filtered by what you can afford and reach. Two minutes and you will know how to use it."
+    },
+    {
+      target: "#startBtn", view: "intro",
+      title: "Start with three questions",
+      body: "What people come to you for, what makes you angry, and what makes time stop. Nothing about marks. Those three are enough to point at fields and specialties. The sixteen-question version adds money, category, year and climate — the things that decide what is genuinely open to you — and you can upgrade later without losing your answers."
+    },
+    {
+      target: ".hero-globe", view: "intro",
+      title: "The globe is optional",
+      body: "Drag it, tap a country, see what is there. But it is an enhancement and never a gate: everything it reaches, Browse and search reach too. If you use a keyboard or a screen reader, you are not missing anything by skipping it."
+    },
+    {
+      target: "#browseSearch", view: "browse",
+      title: "Or skip the questions entirely",
+      body: "Browse holds the whole index with no profile applied. Search by name, institution or field, filter by country, and sort by impact tier or by which deadline is closest. If you already know what you are looking for, start here."
+    },
+    {
+      target: "#browseCards .tier", view: "browse",
+      title: "The tier badge is the honest bit",
+      body: "Tier 1 is career-defining and is the only filled badge on the page; the weight drops down to a dashed outline at tier 5, which means 'certificate collecting, do not build a plan on this'. Most things are not tier 1 and this site says so. That grading lives in a separate file from the facts, so you can disagree with a tier without touching the data."
+    },
+    {
+      target: "#topnav .navlink[data-goto='routes']", view: "routes",
+      title: "Specialty routes",
+      body: "What each specialty is actually like day to day, how you enter it in India and abroad, where it leads — and the thing nobody tells you before you give it three years. Including the non-clinical MDs people treat as failure, and the honest exits from clinical medicine."
+    },
+    {
+      target: "#topnav .navlink[data-goto='frontiers']", view: "frontiers",
+      title: "Fields nobody named in five years of lectures",
+      body: "Every one is a real discipline with journals, funding and people hiring — snakebite research, antimicrobial resistance, global surgery, accessible cell therapy. Each carries one thing you could start this week, from where you are, with what you have."
+    },
+    {
+      target: "#topnav .navlink[data-goto='calendar']", view: "calendar",
+      title: "Deadlines, and how much to trust them",
+      body: "Most opportunities are missed because the window opened during exams and shut before anyone looked up. Every date here is a starting point for your own check, never a substitute for it — dates move every cycle, and the official page is always the authority. The stamp at the top of this view says when entries were last re-read from source."
+    },
+    {
+      target: "#topnav .navlink[data-goto='shortlist']", view: "shortlist",
+      title: "Star anything, from anywhere",
+      body: "The star on any card saves it here. There is no account and no server — your shortlist and your answers live in this browser only, and your answers are also written into the page address, so sending yourself that link is how you move a plan to another device."
+    },
+    {
+      view: "intro",
+      title: "That is the whole thing",
+      body: "Three questions, or browse everything. Grade honestly, check the official page, and start one thing rather than planning five. You can reopen this tour any time from the link under the buttons on the front page."
+    }
+  ];
+
+  let tourStep = 0, tourOpen = false, tourReturnFocus = null, tourNodes = null;
+
+  function tourGotoView(name) {
+    if (!name) return;
+    if (name === "browse") renderBrowse();
+    if (name === "calendar") renderCalendar();
+    if (name === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
+    if (name === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
+    if (name === "shortlist") renderShortlist();
+    showView(name);
+  }
+
+  function tourBuild() {
+    const wrap = document.createElement("div");
+    wrap.className = "tour";
+    wrap.innerHTML =
+      '<div class="tour-scrim" id="tourScrim"></div>' +
+      '<div class="tour-hole" id="tourHole" aria-hidden="true"></div>' +
+      '<div class="tour-pop" id="tourPop" role="dialog" aria-modal="true" aria-labelledby="tourTitle" tabindex="-1">' +
+        '<p class="tour-step" id="tourStep"></p>' +
+        '<h2 class="tour-title" id="tourTitle"></h2>' +
+        '<p class="tour-body" id="tourBody"></p>' +
+        '<div class="tour-nav">' +
+          '<button type="button" class="btn btn-ghost tour-skip" id="tourSkip">Skip</button>' +
+          '<span class="tour-spacer"></span>' +
+          '<button type="button" class="btn btn-ghost" id="tourPrev">Back</button>' +
+          '<button type="button" class="btn btn-primary" id="tourNext">Next</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    tourNodes = {
+      wrap: wrap, scrim: $("#tourScrim"), hole: $("#tourHole"), pop: $("#tourPop"),
+      step: $("#tourStep"), title: $("#tourTitle"), body: $("#tourBody"),
+      prev: $("#tourPrev"), next: $("#tourNext"), skip: $("#tourSkip")
+    };
+    tourNodes.next.addEventListener("click", function () { tourGo(tourStep + 1); });
+    tourNodes.prev.addEventListener("click", function () { tourGo(tourStep - 1); });
+    tourNodes.skip.addEventListener("click", tourEnd);
+    tourNodes.scrim.addEventListener("click", tourEnd);
+    return tourNodes;
+  }
+
+  function tourPlace(target) {
+    const n = tourNodes, pad = 8;
+    const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    let r = null;
+    if (target) {
+      const el = $(target);
+      if (el) {
+        const b = el.getBoundingClientRect();
+        // A collapsed nav has a zero box; do not point at nothing.
+        if (b.width > 4 && b.height > 4 && b.bottom > 0 && b.top < vh) r = b;
+      }
+    }
+
+    if (r) {
+      n.hole.style.display = "block";
+      n.hole.style.top = (r.top - pad) + "px";
+      n.hole.style.left = (r.left - pad) + "px";
+      n.hole.style.width = (r.width + pad * 2) + "px";
+      n.hole.style.height = (r.height + pad * 2) + "px";
+    } else {
+      n.hole.style.display = "none";
+    }
+
+    // Measure the card, then place it below the target, or above, or centred.
+    n.pop.style.top = "0px"; n.pop.style.left = "0px";
+    const pw = Math.min(n.pop.offsetWidth, vw - 24), ph = n.pop.offsetHeight;
+    let top, left;
+    if (r && r.bottom + ph + 20 < vh) {
+      top = r.bottom + 14;
+      left = r.left + r.width / 2 - pw / 2;
+    } else if (r && r.top - ph - 20 > 0) {
+      top = r.top - ph - 14;
+      left = r.left + r.width / 2 - pw / 2;
+    } else {
+      top = Math.max(12, (vh - ph) / 2);
+      left = (vw - pw) / 2;
+    }
+    // Clamp inside the viewport. Never let the card be the thing that puts a
+    // horizontal scrollbar on a 320px screen.
+    left = Math.max(12, Math.min(left, vw - pw - 12));
+    top = Math.max(12, Math.min(top, vh - ph - 12));
+    n.pop.style.top = top + "px";
+    n.pop.style.left = left + "px";
+  }
+
+  function tourGo(i) {
+    if (i < 0) return;
+    if (i >= TOUR.length) return tourEnd();
+    tourStep = i;
+    const s = TOUR[i], n = tourNodes;
+    if (s.view) tourGotoView(s.view);
+
+    n.step.textContent = "Step " + (i + 1) + " of " + TOUR.length;
+    n.title.textContent = s.title;
+    // %TOTAL% is filled from data for the same reason every other count is.
+    n.body.textContent = s.body.replace("%TOTAL%", String(tourTotal()));
+    n.prev.disabled = i === 0;
+    n.next.textContent = i === TOUR.length - 1 ? "Done" : "Next";
+
+    // Let the view switch paint before measuring the target.
+    requestAnimationFrame(function () {
+      const el = s.target ? $(s.target) : null;
+      if (el && el.scrollIntoView) {
+        try { el.scrollIntoView({ block: "center", behavior: prefersReduced ? "auto" : "smooth" }); }
+        catch (e) { el.scrollIntoView(); }
+      }
+      setTimeout(function () { tourPlace(s.target); n.pop.focus(); }, prefersReduced ? 0 : 220);
+    });
+  }
+
+  function tourTotal() {
+    return allOpportunities().length + (window.DB.frontiers || []).length + (window.DB.specialties || []).length;
+  }
+
+  function tourKey(e) {
+    if (!tourOpen) return;
+    if (e.key === "Escape") { e.preventDefault(); return tourEnd(); }
+    if (e.key === "ArrowRight") { e.preventDefault(); return tourGo(tourStep + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); return tourGo(tourStep - 1); }
+    if (e.key !== "Tab") return;
+    // Trap focus inside the card: it is a modal dialog, and letting Tab escape
+    // into a page the scrim has covered strands the keyboard user completely.
+    const f = $$("button:not([disabled])", tourNodes.pop);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function tourReposition() { if (tourOpen) tourPlace(TOUR[tourStep].target); }
+
+  function tourStart() {
+    if (tourOpen) return;
+    tourReturnFocus = document.activeElement;
+    if (!tourNodes) tourBuild();
+    tourNodes.wrap.classList.add("is-on");
+    document.body.classList.add("tour-locked");
+    tourOpen = true;
+    document.addEventListener("keydown", tourKey);
+    window.addEventListener("resize", tourReposition);
+    window.addEventListener("scroll", tourReposition, { passive: true });
+    tourGo(0);
+  }
+
+  function tourEnd() {
+    if (!tourOpen) return;
+    tourOpen = false;
+    tourNodes.wrap.classList.remove("is-on");
+    document.body.classList.remove("tour-locked");
+    document.removeEventListener("keydown", tourKey);
+    window.removeEventListener("resize", tourReposition);
+    window.removeEventListener("scroll", tourReposition);
+    try { localStorage.setItem(TOUR_KEY, "1"); } catch (e) { /* private mode — it will offer again */ }
+    showView("intro");
+    if (tourReturnFocus && tourReturnFocus.focus) tourReturnFocus.focus();
+  }
+
+  function initTour() {
+    const btn = $("#tourBtn");
+    if (btn) btn.addEventListener("click", tourStart);
+
+    let seen = true;   // fail closed: if storage is unreadable, do NOT ambush
+    try { seen = localStorage.getItem(TOUR_KEY) === "1"; } catch (e) { seen = true; }
+
+    // Only auto-run for a genuinely fresh arrival. Someone opening a shared
+    // plan link has come for their results, not for an explainer.
+    const arrivingAtPlan = /[#&]p=/.test(location.hash);
+    if (!seen && !arrivingAtPlan) {
+      setTimeout(function () { if (!tourOpen) tourStart(); }, 900);
+    }
+  }
+
   /* ───────────────── wiring ───────────────── */
   function bindGoto(root) {
     $$("[data-goto]", root || document).forEach(function (b) {
@@ -1877,6 +2122,7 @@
     initHeroGlobe();
     initReveals();
     bindGoto(document);
+    initTour();
     loadShortlist();
     updateShortlistCount();
 

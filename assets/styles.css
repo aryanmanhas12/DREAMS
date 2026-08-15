@@ -1342,3 +1342,79 @@ body {
   .steps-now .sn-when { width: auto; }
   .survey-nav { flex-wrap: wrap; }
 }
+
+/* ════════════════════ THE TOUR ════════════════════
+   A guided walk for a first visit. Everything here is drawn from the palette
+   tokens, so swapping the theme carries the tour with it — no hard-coded
+   colour appears below. */
+
+.tour-line { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+/* Unlike the topbar controls, this one is a text link sitting in normal flow
+   with room beneath it, so it reaches 44px by simply BEING 44px rather than
+   by growing a pseudo-element underneath. A ::after was tried first and
+   measured 38px: the extended box is only a few pixels taller than the text
+   and the following .how list wins the hit test in that sliver. Real height
+   is the honest fix here; it pushes only the list below it, never the primary
+   button, which sits above this line. */
+.tour-trigger {
+  background: none; border: 0; padding: 0; margin: 0;
+  display: inline-flex; align-items: center; min-height: 44px;
+  font: inherit; font-size: .92rem; color: var(--accent);
+  text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer;
+}
+.tour-trigger:hover { color: var(--ink); }
+.tour-line-note {
+  font-family: var(--font-mono); font-size: .7rem;
+  color: var(--ink-3); letter-spacing: .03em;
+}
+
+.tour { position: fixed; inset: 0; z-index: 90; display: none; }
+.tour.is-on { display: block; }
+/* The page must not scroll behind the scrim while a step is anchored to a
+   rect measured against the viewport. */
+body.tour-locked { overflow: hidden; }
+
+.tour-scrim { position: absolute; inset: 0; background: rgba(6, 26, 34, .55); }
+
+/* The spotlight is a hole punched by an enormous outward shadow rather than
+   an SVG mask — no extra element, no layout cost, and box-shadow never
+   contributes to scrollWidth, so it cannot put a scrollbar on a 320px page. */
+.tour-hole {
+  position: absolute; border-radius: 10px; pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(6, 26, 34, .55), 0 0 0 2px var(--accent) inset;
+  transition: top .2s ease, left .2s ease, width .2s ease, height .2s ease;
+}
+
+.tour-pop {
+  position: absolute; width: min(380px, calc(100vw - 24px));
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--r);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .3);
+  padding: 20px 20px 16px;
+}
+.tour-pop:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.tour-step {
+  margin: 0 0 6px; font-family: var(--font-mono); font-size: .68rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+  font-variant-numeric: lining-nums;
+}
+.tour-title {
+  margin: 0 0 8px; font-family: var(--font-display);
+  font-size: 1.32rem; line-height: 1.15; color: var(--ink);
+}
+.tour-body { margin: 0 0 16px; font-size: .93rem; line-height: 1.55; color: var(--ink-2); }
+.tour-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tour-spacer { flex: 1 1 auto; }
+.tour-nav .btn { min-height: 44px; padding: 10px 18px; font-size: .9rem; }
+.tour-skip { color: var(--ink-3); }
+
+@media (max-width: 400px) {
+  .tour-pop { padding: 16px 16px 14px; }
+  .tour-nav .btn { padding: 10px 14px; flex: 1 1 auto; }
+  .tour-spacer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-hole { transition: none; }
+}
