@@ -55,6 +55,15 @@ window.DB.meta = {
      September. And Knight-Hennessy's Stanford programme application does NOT
      share the scholarship's October deadline. Chevening (6 Oct, 11:00 UTC),
      Rhodes India (23 July), Mitacs (16 Sept), Amgen (1 Feb), OIST (15 Oct),
-     IAS-SRFP (31 Jan) and Fulbright all verified correct as written. */
+     IAS-SRFP (31 Jan) and Fulbright all verified correct as written.
+
+     A third pass added the events layer this index was thinnest on — dates in
+     the Indian calendar rather than programmes to apply to, because the
+     commonest reason a student here has nothing to show is not rejection, it
+     is that nothing was ever on a date. INYAS turned out to name MD in
+     medical sciences in its own eligibility, which almost no Indian clinician
+     knows. Smart India Hackathon publishes real health problem statements and
+     is gated only by whether your college registers a SPOC. Checked and NOT
+     added: ichams.org is dead (404). */
   scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme dates re-read from the government portals including the ICMR-STS extension to 10 June; the major international awards re-checked against their own pages, correcting the EPFL and Swiss Excellence deadlines."
 };

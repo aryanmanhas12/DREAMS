@@ -1766,55 +1766,43 @@
 
   const TOUR_KEY = "dc-tour-seen";
 
+  /* Six steps, not ten. The first version explained the site accurately and
+     was too long to finish — and an explainer nobody reaches the end of is
+     worse than none, because it spends the goodwill and delivers half the
+     map. Each step now carries one idea and about thirty words. Anything that
+     could be discovered by looking has been cut; what is left is the four
+     things that are genuinely not visible (the grading is a judgement, the
+     globe is optional, nothing is uploaded, the official page wins) plus the
+     two ways in. */
   const TOUR = [
     {
       title: "This is not a list of links",
-      body: "It is an index of " + "%TOTAL%" + " real programmes, each one graded by how much it would actually change for you, and filtered by what you can afford and reach. Two minutes and you will know how to use it."
+      body: "It is %TOTAL% real programmes, each graded by how much it would actually change for you. Thirty seconds and you will know how to use it."
     },
     {
       target: "#startBtn", view: "intro",
-      title: "Start with three questions",
-      body: "What people come to you for, what makes you angry, and what makes time stop. Nothing about marks. Those three are enough to point at fields and specialties. The sixteen-question version adds money, category, year and climate — the things that decide what is genuinely open to you — and you can upgrade later without losing your answers."
-    },
-    {
-      target: ".hero-globe", view: "intro",
-      title: "The globe is optional",
-      body: "Drag it, tap a country, see what is there. But it is an enhancement and never a gate: everything it reaches, Browse and search reach too. If you use a keyboard or a screen reader, you are not missing anything by skipping it."
+      title: "Two ways in",
+      body: "Three questions about who you are — skill, anger, flow. Or all sixteen, which add money, category and year, and sharpen the ranking. You can upgrade later without losing answers."
     },
     {
       target: "#browseSearch", view: "browse",
-      title: "Or skip the questions entirely",
-      body: "Browse holds the whole index with no profile applied. Search by name, institution or field, filter by country, and sort by impact tier or by which deadline is closest. If you already know what you are looking for, start here."
+      title: "Or skip the questions",
+      body: "The whole index, unfiltered. Search by name, institution or field. Sort by impact, or by which deadline is closest."
     },
     {
       target: "#browseCards .tier", view: "browse",
-      title: "The tier badge is the honest bit",
-      body: "Tier 1 is career-defining and is the only filled badge on the page; the weight drops down to a dashed outline at tier 5, which means 'certificate collecting, do not build a plan on this'. Most things are not tier 1 and this site says so. That grading lives in a separate file from the facts, so you can disagree with a tier without touching the data."
+      title: "The badge is a judgement, not a label",
+      body: "Tier 1 is career-defining and the only filled badge here. It fades to a dashed outline at tier 5, meaning: do not build a plan on this. Most things are not tier 1, and this site says so."
     },
     {
-      target: "#topnav .navlink[data-goto='routes']", view: "routes",
-      title: "Specialty routes",
-      body: "What each specialty is actually like day to day, how you enter it in India and abroad, where it leads — and the thing nobody tells you before you give it three years. Including the non-clinical MDs people treat as failure, and the honest exits from clinical medicine."
-    },
-    {
-      target: "#topnav .navlink[data-goto='frontiers']", view: "frontiers",
-      title: "Fields nobody named in five years of lectures",
-      body: "Every one is a real discipline with journals, funding and people hiring — snakebite research, antimicrobial resistance, global surgery, accessible cell therapy. Each carries one thing you could start this week, from where you are, with what you have."
-    },
-    {
-      target: "#topnav .navlink[data-goto='calendar']", view: "calendar",
-      title: "Deadlines, and how much to trust them",
-      body: "Most opportunities are missed because the window opened during exams and shut before anyone looked up. Every date here is a starting point for your own check, never a substitute for it — dates move every cycle, and the official page is always the authority. The stamp at the top of this view says when entries were last re-read from source."
-    },
-    {
-      target: "#topnav .navlink[data-goto='shortlist']", view: "shortlist",
-      title: "Star anything, from anywhere",
-      body: "The star on any card saves it here. There is no account and no server — your shortlist and your answers live in this browser only, and your answers are also written into the page address, so sending yourself that link is how you move a plan to another device."
+      view: "frontiers",
+      title: "Three more views worth knowing",
+      body: "Specialty routes: what each one is really like, and the thing nobody tells you. Frontier fields — these — are disciplines nobody named in five years of lectures. Deadlines lays the year out."
     },
     {
       view: "intro",
-      title: "That is the whole thing",
-      body: "Three questions, or browse everything. Grade honestly, check the official page, and start one thing rather than planning five. You can reopen this tour any time from the link under the buttons on the front page."
+      title: "Star anything. Nothing is uploaded.",
+      body: "The star on any card saves it. No account, no server: your list stays in this browser, and your answers ride in the page address — send yourself that link to move a plan between devices. Every date here is a starting point, never the authority. That is always the official page."
     }
   ];
 
@@ -1837,11 +1825,11 @@
       '<div class="tour-scrim" id="tourScrim"></div>' +
       '<div class="tour-hole" id="tourHole" aria-hidden="true"></div>' +
       '<div class="tour-pop" id="tourPop" role="dialog" aria-modal="true" aria-labelledby="tourTitle" tabindex="-1">' +
-        '<p class="tour-step" id="tourStep"></p>' +
+        '<p class="tour-step"><span id="tourStep"></span><span class="tour-esc"> · Esc to close</span></p>' +
         '<h2 class="tour-title" id="tourTitle"></h2>' +
         '<p class="tour-body" id="tourBody"></p>' +
         '<div class="tour-nav">' +
-          '<button type="button" class="btn btn-ghost tour-skip" id="tourSkip">Skip</button>' +
+          '<button type="button" class="btn btn-ghost tour-skip" id="tourSkip">Skip tour</button>' +
           '<span class="tour-spacer"></span>' +
           '<button type="button" class="btn btn-ghost" id="tourPrev">Back</button>' +
           '<button type="button" class="btn btn-primary" id="tourNext">Next</button>' +

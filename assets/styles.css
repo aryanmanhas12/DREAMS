@@ -1418,3 +1418,9 @@ body.tour-locked { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .tour-hole { transition: none; }
 }
+
+/* Skip is an exit, not a secondary action — it should look reachable without
+   competing with Next. The Esc hint is named rather than left to be guessed. */
+.tour-skip { text-decoration: underline; text-underline-offset: 3px; }
+.tour-esc { color: var(--ink-3); }
+@media (max-width: 400px) { .tour-esc { display: none; } }

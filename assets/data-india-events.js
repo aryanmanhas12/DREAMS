@@ -175,3 +175,141 @@ Object.assign(window.DB.impact, {
   "society-conferences-india":{ t: 2, odds: "Student paper sessions are under-subscribed", effort: "20 hrs including the abstract", note: "The cheapest place on earth to learn to answer a question you did not expect, and the chair of your session is often your future supervisor. Track the abstract deadline, not the conference date — it is months earlier and it is the one that matters." },
   "campus-research-culture": { t: 3, odds: "Open to anyone who turns up", effort: "An evening at a time", note: "IISc and NCBS publish their seminar calendars openly and medical students assume the rooms are closed. They are not. Starting a research society at your own college, if none exists, returns more than attending any of it." }
 });
+
+/* ── August 2026: the events layer this index was thinnest on ──────────────
+   Everything above is a programme you apply to. These are dates in the Indian
+   calendar you can put in a diary now — the difference matters, because the
+   commonest reason a student here has nothing to show is not that they were
+   rejected, it is that nothing was ever on a date. */
+
+window.DB.research.push(
+  {
+    id: "inyas",
+    name: "INYAS — Indian National Young Academy of Sciences membership",
+    org: "Under the mentorship of the Indian National Science Academy (INSA)",
+    type: "fellowship", country: "India", city: "National, based wherever you work",
+    fields: ["global", "systems", "compbio", "pubhealth", "clinical"],
+    stages: ["pg"], funding: "none",
+    money: "Membership rather than money — a five-year term, with funded meetings and outreach programmes attached",
+    duration: "5-year non-renewable term",
+    window: "Annual membership call, most recently open through the first half of the year",
+    deadlineMonths: [1, 2, 3, 4, 5, 6],
+    url: "https://inyas.in/become-a-member",
+    why: "India's only officially recognised academy for young scientists, and its eligibility explicitly names MD in Medical Sciences alongside a PhD — which almost no Indian clinician realises. It is the closest thing this country has to a peer body for early-career researchers, and medical members are scarce enough that a clinician-scientist joining changes the composition of the room rather than adding to it. Being inside it is how you stop being the only person in your institution working on your question.",
+    reqs: [
+      "PhD in science or engineering, OR an MS/MD in medical sciences",
+      "Under 40 on 31 December of the call year — women may seek relaxation to 41 with justification",
+      "Indian citizen, living and working in India",
+      "Currently holding an academic position, temporary or permanent"
+    ],
+    steps: [
+      "Check the age line first, because it is hard and it arrives sooner than people plan for. If you are finishing an MD at 32, you have roughly eight cycles, not a career's worth.",
+      "The application is judged on independent contribution, not on volume. One line of work you clearly own reads better than a list you were the fourth author on.",
+      "Hold an academic position at the time of applying — a purely clinical post without an institutional academic role does not satisfy it.",
+      "Look at the current membership before writing. Medical members are few, which is the argument for applying rather than against it, and it tells you which gap you would be filling."
+    ],
+    zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 3
+  },
+  {
+    id: "smart-india-hackathon",
+    name: "Smart India Hackathon — the healthcare problem statements",
+    org: "Ministry of Education Innovation Cell with AICTE",
+    type: "skill", country: "India", city: "Nodal centres nationwide",
+    fields: ["compbio", "systems", "pubhealth", "clinical"],
+    stages: ["pre", "clin", "intern"], funding: "none",
+    money: "Free to enter · prize money at the grand finale · travel to the nodal centre is usually supported",
+    duration: "An internal round, then a 36-hour national finale",
+    window: "College SPOC registration closes around end-July; internal hackathons follow, finale later in the year",
+    deadlineMonths: [6, 7, 8, 9],
+    url: "https://www.sih.gov.in/",
+    why: "Ministries and public bodies publish real problem statements every year and several are health ones — screening, records, supply chains, accessibility. Medical students almost never enter because it is assumed to be for engineers, and that assumption is exactly the opening: a team of coders with no clinician is guessing at the problem, and you are the person who has watched it happen. You do not need to write code to be the most useful person on the team.",
+    reqs: [
+      "Enrolled student at a recognised institution — medical colleges qualify",
+      "A team, and your college's SPOC registered on the portal",
+      "Nothing else. No prior projects, no marks bar"
+    ],
+    steps: [
+      "Find out who your college's SPOC is, or whether it has one. This is the whole gate: registration is done by the institution, not by you, and colleges without a SPOC simply do not appear. If yours has none, ask the Dean's office to nominate one — that conversation is the actual task.",
+      "Read the health problem statements before forming a team, then recruit engineers to your problem rather than joining theirs as an afterthought.",
+      "The internal college round comes first and is where most teams are actually chosen. Treat it as the real competition.",
+      "Even losing produces something demonstrable in a weekend, which is more than most students have after a year of planning."
+    ],
+    zeroCost: true, indiaSpecific: true, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "ijms-wcmsr",
+    name: "IJMS World Conference of Medical Student Research",
+    org: "International Journal of Medical Students",
+    type: "conference", country: "Global", city: "Online and hybrid",
+    fields: ["clinical", "pubhealth", "global", "psych"],
+    stages: ["pre", "clin", "intern"], funding: "none",
+    money: "Low or no registration fee, and no flight — the online format is the point",
+    duration: "2 days",
+    window: "Abstracts open months ahead; the 2026 meeting ran 11–12 July",
+    deadlineMonths: [2, 3, 4, 5, 6],
+    url: "https://ijms.info/IJMS/Conference/welcome",
+    why: "A conference built specifically for medical students to present research to other medical students, run by a journal that exists for the same reason. Because it is online, it removes the two things that stop an Indian undergraduate presenting internationally — the airfare and the visa — and leaves only the abstract. For a first international presentation, this is the lowest-risk rung on the ladder, and the acceptance letter is real.",
+    reqs: [
+      "Current medical student, any year",
+      "An abstract — a case series, an audit or an original study all qualify",
+      "No institutional nomination needed"
+    ],
+    steps: [
+      "Submit to their journal in the same cycle if the work is finished. The conference and the journal share an audience and a standard, and a presentation plus a publication from one project is the efficient version of this.",
+      "Present the thing you actually did, including what went wrong. Student audiences ask better questions than senior ones because they are not being polite.",
+      "Use this as the rehearsal before a physical international conference where a travel grant is at stake — the format is the same and the cost of a bad first outing is nothing."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "india-science-festival",
+    name: "India Science Festival and the IISF science-communication events",
+    org: "India Science Festival (IISER Pune) · IISF, Government of India",
+    type: "conference", country: "India", city: "Pune, and IISF moves city each year",
+    fields: ["global", "systems", "env", "compbio"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "none",
+    money: "India Science Festival is free and open to all · IISF registration is nominal",
+    duration: "2 days",
+    window: "India Science Festival runs in January at IISER Pune · IISF has run in October most years since 2015",
+    deadlineMonths: [9, 10, 11, 12, 1],
+    url: "https://www.indiasciencefest.org/",
+    why: "The two events where Indian science talks to the public rather than to itself, and where a doctor who can explain things is unusually valuable. If your anger is about misinformation, or you have ever tried to explain a diagnosis to a frightened family, science communication is a real career track with funding attached — and these are the two places in India where the people already doing it are all in one room. Free, so the only cost is the train.",
+    reqs: [
+      "None to attend. Speaking and exhibiting slots are applied for months ahead",
+      "For IISF, participation often runs through institutional or Vijnana Bharati channels"
+    ],
+    steps: [
+      "Go once as an attendee before trying to speak. Both festivals are unusually easy to attend and the format is not what most medical students expect.",
+      "If you want a slot, watch the call in the autumn for the January festival — speaking applications close long before the event.",
+      "Pair this with the science-writing work in the frontier list. A talk and a published piece are the two artefacts this field actually reads."
+    ],
+    zeroCost: true, indiaSpecific: true, competitiveness: "accessible", workExp: 0
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "inyas": {
+    t: 2,
+    odds: "Small annual intake, and medical members are rare",
+    effort: "15 hrs, free to apply",
+    note: "The eligibility names MD in medical sciences and almost no Indian clinician knows it. A peer body of early-career scientists is the thing that stops you being the only person in your hospital working on your question — and the age ceiling of 40 arrives faster than an MD-then-research timeline expects."
+  },
+  "smart-india-hackathon": {
+    t: 3,
+    odds: "Accessible — the gate is your college registering, not your merit",
+    effort: "A weekend, plus finding the SPOC",
+    note: "Health problem statements published by actual ministries, entered almost entirely by engineering teams with no clinician. You are the missing person on that team and you do not need to code. Produces something demonstrable in a weekend."
+  },
+  "ijms-wcmsr": {
+    t: 3,
+    odds: "Genuinely accessible for a first international abstract",
+    effort: "15 hrs including the abstract",
+    note: "An international presentation with no airfare and no visa, built for medical students. The right rehearsal before a physical conference where a travel grant is at stake."
+  },
+  "india-science-festival": {
+    t: 4,
+    odds: "Open — attending needs nothing",
+    effort: "A weekend and a train ticket",
+    note: "Worth it if cheap, and it is: free entry. Useful specifically if science communication or misinformation is your anger; useless as a line on a CV, which is the honest framing."
+  }
+});
