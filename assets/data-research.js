@@ -17,7 +17,7 @@ window.DB.research = [
     duration: "2 months",
     window: "Opens in spring · advertised close 30 May, extended to 10 June (5 pm) in the 2026 cycle",
     deadlineMonths: [3, 4, 5, 6],
-    url: "https://schemes.dhr.gov.in/",
+    url: "https://www.icmr.gov.in/short-term-studentship-sts",
     why: "The default first research project for every Indian medical student, and the one most people apply to a year too late. You can hold it ONCE — and only in 1st or 2nd year MBBS. Third and final year are ineligible, so the window genuinely closes.",
     reqs: ["1st or 2nd professional MBBS only", "A faculty guide from your own institution", "Institutional Ethics Committee clearance", "Free to apply"],
     steps: [

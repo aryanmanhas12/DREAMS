@@ -59,7 +59,7 @@ window.DB.research.push(
     duration: "6–8 weeks, usually May to July",
     window: "Applications open around December and close February–March",
     deadlineMonths: [12, 1, 2, 3],
-    url: "https://www.iiserpune.ac.in/",
+    url: "https://www.iiserpune.ac.in/research/summer-research-programme",
     why: "The IISERs were built to do basic science properly and they run summer programmes that pay you, house you and put you in a working laboratory for two months. IISER Pune's biology and neuroscience groups in particular publish at an international level. The reason to care as a medical student is that this is the cheapest way in the country to find out whether you actually like bench research before you commit a doctorate to it — and a supervisor here writes the reference that makes a foreign application credible.",
     reqs: [
       "Current enrolment in a science or medical degree; MBBS students are eligible and are a smaller part of the pool than you would think",
@@ -184,6 +184,33 @@ Object.assign(window.DB.impact, {
 
 window.DB.research.push(
   {
+    id: "icmr-intl-fellowship",
+    name: "ICMR International Fellowship for Indian Biomedical Scientists",
+    org: "Indian Council of Medical Research",
+    type: "fellowship", country: "India", city: "Held at an overseas host laboratory",
+    fields: ["infect", "genomics", "pubhealth", "clinical", "onco", "neuro"],
+    stages: ["pg"], funding: "full",
+    money: "US$3,000 a month for Young Scientists, covering accommodation and living · free to apply",
+    duration: "3–6 months (Young Scientist) · 10–15 days (Senior Scientist)",
+    window: "Annual call through the DHR portal, alongside the other HRD schemes",
+    deadlineMonths: [4, 5, 6, 7],
+    url: "https://www.icmr.gov.in/icmr-international-fellowship-programme-for-indian-biomedical-scientists",
+    why: "Twelve Young Scientist fellowships a year, at three thousand US dollars a month, to work in an overseas laboratory and come back. Twelve is a very small number — and that is the argument for applying, not against it, because the pool that knows this exists is smaller still. It sits alongside the DHR Fellowship Abroad rather than competing with it: this one is ICMR's own biomedical scheme with a stipend attached, and both are advertised on the same portal in the same season, so you can see them in one visit.",
+    reqs: [
+      "Indian biomedical scientist with a research position — MD/MS/DNB or PhD",
+      "A host laboratory abroad that has agreed to take you",
+      "Only twelve Young Scientist places and six Senior Scientist places a year",
+      "Free to apply, through the DHR e-portal"
+    ],
+    steps: [
+      "Secure the overseas host before the call opens. As with every scheme of this shape, the invitation is the slow part and the form is the fast part.",
+      "Check which tier you are applying under. Young Scientist buys you three to six months, which is long enough to learn a technique properly; the Senior route is ten to fifteen days and is for people going to do something specific.",
+      "Watch the same DHR portal that carries STS and the Fellowship Abroad — the HRD calls cluster, and one visit in April or May shows you all of them.",
+      "Write the proposal around a technique or dataset you cannot access in India. Reviewers are asking what the trip buys that staying would not."
+    ],
+    zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 2
+  },
+  {
     id: "inyas",
     name: "INYAS — Indian National Young Academy of Sciences membership",
     org: "Under the mentorship of the Indian National Science Academy (INSA)",
@@ -288,6 +315,12 @@ window.DB.research.push(
 );
 
 Object.assign(window.DB.impact, {
+  "icmr-intl-fellowship": {
+    t: 1,
+    odds: "Twelve Young Scientist places a year, nationally",
+    effort: "20 hrs, free to apply, plus securing the host",
+    note: "Three thousand US dollars a month to spend up to six months in an overseas laboratory and return. Twelve places sounds impossible until you notice how few Indian clinicians know the scheme exists — the field is thinner than the number suggests."
+  },
   "inyas": {
     t: 2,
     odds: "Small annual intake, and medical members are rare",

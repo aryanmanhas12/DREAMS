@@ -260,7 +260,7 @@ window.DB.funding = [
     duration: "One-time award for a postgraduate degree abroad",
     window: "Opens ~Dec · closes mid-March",
     deadlineMonths: [12, 1, 2, 3],
-    url: "https://www.jntataendowment.org/",
+    url: "https://www.jntataendowment.org/loan-scholarship",
     why: "Over a century old, open to every field including medicine, and it does not require an admission offer in hand when you apply. The interest-free structure means you repay only what you borrowed — in practice one of the cheapest ways to bridge a funding gap.",
     reqs: [
       "Indian citizen with a first degree",
@@ -306,7 +306,7 @@ window.DB.funding = [
     duration: "Full masters or specialised training",
     window: "Opens ~Jan · closes end-March",
     deadlineMonths: [1, 2, 3],
-    url: "https://www.inlaksfoundation.org/",
+    url: "https://inlaksfoundation.org/scholarships/",
     why: "Enormous money, but read the exclusions before you invest time: medicine, engineering, computer science, MBA and management are all excluded. It remains open for psychology, public health as a social science, and pure sciences — which is exactly the boundary a medic pivoting into behavioural or population science is standing on.",
     reqs: [
       "Indian citizen resident in India, under 30",

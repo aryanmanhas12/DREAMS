@@ -88,21 +88,21 @@ window.DB.research.push(
 window.DB.funding.push(
   {
     id: "travel-grants-gov",
-    name: "Government travel grants — ICMR, CSIR and ANRF/SERB",
+    name: "Government travel grants — ICMR, CSIR and ANRF (formerly SERB)",
     org: "Dept of Health Research · CSIR-HRDG · Anusandhan National Research Foundation",
     type: "scholarship", country: "Any", city: "Wherever the conference is",
     fields: ["pubhealth", "clinical", "neuro", "psych", "genomics", "biochem", "global", "infect", "onco"],
     stages: ["clin", "intern", "grad", "pg"], funding: "full",
-    money: "ICMR up to ₹1,50,000 · CSIR 100% economy airfare · ANRF/SERB airfare, visa, airport taxes and registration up to ₹50,000",
+    money: "ICMR up to ₹1,50,000 · CSIR 100% economy airfare · ANRF airfare, visa, airport taxes and registration up to ₹50,000",
     duration: "The length of the conference",
     window: "File 60–90 days before the conference. ANRF/SERB will not accept it outside that window at all",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://schemes.dhr.gov.in/",
+    url: "https://www.icmr.gov.in/international-travel-by-non-icmr-scientists",
     why: "This is the single most under-used route to a first foreign experience, and it inverts the usual problem. You do not need a scholarship, an admission offer or savings. You need an abstract accepted somewhere abroad, and the Government of India will reimburse the flight — up to ₹1.5 lakh under ICMR. What stops people is never the money and almost never the merit. It is that the application had to be filed sixty days before the conference and nobody told them, so they found the scheme three weeks out and were already ineligible.",
     reqs: [
       "An accepted oral or poster paper at an international conference, as lead or single author",
-      "ICMR: no ICMR travel support in the past three years",
-      "CSIR and ANRF/SERB: under 35 years of age",
+      "ICMR: no ICMR travel support in the past three years, and applications must reach them at least two weeks before the conference",
+      "CSIR and ANRF: under 35 years of age. ICMR treats 35 as the young-scientist line too, measured on the date of the conference rather than the date you apply",
       "An endorsement or no-objection letter from your college Dean — allow weeks for this",
       "A flight quotation from a government-approved agent: Balmer Lawrie, Ashok Travels or IRCTC. A private booking site quote is rejected",
       "Conference acceptance letter, abstract, conference brochure, one-page CV, and age proof"
@@ -110,7 +110,7 @@ window.DB.funding.push(
     steps: [
       "Submit the abstract first. Everything here is downstream of an acceptance letter, and acceptances usually arrive three to five months before the meeting — which is exactly the window these schemes need.",
       "The day the acceptance arrives, start the Dean's endorsement letter and the government travel-agent quote in parallel. Those two are the slow items and they are the ones that make people miss the window.",
-      "File 60 to 90 days ahead. ANRF/SERB enforces both ends of that window — too early is rejected as firmly as too late.",
+      "File 60 to 90 days ahead. ANRF enforces both ends of that window — too early is rejected as firmly as too late. ICMR is the more forgiving of the three: its own minimum is two weeks before the conference, and it accepts on a rolling basis, so if a deadline has run away from you ICMR is the one still worth filing.",
       "Pick the right scheme rather than applying to all three: ICMR for health research, CSIR for the broader sciences, ANRF/SERB for young researchers under 35. They cover overlapping ground and duplicate applications are noticed.",
       "These are reimbursements, not advances. You pay for the ticket and claim it back afterwards with boarding passes and receipts, so plan the cash flow or ask your department about an advance.",
       "Verify current caps, forms and portal addresses on each scheme's own site before you file — the ICMR portal has already moved once, from sts.icmr.org.in to schemes.dhr.gov.in."
