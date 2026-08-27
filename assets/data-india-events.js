@@ -60,7 +60,7 @@ window.DB.research.push(
     window: "Applications open around December and close February–March",
     deadlineMonths: [12, 1, 2, 3],
     url: "https://www.iiserpune.ac.in/research/summer-research-programme",
-    why: "The IISERs were built to do basic science properly and they run summer programmes that pay you, house you and put you in a working laboratory for two months. IISER Pune's biology and neuroscience groups in particular publish at an international level. The reason to care as a medical student is that this is the cheapest way in the country to find out whether you actually like bench research before you commit a doctorate to it — and a supervisor here writes the reference that makes a foreign application credible.",
+    why: "The IISERs were built to do basic science properly and they run summer programmes that pay you, house you and put you in a working laboratory for two months. IISER Pune's biology and neuroscience groups in particular publish at an international level. The reason to care as a medical student is that this is the cheapest way in the country to find out whether you actually like bench research before you commit a doctorate to it, and a supervisor here writes the reference that makes a foreign application credible.",
     reqs: [
       "Current enrolment in a science or medical degree; MBBS students are eligible and are a smaller part of the pool than you would think",
       "Marks matter for shortlisting — first-year and second-year results are what you have",
@@ -100,7 +100,7 @@ window.DB.study.push(
     steps: [
       "Volunteer for the next journal club this month. It is the only rung with no gatekeeper and it is the one that teaches you to stand still and speak slowly.",
       "Turn something you have already done into an abstract. Most students believe they have no data; most students have an audit, a case series or an STS project sitting unused.",
-      "Submit to your state chapter first. Acceptance rates are high, the room is smaller, and the questions are gentler — which is exactly what you want for a first podium.",
+      "Submit to your state chapter first. Acceptance rates are high, the room is smaller, and the questions are gentler, which is exactly what you want for a first podium.",
       "Ask a senior resident to run a mock question session before you go. Two rounds of hostile questions in private is worth more than any amount of slide polishing.",
       "Enter the student or PG award paper category explicitly where one exists. The judging is separate from the main sessions and the competition is people at your own stage.",
       "Keep every certificate and every abstract book page. This is the evidence that fills the 'research experience' box on every application in this index."
@@ -172,7 +172,7 @@ Object.assign(window.DB.impact, {
   "nimhans-training":        { t: 1, odds: "Open now, and free", effort: "A few hours for the first course", note: "The country's best mental health institute teaches structured courses online for nothing, and most Indian medical students have never opened the page. If psychiatry or neurology is the destination, this outranks most foreign summer schools on value and costs a hundredth as much." },
   "present-first-paper":     { t: 1, odds: "Entirely within your control", effort: "One academic year, spread thin", note: "Rated top tier because everything else in this index eventually asks you to defend your own work in a hostile room, and this is the only entry that builds that. The order matters — students who skip to a national podium get taken apart and quietly stop trying." },
   "iiser-summer":            { t: 2, odds: "Competitive, and MBBS students are a small part of the pool", effort: "12 hrs to apply properly", note: "Paid, housed, two months in a real laboratory, and the cheapest way in India to find out whether you like bench work before committing a doctorate to it. Name a specific group and a specific paper or the application goes nowhere." },
-  "society-conferences-india":{ t: 2, odds: "Student paper sessions are under-subscribed", effort: "20 hrs including the abstract", note: "The cheapest place on earth to learn to answer a question you did not expect, and the chair of your session is often your future supervisor. Track the abstract deadline, not the conference date — it is months earlier and it is the one that matters." },
+  "society-conferences-india":{ t: 2, odds: "Student paper sessions are under-subscribed", effort: "20 hrs including the abstract", note: "The cheapest place on earth to learn to answer a question you did not expect, and the chair of your session is often your future supervisor. Track the abstract deadline, not the conference date. It is months earlier and it is the one that matters." },
   "campus-research-culture": { t: 3, odds: "Open to anyone who turns up", effort: "An evening at a time", note: "IISc and NCBS publish their seminar calendars openly and medical students assume the rooms are closed. They are not. Starting a research society at your own college, if none exists, returns more than attending any of it." }
 });
 
@@ -195,7 +195,7 @@ window.DB.research.push(
     window: "Annual call through the DHR portal, alongside the other HRD schemes",
     deadlineMonths: [4, 5, 6, 7],
     url: "https://www.icmr.gov.in/icmr-international-fellowship-programme-for-indian-biomedical-scientists",
-    why: "Twelve Young Scientist fellowships a year, at three thousand US dollars a month, to work in an overseas laboratory and come back. Twelve is a very small number — and that is the argument for applying, not against it, because the pool that knows this exists is smaller still. It sits alongside the DHR Fellowship Abroad rather than competing with it: this one is ICMR's own biomedical scheme with a stipend attached, and both are advertised on the same portal in the same season, so you can see them in one visit.",
+    why: "Twelve Young Scientist fellowships a year, at three thousand US dollars a month, to work in an overseas laboratory and come back. Twelve is a very small number, and that is the argument for applying, not against it, because the pool that knows this exists is smaller still. It sits alongside the DHR Fellowship Abroad rather than competing with it: this one is ICMR's own biomedical scheme with a stipend attached, and both are advertised on the same portal in the same season, so you can see them in one visit.",
     reqs: [
       "Indian biomedical scientist with a research position — MD/MS/DNB or PhD",
       "A host laboratory abroad that has agreed to take you",
@@ -222,7 +222,7 @@ window.DB.research.push(
     window: "Annual membership call, most recently open through the first half of the year",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
     url: "https://inyas.in/become-a-member",
-    why: "India's only officially recognised academy for young scientists, and its eligibility explicitly names MD in Medical Sciences alongside a PhD — which almost no Indian clinician realises. It is the closest thing this country has to a peer body for early-career researchers, and medical members are scarce enough that a clinician-scientist joining changes the composition of the room rather than adding to it. Being inside it is how you stop being the only person in your institution working on your question.",
+    why: "India's only officially recognised academy for young scientists, and its eligibility explicitly names MD in Medical Sciences alongside a PhD, which almost no Indian clinician realises. It is the closest thing this country has to a peer body for early-career researchers, and medical members are scarce enough that a clinician-scientist joining changes the composition of the room rather than adding to it. Being inside it is how you stop being the only person in your institution working on your question.",
     reqs: [
       "PhD in science or engineering, OR an MS/MD in medical sciences",
       "Under 40 on 31 December of the call year — women may seek relaxation to 41 with justification",
@@ -300,7 +300,7 @@ window.DB.research.push(
     window: "India Science Festival runs in January at IISER Pune · IISF has run in October most years since 2015",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.indiasciencefest.org/",
-    why: "The two events where Indian science talks to the public rather than to itself, and where a doctor who can explain things is unusually valuable. If your anger is about misinformation, or you have ever tried to explain a diagnosis to a frightened family, science communication is a real career track with funding attached — and these are the two places in India where the people already doing it are all in one room. Free, so the only cost is the train.",
+    why: "The two events where Indian science talks to the public rather than to itself, and where a doctor who can explain things is unusually valuable. If your anger is about misinformation, or you have ever tried to explain a diagnosis to a frightened family, science communication is a real career track with funding attached, and these are the two places in India where the people already doing it are all in one room. Free, so the only cost is the train.",
     reqs: [
       "None to attend. Speaking and exhibiting slots are applied for months ahead",
       "For IISF, participation often runs through institutional or Vijnana Bharati channels"
@@ -325,7 +325,7 @@ Object.assign(window.DB.impact, {
     t: 2,
     odds: "Small annual intake, and medical members are rare",
     effort: "15 hrs, free to apply",
-    note: "The eligibility names MD in medical sciences and almost no Indian clinician knows it. A peer body of early-career scientists is the thing that stops you being the only person in your hospital working on your question — and the age ceiling of 40 arrives faster than an MD-then-research timeline expects."
+    note: "The eligibility names MD in medical sciences and almost no Indian clinician knows it. A peer body of early-career scientists is the thing that stops you being the only person in your hospital working on your question, and the age ceiling of 40 arrives faster than an MD-then-research timeline expects."
   },
   "smart-india-hackathon": {
     t: 3,

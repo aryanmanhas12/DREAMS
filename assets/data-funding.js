@@ -14,7 +14,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + monthly stipend + flights + arrival allowance. India is the largest Chevening cohort in the world.",
     duration: "1-year UK masters",
-    window: "Opened 4 Aug · closes 6 October, 11:00 UTC — that is 4:30 pm IST, and there are no extensions, ever",
+    window: "Opened 4 Aug · closes 6 October, 11:00 UTC. That is 4:30 pm IST, and there are no extensions, ever",
     deadlineMonths: [8, 9, 10],
     url: "https://www.chevening.org/scholarships/",
     why: "The largest fully-funded route from India to the UK. Roughly 8–10 % of Indian applicants are selected, which sounds brutal until you realise most applications are visibly rushed — the leadership and networking essays are where people lose, and they are the two you can actually prepare for.",
@@ -25,7 +25,7 @@ window.DB.funding = [
       "Three UK master's course choices, and an unconditional offer from one by mid-July"
     ],
     steps: [
-      "Count your 2,800 hours honestly and early — this is the criterion that silently disqualifies most medical applicants. Your MBBS internship year alone is usually enough.",
+      "Count your 2,800 hours honestly and early. This is the criterion that silently disqualifies most medical applicants. Your MBBS internship year alone is usually enough.",
       "Four essays: leadership, networking, choice of course, career plan. Draft them in August, not September.",
       "Pick three DIFFERENT universities, not three courses at one. Selectors read the spread as judgement.",
       "Submit at least 48 hours before the deadline. The portal closes at 11:00 UTC — 4:30 pm IST — exactly, and has crashed under load in past years.",
@@ -45,7 +45,7 @@ window.DB.funding = [
     window: "Opens ~Aug–Sept · Master's deadline around mid-October; Shared Scholarships vary by university",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://cscuk.fcdo.gov.uk/scholarships/",
-    why: "Explicitly designed for people from lower- and middle-income Commonwealth countries who cannot otherwise afford UK study — which means, unusually, that limited financial means is an advantage rather than something to hide. Health and wellbeing is one of its six named priority themes.",
+    why: "Explicitly designed for people from lower- and middle-income Commonwealth countries who cannot otherwise afford UK study, which means, unusually, that limited financial means is an advantage rather than something to hide. Health and wellbeing is one of its six named priority themes.",
     reqs: [
       "Indian citizenship, resident in India",
       "Upper second-class degree or equivalent — MBBS qualifies",
@@ -82,7 +82,7 @@ window.DB.funding = [
       "Cannot hold or be studying for a US degree already"
     ],
     steps: [
-      "Start counting the three years now. Internship plus two years of clinical or research work gets you there — which means applying in your third post-MBBS year.",
+      "Start counting the three years now. Internship plus two years of clinical or research work gets you there, which means applying in your third post-MBBS year.",
       "The application closes in May for a course starting 16 months later. This is the longest lead time of any scholarship here.",
       "USIEF places you; you list preferences but do not need an offer in hand first. That removes the usual chicken-and-egg problem.",
       "Fulbright-Nehru Doctoral Research Fellowships are a separate scheme for people already registered for a PhD in India who want a year in a US lab."
@@ -128,7 +128,7 @@ window.DB.funding = [
     window: "Most consortia open Oct–Nov and close Dec–Jan",
     deadlineMonths: [10, 11, 12, 1, 2],
     url: "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-    why: "The most under-applied major scholarship available to Indians, and the €1,400 monthly allowance is genuinely more than you need in most of Europe. There are over 200 funded joint masters covering neuroscience, public health, epidemiology, biomedical engineering and global health — and most Indian students have never opened the catalogue.",
+    why: "The most under-applied major scholarship available to Indians, and the €1,400 monthly allowance is genuinely more than you need in most of Europe. There are over 200 funded joint masters covering neuroscience, public health, epidemiology, biomedical engineering and global health, and most Indian students have never opened the catalogue.",
     reqs: [
       "Any bachelor's or MBBS",
       "No work experience required for most programmes",
@@ -164,7 +164,7 @@ window.DB.funding = [
     ],
     steps: [
       "The international-round deadline in early December is earlier than the course deadline. Use the December one.",
-      "Tick the Gates Cambridge funding box on the Cambridge Graduate Application — there is no separate form.",
+      "Tick the Gates Cambridge funding box on the Cambridge Graduate Application. There is no separate form.",
       "The 'commitment to improving the lives of others' section is scored. Write about what you have actually done, at whatever scale you did it.",
       "Shortlisted candidates are interviewed in late January."
     ],
@@ -182,7 +182,7 @@ window.DB.funding = [
     window: "India round opened 1 June and closed 23 July, 23:59 IST — 53 days, and the earliest major deadline of the year",
     deadlineMonths: [6, 7],
     url: "https://www.rhodeshouse.ox.ac.uk/scholarships/",
-    why: "Five or six Indians a year. The bar is not just marks — it is a demonstrated record of using energy on behalf of other people. Medical students who have organised, built or campaigned for something are structurally well placed here; medical students with only a transcript are not.",
+    why: "Five or six Indians a year. The bar is not just marks. It is a demonstrated record of using energy on behalf of other people. Medical students who have organised, built or campaigned for something are structurally well placed here; medical students with only a transcript are not.",
     reqs: [
       "Indian citizen or resident, aged 19–25 (some flexibility for MBBS holders)",
       "Completed or completing an undergraduate degree with strong academic standing",
@@ -208,11 +208,11 @@ window.DB.funding = [
     window: "Tied to your Oxford course deadline — the early-January gathered field",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.ox.ac.uk/clarendon",
-    why: "About 200 awards a year across every Oxford department, and there is no separate application — you are automatically considered when you apply to Oxford by the relevant deadline. It is the single least-effort major scholarship in existence, and people still miss it by applying late.",
+    why: "About 200 awards a year across every Oxford department, and there is no separate application. You are automatically considered when you apply to Oxford by the relevant deadline. It is the single least-effort major scholarship in existence, and people still miss it by applying late.",
     reqs: [
       "Applying to any full-time Oxford graduate course",
       "Awarded purely on academic merit and potential",
-      "No separate form — but you MUST meet the earlier gathered-field deadline"
+      "No separate form, but you MUST meet the earlier gathered-field deadline"
     ],
     steps: [
       "Apply in the earliest gathered field for your course, usually November or early January.",
@@ -307,7 +307,7 @@ window.DB.funding = [
     window: "Opens ~Jan · closes end-March",
     deadlineMonths: [1, 2, 3],
     url: "https://inlaksfoundation.org/scholarships/",
-    why: "Enormous money, but read the exclusions before you invest time: medicine, engineering, computer science, MBA and management are all excluded. It remains open for psychology, public health as a social science, and pure sciences — which is exactly the boundary a medic pivoting into behavioural or population science is standing on.",
+    why: "Enormous money, but read the exclusions before you invest time: medicine, engineering, computer science, MBA and management are all excluded. It remains open for psychology, public health as a social science, and pure sciences, which is exactly the boundary a medic pivoting into behavioural or population science is standing on.",
     reqs: [
       "Indian citizen resident in India, under 30",
       "First-class degree from a recognised Indian university",
@@ -358,7 +358,7 @@ window.DB.funding = [
     reqs: ["From a country where AKF operates — India qualifies", "Under 30 preferred", "Must show financial need and have tried other sources first"],
     steps: [
       "Applications are made to the AKF office in India, not centrally.",
-      "You must show you have applied elsewhere too — this is a gap-filler by design.",
+      "You must show you have applied elsewhere too. This is a gap-filler by design.",
       "Community service history is weighted heavily. Document your outreach work properly."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
@@ -399,7 +399,7 @@ window.DB.funding = [
     window: "Lab and Summer tracks open Nov–Jan · Exchange autumn track opens ~Mar",
     deadlineMonths: [11, 12, 1, 2, 3],
     url: "https://www.inde.campusfrance.org/france-excellence-charpak-scholarship-program",
-    why: "Charpak Lab is the rare funded research internship that a CURRENT medical student can take — you do not need to have graduated. A two to four month stint in a French laboratory, paid, while still in MBBS, is one of the most efficient credential-builders available to an Indian medico.",
+    why: "Charpak Lab is the rare funded research internship that a CURRENT medical student can take. You do not need to have graduated. A two to four month stint in a French laboratory, paid, while still in MBBS, is one of the most efficient credential-builders available to an Indian medico.",
     reqs: [
       "Indian citizen enrolled in an Indian institution (Lab and Exchange tracks) — current MBBS students qualify",
       "Lab track requires an invitation letter from a French laboratory",
@@ -596,7 +596,7 @@ window.DB.funding = [
     duration: "5 years",
     window: "Two calls a year, typically Jan and Jul",
     deadlineMonths: [1, 2, 7, 8],
-    url: "https://www.indiaalliance.org/",
+    url: "https://www.indiaalliance.org/apply",
     why: "The single most important structural fact for an Indian clinician-researcher: India Alliance runs a Clinical and Public Health Research fellowship stream where a medical degree plus a research record can substitute for a PhD. You can lead your own funded research programme in India without ever doing a doctorate. Almost nobody uses this.",
     reqs: [
       "MBBS/MD/MS/DNB with a demonstrated research record — a PhD is NOT required for the clinical stream",
@@ -604,7 +604,7 @@ window.DB.funding = [
       "A mentor and a clear five-year research plan"
     ],
     steps: [
-      "Read the Clinical and Public Health Research Fellowship criteria specifically — it is a different track from the basic-science one.",
+      "Read the Clinical and Public Health Research Fellowship criteria specifically. It is a different track from the basic-science one.",
       "You need a host institution and a sponsor before you apply. Build that relationship during residency, not after.",
       "Two calls a year means a missed deadline costs six months, not a year.",
       "This is the endgame for anyone who wants to stay in India and still run real research. Work backwards from it."
@@ -623,7 +623,7 @@ window.DB.funding = [
     window: "Distinct calls with fixed closing dates; check the scheme page each quarter",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://wellcome.org/research-funding",
-    why: "Wellcome funds researchers to build a group where they already are, rather than requiring permanent relocation. For a doctor who wants a research career without emigrating, this is the model — but read the next line before you spend a month on it.",
+    why: "Wellcome funds researchers to build a group where they already are, rather than requiring permanent relocation. For a doctor who wants a research career without emigrating, this is the model, but read the next line before you spend a month on it.",
     reqs: [
       "Health-related research with a specific, answerable question",
       "An eligible host organisation and a sponsor",

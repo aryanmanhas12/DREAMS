@@ -36,7 +36,7 @@ window.DB.funding.push(
     steps: [
       "Read the NPGH LEADERs consortium's current partner list on fogartyfellows.org — the US-side mentor you approach should already have India ties or an active collaborator here.",
       "Draft a one-year research plan with your India-based mentor before you touch the application; the US partnership is easier to arrange once the local half exists.",
-      "Apply through the portal in the autumn cycle for a July start — this is a once-a-year window, not rolling.",
+      "Apply through the portal in the autumn cycle for a July start. This is a once-a-year window, not rolling.",
       "Budget the 1–3 month US stint separately: visa timing (a J-1 exchange visa, typically) needs its own runway alongside the fellowship paperwork."
     ],
     indiaSpecific: true, competitiveness: "high", workExp: 0
@@ -61,7 +61,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Identify the actual Stanford graduate programme first — an MS in Epidemiology, Health Policy, or a relevant PhD track are the realistic entry points for a medical graduate, not the MD.",
-      "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes in early October; the Stanford programme is due by its own deadline or 1 December, whichever falls first — and for many programmes that is earlier than the KHS date. Look up your specific programme's deadline before you plan around October, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
+      "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes in early October; the Stanford programme is due by its own deadline or 1 December, whichever falls first, and for many programmes that is earlier than the KHS date. Look up your specific programme's deadline before you plan around October, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
       "Because this funds up to three years and stacks a leadership cohort of ~70 scholars from every country on top, treat it as the single highest-ceiling entry in this whole index if your graduate plan is Stanford-shaped.",
       "Confirm the current cohort's exact age and degree-date cut-offs on the eligibility page before investing the months this application takes."
     ],
@@ -109,7 +109,7 @@ window.DB.study.push(
     window: "Registration opens in winter · Institute runs 8–26 June 2026",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
     url: "https://publichealth.jhu.edu/academics/graduate-summer-institute-of-epidemiology-and-biostatistics",
-    why: "This is the one entry in the whole index that is neither a scholarship nor a competition — it is a paid short course, open to anyone, that hands you a real Johns Hopkins transcript line in epidemiology or biostatistics without a multi-year admissions process. For a student who wants to test whether public health is actually their direction before committing to an MPH, a single two-week course here is the cheapest possible way to find out, and the credit is transferable if you do go on to a Hopkins degree.",
+    why: "This is the one entry in the whole index that is neither a scholarship nor a competition. It is a paid short course, open to anyone, that hands you a real Johns Hopkins transcript line in epidemiology or biostatistics without a multi-year admissions process. For a student who wants to test whether public health is actually their direction before committing to an MPH, a single two-week course here is the cheapest possible way to find out, and the credit is transferable if you do go on to a Hopkins degree.",
     reqs: [
       "None — open to clinicians, students, and public health practitioners worldwide",
       "Some quantitative courses assume undergraduate-level statistics; check individual course prerequisites",

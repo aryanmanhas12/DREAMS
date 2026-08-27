@@ -57,7 +57,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Sit ICMR-JRF if your interest is biomedical and clinical; DBT-BET if it is molecular and biotechnological.",
-      "Because the fellowship travels with you, approach a supervisor holding one and the conversation changes completely — you are bringing funding, not asking for it.",
+      "Because the fellowship travels with you, approach a supervisor holding one and the conversation changes completely. You are bringing funding, not asking for it.",
       "CSIR-UGC NET JRF is a third route, though eligibility for MBBS holders varies by cycle — check the current notification rather than relying on what a senior told you."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0
@@ -77,7 +77,7 @@ window.DB.funding.push(
     why: "The INSPIRE Faculty scheme is the interesting one and almost nobody outside basic science knows it exists: it gives an early-career researcher an independent position and a grant at an Indian institution, without needing to wait for a conventional faculty vacancy. For someone determined to build a research career in India rather than emigrate, it is one of the few genuine ladders that exists.",
     reqs: ["Doctoral scheme: strong academic record at the qualifying level", "Faculty scheme: a PhD, usually within a few years of completion", "Host institution needed for the faculty scheme"],
     steps: [
-      "For the faculty scheme, secure the host institution's agreement before applying — that is the practical gate.",
+      "For the faculty scheme, secure the host institution's agreement before applying. That is the practical gate.",
       "Check the current eligibility notification for medical graduates; DST criteria have shifted between cycles.",
       "This pairs naturally with an India Alliance fellowship as the next step up."
     ],
@@ -123,7 +123,7 @@ window.DB.research.push(
     window: "Apply 6–12 months ahead; VSLO opens in the spring",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://students-residents.aamc.org/visiting-student-learning-opportunities/visiting-student-learning-opportunities",
-    why: "US clinical experience is close to mandatory for matching into an American residency, and it is dramatically easier to arrange while you are still enrolled than after you graduate. A hands-on elective, where you are part of the team, is worth far more than a passive observership — and the letter of recommendation is the actual product, not the certificate.",
+    why: "US clinical experience is close to mandatory for matching into an American residency, and it is dramatically easier to arrange while you are still enrolled than after you graduate. A hands-on elective, where you are part of the team, is worth far more than a passive observership, and the letter of recommendation is the actual product, not the certificate.",
     reqs: [
       "Currently enrolled at a medical school listed in the World Directory of Medical Schools",
       "Most hands-on electives require you to still be a student — this window closes at graduation",
@@ -154,7 +154,7 @@ window.DB.research.push(
     steps: [
       "The KAUST Visiting Student Research Programme is the low-risk entry point: ten weeks, fully funded including flights, and it frequently converts into a doctoral offer.",
       "Apply in the first quarter for a summer placement.",
-      "Consider carefully whether the social and legal environment suits you — that is a personal judgement and worth making deliberately rather than by default."
+      "Consider carefully whether the social and legal environment suits you. That is a personal judgement and worth making deliberately rather than by default."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },

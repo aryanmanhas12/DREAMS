@@ -76,7 +76,7 @@ Object.assign(window.DB.countries, {
     visa: "Student residence visa; Portugal is Schengen and has one of Europe's more workable post-study residence routes.",
     work: "20 hours/week permitted. Fully funded doctoral students do not need it.",
     allergy: "Olive and grass pollen in spring. Very low humidity in summer suits most people.",
-    honest: "Portugal is underrated in exactly the way this site exists to correct. The Champalimaud neuroscience programme is world class and pays a full stipend, the weather and the people are the gentlest adjustment on this list, and the cost of living is the lowest in Western Europe. What Portugal does not have is a broad research base — it is a small number of excellent institutions, not a deep national system."
+    honest: "Portugal is underrated in exactly the way this site exists to correct. The Champalimaud neuroscience programme is world class and pays a full stipend, the weather and the people are the gentlest adjustment on this list, and the cost of living is the lowest in Western Europe. What Portugal does not have is a broad research base. It is a small number of excellent institutions, not a deep national system."
   },
 
   Norway: {
@@ -94,7 +94,7 @@ Object.assign(window.DB.countries, {
     visa: "Student residence permit, which requires proof you hold roughly NOK 150,000 for living costs — this financial requirement stops more people than the academic one.",
     work: "20 hours/week permitted.",
     allergy: "Birch pollen in spring is severe. Very low pollution otherwise.",
-    honest: "Read this before you build a plan on old advice, because it has changed twice. Norway charged non-EU students no tuition for decades and stopped in autumn 2023; fees have run roughly NOK 130,000–390,000 a year since. But from 2025 institutions were allowed to set their own fees rather than charge full cost, and several cut them sharply — so the number varies enormously by university now, and a figure you read anywhere, including here, may be a year out of date in either direction. Norway remains outstanding for global health at Bergen and for a working culture that protects your evenings. Get the fee from the specific university's own page for the specific intake, and from nowhere else."
+    honest: "Read this before you build a plan on old advice, because it has changed twice. Norway charged non-EU students no tuition for decades and stopped in autumn 2023; fees have run roughly NOK 130,000–390,000 a year since. But from 2025 institutions were allowed to set their own fees rather than charge full cost, and several cut them sharply, so the number varies enormously by university now, and a figure you read anywhere, including here, may be a year out of date in either direction. Norway remains outstanding for global health at Bergen and for a working culture that protects your evenings. Get the fee from the specific university's own page for the specific intake, and from nowhere else."
   },
 
   Denmark: {
@@ -154,7 +154,7 @@ Object.assign(window.DB.countries, {
   Thailand: {
     name: "Thailand",
     climate: "hot",
-    winter: "22–32 °C — there is no winter",
+    winter: "22–32 °C. There is no winter",
     summer: "28–38 °C, humid, monsoon from June to October",
     daylight: "About 11.5 hours in December",
     cost: "₹35,000–60,000/month in Bangkok — the cheapest destination on this site outside India",
@@ -166,7 +166,7 @@ Object.assign(window.DB.countries, {
     visa: "Non-immigrant ED visa, straightforward for admitted students. Four hours' flight from most Indian metros.",
     work: "Restricted for students — plan on the scholarship or your savings.",
     allergy: "Humidity, mould and Bangkok's air quality in the burning season (February to April) are the real issues.",
-    honest: "Mahidol's tropical medicine school is genuinely world-ranked in its field and sits in the region where tropical disease actually is — which matters more than it sounds. It is close, cheap, warm and culturally easy. What it is not is a name that impresses a Western academic committee, so choose it for the training and the fieldwork, not for the letterhead."
+    honest: "Mahidol's tropical medicine school is genuinely world-ranked in its field and sits in the region where tropical disease actually is, which matters more than it sounds. It is close, cheap, warm and culturally easy. What it is not is a name that impresses a Western academic committee, so choose it for the training and the fieldwork, not for the letterhead."
   },
 
   "South Africa": {
@@ -260,7 +260,7 @@ Object.assign(window.DB.countries, {
   },
 
   /* Two regional profiles rather than country ones. Both exist because an entry
-     in this index points at a group of countries rather than one — and without
+     in this index points at a group of countries rather than one, and without
      a profile the climate, food and allergy matching silently does nothing for
      that entry, which is a failure you cannot see. A shared profile is honest
      here because the members really do share a climate. */
@@ -334,7 +334,7 @@ window.DB.study.push(
     window: "Scholarship applications typically close ~January–February for the following September",
     deadlineMonths: [11, 12, 1, 2],
     url: "https://www.itg.be/en/study/studying-at-itm",
-    why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds seats specifically for doctors from countries like India. A fully funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices — and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
+    why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds seats specifically for doctors from countries like India. A fully funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices, and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
     reqs: [
       "A medical degree (MBBS qualifies) or an equivalent health-sciences degree",
       "Clinical or public-health work experience strengthens the application considerably",
@@ -474,7 +474,7 @@ window.DB.research.push(
       "Strong quantitative ability matters more than laboratory experience"
     ],
     steps: [
-      "Apply in the single annual cycle — there is no rolling admission and missing it costs a year.",
+      "Apply in the single annual cycle. There is no rolling admission and missing it costs a year.",
       "The interview weekend is in person and expenses are usually covered. Ask, rather than assuming you must pay to attend.",
       "Write the application around a scientific question you find genuinely interesting, not around your CV. This programme selects for curiosity and explicitly says so.",
       "An MBBS with any exposure to neurology or psychiatry is a distinctive profile here. Say plainly what clinical observation made you want to understand the brain."
@@ -665,7 +665,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Correct your assumptions about cost first. Norway charged non-EU students nothing for decades and began charging tuition in autumn 2023, and a great deal of advice online has not caught up. Check current fees on the university's own page before anything else.",
-      "Target the salaried doctoral vacancies rather than the taught masters — that is where the Nordic advantage now sits for a non-EU applicant.",
+      "Target the salaried doctoral vacancies rather than the taught masters. That is where the Nordic advantage now sits for a non-EU applicant.",
       "Watch the financial requirement for the residence permit. Proving you hold the required living costs stops more applicants than admissions does.",
       "Take the winter dark seriously when choosing between Bergen, Copenhagen and Stockholm. It is a real variable, not a joke."
     ],
@@ -679,13 +679,13 @@ window.DB.funding.push(
 
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "itm-antwerp-tropmed": { t: 1, odds: "Competitive, but the Indian applicant pool is small", effort: "40 hrs including the scholarship file", note: "A fully funded European masters in the field that matters most to Indian public health, at the institute that trains WHO country staff. The reason to rate it top tier is not the degree — it is that Belgian development funding ring-fences seats for exactly this candidate and almost nobody in India applies." },
+  "itm-antwerp-tropmed": { t: 1, odds: "Competitive, but the Indian applicant pool is small", effort: "40 hrs including the scholarship file", note: "A fully funded European masters in the field that matters most to Indian public health, at the institute that trains WHO country staff. The reason to rate it top tier is not the degree. It is that Belgian development funding ring-fences seats for exactly this candidate and almost nobody in India applies." },
   "champalimaud-indp":    { t: 1, odds: "Very competitive; a medical degree is an advantage here", effort: "30 hrs", note: "A rotation year before you commit to a laboratory is worth more than it sounds: it is the difference between choosing a supervisor on evidence and choosing one on a video call. Full stipend, no fees, English, Lisbon." },
   "ista-phd":             { t: 1, odds: "Competitive, and open directly after MBBS", effort: "25 hrs", note: "A salary and a pension contribution rather than a stipend, no tuition, rotations in year one, and direct entry on a bachelor's degree. Invisible to Indian medical students only because it does not look like a medical school." },
   "gks-korea":            { t: 1, odds: "Genuinely under-applied from India for what it pays", effort: "45 hrs, mostly document chasing", note: "Flight, fees, living, insurance and a paid language year. The documents defeat more applicants than the essays do — apostilles take weeks, so the real deadline is December." },
   "tigp-academia-sinica": { t: 2, odds: "Tiny Indian applicant pool for the quality of the science", effort: "20 hrs", note: "Fully funded English-language doctorate at a national academy, in a country that is unusually easy for a vegetarian. The weakness is name recognition, not research quality — weigh that honestly against where you want to work afterwards." },
   "wits-uct-global":      { t: 2, odds: "Reachable, especially with prior research", effort: "20 hrs", note: "For HIV, TB and health systems this is ahead of Europe, because the epidemiology and the trial infrastructure are on the doorstep. Security is a real constraint on daily life and should be researched from students, not from the prospectus." },
-  "isglobal-msc":         { t: 2, odds: "Moderately competitive", effort: "15 hrs", note: "A third of the price of the London equivalent with genuine African and South Asian field programmes. Ask about field placement access before accepting — that is the part that distinguishes it." },
+  "isglobal-msc":         { t: 2, odds: "Moderately competitive", effort: "15 hrs", note: "A third of the price of the London equivalent with genuine African and South Asian field programmes. Ask about field placement access before accepting. That is the part that distinguishes it." },
   "mahidol-tropmed":      { t: 2, odds: "Accessible", effort: "12 hrs", note: "Tropical medicine taught where the disease is, four hours from home, for less than an Indian private programme. Choose it for the fieldwork and the border research units, not for the letterhead." },
   "nordic-global-health": { t: 2, odds: "Doctoral vacancies are winnable; masters are expensive", effort: "20 hrs per vacancy", note: "A Nordic doctorate is a job with a pension, which is a different life from a stipend. Read the Norway tuition correction before planning — the free-tuition Norway in old forum posts stopped existing in 2023." },
   "otago-nz-pubhealth":   { t: 3, odds: "Reachable with an agreed supervisor", effort: "18 hrs", note: "International doctoral students pay domestic fees, which quietly makes this one of the cheapest doctorates in the English-speaking world. The taught masters gets no such discount." },

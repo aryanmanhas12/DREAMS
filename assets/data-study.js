@@ -24,7 +24,7 @@ window.DB.study = [
       "Pick your stream first — Public Health, Health Services Management, Environment & Health, or Health Promotion. They have different cores.",
       "Register on the LSHTM online application portal and start early: the personal statement asks for a specific public-health problem you want to work on.",
       "Two academic references. For an MBBS student, one should be a department head who has seen you do research, not just teach you.",
-      "Apply for Commonwealth Shared Scholarship in the SAME cycle — it is applied for through LSHTM, not separately, and closes months before term.",
+      "Apply for Commonwealth Shared Scholarship in the SAME cycle. It is applied for through LSHTM, not separately, and closes months before term.",
       "If cost is the blocker, apply to the distance-learning MSc instead: roughly a third of the price, same degree certificate."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
@@ -169,7 +169,7 @@ window.DB.study = [
     window: "Opens Sept · Gates deadline early Dec for international",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://www.postgraduate.study.cam.ac.uk/courses",
-    why: "The MPhil is the standard Cambridge on-ramp to a PhD. Gates Cambridge funds roughly 25 international scholars a year at full cost and explicitly looks for people committed to improving the lives of others — which is exactly the framing a public-health medic already has.",
+    why: "The MPhil is the standard Cambridge on-ramp to a PhD. Gates Cambridge funds roughly 25 international scholars a year at full cost and explicitly looks for people committed to improving the lives of others, which is exactly the framing a public-health medic already has.",
     reqs: ["High 2:1 / first equivalent", "IELTS 7.5", "Research proposal for research-track MPhils"],
     steps: [
       "One Cambridge application form covers both course admission and Gates Cambridge — tick the funding box.",
@@ -213,7 +213,7 @@ window.DB.study = [
     window: "Opens Sept · Round 1 early Dec, final deadline Jan",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://hsph.harvard.edu/admissions/",
-    why: "This is the single most important fact on this page for an Indian medical graduate: Harvard's 45-credit MPH requires a prior DOCTORAL degree — and MBBS counts. You are eligible for the accelerated route that most applicants are not, and it costs a year less than the 65-credit programme.",
+    why: "This is the single most important fact on this page for an Indian medical graduate: Harvard's 45-credit MPH requires a prior DOCTORAL degree, and MBBS counts. You are eligible for the accelerated route that most applicants are not, and it costs a year less than the 65-credit programme.",
     reqs: ["MBBS satisfies the doctoral-degree requirement", "TOEFL/IELTS unless prior degree taught in English", "GRE not required for most departments"],
     steps: [
       "Confirm your MBBS is being read as the doctoral-equivalent qualification — state it plainly in the application, do not assume the reader knows what MBBS is.",
@@ -261,7 +261,7 @@ window.DB.study = [
     why: "Yale offers advanced standing to applicants who already hold a medical degree, compressing the MPH to one year. Its Social & Behavioral Sciences track is where mental health, stigma and health behaviour actually live.",
     reqs: ["MBBS qualifies for advanced standing consideration", "TOEFL 100", "GRE optional"],
     steps: [
-      "Explicitly request advanced-standing consideration in your application — it is not automatic.",
+      "Explicitly request advanced-standing consideration in your application. It is not automatic.",
       "Apply through SOPHAS by the January deadline.",
       "Yale's funding for internationals is real but need-blind admission is not — apply for aid at the same time, never after."
     ],
@@ -303,7 +303,7 @@ window.DB.study = [
     why: "Next door to the US CDC, with a formal pipeline into it. Emory is meaningfully cheaper than the Ivy-adjacent schools and hands out more merit money to international applicants, which makes it the best value-per-prestige MPH in America.",
     reqs: ["Bachelor's or MBBS", "TOEFL 100", "Some global health experience preferred"],
     steps: [
-      "Apply in the December priority round — that is when the merit scholarships are allocated.",
+      "Apply in the December priority round. That is when the merit scholarships are allocated.",
       "Say clearly which CDC-adjacent problem you want to work on. Emory reads for placement fit.",
       "The MSPH is the research-heavy variant; choose it if a PhD is the eventual goal."
     ],
@@ -413,12 +413,12 @@ window.DB.study = [
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.mhh.de/en",
     why: "A shorter research doctorate that runs alongside or just after clinical training. There is no admissions committee — you find a professor who agrees to supervise you, and that is the entire gate. For a doctor with a specific question and a contact, it is the least bureaucratic research doctorate in Europe.",
-    reqs: ["Medical degree", "A willing supervisor — this is the whole process", "German usually needed for clinical work; lab-based projects often English"],
+    reqs: ["Medical degree", "A willing supervisor. This is the whole process", "German usually needed for clinical work; lab-based projects often English"],
     steps: [
       "Identify the professor first, the institution second. The relationship is the application.",
       "Send a two-paragraph email: what you have done, what you want to study, what you can contribute. Attach a one-page CV.",
       "Ask directly whether the project is Dr. med. (clinical, shorter) or Dr. rer. nat. (science, longer, more portable). The second travels better internationally.",
-      "Learn German to B1 regardless — it is what turns a research stay into a career."
+      "Learn German to B1 regardless. It is what turns a research stay into a career."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
@@ -442,7 +442,7 @@ window.DB.study = [
       "Apply for advanced standing / credit at the point of application, with your full MBBS transcript and syllabus. It can cut a year and roughly AUD 50,000.",
       "Two intakes per year means a missed deadline costs six months, not twelve.",
       "The Graduate Research Scholarship and Melbourne International Scholarship are separate applications.",
-      "Factor in the post-study work visa (subclass 485) — it is the reason Australia often out-competes the UK on total value."
+      "Factor in the post-study work visa (subclass 485). It is the reason Australia often out-competes the UK on total value."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -479,7 +479,7 @@ window.DB.study = [
     window: "Applications usually close Aug–Sept for the following year",
     deadlineMonths: [7, 8, 9],
     url: "https://nceph.anu.edu.au/study",
-    why: "Australia's field epidemiology training programme — you are placed inside a real health department and do outbreak investigation as your degree. It is the closest thing outside the US CDC to being trained as a disease detective.",
+    why: "Australia's field epidemiology training programme. You are placed inside a real health department and do outbreak investigation as your degree. It is the closest thing outside the US CDC to being trained as a disease detective.",
     reqs: ["Health or science degree; medical graduates strongly favoured", "Placement-based, so competitive", "IELTS 6.5"],
     steps: [
       "This is a placement programme — your application is assessed on fit with a host field site.",
@@ -501,7 +501,7 @@ window.DB.study = [
     deadlineMonths: [4, 5, 8, 9, 10],
     url: "https://www.education.gov.au/research-block-grants/research-training-program",
     why: "Australian PhD scholarships are tax-free, cover full fees for international students, and — unlike the UK — the country actively wants you to stay afterwards. A medical degree plus one solid research project is a competitive application.",
-    reqs: ["MBBS + demonstrated research capacity (a thesis, publication, or substantial project)", "A supervisor who has agreed to take you — this is mandatory before you apply", "IELTS 6.5"],
+    reqs: ["MBBS + demonstrated research capacity (a thesis, publication, or substantial project)", "A supervisor who has agreed to take you. This is mandatory before you apply", "IELTS 6.5"],
     steps: [
       "Find the supervisor before you find the university. No Australian PhD application progresses without one.",
       "Send a proposal of one to two pages plus your CV. Australian academics reply to concrete proposals.",
@@ -570,7 +570,7 @@ window.DB.study = [
     why: "Erasmus Mundus is the most under-applied major scholarship available to Indians — full funding, a living allowance well above student needs, and you study in two or three European countries on one degree. Indians are consistently among the top three nationalities awarded.",
     reqs: ["Bachelor's or MBBS", "English proficiency", "No work experience required for most consortia"],
     steps: [
-      "Search the official EACEA catalogue for your field — there are over 200 funded joint masters and most Indian students have heard of none of them.",
+      "Search the official EACEA catalogue for your field. There are over 200 funded joint masters and most Indian students have heard of none of them.",
       "Apply to a maximum of three Erasmus Mundus programmes per cycle. Applying to more makes you ineligible.",
       "One application per consortium covers both admission and the scholarship.",
       "Deadlines cluster in December and January for an August–September start. Build the calendar backwards from there."
@@ -592,7 +592,7 @@ window.DB.study = [
     why: "Swiss PhD students are employees on a real salary — enough to save on, which is unheard of elsewhere. The Zurich neuroscience programme takes medical graduates directly and runs entirely in English.",
     reqs: ["MBBS or MSc", "Strong research record", "No German required for the programme itself"],
     steps: [
-      "Two application rounds a year with fixed deadlines, both fully centralised — you do not need a supervisor beforehand.",
+      "Two application rounds a year with fixed deadlines, both fully centralised. You do not need a supervisor beforehand.",
       "Swiss Government Excellence Scholarships are a separate, parallel route with a September deadline through the Swiss embassy in India.",
       "Living costs are extreme. The salary covers it, but do not go on savings."
     ],
@@ -615,7 +615,7 @@ window.DB.study = [
     steps: [
       "Apply early in the cycle; rolling admissions reward it.",
       "The Government of Ireland International Education Scholarship is a separate March deadline.",
-      "Check the two-year Third Level Graduate Programme visa — it is the reason Ireland's total cost often beats the UK's."
+      "Check the two-year Third Level Graduate Programme visa. It is the reason Ireland's total cost often beats the UK's."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
@@ -697,12 +697,12 @@ window.DB.study = [
     deadlineMonths: [4, 5, 6],
     url: "https://www.studyinjapan.go.jp/en/",
     why: "One of the most generous and least-contested government scholarships available to Indians. It covers everything, includes a language year, and Japanese neuroscience and genomics institutes are world-class while attracting a fraction of the applications that US programmes do.",
-    reqs: ["Under 35 for most categories", "MBBS accepted", "No Japanese required at application — it is taught to you"],
+    reqs: ["Under 35 for most categories", "MBBS accepted", "No Japanese required at application. It is taught to you"],
     steps: [
       "Apply through the Embassy of Japan in India (embassy recommendation route) — it has better odds than the university recommendation route.",
       "The application opens around April and involves a written exam plus interview in India.",
       "Contact a potential supervisor early; a letter of acceptance from a professor strengthens the application enormously.",
-      "Budget for the six-month intensive Japanese course — it is part of the award, not an obstacle."
+      "Budget for the six-month intensive Japanese course. It is part of the award, not an obstacle."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },

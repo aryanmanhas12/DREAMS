@@ -14,7 +14,7 @@ window.DB = window.DB || {};
 window.DB.tierInfo = {
   1: {
     name: "Career-defining",
-    blurb: "Changes what you are eligible for afterwards. Recognised by name anywhere in the world. Single-digit acceptance rates — which is exactly why holding one settles the question of whether you can do the work."
+    blurb: "Changes what you are eligible for afterwards. Recognised by name anywhere in the world. Single-digit acceptance rates, which is exactly why holding one settles the question of whether you can do the work."
   },
   2: {
     name: "Strong signal",
@@ -81,7 +81,7 @@ window.DB.impact = {
   "swiss-excellence":  { t: 2, odds: "Dedicated India quota, chronically under-subscribed", effort: "25 hrs plus securing a Swiss host", note: "The supervisor's letter is the gate. Start emailing in June for a September deadline." },
   "australia-awards":  { t: 2, odds: "~10 %", effort: "30 hrs", note: "Fully funded, with the most generous post-study work rights of the major destinations." },
   "karolinska-msc":    { t: 2, odds: "~20 %", effort: "20 hrs", note: "The institution that awards the Nobel Prize in Medicine. One national deadline in mid-January and no late round at all." },
-  "anu-mae":           { t: 2, odds: "Small cohort, placement-matched", effort: "25 hrs", note: "Field epidemiology training — you do outbreak investigation as your degree. The closest thing outside the US CDC to being trained as a disease detective." },
+  "anu-mae":           { t: 2, odds: "Small cohort, placement-matched", effort: "25 hrs", note: "Field epidemiology training. You do outbreak investigation as your degree. The closest thing outside the US CDC to being trained as a disease detective." },
   "usmle":             { t: 2, odds: "~55 % IMG match rate overall; higher in psychiatry", effort: "2–3 years and ₹4–6 lakh", note: "The best-paid clinical route out of India, and US psychiatry residency includes protected research time." },
   "jn-tata":           { t: 2, odds: "~15 %", effort: "15 hrs plus an interview", note: "Interest-free, over a century old, open to medicine, and you do not need an admission offer to apply." },
   "narotam":           { t: 2, odds: "~10 %", effort: "20 hrs plus interview", note: "The largest interest-free loan scholarship open to Indians in any discipline." },
@@ -133,8 +133,8 @@ window.DB.impact = {
   "minority-schemes":  { t: 3, odds: "Scheme-dependent", effort: "1 hour of searching", note: "The education loan interest subsidy schemes are the most under-claimed benefit here. One hour on the National Scholarship Portal is worth it." },
 
   /* ─────── Tier 4 — worth it if cheap ─────── */
-  "ifmsa-score":       { t: 4, odds: "Reasonable if your college has a Local Committee", effort: "20 hrs plus travel cost", note: "The cheapest route to a month abroad — but be realistic. A four-week clinical observership is worth far less on a research CV than four weeks with an output. Choose SCORE over SCOPE if research is the goal." },
-  "networks":          { t: 4, odds: "Open", effort: "₹750–1,000 and some hours", note: "The reason other people hear about opportunities first is that they are in these networks. Join one properly rather than five superficially — and organise something, because organisers hear before members." },
+  "ifmsa-score":       { t: 4, odds: "Reasonable if your college has a Local Committee", effort: "20 hrs plus travel cost", note: "The cheapest route to a month abroad, but be realistic. A four-week clinical observership is worth far less on a research CV than four weeks with an output. Choose SCORE over SCOPE if research is the goal." },
+  "networks":          { t: 4, odds: "Open", effort: "₹750–1,000 and some hours", note: "The reason other people hear about opportunities first is that they are in these networks. Join one properly rather than five superficially, and organise something, because organisers hear before members." },
   "language":          { t: 4, odds: "Open", effort: "3–6 months per level", note: "Do not let language delay your applications. Almost every research programme here is taught in English. German matters for a life in Germany, not for a degree there." },
   "loan-route":        { t: 4, odds: "Approval-dependent", effort: "Paperwork", note: "Exhaust the funded routes first. A funded doctorate pays you; a self-funded masters costs you a decade of repayments." }
 };

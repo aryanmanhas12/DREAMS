@@ -33,7 +33,7 @@ window.DB.funding.push(
     steps: [
       "Confirm the current URL and cycle at the Schlumberger Foundation site — the programme has been renamed alongside the company and links move.",
       "The outreach requirement is real and weighted. If you have taught, mentored or run anything for girls in science, document it with numbers before you apply.",
-      "You do not need a confirmed place to start the application, only to have applied — so this runs in parallel with your doctoral applications, not after them.",
+      "You do not need a confirmed place to start the application, only to have applied, so this runs in parallel with your doctoral applications, not after them.",
       "Applications open around September and close in November for the following academic year."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
@@ -50,7 +50,7 @@ window.DB.funding.push(
     window: "L'Oréal India around Oct–Dec · AAUW closes mid-November",
     deadlineMonths: [8, 9, 10, 11, 12],
     url: "https://www.forwomeninscience.com/",
-    why: "A whole tier of funding exists specifically because women leave science at every career stage, and it is chronically under-applied in India relative to the number of eligible candidates. AAUW funds women who are not US citizens to study in the United States — which most Indian applicants never discover because they search for 'scholarships for Indians' rather than 'fellowships for women'.",
+    why: "A whole tier of funding exists specifically because women leave science at every career stage, and it is chronically under-applied in India relative to the number of eligible candidates. AAUW funds women who are not US citizens to study in the United States, which most Indian applicants never discover because they search for 'scholarships for Indians' rather than 'fellowships for women'.",
     reqs: [
       "Female applicants",
       "AAUW: non-US citizen, studying or researching in the US, closes mid-November",
@@ -104,7 +104,7 @@ window.DB.research.push(
     window: "Rolling; internship calls mostly Sept–Jan for the following summer",
     deadlineMonths: [9, 10, 11, 12, 1, 2],
     url: "https://wellcome.org/research-funding",
-    why: "Clinical AI has a shortage the field talks about constantly: people who understand both the model and the patient. A doctor who can code is not competing against computer scientists here — they are the scarce half of the pair. Google Research India works on health specifically, and academic compute grants mean you do not need a laboratory's hardware budget to do serious work.",
+    why: "Clinical AI has a shortage the field talks about constantly: people who understand both the model and the patient. A doctor who can code is not competing against computer scientists here. They are the scarce half of the pair. Google Research India works on health specifically, and academic compute grants mean you do not need a laboratory's hardware budget to do serious work.",
     reqs: [
       "Demonstrable coding ability — a public repository counts for more than a course certificate",
       "Clinical training is the differentiator, not a handicap",
@@ -133,7 +133,7 @@ window.DB.research.push(
     why: "A two-week summer school is the cheapest way to test whether you actually like a field before committing years to it, and to be taught by the people whose papers you have been reading. The scholarship deadline is almost always weeks before the general application deadline, which is exactly why most people pay full price or miss it.",
     reqs: [
       "Current enrolment or a recent degree",
-      "Scholarship applications are separate and earlier — this is the single most common way people lose the funding",
+      "Scholarship applications are separate and earlier. This is the single most common way people lose the funding",
       "English proficiency; no test usually required for short courses"
     ],
     steps: [
@@ -150,6 +150,6 @@ Object.assign(window.DB.impact, {
   "faculty-future":       { t: 1, odds: "Under-applied for the sum involved", effort: "30 hrs plus documenting outreach", note: "USD 50,000 a year, renewable to completion, for women from developing countries. Most Indian medical students never encounter it because it is mentally filed under engineering." },
   "women-in-science":     { t: 2, odds: "Smaller fields than the general schemes", effort: "20 hrs", note: "A second, largely separate funding pool. Almost everyone searches by nationality and never searches by gender." },
   "ai-health-programmes": { t: 2, odds: "Competitive, but the clinical half is scarce", effort: "Ongoing — the repository is the application", note: "A doctor who can code is the scarce half of the pair here, not the redundant one." },
-  "summer-schools-global":{ t: 3, odds: "Accessible; scholarships more competitive", effort: "10 hrs", note: "The cheapest way to test a field before committing years. The scholarship deadline is weeks before the course deadline — that is how people lose it." },
+  "summer-schools-global":{ t: 3, odds: "Accessible; scholarships more competitive", effort: "10 hrs", note: "The cheapest way to test a field before committing years. The scholarship deadline is weeks before the course deadline. That is how people lose it." },
   "disability-support":   { t: 3, odds: "Chronically under-spent", effort: "One email per institution", note: "Access and hardship funds are separately budgeted and separately under-claimed. Institutions assume you will ask." }
 });

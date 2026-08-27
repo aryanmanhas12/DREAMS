@@ -10,7 +10,7 @@ window.DB.frontiers = [
     name: "Psychiatric Genomics",
     tagline: "Finding the genetic architecture of mental illness",
     fields: ["psych", "genomics", "compbio"],
-    what: "Large-scale genome-wide studies that ask which common and rare variants raise the risk of schizophrenia, depression and bipolar disorder — and what those variants do biologically. The field went from zero replicated findings to hundreds of loci in about fifteen years.",
+    what: "Large-scale genome-wide studies that ask which common and rare variants raise the risk of schizophrenia, depression and bipolar disorder, and what those variants do biologically. The field went from zero replicated findings to hundreds of loci in about fifteen years.",
     whyIndia: "Polygenic risk scores were built almost entirely on European cohorts and transfer badly to South Asian populations — a well-documented failure that nobody has fixed. GenomeIndia has released thousands of Indian genomes into the public Indian Biological Data Centre. The field's largest blind spot is your home population, and the data is already public.",
     entry: "MBBS → MSc in genomics/bioinformatics or a direct funded PhD → analyse public cohort data in the meantime. You need Python or R and population genetics, not a wet lab.",
     where: ["Broad Institute (Boston)", "Cardiff MRC Centre for Neuropsychiatric Genetics", "QIMR Berghofer (Brisbane)", "NIMHANS ADBS programme (Bengaluru)", "Karolinska"],
@@ -35,7 +35,7 @@ window.DB.frontiers = [
     tagline: "Reading illness from a phone, a voice, a sleep pattern",
     fields: ["psych", "compbio", "global"],
     what: "Inferring mental and neurological state from passively collected data — typing dynamics, GPS-derived mobility, sleep regularity, and especially the acoustic properties of speech. Vocal changes in depression, Parkinson's and psychosis are measurable before a clinician notices them.",
-    whyIndia: "There are a handful of practising psychiatrists per million people across much of India. A screening tool that works from a thirty-second phone recording is not a convenience here — it is the only version of the service that can scale. And multilingual voice data is exactly what Western datasets lack.",
+    whyIndia: "There are a handful of practising psychiatrists per million people across much of India. A screening tool that works from a thirty-second phone recording is not a convenience here. It is the only version of the service that can scale. And multilingual voice data is exactly what Western datasets lack.",
     entry: "This is buildable now, by you, without institutional permission. Signal processing plus a validated clinical scale plus a consented sample. The paper gets written about the tool afterwards.",
     where: ["Harvard Digital Psychiatry Division", "KCL IoPPN RADAR-CNS", "Vanderbilt", "Mount Sinai", "Indian Institute of Technology digital health groups"],
     startNow: "Build the multilingual screener you already started, validate it against a standard instrument like DASS-21 or PHQ-9, and publish the repository. A working tool that screens across languages is, in global health terms, worth more than an early letter to the editor.",
@@ -47,7 +47,7 @@ window.DB.frontiers = [
     tagline: "The immune system as a driver of mental illness",
     fields: ["psych", "neuro", "biochem", "infect"],
     what: "The evidence that inflammation, autoimmunity and the gut microbiome participate causally in depression, psychosis and cognitive decline. Anti-NMDA receptor encephalitis rewrote what a psychiatric presentation can mean; the field is now asking how much else has been misclassified.",
-    whyIndia: "India's infectious disease burden means a population where infection, inflammation and mental illness overlap constantly — and almost nobody is characterising it. Post-infectious neuropsychiatric syndromes are systematically under-diagnosed here.",
+    whyIndia: "India's infectious disease burden means a population where infection, inflammation and mental illness overlap constantly, and almost nobody is characterising it. Post-infectious neuropsychiatric syndromes are systematically under-diagnosed here.",
     entry: "Biochemistry and immunology are unusually direct routes in. This is one of the few frontier fields where an MSc in biochemistry is the right first move rather than a detour.",
     where: ["Cambridge (Psychiatry & Immunology)", "KCL", "Charité Berlin", "Johns Hopkins", "NIMHANS"],
     startNow: "Look at what your own hospital already measures. CRP, ferritin and differential counts sit in records alongside psychiatric admissions — a retrospective association study needs no new funding.",
@@ -179,7 +179,7 @@ window.DB.frontiers = [
     tagline: "A pharmacological class returning to psychiatry after fifty years",
     fields: ["psych", "neuro", "biochem"],
     what: "Controlled trials of psilocybin, MDMA and ketamine analogues for treatment-resistant depression and PTSD, alongside the mechanistic neuroscience of how a single dose produces durable change.",
-    whyIndia: "Regulatory constraints make clinical trials difficult in India, but the mechanistic, imaging and modelling work is open to anyone — and ketamine research is already permissible and active.",
+    whyIndia: "Regulatory constraints make clinical trials difficult in India, but the mechanistic, imaging and modelling work is open to anyone, and ketamine research is already permissible and active.",
     entry: "Psychiatry research training, then a group running trials. Imperial and Johns Hopkins both have dedicated centres and take international researchers.",
     where: ["Imperial College Centre for Psychedelic Research", "Johns Hopkins Center for Psychedelic Research", "Maastricht", "Zurich"],
     startNow: "Read the mechanistic literature rather than the media coverage. The interesting open questions are about plasticity and prediction error, not about the experience.",
@@ -213,7 +213,7 @@ window.DB.residency = [
     window: "ERAS opens Sept · Match results in March",
     deadlineMonths: [9, 10, 11, 12, 1, 2, 3],
     url: "https://www.ecfmg.org/",
-    why: "The best-paid and most research-integrated clinical route out of India. Psychiatry is one of the most IMG-friendly specialties in the American Match, and US psychiatry residency includes protected research time — which makes it a genuine physician-scientist pathway, not just an emigration route.",
+    why: "The best-paid and most research-integrated clinical route out of India. Psychiatry is one of the most IMG-friendly specialties in the American Match, and US psychiatry residency includes protected research time, which makes it a genuine physician-scientist pathway, not just an emigration route.",
     reqs: [
       "MBBS from a WDOMS-listed college — verify yours",
       "Step 1 is now pass/fail, so Step 2 CK score and US clinical experience carry the weight",
@@ -266,7 +266,7 @@ window.DB.residency = [
     why: "No entrance exam lottery, no match, no application season — you learn the language, pass a professional exam, and get a salaried training post. Germany has a genuine physician shortage and specialty training pays from the first day. Psychiatry and neurology posts are widely available.",
     reqs: [
       "MBBS + internship",
-      "German to B2 general and C1 medical — this is the real barrier and it takes 12–18 months",
+      "German to B2 general and C1 medical. This is the real barrier and it takes 12–18 months",
       "Fachsprachprüfung (medical language exam) and usually Kenntnisprüfung (knowledge exam)",
       "Recognition of your degree by the state medical board"
     ],
@@ -293,7 +293,7 @@ window.DB.residency = [
     why: "High salaries, strong working-hours culture and a clear route to permanent residency. Psychiatry is on Australia's skilled occupation shortage lists, which shortens the immigration path considerably.",
     reqs: ["MBBS recognised by the AMC", "IELTS 7.0 across all bands or OET B", "AMC MCQ examination, sittable in India", "Registration with AHPRA"],
     steps: [
-      "Sit the AMC MCQ in India first — it is the cheapest way to test your commitment to the pathway.",
+      "Sit the AMC MCQ in India first. It is the cheapest way to test your commitment to the pathway.",
       "The workplace-based assessment route is often faster than the clinical examination if you can secure a post.",
       "Check the current skilled occupation list; psychiatry's presence on it changes the visa maths substantially.",
       "New Zealand's NZREX is a parallel and often less contested route into the same region."
@@ -347,7 +347,7 @@ window.DB.equity = [
     ],
     steps: [
       "Apply on the NOS portal in the first round, which in the 2026 cycle ran from late April to 2 June.",
-      "If you miss it, watch for the second round. The scheme reopens the portal for about 40 days in September or October in any year where slots are left unfilled — which is the clearest evidence there is that this award is under-subscribed.",
+      "If you miss it, watch for the second round. The scheme reopens the portal for about 40 days in September or October in any year where slots are left unfilled, which is the clearest evidence there is that this award is under-subscribed.",
       "You need an admission offer or a conditional offer from a top-500 ranked institution.",
       "There is a separate parallel scheme for Scheduled Tribe candidates run by the Ministry of Tribal Affairs — check that one too if it applies.",
       "The income ceiling and category certificate are the two documents that decide the application. Get them issued well in advance; district offices are slow."
@@ -408,7 +408,7 @@ window.DB.equity = [
     window: "Apply once you hold an admission offer",
     deadlineMonths: [],
     url: "https://sbi.bank.in/web/personal-banking/loans/education-loans",
-    why: "Included here because pretending loans do not exist helps nobody — but so is the arithmetic. A ₹50 lakh loan at 10 % costs roughly ₹65,000 a month for ten years. If the degree does not clearly lead to income in that currency, a funded PhD or a free German masters is not a lesser option, it is a better one.",
+    why: "Included here because pretending loans do not exist helps nobody. Nor does hiding the arithmetic. A ₹50 lakh loan at 10 % costs roughly ₹65,000 a month for ten years. If the degree does not clearly lead to income in that currency, a funded PhD or a free German masters beats it outright. Not as a consolation: on the numbers.",
     reqs: ["Admission offer", "Co-applicant, usually a parent", "Collateral for larger amounts; up to ₹7.5 lakh can be collateral-free"],
     steps: [
       "Exhaust the funded routes on this site before borrowing. A fully funded PhD pays you; a self-funded masters costs you a decade of repayments.",

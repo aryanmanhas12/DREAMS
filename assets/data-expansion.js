@@ -109,7 +109,7 @@ window.DB.study.push(
     window: "Opens Oct · rolling through to June",
     deadlineMonths: [10, 11, 12, 1, 2, 3, 4, 5, 6],
     url: "https://www.findamasters.com/masters-degrees/biochemistry/",
-    why: "The most direct conversion from a clinical degree into bench science. An MBBS gives you more physiology and pathology than most biochemistry graduates have, and less molecular technique — which is precisely the gap a taught masters closes. Choose the MRes variant over the MSc if a doctorate is the eventual aim, because it is mostly laboratory work rather than lectures.",
+    why: "The most direct conversion from a clinical degree into bench science. An MBBS gives you more physiology and pathology than most biochemistry graduates have, and less molecular technique, which is precisely the gap a taught masters closes. Choose the MRes variant over the MSc if a doctorate is the eventual aim, because it is mostly laboratory work rather than lectures.",
     reqs: ["MBBS or a science degree with a strong biochemistry component", "IELTS 6.5–7.0", "Some programmes ask for prior laboratory experience — an ICMR STS project counts"],
     steps: [
       "Choose MRes over MSc if you want a doctorate afterwards. An MRes is essentially a year in a lab with a thesis and reads far better to a PhD admissions panel.",
@@ -133,7 +133,7 @@ window.DB.study.push(
     why: "Molecular medicine is biochemistry taught for people who intend to apply it clinically, and continental Europe teaches it in English at close to zero tuition. Göttingen's programme in particular is a well-known feeder into German doctoral schools, which is the natural next step.",
     reqs: ["MBBS or bioscience bachelor's", "English proficiency; no German required for these tracks", "Blocked account or proof of funds for the visa"],
     steps: [
-      "Verify the teaching language of the specific track — this is where most Indian applicants lose a whole cycle.",
+      "Verify the teaching language of the specific track. This is where most Indian applicants lose a whole cycle.",
       "Get your MBBS assessed on ANABIN and uni-assist early for Germany; recognition is procedural and slow.",
       "Two years with no tuition means your only cost is living, which in Leipzig or Göttingen is far lower than in any UK city."
     ],
@@ -152,7 +152,7 @@ window.DB.study.push(
     deadlineMonths: [10, 11, 12, 1, 2, 3, 4, 5, 6, 7],
     url: "https://www.genomicseducation.hee.nhs.uk/",
     why: "Built out of the 100,000 Genomes Project to retrain practising clinicians for genomic medicine, so it is designed around people with a medical degree and no bioinformatics. The part-time modular route means you can hold it while working, and it is the most direct on-ramp from clinical medicine into psychiatric or cancer genomics.",
-    reqs: ["Medical, nursing or bioscience degree", "No prior programming required — that is the point of the course", "IELTS 7.0"],
+    reqs: ["Medical, nursing or bioscience degree", "No prior programming required. That is the point of the course", "IELTS 7.0"],
     steps: [
       "Take individual modules first if you are unsure — most of these programmes allow standalone module enrolment.",
       "Pair this with a public dataset project. A genomics masters plus an independent analysis of GenomeIndia or UK Biobank data is a genuinely strong doctoral application.",
@@ -173,7 +173,7 @@ window.DB.study.push(
     deadlineMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
     url: "https://www.lshtm.ac.uk/study/courses/masters-degrees/health-data-science",
     why: "The highest-employability degree on this entire site, and the one that keeps every door open — clinical research, industry, global health and academia all need people who can genuinely analyse data and also understand what a patient is. US biostatistics departments frequently fund masters students through teaching assistantships, which almost nobody realises.",
-    reqs: ["Quantitative comfort — this is genuinely required", "MBBS accepted; some programmes ask for evidence of mathematics", "Prior Python or R helps a great deal"],
+    reqs: ["Quantitative comfort. This is genuinely required", "MBBS accepted; some programmes ask for evidence of mathematics", "Prior Python or R helps a great deal"],
     steps: [
       "Do a free statistics and Python course before applying. It changes both your application and your first term.",
       "Ask US biostatistics departments directly about teaching assistantship funding for masters students. It exists more often than it is advertised.",
@@ -242,7 +242,7 @@ window.DB.study.push(
       "English-taught programmes throughout"
     ],
     steps: [
-      "Verify India's eligibility for the current cycle on the national agency site before investing time — this is the one thing that decides whether the route exists for you.",
+      "Verify India's eligibility for the current cycle on the national agency site before investing time. This is the one thing that decides whether the route exists for you.",
       "Even without a state scholarship, tuition of €3,000–6,000 a year with low living costs beats a part-funded UK place on total cost.",
       "The University of Tartu's genomics and biobank work is the standout scientific reason to look here."
     ],
@@ -284,7 +284,7 @@ window.DB.research.push(
     duration: "3 days – 2 weeks",
     window: "Rolling calls throughout the year, usually 4–6 months ahead",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://coursesandconferences.wellcomeconnectingscience.org/",
+    url: "https://coursesandconferences.wellcomeconnectingscience.org/our-events/",
     why: "The genomics training arm of the Sanger Institute, and it explicitly funds participants from low- and middle-income countries with full bursaries including flights. It also runs courses regionally in Asia and Africa. World-class genomics training that can cost an Indian medical graduate nothing at all.",
     reqs: ["Relevant research background or clear intent", "Bursary application submitted WITH the course application", "Many courses also released free online"],
     steps: [
@@ -307,7 +307,7 @@ window.DB.research.push(
     deadlineMonths: [1, 2, 3, 4, 5, 9, 10, 11],
     url: "https://cajal-training.org/",
     why: "Hands-on laboratory and computational neuroscience training at a level Indian medical colleges simply cannot offer — two weeks of doing rather than watching. IBRO funds participants from countries like India specifically, and these stipends are consistently under-applied.",
-    reqs: ["Neuroscience research background or serious intent", "Stipend application is part of the course application", "Highly practical — you will be at a bench or a terminal all day"],
+    reqs: ["Neuroscience research background or serious intent", "Stipend application is part of the course application", "Highly practical. You will be at a bench or a terminal all day"],
     steps: [
       "Pick the course by technique, not by city. These are skills courses and the technique is the product.",
       "Apply for the IBRO or FENS stipend in the same form. Do not assume you will be asked later.",
@@ -358,7 +358,7 @@ window.DB.research.push(
       "Watch for the participating-organisations list in February and look for INCF, NeuroStars, the Turing Way, Open Bioinformatics Foundation and similar.",
       "Start contributing small fixes BEFORE applying. Accepted proposals almost always come from people already visible in the project.",
       "The proposal is a technical document, not a personal statement. Describe what you will build, in what order, with milestones.",
-      "Even an unsuccessful attempt leaves you with merged contributions to a real scientific tool — which is worth more than most certificates."
+      "Even an unsuccessful attempt leaves you with merged contributions to a real scientific tool, which is worth more than most certificates."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -374,7 +374,7 @@ window.DB.research.push(
     window: "Abstract deadlines usually 4–6 months before the meeting",
     deadlineMonths: [1, 2, 3, 10, 11, 12],
     url: "https://www.humanbrainmapping.org/",
-    why: "These are where psychiatric imaging and genetics are actually argued out. OHBM has an active and welcoming trainee community, runs an educational course alongside the main meeting, and its abstract acceptance rate is high — which makes it a realistic first international presentation.",
+    why: "These are where psychiatric imaging and genetics are actually argued out. OHBM has an active and welcoming trainee community, runs an educational course alongside the main meeting, and its abstract acceptance rate is high, which makes it a realistic first international presentation.",
     reqs: ["An abstract", "Trainee membership, which is cheap", "Travel award applications are separate and earlier"],
     steps: [
       "OHBM's educational day is worth attending on its own and is included in registration.",
@@ -395,7 +395,7 @@ window.DB.research.push(
     window: "Rolling — depends entirely on the host institution",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://erasmus-plus.ec.europa.eu/opportunities/individuals/students",
-    why: "Most Indian students assume Erasmus+ is only for EU nationals. Traineeship funding is administered by the host institution, and third-country participants are eligible for several strands. If a European lab wants you, there is often money attached that neither of you knew about — so ask.",
+    why: "Most Indian students assume Erasmus+ is only for EU nationals. Traineeship funding is administered by the host institution, and third-country participants are eligible for several strands. If a European lab wants you, there is often money attached that neither of you knew about, so ask.",
     reqs: ["A host institution willing to take you", "Eligibility depends on the specific strand and host — ask them directly", "No fixed cycle"],
     steps: [
       "When a European laboratory expresses interest, ask directly: 'is there any Erasmus+ or institutional mobility funding attached to this placement?' The answer is yes more often than you would guess.",
@@ -418,7 +418,7 @@ window.DB.research.push(
     url: "https://www.ukbiobank.ac.uk/enable-your-research",
     why: "The single most under-used fact in Indian medical research: you can run a study on half a million people from a laptop in Jammu. UK Biobank grants access to approved researchers worldwide. The Psychiatric Genomics Consortium publishes its summary statistics openly. India's own National Family Health Survey is fully public and chronically under-analysed. No ethics delay, no funding, no permission — only a question and the method to answer it.",
     reqs: [
-      "An answerable question — this is the actual bottleneck, not access",
+      "An answerable question. This is the actual bottleneck, not access",
       "R or Python",
       "Some datasets need a supervisor or institutional affiliation on the application; many need nothing"
     ],
@@ -440,10 +440,10 @@ Object.assign(window.DB.impact, {
   "pasteur-mdphd":     { t: 1, odds: "~8 %", effort: "20 hrs", note: "Pick the unit, not the brand. Pasteur is a federation and the unit is what you actually join." },
   "uk-acf":            { t: 1, odds: "Competitive but IMG-accessible in psychiatry", effort: "Follows GMC registration", note: "A quarter of your working week protected for research, on a full salary, while you train. The answer to 'do I have to choose?'" },
   "gsoc":              { t: 1, odds: "~15–20 % of serious applicants", effort: "12 weeks + weeks of prior contributions", note: "Paid, remote, no visa, no professor, no institution required. The most overlooked opportunity here for a medical student who codes." },
-  "open-data":         { t: 1, odds: "Open to everyone", effort: "Ongoing", note: "You can run a study on half a million people from your bedroom. The bottleneck is the question, not the access — and almost nobody in Indian medicine has noticed." },
+  "open-data":         { t: 1, odds: "Open to everyone", effort: "Ongoing", note: "You can run a study on half a million people from your bedroom. The bottleneck is the question, not the access, and almost nobody in Indian medicine has noticed." },
   "wellcome-connecting": { t: 1, odds: "Moderate — bursaries designed for LMIC applicants", effort: "10 hrs", note: "World-class genomics training that can cost an Indian medical graduate literally nothing, flights included." },
   "cpc-zurich":        { t: 2, odds: "Open registration", effort: "1 week", note: "The people who invented computational psychiatry, teaching it. Hybrid format means you can do the whole thing from India." },
-  "biochem-msc-uk":    { t: 2, odds: "~40 %", effort: "20 hrs", note: "Choose the MRes over the MSc if a doctorate is the aim — it is a year in a lab rather than a year in lectures." },
+  "biochem-msc-uk":    { t: 2, odds: "~40 %", effort: "20 hrs", note: "Choose the MRes over the MSc if a doctorate is the aim. It is a year in a lab rather than a year in lectures." },
   "genomic-medicine-msc": { t: 2, odds: "~45 %", effort: "18 hrs", note: "Designed to retrain clinicians who cannot yet code. The most direct on-ramp from medicine into psychiatric or cancer genomics." },
   "health-data-science": { t: 2, odds: "~30 %", effort: "25 hrs", note: "The highest-employability degree here, and the one that keeps every door open. US biostatistics departments fund masters students more often than they advertise." },
   "cajal":             { t: 2, odds: "Moderate; IBRO stipends under-applied", effort: "2–3 weeks", note: "Two weeks of doing rather than watching. Signals hands-on competence in a way no online certificate can." },
@@ -453,5 +453,5 @@ Object.assign(window.DB.impact, {
   "ohbm-ashg":         { t: 2, odds: "High abstract acceptance", effort: "20 hrs", note: "A realistic first international presentation. Virtual attendance is often dramatically cheaper or free." },
   "czech-charles":     { t: 3, odds: "Accessible", effort: "15 hrs", note: "India has featured on the Václav Havel eligibility list. Learn Czech and public university tuition drops to zero entirely." },
   "erasmus-traineeship": { t: 3, odds: "Host-dependent", effort: "Low, once a host says yes", note: "Most Indian students assume this is EU-only. When a European lab wants you, ask their international office about mobility funding — the answer is yes more often than you would guess." },
-  "baltics":           { t: 3, odds: "Low competition, but verify eligibility", effort: "15 hrs", note: "India has NOT consistently appeared on Baltic state scholarship lists. Verify before planning — but Tartu's genomics work is a real scientific draw regardless." }
+  "baltics":           { t: 3, odds: "Low competition, but verify eligibility", effort: "15 hrs", note: "India has NOT consistently appeared on Baltic state scholarship lists. Verify before planning, but Tartu's genomics work is a real scientific draw regardless." }
 });

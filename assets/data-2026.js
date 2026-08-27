@@ -33,7 +33,7 @@ window.DB.funding.push(
     window: "One annual round, opening early in the year and closing around February",
     deadlineMonths: [1, 2, 3],
     url: "https://turkiyeburslari.gov.tr/",
-    why: "One of the few genuinely full scholarships anywhere that names medical sciences as an eligible field and does not require a language test to apply. Turkish medical faculties are strong in transplant surgery, cardiology and emergency medicine, and Türkiye's own health system reform is one of the most studied in the world — which makes it a real subject to work on rather than just a place to hold a degree. It is also the rare fully funded route where placement is done for you: you rank up to twelve programmes and the committee assigns one.",
+    why: "One of the few genuinely full scholarships anywhere that names medical sciences as an eligible field and does not require a language test to apply. Turkish medical faculties are strong in transplant surgery, cardiology and emergency medicine, and Türkiye's own health system reform is one of the most studied in the world, which makes it a real subject to work on rather than just a place to hold a degree. It is also the rare fully funded route where placement is done for you: you rank up to twelve programmes and the committee assigns one.",
     reqs: [
       "Not a Turkish citizen and never a Turkish citizen",
       "Medical sciences carry the highest academic bar of any field here — around 90 % in your prior degree",
@@ -41,7 +41,7 @@ window.DB.funding.push(
       "No language certificate needed to apply; teaching is in Turkish or English depending on the programme"
     ],
     steps: [
-      "Check which of your target programmes are taught in English before you rank them. Many medical and public health programmes are Turkish-medium, and the funded language year is designed to get you there — but you should choose that deliberately, not discover it after acceptance.",
+      "Check which of your target programmes are taught in English before you rank them. Many medical and public health programmes are Turkish-medium, and the funded language year is designed to get you there, but you should choose that deliberately, not discover it after acceptance.",
       "You rank up to twelve programmes in one application and are assigned one. Rank honestly by what you want to study, not by city prestige; there is no second round to correct it.",
       "The letter of intent carries this application. Write it about Türkiye specifically — its health system, a department, a named researcher — because the reviewers can see instantly who has applied to nine countries with one essay.",
       "Two academic references and your marksheets need attesting. Start that in December; Indian university administrations do not move at application speed.",
@@ -61,7 +61,7 @@ window.DB.funding.push(
     window: "One annual round, closing 15 May; Peace Centre assignments announced the following November",
     deadlineMonths: [3, 4, 5],
     url: "https://www.rotary.org/get-involved/our-programs/peace-fellowships",
-    why: "The most under-applied full scholarship open to a doctor whose anger is about conflict, displacement or health in emergencies. Because it is framed as peacebuilding rather than health, medics rarely look at it — and yet the fellows who work on health in conflict zones are exactly who the programme wants. The certificate route at Chulalongkorn or Makerere is the unusual part: eleven weeks, fully funded, and designed for people already working, so it does not require you to abandon a job for two years.",
+    why: "The most under-applied full scholarship open to a doctor whose anger is about conflict, displacement or health in emergencies. Because it is framed as peacebuilding rather than health, medics rarely look at it, and yet the fellows who work on health in conflict zones are exactly who the programme wants. The certificate route at Chulalongkorn or Makerere is the unusual part: eleven weeks, fully funded, and designed for people already working, so it does not require you to abandon a job for two years.",
     reqs: [
       "Proficiency in English, and a bachelor's degree — MBBS qualifies",
       "Masters route: at least three years of relevant work or volunteer experience",
@@ -73,7 +73,7 @@ window.DB.funding.push(
       "Selection by Rotary does not admit you to the university — you apply to the host institution separately, and that admission is not guaranteed. Budget for two applications, not one.",
       "You need a Rotary club endorsement. Find your district's contact early; this is the step that catches people out, and it cannot be done in the final week.",
       "Write the essays about a specific conflict or displacement problem you have seen in your own work. Health in emergencies, mental health after disaster, and access under blockade are all squarely within scope and are argued far less often than the generic peace essay.",
-      "Selected fellows hear in November for a course starting the following year — so this is an eighteen-month lead time from application to arrival. Plan the gap deliberately."
+      "Selected fellows hear in November for a course starting the following year, so this is an eighteen-month lead time from application to arrival. Plan the gap deliberately."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 3
   }
@@ -94,7 +94,7 @@ window.DB.research.push(
     window: "Calls run roughly annually; watch the capacity-strengthening page",
     deadlineMonths: [6, 7, 8, 9],
     url: "https://tdr.who.int/home/our-work/strengthening-research-capacity",
-    why: "A WHO programme built specifically so that clinical trials in diseases of poverty are led from the countries where those diseases actually are, rather than run remotely from Europe. It trains you to run a trial, not to assist on one — and it is explicitly reserved for people working in low- and middle-income countries, which for once puts an Indian applicant inside the target group rather than competing against it.",
+    why: "A WHO programme built specifically so that clinical trials in diseases of poverty are led from the countries where those diseases actually are, rather than run remotely from Europe. It trains you to run a trial, not to assist on one, and it is explicitly reserved for people working in low- and middle-income countries, which for once puts an Indian applicant inside the target group rather than competing against it.",
     reqs: [
       "Employed in a clinical research role for at least 24 months at a registered institution in an LMIC",
       "Demonstrable experience in trial-related work in diseases of poverty",
@@ -120,7 +120,7 @@ window.DB.research.push(
     window: "Annual call, recent rounds closing end of January",
     deadlineMonths: [11, 12, 1],
     url: "https://tdr.who.int/home/our-work/strengthening-research-capacity",
-    why: "Implementation research is the discipline that asks why a treatment that works in a trial does not work in a district — which is the single most common frustration of anyone who has done a rural posting. This fellowship teaches it formally, hosts it in the global South rather than flying you to Geneva, and costs nothing. For a doctor whose anger is about the gap between guideline and reality, it is the most direct training that exists.",
+    why: "Implementation research is the discipline that asks why a treatment that works in a trial does not work in a district, which is the single most common frustration of anyone who has done a rural posting. This fellowship teaches it formally, hosts it in the global South rather than flying you to Geneva, and costs nothing. For a doctor whose anger is about the gap between guideline and reality, it is the most direct training that exists.",
     reqs: [
       "Working in a health-related role in a low- or middle-income country",
       "A concrete implementation problem you can actually study where you work",
@@ -146,7 +146,7 @@ window.DB.research.push(
     window: "Main call closes 31 March; a second short-term round runs to 30 September",
     deadlineMonths: [1, 2, 3, 8, 9],
     url: "https://www.icgeb.org/fellowship/",
-    why: "An intergovernmental research centre with one of its three laboratories in New Delhi — which makes this the rare world-class fellowship you can hold without leaving India, and the rare Indian position that comes with an automatic route to Trieste or Cape Town. India is a founding member state, so Indian nationals are inside the priority group rather than competing as foreign applicants. Almost no medical students have heard of it, because it recruits through biotechnology departments and never through medical colleges.",
+    why: "An intergovernmental research centre with one of its three laboratories in New Delhi, which makes this the rare world-class fellowship you can hold without leaving India, and the rare Indian position that comes with an automatic route to Trieste or Cape Town. India is a founding member state, so Indian nationals are inside the priority group rather than competing as foreign applicants. Almost no medical students have heard of it, because it recruits through biotechnology departments and never through medical colleges.",
     reqs: [
       "A degree in life sciences, medicine or a related field — MBBS is accepted",
       "A written statement of support from the ICGEB group leader you want to work with. This is mandatory and there is no way around it.",
@@ -154,7 +154,7 @@ window.DB.research.push(
     ],
     steps: [
       "Choose the group before the fellowship. Read the ICGEB New Delhi group pages, find two or three whose actual published work you can discuss, and write to those group leaders directly.",
-      "The supporting statement from the group leader is the application's spine. Allow two months to secure it — this is the step that fails, not the form.",
+      "The supporting statement from the group leader is the application's spine. Allow two months to secure it. This is the step that fails, not the form.",
       "If you are still in MBBS, the short-term route is not yet open to you; build toward it by finishing a real project first, then apply as a PhD student or a graduate.",
       "Note the two windows. The main call closes at the end of March, and a separate short-term round runs through to the end of September, so a missed deadline is not a missed year."
     ],
@@ -198,7 +198,7 @@ window.DB.research.push(
     window: "Runs with the Global Symposium on Health Systems Research; the 2026 round closed 20 March",
     deadlineMonths: [1, 2, 3],
     url: "https://www.ev4gh.net/",
-    why: "A training programme whose stated purpose is to get researchers from the global South into the rooms where global health is argued about, rather than cited in it. It ends immediately before the Global Symposium on Health Systems Research, so you arrive at the largest gathering in the field already holding a cohort of colleagues — which is the part that actually changes a career, and the part that no conference registration can buy you. The 2026 cohort ran into the symposium in Dubai.",
+    why: "A training programme whose stated purpose is to get researchers from the global South into the rooms where global health is argued about, rather than cited in it. It ends immediately before the Global Symposium on Health Systems Research, so you arrive at the largest gathering in the field already holding a cohort of colleagues, which is the part that actually changes a career, and the part that no conference registration can buy you. The 2026 cohort ran into the symposium in Dubai.",
     reqs: [
       "Early-career, and from or working in a low- or middle-income country",
       "Not only researchers — implementers, decision-makers, journalists and knowledge brokers are explicitly wanted",

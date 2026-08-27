@@ -25,7 +25,7 @@
 
   /* Values of `country` that name a region rather than a place. They are
      excluded from the "countries covered" tile, because the globe can only plot
-     somewhere it has coordinates for — and a tile claiming 33 while the globe
+     somewhere it has coordinates for, and a tile claiming 33 while the globe
      shows 31 is the same contradiction that made the old India count read 16 in
      one place and 65 in another. The scratchpad data check asserts that every
      non-region country here has globe coordinates, so the two cannot drift. */
@@ -104,7 +104,7 @@
     {
       id: "flow", act: "Question three of three", type: "multi", free: true,
       title: "What makes time stop?",
-      help: "The task where you look up and three hours have gone. Flow is not a mood, it is data — it tells you which <em>method</em> you belong in, regardless of which subject you love.",
+      help: "The task where you look up and three hours have gone. Treat that as data rather than mood. It tells you which <em>method</em> you belong in, regardless of which subject you love.",
       placeholder: "When did you last lose track of time completely?",
       options: [
         { v: "building", t: "Building something that works",       d: "Code, a tool, a thing that runs", f: ["compbio"] },
@@ -178,7 +178,7 @@
       title: "Do you actually want to leave India?",
       help: "There is a real answer here that is not 'yes'. NIMHANS, AIIMS, IISc and NCBS produce internationally cited work, and India Alliance funds clinicians to lead their own research without a doctorate.",
       options: [
-        { v: "yes",    t: "Yes — that is the plan", d: "Show me the world" },
+        { v: "yes",    t: "Yes. That is the plan", d: "Show me the world" },
         { v: "funded", t: "Only if someone else pays", d: "Fully funded routes only" },
         { v: "short",  t: "Short trips yes, moving no", d: "Summer programmes, exchanges, conferences" },
         { v: "india",  t: "I want to build something here", d: "Domestic routes, remote work, Indian funding" },
@@ -272,7 +272,7 @@
     {
       id: "record", act: "Practicalities", type: "multi",
       title: "What do you already have?",
-      help: "This decides what you are competitive for <em>today</em> versus what you should be building toward. Tick nothing if the answer is nothing — that is the normal starting point and it is fine.",
+      help: "This decides what you are competitive for <em>today</em> versus what you should be building toward. Tick nothing if the answer is nothing. That is the normal starting point and it is fine.",
       options: [
         { v: "project",  t: "A research project running", d: "Even unfinished" },
         { v: "pub",      t: "A publication or accepted abstract", d: "Any journal, any conference" },
@@ -413,7 +413,7 @@
 
     /* Which constraints the reader ACTUALLY answered, as opposed to which ones
        have a default above. Every field on `p` is populated either way — that
-       is what keeps ranking working on a three-question run — but the prose is
+       is what keeps ranking working on a three-question run, but the prose is
        a different matter. "You told me you cannot pay" attributed to someone
        who was never asked about money is a fabrication, and it is the exact
        failure this site exists to avoid. So: rank on the defaults, speak only
@@ -530,7 +530,7 @@
     // ── experience requirement
     if (item.workExp && item.workExp > p.exp) {
       s -= 8 * (item.workExp - p.exp);
-      reasons.push("needs " + item.workExp + " years' experience — this is a later target");
+      reasons.push("needs " + item.workExp + " years' experience. This is a later target");
     }
 
     // ── category-gated equity schemes
@@ -645,7 +645,7 @@
     let open = "You said the thing that stops time for you is <strong>" +
       esc((flowTxt || "still being worked out").toLowerCase()) + "</strong>";
     if (angerTxt) open += ", and that what makes you angry is <strong>" + esc(angerTxt.toLowerCase()) + "</strong>";
-    open += ". Those two together are not a mood — they are a specification.";
+    open += ". Those two together are not a mood. They are a specification.";
     if (f1 && f2) {
       open += " They point at <strong>" + esc(FIELDS[f1].toLowerCase()) + "</strong> sitting against <strong>" +
         esc(FIELDS[f2].toLowerCase()) + "</strong>";
@@ -676,7 +676,7 @@
       mid += "You are in the years where the international research internships open — Khorana specifically wants pre-final-year MBBS students and lowers its marks bar for them. " +
         "ICMR STS has closed to you, so MedEngage and the summer fellowships are the substitutes that keep the record moving. ";
     } else if (p.asked.stage && (p.stage === "grad" || p.stage === "pg")) {
-      mid += "With the degree finished, the funded doctorate becomes the main event — and the misconception worth killing early is that you need a masters first. " +
+      mid += "With the degree finished, the funded doctorate becomes the main event, and the misconception worth killing early is that you need a masters first. " +
         "You usually do not. US, German, Swiss and Australian doctoral programmes take medical graduates directly and pay them. ";
     }
     if (mid) paras.push(mid);
@@ -687,11 +687,11 @@
     if (!p.asked.record) {
       // Never asked what they already have, so claim nothing about it. The
       // order-of-operations point below holds regardless of the answer.
-      ready = "I have not asked what you already have — and on a three-question run I am not going to pretend I know. " +
+      ready = "I have not asked what you already have, and on a three-question run I am not going to pretend I know. " +
         "What holds either way is the order of operations: credentials are not what gets you in, a finished thing is. " +
         "One completed project with an output beats five certificates of attendance, every time.";
     } else if (hasNothing) {
-      ready = "You ticked nothing under what you already have, which is the normal starting position and not a problem — but it does set the order of operations. " +
+      ready = "You ticked nothing under what you already have, which is the normal starting position and not a problem, but it does set the order of operations. " +
         "Credentials are not what gets you in; a finished thing is. One completed project with an output beats five certificates of attendance, every time. " +
         "Start with the free skill stack and one small piece of research at your own institution.";
     } else if (p.record.indexOf("mentor") !== -1) {
@@ -744,10 +744,10 @@
       plan.push({ when: "This month", what: "<b>Book IELTS or TOEFL.</b> Results take about two weeks and almost every application asks for them." });
 
     if (p.record.indexOf("mentor") === -1)
-      plan.push({ when: "This month", what: "<b>Have one fifteen-minute conversation with a faculty member</b> whose corridor you already walk past. This is the highest-return, lowest-cost item you will ever do — and it gets much harder once you change year and stop being a face they recognise." });
+      plan.push({ when: "This month", what: "<b>Have one fifteen-minute conversation with a faculty member</b> whose corridor you already walk past. This is the highest-return, lowest-cost item you will ever do, and it gets much harder once you change year and stop being a face they recognise." });
 
     if (p.record.indexOf("code") === -1 && (p.fields.compbio || p.fields.genomics))
-      plan.push({ when: "Starting now", what: "<b>Twenty minutes of Python a day.</b> On a bad day, five. Nobody bridges medicine and computation in a heroic sprint — and Coursera grants financial aid to Indian students on request." });
+      plan.push({ when: "Starting now", what: "<b>Twenty minutes of Python a day.</b> On a bad day, five. Nobody bridges medicine and computation in a heroic sprint, and Coursera grants financial aid to Indian students on request." });
 
     if (p.category === "sc" || p.category === "st")
       plan.push({ when: "Before March", what: "<b>Get your category and income certificates reissued.</b> The National Overseas Scholarship turns on these two documents and district offices are slow." });
@@ -890,7 +890,7 @@
     if (q.free) {
       h += '<textarea class="q-free" rows="3" id="freeText" placeholder="' + esc(q.placeholder || "") + '">' +
            esc(answers[q.id + "_text"] || "") + '</textarea>';
-      h += '<p class="q-note">Optional — but the words you use here shape the answer.</p>';
+      h += '<p class="q-note">Optional, but the words you use here shape the answer.</p>';
     }
     if (q.type === "multi") h += '<p class="q-note">Choose as many as are true. None is also an answer.</p>';
 
@@ -960,7 +960,7 @@
       h += "<p>You answered the three questions about who you are, and that is enough to point at fields, " +
            "specialties and a starting list. What it cannot do is tell you what you can <em>reach</em>. " +
            "The ranking below is currently assuming you are in your first two years, that money is not the " +
-           "binding constraint, and that you are open to anywhere — because you have not told me otherwise.</p>";
+           "binding constraint, and that you are open to anywhere, because you have not told me otherwise.</p>";
       h += "<p>Thirteen more questions cover money, category, year of study, climate, health, language and the " +
            "hours you actually have. They take about three minutes, they change the order of nearly everything " +
            "below, and they unlock the category-specific funding that most people never find. " +
@@ -1041,7 +1041,7 @@
       { key: ["research"], n: 9, h: "Research programmes to apply for", s: "Ranked against your field, your stage and your budget. Stage eligibility is already applied — nothing here is closed to you unless it says so." },
       { key: ["scholarship", "fellowship"], n: 10, h: "Money you could actually get", s: "Scholarships and fellowships you are eligible for now, or should be building toward. Several of these stack with each other." },
       { key: ["masters", "phd"], n: 10, h: "Degrees worth the years", s: "Where each one leads, what it costs, and who pays. Note how many of the doctorates pay you rather than the reverse." },
-      { key: ["conference"], n: 4, h: "Conferences that will fly you there", s: "You do not attend these by paying. You attend by submitting an abstract and applying for the travel award in the same breath — and the award deadline is always earlier than you expect." },
+      { key: ["conference"], n: 4, h: "Conferences that will fly you there", s: "You do not attend these by paying. You attend by submitting an abstract and applying for the travel award in the same breath, and the award deadline is always earlier than you expect." },
       { key: ["skill"], n: 6, h: "Build the skills first", s: "Almost all of this is free. Every credential above quietly assumes skills you can acquire for nothing." },
       { key: ["residency"], n: 5, h: "If you want to practise, not just research", s: "Clinical training routes abroad and at home, with the real barriers named rather than glossed." }
     ];
@@ -1056,7 +1056,7 @@
 
     /* what to skip */
     h += '<section class="actions-block"><h2 class="sec-h">What to say no to</h2>';
-    h += '<p class="sec-sub">A list of what to pursue is only half the advice. These consume time and money and produce nothing a reviewer can verify — and every one of them is marketed hard at Indian medical students.</p>';
+    h += '<p class="sec-sub">A list of what to pursue is only half the advice. These consume time and money and produce nothing a reviewer can verify, and every one of them is marketed hard at Indian medical students.</p>';
     h += '<div class="skip-grid">';
     (window.DB.skipList || []).forEach(function (s) {
       h += '<article class="skip-card"><h3>' + esc(s.name) + "</h3><p>" + esc(s.why) + "</p></article>";
@@ -1330,7 +1330,7 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Count a number up to its target. The point is that "150" lands as a
-  // quantity rather than as a label you skim past — so it eases out, and
+  // quantity rather than as a label you skim past, so it eases out, and
   // under reduced-motion it simply appears.
   function countUp(el, target) {
     if (prefersReduced || target <= 0) { el.textContent = String(target); return; }
@@ -1375,7 +1375,7 @@
     const student = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
     const nCountries = Object.keys(countries).length;
 
-    // The headline number appears immediately — it is part of a sentence and
+    // The headline number appears immediately. It is part of a sentence and
     // must not read as "This page has — of them" for a beat. The stat tiles,
     // being data rather than prose, count up.
     const hc = $("#heroCount");
@@ -1385,7 +1385,7 @@
     // written from data for the same reason the review stamp is: a number
     // typed into the HTML drifts on the next commit and then disagrees with
     // the stat tile a few inches above it. Prose does not count up — it would
-    // read as a slot machine mid-sentence — so these are set directly.
+    // read as a slot machine mid-sentence, so these are set directly.
     const claims = { "#claimTotal": total, "#claimFree": free, "#claimCountries": nCountries };
     Object.keys(claims).forEach(function (sel) {
       const el = $(sel);
@@ -1471,7 +1471,7 @@
      Keyword matching, deliberately: the prose is human-written and varies, so
      this errs toward catching a requirement and naming which programmes it
      came from, rather than silently missing it. The card's own text stays the
-     authority — this is a summary, and says so. */
+     authority. This is a summary, and says so. */
   const PREP_RULES = [
     { id: "english", label: "An English test score",
       hint: "IELTS or TOEFL results take about two weeks. One sitting covers every programme here.",
@@ -1486,7 +1486,7 @@
       hint: "WES, ECE and uni-assist verification of Indian transcripts takes weeks — start before you need it.",
       re: /transcript|WES|ECE|credential|ANABIN|uni-assist|degree certificate|attested/i },
     { id: "experience", label: "Documented work experience",
-      hint: "Internship, paid research and voluntary work usually all count — but you have to be able to evidence the hours.",
+      hint: "Internship, paid research and voluntary work usually all count, but you have to be able to evidence the hours.",
       re: /years? of (?:relevant )?(?:full-time |professional |post-bachelor's )?experience|work experience|professional experience|\d[\d,]* hours/i },
     { id: "research", label: "A research record",
       hint: "One finished project with an output beats five certificates of attendance.",
@@ -1495,7 +1495,7 @@
       hint: "This is the real gate on most European routes. Start emailing months before the deadline.",
       re: /supervisor|invitation letter|host institution|willing (?:professor|PI)|sponsor|agreed to (?:take|host)/i },
     { id: "language", label: "A second language",
-      hint: "Almost every research programme here is taught in English — this is for living and clinical work, not admission.",
+      hint: "Almost every research programme here is taught in English. This is for living and clinical work, not admission.",
       re: /\b(?:German|French|Japanese|Czech)\b|\b[ABC][12]\b|Fachsprachprüfung|language certificate/i },
     { id: "category", label: "Category and income certificates",
       hint: "District offices are slow, and these two documents decide the entire application.",
@@ -1525,7 +1525,7 @@
             ' thing' + (groups.length === 1 ? '' : 's') + ' across ' + items.length + ' saved</summary>';
     h += '<div class="prep-body">';
     h += '<p class="prep-intro">Pulled from the requirements on the programmes you saved, so the shared work shows up as shared. ' +
-         'Each card’s own text is the authority — this is a summary to plan around, not a substitute for reading them.</p>';
+         'Each card’s own text is the authority. This is a summary to plan around, not a substitute for reading them.</p>';
     groups.forEach(function (g) {
       h += '<div class="prep-row">';
       h += '<div class="prep-head"><strong>' + esc(g.rule.label) + '</strong>' +
@@ -1554,7 +1554,7 @@
       .replace(/\r?\n/g, "\\n");
   }
 
-  /* RFC 5545 caps lines at 75 OCTETS, not characters — and this content is
+  /* RFC 5545 caps lines at 75 OCTETS, not characters, and this content is
      full of multi-byte UTF-8 (≈, £, ·, —, en dashes in every money field),
      so folding on string length silently produces over-long lines. Measure
      in bytes, and iterate code points (for...of) so a surrogate pair is
@@ -1755,7 +1755,7 @@
      deliberate limit and the interface says so: there is no account here, so
      "seen it" lives in this browser's local storage and nowhere else. A
      different phone, a different browser, or cleared site data all count as a
-     first visit — which is why the trigger in the hero is permanent rather
+     first visit, which is why the trigger in the hero is permanent rather
      than something that disappears after the first run.
 
      Steps may name a view; the tour switches to it exactly the way the nav
@@ -1767,7 +1767,7 @@
   const TOUR_KEY = "dc-tour-seen";
 
   /* Six steps, not ten. The first version explained the site accurately and
-     was too long to finish — and an explainer nobody reaches the end of is
+     was too long to finish, and an explainer nobody reaches the end of is
      worse than none, because it spends the goodwill and delivers half the
      map. Each step now carries one idea and about thirty words. Anything that
      could be discovered by looking has been cut; what is left is the four

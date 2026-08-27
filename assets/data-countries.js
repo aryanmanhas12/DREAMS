@@ -29,7 +29,7 @@ window.DB.countries = {
     food: "Large Indian populations in New Jersey, the Bay Area, Texas, Chicago and Atlanta. Vegetarian food is easy in cities, harder in rural areas.",
     mentalHealth: "University counselling centres are generally well funded and free to enrolled students. Health insurance is mandatory and expensive; check exactly what mental health cover your student plan includes before you need it.",
     people: "Outwardly friendly and quick to include, though the warmth can be shallower than it first appears. Indian graduate student communities are large and genuinely supportive.",
-    visa: "F-1 for study. OPT gives 12 months of post-study work, extended to 36 months for STEM-designated degrees — and many public health and biostatistics programmes ARE STEM-designated. Check the CIP code of your specific programme; it can be worth two extra years.",
+    visa: "F-1 for study. OPT gives 12 months of post-study work, extended to 36 months for STEM-designated degrees, and many public health and biostatistics programmes ARE STEM-designated. Check the CIP code of your specific programme; it can be worth two extra years.",
     work: "On-campus work only during study. PhD stipends are salaries, so the question does not arise. H-1B afterwards is a lottery, which is the real long-term uncertainty.",
     allergy: "Regional pollen is intense — ragweed in autumn across the Midwest and East. Peanut and tree-nut labelling is strict and reliable.",
     honest: "The most upside and the most volatility. A funded PhD is one of the best deals available anywhere on earth. A self-funded masters at $80,000 is one of the worst. The difference is entirely which one you take."
@@ -200,7 +200,7 @@ window.DB.countries = {
     visa: "Student visa arranged through the institution.",
     work: "Restricted for student visas; funded programmes cover living costs.",
     allergy: "Dry climate, low mould. Spring pollen is moderate.",
-    honest: "Weizmann is one of the finest research institutes in the world and its summer school is fully funded including flights. Check your government's current travel advisory and your own comfort with regional security before committing — that is a personal judgement nobody else can make for you."
+    honest: "Weizmann is one of the finest research institutes in the world and its summer school is fully funded including flights. Check your government's current travel advisory and your own comfort with regional security before committing. That is a personal judgement nobody else can make for you."
   },
   Czechia: {
     name: "Czechia (Czech Republic)",
@@ -242,14 +242,14 @@ window.DB.countries = {
     visa: "Residence permit for study. EU degree with EU-wide recognition.",
     work: "Permitted with restrictions.",
     allergy: "Ragweed pollen in late summer is among the most severe in Europe — Hungary has notably high sensitisation rates. Relevant if you have hay fever.",
-    honest: "Stipendium Hungaricum gives India roughly 200 fully-funded places a year and remains one of the least-known major scholarships available. Low cost of living, EU degree, English-taught. The language is difficult and the country is small — but as a funded route into Europe it is unusually accessible."
+    honest: "Stipendium Hungaricum gives India roughly 200 fully-funded places a year and remains one of the least-known major scholarships available. Low cost of living, EU degree, English-taught. The language is difficult and the country is small, but as a funded route into Europe it is unusually accessible."
   },
   Bangladesh: {
     name: "Bangladesh",
     climate: "hot", winter: "12–25 °C and dry — the pleasant season", summer: "28–36 °C with very high humidity; monsoon June to October",
     daylight: "About 10.5 hours in December. Close enough to home that nothing about the light will surprise you.",
     cost: "₹25,000–45,000/month in Dhaka — among the cheapest places on this site to live",
-    diaspora: "n/a — you are in the region, not away from it", vegFood: "easy",
+    diaspora: "n/a. You are in the region, not away from it", vegFood: "easy",
     food: "Rice, dal, fish and vegetables, seasoned much as in West Bengal. Vegetarian eating is straightforward, though fish is treated as a default rather than a meat. If you are from eastern India this is not a foreign cuisine at all.",
     mentalHealth: "Provision is thin, as it is across the region, and you should not plan on institutional support. The advantage is proximity: you are two hours from home by air and in the same time zone, which for many people matters more than a counselling service would.",
     people: "Warm, and Bangla is close enough to Hindi in rhythm that most Indians pick up functional phrases quickly. English is the working language of research institutions. Indians are unremarkable here, which makes ordinary life easy.",
@@ -270,7 +270,7 @@ window.DB.countries = {
     visa: "Student residence permit, arranged after arrival. Türkiye Bursları handles most of the paperwork, which removes the step that defeats people elsewhere.",
     work: "Restricted during study — postgraduate students may work with permission, undergraduates largely may not. Do not plan on earning; plan on the stipend.",
     allergy: "Olive and grass pollen are heavy in spring along the Aegean and Mediterranean coasts. Air quality in Ankara in winter is poor enough to matter if you have asthma.",
-    honest: "The funded language year is the whole decision. If your programme is Turkish-medium you will spend a year learning a language you may never use again, in exchange for a fully paid degree — that is a real trade and it is worth making deliberately rather than discovering. Turkish medicine is strong in transplant, cardiology and emergency care, and the country's own health system reform is genuinely studied worldwide. Recognition of a Turkish medical qualification in India or the UK requires the same screening exams as anywhere else, so choose this for the training and the funding, not as a shortcut home."
+    honest: "The funded language year is the whole decision. If your programme is Turkish-medium you will spend a year learning a language you may never use again, in exchange for a fully paid degree. That is a real trade and it is worth making deliberately rather than discovering. Turkish medicine is strong in transplant, cardiology and emergency care, and the country's own health system reform is genuinely studied worldwide. Recognition of a Turkish medical qualification in India or the UK requires the same screening exams as anywhere else, so choose this for the training and the funding, not as a shortcut home."
   },
   Russia: {
     name: "Russia",
@@ -294,7 +294,7 @@ window.DB.countries = {
     diaspora: "n/a", vegFood: "easy",
     food: "Home.",
     mentalHealth: "Uneven and stigmatised, which you already know better than any guide could tell you. Tele-MANAS (14416) is a free national helpline. Your college almost certainly has a counsellor you have never been told about.",
-    people: "Your people, your language, your family — which is both the argument for staying and, for some, the argument for leaving.",
+    people: "Your people, your language, your family, which is both the argument for staying and, for some, the argument for leaving.",
     visa: "None required.",
     work: "Unrestricted.",
     allergy: "You know your own triggers here better than anywhere.",

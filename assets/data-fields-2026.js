@@ -11,7 +11,7 @@
    Snakebite kills more people in India than anywhere on earth. AMR's
    sharpest edge is here. The world's cheapest CAR-T was built in Bombay.
    Global surgery's unmet-need denominator is rural India. A student reading
-   this does not have to leave to work on any of them — which is the whole
+   this does not have to leave to work on any of them, which is the whole
    argument of this site, made in fields nobody named in five years of
    lectures. */
 
@@ -29,7 +29,7 @@ window.DB.frontiers.push(
     name: "Snakebite Envenoming & Neglected Tropical Disease",
     tagline: "The disease that kills most in your country and is studied least",
     fields: ["clinical", "global", "pubhealth", "env"],
-    what: "Snakebite envenoming was only reclassified by WHO as a category A neglected tropical disease in 2017, and carries a 2030 target of halving death and disability. The science runs from antivenom immunology and recombinant antibodies through to ambulance logistics and community first aid — it is one of the few fields where a laboratory question and a health-systems question sit inside the same problem.",
+    what: "Snakebite envenoming was only reclassified by WHO as a category A neglected tropical disease in 2017, and carries a 2030 target of halving death and disability. The science runs from antivenom immunology and recombinant antibodies through to ambulance logistics and community first aid. It is one of the few fields where a laboratory question and a health-systems question sit inside the same problem.",
     whyIndia: "India records roughly 58,000 snakebite deaths a year from somewhere between 0.77 and 1.24 million envenomings — more than any other country, and close to half the world's total. South-East Asia carries almost 70 % of global snakebite deaths. India launched its National Action Plan for Prevention and Control of Snakebite Envenoming in March 2024. Indian antivenom is raised against four species and performs poorly against several regionally important snakes it was never designed for, which is an unsolved problem sitting in your own district hospital.",
     entry: "You do not need a further degree to start. A rural or district posting, a casualty rotation, or a community medicine department is the entry point. From there: MSc/PhD in toxinology, tropical medicine or epidemiology, or a clinical research fellowship. The Liverpool and Oxford tropical groups both take clinicians directly.",
     where: ["Liverpool School of Tropical Medicine (Centre for Snakebite Research)", "Oxford Tropical Medicine / MORU", "ICMR institutes and the NAP-SE network", "Kasturba Medical College and other high-burden district centres", "IDDO / WHO NTD programmes"],
@@ -54,7 +54,7 @@ window.DB.frontiers.push(
     tagline: "Five billion people cannot get an operation, and it is a research field",
     fields: ["clinical", "global", "systems", "pubhealth"],
     what: "The discipline created by the 2015 Lancet Commission on Global Surgery, which established that 5 billion people lack access to safe, affordable surgical and anaesthesia care — 3.3 billion of them in low- and middle-income countries. It is measured through six indicators covering access, workforce, volume, mortality and the financial catastrophe an operation causes a family. This is surgery studied as a health system rather than as a technique.",
-    whyIndia: "The Indian numbers are the argument. Analyses of the Commission's indicators for India found that only about 6.8 % of the need for major surgical operations was met in rural India — and the blood supply deficit and the rural surgical workforce are named as the two highest priorities. If you are a surgical trainee in India who wants to matter beyond the operating list, the unmet need is not abroad. It is one district away.",
+    whyIndia: "The Indian numbers are the argument. Analyses of the Commission's indicators for India found that only about 6.8 % of the need for major surgical operations was met in rural India, and the blood supply deficit and the rural surgical workforce are named as the two highest priorities. If you are a surgical trainee in India who wants to matter beyond the operating list, the unmet need is not abroad. It is one district away.",
     entry: "Any surgical, anaesthetic or obstetric trainee can enter through an audit. Formal routes: MPH or MSc in global health, the Harvard Program in Global Surgery and Social Change, or a research post attached to a surgical department. No fellowship is required to publish your first indicator study.",
     where: ["Program in Global Surgery and Social Change, Harvard", "King's Centre for Global Health", "WHO Emergency and Essential Surgical Care programme", "AIIMS and CMC surgical departments running LCoGS indicator work", "Lancet Regional Health — Southeast Asia"],
     startNow: "Measure one of the six indicators for your own hospital's catchment — the simplest is the proportion of the population within two hours of a facility that can deliver caesarean section, laparotomy and open fracture care. It is a map and a denominator, it costs nothing, and it is exactly what the Commission asks countries to report and most have not.",
@@ -65,10 +65,10 @@ window.DB.frontiers.push(
     name: "Accessible Cell & Gene Therapy",
     tagline: "India built the world's cheapest CAR-T. That is now a field.",
     fields: ["onco", "genomics", "biochem", "systems"],
-    what: "Engineering a patient's own immune cells to attack their cancer — and the separate, harder problem of making that affordable. CAR-T abroad costs on the order of a crore per patient, which puts it outside the reach of nearly every Indian family and most health systems on earth. The frontier is no longer only whether the biology works; it is manufacturing, supply chain, toxicity management and price.",
+    what: "Engineering a patient's own immune cells to attack their cancer, and the separate, harder problem of making that affordable. CAR-T abroad costs on the order of a crore per patient, which puts it outside the reach of nearly every Indian family and most health systems on earth. The frontier is no longer only whether the biology works; it is manufacturing, supply chain, toxicity management and price.",
     whyIndia: "NexCAR19, developed out of IIT Bombay with Tata Memorial Centre and incubated through BIRAC, became India's first indigenous CAR-T approved by CDSCO — delivering comparable efficacy at close to a tenth of the global cost, with a lower rate of cytokine release syndrome in its trial cohort of 64 patients and no reported neurotoxicity. It has since treated several hundred patients. This is the clearest recent case of Indian translational science solving a problem the rest of the world had priced out of reach, and the people who built it are still in the country.",
     entry: "Medical oncology, haematology or transfusion medicine clinically; or immunology and bioprocess engineering on the science side. A medical graduate is unusually useful here because toxicity management — CRS, ICANS — is a bedside skill the engineers do not have.",
-    where: ["Tata Memorial Centre, Mumbai", "IIT Bombay / ImmunoACT", "CMC Vellore haematology", "BIRAC-funded cell therapy programmes", "international sites for comparison — but the interesting work is here"],
+    where: ["Tata Memorial Centre, Mumbai", "IIT Bombay / ImmunoACT", "CMC Vellore haematology", "BIRAC-funded cell therapy programmes", "international sites for comparison, but the interesting work is here"],
     startNow: "Read the published NexCAR19 trial data properly, then ask your haematology department what happens to a relapsed ALL patient who cannot pay. Understanding that gap concretely is what separates people who work on access from people who talk about it.",
     url: "https://immunoact.com/"
   },
@@ -79,7 +79,7 @@ window.DB.frontiers.push(
     fields: ["clinical", "systems", "compbio"],
     what: "A structured method — observe clinical practice, identify and filter unmet needs, invent, then navigate regulation and reimbursement — that came out of Stanford and was deliberately transplanted to India. It treats the clinician as the origin of the invention rather than its end user, which is the inversion the field rests on.",
     whyIndia: "Devices designed for well-resourced hospitals fail in Indian settings for unglamorous reasons: power, consumables, calibration, cost, maintenance. A device designed here for here often works everywhere, and the reverse is rarely true. India has a government-funded pipeline for exactly this through the Department of Biotechnology, which most medical students have never heard of despite it paying a stipend.",
-    entry: "The School of International Biodesign fellowship at AIIMS New Delhi and IIT Delhi takes medical graduates into mixed teams with engineers, designers and MBAs — it is listed as a programme on this site, and it pays. No engineering background is required; being the clinician in the room is the contribution.",
+    entry: "The School of International Biodesign fellowship at AIIMS New Delhi and IIT Delhi takes medical graduates into mixed teams with engineers, designers and MBAs. It is listed as a programme on this site, and it pays. No engineering background is required; being the clinician in the room is the contribution.",
     where: ["School of International Biodesign — AIIMS New Delhi & IIT Delhi", "Stanford Byers Center for Biodesign", "IIT Kanpur / KGMU SIB-SHInE", "BIRAC BioNEST incubators", "Jhpiego and PATH device programmes"],
     startNow: "Keep a needs notebook for one month on the wards. Write down every time something is worked around with tape, a syringe, a repurposed tube or a nurse's improvisation. That list is the raw material of the entire method, and it is only visible to someone standing where you are standing.",
     url: "https://schoolofbiodesign.in/"
@@ -91,7 +91,7 @@ window.DB.frontiers.push(
     fields: ["systems", "pubhealth", "global"],
     what: "The formal evaluation of whether a drug, device or programme is worth public money — cost-effectiveness modelling, budget impact analysis, and the ethics of the threshold you set. It is the discipline that turns a clinical trial result into a decision about whether a state health scheme covers it.",
     whyIndia: "Ayushman Bharat covers a vast population against a finite budget, and every package rate is implicitly an HTA decision. India has a formal Health Technology Assessment body under the Department of Health Research to do this work. The people who build those models are overwhelmingly economists; clinicians who understand both the disease and the discounting are rare enough to be immediately useful, and the decisions being made are enormous.",
-    entry: "MSc in health economics, or an MPH with a health-economics stream. Modelling is done in Excel, R and TreeAge — this is learnable without leaving your job. A clinician who can build a Markov model is a genuinely scarce combination.",
+    entry: "MSc in health economics, or an MPH with a health-economics stream. Modelling is done in Excel, R and TreeAge. This is learnable without leaving your job. A clinician who can build a Markov model is a genuinely scarce combination.",
     where: ["Department of Health Research HTA network (India)", "PHFI health economics groups", "University of York Centre for Health Economics", "LSHTM and Imperial health economics", "NICE International"],
     startNow: "Take one decision your own hospital makes routinely — which stent, which insulin, which screening interval — and build the simplest possible cost-effectiveness comparison for it. The exercise teaches the method faster than a course, and it forces you to find out what things actually cost, which most clinicians never learn.",
     url: "https://www.icmr.gov.in/"
@@ -105,7 +105,7 @@ window.DB.specialties.push(
     id: "sp-derm",
     name: "Dermatology",
     fields: ["clinical", "genomics", "global"],
-    oneLine: "The most competitive seat in Indian postgraduate medicine, chosen by many for the lifestyle and by almost nobody for the science — which is where the opening is.",
+    oneLine: "The most competitive seat in Indian postgraduate medicine, chosen by many for the lifestyle and by almost nobody for the science, which is where the opening is.",
     day: "Almost entirely outpatient, high volume, largely diagnostic by pattern recognition. Procedures if you want them — biopsies, lasers, aesthetics. Predictable hours, very few nights, and the rare clinical specialty where private practice is genuinely viable early.",
     india: "NEET-PG or INI-CET → MD Dermatology, Venereology and Leprology (3 years) or DNB. Consistently among the highest closing ranks in the country, which is the whole difficulty. Stipend roughly ₹60,000–95,000/month at government institutions.",
     abroad: [
@@ -149,7 +149,7 @@ window.DB.specialties.push(
     ],
     masters: ["MSc Public Health for Eye Care (LSHTM)", "MSc Health Data Science", "MPH for community ophthalmology", "Fellowships at Aravind or LV Prasad"],
     fitIf: "You want microsurgery with a short learning loop and a visible result. You like technology and instruments. You are drawn to a field where a twelve-minute operation can return someone's sight and their livelihood in one afternoon.",
-    truth: "The field's ceiling in India is unusually high and its floor is unusually comfortable, which makes it easy to coast. LSHTM runs an entire masters in public health for eye care because blindness is a systems problem, not a surgical one — and most of the world's avoidable blindness is cataract that simply never reached a table. If you take this specialty and only operate, you have taken the easiest version of it."
+    truth: "The field's ceiling in India is unusually high and its floor is unusually comfortable, which makes it easy to coast. LSHTM runs an entire masters in public health for eye care because blindness is a systems problem, not a surgical one, and most of the world's avoidable blindness is cataract that simply never reached a table. If you take this specialty and only operate, you have taken the easiest version of it."
   },
   {
     id: "sp-ortho",
@@ -174,13 +174,13 @@ window.DB.specialties.push(
     ],
     masters: ["MSc Trauma Sciences (Queen Mary)", "MSc Global Health / MPH for trauma systems", "MSc Orthopaedic Engineering", "Diploma in Sports Medicine"],
     fitIf: "You want to fix things mechanically and see them work. You are physically robust and unbothered by unpredictable hours. You are drawn to trauma rather than repelled by it.",
-    truth: "It is the specialty where the gap between what you do for one patient and what could be done for a population is widest, and almost nobody in it looks at the population end. Road traffic injury is a leading killer of young Indians and pre-hospital care is close to absent in most of the country — that is a research career sitting untouched next to a very busy operating list. The physical toll is real and people rarely mention it until their forties."
+    truth: "It is the specialty where the gap between what you do for one patient and what could be done for a population is widest, and almost nobody in it looks at the population end. Road traffic injury is a leading killer of young Indians and pre-hospital care is close to absent in most of the country. That is a research career sitting untouched next to a very busy operating list. The physical toll is real and people rarely mention it until their forties."
   },
   {
     id: "sp-pmr",
     name: "Physical Medicine & Rehabilitation",
     fields: ["clinical", "systems", "global", "neuro"],
-    oneLine: "The specialty that treats what medicine leaves behind — and the one an ageing, surviving India will need most and has least of.",
+    oneLine: "The specialty that treats what medicine leaves behind, and the one an ageing, surviving India will need most and has least of.",
     day: "Outpatient and rehabilitation-ward based, working in teams with physiotherapists, occupational therapists, prosthetists and speech therapists. Long relationships with patients across months. Procedures if you want them — spasticity injections, ultrasound-guided work, electrodiagnosis. Almost no nights.",
     india: "NEET-PG or INI-CET → MD Physical Medicine and Rehabilitation (3 years) or DNB. Far less competitive than the glamour specialties, which is a genuine opportunity rather than a consolation. Stipend roughly ₹60,000–95,000/month at government institutions.",
     abroad: [
@@ -205,14 +205,14 @@ window.DB.specialties.push(
     id: "sp-palliative",
     name: "Palliative Medicine",
     fields: ["clinical", "psych", "global", "systems"],
-    oneLine: "The specialty built on the admission that not everything is curable — and the one where India has a genuine world model in Kerala.",
+    oneLine: "The specialty built on the admission that not everything is curable, and the one where India has a genuine world model in Kerala.",
     day: "Outpatient clinics, home visits, inpatient consults across every other specialty, and long conversations that are the actual clinical work. Symptom control, opioid prescribing, and family meetings. Emotionally demanding in a way that is different from being busy.",
     india: "NEET-PG → MD Palliative Medicine (3 years), a young and small specialty in India with limited seats but very limited competition. Also entered through fellowships and diplomas after any base specialty. Tata Memorial, AIIMS, CMC Vellore and the Kerala network are the main centres.",
     abroad: [
       "UK — palliative medicine after MRCP; a well-established specialty with structured training",
       "Australia — RACP training, and palliative care is a recognised shortage area",
       "USA — hospice and palliative medicine as a fellowship after a base residency",
-      "The field is small everywhere, which means the international community is genuinely reachable — you can know most of the people working on your question"
+      "The field is small everywhere, which means the international community is genuinely reachable. You can know most of the people working on your question"
     ],
     supers: ["Paediatric palliative care", "Cancer pain", "Palliative care in heart failure and end-stage organ disease", "Community and home-based care", "Bereavement and psychosocial care"],
     research: [
@@ -271,7 +271,7 @@ window.DB.research.push(
     window: "Applications accepted twice a year",
     deadlineMonths: [1, 2, 3, 7, 8, 9],
     url: "https://schoolofbiodesign.in/index.php/fellowship/",
-    why: "A government-funded year that pays a medical graduate a real stipend to invent a medical device, inside a team with engineers, designers and MBAs, hosted between AIIMS and IIT Delhi. The Stanford biodesign method treats the clinician as the origin of the invention — you are in the room because you are the only person who has watched the problem happen. For anyone who has ever improvised a fix on a ward and thought someone should build this properly, this is the structured version of that thought, and it is one of very few routes on this site that pays you to leave clinical work temporarily without leaving medicine.",
+    why: "A government-funded year that pays a medical graduate a real stipend to invent a medical device, inside a team with engineers, designers and MBAs, hosted between AIIMS and IIT Delhi. The Stanford biodesign method treats the clinician as the origin of the invention. You are in the room because you are the only person who has watched the problem happen. For anyone who has ever improvised a fix on a ward and thought someone should build this properly, this is the structured version of that thought, and it is one of very few routes on this site that pays you to leave clinical work temporarily without leaving medicine.",
     reqs: [
       "Graduates and postgraduates from medicine, engineering, design or management — MBBS qualifies directly",
       "Selection favours a demonstrated track record of innovation and willingness to work in a mixed team",
@@ -291,7 +291,7 @@ window.DB.impact["dhr-fellowship-abroad"] = {
   t: 1,
   odds: "Competitive but a small, self-selecting field — most eligible people never hear of it",
   effort: "20 hrs, free to apply, plus the time to secure a host",
-  note: "The Indian government paying for an Indian clinician to train abroad and return, with an age ceiling of 45 or 57 rather than 30. That means it is still open when nearly everything else on this site has closed — and almost nobody applies."
+  note: "The Indian government paying for an Indian clinician to train abroad and return, with an age ceiling of 45 or 57 rather than 30. That means it is still open when nearly everything else on this site has closed, and almost nobody applies."
 };
 window.DB.impact["sib-biodesign"] = {
   t: 2,

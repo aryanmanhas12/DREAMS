@@ -18,7 +18,7 @@ window.DB.research = [
     window: "Opens in spring · advertised close 30 May, extended to 10 June (5 pm) in the 2026 cycle",
     deadlineMonths: [3, 4, 5, 6],
     url: "https://www.icmr.gov.in/short-term-studentship-sts",
-    why: "The default first research project for every Indian medical student, and the one most people apply to a year too late. You can hold it ONCE — and only in 1st or 2nd year MBBS. Third and final year are ineligible, so the window genuinely closes.",
+    why: "The default first research project for every Indian medical student, and the one most people apply to a year too late. You can hold it ONCE, and only in 1st or 2nd year MBBS. Third and final year are ineligible, so the window genuinely closes.",
     reqs: ["1st or 2nd professional MBBS only", "A faculty guide from your own institution", "Institutional Ethics Committee clearance", "Free to apply"],
     steps: [
       "Find your guide in the term BEFORE you need them. A professor who already knows your face says yes; an emailed stranger does not.",
@@ -69,7 +69,7 @@ window.DB.research = [
     steps: [
       "Apply in December or January for a summer placement.",
       "Name the laboratory you want. JNCASR's neuroscience and molecular biology units are small and specific.",
-      "Ask for accommodation on campus — it is usually available and cheap."
+      "Ask for accommodation on campus. It is usually available and cheap."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "medium", workExp: 0
   },
@@ -148,7 +148,7 @@ window.DB.research = [
     window: "MedEngage Nov–Dec · IAP around August",
     deadlineMonths: [8, 11, 12],
     url: "https://www.medengage.in/",
-    why: "Smaller grants, far less competition, and open to all MBBS years including interns — which matters because ICMR STS locks out third and final year. If you missed STS, these are the alternatives that keep your research record moving.",
+    why: "Smaller grants, far less competition, and open to all MBBS years including interns, which matters because ICMR STS locks out third and final year. If you missed STS, these are the alternatives that keep your research record moving.",
     reqs: ["MBBS any year, interns included", "A guide and a project", "Free to apply"],
     steps: [
       "Reuse the ICMR STS proposal you already wrote. Reformatting takes an afternoon.",
@@ -181,7 +181,7 @@ window.DB.research = [
     steps: [
       "Confirm your year status counts as pre-final BEFORE you invest in the application. Email WINStep Forward and ask directly — it takes ten minutes and saves a cycle.",
       "Apply through the IUSSTF visitation-programmes portal.",
-      "IUSSTF and WINStep match you to up to three US professors — you do not have to find the lab yourself, which removes the hardest barrier.",
+      "IUSSTF and WINStep match you to up to three US professors. You do not have to find the lab yourself, which removes the hardest barrier.",
       "The statement of purpose should name a specific research area, not a general interest in the United States."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 0
@@ -252,7 +252,7 @@ window.DB.research = [
     steps: [
       "Apply in December–January for the following summer.",
       "The research statement should show you can think about a problem, not that you are enthusiastic about science.",
-      "Even an unsuccessful application forces you to articulate a research question properly — which is the exact skill your later applications need."
+      "Even an unsuccessful application forces you to articulate a research question properly, which is the exact skill your later applications need."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -469,7 +469,7 @@ window.DB.research = [
     window: "Applications open February · info sessions in January",
     deadlineMonths: [1, 2, 3, 4],
     url: "https://neuromatch.io/computational-neuroscience/",
-    why: "The single cheapest credential that makes a cold email to a computational neuroscience laboratory actually land. Three weeks, globally respected, remote, and the fee is waived if you ask. Right now a principal investigator has no way to verify you can do the work — this is the proof.",
+    why: "The single cheapest credential that makes a cold email to a computational neuroscience laboratory actually land. Three weeks, globally respected, remote, and the fee is waived if you ask. Right now a principal investigator has no way to verify you can do the work. This is the proof.",
     reqs: ["Basic Python — do a free course first if you have none", "No degree requirement", "Tuition waivers available; there is no cost to apply"],
     steps: [
       "Applications open in February for a July course. Attend the January information session.",
@@ -497,7 +497,7 @@ window.DB.research = [
       "Apply for Coursera financial aid rather than paying. Write two honest paragraphs; approval takes about 15 days.",
       "The order that works: Python basics → pandas → statistics → the specific method your field uses.",
       "Free and genuinely good: Johns Hopkins Data Science and Epidemiology on Coursera, EMBL-EBI bioinformatics, OpenWHO for public health emergencies, Kaggle Learn for practical Python, Software Carpentry for reproducible workflows.",
-      "Do CITI or NIH Good Clinical Practice training free online — it is a formal requirement for many research placements and takes one afternoon.",
+      "Do CITI or NIH Good Clinical Practice training free online. It is a formal requirement for many research placements and takes one afternoon.",
       "Twenty minutes of code a day beats a weekend sprint every month. Nobody bridges medicine and computation heroically."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0

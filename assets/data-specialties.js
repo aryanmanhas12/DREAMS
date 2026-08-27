@@ -11,7 +11,7 @@ window.DB.specialties = [
     id: "sp-psych",
     name: "Psychiatry",
     fields: ["psych", "neuro", "global"],
-    oneLine: "The only specialty where the diagnostic instrument is still a conversation — and the field currently trying hardest to change that.",
+    oneLine: "The only specialty where the diagnostic instrument is still a conversation, and the field currently trying hardest to change that.",
     day: "Outpatient clinics, liaison work on medical wards, crisis assessments, long-term follow-up. Fewer procedures and fewer nights than almost any other specialty, and far more continuity with the same patients over years.",
     india: "NEET-PG or INI-CET → MD Psychiatry (3 years) or DNB. NIMHANS runs its own entrance and is the strongest department in the country. Stipend roughly ₹60,000–95,000/month at government institutions.",
     abroad: [
@@ -30,7 +30,7 @@ window.DB.specialties = [
     ],
     masters: ["MSc Global Mental Health (LSHTM/KCL)", "MSc Psychiatric Research (KCL IoPPN)", "MSc Genomic Medicine", "MSc Health Data Science"],
     fitIf: "People tell you things they tell nobody else. You are more interested in why someone became unwell than in the drug you will prescribe. You can sit with uncertainty for years without needing it resolved.",
-    truth: "The pay is lower than procedural specialties in India and the stigma extends to the doctors, not just the patients — you will be asked repeatedly why you are 'wasting' an MBBS. Against that: it is the specialty with the most unanswered questions, the most room for a researcher to matter, and the best working hours of any clinical discipline. If you want to change what medicine knows rather than apply what it already knows, there is more open ground here than anywhere else."
+    truth: "The pay is lower than procedural specialties in India and the stigma extends to the doctors, not just the patients. You will be asked repeatedly why you are 'wasting' an MBBS. Against that: it is the specialty with the most unanswered questions, the most room for a researcher to matter, and the best working hours of any clinical discipline. If you want to change what medicine knows rather than apply what it already knows, there is more open ground here than anywhere else."
   },
   {
     id: "sp-neuro",
@@ -224,7 +224,7 @@ window.DB.specialties = [
     ],
     masters: ["MSc Neuroimaging", "MSc Health Data Science", "MSc Medical Imaging / Image Computing (UCL, KCL)"],
     fitIf: "You are a strong visual pattern-matcher. You want deep involvement in diagnosis without owning the ward. You are curious rather than defensive about what algorithms can do.",
-    truth: "You will hear repeatedly that AI is going to replace radiologists. The evidence so far says the opposite — it is changing the job, not removing it, and the radiologists who understand the models are the ones shaping how they are deployed. If your instinct is to build things, this is the clinical specialty where that instinct is most immediately useful. FRCR being sittable from India also makes it one of the most portable qualifications available."
+    truth: "You will hear repeatedly that AI is going to replace radiologists. The evidence so far says the opposite. It is changing the job, not removing it, and the radiologists who understand the models are the ones shaping how they are deployed. If your instinct is to build things, this is the clinical specialty where that instinct is most immediately useful. FRCR being sittable from India also makes it one of the most portable qualifications available."
   },
   {
     id: "sp-path",
@@ -247,7 +247,7 @@ window.DB.specialties = [
     ],
     masters: ["MSc Genomic Medicine", "MSc Molecular Medicine", "MSc Biochemistry / MRes", "MSc Bioinformatics"],
     fitIf: "You want the mechanism, not the bedside. Predictable hours matter to you. You are as interested in the tissue as in the person.",
-    truth: "The most direct clinical route into molecular research, and the most underrated by Indian students who read low competition as low value. Pathology is one of the friendliest US residencies for international graduates precisely because it selects on research output rather than clinical charisma — which means a strong publication record can carry you where a Step score alone cannot. If your flow state is a laboratory, this is the specialty that lets you stay in one and still be a doctor."
+    truth: "The most direct clinical route into molecular research, and the most underrated by Indian students who read low competition as low value. Pathology is one of the friendliest US residencies for international graduates precisely because it selects on research output rather than clinical charisma, which means a strong publication record can carry you where a Step score alone cannot. If your flow state is a laboratory, this is the specialty that lets you stay in one and still be a doctor."
   },
   {
     id: "sp-nonclinical-md",
@@ -255,7 +255,7 @@ window.DB.specialties = [
     fields: ["biochem", "genomics", "compbio", "neuro"],
     oneLine: "Three-year MD degrees that almost nobody chooses deliberately, and that lead somewhere very different from where students assume.",
     day: "Teaching, laboratory work, research supervision, and diagnostic service in the case of biochemistry. No wards, no call, and real time to think.",
-    india: "MD Biochemistry, MD Physiology, MD Pharmacology or MD Anatomy (3 years) via NEET-PG. Among the least competitive seats in the country — which is a statement about student preference, not about where the degree can take you.",
+    india: "MD Biochemistry, MD Physiology, MD Pharmacology or MD Anatomy (3 years) via NEET-PG. Among the least competitive seats in the country, which is a statement about student preference, not about where the degree can take you.",
     abroad: [
       "These map cleanly onto international research careers rather than clinical ones",
       "A funded PhD abroad is often a better move than one of these MDs if research is the only goal — European and US doctorates pay a salary and take medical graduates directly",
@@ -270,7 +270,7 @@ window.DB.specialties = [
     ],
     masters: ["Often unnecessary — go straight for a funded PhD instead", "MSc Molecular Medicine if you want to move abroad first", "MSc Clinical Pharmacology"],
     fitIf: "You are honestly more interested in mechanism than in patients. You want time and a laboratory. Teaching appeals to you. You are unbothered by the status hierarchy in an Indian medical college.",
-    truth: "This is the most misunderstood entry on the whole site. These seats are the least contested in the NEET-PG counselling and students treat them as failure — but MD Biochemistry followed by an India Alliance clinical fellowship, or MD Pharmacology followed by a career in clinical trials, are perfectly good lives that involve far less suffering than the alternatives. The genuine caution is different: if pure research is the goal, a funded PhD abroad usually beats a non-clinical MD, because it pays you a salary, trains you better in method, and travels further. Choose the MD if you want to stay in India and teach; choose the PhD if you want to run your own research programme."
+    truth: "This is the most misunderstood entry on the whole site. These seats are the least contested in the NEET-PG counselling and students treat them as failure, but MD Biochemistry followed by an India Alliance clinical fellowship, or MD Pharmacology followed by a career in clinical trials, are perfectly good lives that involve far less suffering than the alternatives. The genuine caution is different: if pure research is the goal, a funded PhD abroad usually beats a non-clinical MD, because it pays you a salary, trains you better in method, and travels further. Choose the MD if you want to stay in India and teach; choose the PhD if you want to run your own research programme."
   },
   {
     id: "sp-emergency",
@@ -287,7 +287,7 @@ window.DB.specialties = [
     ],
     supers: ["Pre-hospital and retrieval medicine", "Toxicology", "Disaster and humanitarian medicine", "Palliative care", "Sports medicine", "Rural and remote medicine"],
     research: [
-      "Health systems and access research — this is the frontline of who does and does not get care",
+      "Health systems and access research. This is the frontline of who does and does not get care",
       "Triage prediction models",
       "Humanitarian and disaster health, where MSF and WHO recruit directly",
       "Primary care implementation science"
