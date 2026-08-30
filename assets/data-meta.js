@@ -64,6 +64,16 @@ window.DB.meta = {
      medical sciences in its own eligibility, which almost no Indian clinician
      knows. Smart India Hackathon publishes real health problem statements and
      is gated only by whether your college registers a SPOC. Checked and NOT
-     added: ichams.org is dead (404). */
+     added: ichams.org is dead (404).
+
+     A full sweep of all 180 links then ran from an unrestricted host: no dead
+     links anywhere. Sixteen return 403 to a command-line fetch, which is bot
+     protection rather than breakage (LSHTM, Oxford, Johns Hopkins, UK Biobank,
+     Melbourne, Otago, Mahidol and the Smart India Hackathon portal all serve
+     browsers normally). Around a dozen return no status at all: Indian
+     government hosts refuse foreign addresses outright, and Chevening, DFAT
+     and a few others drop a non-browser connection at the firewall. Neither
+     code is evidence of a broken link, and this file has been wrong about
+     that before. */
   scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme dates re-read from the government portals including the ICMR-STS extension to 10 June; the major international awards re-checked against their own pages, correcting the EPFL and Swiss Excellence deadlines."
 };
