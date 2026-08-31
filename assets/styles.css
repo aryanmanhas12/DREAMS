@@ -1,4 +1,4 @@
-/* ════════════════════════════════════════════════════════════════
+﻿/* ════════════════════════════════════════════════════════════════
    Dream Counsellor
 
    Type — three roles, self-hosted so nothing depends on a CDN:
@@ -1424,3 +1424,21 @@ body.tour-locked { overflow: hidden; }
 .tour-skip { text-decoration: underline; text-underline-offset: 3px; }
 .tour-esc { color: var(--ink-3); }
 @media (max-width: 400px) { .tour-esc { display: none; } }
+
+/* ════════ HIGH-PERFORMANCE COMPOSITING & FLUID RENDERING ════════ */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  overscroll-behavior-y: contain;
+}
+button, a, input, select, summary, .btn, .card {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.card, .tour-pop, .drawer, .modal {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
