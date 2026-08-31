@@ -97,7 +97,7 @@
 
   --accent:     #00787E;   /* slate teal — everything interactive */
   --accent-2:   #005C63;
-  --accent-wash:#CDE8E6;
+  --accent-wash:#EAF6F4;   /* was #CDE8E6 — 4.08:1 against --accent text, fails AA on the small chip labels. This clears 4.76:1 */
 
   --signal:     #C63A0E;   /* citrus — deadlines only, the one high-energy tone */
   --signal-wash:#FADFCF;
@@ -178,7 +178,7 @@
   --paper:#F2EFE4; --paper-2:#FBF8F0; --surface:#FFFEF9;
   --line:#D8CFBC; --line-soft:#E8E1D2;
   --ink:#131E2C; --ink-2:#46566E; --ink-3:#5E6B7B;
-  --accent:#00787E; --accent-2:#005C63; --accent-wash:#CDE8E6;
+  --accent:#00787E; --accent-2:#005C63; --accent-wash:#EAF6F4;
   --signal:#C63A0E; --signal-wash:#FADFCF;
   --gold:#8A6206; --gold-wash:#F6E6BE; --gold-ink:#FFFDF7;
   --ok:#1E7A50; --warn:#8A5A05;
