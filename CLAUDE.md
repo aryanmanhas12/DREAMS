@@ -54,6 +54,15 @@ steps. Static, client-side, no backend.
   every local open. This page must work from the filesystem, and the published
   bundle inlines every face as a data URI, so there is nothing to win. Tried and
   reverted once already.
+- **The stylesheet link IS preloaded, deliberately, and that is a different case.** `index.html`
+  loads `styles.css` as `<link rel="preload" as="style">` + a `media="print"` swap-on-load +
+  a `<noscript>` fallback, to stop 61KB of CSS blocking first paint (Lighthouse: ~2.9s on Slow
+  4G). This does not hit the font-preload trap above because a stylesheet preload needs no
+  `crossorigin` — that restriction is specific to fonts. `build.js` matches all three tags as
+  one block (`STYLE_BLOCK` regex) and collapses them to a single inline `<style>`; if you ever
+  change this markup, the regex is written to throw loudly rather than silently stop matching,
+  because a silent miss here ships a bundle that 404s on `assets/styles.css` with no local
+  `assets/` directory beside it.
 - **The hero grid is flat, and that is deliberate.** `eyebrow / h1 / globe / lede /
   actions / how` are direct grid children so the source order *is* the phone order,
   with `grid-template-areas` moving the globe into a second column from 920px.
@@ -80,6 +89,10 @@ steps. Static, client-side, no backend.
 - **Watch the em-dash count; it is the single most recognised AI tell.** Measured at 955 across 87k words (≈11 per 1,000) before a cleanup pass took it to 789 (≈9). Human prose typically runs 1–2 per 1,000. This matters for a site whose whole claim is that a person wrote it after checking things. Two rules learned the hard way: a dash joining two independent clauses can safely become a full stop, and one introducing *and/but/so/which* can become a comma — but **only transform lines carrying exactly ONE dash.** A line with two is a parenthetical, and converting half of it orphans the rest: the first attempt turned a list of psychiatry departments into "neurology, and to a specific consultant". Verify afterwards that no changed line still contains a dash.
 - **Never write "X is not A, it is B".** It is the most commonly identified AI construction there is, and the site had eight. Say the thing directly instead. The vocabulary tells (*delve, tapestry, testament, landscape, realm, leverage, seamless, robust*) are already near-absent here and should stay that way — specificity is what keeps them out.
 - **A cleanup pass exposes pre-existing errors; do not assume you caused them.** Removing a dash surfaced "helps nobody — but so is the arithmetic", which had no antecedent for "so is" and had been wrong since it was written. Check `git show HEAD:<file>` before apologising for a bug you did not introduce.
+
+## Test-harness rules (a false-negative cost a real bug this time)
+
+- **The contrast sweep's selector list is a whitelist, and a whitelist rots.** `.chip.is-key` failed AA at 4.08:1 (`#00787E` on `#CDE8E6`) and shipped anyway, because the audit's `sels` array checked `p, li, h1...` but nobody had added `.chip` when the chips were built. Lighthouse caught it; the project's own harness did not, on the same page, at the same viewport. When a new component introduces its own text-on-background combination, add its selector to the sweep in the same change — do not assume the generic tag list covers it.
 
 ## Test-harness rules (six false failures came from ignoring these)
 

@@ -36,8 +36,22 @@ const js = scripts
 // String.replace() special-cases "$$", "$&", "$`" etc. as pattern tokens,
 // which silently corrupts source that legitimately contains "$$" (as ours
 // does — the $$ selector helper in app.js).
+// index.html loads the stylesheet as preload + media="print" swap (a
+// non-blocking-CSS technique — see the comment above the link in index.html)
+// with a <noscript> fallback for a JS-disabled browser. All three exist only
+// to fetch assets/styles.css over the network; in the bundle there is no
+// assets/ directory beside the file and the CSP blocks the request anyway,
+// so the whole three-tag block collapses to one inline <style>. Matched as
+// one block, not tag-by-tag — matching only the plain <link> (as a single-tag
+// regex would, since it is now the only one of the three with no extra
+// attributes) inlines the CSS into a <noscript> that never applies with JS
+// on, and leaves the other two pointing at a path that no longer exists.
+const STYLE_BLOCK = /<link rel="preload" href="assets\/styles\.css"[^>]*\/>\s*<link rel="stylesheet" href="assets\/styles\.css" media="print"[^>]*\/>\s*<noscript><link rel="stylesheet" href="assets\/styles\.css" \/><\/noscript>/;
+if (!STYLE_BLOCK.test(html)) {
+  throw new Error("build.js: the preload/print-swap/noscript stylesheet block in index.html did not match — index.html's <head> markup changed shape, update this regex to match it.");
+}
 let out = html
-  .replace(/<link rel="stylesheet" href="assets\/styles\.css" \/>/, () => "<style>\n" + css + "\n</style>")
+  .replace(STYLE_BLOCK, () => "<style>\n" + css + "\n</style>")
   .replace(/<script src="[^"]+"><\/script>\s*/g, "");
 
 out = out.replace("</body>", () => "<script>\n" + js + "\n</script>\n</body>");

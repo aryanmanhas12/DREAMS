@@ -35,7 +35,19 @@
      page has to work from the filesystem, and the published bundle inlines
      every face as a data URI anyway, so the preload would buy nothing there.
      The faces are same-origin and discovered one hop after this stylesheet. -->
-<link rel="stylesheet" href="assets/styles.css" />
+<!-- Loaded non-blocking: media="print" makes the browser fetch this at high
+     priority without holding up first paint, then the onload swaps it to
+     "all" once it lands. Pure HTML/inline-attribute technique — no external
+     loader script, so it still works over file:// and needs no build step.
+     Lighthouse flagged 61KB of render-blocking CSS costing ~2.9s on Slow 4G;
+     this is the standard fix that does not need a bundler. The <noscript>
+     fallback covers a JS-disabled browser, which would otherwise get no
+     styles at all under this pattern. Font preloading is still deliberately
+     NOT done here — see the note below; that restriction is about fonts
+     specifically, not this stylesheet. -->
+<link rel="preload" href="assets/styles.css" as="style" />
+<link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'; this.onload=null;" />
+<noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
 </head>
 <body>
 
