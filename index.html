@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -35,6 +35,12 @@
      page has to work from the filesystem, and the published bundle inlines
      every face as a data URI anyway, so the preload would buy nothing there.
      The faces are same-origin and discovered one hop after this stylesheet. -->
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="DREAMS" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -406,5 +412,12 @@
 <script src="assets/data-coast.js"></script>
 <script src="assets/globe.js"></script>
 <script src="assets/app.js"></script>
+<script>
+if ('serviceWorker' in navigator && (location.protocol.startsWith('http') || location.hostname === 'localhost')) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  });
+}
+</script>
 </body>
 </html>

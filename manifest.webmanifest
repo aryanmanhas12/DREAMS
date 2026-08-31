@@ -1,0 +1,17 @@
+﻿{
+  "name": "Dream Counsellor — Medical Research & Fellowships",
+  "short_name": "DREAMS",
+  "description": "207 funded research programmes, scholarships and clinical placements open to Indian medical students. Works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#061A22",
+  "theme_color": "#061A22",
+  "categories": ["education", "medical", "research"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
