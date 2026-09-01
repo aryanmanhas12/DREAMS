@@ -50,8 +50,18 @@ const STYLE_BLOCK = /<link rel="preload" href="assets\/styles\.css"[^>]*\/>\s*<l
 if (!STYLE_BLOCK.test(html)) {
   throw new Error("build.js: the preload/print-swap/noscript stylesheet block in index.html did not match — index.html's <head> markup changed shape, update this regex to match it.");
 }
+// The single-file bundle has no manifest.webmanifest or sw.js beside it, and
+// runs under a CSP that blocks the fetch anyway. Dropping the manifest link
+// also switches off service-worker registration: app.js treats the presence
+// of that link as the signal that there is a worker to register.
+const MANIFEST_BLOCK = /<link rel="manifest"[^>]*\/>\s*<link rel="apple-touch-icon"[^>]*\/>\s*<meta name="apple-mobile-web-app-title"[^>]*\/>\s*<meta name="mobile-web-app-capable"[^>]*\/>/;
+if (!MANIFEST_BLOCK.test(html)) {
+  throw new Error("build.js: the manifest/apple-touch-icon block in index.html did not match — update this regex, or the bundle will ship a dead manifest link and try to register a service worker that is not there.");
+}
+
 let out = html
   .replace(STYLE_BLOCK, () => "<style>\n" + css + "\n</style>")
+  .replace(MANIFEST_BLOCK, () => "")
   .replace(/<script src="[^"]+"><\/script>\s*/g, "");
 
 out = out.replace("</body>", () => "<script>\n" + js + "\n</script>\n</body>");

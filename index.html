@@ -48,6 +48,13 @@
 <link rel="preload" href="assets/styles.css" as="style" />
 <link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'; this.onload=null;" />
 <noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
+
+<!-- Installable to a phone home screen. Relative paths throughout so this
+     works both at the GitHub Pages sub-path and from the filesystem. -->
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Dream Counsellor" />
+<meta name="mobile-web-app-capable" content="yes" />
 </head>
 <body>
 

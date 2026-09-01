@@ -1,0 +1,19 @@
+{
+  "name": "Dream Counsellor — career compass for Indian medical students",
+  "short_name": "Dream Counsellor",
+  "description": "Every funded research programme, scholarship and frontier field open to an Indian medical student, graded honestly and linked to its official page.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F2EFE4",
+  "theme_color": "#F2EFE4",
+  "lang": "en-IN",
+  "categories": ["education", "medical", "reference"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

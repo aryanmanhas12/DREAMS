@@ -2102,7 +2102,31 @@
     });
   }
 
+  /* Registers the offline worker, and does nothing at all when it cannot.
+     Three cases have to stay quiet rather than throwing a console error:
+     a file:// open (service workers need a secure origin), a browser without
+     support, and the single-file bundle — build.js strips the manifest link,
+     so its absence is the signal that there is no sw.js beside us either. */
+  function initServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+    if (!document.querySelector('link[rel="manifest"]')) return;
+    // isSecureContext is the browser's own answer to "can a worker run here",
+    // and it covers https, localhost AND 127.0.0.1 — a hand-rolled hostname
+    // check missed the loopback IP and silently disabled the worker in local
+    // testing. file:// is excluded separately: some builds report it as a
+    // secure context, but register() still rejects there, and the resulting
+    // console error would be noise on every local open of index.html.
+    if (location.protocol === "file:") return;
+    if (!window.isSecureContext) return;
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {
+        /* Offline support is a bonus; the site works without it. */
+      });
+    });
+  }
+
   function init() {
+    initServiceWorker();
     renderStats();
     renderReviewed();
     initTheme();
