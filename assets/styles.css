@@ -1424,3 +1424,118 @@ body.tour-locked { overflow: hidden; }
 .tour-skip { text-decoration: underline; text-underline-offset: 3px; }
 .tour-esc { color: var(--ink-3); }
 @media (max-width: 400px) { .tour-esc { display: none; } }
+
+/* ─────────────── touch feel and scroll surface ───────────────
+   Everything below is polish on how the page responds to a finger. Four
+   things it deliberately does NOT do, each of which it did once:
+
+   1. No `scroll-behavior: smooth` here. `html` already sets it at the top of
+      this file, where the prefers-reduced-motion block immediately below can
+      turn it off. Re-declaring it down here would land after that guard and
+      win on source order, quietly re-enabling smooth scrolling for the
+      readers who explicitly asked their OS for no motion.
+   2. No `text-rendering: optimizeLegibility`. It is a well-known cost on long
+      documents and buys nothing the browser is not already doing with kerning
+      and ligatures on these faces.
+   3. No blanket `translateZ(0)`. Promoting a component to its own compositing
+      layer helps when there are a handful of them; browse renders 167 cards,
+      and 167 layers is a memory problem on exactly the mid-range Android this
+      is supposed to be fast on. Only the tour popover, of which there is one,
+      is promoted.
+   4. No selectors for elements that do not exist. `.entry-card`, `.drawer`,
+      `.modal` and `.filter-btn` were all styled here and none of them is in
+      the markup. */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Slim translucent scrollbars, tinted from the ink token so they follow the
+   theme instead of staying grey on the dark ground. */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  transition: background-color .2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--ink) 34%, transparent);
+  background-clip: padding-box;
+}
+
+/* `touch-action: manipulation` removes the 300ms double-tap-to-zoom wait, and
+   killing the tap highlight stops the grey flash on every card tap. Both are
+   pure responsiveness with no motion attached. */
+button, a, input, select, summary, .btn, .card, .chip, .opt {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The press-in is on :active only, so it reads as a button taking the touch.
+   The universal reduced-motion rule near the top of this file carries
+   `transition-duration: .001ms !important`, which collapses these to instant
+   rather than needing a second guard here. */
+button, .btn, .chip, .opt {
+  transition: transform .16s cubic-bezier(.34, 1.56, .64, 1),
+              box-shadow .24s cubic-bezier(.16, 1, .3, 1),
+              background-color .15s ease,
+              border-color .15s ease,
+              color .15s ease;
+}
+button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); }
+
+/* Card lift is gated on a real pointer. On a touchscreen :hover sticks after
+   a tap, so an un-gated lift leaves a card floating until you tap elsewhere. */
+@media (hover: hover) and (pointer: fine) {
+  .card {
+    transition: transform .16s cubic-bezier(.34, 1.56, .64, 1),
+                box-shadow .24s cubic-bezier(.16, 1, .3, 1),
+                border-color .15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2.5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12), 0 16px 36px rgba(0, 0, 0, .16);
+  }
+}
+
+/* No frosted-topbar rule here on purpose. .topbar already carries
+   `color-mix(in srgb, var(--paper) 88%, transparent)` and a 10px blur near the
+   top of this file. An override was added here using `var(--bg, #F2EFE4)`, and
+   there is no --bg token in this palette, so it resolved to that hardcoded
+   cream in BOTH themes and put a light strip across the top of the dark one.
+   The background token is --paper. */
+
+/* A deeper shadow and a hairline ring, so the popover reads as lifted off the
+   scrim. No backdrop-filter: .tour-pop is painted on an opaque --surface, so
+   a blur behind it would cost a frame and show nothing. */
+.tour-pop {
+  box-shadow: 0 24px 56px -12px rgba(0, 0, 0, .36),
+              0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+/* A saved copy that has since been superseded says so, at the bottom where it
+   cannot cover the topbar or the primary action. Deliberately NOT --signal:
+   that colour is reserved for deadlines, and this is a staleness notice, not
+   a date. The button is --accent like everything else interactive. */
+.stale-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 10px 16px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); color: var(--ink);
+  border-top: 2px solid var(--warn);
+  box-shadow: 0 -8px 24px -12px rgba(0, 0, 0, .3);
+  font-family: var(--font-ui); font-size: 15px; line-height: 1.4;
+  text-align: center;
+}
+.stale-bar-btn {
+  font: inherit; font-weight: 600;
+  padding: 9px 16px; min-height: 44px;
+  background: var(--accent); color: var(--paper-2);
+  border: 1px solid var(--accent-2); border-radius: var(--r);
+  cursor: pointer;
+}
+.stale-bar-btn:hover { background: var(--accent-2); }
+.stale-bar-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

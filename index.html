@@ -43,18 +43,25 @@
      this is the standard fix that does not need a bundler. The <noscript>
      fallback covers a JS-disabled browser, which would otherwise get no
      styles at all under this pattern. Font preloading is still deliberately
-     NOT done here — see the note below; that restriction is about fonts
+     NOT done here — see the note above; that restriction is about fonts
      specifically, not this stylesheet. -->
 <link rel="preload" href="assets/styles.css" as="style" />
 <link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'; this.onload=null;" />
 <noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
 
 <!-- Installable to a phone home screen. Relative paths throughout so this
-     works both at the GitHub Pages sub-path and from the filesystem. -->
+     works both at the GitHub Pages sub-path and from the filesystem.
+     apple-mobile-web-app-capable is the older alias of the standard property
+     and older iOS still reads only that one, so both are set. The status bar
+     stays "default" rather than black-translucent: translucent makes the web
+     view extend up behind the clock, and with a sticky topbar and no
+     safe-area padding that puts the menu button under the system time. -->
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="Dream Counsellor" />
 <meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </head>
 <body>
 
@@ -399,7 +406,7 @@
     <p class="foot-note foot-small reviewed" id="reviewedFoot"></p>
     <p class="foot-note foot-small">
       If you are struggling right now, that is not a career problem and it does not wait for a
-      deadline. Tele-MANAS, India's free national mental health helpline: <strong>14416</strong>.
+      deadline. Tele-MANAS, India's free national mental health helpline: <a href="tel:14416"><strong>14416</strong></a> · Check your wellbeing privately with <a href="https://aryanmanhas12.github.io/Psych/" target="_blank" rel="noopener"><strong>Psych Screener</strong></a>.
     </p>
     <p class="foot-sign">Go on then. The world is wider than they told you.</p>
   </div>

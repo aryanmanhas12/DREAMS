@@ -54,7 +54,9 @@ if (!STYLE_BLOCK.test(html)) {
 // runs under a CSP that blocks the fetch anyway. Dropping the manifest link
 // also switches off service-worker registration: app.js treats the presence
 // of that link as the signal that there is a worker to register.
-const MANIFEST_BLOCK = /<link rel="manifest"[^>]*\/>\s*<link rel="apple-touch-icon"[^>]*\/>\s*<meta name="apple-mobile-web-app-title"[^>]*\/>\s*<meta name="mobile-web-app-capable"[^>]*\/>/;
+// The leading comment is part of the match on purpose: left behind, the bundle
+// carries an explanation of six tags that are no longer in it.
+const MANIFEST_BLOCK = /<!-- Installable to a phone home screen\.[\s\S]*?-->\s*<link rel="manifest"[^>]*\/>\s*<link rel="apple-touch-icon"[^>]*\/>\s*<meta name="apple-mobile-web-app-title"[^>]*\/>\s*<meta name="mobile-web-app-capable"[^>]*\/>\s*<meta name="apple-mobile-web-app-capable"[^>]*\/>\s*<meta name="apple-mobile-web-app-status-bar-style"[^>]*\/>/;
 if (!MANIFEST_BLOCK.test(html)) {
   throw new Error("build.js: the manifest/apple-touch-icon block in index.html did not match — update this regex, or the bundle will ship a dead manifest link and try to register a service worker that is not there.");
 }

@@ -2125,8 +2125,107 @@
     });
   }
 
+  /* A page that was opened during an outage can outlive the outage.
+     Chromium keeps a document's subresources in the renderer's own memory
+     cache, and that cache is consulted BEFORE the service worker, so an
+     in-place reload after the signal returns can still run the data files
+     from the offline session. Measured here, not assumed: with the server
+     stopped and restarted, reload, second reload and a same-URL navigation
+     all kept serving the old copy, while a fresh tab came back correct.
+
+     The first attempt at fixing this asked the network what the review stamp
+     said now, and it made things WORSE. Fetching data-meta.js was enough to
+     invalidate that one entry, so the next reload picked up a new stamp while
+     every programme file stayed on the old copy: a freshly-dated page
+     certifying last month's deadlines. Measuring by fetching changed the
+     thing being measured.
+
+     Detecting it is harder than it looks. Two signals were tried and both
+     were wrong. Resource Timing's deliveryType == "cache-storage" is too
+     narrow: once the HTTP cache has the file it reports "cache" instead, and
+     a genuinely stale page slips through. Re-fetching data-meta.js normally
+     is worse than useless, because the fetch REPLACES that one cache entry,
+     so the next reload picks up a new review stamp while every programme file
+     stays old. That is a page confidently certifying last month's deadlines,
+     and it is the single worst state this site can be in.
+
+     cache:"no-store" was not the way out either — Chromium still drops the
+     existing entry, and the split-brain came straight back.
+
+     What works is asking under a DIFFERENT URL. A query string makes a
+     separate cache key, so fetching assets/data-meta.js?fresh=1 cannot
+     replace the entry behind assets/data-meta.js no matter how it is cached.
+     The worker leaves any ?fresh= request alone so nothing is stored under
+     the probe URL either. Compare the stamp it reports against the one this
+     document is running on: if they differ, this document is a saved copy,
+     whatever route it arrived by. */
+  function initFreshnessCheck() {
+    if (!("serviceWorker" in navigator)) return;
+    if (!navigator.serviceWorker.controller) return;
+    const running = (window.DB && window.DB.meta && window.DB.meta.reviewed) || null;
+    if (!running) return;
+
+    function check() {
+      if ($("#staleBar")) return;
+      if (!navigator.onLine) return;
+      fetch("assets/data-meta.js?fresh=1&t=" + Date.now(), { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (src) {
+          if (!src) return;
+          const m = src.match(/reviewed:\s*"([^"]+)"/);
+          if (m && m[1] !== running) showStaleBar();
+        })
+        .catch(function () { /* still offline, or the probe failed: say nothing */ });
+    }
+
+    /* Recovery is fiddlier than it looks, and two obvious moves both failed a
+       real outage test. A plain location.reload() re-runs the same cached
+       files. Navigating to a cache-busting URL (index.html?r=…) changes only
+       the DOCUMENT's address, while every script tag still points at the same
+       assets/*.js and is answered from the same store, so the page comes back
+       just as stale with a tidier URL.
+
+       What does work is re-requesting each file with cache:"reload", which
+       goes past both the memory cache and the HTTP cache and replaces the
+       entry, and only then reloading. It costs a full re-download of the
+       index, which is why it is behind an explicit tap rather than automatic. */
+    function showStaleBar() {
+      if ($("#staleBar")) return;
+      const bar = document.createElement("div");
+      bar.id = "staleBar";
+      bar.className = "stale-bar";
+      bar.setAttribute("role", "status");
+      const msg = document.createElement("span");
+      msg.textContent = "You are reading a copy saved while you were offline. Deadlines may have moved since.";
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "stale-bar-btn";
+      btn.textContent = "Load the current version";
+      btn.addEventListener("click", function () {
+        btn.disabled = true;
+        btn.textContent = "Loading\u2026";
+        const urls = [];
+        for (let i = 0; i < document.scripts.length; i++) {
+          if (document.scripts[i].src) urls.push(document.scripts[i].src);
+        }
+        const link = document.querySelector('link[rel="stylesheet"], link[rel="preload"][as="style"]');
+        if (link && link.href) urls.push(link.href);
+        Promise.all(urls.map(function (u) {
+          return fetch(u, { cache: "reload" }).catch(function () {});
+        })).then(function () { location.reload(); });
+      });
+      bar.appendChild(msg);
+      bar.appendChild(btn);
+      document.body.appendChild(bar);
+    }
+
+    check();
+    window.addEventListener("online", check);
+  }
+
   function init() {
     initServiceWorker();
+    initFreshnessCheck();
     renderStats();
     renderReviewed();
     initTheme();

@@ -48,7 +48,12 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   // Same-origin only. Never interpose on a programme's own site.
-  if (new URL(req.url).origin !== self.location.origin) return;
+  const u0 = new URL(req.url);
+  if (u0.origin !== self.location.origin) return;
+  // The page's staleness probe. It deliberately asks under its own URL so it
+  // cannot disturb the entry the document actually loads, and the worker
+  // stays out of it entirely so nothing is stored under the probe URL either.
+  if (u0.searchParams.has("fresh")) return;
 
   // Content that can carry a deadline is always revalidated against the
   // server; fonts and icons are not, because they effectively never change
