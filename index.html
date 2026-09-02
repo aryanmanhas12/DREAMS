@@ -148,8 +148,20 @@
              to it afterwards. -->
         <p class="tour-line">
           <button type="button" class="tour-trigger" id="tourBtn">Show me how this page works</button>
-          <span class="tour-line-note">Six steps · about a minute</span>
+          <span class="tour-line-note" id="tourLineNote"></span>
         </p>
+
+        <!-- Installing has to be offered out loud. Chrome buries "Add to Home
+             screen" in the ⋮ menu and iOS Safari never prompts at all, so a
+             site that only meets the technical requirements is, in practice,
+             not installable by the person holding the phone. Hidden until the
+             browser confirms it can actually be installed, so it is never a
+             button that does nothing. -->
+        <div class="install-line" id="installLine" hidden>
+          <button type="button" class="install-btn" id="installBtn" aria-expanded="false">Install as an app</button>
+          <span class="install-note" id="installNote">Opens like an app · works with no signal</span>
+          <p class="install-steps" id="installSteps" hidden></p>
+        </div>
 
         <!-- An ordered list because it genuinely is a sequence. You cannot get
              step 3 without step 1. That is what earns the numbering. -->

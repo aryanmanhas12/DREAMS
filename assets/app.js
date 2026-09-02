@@ -1803,8 +1803,29 @@
       view: "intro",
       title: "Star anything. Nothing is uploaded.",
       body: "The star on any card saves it. No account, no server: your list stays in this browser, and your answers ride in the page address — send yourself that link to move a plan between devices. Every date here is a starting point, never the authority. That is always the official page."
+    },
+    {
+      target: "#installBtn", view: "intro", needsInstall: true,
+      title: "Keep it on your home screen",
+      body: "Install it and it opens like an app and still works on a train with no signal. If you ever open it offline and the signal comes back, it tells you that you are reading a saved copy rather than letting you plan around an old deadline."
     }
   ];
+
+  /* The install step is only true on a device that can install, so it is
+     filtered out rather than shown as a step about a button that is not
+     there. Same shape as activeQuestions(): the array is the script, and what
+     applies to this reader is computed from it. */
+  function tourSteps() {
+    return TOUR.filter(function (s) { return !s.needsInstall || installAvailable(); });
+  }
+
+  /* Rendered rather than typed, because the count moves with the device: the
+     install step exists only where installing does. A hardcoded "Six steps"
+     was right until this line stopped always being true. */
+  function renderTourNote() {
+    const el = $("#tourLineNote");
+    if (el) el.textContent = tourSteps().length + " steps · about a minute";
+  }
 
   let tourStep = 0, tourOpen = false, tourReturnFocus = null, tourNodes = null;
 
@@ -1895,17 +1916,18 @@
 
   function tourGo(i) {
     if (i < 0) return;
-    if (i >= TOUR.length) return tourEnd();
+    const steps = tourSteps();
+    if (i >= steps.length) return tourEnd();
     tourStep = i;
-    const s = TOUR[i], n = tourNodes;
+    const s = steps[i], n = tourNodes;
     if (s.view) tourGotoView(s.view);
 
-    n.step.textContent = "Step " + (i + 1) + " of " + TOUR.length;
+    n.step.textContent = "Step " + (i + 1) + " of " + steps.length;
     n.title.textContent = s.title;
     // %TOTAL% is filled from data for the same reason every other count is.
     n.body.textContent = s.body.replace("%TOTAL%", String(tourTotal()));
     n.prev.disabled = i === 0;
-    n.next.textContent = i === TOUR.length - 1 ? "Done" : "Next";
+    n.next.textContent = i === steps.length - 1 ? "Done" : "Next";
 
     // Let the view switch paint before measuring the target.
     requestAnimationFrame(function () {
@@ -1937,7 +1959,11 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
-  function tourReposition() { if (tourOpen) tourPlace(TOUR[tourStep].target); }
+  function tourReposition() {
+    if (!tourOpen) return;
+    const s = tourSteps()[tourStep];
+    if (s) tourPlace(s.target);
+  }
 
   function tourStart() {
     if (tourOpen) return;
@@ -2107,6 +2133,104 @@
      a file:// open (service workers need a secure origin), a browser without
      support, and the single-file bundle — build.js strips the manifest link,
      so its absence is the signal that there is no sw.js beside us either. */
+  /* Meeting the install requirements is not the same as being installable by
+     the person holding the phone. Chrome buries "Add to Home screen" in the ⋮
+     menu behind a passive address-bar hint, and iOS Safari never prompts at
+     all — you have to know to tap Share and scroll. So the offer is made on
+     the page, out loud.
+
+     Two routes, because the platforms genuinely differ:
+       Chromium fires beforeinstallprompt, which can be saved and replayed
+       from a real click. That is the only way to get the native dialogue.
+       iOS fires nothing and exposes no API, so the button spells out the
+       actual taps rather than pretending it can do it for you.
+     Anything else (desktop Firefox, an in-app webview) gets no button at
+     all — an install control that cannot install is worse than none. */
+  let deferredInstall = null;
+
+  function isStandalone() {
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+      window.navigator.standalone === true;
+  }
+
+  /* iPadOS reports itself as MacIntel, so the touch-point count is what
+     separates an iPad from a desktop Mac. */
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+
+  function installAvailable() {
+    const line = $("#installLine");
+    return !!(line && !line.hidden);
+  }
+
+  function showInstallLine(mode) {
+    const line = $("#installLine");
+    if (!line || isStandalone()) return;
+    line.hidden = false;
+    line.dataset.mode = mode;
+    renderTourNote();
+  }
+
+  function hideInstallLine() {
+    const line = $("#installLine");
+    if (line) line.hidden = true;
+    renderTourNote();
+  }
+
+  function initInstall() {
+    const line = $("#installLine"), btn = $("#installBtn"), steps = $("#installSteps");
+    if (!line || !btn || !steps) return;
+    // Nothing to offer inside the installed app, or in the bundle, which has
+    // no manifest beside it.
+    if (isStandalone()) return;
+    if (!document.querySelector('link[rel="manifest"]')) return;
+
+    window.addEventListener("beforeinstallprompt", function (e) {
+      // Suppress Chrome's own mini-infobar so this button is the single place
+      // the offer is made.
+      e.preventDefault();
+      deferredInstall = e;
+      showInstallLine("prompt");
+    });
+
+    if (isIOS()) showInstallLine("ios");
+
+    btn.addEventListener("click", function () {
+      if (line.dataset.mode === "prompt" && deferredInstall) {
+        const evt = deferredInstall;
+        deferredInstall = null;
+        evt.prompt();
+        evt.userChoice.then(function (choice) {
+          if (choice && choice.outcome === "accepted") hideInstallLine();
+          else showInstallLine("prompt");   // let them change their mind
+        }).catch(function () {});
+        return;
+      }
+      // iOS: no API exists, so name the taps.
+      const open = !steps.hidden;
+      steps.hidden = open;
+      btn.setAttribute("aria-expanded", String(!open));
+      if (!open && !steps.childNodes.length) {
+        steps.appendChild(document.createTextNode("In Safari, tap "));
+        const share = document.createElement("b");
+        share.textContent = "Share";
+        steps.appendChild(share);
+        steps.appendChild(document.createTextNode(" at the bottom of the screen, scroll down, then tap "));
+        const add = document.createElement("b");
+        add.textContent = "Add to Home Screen";
+        steps.appendChild(add);
+        steps.appendChild(document.createTextNode(". Chrome on iPhone cannot do this; Safari can."));
+      }
+    });
+
+    window.addEventListener("appinstalled", function () {
+      deferredInstall = null;
+      hideInstallLine();
+    });
+  }
+
   function initServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
     if (!document.querySelector('link[rel="manifest"]')) return;
@@ -2225,6 +2349,8 @@
 
   function init() {
     initServiceWorker();
+    initInstall();
+    renderTourNote();
     initFreshnessCheck();
     renderStats();
     renderReviewed();

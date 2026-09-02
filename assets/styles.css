@@ -1369,6 +1369,40 @@ body {
   color: var(--ink-3); letter-spacing: .03em;
 }
 
+/* The install offer. A real bordered button rather than a text link, because
+   it is an action on the device rather than a way around the page, and it has
+   to be findable by someone who has never heard the phrase "progressive web
+   app". [hidden] is spelled out: this rule sets display, and a bare hidden
+   attribute would lose to it. */
+.install-line { margin: 10px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.install-line[hidden], .install-steps[hidden] { display: none; }
+.install-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 16px;
+  font: inherit; font-size: .92rem; font-weight: 600;
+  color: var(--accent); background: var(--accent-wash);
+  border: 1px solid var(--accent); border-radius: var(--r);
+  cursor: pointer;
+}
+.install-btn::before {
+  content: ""; width: 13px; height: 13px; flex: none;
+  border: 2px solid currentColor; border-top: 0; border-radius: 0 0 2px 2px;
+  box-shadow: inset 0 -2px 0 currentColor;
+}
+.install-btn:hover { color: var(--paper-2); background: var(--accent); }
+.install-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.install-note {
+  font-family: var(--font-mono); font-size: .7rem;
+  color: var(--ink-3); letter-spacing: .03em;
+}
+/* iOS has no install prompt to call, so the steps are spelled out instead of
+   promised. Full width so it drops under the button rather than beside it. */
+.install-steps {
+  flex-basis: 100%; margin: 2px 0 0; max-width: 46ch;
+  font-size: .88rem; line-height: 1.5; color: var(--ink-2);
+}
+.install-steps b { color: var(--ink); }
+
 .tour { position: fixed; inset: 0; z-index: 90; display: none; }
 .tour.is-on { display: block; }
 /* The page must not scroll behind the scrim while a step is anchored to a
