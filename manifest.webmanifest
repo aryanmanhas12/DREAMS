@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#F2EFE4",
-  "theme_color": "#F2EFE4",
+  "background_color": "#061A22",
+  "theme_color": "#061A22",
   "lang": "en-IN",
   "categories": ["education", "medical", "reference"],
   "icons": [

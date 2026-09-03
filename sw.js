@@ -20,7 +20,12 @@
    next load instead of waiting for every tab to close. Without that, a
    corrected deadline could sit behind a stale worker indefinitely. */
 
-const VERSION = "dc-v1";
+/* Bump this whenever a precached FILE changes shape rather than content — the
+   icons going dark is the case that forced v2. Content changes do not need it,
+   because every fetch goes to the network first and refreshes the entry behind
+   itself; but the old cache holds the old icon bytes, and activate() only
+   deletes caches whose key differs from this one. */
+const VERSION = "dc-v2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "assets/styles.css", "assets/data-study.js", "assets/data-funding.js", "assets/data-research.js", "assets/data-frontiers.js", "assets/data-countries.js", "assets/data-impact.js", "assets/data-expansion.js", "assets/data-india-funding.js", "assets/data-specialties.js", "assets/data-equity-plus.js", "assets/data-world.js", "assets/data-india-events.js", "assets/data-abroad.js", "assets/data-newroutes.js", "assets/data-2026.js", "assets/data-fields-2026.js", "assets/data-meta.js", "assets/data-coast.js", "assets/globe.js", "assets/app.js", "assets/fonts/cormorant-garamond.woff2", "assets/fonts/cormorant-garamond-italic.woff2", "assets/fonts/ibm-plex-sans.woff2", "assets/fonts/ibm-plex-mono.woff2", "assets/fonts/petit-formal-script.woff2", "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/icon-maskable-512.png"];
 
 self.addEventListener("install", (e) => {

@@ -24,10 +24,37 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const TMP = path.join(ROOT, "_icon-render.html");
 
-// Light-theme tokens, mirrored from styles.css. globe.js reads these off :root.
-const TOKENS = `--accent:#00787E;--paper:#F2EFE4;--paper-2:#FBF8F0;--surface:#FFFEF9;
-  --line:#D8CFBC;--line-soft:#E8E1D2;--ink:#131E2C;--ink-2:#46566E;--ink-3:#5E6B7B;
-  --signal:#C63A0E;--accent-2:#005C63`;
+/* Both palettes, mirrored from styles.css. globe.js reads these off :root, so
+   the icon is drawn in real site colours rather than approximations of them.
+
+   SHIP is dark, and that is a deliberate call rather than a preference. No
+   browser supports a per-theme app icon: the manifest has no colour-scheme
+   variant for icons, and iOS shows one apple-touch-icon whatever appearance
+   the phone is in. So this is a single image that has to work on both kinds of
+   home screen, and the two cases are not symmetrical. A dark icon on a light
+   home screen is ordinary — a good share of shipping apps have one. A cream
+   icon on a dark home screen is a lit panel among unlit ones, which is what
+   the installed app actually looked like.
+
+   Flip SHIP to "light" and re-run to change it back; nothing else needs
+   editing except the manifest's background_color, which exists to match. */
+const PALETTE = {
+  light: {
+    ground: "#F2EFE4",
+    tokens: `--accent:#00787E;--paper:#F2EFE4;--paper-2:#FBF8F0;--surface:#FFFEF9;
+      --line:#D8CFBC;--line-soft:#E8E1D2;--ink:#131E2C;--ink-2:#46566E;--ink-3:#5E6B7B;
+      --signal:#C63A0E;--accent-2:#005C63`
+  },
+  dark: {
+    ground: "#061A22",
+    tokens: `--accent:#3FE8D8;--paper:#061A22;--paper-2:#0B2831;--surface:#103440;
+      --line:#245460;--line-soft:#1A404B;--ink:#F3EDE1;--ink-2:#B2C3C7;--ink-3:#93A5AD;
+      --signal:#FF7A45;--accent-2:#8DF4EA`
+  }
+};
+const SHIP = "dark";
+const TOKENS = PALETTE[SHIP].tokens;
+const GROUND = PALETTE[SHIP].ground;
 
 // Data files in index.html's order, so the counts match the live globe.
 const DATA = [...fs.readFileSync(path.join(ROOT, "index.html"), "utf8")
@@ -37,7 +64,7 @@ function page(tile, globePx) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
   html,body{margin:0;padding:0}
   :root{${TOKENS}}
-  #wrap{width:${tile}px;height:${tile}px;background:#F2EFE4;display:grid;place-items:center}
+  #wrap{width:${tile}px;height:${tile}px;background:${GROUND};display:grid;place-items:center}
   #globeCanvas{width:${globePx}px;height:${globePx}px;display:block}
   </style></head><body><div id="wrap"><canvas id="globeCanvas"></canvas></div>
   ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}
