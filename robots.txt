@@ -1,0 +1,6 @@
+# Dream Counsellor — a free index of funded programmes for Indian medical students.
+# Everything here is public and meant to be found. Nothing is gated, so nothing is disallowed.
+User-agent: *
+Allow: /
+
+Sitemap: https://aryanmanhas12.github.io/DREAMS/sitemap.xml

@@ -1573,3 +1573,52 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 }
 .stale-bar-btn:hover { background: var(--accent-2); }
 .stale-bar-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ─────────────── standalone document pages ───────────────
+   privacy.html, terms.html and 404.html reuse this stylesheet rather than
+   carrying their own, so a palette change reaches them too. They are plain
+   prose: no globe, no survey, no script of any kind. */
+.doc-page {
+  max-width: var(--readw);
+  padding: 32px 20px 72px;
+  font-family: var(--font-ui);
+  color: var(--ink);
+}
+.doc-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  line-height: 1.08; margin: 12px 0 14px;
+}
+.doc-page h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem; line-height: 1.2;
+  margin: 36px 0 8px; padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+}
+.doc-page h3 { font-size: 1rem; margin: 22px 0 6px; letter-spacing: .01em; }
+.doc-page p, .doc-page li { font-size: 1rem; line-height: 1.62; }
+.doc-page p { margin: 0 0 14px; }
+.doc-page ul { margin: 0 0 14px; padding-left: 20px; }
+.doc-page li { margin-bottom: 8px; }
+.doc-page code {
+  font-family: var(--font-mono); font-size: .88em;
+  background: var(--accent-wash); padding: 1px 5px; border-radius: 2px;
+}
+.doc-lede {
+  font-size: 1.12rem !important; line-height: 1.55 !important;
+  color: var(--ink-2); margin-bottom: 22px !important;
+}
+.doc-eyebrow {
+  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--signal); margin: 0;
+}
+.doc-back { font-size: .92rem; margin: 0 0 8px; }
+.doc-back a { color: var(--accent); }
+.doc-stamp {
+  font-family: var(--font-mono); font-size: .72rem;
+  color: var(--ink-3); margin-top: 34px !important;
+  padding-top: 14px; border-top: 1px solid var(--line-soft);
+}
+.doc-small { font-size: .92rem !important; color: var(--ink-2); }
+.doc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 28px; }
+.doc-404 { padding-top: 56px; }

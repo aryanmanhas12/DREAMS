@@ -66,6 +66,11 @@ let out = html
   .replace(MANIFEST_BLOCK, () => "")
   .replace(/<script src="[^"]+"><\/script>\s*/g, "");
 
+// The bundle is one file with nothing beside it, so a relative privacy.html
+// link would dead-end. Point those at the published copies instead.
+out = out.replace(/href="(privacy|terms)\.html"/g, (m, p) =>
+  'href="https://aryanmanhas12.github.io/DREAMS/' + p + '.html" target="_blank" rel="noopener"');
+
 out = out.replace("</body>", () => "<script>\n" + js + "\n</script>\n</body>");
 
 const dest = path.join(root, "dist");

@@ -166,6 +166,44 @@ steps. Static, client-side, no backend.
 - **All motion must be disabled under `prefers-reduced-motion`**, and reveal states must fall
   back to *visible* — never stranded at `opacity: 0` when `IntersectionObserver` is missing.
 
+## Pre-launch checklist — run this before any release, every time
+
+The user asked for this list to be kept here permanently. Twenty items; this
+project's status against each is recorded so a future pass checks rather than
+re-decides. **Re-verify, do not assume — three of these were wrong when first
+audited.**
+
+| # | Item | Status here |
+|---|---|---|
+| 1 | Privacy policy page | `privacy.html`, linked in the footer. The homepage `<details>` stays as the short version. |
+| 2 | Terms & conditions | `terms.html`. Leads with the one that matters: dates are a starting point, the official page is the authority. |
+| 3 | Secrets off the frontend | None exist; there is no backend to hold a key. Grep for `api_key|secret|token|password|bearer` before every release. |
+| 4 | Force HTTPS | GitHub Pages serves HTTPS only; the "Enforce HTTPS" toggle is on. No headers are settable on Pages, so HSTS is not available. |
+| 5 | Cookie consent banner | **Deliberately absent, and that is the correct answer.** The site sets no cookies and runs no analytics, so there is nothing to consent to. Adding a banner would be theatre that implies tracking exists. Do not add one unless tracking is ever added. |
+| 6 | Meta title + description | Present. The counts inside them are asserted by the data check. |
+| 7 | Social preview image | `assets/og-image.png`, **rendered from data** by `tools/make-og.js`. |
+| 8 | Favicon | Inline SVG globe data URI, matching the installed app icon. Was a compass until the two diverged. |
+| 9 | Sitemap + robots.txt | Both present at the repo root, listing index/privacy/terms. |
+| 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
+| 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
+| 12 | Page load speed | CSS is non-blocking (preload + print-swap). Re-run Lighthouse after any asset change. |
+| 13 | Colour contrast | `audit.js` sweeps AA across 6 viewports × 2 themes. Its selector list is a whitelist and rots — add new components to it in the same change. |
+| 14 | Mobile friendly | `audit.js` covers 320–1280 and asserts no horizontal scroll and ≥44px targets. |
+| 15 | Custom 404 | `404.html`; GitHub Pages serves it automatically. |
+| 16 | Broken links | Full sweep from an unrestricted host via Composio. **403/405/000 are not failures** — see the sweep-reading rules above. |
+| 17 | Form validation | The only inputs are the survey and search, all client-side with no submission. Nothing to validate server-side. |
+| 18 | Spam protection | No forms post anywhere, so there is no attack surface. |
+| 19 | Analytics | **Deliberately absent.** The site's central promise is "nothing is uploaded", and `privacy.html` states it. Adding third-party analytics would make both false. If it is ever wanted, say so on the privacy page *before* shipping it, and prefer a cookieless self-hosted count. |
+| 20 | One clear call to action | "Answer the Three Questions" is the single primary button; everything else in the hero is a ghost button. |
+
+**The lesson worth keeping from the first run of this list:** the three real
+defects it caught were all things no automated check could see — a share card
+with a number painted into the pixels (155 while the index held 207), a card
+whose real dimensions disagreed with the `og:image:width` it declared, and a
+favicon that no longer matched the app icon. Numbers inside binaries are
+invisible to every text check, which is why `check.js` now compares the card's
+mtime against the data files and its real size against the declared one.
+
 ## Workflow
 
 - **Branching: work on the feature branch, and keep `main` identical to it.** `.github/workflows/pages.yml` deploys on push to `main` **only**, so nothing a feature branch alone can do will ever reach the live site. The sequence that has worked every time: commit to the feature branch → push it → fast-forward `main` to it → push `main` (that push is what triggers the deploy). Never commit directly on `main`, and never let the two diverge — a divergence means the published site and the branch you are reviewing are different pages, which is the most confusing state this repo can be in. The branch name changes per work session and does not matter; the invariant is that `main` is a fast-forward of it when you finish.
