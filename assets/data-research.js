@@ -147,7 +147,7 @@ window.DB.research = [
     duration: "Project-length",
     window: "MedEngage Nov–Dec · IAP around August",
     deadlineMonths: [8, 11, 12],
-    url: "https://www.medengage.in/",
+    url: "https://med-engage.com/",
     why: "Smaller grants, far less competition, and open to all MBBS years including interns, which matters because ICMR STS locks out third and final year. If you missed STS, these are the alternatives that keep your research record moving.",
     reqs: ["MBBS any year, interns included", "A guide and a project", "Free to apply"],
     steps: [

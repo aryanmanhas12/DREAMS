@@ -224,7 +224,7 @@ window.DB.funding = [
   {
     id: "felix",
     name: "Felix Scholarship",
-    org: "Oxford, Cambridge, SOAS, Reading, LSHTM",
+    org: "Oxford, Reading, SOAS",
     type: "scholarship", country: "UK", city: "Various",
     fields: ["pubhealth", "global", "systems", "env"],
     stages: ["grad", "pg"], funding: "full",
@@ -232,7 +232,7 @@ window.DB.funding = [
     duration: "Full length of the course",
     window: "Deadlines Dec–Jan, aligned to each university",
     deadlineMonths: [11, 12, 1],
-    url: "https://www.felixscholarship.org.uk/",
+    url: "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/felix-scholarships",
     why: "Reserved for Indian nationals specifically, with a stated preference for candidates from financially disadvantaged backgrounds who intend to return to India. Far fewer applicants than Chevening, comparable money.",
     reqs: [
       "Indian citizen, resident in India, first degree from an Indian university",
@@ -243,7 +243,7 @@ window.DB.funding = [
     steps: [
       "Apply to the university course first; Felix is then applied for through that institution.",
       "The 'financially disadvantaged' criterion is real and assessed — do not inflate your circumstances, and do not hide them either.",
-      "LSHTM is a Felix partner, which makes this one of the best public-health funding routes available to an Indian doctor."
+      "It runs at three universities and no others: Oxford, Reading and SOAS. Cambridge and LSHTM are not Felix partners, whatever the aggregator listicles say, so a public-health plan built around Felix has to be built around one of those three."
     ],
     indiaSpecific: true, competitiveness: "high", workExp: 0
   },
@@ -260,7 +260,7 @@ window.DB.funding = [
     duration: "One-time award for a postgraduate degree abroad",
     window: "Opens ~Dec · closes mid-March",
     deadlineMonths: [12, 1, 2, 3],
-    url: "https://www.jntataendowment.org/loan-scholarship",
+    url: "https://jntataendowment.org/loan-scholarship-process/",
     why: "Over a century old, open to every field including medicine, and it does not require an admission offer in hand when you apply. The interest-free structure means you repay only what you borrowed — in practice one of the cheapest ways to bridge a funding gap.",
     reqs: [
       "Indian citizen with a first degree",
@@ -306,7 +306,7 @@ window.DB.funding = [
     duration: "Full masters or specialised training",
     window: "Opens ~Jan · closes end-March",
     deadlineMonths: [1, 2, 3],
-    url: "https://inlaksfoundation.org/scholarships/",
+    url: "https://inlaksfoundation.org/opportunities/scholarship/",
     why: "Enormous money, but read the exclusions before you invest time: medicine, engineering, computer science, MBA and management are all excluded. It remains open for psychology, public health as a social science, and pure sciences, which is exactly the boundary a medic pivoting into behavioural or population science is standing on.",
     reqs: [
       "Indian citizen resident in India, under 30",

@@ -22,58 +22,50 @@ window.DB = window.DB || {};
 
 window.DB.meta = {
   /* ISO year-month of the last verification pass. */
-  reviewed: "2026-08",
-  reviewedLabel: "August 2026",
+  reviewed: "2026-09",
+  reviewedLabel: "September 2026",
   /* What that pass actually covered, so the stamp does not over-claim. Spot
      checks are not a full audit and the interface should not imply one.
 
-     This cycle swept all 161 links again from an unrestricted host. No entry
-     was dead, but eighteen had drifted to a new address and two were pointing
-     somewhere actively wrong. The more useful finding was an eligibility one,
-     not a link one: DAAD WISE and PMRF are both closed to MBBS students by
-     rules that are not on their front pages, and this index was recommending
-     the first of them. Both are now named in the skip list instead. Deadlines
-     were re-read for the Indian schemes against the DHR and ministry portals
-     rather than against aggregators. ICMR-STS advertised 30 May and was then
-     extended to 10 June, which is the pattern across DHR's 2026-27 calls —
-     the main HRD research call went to 15 June and the Young Medical Faculty
-     PhD to 14 July. That is now written into the STS entry, with the warning
-     that the extension is announced days beforehand and must never be planned
-     around. IAS-SRFP holds at 31 January. NOS opened 24 April and closed
-     2 June with a correction window to the 7th.
+     This cycle re-swept all 180 links from an unrestricted host and, for the
+     first time, checked the failures against a public resolver rather than
+     trusting the sweep box. That distinction found the pass's real work.
+     Three domains in this index have stopped existing — NXDOMAIN, confirmed
+     independently, not a firewall and not bot protection:
 
-     One link was worth the whole sweep: lancetglobalsurgery.org has lapsed
-     and now redirects to a gambling site. It was never in the index, but it
-     is the first result for global surgery and students will find it.
+       felixscholarship.org.uk  the Felix Scholarship's own site
+       medengage.in             MedEngage
+       cpcourse.org             the Computational Psychiatry Course
 
-     A second pass then re-read the major international awards against their
-     own pages rather than aggregators, and found two wrong dates and one
-     wrong instruction. EPFL's summer research programme closes 15 November,
-     not 31 January — the old date was repeated in three places here and would
-     have cost a reader the whole cycle. The Swiss Government Excellence
-     deadline is country-specific and India's fell on 10 November, not early
-     September. And Knight-Hennessy's Stanford programme application does NOT
-     share the scholarship's October deadline. Chevening (6 Oct, 11:00 UTC),
-     Rhodes India (23 July), Mitacs (16 Sept), Amgen (1 Feb), OIST (15 Oct),
-     IAS-SRFP (31 Jan) and Fulbright all verified correct as written.
+     All three programmes are alive; only their addresses died. Felix now runs
+     through its partner universities, MedEngage moved to med-engage.com, and
+     the Zurich course sits under the TNU's own domain. Every one is repointed.
 
-     A third pass added the events layer this index was thinnest on — dates in
-     the Indian calendar rather than programmes to apply to, because the
-     commonest reason a student here has nothing to show is not rejection, it
-     is that nothing was ever on a date. INYAS turned out to name MD in
-     medical sciences in its own eligibility, which almost no Indian clinician
-     knows. Smart India Hackathon publishes real health problem statements and
-     is gated only by whether your college registers a SPOC. Checked and NOT
-     added: ichams.org is dead (404).
+     Checking Felix turned up a second error worth more than the link. This
+     index listed its partners as Oxford, Cambridge, SOAS, Reading and LSHTM,
+     and told public-health applicants that "LSHTM is a Felix partner, which
+     makes this one of the best public-health funding routes available". Felix
+     runs at three universities: Oxford, Reading and SOAS. Cambridge and LSHTM
+     are not among them, so that sentence sent people to build a plan around a
+     scholarship they could not hold there.
 
-     A full sweep of all 180 links then ran from an unrestricted host: no dead
-     links anywhere. Sixteen return 403 to a command-line fetch, which is bot
-     protection rather than breakage (LSHTM, Oxford, Johns Hopkins, UK Biobank,
-     Melbourne, Otago, Mahidol and the Smart India Hackathon portal all serve
-     browsers normally). Around a dozen return no status at all: Indian
-     government hosts refuse foreign addresses outright, and Chevening, DFAT
-     and a few others drop a non-browser connection at the firewall. Neither
-     code is evidence of a broken link, and this file has been wrong about
-     that before. */
-  scope: "Every link re-swept and eighteen repointed; two eligibility traps that quietly exclude MBBS students removed and named; Indian scheme dates re-read from the government portals including the ICMR-STS extension to 10 June; the major international awards re-checked against their own pages, correcting the EPFL and Swiss Excellence deadlines."
+     The US PhD entry had an eligibility trap of the DAAD WISE kind. It linked
+     to the NSF Graduate Research Fellowship, which requires US citizenship,
+     national status or a green card, so an Indian applicant is excluded before
+     the first question. The entry's substance was right — US doctorates are
+     salaried and MBBS is accepted — but the link pointed at the one route
+     closed to the reader. It now points at a real departmental admissions page
+     and names the GRFP as the trap it is, because it is the first thing anyone
+     searching will find.
+
+     Two links had drifted and were repointed: the J N Tata Endowment loan
+     scholarship and the Inlaks scholarship page. ICMR-STS was re-read against
+     the DHR portal and is correct as written, including the ₹60,000 stipend,
+     the 1st and 2nd professional year restriction, and the 30 May close that
+     DHR extended to 10 June. Nothing else in the Indian schemes had moved.
+
+     What this pass did NOT do: re-verify all 161 fixed-window deadlines
+     one by one. The Indian schemes and the dead links were the priority, and
+     the rest carry the dates confirmed in the August pass. */
+  scope: "All 180 links re-swept and every failure re-checked against a public resolver, which found three programmes whose domains have lapsed (Felix, MedEngage, the Zurich computational psychiatry course), all now repointed; the Felix partner list corrected from five universities to the three that actually run it; and an NSF fellowship closed to Indian nationals removed from the US doctorate entry and named as a trap."
 };

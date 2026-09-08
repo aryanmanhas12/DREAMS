@@ -263,7 +263,7 @@ window.DB.research.push(
     duration: "1 week, usually late summer",
     window: "Registration typically opens in spring",
     deadlineMonths: [3, 4, 5, 6],
-    url: "https://www.cpcourse.org/",
+    url: "https://translationalneuromodeling.org/cpcourse/",
     why: "The definitive training course in the field — the one where the people who invented computational psychiatry teach it. It runs in a hybrid format, which means you can attend the whole thing from India for a fraction of the cost. For anyone whose interests sit between psychiatry, modelling and code, this is the single most targeted week available anywhere.",
     reqs: ["Basic programming and statistics", "Open to students, clinicians and researchers", "No degree requirement"],
     steps: [

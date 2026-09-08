@@ -320,14 +320,15 @@ window.DB.study = [
     duration: "5–6 years",
     window: "Opens Sept · deadlines 1–15 Dec almost universally",
     deadlineMonths: [9, 10, 11, 12],
-    url: "https://www.nsfgrfp.org/",
+    url: "https://biosciences.stanford.edu/admissions/",
     why: "The most important thing Indian medical students get wrong: US PhDs are PAID. You do not need a masters first, you do not need to self-fund, and MBBS is accepted as the prior degree. A funded PhD is a job with a salary, not a fee you have to raise.",
-    reqs: ["MBBS accepted as the qualifying degree", "Research experience is the single deciding factor — publications help but a real project matters more", "TOEFL 100; GRE now optional at most programmes", "Three strong letters, at least two from researchers"],
+    reqs: ["MBBS accepted as the qualifying degree", "Research experience is the single deciding factor — publications help but a real project matters more", "TOEFL 100; GRE now optional at most programmes", "Three strong letters, at least two from researchers", "The money comes from the department, not from a fellowship you win first — which matters, because the NSF GRFP that dominates the search results is closed to you"],
     steps: [
       "Build the research record FIRST. One completed project with an output beats five certificates of attendance.",
       "Email 3–5 potential supervisors in September with a specific, technical question about their work — ideally after reproducing one of their figures. This single habit converts applications more than any credential.",
       "Almost every US PhD deadline is 1–15 December. Work backwards: letters requested by early November, statement drafted by October.",
       "Apply to 8–12 programmes across a range of selectivity. Admission is noisy, and fit matters more than rank.",
+      "Ignore the NSF Graduate Research Fellowship. It is the first thing you will find and it requires US citizenship, US national status or a green card, so an Indian applicant is excluded before the first question. Departmental funding is the actual route and it is attached to the admission offer itself.",
       "Never pay for a US PhD. If a programme offers admission without funding, that is a signal, not an opportunity."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
