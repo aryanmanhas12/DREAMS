@@ -798,15 +798,21 @@
     h += '<div class="card-in">';
     h += '<header class="card-head"><div class="card-top">';
     if (idx != null) h += '<span class="card-rank">' + String(idx + 1).padStart(2, "0") + '</span>';
-    h += '<h3>' + esc(item.name) + '</h3>';
+    h += '<h3 translate="no">' + esc(item.name) + '</h3>';
     h += '<span class="tier tier-' + imp.t + '" title="' + esc(tierName) + '">Tier ' + imp.t +
          ' · ' + esc(tierName) + '</span>';
+    // Icon-only, so the accessible name has to be spelled out. title is a
+    // tooltip and not a reliable name; aria-label names the ACTION and the
+    // programme, because "Save to shortlist" repeated 171 times down a card
+    // list tells a screen-reader user nothing about which one they are on.
+    const starAct = (saved ? "Remove " : "Save ") + item.name + (saved ? " from" : " to") + " shortlist";
     h += '<button type="button" class="star-btn' + (saved ? " is-saved" : "") +
          '" data-star="' + esc(item.id) + '" aria-pressed="' + saved +
+         '" aria-label="' + esc(starAct) +
          '" title="' + (saved ? "Remove from shortlist" : "Save to shortlist") + '">' +
          starSVG(saved) + '</button>';
     h += '</div>';
-    h += '<p class="card-org">' + esc(item.org) + '</p>';
+    h += '<p class="card-org" translate="no">' + esc(item.org) + '</p>';
     h += recordLine(item, urg);
     h += '</header>';
 
@@ -1281,9 +1287,9 @@
     list = sortList(list);
 
     const SORT_LABEL = { tier: "sorted by impact tier", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
-    let countText = list.length + " programme" + (list.length === 1 ? "" : "s");
+    let countText = fmtNum(list.length) + " programme" + (list.length === 1 ? "" : "s");
     if (countryFilter) countText += " in " + countryFilter;
-    if (searchQuery) countText += " matching “" + searchQuery + "” of " + preSearchCount;
+    if (searchQuery) countText += " matching “" + searchQuery + "” of " + fmtNum(preSearchCount);
     countText += " · " + SORT_LABEL[sortMode];
     $("#browseCount").textContent = countText;
 
@@ -1332,15 +1338,26 @@
   // Count a number up to its target. The point is that "150" lands as a
   // quantity rather than as a label you skim past, so it eases out, and
   // under reduced-motion it simply appears.
+  /* Counts are formatted rather than concatenated. At today's sizes this is
+     invisible — 211 renders as "211" in every locale — but this index went
+     from 155 to 211 in two months and will cross a thousand, and that is the
+     point where a hand-built string starts printing "1211" to a reader whose
+     locale wants "1,211". Falls back to the raw number on a browser without
+     Intl rather than throwing. */
+  const NUMFMT = (function () {
+    try { return new Intl.NumberFormat(undefined); } catch (e) { return null; }
+  })();
+  function fmtNum(n) { return NUMFMT ? NUMFMT.format(n) : String(n); }
+
   function countUp(el, target) {
-    if (prefersReduced || target <= 0) { el.textContent = String(target); return; }
+    if (prefersReduced || target <= 0) { el.textContent = fmtNum(target); return; }
     const dur = 900, t0 = performance.now();
     (function step(now) {
       const p = Math.min(1, (now - t0) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = String(Math.round(target * eased));
+      el.textContent = fmtNum(Math.round(target * eased));
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = String(target);
+      else el.textContent = fmtNum(target);
     })(t0);
   }
 
@@ -1379,7 +1396,7 @@
     // must not read as "This page has — of them" for a beat. The stat tiles,
     // being data rather than prose, count up.
     const hc = $("#heroCount");
-    if (hc) hc.textContent = total;
+    if (hc) hc.textContent = fmtNum(total);
 
     // The three claim cards quote the same figures inside prose. They are
     // written from data for the same reason the review stamp is: a number
@@ -1389,7 +1406,7 @@
     const claims = { "#claimTotal": total, "#claimFree": free, "#claimCountries": nCountries };
     Object.keys(claims).forEach(function (sel) {
       const el = $(sel);
-      if (el) el.textContent = String(claims[sel]);
+      if (el) el.textContent = fmtNum(claims[sel]);
     });
 
     countUp($("#statTotal"), total);
@@ -1440,7 +1457,7 @@
     }
     const datedCount = items.filter(hasFixedWindow).length;
     let h = '<div class="shortlist-bar">';
-    h += '<p class="result-count">' + items.length + ' saved</p>';
+    h += '<p class="result-count">' + fmtNum(items.length) + ' saved</p>';
     if (datedCount) {
       h += '<button type="button" class="btn btn-ghost btn-sm" id="icsBtn">' +
            'Add ' + datedCount + ' deadline' + (datedCount === 1 ? '' : 's') + ' to my calendar</button>';

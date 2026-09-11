@@ -193,3 +193,139 @@ Object.assign(window.DB.impact, {
   "lmic-partnerships": { t: 2, odds: "Moderate", effort: "Application plus relocation", note: "Sangath, icddr,b and KEMRI-Wellcome publish in the best journals and are more reachable from India than any Western institution. A year here builds exactly the record a Wellcome fellowship needs." },
   "state-schemes": { t: 3, odds: "Small applicant pools", effort: "1 hour of searching, then paperwork", note: "Administered by state departments that do not advertise and are aggregated nowhere useful. Ask your own college office — they often know what is not online." }
 });
+
+/* New Zealand, added September 2026. The country had one entry and deserved
+   more, because of a policy almost nobody outside it knows about: New Zealand
+   charges international PhD candidates the DOMESTIC tuition rate. That single
+   rule moves a doctorate there from unaffordable to roughly the price of a
+   private Indian masters, before any scholarship. */
+window.DB.study.push(
+  {
+    id: "nz-doctorate",
+    name: "PhD in New Zealand — at the domestic tuition rate",
+    org: "University of Otago · University of Auckland · and the other NZ universities",
+    type: "phd", country: "New Zealand", city: "Dunedin, Auckland, Wellington, Christchurch",
+    fields: ["pubhealth", "clinical", "neuro", "genomics", "global", "env"],
+    stages: ["grad", "pg"], funding: "full",
+    money: "Tuition ≈ NZ$8,800/year at the domestic rate, against NZ$45,000+ charged to international doctoral students almost everywhere else · Otago's doctoral scholarship adds NZ$34,128/year plus a fee waiver for 36 months",
+    duration: "3–4 years",
+    window: "Applications accepted year-round · Otago assesses scholarships in quarterly rounds",
+    deadlineMonths: [3, 6, 9, 11],
+    url: "https://www.auckland.ac.nz/en/study/international-students/study-options-for-international-students/postgraduate-study-for-international-students/doctoral-programmes-international-students.html",
+    why: "A government scheme lets New Zealand universities charge international PhD candidates what they charge New Zealanders. The comparison is not subtle: the same degree costs a fifth of what it costs in Australia or the UK, and that is the sticker price before any scholarship. It is the least-known affordability fact in this entire index, and it exists because the country is trying to attract research students rather than bill them.",
+    reqs: [
+      "A research degree or a strong research record; MBBS is accepted as the qualifying degree",
+      "You must RESIDE in New Zealand for the doctorate to keep the domestic rate — research abroad is capped at about 12 months cumulative",
+      "A supervisor who has agreed to take you, which is the real gate rather than the paperwork",
+      "IELTS or equivalent English evidence"
+    ],
+    steps: [
+      "Find the supervisor before the scholarship. Every route here runs through a named academic agreeing to supervise, and no amount of application polish substitutes for that.",
+      "Apply for admission and the doctoral scholarship together. Otago assesses in quarterly rounds and Auckland runs its own; missing a round costs three months, not a year.",
+      "Read the residence condition carefully. The domestic fee is conditional on living in New Zealand, so a plan built around remote enrolment loses the entire advantage.",
+      "Cost it against Australia honestly. The salary after graduation is lower than Australia's, the fees during it are a fraction, and which of those matters more depends on whether you intend to stay."
+    ],
+    indiaSpecific: false, competitiveness: "medium", workExp: 0
+  }
+);
+
+window.DB.residency.push(
+  {
+    id: "nzrex",
+    name: "NZREX Clinical — practising medicine in New Zealand",
+    org: "Medical Council of New Zealand",
+    type: "residency", country: "New Zealand", city: "Various",
+    fields: ["clinical", "psych", "pubhealth"],
+    stages: ["intern", "grad"], funding: "paid",
+    money: "House officer ≈ NZ$80,000–95,000/year once registered",
+    duration: "Qualifying exam → NZREX Clinical → PGY1 post → registration",
+    window: "NZREX sittings run a few times a year and fill early",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://www.mcnz.org.nz/registration/getting-registered/registration-exam-nzrex/",
+    why: "The parallel route to Australia's AMC, with a smaller applicant pool and a country that is substantially cheaper to sit the process in. Worth knowing before you commit to the USMLE by default.",
+    reqs: [
+      "MBBS from a school listed in the World Directory of Medical Schools",
+      "A qualifying exam FIRST — USMLE Step 1 and 2, AMC Part 1, PLAB Part 1 or MCCQE Part 1. NZREX is not an entry point on its own",
+      "Primary source verification of your degree through ECFMG's EPIC service",
+      "English evidence, and the ability to satisfy the Council you can communicate in a clinical setting"
+    ],
+    steps: [
+      "Understand the gate before you spend anything: NZREX sits AFTER another country's exam. If you were going to sit PLAB or the AMC MCQ anyway, New Zealand costs you one extra exam rather than a whole new pathway.",
+      "Start EPIC verification early. It is slow, it is administrative, and it blocks everything behind it.",
+      "The part nobody mentions until late: passing NZREX does not register you. You then have to secure a PGY1 post with a training provider, and that post is the actual bottleneck. Ask about PGY1 availability before you sit the exam, not after.",
+      "If Australia is also on your list, sequence them. AMC Part 1 satisfies the NZREX qualifying-exam requirement, so one exam can open both doors."
+    ],
+    indiaSpecific: false, competitiveness: "medium", workExp: 1
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "nz-doctorate": { t: 1, odds: "Turns on finding a supervisor, not on a competition", effort: "Emails to supervisors, then one application", note: "International candidates pay the DOMESTIC tuition rate — roughly NZ$8,800 against NZ$45,000+ elsewhere. The single most useful affordability fact in this index, and almost nobody outside New Zealand knows it." },
+  "nzrex":        { t: 2, odds: "Smaller pool than the USMLE or AMC", effort: "A qualifying exam, then NZREX, then a PGY1 hunt", note: "Cheaper and less contested than the usual routes, with one catch worth knowing first: passing the exam does not register you, securing a PGY1 post does, and those posts are the real bottleneck." }
+});
+
+/* Added September 2026. Both verified against the funding body's own pages,
+   not against an aggregator: BIRAC's BIG scheme names medical degree holders
+   in its own eligibility text, and ACTREC's life-sciences page describes the
+   short-term training it runs alongside the PhD. */
+window.DB.research.push(
+  {
+    id: "birac-big",
+    name: "BIRAC Biotechnology Ignition Grant (BIG)",
+    org: "BIRAC, Department of Biotechnology",
+    type: "research", country: "India", city: "Anywhere in India",
+    fields: ["biochem", "clinical", "systems", "genomics", "infect"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "full",
+    money: "Up to ₹50 lakh grant-in-aid over 18 months · no equity taken",
+    duration: "Up to 18 months",
+    window: "Calls open roughly twice a year · check the live call before planning",
+    deadlineMonths: [3, 9],
+    url: "https://birac.nic.in/big.php",
+    why: "The largest sum in this index that an individual student can hold, and almost no medical student applies. BIRAC's own eligibility names medical degree holders alongside PhDs and biomedical engineers, so a clinician with a diagnostic or device idea is inside the intended audience rather than at its edge. Doctors see the unmet need every day in outpatients; the people who usually win these grants have to go looking for it.",
+    reqs: [
+      "An idea at nascent or planning stage — a prototype is not required to apply",
+      "Medical degree holders are named in the scheme's own eligibility, alongside students and academics",
+      "A No Objection Certificate from your institution if you are still enrolled",
+      "Funds for an individual applicant go into a dedicated auditable no-lien account"
+    ],
+    steps: [
+      "Start from a problem you have watched go unsolved on a ward round, not from a technology you find interesting. The clinical observation is the part nobody else on the applicant list has.",
+      "Read the BIG user guide before writing anything. It states plainly what stage of idea the scheme funds, and most rejected applications are simply at the wrong stage.",
+      "Get the institutional NOC moving early. It is administrative rather than difficult, and it is the step most likely to miss the date.",
+      "Attach yourself to a BIRAC-recognised incubator. They exist to shepherd exactly this application and their support materially changes the odds.",
+      "If the idea is a device rather than a molecule, run this alongside the School of International Biodesign fellowship in this index rather than choosing between them."
+    ],
+    zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "actrec-tmc",
+    name: "ACTREC / Tata Memorial Centre — short-term training and PhD",
+    org: "Advanced Centre for Treatment, Research and Education in Cancer, TMC",
+    type: "research", country: "India", city: "Navi Mumbai",
+    fields: ["onco", "genomics", "biochem", "clinical", "compbio"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "stipend",
+    money: "Short-term training is unpaid or nominally paid · the PhD and JRF routes carry a full UGC-rate fellowship",
+    duration: "Weeks for training · 4–5 years for the doctorate",
+    window: "Training requests accepted through the year · JRF and PhD calls advertised on the site",
+    deadlineMonths: [2, 5, 6, 11],
+    url: "https://actrec.gov.in/life-sciences",
+    why: "India's largest cancer centre runs a research arm that takes undergraduates for short-term projects, and it is reachable by asking rather than by winning a competition. For anyone drawn to oncology this is the shortest path from a lecture hall to a laboratory that publishes.",
+    reqs: [
+      "Short-term training takes undergraduates, postgraduates and academics; individual training requests are accepted",
+      "Specific technique courses set their own bar and some require an MSc, so read the advertisement for the course rather than assuming",
+      "The JRF and PhD routes advertise separately and follow the usual national fellowship rules"
+    ],
+    steps: [
+      "Read three recent papers from a single ACTREC group before writing to anyone, and name the paper in your email. Cold requests that could have been sent to any laboratory are the ones that go unanswered.",
+      "Ask for a specific technique and a specific window. A vague request for exposure is harder to say yes to than a request for six weeks learning one assay.",
+      "Watch the advertisements page directly. JRF and training calls appear there as PDFs and are aggregated nowhere reliable.",
+      "Pair a training stint with an ICMR-STS proposal in the same year if you can. The techniques you learn here are what make an STS project deliverable in two months."
+    ],
+    zeroCost: false, indiaSpecific: true, competitiveness: "medium", workExp: 0
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "birac-big":  { t: 1, odds: "Low, but the applicant pool has almost no clinicians in it", effort: "60+ hrs including the NOC and an incubator tie-up", note: "The largest single sum an individual in this index can hold, and the eligibility explicitly names medical degree holders. The clinical observation behind the idea is the part the usual applicants cannot manufacture." },
+  "actrec-tmc": { t: 2, odds: "Reachable by asking rather than by competition", effort: "A well-researched email, then weeks on site", note: "India's largest cancer centre, taking undergraduates for short projects. The shortest route from a lecture hall to a laboratory that actually publishes." }
+});

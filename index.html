@@ -20,7 +20,7 @@
      first impression more often than the page is. -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Dream Counsellor — you were told there were two options" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 207 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 211 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -28,7 +28,7 @@
 <meta property="og:image:alt" content="Dream Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Dream Counsellor — you were told there were two options" />
-<meta name="twitter:description" content="207 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:description" content="211 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -74,7 +74,7 @@
   <div class="wrap topbar-in">
     <a class="brand" href="#" id="brandHome">
       <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-text">Dream<em>Counsellor</em></span>
+      <span class="brand-text" translate="no">Dream<em>Counsellor</em></span>
     </a>
     <nav class="topnav" id="topnav" aria-label="Primary">
       <button type="button" class="navlink" data-goto="intro">Start</button>
@@ -83,7 +83,7 @@
       <button type="button" class="navlink" data-goto="frontiers">Frontier fields</button>
       <button type="button" class="navlink" data-goto="calendar">Deadlines</button>
       <button type="button" class="navlink navlink-shortlist" data-goto="shortlist">
-        Shortlist<span class="shortlist-count" id="shortlistCount"></span>
+        Shortlist<span class="shortlist-count" id="shortlistCount" aria-live="polite"></span>
       </button>
     </nav>
     <div class="topbar-controls">
@@ -296,6 +296,7 @@
     <div class="browse-tools">
       <div class="search-wrap">
         <input type="search" id="browseSearch" class="search-input"
+               autocomplete="off" spellcheck="false"
                placeholder="Search by name, institution or field — try &quot;Germany&quot;, &quot;psychiatry&quot;, &quot;free&quot;…"
                aria-label="Search programmes" />
       </div>
@@ -310,7 +311,9 @@
     </div>
     <div class="filters" id="filters"></div>
     <div id="activeCountry"></div>
-    <p class="result-count" id="browseCount"></p>
+    <!-- The count changes as you type, and a screen-reader user gets no other
+         signal that filtering happened. polite, so it waits for a pause. -->
+    <p class="result-count" id="browseCount" role="status" aria-live="polite"></p>
     <div class="cards" id="browseCards"></div>
   </div>
 </section>
