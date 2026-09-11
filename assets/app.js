@@ -1095,7 +1095,16 @@
     /* country fit */
     if (p.abroad !== "india") {
       h += '<section class="actions-block"><h2 class="sec-h">Where you would actually be okay</h2>';
-      h += '<p class="sec-sub">Ranked on climate, daylight, food, community and cost against what you told me you need — not on university league tables.</p>';
+      /* In a three-question run the reader was asked about skill, anger and
+         flow and nothing else. Climate, food, community and cost come from
+         defaults, which is correct for RANKING and a fabrication in PROSE:
+         "what you told me you need" claims they supplied preferences they
+         were never asked for. Same rule as every attributed line in
+         counsellorRead, and the short run has to earn the sentence too. */
+      const toldLiveability = p.asked.money || p.asked.abroad;
+      h += '<p class="sec-sub">' + (toldLiveability
+        ? 'Ranked on climate, daylight, food, community and cost against what you told me you need — not on university league tables.'
+        : 'Ranked on climate, daylight, food, community and cost, because those decide whether you could actually live somewhere. These are general rankings: answer the full sixteen and they are re-ranked against your own limits instead.') + '</p>';
       h += '<div class="countries">';
       ctys.slice(0, 4).forEach(function (x, i) {
         const c = x.c;
