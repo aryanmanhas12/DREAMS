@@ -284,3 +284,67 @@ Object.assign(window.DB.impact, {
   "dth-lab":        { t: 2, odds: "Small cohort, narrow eligibility that works in your favour", effort: "An application and a reading week", note: "Aged 30 or under and based in an LMIC — a ceiling that makes this easier as a student than it will ever be again. Digital health rules are being written now; this is a seat at that table." },
   "takemi-harvard": { t: 2, odds: "Mid-career only — years away for a student", effort: "A decade of health-systems record", note: "Listed so you can aim at it, not apply to it. Read where its fellows worked before their year and you have a map of the career." }
 });
+
+/* UN-system entry routes, added September 2026. The index had WHO and nothing
+   else from the UN, which left out the two doors a student can actually walk
+   through without a postgraduate degree. */
+window.DB.research.push(
+  {
+    id: "unicef-intern",
+    name: "UNICEF Internship Programme",
+    org: "United Nations Children's Fund",
+    type: "fellowship", country: "Global", city: "Country offices, HQ, or remote",
+    fields: ["pubhealth", "global", "nutrition", "systems", "repro"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "stipend",
+    money: "Paid: a monthly stipend up to about US$1,700 depending on duty station · travel and visa support where funding allows · no application fee",
+    duration: "6 to 26 weeks",
+    window: "No single deadline — posts appear continuously on the careers portal",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://www.unicef.org/careers/internships",
+    why: "A paid UN internship open to every nationality, with health, nutrition and WASH among the posted fields, and it takes people still enrolled or within two years of graduating. Most students assume the UN is closed to them until they have a masters and a decade of work. This one is not, and it posts all year.",
+    reqs: [
+      "At least 18 and enrolled in an undergraduate, graduate or PhD programme, or graduated within the past two years",
+      "Fluency in one UNICEF working language: English, French or Spanish",
+      "Open to all nationalities, so Indian students and recent graduates are eligible",
+      "No application fee at any stage"
+    ],
+    steps: [
+      "Treat the careers portal as a feed rather than a deadline. Posts appear all year, so check it fortnightly instead of waiting for a cycle that does not exist.",
+      "Filter for health, nutrition and WASH, and read the country-office posts as seriously as the headquarters ones. A field office gives you more responsibility and less competition.",
+      "The two-year post-graduation window is the part people miss. If you are in internship year, this is open to you now and closes quietly two years after you qualify.",
+      "Remote posts exist. If you cannot leave India this year, that removes the usual objection entirely."
+    ],
+    indiaSpecific: false, competitiveness: "medium", workExp: 0
+  },
+  {
+    id: "un-online-volunteer",
+    name: "UN Online Volunteering",
+    org: "United Nations Volunteers",
+    type: "research", country: "Online", city: "Anywhere",
+    fields: ["pubhealth", "global", "systems", "env"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "free",
+    money: "Unpaid, and free to join · no travel, no relocation, no fee",
+    duration: "Assignment-length, typically weeks",
+    window: "Assignments are posted continuously on the volunteering platform",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://app.unv.org/",
+    why: "Real assignments with UN agencies and partner organisations, done from a laptop in a hostel room, with research and analysis among the commonest tasks. It is unpaid, and it is still the fastest way to put an actual UN agency on a CV before you have a degree that would let you apply for anything else there.",
+    reqs: [
+      "Open to any country and any age over 18",
+      "No fee, no degree requirement, no relocation",
+      "Reliable internet and the ability to hold a deadline without supervision"
+    ],
+    steps: [
+      "Filter for research, data and writing assignments rather than translation, unless language work is genuinely your strength. Research tasks are the ones that produce something you can point at afterwards.",
+      "Finish what you start. The whole value is the reference at the end, and an abandoned assignment is worse than none.",
+      "Ask, at the outset, whether your contribution will be named in whatever gets published. Sometimes it is, and that is worth more than the hours.",
+      "Run this alongside the free WHO courses rather than instead of them: the certificate shows you learned the material, the assignment shows someone trusted you with it."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "unicef-intern":       { t: 2, odds: "Posts all year, so the real limit is how often you look", effort: "An application per post; no fee", note: "A PAID UN internship open to every nationality, taking people still enrolled or within two years of graduating. Most students write the UN off until they have a masters; this door is open now and shuts quietly two years after you qualify." },
+  "un-online-volunteer": { t: 3, odds: "Accessible — the constraint is finishing, not getting in", effort: "Weeks of unpaid but real work", note: "Unpaid, and still the fastest way to get an actual UN agency onto a CV before you hold a degree that would let you apply there. Pick research assignments and finish them; the reference is the point." }
+});

@@ -236,6 +236,7 @@ mtime against the data files and its real size against the declared one.
   a hard `404`, or a `200` that renders an error page, is evidence of a dead link. Follow
   redirects and read `url_effective` too — that is how the ICMR-STS portal move from
   `sts.icmr.org.in` to `schemes.dhr.gov.in` surfaced.
+- **A 200 can lie about its body, and that is a fourth code to read carefully.** `unv.org` answers every path with HTTP **200** whose content is an Imperva/Incapsula block page — "Request unsuccessful. Incapsula incident ID: …", about 950 bytes. A status-only sweep records that as healthy. So for any host that matters, check the BODY as well as the code: a few hundred bytes, a missing `<title>`, or the words "Request unsuccessful", "Just a moment", "Attention Required" or "enable JavaScript to run this app" all mean the sweep did not see the real page. The last of those is usually a JS app and genuinely fine (med-engage.com, app.unv.org); the others mean the check was blocked and the link needs verifying another way.
 - Data integrity check lives in the scratchpad, not the repo; recreate it if needed. It should
   assert unique ids, that every `data-impact.js` key resolves to a real programme, that every
   field/stage tag is in the taxonomy, that every URL is https, and that every referenced
