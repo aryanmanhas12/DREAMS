@@ -70,7 +70,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Decide which of the two routes you are actually eligible for before writing anything. The masters and the certificate have different experience bars and different audiences.",
-      "Selection by Rotary does not admit you to the university — you apply to the host institution separately, and that admission is not guaranteed. Budget for two applications, not one.",
+      "Selection by Rotary does not admit you to the university. You apply to the host institution separately, and that admission is not guaranteed. Budget for two applications, not one.",
       "You need a Rotary club endorsement. Find your district's contact early; this is the step that catches people out, and it cannot be done in the final week.",
       "Write the essays about a specific conflict or displacement problem you have seen in your own work. Health in emergencies, mental health after disaster, and access under blockade are all squarely within scope and are argued far less often than the generic peace essay.",
       "Selected fellows hear in November for a course starting the following year, so this is an eighteen-month lead time from application to arrival. Plan the gap deliberately."
@@ -130,7 +130,7 @@ window.DB.research.push(
       "Bring a real problem. The strongest applications name one specific failure in one specific place — a stockout, a follow-up rate, a referral that never happens — rather than a topic.",
       "Get your supervisor's agreement in writing early; the blended format needs protected time and departments agree to it far more slowly than you expect.",
       "The host university changes between rounds, so check where the current cohort sits before assuming a location.",
-      "Recent rounds have closed at the end of January, which means drafting over December. Confirm the current date on the TDR page — this call has moved before."
+      "Recent rounds have closed at the end of January, which means drafting over December. Confirm the current date on the TDR page. This call has moved before."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 1
   },
@@ -172,9 +172,9 @@ window.DB.research.push(
     window: "Courses run through the year; fellowship and internship calls are posted as they open",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.icddrb.org/knowledge-sharing/education-and-training/internship",
-    why: "The most consequential public health research institute in South Asia, and the one an Indian medical graduate can most easily reach — a short flight, no visa ordeal, and disease patterns that are actually the ones you will spend your career on. Oral rehydration solution was proven here, and the Matlab field site is the longest-running demographic surveillance system in the developing world. If you want field epidemiology rather than a lecture about it, this is a far better use of a year than a European summer school, and it costs a fraction as much.",
+    why: "The most consequential public health research institute in South Asia, and the one an Indian medical graduate can most easily reach. A short flight, no visa ordeal, and disease patterns that are actually the ones you will spend your career on. Oral rehydration solution was proven here, and the Matlab field site is the longest-running demographic surveillance system in the developing world. If you want field epidemiology rather than a lecture about it, this is a far better use of a year than a European summer school, and it costs a fraction as much.",
     reqs: [
-      "Fellowships: within about three years of your last degree — a recent MBBS or a masters both qualify",
+      "Fellowships: within about three years of your last degree. A recent MBBS or a masters both qualify",
       "Internships are open earlier and are the realistic entry point for a student",
       "Short courses in epidemiology, biostatistics and research ethics are open to anyone who can pay the fee"
     ],
@@ -246,7 +246,7 @@ window.DB.impact["icgeb-falaschi"] = {
   t: 1,
   odds: "Small intake per laboratory, but a founding-member-state field",
   effort: "20 hrs, free to apply, plus two months to secure the group leader's statement",
-  note: "A world-class intergovernmental fellowship with a laboratory in New Delhi, which means you can hold it without emigrating and still be inside an international system. Recruits through biotechnology departments, so medical students almost never see it — that thin field is the whole opportunity."
+  note: "A world-class intergovernmental fellowship with a laboratory in New Delhi, which means you can hold it without emigrating and still be inside an international system. Recruits through biotechnology departments, so medical students almost never see it. That thin field is the whole opportunity."
 };
 window.DB.impact["icddrb"] = {
   t: 2,

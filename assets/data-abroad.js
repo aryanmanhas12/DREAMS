@@ -2,8 +2,8 @@
    funded, before they graduate.
 
    Two things sit in this file. First, the two summer/semester research
-   internships that take undergraduates directly and pay for them. Second — and
-   this is the part nobody tells students — the three Indian government schemes
+   internships that take undergraduates directly and pay for them. Second, and
+   this is the part nobody tells students. The three Indian government schemes
    that will buy your plane ticket to an international conference once you have
    an accepted abstract.
 
@@ -113,7 +113,7 @@ window.DB.funding.push(
       "File 60 to 90 days ahead. ANRF enforces both ends of that window — too early is rejected as firmly as too late. ICMR is the more forgiving of the three: its own minimum is two weeks before the conference, and it accepts on a rolling basis, so if a deadline has run away from you ICMR is the one still worth filing.",
       "Pick the right scheme rather than applying to all three: ICMR for health research, CSIR for the broader sciences, ANRF/SERB for young researchers under 35. They cover overlapping ground and duplicate applications are noticed.",
       "These are reimbursements, not advances. You pay for the ticket and claim it back afterwards with boarding passes and receipts, so plan the cash flow or ask your department about an advance.",
-      "Verify current caps, forms and portal addresses on each scheme's own site before you file — the ICMR portal has already moved once, from sts.icmr.org.in to schemes.dhr.gov.in."
+      "Verify current caps, forms and portal addresses on each scheme's own site before you file. The ICMR portal has already moved once, from sts.icmr.org.in to schemes.dhr.gov.in."
     ],
     indiaSpecific: true, competitiveness: "accessible", workExp: 0
   }
@@ -134,7 +134,7 @@ window.DB.study.push(
     url: "https://schemes.dhr.gov.in/",
     why: "Most students treat going abroad as a lottery they enter once, in final year, by applying to something enormous. It is better understood as a pipeline with three independent inlets, and you only need one of them to open. Run all three at once and the odds stop looking like a lottery. The order below is deliberate: it starts with the thing that is entirely within your control and needs nobody's permission.",
     reqs: [
-      "An abstract you can submit — an audit, a case series or an ICMR-STS project all qualify",
+      "An abstract you can submit. An audit, a case series or an ICMR-STS project all qualify",
       "One faculty member who will put their name to your work",
       "A passport, obtained in year one and not in the week you need it",
       "Roughly 18 months of runway before you want to travel"
@@ -144,7 +144,7 @@ window.DB.study.push(
       "Inlet one, and the one you control: produce something presentable. An ICMR-STS project, a departmental audit, a case series. It does not need to be novel; it needs to exist and to have a supervisor's name on it.",
       "Submit that abstract to an international conference with a student category. Acceptance rates for student posters are far higher than people assume, and an acceptance letter is the key that unlocks the government travel grants.",
       "The moment it is accepted, file for ICMR, CSIR or ANRF/SERB travel support — 60 to 90 days ahead, with the Dean's letter and a government travel-agent quote. This is the cheapest, highest-probability route abroad that exists for an Indian medical student.",
-      "Inlet two, running in parallel: apply to the summer research programmes that pay. EPFL closes 15 November for the following summer; OIST runs two intakes; the IISER and IAS summer fellowships run on similar timelines inside India as a fallback. Note how early that EPFL date is — an Indian summer break in June needs an application submitted the previous November.",
+      "Inlet two, running in parallel: apply to the summer research programmes that pay. EPFL closes 15 November for the following summer; OIST runs two intakes; the IISER and IAS summer fellowships run on similar timelines inside India as a fallback. Note how early that EPFL date is. An Indian summer break in June needs an application submitted the previous November.",
       "Inlet three: ask. Email three researchers abroad whose papers you have actually read, with one specific question and a concrete offer of what you would do for eight weeks. A self-funded 'no' costs nothing to receive, and unfunded lab invitations are what many travel grants are then used for.",
       "Negotiate college permission before you need it. For anything longer than a summer break, the Dean's sign-off is the real bottleneck — not admission, not money.",
       "Keep every acceptance letter, certificate and abstract-book page. The second trip is much easier than the first, and this is the evidence that makes it so."
@@ -219,7 +219,7 @@ window.DB.research.push(
     ],
     steps: [
       "Read two of the Center's own working papers before applying and reference them specifically. The applicant pool here is small enough that a generic letter is obvious.",
-      "If your background is purely clinical, build one piece of health-systems work first — a costing exercise, a district-level access audit, an analysis of an existing NSSO or NFHS dataset. The open-data entry in this index is where to start tonight.",
+      "If your background is purely clinical, build one piece of health-systems work first. A costing exercise, a district-level access audit, an analysis of an existing NSSO or NFHS dataset. The open-data entry in this index is where to start tonight.",
       "Health financing is the part clinicians consistently skip and the part this field actually runs on. A free course in health economics closes more of the gap than another clinical posting.",
       "Watch their page directly. This role is not advertised through the usual scholarship aggregators."
     ],
@@ -265,7 +265,7 @@ window.DB.research.push(
     url: "https://www.hsph.harvard.edu/takemi-program/",
     why: "A year at Harvard to work on health systems, aimed squarely at people who will go back and run them. Worth knowing about early even though you cannot apply yet, because it changes what a mid-career plan looks like: the people who get this spent their twenties building a health-systems record, not only a clinical one.",
     reqs: [
-      "Mid-career health professionals and scholars — this is not an entry-level route",
+      "Mid-career health professionals and scholars. This is not an entry-level route",
       "A track record in health systems, policy or health economics",
       "A defined research project to pursue during the year"
     ],
@@ -281,7 +281,7 @@ window.DB.research.push(
 Object.assign(window.DB.impact, {
   "openwho":        { t: 3, odds: "Open to everyone, always", effort: "Hours per course, free", note: "The cheapest credible line you can add to a CV this month, and the one that makes a cold email to a global health researcher read as serious. Three deep courses beat fifteen scattered ones." },
   "cpigh-policy":   { t: 1, odds: "Small pool, and India is a named focus country", effort: "A real health-systems piece of work first, then the application", note: "Most global health policy is done to countries like yours by people from elsewhere. This is one of the few doors built the other way round, and it is paid." },
-  "dth-lab":        { t: 2, odds: "Small cohort, narrow eligibility that works in your favour", effort: "An application and a reading week", note: "Aged 30 or under and based in an LMIC — a ceiling that makes this easier as a student than it will ever be again. Digital health rules are being written now; this is a seat at that table." },
+  "dth-lab":        { t: 2, odds: "Small cohort, narrow eligibility that works in your favour", effort: "An application and a reading week", note: "Aged 30 or under and based in an LMIC. A ceiling that makes this easier as a student than it will ever be again. Digital health rules are being written now; this is a seat at that table." },
   "takemi-harvard": { t: 2, odds: "Mid-career only — years away for a student", effort: "A decade of health-systems record", note: "Listed so you can aim at it, not apply to it. Read where its fellows worked before their year and you have a map of the career." }
 });
 
@@ -346,5 +346,5 @@ window.DB.research.push(
 
 Object.assign(window.DB.impact, {
   "unicef-intern":       { t: 2, odds: "Posts all year, so the real limit is how often you look", effort: "An application per post; no fee", note: "A PAID UN internship open to every nationality, taking people still enrolled or within two years of graduating. Most students write the UN off until they have a masters; this door is open now and shuts quietly two years after you qualify." },
-  "un-online-volunteer": { t: 3, odds: "Accessible — the constraint is finishing, not getting in", effort: "Weeks of unpaid but real work", note: "Unpaid, and still the fastest way to get an actual UN agency onto a CV before you hold a degree that would let you apply there. Pick research assignments and finish them; the reference is the point." }
+  "un-online-volunteer": { t: 3, odds: "Accessible. The constraint is finishing, not getting in", effort: "Weeks of unpaid but real work", note: "Unpaid, and still the fastest way to get an actual UN agency onto a CV before you hold a degree that would let you apply there. Pick research assignments and finish them; the reference is the point." }
 });

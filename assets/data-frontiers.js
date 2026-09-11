@@ -11,7 +11,7 @@ window.DB.frontiers = [
     tagline: "Finding the genetic architecture of mental illness",
     fields: ["psych", "genomics", "compbio"],
     what: "Large-scale genome-wide studies that ask which common and rare variants raise the risk of schizophrenia, depression and bipolar disorder, and what those variants do biologically. The field went from zero replicated findings to hundreds of loci in about fifteen years.",
-    whyIndia: "Polygenic risk scores were built almost entirely on European cohorts and transfer badly to South Asian populations — a well-documented failure that nobody has fixed. GenomeIndia has released thousands of Indian genomes into the public Indian Biological Data Centre. The field's largest blind spot is your home population, and the data is already public.",
+    whyIndia: "Polygenic risk scores were built almost entirely on European cohorts and transfer badly to South Asian populations. A well-documented failure that nobody has fixed. GenomeIndia has released thousands of Indian genomes into the public Indian Biological Data Centre. The field's largest blind spot is your home population, and the data is already public.",
     entry: "MBBS → MSc in genomics/bioinformatics or a direct funded PhD → analyse public cohort data in the meantime. You need Python or R and population genetics, not a wet lab.",
     where: ["Broad Institute (Boston)", "Cardiff MRC Centre for Neuropsychiatric Genetics", "QIMR Berghofer (Brisbane)", "NIMHANS ADBS programme (Bengaluru)", "Karolinska"],
     startNow: "Download summary statistics from the Psychiatric Genomics Consortium — they are free and public — and reproduce one published figure. That single notebook is a better credential than any certificate.",
@@ -50,7 +50,7 @@ window.DB.frontiers = [
     whyIndia: "India's infectious disease burden means a population where infection, inflammation and mental illness overlap constantly, and almost nobody is characterising it. Post-infectious neuropsychiatric syndromes are systematically under-diagnosed here.",
     entry: "Biochemistry and immunology are unusually direct routes in. This is one of the few frontier fields where an MSc in biochemistry is the right first move rather than a detour.",
     where: ["Cambridge (Psychiatry & Immunology)", "KCL", "Charité Berlin", "Johns Hopkins", "NIMHANS"],
-    startNow: "Look at what your own hospital already measures. CRP, ferritin and differential counts sit in records alongside psychiatric admissions — a retrospective association study needs no new funding.",
+    startNow: "Look at what your own hospital already measures. CRP, ferritin and differential counts sit in records alongside psychiatric admissions. A retrospective association study needs no new funding.",
     url: "https://www.neuroimmunology.org/"
   },
   {
@@ -59,7 +59,7 @@ window.DB.frontiers = [
     tagline: "Why proven treatments never reach the people who need them",
     fields: ["pubhealth", "global", "systems", "psych"],
     what: "The formal study of the gap between what works in trials and what happens in clinics. Not 'does this drug work' but 'why, after twenty years of evidence, is it still not being given'. It has its own methods, journals and funding streams.",
-    whyIndia: "This is the discipline for anyone whose real frustration is not scientific ignorance but systemic failure — the treatment exists, the guideline exists, and the patient still does not get it. India is the largest natural laboratory on earth for this question.",
+    whyIndia: "This is the discipline for anyone whose real frustration is not scientific ignorance but systemic failure. The treatment exists, the guideline exists, and the patient still does not get it. India is the largest natural laboratory on earth for this question.",
     entry: "MPH or MSc in health services research. Career paths run through WHO, the Gates Foundation, PATH, national health missions and university global health departments.",
     where: ["LSHTM", "Johns Hopkins", "University of Washington (Global Health)", "PHFI / Indian Institutes of Public Health", "George Institute India"],
     startNow: "Pick one national guideline and audit its adherence in your own hospital. That is a publishable implementation study and it costs nothing but time.",
@@ -106,7 +106,7 @@ window.DB.frontiers = [
     name: "Mental Health Economics & Task-Shifting",
     tagline: "Proving that treating minds pays for itself",
     fields: ["psych", "global", "systems", "pubhealth"],
-    what: "Costing mental health interventions, modelling their return, and designing systems where lay counsellors rather than psychiatrists deliver care. India produced the foundational evidence for this — the Healthy Activity Program trials in Goa are cited worldwide.",
+    what: "Costing mental health interventions, modelling their return, and designing systems where lay counsellors rather than psychiatrists deliver care. India produced the foundational evidence for this. The Healthy Activity Program trials in Goa are cited worldwide.",
     whyIndia: "The most influential task-shifting trials in global mental health were run in India by Indian researchers. This is a field where the centre of gravity is genuinely here, and where working from India is an advantage rather than a compromise.",
     entry: "MSc health economics or global mental health. Sangath, the George Institute and PHFI all hire medical graduates into this work directly.",
     where: ["Sangath (Goa)", "LSHTM / KCL Centre for Global Mental Health", "Harvard", "PHFI"],
@@ -244,7 +244,7 @@ window.DB.residency = [
     why: "The lowest-barrier route to a paid clinical job in a high-income country. UK psychiatry is chronically understaffed and actively recruits internationally, with a Royal College training pathway that includes academic clinical fellowships.",
     reqs: ["MBBS + internship completed", "IELTS 7.5 or OET B", "PLAB 1 and 2, or the UKMLA as it replaces them", "GMC registration"],
     steps: [
-      "Check the current status of UKMLA versus PLAB before booking anything — the GMC has been transitioning between them.",
+      "Check the current status of UKMLA versus PLAB before booking anything. The GMC has been transitioning between them.",
       "PLAB 1 can be sat in India; PLAB 2 requires travel to the UK.",
       "Most Indian doctors take a non-training trust job first, then apply into specialty training. That is the normal route, not a failure.",
       "Academic Clinical Fellowships combine psychiatry training with protected research time — apply for those specifically if research is the goal."
@@ -263,7 +263,7 @@ window.DB.residency = [
     window: "Rolling — no annual cycle, apply when ready",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.bundesgesundheitsministerium.de/",
-    why: "No entrance exam lottery, no match, no application season — you learn the language, pass a professional exam, and get a salaried training post. Germany has a genuine physician shortage and specialty training pays from the first day. Psychiatry and neurology posts are widely available.",
+    why: "No entrance exam lottery, no match, no application season. You learn the language, pass a professional exam, and get a salaried training post. Germany has a genuine physician shortage and specialty training pays from the first day. Psychiatry and neurology posts are widely available.",
     reqs: [
       "MBBS + internship",
       "German to B2 general and C1 medical. This is the real barrier and it takes 12–18 months",
@@ -366,7 +366,7 @@ window.DB.equity = [
     window: "Typically opens Mar–Jun",
     deadlineMonths: [3, 4, 5, 6],
     url: "https://tribal.nic.in/",
-    why: "Twenty fully-funded awards a year for Scheduled Tribe students to study abroad, with an income ceiling of ₹6 lakh. The number of applicants is small enough that a well-prepared application has meaningful odds — a completely different competitive landscape from Chevening or Fulbright.",
+    why: "Twenty fully-funded awards a year for Scheduled Tribe students to study abroad, with an income ceiling of ₹6 lakh. The number of applicants is small enough that a well-prepared application has meaningful odds. A completely different competitive landscape from Chevening or Fulbright.",
     reqs: ["Scheduled Tribe category", "Family income below ₹6 lakh per annum", "Admission to a recognised foreign institution", "Age limit usually 35"],
     steps: [
       "Watch tribal.nic.in from March. The notification is poorly publicised and the window is short.",

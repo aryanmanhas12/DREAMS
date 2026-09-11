@@ -49,7 +49,7 @@ window.DB.funding.push(
     window: "DBT-BET around Feb–Apr · ICMR-JRF around Mar–Jul",
     deadlineMonths: [2, 3, 4, 5, 6, 7],
     url: "https://dbtindia.gov.in/",
-    why: "These are the examinations that turn an Indian PhD from something you pay for into something that pays you. A DBT or ICMR fellowship is portable — you take it to whichever institution accepts you, which inverts the usual power dynamic when approaching a supervisor. Very few medical students sit these because nobody tells them they are eligible.",
+    why: "These are the examinations that turn an Indian PhD from something you pay for into something that pays you. A DBT or ICMR fellowship is portable. You take it to whichever institution accepts you, which inverts the usual power dynamic when approaching a supervisor. Very few medical students sit these because nobody tells them they are eligible.",
     reqs: [
       "MBBS holders are eligible for ICMR-JRF; DBT-BET is open to postgraduates in life sciences and to medical graduates",
       "Written examination followed by an interview",
@@ -103,7 +103,7 @@ window.DB.funding.push(
     ],
     steps: [
       "Search your own state's social welfare, minority affairs and higher education department sites directly. The National Scholarship Portal aggregates some but not all of them.",
-      "Ask at your college office — they often know about state schemes that never appear online.",
+      "Ask at your college office. They often know about state schemes that never appear online.",
       "These stack with partial university funding, which is how most successful applicants actually close the gap."
     ],
     indiaSpecific: true, competitiveness: "accessible", workExp: 0
@@ -126,13 +126,13 @@ window.DB.research.push(
     why: "US clinical experience is close to mandatory for matching into an American residency, and it is dramatically easier to arrange while you are still enrolled than after you graduate. A hands-on elective, where you are part of the team, is worth far more than a passive observership, and the letter of recommendation is the actual product, not the certificate.",
     reqs: [
       "Currently enrolled at a medical school listed in the World Directory of Medical Schools",
-      "Most hands-on electives require you to still be a student — this window closes at graduation",
+      "Most hands-on electives require you to still be a student. This window closes at graduation",
       "Health insurance, immunisation records and sometimes a visa"
     ],
     steps: [
       "Do this DURING MBBS, not after. Hands-on electives are largely closed to graduates, and that single fact reshapes the whole USMLE timeline.",
       "Apply through VSLO where possible; many institutions also accept direct applications with lower fees.",
-      "The goal is a strong, specific letter of recommendation from a US faculty member. Say so to yourself at the outset — it changes how you behave on the rotation.",
+      "The goal is a strong, specific letter of recommendation from a US faculty member. Say so to yourself at the outset. It changes how you behave on the rotation.",
       "Be alert to cost. Agencies charge several times what the institution charges for the same placement. Apply directly."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "accessible", workExp: 0
@@ -191,7 +191,7 @@ Object.assign(window.DB.impact, {
   "us-electives":  { t: 2, odds: "Open, but costly", effort: "$1,500–4,000 per rotation", note: "Do it DURING MBBS. Hands-on electives are largely closed to graduates, and that one fact reshapes the entire USMLE timeline. Apply directly, never through an agency." },
   "inspire":       { t: 2, odds: "Moderate", effort: "25 hrs", note: "The Faculty scheme gives an independent position and a grant without waiting for a conventional vacancy. One of the few genuine ladders for building a research career inside India." },
   "lmic-partnerships": { t: 2, odds: "Moderate", effort: "Application plus relocation", note: "Sangath, icddr,b and KEMRI-Wellcome publish in the best journals and are more reachable from India than any Western institution. A year here builds exactly the record a Wellcome fellowship needs." },
-  "state-schemes": { t: 3, odds: "Small applicant pools", effort: "1 hour of searching, then paperwork", note: "Administered by state departments that do not advertise and are aggregated nowhere useful. Ask your own college office — they often know what is not online." }
+  "state-schemes": { t: 3, odds: "Small applicant pools", effort: "1 hour of searching, then paperwork", note: "Administered by state departments that do not advertise and are aggregated nowhere useful. Ask your own college office. They often know what is not online." }
 });
 
 /* New Zealand, added September 2026. The country had one entry and deserved
@@ -283,7 +283,7 @@ window.DB.research.push(
     url: "https://birac.nic.in/big.php",
     why: "The largest sum in this index that an individual student can hold, and almost no medical student applies. BIRAC's own eligibility names medical degree holders alongside PhDs and biomedical engineers, so a clinician with a diagnostic or device idea is inside the intended audience rather than at its edge. Doctors see the unmet need every day in outpatients; the people who usually win these grants have to go looking for it.",
     reqs: [
-      "An idea at nascent or planning stage — a prototype is not required to apply",
+      "An idea at nascent or planning stage. A prototype is not required to apply",
       "Medical degree holders are named in the scheme's own eligibility, alongside students and academics",
       "A No Objection Certificate from your institution if you are still enrolled",
       "Funds for an individual applicant go into a dedicated auditable no-lien account"

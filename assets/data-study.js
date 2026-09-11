@@ -41,10 +41,10 @@ window.DB.study = [
     window: "Opens Oct · apply by Jan–Mar for scholarship alignment",
     deadlineMonths: [10, 11, 12, 1, 2, 3],
     url: "https://www.lshtm.ac.uk/study/courses/masters-degrees/global-mental-health",
-    why: "Run jointly with the Institute of Psychiatry, Psychology & Neuroscience — the department that produced most of the evidence base for task-shifted mental health care in low-income countries. If your anger is about mental health being ignored, this is the degree that trains you to fix it at population scale.",
-    reqs: ["MBBS, psychology, or social science degree", "IELTS 7.0", "Demonstrated interest in mental health — a project, an internship, a screener you built"],
+    why: "Run jointly with the Institute of Psychiatry, Psychology & Neuroscience. The department that produced most of the evidence base for task-shifted mental health care in low-income countries. If your anger is about mental health being ignored, this is the degree that trains you to fix it at population scale.",
+    reqs: ["MBBS, psychology, or social science degree", "IELTS 7.0", "Demonstrated interest in mental health. A project, an internship, a screener you built"],
     steps: [
-      "Write the personal statement around one concrete gap you have seen — a district with no psychiatrist, a stigma you watched play out. Specific beats passionate.",
+      "Write the personal statement around one concrete gap you have seen. A district with no psychiatrist, a stigma you watched play out. Specific beats passionate.",
       "Name the faculty whose work you have actually read. This course reads for that.",
       "Apply through LSHTM's portal; the degree is awarded jointly with KCL.",
       "Flag Commonwealth Shared Scholarship interest inside the application — India is eligible and mental health is a priority theme."
@@ -63,13 +63,13 @@ window.DB.study = [
     window: "Two gathered fields: early Nov and early Jan",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.ndph.ox.ac.uk/study-with-us",
-    why: "Heavy quantitative training — you leave able to run a real epidemiological analysis, not just describe one. Sits inside the Nuffield Department of Population Health, which runs some of the largest cohort studies on earth.",
-    reqs: ["Strong first degree; MBBS accepted", "Comfort with numbers — they test this", "IELTS 7.5 overall"],
+    why: "Heavy quantitative training. You leave able to run a real epidemiological analysis, not just describe one. Sits inside the Nuffield Department of Population Health, which runs some of the largest cohort studies on earth.",
+    reqs: ["Strong first degree; MBBS accepted", "Comfort with numbers. They test this", "IELTS 7.5 overall"],
     steps: [
       "Apply in the NOVEMBER gathered field, not January. Scholarship consideration at Oxford is tied to the earlier deadline.",
       "One tick-box on the Oxford form puts you in the Clarendon pool automatically — do not miss it.",
       "Rhodes India is a separate application with an earlier deadline (usually July–Aug). If you want it, you are applying a year ahead.",
-      "Submit a written work sample if requested — a research proposal you actually wrote counts."
+      "Submit a written work sample if requested. A research proposal you actually wrote counts."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -90,7 +90,7 @@ window.DB.study = [
     steps: [
       "Identify two Oxford labs you would want your rotations in and say so in the statement.",
       "Apply in the November gathered field for scholarship consideration.",
-      "If your quantitative background is thin, finish an online neuroscience or Python course BEFORE applying and name it — it converts intent into evidence."
+      "If your quantitative background is thin, finish an online neuroscience or Python course BEFORE applying and name it. It converts intent into evidence."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -151,7 +151,7 @@ window.DB.study = [
     why: "Edinburgh's online masters programmes are the best-value route to a top-25 university degree while you are still working in India. You can start it during internship and finish it before you leave.",
     reqs: ["2:1 equivalent", "IELTS 7.0", "Online route has identical entry standards"],
     steps: [
-      "Decide on-campus versus online honestly. Online is not lesser — the certificate does not say 'online'.",
+      "Decide on-campus versus online honestly. Online is not lesser. The certificate does not say 'online'.",
       "Pay per year rather than upfront on the online route; you can pause between years.",
       "Edinburgh Global Research Scholarships are separate and close in February."
     ],
@@ -236,7 +236,7 @@ window.DB.study = [
     window: "Rounds from Oct through Mar",
     deadlineMonths: [10, 11, 12, 1, 2, 3],
     url: "https://publichealth.jhu.edu/academics",
-    why: "The largest school of public health in the world, and the one that most reliably converts an MBBS into a global health career. Bloomberg expects and welcomes physicians — a large share of every MPH cohort holds a medical degree.",
+    why: "The largest school of public health in the world, and the one that most reliably converts an MBBS into a global health career. Bloomberg expects and welcomes physicians. A large share of every MPH cohort holds a medical degree.",
     reqs: ["Bachelor's degree; MBBS strongly preferred", "Two years of post-bachelor's health experience (internship counts)", "TOEFL 100 / IELTS 7.0"],
     steps: [
       "The two-year experience requirement is real but generously interpreted — your MBBS internship and any research employment counts. Document it explicitly.",
@@ -413,7 +413,7 @@ window.DB.study = [
     window: "Rolling — depends entirely on the supervising professor",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.mhh.de/en",
-    why: "A shorter research doctorate that runs alongside or just after clinical training. There is no admissions committee — you find a professor who agrees to supervise you, and that is the entire gate. For a doctor with a specific question and a contact, it is the least bureaucratic research doctorate in Europe.",
+    why: "A shorter research doctorate that runs alongside or just after clinical training. There is no admissions committee. You find a professor who agrees to supervise you, and that is the entire gate. For a doctor with a specific question and a contact, it is the least bureaucratic research doctorate in Europe.",
     reqs: ["Medical degree", "A willing supervisor. This is the whole process", "German usually needed for clinical work; lab-based projects often English"],
     steps: [
       "Identify the professor first, the institution second. The relationship is the application.",
@@ -463,7 +463,7 @@ window.DB.study = [
     reqs: ["MBBS or health-related bachelor's", "IELTS 6.5", "Recognition of prior learning available"],
     steps: [
       "Three intakes a year makes UNSW unusually forgiving of timing.",
-      "Look at the George Institute's India operation specifically — it employs and supervises Indian medical graduates.",
+      "Look at the George Institute's India operation specifically. It employs and supervises Indian medical graduates.",
       "Apply for course credit based on MBBS at the same time as admission."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
@@ -585,7 +585,7 @@ window.DB.study = [
     type: "phd", country: "Switzerland", city: "Zurich",
     fields: ["neuro", "compbio", "psych"],
     stages: ["grad", "pg"], funding: "full",
-    money: "PhD salary ≈ CHF 47,000–55,000/year — the highest-paid doctorate in the world",
+    money: "PhD salary ≈ CHF 47,000–55,000/year. The highest-paid doctorate in the world",
     duration: "3–4 years",
     window: "Two calls a year: deadlines around 1 Dec and 1 Jun",
     deadlineMonths: [5, 6, 11, 12],
@@ -632,7 +632,7 @@ window.DB.study = [
     window: "Deadlines cluster Dec–Feb for an August start",
     deadlineMonths: [11, 12, 1, 2, 3],
     url: "https://www.studyinnorway.no/",
-    why: "Norway's public universities have historically charged no tuition at all, including to international students — you pay only living costs. The trade is a high cost of living and long dark winters, but the degree itself can be free.",
+    why: "Norway's public universities have historically charged no tuition at all, including to international students. You pay only living costs. The trade is a high cost of living and long dark winters, but the degree itself can be free.",
     reqs: ["Recognised bachelor's or MBBS", "IELTS 6.5", "Proof of ≈ NOK 150,000 in a Norwegian account for the study permit"],
     steps: [
       "Verify current tuition policy for your exact programme before planning around it — Norway has been revising fees for non-EU students.",
@@ -658,7 +658,7 @@ window.DB.study = [
     why: "Canada's largest public health school, with a three-year post-graduation work permit and a genuine route to permanent residency. The research-stream MSc is often funded, unlike the professional MPH.",
     reqs: ["MBBS accepted", "IELTS 7.0 / TOEFL 100", "MSc stream requires a supervisor match"],
     steps: [
-      "Apply to the thesis-based MSc rather than the course-based MPH if funding matters — the MSc carries stipends, the MPH usually does not.",
+      "Apply to the thesis-based MSc rather than the course-based MPH if funding matters. The MSc carries stipends, the MPH usually does not.",
       "Canada's post-graduation work permit length tracks your programme length. A two-year degree earns a three-year permit.",
       "Vanier Canada Graduate Scholarships apply at doctoral level and are worth CAD 50,000/year for three years."
     ],
@@ -700,7 +700,7 @@ window.DB.study = [
     why: "One of the most generous and least-contested government scholarships available to Indians. It covers everything, includes a language year, and Japanese neuroscience and genomics institutes are world-class while attracting a fraction of the applications that US programmes do.",
     reqs: ["Under 35 for most categories", "MBBS accepted", "No Japanese required at application. It is taught to you"],
     steps: [
-      "Apply through the Embassy of Japan in India (embassy recommendation route) — it has better odds than the university recommendation route.",
+      "Apply through the Embassy of Japan in India (embassy recommendation route). It has better odds than the university recommendation route.",
       "The application opens around April and involves a written exam plus interview in India.",
       "Contact a potential supervisor early; a letter of acceptance from a professor strengthens the application enormously.",
       "Budget for the six-month intensive Japanese course. It is part of the award, not an obstacle."
@@ -742,12 +742,12 @@ window.DB.study = [
     window: "Entrance rounds in Dec–Feb and May–Jul; DBT-BET and CSIR-NET are the gateways",
     deadlineMonths: [1, 2, 5, 6, 7, 12],
     url: "https://nimhans.ac.in/",
-    why: "NIMHANS Bengaluru is genuinely world-class in psychiatry and neurosciences — its cohorts are cited internationally and it has data no Western institution can access. If your question is about Indian brains and Indian populations, the answer may be that the best place to study it is here.",
+    why: "NIMHANS Bengaluru is genuinely world-class in psychiatry and neurosciences. Its cohorts are cited internationally and it has data no Western institution can access. If your question is about Indian brains and Indian populations, the answer may be that the best place to study it is here.",
     reqs: ["MBBS accepted directly for most biomedical PhDs", "DBT-JRF / ICMR-JRF / CSIR-NET or institutional entrance", "MD/MS holders get preferential entry at NIMHANS"],
     steps: [
       "Sit DBT-BET or ICMR-JRF — these are the fellowships that make an Indian PhD paid rather than self-funded.",
       "For NIMHANS, the PhD in Clinical Neurosciences and Psychiatric Genetics both accept MBBS holders.",
-      "The India Alliance (DBT/Wellcome Trust) Early Career Fellowship does NOT require a PhD for clinicians — a clinician with a research record can hold one directly. This is the single biggest structural advantage Indian doctors have and almost nobody uses it.",
+      "The India Alliance (DBT/Wellcome Trust) Early Career Fellowship does NOT require a PhD for clinicians. A clinician with a research record can hold one directly. This is the single biggest structural advantage Indian doctors have and almost nobody uses it.",
       "Look at GenomeIndia data through the Indian Biological Data Centre. Ten thousand Indian genomes are publicly available and desperately under-analysed."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0

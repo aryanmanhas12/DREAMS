@@ -30,7 +30,7 @@ Object.assign(window.DB.countries, {
     climate: "cold",
     winter: "−5 to 0 °C, snow from December to March, grey for months",
     summer: "18–25 °C, long bright evenings",
-    daylight: "About 7.5 hours in December — the dark is the part people underestimate",
+    daylight: "About 7.5 hours in December. The dark is the part people underestimate",
     cost: "₹45,000–70,000/month including rent. One of the cheapest routes to an EU degree.",
     diaspora: "growing fast — Kaunas has a large and well-organised Indian student community",
     vegFood: "manageable",
@@ -91,7 +91,7 @@ Object.assign(window.DB.countries, {
     food: "Oslo has Indian grocers and the Pakistani community is long-established, so spices and lentils are available. Eating out is punishingly expensive; almost everyone cooks.",
     mentalHealth: "Excellent, well-funded and genuinely destigmatised. The winter dark is taken seriously as a health issue rather than as a personal weakness.",
     people: "Reserved to the point that many international students find the first year lonely, and then unusually loyal once a friendship forms. Nearly everyone speaks fluent English.",
-    visa: "Student residence permit, which requires proof you hold roughly NOK 150,000 for living costs — this financial requirement stops more people than the academic one.",
+    visa: "Student residence permit, which requires proof you hold roughly NOK 150,000 for living costs. This financial requirement stops more people than the academic one.",
     work: "20 hours/week permitted.",
     allergy: "Birch pollen in spring is severe. Very low pollution otherwise.",
     honest: "Read this before you build a plan on old advice, because it has changed twice. Norway charged non-EU students no tuition for decades and stopped in autumn 2023; fees have run roughly NOK 130,000–390,000 a year since. But from 2025 institutions were allowed to set their own fees rather than charge full cost, and several cut them sharply, so the number varies enormously by university now, and a figure you read anywhere, including here, may be a year out of date in either direction. Norway remains outstanding for global health at Bergen and for a working culture that protects your evenings. Get the fee from the specific university's own page for the specific intake, and from nowhere else."
@@ -108,7 +108,7 @@ Object.assign(window.DB.countries, {
     vegFood: "easy",
     food: "Copenhagen is a serious food city with good vegetarian provision and Indian grocers in Nørrebro.",
     mentalHealth: "Strong provision and low stigma. Universities have dedicated international-student psychologists.",
-    people: "Egalitarian, informal and hard to befriend quickly — the same Nordic pattern. Workplace hierarchy is genuinely flat, which surprises people trained in Indian medical culture.",
+    people: "Egalitarian, informal and hard to befriend quickly. The same Nordic pattern. Workplace hierarchy is genuinely flat, which surprises people trained in Indian medical culture.",
     visa: "Student residence permit. Denmark is Schengen and has an established post-study job search scheme.",
     work: "20 hours/week, 37 in summer.",
     allergy: "Birch and grass pollen in spring.",
@@ -147,7 +147,7 @@ Object.assign(window.DB.countries, {
     people: "Widely described by international students as the friendliest place in East Asia. Genuinely helpful to strangers, curious about foreigners, low-hostility.",
     visa: "Resident visa then an ARC. Academia Sinica handles the paperwork for its doctoral students.",
     work: "Permitted with a work permit; TIGP fellows are funded and do not need it.",
-    allergy: "Dust mites and mould thrive in the humidity — the main issue for anyone with allergic asthma. Air quality is moderate.",
+    allergy: "Dust mites and mould thrive in the humidity. The main issue for anyone with allergic asthma. Air quality is moderate.",
     honest: "Academia Sinica's Taiwan International Graduate Program is a fully funded English-language doctorate with a real stipend, at a research institute that publishes seriously in molecular biology and computational biology, and almost no Indian medical student has heard of it. The weakness is that a Taiwanese doctorate carries less name recognition with Indian and Western employers than its research quality deserves."
   },
 
@@ -157,10 +157,10 @@ Object.assign(window.DB.countries, {
     winter: "22–32 °C. There is no winter",
     summer: "28–38 °C, humid, monsoon from June to October",
     daylight: "About 11.5 hours in December",
-    cost: "₹35,000–60,000/month in Bangkok — the cheapest destination on this site outside India",
+    cost: "₹35,000–60,000/month in Bangkok. The cheapest destination on this site outside India",
     diaspora: "large and long-established",
     vegFood: "easy",
-    food: "Thai food is vegetable-heavy and Bangkok has a large Indian community around Phahurat with proper Indian groceries. Watch for fish sauce, which is in almost everything by default — the phrase you need is 'jay' (เจ), meaning strict vegetarian.",
+    food: "Thai food is vegetable-heavy and Bangkok has a large Indian community around Phahurat with proper Indian groceries. Watch for fish sauce, which is in almost everything by default. The phrase you need is 'jay' (เจ), meaning strict vegetarian.",
     mentalHealth: "Mahidol has student services; private English-speaking psychiatry in Bangkok is good and affordable.",
     people: "Warm, non-confrontational and welcoming. The cultural distance from India is smaller than any Western destination on this list.",
     visa: "Non-immigrant ED visa, straightforward for admitted students. Four hours' flight from most Indian metros.",
@@ -219,7 +219,7 @@ Object.assign(window.DB.countries, {
     people: "Reserved and formal at first, hospitable once known. English is widespread among the young.",
     visa: "National D visa then a residence card. EU member, Schengen.",
     work: "Permitted for students holding a residence card.",
-    allergy: "Winter smog in Kraków and other southern cities is among the worst in Europe — a real consideration for asthmatics.",
+    allergy: "Winter smog in Kraków and other southern cities is among the worst in Europe. A real consideration for asthmatics.",
     honest: "Poland deserves a plain assessment rather than a brochure. It is an affordable, EU-accredited route and its English-taught medical programmes are legitimate. It is also heavily marketed to Indian families by agents who take a commission, the research output is modest, and a Polish degree does not shortcut licensing anywhere. Choose it if EU access at low cost is the actual goal, and go in without illusions about the research."
   },
 
@@ -288,7 +288,7 @@ Object.assign(window.DB.countries, {
     winter: "15–25 °C — the pleasant season, and the reason the academic year is built around it",
     summer: "35–48 °C, and genuinely dangerous outdoors between June and September",
     daylight: "About 10.5 hours in December",
-    cost: "Usually irrelevant — the serious research institutions here house and pay their students",
+    cost: "Usually irrelevant. The serious research institutions here house and pay their students",
     diaspora: "very large. Indians are among the largest population groups in the UAE, Qatar and Saudi Arabia",
     vegFood: "easy",
     food: "The easiest food environment outside India. Indian groceries, restaurants and regional cuisines are everywhere, and vegetarian is a completely normal request.",
@@ -343,10 +343,10 @@ window.DB.study.push(
     ],
     steps: [
       "Read the VLIR-UOS eligibility page before the course page. The scholarship, not the seat, is the hard part, and it has its own nationality and age criteria.",
-      "Apply to ITM and to the scholarship in the same cycle — the scholarship deadline is the earlier of the two and missing it means self-funding a European masters.",
+      "Apply to ITM and to the scholarship in the same cycle. The scholarship deadline is the earlier of the two and missing it means self-funding a European masters.",
       "The motivation letter is assessed on whether you will use the training in your own health system. Write about a specific Indian problem you have seen, not about a general interest in global health.",
       "An internship year or district-hospital posting is genuinely useful evidence here in a way it is not for most Western masters.",
-      "Confirm current fees, deadlines and scholarship rules on the ITM site — this programme's funding rules change with Belgian development-aid cycles."
+      "Confirm current fees, deadlines and scholarship rules on the ITM site. This programme's funding rules change with Belgian development-aid cycles."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 1
   },
@@ -369,7 +369,7 @@ window.DB.study.push(
       "Research or fieldwork experience helps but is not mandatory"
     ],
     steps: [
-      "Decide between the research-oriented and the practice-oriented track before applying — the application asks and the answer shapes your thesis placement.",
+      "Decide between the research-oriented and the practice-oriented track before applying. The application asks and the answer shapes your thesis placement.",
       "Ask directly about field placement sites. ISGlobal's value is its African and South Asian field programmes, and access to them is what separates this from a generic European masters.",
       "Apply for the Spanish government and ISGlobal scholarships separately and earlier than the course deadline."
     ],
@@ -382,7 +382,7 @@ window.DB.study.push(
     type: "masters", country: "Thailand", city: "Bangkok",
     fields: ["infect", "global", "pubhealth", "clinical"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "≈ ₹2–4 lakh a year total including living costs — the cheapest credible international option on this site",
+    money: "≈ ₹2–4 lakh a year total including living costs. The cheapest credible international option on this site",
     duration: "6-month diploma or 2-year MSc",
     window: "Main intake applications close around March–May",
     deadlineMonths: [1, 2, 3, 4, 5],
@@ -395,7 +395,7 @@ window.DB.study.push(
     ],
     steps: [
       "Choose the diploma first if you are unsure. Six months, low cost, and it tells you whether the field is yours before you commit two years.",
-      "Ask about attachment to the Shoklo Malaria Research Unit or the border field sites — that fieldwork is the real value and it is not automatic.",
+      "Ask about attachment to the Shoklo Malaria Research Unit or the border field sites. That fieldwork is the real value and it is not automatic.",
       "Thai student visas are straightforward but must be applied for from India before travel, not converted on arrival."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
@@ -468,7 +468,7 @@ window.DB.research.push(
     url: "https://fchampalimaud.org/champalimaud-research/education",
     why: "One of the best-funded neuroscience institutes in Europe, built deliberately as an international programme, teaching in English, on the Lisbon waterfront. The structure is the thing worth noticing: a year of rotations before you choose a laboratory, which means you are not gambling five years on a supervisor you met once over a video call. A medical degree is a real advantage in this pool rather than an oddity.",
     reqs: [
-      "A degree in medicine, biology, engineering, physics, psychology or mathematics — the programme deliberately recruits across all of them",
+      "A degree in medicine, biology, engineering, physics, psychology or mathematics. The programme deliberately recruits across all of them",
       "No neuroscience background required; they train it",
       "English; no Portuguese needed",
       "Strong quantitative ability matters more than laboratory experience"
@@ -531,7 +531,7 @@ window.DB.research.push(
       "Pick the specific TIGP programme first — molecular medicine, bioinformatics, and molecular science each admit separately with different criteria.",
       "Email the programme coordinator with a short, specific question before applying. Response rates are high and it is remembered.",
       "The fellowship is guaranteed for the first year and then transfers to your supervisor's grant. Ask a current student how reliably that transition happens in the group you are joining.",
-      "Confirm current stipend figures on the TIGP site — the number above moves with Taiwanese science funding."
+      "Confirm current stipend figures on the TIGP site. The number above moves with Taiwanese science funding."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -554,7 +554,7 @@ window.DB.research.push(
       "Funded doctoral posts usually require a prior masters or demonstrable research output"
     ],
     steps: [
-      "Approach a specific research unit rather than the university — the Wits Reproductive Health and HIV Institute and the Desmond Tutu HIV Centre both recruit directly.",
+      "Approach a specific research unit rather than the university. The Wits Reproductive Health and HIV Institute and the Desmond Tutu HIV Centre both recruit directly.",
       "Ask about the funding source before you accept. Grant-funded posts end when the grant does, and that timeline should match your degree's.",
       "Be realistic about security when choosing where to live, and ask current international students rather than the international office.",
       "South African study visas are slow. Begin the application months before you need it."
@@ -582,7 +582,7 @@ window.DB.research.push(
     steps: [
       "Secure a supervisor before applying for the doctorate. Without an agreed supervisor the application does not progress, and this is the step people skip.",
       "The domestic-fee rule applies to doctorates, not to taught masters. Check which you are actually applying for.",
-      "Apply for the University of Otago doctoral scholarship in the same cycle — it covers fees and a stipend and closes before the general deadline.",
+      "Apply for the University of Otago doctoral scholarship in the same cycle. It covers fees and a stipend and closes before the general deadline.",
       "Factor the flight. It is the most expensive travel on this site and you will not come home often."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "medium", workExp: 0
@@ -602,7 +602,7 @@ window.DB.funding.push(
     window: "Embassy track applications open ~February; university track ~March",
     deadlineMonths: [2, 3, 4],
     url: "https://www.studyinkorea.go.kr/",
-    why: "One of the most complete government scholarship packages that exists — it pays for the flight, the fees, the living, the insurance and a year of language teaching, and it is applied for from India through the Korean embassy. Korean biomedical research is strong and getting stronger, and the number of Indian medical graduates applying is far below what the generosity of the award would justify.",
+    why: "One of the most complete government scholarship packages that exists. It pays for the flight, the fees, the living, the insurance and a year of language teaching, and it is applied for from India through the Korean embassy. Korean biomedical research is strong and getting stronger, and the number of Indian medical graduates applying is far below what the generosity of the award would justify.",
     reqs: [
       "Under 25 for undergraduate, under 40 for graduate awards",
       "A grade average in roughly the top 20 per cent of your class",
@@ -638,7 +638,7 @@ window.DB.funding.push(
       "Some programmes require HSK Chinese proficiency; English-taught medical and science programmes generally do not"
     ],
     steps: [
-      "Apply through a Chinese university's own portal and through the CSC portal — most routes require both, and applicants routinely complete only one.",
+      "Apply through a Chinese university's own portal and through the CSC portal. Most routes require both, and applicants routinely complete only one.",
       "Secure an acceptance letter from a supervisor first. It converts the application from a lottery into a strong one.",
       "Verify the current state of India–China student visa issuance before you build a plan around this, and keep a second option live.",
       "Confirm that your degree will be recognised for whatever you intend to do next — check with the Indian regulator, not with the university."
@@ -661,7 +661,7 @@ window.DB.funding.push(
     reqs: [
       "A medical or health-sciences degree",
       "English proficiency; teaching and research are in English throughout",
-      "Doctoral posts are advertised jobs with named projects — you apply to a vacancy, not to a department"
+      "Doctoral posts are advertised jobs with named projects. You apply to a vacancy, not to a department"
     ],
     steps: [
       "Correct your assumptions about cost first. Norway charged non-EU students nothing for decades and began charging tuition in autumn 2023, and a great deal of advice online has not caught up. Check current fees on the university's own page before anything else.",
@@ -687,9 +687,9 @@ Object.assign(window.DB.impact, {
   "wits-uct-global":      { t: 2, odds: "Reachable, especially with prior research", effort: "20 hrs", note: "For HIV, TB and health systems this is ahead of Europe, because the epidemiology and the trial infrastructure are on the doorstep. Security is a real constraint on daily life and should be researched from students, not from the prospectus." },
   "isglobal-msc":         { t: 2, odds: "Moderately competitive", effort: "15 hrs", note: "A third of the price of the London equivalent with genuine African and South Asian field programmes. Ask about field placement access before accepting. That is the part that distinguishes it." },
   "mahidol-tropmed":      { t: 2, odds: "Accessible", effort: "12 hrs", note: "Tropical medicine taught where the disease is, four hours from home, for less than an Indian private programme. Choose it for the fieldwork and the border research units, not for the letterhead." },
-  "nordic-global-health": { t: 2, odds: "Doctoral vacancies are winnable; masters are expensive", effort: "20 hrs per vacancy", note: "A Nordic doctorate is a job with a pension, which is a different life from a stipend. Read the Norway tuition correction before planning — the free-tuition Norway in old forum posts stopped existing in 2023." },
+  "nordic-global-health": { t: 2, odds: "Doctoral vacancies are winnable; masters are expensive", effort: "20 hrs per vacancy", note: "A Nordic doctorate is a job with a pension, which is a different life from a stipend. Read the Norway tuition correction before planning. The free-tuition Norway in old forum posts stopped existing in 2023." },
   "otago-nz-pubhealth":   { t: 3, odds: "Reachable with an agreed supervisor", effort: "18 hrs", note: "International doctoral students pay domestic fees, which quietly makes this one of the cheapest doctorates in the English-speaking world. The taught masters gets no such discount." },
   "csc-china":            { t: 3, odds: "Large intake, moderate competition", effort: "30 hrs", note: "The funding is real and the genomics is world-class. Rated third tier not on quality but on risk: language, internet restrictions on academic work, and India–China visa policy that has to be checked as a live variable." },
-  "lsmu-lithuania":       { t: 4, odds: "Accessible", effort: "15 hrs plus degree recognition", note: "An honest EU degree at the lowest price on this site, and no more than that. It opens Europe; it does not shortcut PLAB or USMLE. Apply directly — the agent commission buys you nothing." },
+  "lsmu-lithuania":       { t: 4, odds: "Accessible", effort: "15 hrs plus degree recognition", note: "An honest EU degree at the lowest price on this site, and no more than that. It opens Europe; it does not shortcut PLAB or USMLE. Apply directly. The agent commission buys you nothing." },
   "poland-english-med":   { t: 4, odds: "Accessible", effort: "12 hrs", note: "Listed so the comparison is fair rather than because it stands out. Jagiellonian is old and respectable, the research base you would join is thin, and it is the most heavily agent-brokered destination here. If the appeal is that it is easy to enter, committees later will read it that way too." }
 });

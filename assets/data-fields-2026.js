@@ -57,7 +57,7 @@ window.DB.frontiers.push(
     whyIndia: "The Indian numbers are the argument. Analyses of the Commission's indicators for India found that only about 6.8 % of the need for major surgical operations was met in rural India, and the blood supply deficit and the rural surgical workforce are named as the two highest priorities. If you are a surgical trainee in India who wants to matter beyond the operating list, the unmet need is not abroad. It is one district away.",
     entry: "Any surgical, anaesthetic or obstetric trainee can enter through an audit. Formal routes: MPH or MSc in global health, the Harvard Program in Global Surgery and Social Change, or a research post attached to a surgical department. No fellowship is required to publish your first indicator study.",
     where: ["Program in Global Surgery and Social Change, Harvard", "King's Centre for Global Health", "WHO Emergency and Essential Surgical Care programme", "AIIMS and CMC surgical departments running LCoGS indicator work", "Lancet Regional Health — Southeast Asia"],
-    startNow: "Measure one of the six indicators for your own hospital's catchment — the simplest is the proportion of the population within two hours of a facility that can deliver caesarean section, laparotomy and open fracture care. It is a map and a denominator, it costs nothing, and it is exactly what the Commission asks countries to report and most have not.",
+    startNow: "Measure one of the six indicators for your own hospital's catchment. The simplest is the proportion of the population within two hours of a facility that can deliver caesarean section, laparotomy and open fracture care. It is a map and a denominator, it costs nothing, and it is exactly what the Commission asks countries to report and most have not.",
     url: "https://www.pgssc.org/"
   },
   {
@@ -141,7 +141,7 @@ window.DB.specialties.push(
     ],
     supers: ["Retina (medical and surgical)", "Cornea and refractive", "Glaucoma", "Paediatric ophthalmology and strabismus", "Oculoplasty", "Community ophthalmology"],
     research: [
-      "Diabetic retinopathy screening by AI — the single most mature clinical AI application anywhere, and India is where it is being deployed at scale",
+      "Diabetic retinopathy screening by AI. The single most mature clinical AI application anywhere, and India is where it is being deployed at scale",
       "Cataract surgical delivery models — Aravind's assembly-line system is studied at Harvard Business School and was built in Madurai",
       "Retinopathy of prematurity, which is rising sharply in India as neonatal survival improves",
       "Gene therapy for inherited retinal dystrophy",
@@ -191,7 +191,7 @@ window.DB.specialties.push(
     ],
     supers: ["Spinal cord injury", "Neurorehabilitation and stroke", "Prosthetics and orthotics", "Paediatric rehabilitation and cerebral palsy", "Pain medicine", "Musculoskeletal and sports rehabilitation"],
     research: [
-      "Assistive technology designed for Indian cost and terrain — a wheelchair built for a smooth floor is useless in most of the country",
+      "Assistive technology designed for Indian cost and terrain. A wheelchair built for a smooth floor is useless in most of the country",
       "Stroke rehabilitation delivery where no rehabilitation service exists — task-shifting to family caregivers is a live research question",
       "Disability measurement and the enormous undercount in Indian data",
       "Brain-computer interfaces and neuroprosthetics, which arrive in this specialty before any other",
@@ -199,7 +199,7 @@ window.DB.specialties.push(
     ],
     masters: ["MSc Rehabilitation Science", "MSc Assistive Technology / Disability Studies", "MPH with a disability focus", "MSc Clinical Neuroscience for the neurorehab route"],
     fitIf: "You measure success in function rather than in cure. You work well in teams and do not need to be the only decision-maker. You are more interested in the person's life after the illness than in the acute episode.",
-    truth: "It is chosen late and often by people who did not get what they wanted, and that is a misreading of the field. India has an enormous and growing population of stroke, trauma and cerebral palsy survivors and almost no rehabilitation capacity to meet it — the specialty is undersupplied precisely because it is undervalued. The work is slow and the wins are partial; if you need dramatic outcomes this will frustrate you. If you want a field where you can still define how it is practised in your country, there are very few left, and this is one."
+    truth: "It is chosen late and often by people who did not get what they wanted, and that is a misreading of the field. India has an enormous and growing population of stroke, trauma and cerebral palsy survivors and almost no rehabilitation capacity to meet it. The specialty is undersupplied precisely because it is undervalued. The work is slow and the wins are partial; if you need dramatic outcomes this will frustrate you. If you want a field where you can still define how it is practised in your country, there are very few left, and this is one."
   },
   {
     id: "sp-palliative",
@@ -281,7 +281,7 @@ window.DB.research.push(
       "Before applying, keep a needs notebook on the wards for a month — every workaround, every improvised fix. The application and the interview both reward specific observed problems over general enthusiasm for innovation.",
       "Apply as someone who will still be a doctor afterwards. The strongest medical fellows treat this as clinical training in a different medium, not as an exit.",
       "Two intakes a year means missing one costs six months rather than a year. Check the current cycle on the fellowship page.",
-      "Look also at the SIB-SHInE programme run by IIT Kanpur with KGMU Lucknow if Delhi does not suit — the model has been replicated."
+      "Look also at the SIB-SHInE programme run by IIT Kanpur with KGMU Lucknow if Delhi does not suit. The model has been replicated."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "medium", workExp: 0
   }
@@ -289,7 +289,7 @@ window.DB.research.push(
 
 window.DB.impact["dhr-fellowship-abroad"] = {
   t: 1,
-  odds: "Competitive but a small, self-selecting field — most eligible people never hear of it",
+  odds: "Competitive but a small, self-selecting field. Most eligible people never hear of it",
   effort: "20 hrs, free to apply, plus the time to secure a host",
   note: "The Indian government paying for an Indian clinician to train abroad and return, with an age ceiling of 45 or 57 rather than 30. That means it is still open when nearly everything else on this site has closed, and almost nobody applies."
 };

@@ -22,7 +22,7 @@ window.DB.tierInfo = {
   },
   3: {
     name: "Solid foundation",
-    blurb: "Real substance, moderate signal. These are the workhorses — they build the record that makes tier 1 and 2 applications credible. Most people should be doing several of these before reaching upward."
+    blurb: "Real substance, moderate signal. These are the workhorses. They build the record that makes tier 1 and 2 applications credible. Most people should be doing several of these before reaching upward."
   },
   4: {
     name: "Worth it if cheap",
@@ -38,9 +38,9 @@ window.DB.tierInfo = {
 window.DB.impact = {
   /* ─────── Tier 1 — career-defining ─────── */
   "gates-cambridge":   { t: 1, odds: "~1 in 60 worldwide", effort: "40–60 hrs over 3 months", note: "One of about 75 awarded globally each year. The name alone opens doors for the rest of your life." },
-  "rhodes-india":      { t: 1, odds: "5–6 Indians a year", effort: "60+ hrs, referees lined up months ahead", note: "The most competitive award an Indian student can hold. Applying is worth it even at these odds — the essays force clarity you will reuse everywhere." },
+  "rhodes-india":      { t: 1, odds: "5–6 Indians a year", effort: "60+ hrs, referees lined up months ahead", note: "The most competitive award an Indian student can hold. Applying is worth it even at these odds. The essays force clarity you will reuse everywhere." },
   "fulbright":         { t: 1, odds: "~5 % of Indian applicants", effort: "50 hrs, plus a 16-month lead time", note: "USIEF places you at the university, which removes the hardest part of a US application." },
-  "chevening":         { t: 1, odds: "8–10 % of Indian applicants", effort: "30–40 hrs on four essays", note: "The largest fully-funded India-to-UK route. Most rejected applications are visibly rushed — the essays reward preparation more than pedigree." },
+  "chevening":         { t: 1, odds: "8–10 % of Indian applicants", effort: "30–40 hrs on four essays", note: "The largest fully-funded India-to-UK route. Most rejected applications are visibly rushed. The essays reward preparation more than pedigree." },
   "commonwealth":      { t: 1, odds: "~5 %", effort: "30 hrs", note: "Unusually, financial need counts in your favour rather than against it." },
   "clarendon":         { t: 1, odds: "~1 in 12 of Oxford applicants", effort: "Zero extra — no separate form", note: "The highest value-per-hour award in existence. You are considered automatically; people miss it purely by applying after the early deadline." },
   "felix":             { t: 1, odds: "Restricted to Indians, so a far smaller field", effort: "25 hrs", note: "Reserved for Indian nationals with financial need. Comparable money to Chevening, a fraction of the applicants." },
@@ -51,9 +51,9 @@ window.DB.impact = {
   "khorana":           { t: 1, odds: "~5 % of applicants", effort: "20 hrs, free to apply", note: "Fully funded US summer research that a currently-enrolled MBBS student can hold, with the marks bar lowered specifically for medics. Nothing else on this list does all three." },
   "cshl-urp":          { t: 1, odds: "~20 places worldwide", effort: "15 hrs, free to apply", note: "Brutally competitive and free to enter, which makes the expected value of applying very high even when you do not get it." },
   "weizmann-kupcinet": { t: 1, odds: "Small international cohort", effort: "15 hrs, free to apply", note: "Flights, accommodation, meals and a stipend, at one of the great research institutes. Almost no Indian medical students apply." },
-  "amgen-scholars":    { t: 1, odds: "~5–10 %", effort: "20 hrs per hub, multiple hubs allowed", note: "Apply to the Europe, Japan and Australia hubs — the US hubs require enrolment at a US institution and will reject you on that alone." },
+  "amgen-scholars":    { t: 1, odds: "~5–10 %", effort: "20 hrs per hub, multiple hubs allowed", note: "Apply to the Europe, Japan and Australia hubs. The US hubs require enrolment at a US institution and will reject you on that alone." },
   "lindau":            { t: 1, odds: "600 places worldwide, nomination-gated", effort: "15 hrs plus securing a nomination", note: "A week with thirty Nobel laureates, fully funded including international travel. The highest-prestige item here that costs a student nothing." },
-  "mitacs":            { t: 1, odds: "~10 % of Indian applicants", effort: "10 hrs — you rank projects, no supervisor hunt", note: "Flights, visa, housing, insurance and a stipend all covered, and no need to find your own supervisor. The most accessible fully-funded international research internship open to an Indian undergraduate." },
+  "mitacs":            { t: 1, odds: "~10 % of Indian applicants", effort: "10 hrs. You rank projects, no supervisor hunt", note: "Flights, visa, housing, insurance and a stipend all covered, and no need to find your own supervisor. The most accessible fully-funded international research internship open to an Indian undergraduate." },
   "harvard-mph45":     { t: 1, odds: "~10 %", effort: "40 hrs via SOPHAS", note: "MBBS satisfies the doctoral-degree requirement, so you are eligible for the accelerated route most applicants are not. That is a full year and roughly $30,000 saved." },
   "jhu-mph":           { t: 1, odds: "~15 %", effort: "40 hrs", note: "The school that most reliably converts an MBBS into a global health career. A large share of every cohort already holds a medical degree." },
   "cam-mphil":         { t: 1, odds: "~10 %", effort: "35 hrs", note: "The standard Cambridge on-ramp to a doctorate, and the vehicle for a Gates Cambridge application." },
@@ -63,13 +63,13 @@ window.DB.impact = {
   "nos-st":            { t: 1, odds: "~20 awards a year, few applicants", effort: "20 hrs plus paperwork", note: "Same logic as the SC scheme. A well-prepared application has genuinely meaningful odds." },
 
   /* ─────── Tier 2 — strong signal ─────── */
-  "icmr-sts":          { t: 2, odds: "~20–25 %", effort: "30 hrs including ethics clearance", note: "The default first project, and the window closes permanently after second year. The stipend is the smallest part of the value — the publication is the point." },
+  "icmr-sts":          { t: 2, odds: "~20–25 %", effort: "30 hrs including ethics clearance", note: "The default first project, and the window closes permanently after second year. The stipend is the smallest part of the value. The publication is the point." },
   "ias-srfp":          { t: 2, odds: "~15 %", effort: "10 hrs, free to apply", note: "Train fare reimbursed, so the real cost is close to zero. MBBS students are eligible and rarely apply." },
   "neuromatch":        { t: 2, odds: "Accepts most prepared applicants", effort: "3 weeks full-time", note: "The cheapest credential that makes a cold email to a computational lab actually land. Tuition waivers available on request." },
   "ictp":              { t: 2, odds: "Moderate — designed for developing-country scientists", effort: "10 hrs", note: "Exists specifically to fund people from countries like yours. Almost no Indian medical students know it exists." },
   "charpak":           { t: 2, odds: "~20 %, Indians only", effort: "20 hrs plus finding a French lab", note: "Charpak Lab is the rare funded research internship a current MBBS student can take." },
   "lshtm-mph":         { t: 2, odds: "~30 % admission; funding much harder", effort: "25 hrs", note: "The most recognised public health masters in the world. The distance-learning route is the cheapest credible way to hold the degree." },
-  "lshtm-gmh":         { t: 2, odds: "~25 %", effort: "25 hrs", note: "Joint with the IoPPN — the department that built the evidence base for task-shifted mental health care." },
+  "lshtm-gmh":         { t: 2, odds: "~25 %", effort: "25 hrs", note: "Joint with the IoPPN. The department that built the evidence base for task-shifted mental health care." },
   "ox-msc-gh":         { t: 2, odds: "~15 %", effort: "30 hrs", note: "You leave able to run a real epidemiological analysis, not just describe one." },
   "ox-msc-neuro":      { t: 2, odds: "~15 %", effort: "30 hrs", note: "A conversion year that makes a clinically trained doctor credible to a neuroscience PhD programme." },
   "kcl-ioppn":         { t: 2, odds: "~35 %", effort: "20 hrs", note: "Consistently the top-ranked psychiatry research institution outside the United States." },
@@ -96,7 +96,7 @@ window.DB.impact = {
   "ncbs-inStem":       { t: 2, odds: "~10 %", effort: "10 hrs", note: "One of the best basic-science institutes in Asia. Direct emails to individual PIs work here more often than almost anywhere." },
   "iisc-programs":     { t: 2, odds: "~10 %", effort: "10 hrs", note: "India's top-ranked research institution, and one of very few places a medical student can learn real computational biology with clinical framing." },
   "jncasr-srfp":       { t: 2, odds: "~15 %", effort: "8 hrs, free to apply", note: "A real molecular neuroscience laboratory, open from first year, with travel paid. A two-month, zero-risk experiment." },
-  "embl-embo":         { t: 2, odds: "Course-dependent", effort: "10 hrs", note: "EMBO explicitly funds participants from lower-income countries. Always tick the fellowship box when applying — you usually cannot ask afterwards." },
+  "embl-embo":         { t: 2, odds: "Course-dependent", effort: "10 hrs", note: "EMBO explicitly funds participants from lower-income countries. Always tick the fellowship box when applying. You usually cannot ask afterwards." },
   "stipendium-hungaricum": { t: 2, odds: "~200 Indian places a year", effort: "20 hrs, two parallel submissions", note: "For the money involved, the least-known major scholarship available to Indians." },
 
   /* ─────── Tier 3 — solid foundation ─────── */
@@ -117,7 +117,7 @@ window.DB.impact = {
   "charite-msc":       { t: 3, odds: "~35 %", effort: "25 hrs plus credential recognition", note: "Effectively free — German public universities charge no tuition. Verify the teaching language of your exact track first." },
   "germany-drmed":     { t: 3, odds: "Supervisor-dependent, no committee", effort: "Mostly relationship-building", note: "There is no admissions committee. You find a professor who agrees, and that is the entire gate." },
   "ukmla":             { t: 3, odds: "High pass rates", effort: "6–12 months", note: "The lowest-barrier route to a paid clinical job in a high-income country. UK psychiatry actively recruits internationally." },
-  "amc-australia":     { t: 3, odds: "Moderate", effort: "12–18 months", note: "Sit the AMC MCQ in India first — the cheapest way to test your own commitment to the pathway." },
+  "amc-australia":     { t: 3, odds: "Moderate", effort: "12–18 months", note: "Sit the AMC MCQ in India first. The cheapest way to test your own commitment to the pathway." },
   "germany-approbation": { t: 3, odds: "High once the language is done", effort: "12–18 months, almost all of it language", note: "No match, no lottery, no application season. Everything downstream depends on German — start it now or not at all." },
   "india-pg":          { t: 3, odds: "Highly rank-dependent", effort: "1–2 years", note: "Choose the department by its research output, not the institution's name. A publishing unit at a mid-tier college beats a silent one at a famous one." },
   "who-internship":    { t: 3, odds: "Competitive at Geneva, far less at SEARO", effort: "8 hrs", note: "Apply to the SEARO office in New Delhi as well — far fewer applicants, same institution on your CV." },
@@ -128,7 +128,7 @@ window.DB.impact = {
   "csc-gks-taiwan":    { t: 3, odds: "Moderate — light Indian competition", effort: "25 hrs", note: "East Asian governments are spending heavily to attract researchers and Indian applications are few." },
   "nordic-govt":       { t: 3, odds: "~10 %", effort: "25 hrs across two deadlines", note: "The Swedish route needs two applications with two separate deadlines. Baltic state schemes are almost unknown to Indian applicants." },
   "holland-orange":    { t: 3, odds: "Moderate", effort: "8 hrs", note: "€5,000 is a real dent but not a solution on its own against €18,000 tuition." },
-  "aga-khan":          { t: 3, odds: "Moderate", effort: "20 hrs", note: "A gap-filler by design — you must show you have applied elsewhere first. Community service history is weighted heavily." },
+  "aga-khan":          { t: 3, odds: "Moderate", effort: "20 hrs", note: "A gap-filler by design. You must show you have applied elsewhere first. Community service history is weighted heavily." },
   "eiffel":            { t: 3, odds: "Nomination-capped, so a small field", effort: "10 hrs plus asking the institution", note: "Simply emailing the admissions office to ask about nomination puts you ahead of everyone who did not ask." },
   "minority-schemes":  { t: 3, odds: "Scheme-dependent", effort: "1 hour of searching", note: "The education loan interest subsidy schemes are the most under-claimed benefit here. One hour on the National Scholarship Portal is worth it." },
 

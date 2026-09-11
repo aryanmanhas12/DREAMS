@@ -132,7 +132,7 @@ window.DB.research = [
     steps: [
       "Check the specific programme page in December; IISc runs several parallel schemes with different deadlines.",
       "For PHCCO, some prior Python exposure genuinely helps. Do a free course first.",
-      "IISc is also where you would sit for a PhD later — a summer here builds the relationship."
+      "IISc is also where you would sit for a PhD later. A summer here builds the relationship."
     ],
     zeroCost: false, indiaSpecific: true, competitiveness: "high", workExp: 0
   },
@@ -179,7 +179,7 @@ window.DB.research = [
       "Free to apply"
     ],
     steps: [
-      "Confirm your year status counts as pre-final BEFORE you invest in the application. Email WINStep Forward and ask directly — it takes ten minutes and saves a cycle.",
+      "Confirm your year status counts as pre-final BEFORE you invest in the application. Email WINStep Forward and ask directly. It takes ten minutes and saves a cycle.",
       "Apply through the IUSSTF visitation-programmes portal.",
       "IUSSTF and WINStep match you to up to three US professors. You do not have to find the lab yourself, which removes the hardest barrier.",
       "The statement of purpose should name a specific research area, not a general interest in the United States."
@@ -338,7 +338,7 @@ window.DB.research = [
     deadlineMonths: [1, 2, 3, 4],
     url: "https://ifmsa.org/student-exchange-program/",
     why: "The cheapest way for a medical student to get a month abroad. SCORE is the research track, SCOPE is clinical. Accommodation and often meals are covered by the host committee, so beyond flights the marginal cost is small.",
-    reqs: ["Membership of MSAI (India's IFMSA national member organisation)", "Your college needs a Local Committee — or you help start one", "Some countries require a language certificate"],
+    reqs: ["Membership of MSAI (India's IFMSA national member organisation)", "Your college needs a Local Committee, or you help start one", "Some countries require a language certificate"],
     steps: [
       "Start at MSAI rather than at IFMSA. India applies through its national member organisation and the outgoing calls, fees and timelines are published there — msaindia.org/exchanges — not on the international site.",
       "Join MSAI first. If your college has no Local Committee, founding one is itself a leadership credential worth having.",
@@ -363,7 +363,7 @@ window.DB.research = [
     why: "EMBO explicitly funds participants from countries with fewer resources, and EMBL-EBI's bioinformatics training is the reference standard. A week here teaches you more usable technique than a semester of lectures.",
     reqs: ["Relevant research background", "Fellowship application submitted WITH the course application, not after"],
     steps: [
-      "Always tick the fellowship box at the point of applying — you usually cannot ask afterwards.",
+      "Always tick the fellowship box at the point of applying. You usually cannot ask afterwards.",
       "EMBL-EBI also publishes its entire bioinformatics training catalogue free online. Start there tonight if money is the constraint.",
       "EMBO Short-Term Fellowships fund research visits of up to three months between labs."
     ],
@@ -404,7 +404,7 @@ window.DB.research = [
     window: "Abstract deadlines usually 5–7 months before the meeting",
     deadlineMonths: [1, 2, 3, 4, 5, 10, 11, 12],
     url: "https://ibro.org/grants/",
-    why: "You do not attend these by paying — you attend them by submitting an abstract and applying for the travel award in the same breath. IBRO in particular exists to fund neuroscientists from countries like India, and its schemes are chronically under-applied.",
+    why: "You do not attend these by paying. You attend them by submitting an abstract and applying for the travel award in the same breath. IBRO in particular exists to fund neuroscientists from countries like India, and its schemes are chronically under-applied.",
     reqs: ["An accepted abstract, usually", "Trainee status", "Travel award applications are separate and have earlier deadlines"],
     steps: [
       "Submit the abstract AND the travel award application together. The award deadline is almost always earlier than you expect.",
@@ -474,7 +474,7 @@ window.DB.research = [
     steps: [
       "Applications open in February for a July course. Attend the January information session.",
       "Request the tuition waiver during enrolment. It is a normal part of the process, not a favour.",
-      "Do a free Python course beforehand — the academy assumes you can write a loop.",
+      "Do a free Python course beforehand. The academy assumes you can write a loop.",
       "The group project is the part that matters. Finish it, put it on GitHub, and link it in every application afterwards."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0

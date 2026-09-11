@@ -16,7 +16,7 @@ window.DB.countries = {
     mentalHealth: "Every university has free counselling, and NHS mental health care is free at the point of use once registered with a GP. Waiting lists are long — register with a GP in your first week, not when you need one.",
     people: "Reserved and polite rather than warm. Friendships form slowly. Indian student societies are large and active in every university and are the fastest route to a social base.",
     visa: "Student visa is straightforward with a CAS. Graduate Route gives 2 years of post-study work (3 after a PhD).",
-    work: "20 hours/week during term. Post-study work is the real question — the Graduate Route has been under political review, so verify its status when you apply.",
+    work: "20 hours/week during term. Post-study work is the real question. The Graduate Route has been under political review, so verify its status when you apply.",
     allergy: "Tree and grass pollen are severe March–July; hay fever affects many first-time visitors. Damp housing means mould is a genuine issue in older student accommodation — check before signing.",
     honest: "The one-year masters is the fastest credential in the world, and also the most expensive per month. Loneliness in the first term is close to universal and says nothing about you. Winter is not cold so much as relentlessly dark and wet."
   },
@@ -108,7 +108,7 @@ window.DB.countries = {
     name: "Switzerland",
     climate: "cold", winter: "−2 to 6 °C", summer: "18–28 °C",
     daylight: "9 hours in December",
-    cost: "₹1.8–2.5 lakh/month — the most expensive country on this list",
+    cost: "₹1.8–2.5 lakh/month. The most expensive country on this list",
     diaspora: "small", vegFood: "moderate",
     food: "Good vegetarian availability but very expensive. Indian groceries in Zurich and Geneva only.",
     mentalHealth: "Excellent but expensive; insurance is mandatory and costly. University services exist and are the affordable route.",
@@ -140,7 +140,7 @@ window.DB.countries = {
     diaspora: "moderate", vegFood: "easy",
     food: "Growing Indian population in Dublin, Cork and Galway. Groceries readily available.",
     mentalHealth: "University counselling is free. The public health system is slower than the UK's; private insurance helps.",
-    people: "Genuinely warm and talkative — the friendliest of the English-speaking destinations by most students' accounts.",
+    people: "Genuinely warm and talkative. The friendliest of the English-speaking destinations by most students' accounts.",
     visa: "Stamp 2 student permission. The Third Level Graduate Programme gives 24 months post-study for masters graduates.",
     work: "20 hours/week during term, 40 in holidays.",
     allergy: "Damp; mould in older housing. Mild pollen season.",
@@ -225,10 +225,10 @@ window.DB.countries = {
     food: "Vegetarian eating is genuinely easy — pasta, pizza and produce-based cooking make it one of the more accommodating European food cultures. Indian groceries are limited to the larger cities.",
     mentalHealth: "University services exist but are inconsistent between institutions. English-speaking therapists are concentrated in Rome, Milan and Trieste.",
     people: "Warm and expressive once a relationship starts, though bureaucracy is a genuine daily obstacle — Italian administrative processes are slower than almost anywhere else in Western Europe.",
-    visa: "National (D) visa for study, then a residence permit (permesso di soggiorno) applied for within days of arrival — a notoriously bureaucratic step that catches almost every first-time arrival off guard.",
+    visa: "National (D) visa for study, then a residence permit (permesso di soggiorno) applied for within days of arrival. A notoriously bureaucratic step that catches almost every first-time arrival off guard.",
     work: "Limited hours permitted for non-EU students during term.",
     allergy: "Grass and olive pollen in spring; generally good air quality outside the largest cities.",
-    honest: "The reason to come here specifically is ICTP in Trieste — a UN-affiliated institute built to fund scientists from countries like India, with quantitative-biology and neuroscience schools that cost a participant almost nothing. Outside that, Italy is not a major English-taught research destination, so treat it as a place for a specific funded programme rather than for a degree search."
+    honest: "The reason to come here specifically is ICTP in Trieste. A UN-affiliated institute built to fund scientists from countries like India, with quantitative-biology and neuroscience schools that cost a participant almost nothing. Outside that, Italy is not a major English-taught research destination, so treat it as a place for a specific funded programme rather than for a degree search."
   },
   Hungary: {
     name: "Hungary",
@@ -246,7 +246,7 @@ window.DB.countries = {
   },
   Bangladesh: {
     name: "Bangladesh",
-    climate: "hot", winter: "12–25 °C and dry — the pleasant season", summer: "28–36 °C with very high humidity; monsoon June to October",
+    climate: "hot", winter: "12–25 °C and dry. The pleasant season", summer: "28–36 °C with very high humidity; monsoon June to October",
     daylight: "About 10.5 hours in December. Close enough to home that nothing about the light will surprise you.",
     cost: "₹25,000–45,000/month in Dhaka — among the cheapest places on this site to live",
     diaspora: "n/a. You are in the region, not away from it", vegFood: "easy",

@@ -26,7 +26,7 @@ window.DB.funding.push(
     window: "Cycle typically opens in autumn and closes in winter for a start the following July",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://fogartyfellows.org/apply/",
-    why: "A full year of US-government-funded mentored research, done mostly in India with a paired US mentor and a short spell at their university — the University of Washington, Indiana, Michigan and Minnesota consortium all take Indian trainees. This is not a relocation programme; it is US-calibre funding and mentorship landing on Indian soil, which is the opposite of every other route in this section.",
+    why: "A full year of US-government-funded mentored research, done mostly in India with a paired US mentor and a short spell at their university. The University of Washington, Indiana, Michigan and Minnesota consortium all take Indian trainees. This is not a relocation programme; it is US-calibre funding and mentorship landing on Indian soil, which is the opposite of every other route in this section.",
     reqs: [
       "Doctoral-level trainee in a health profession — MD, MBBS-with-research-registration, or enrolled in a relevant doctoral programme",
       "Citizen or permanent resident of India",
@@ -34,7 +34,7 @@ window.DB.funding.push(
       "Available to spend 1–3 months at the US consortium university during the fellowship year"
     ],
     steps: [
-      "Read the NPGH LEADERs consortium's current partner list on fogartyfellows.org — the US-side mentor you approach should already have India ties or an active collaborator here.",
+      "Read the NPGH LEADERs consortium's current partner list on fogartyfellows.org. The US-side mentor you approach should already have India ties or an active collaborator here.",
       "Draft a one-year research plan with your India-based mentor before you touch the application; the US partnership is easier to arrange once the local half exists.",
       "Apply through the portal in the autumn cycle for a July start. This is a once-a-year window, not rolling.",
       "Budget the 1–3 month US stint separately: visa timing (a J-1 exchange visa, typically) needs its own runway alongside the fellowship paperwork."
@@ -60,7 +60,7 @@ window.DB.funding.push(
       "Under 29 as of 1 August of your enrolment year"
     ],
     steps: [
-      "Identify the actual Stanford graduate programme first — an MS in Epidemiology, Health Policy, or a relevant PhD track are the realistic entry points for a medical graduate, not the MD.",
+      "Identify the actual Stanford graduate programme first. An MS in Epidemiology, Health Policy, or a relevant PhD track are the realistic entry points for a medical graduate, not the MD.",
       "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes in early October; the Stanford programme is due by its own deadline or 1 December, whichever falls first, and for many programmes that is earlier than the KHS date. Look up your specific programme's deadline before you plan around October, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
       "Because this funds up to three years and stacks a leadership cohort of ~70 scholars from every country on top, treat it as the single highest-ceiling entry in this whole index if your graduate plan is Stanford-shaped.",
       "Confirm the current cohort's exact age and degree-date cut-offs on the eligibility page before investing the months this application takes."
@@ -148,7 +148,7 @@ window.DB.research.push(
       "Check msfsouthasia.org's current openings page rather than applying speculatively — internships are posted against specific department needs.",
       "Apply to Communications or the Access Campaign if your interest is global health policy; Fundraising or HR if it is organisational operations — both are legitimate paths to a field role later.",
       "Applications are rolling but high-volume; only shortlisted candidates hear back, so do not wait for a rejection before applying elsewhere.",
-      "Use the internship to build one real reference inside MSF — that reference is what matters when you apply for a field post once you clear the two-year clinical-experience bar."
+      "Use the internship to build one real reference inside MSF. That reference is what matters when you apply for a field post once you clear the two-year clinical-experience bar."
     ],
     zeroCost: false, indiaSpecific: true, competitiveness: "accessible", workExp: 0
   },
@@ -164,16 +164,16 @@ window.DB.research.push(
     window: "Regional hackathons run through the year; GrandHack in Boston is usually March",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://hackingmedicine.mit.edu/",
-    why: "No age or background restriction, no application essay, and a weekend is a far smaller bet than any fellowship in this index — you show up with a clinical problem you have actually seen and team up with engineers and designers to prototype a fix. The realistic payoff is not winning; it is the team you meet and the fact that a stand-out performance at a regional edition can win a fully funded seat at the Boston GrandHack, which is a genuine door into global health-tech.",
+    why: "No age or background restriction, no application essay, and a weekend is a far smaller bet than any fellowship in this index. You show up with a clinical problem you have actually seen and team up with engineers and designers to prototype a fix. The realistic payoff is not winning; it is the team you meet and the fact that a stand-out performance at a regional edition can win a fully funded seat at the Boston GrandHack, which is a genuine door into global health-tech.",
     reqs: [
       "None formally — open to anyone, students explicitly included",
       "Bring a real clinical problem, not a general interest in 'health-tech' — teams form around specific pitches"
     ],
     steps: [
       "Watch hackingmedicine.mit.edu's events page and MIT Hacking Medicine's social channels for the nearest regional edition — Southeast Asia (Siriraj x MIT Hacking Medicine) is the closest recurring one to India.",
-      "Come with one specific clinical pain point you have personally observed on the wards — a triage delay, a documentation gap, a diagnostic bottleneck. That specificity is what gets a team to form around your pitch rather than someone else's.",
+      "Come with one specific clinical pain point you have personally observed on the wards. A triage delay, a documentation gap, a diagnostic bottleneck. That specificity is what gets a team to form around your pitch rather than someone else's.",
       "Standout individual performers at regional events are sometimes individually selected for a fully funded 'Golden Ticket' to the following year's Boston GrandHack — ask organisers directly whether the edition you attend runs this.",
-      "Treat the weekend as networking and portfolio-building, not as the finish line — the strongest outcome is an ongoing side project with the team you meet, not the prize."
+      "Treat the weekend as networking and portfolio-building, not as the finish line. The strongest outcome is an ongoing side project with the team you meet, not the prize."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
   }
@@ -183,10 +183,10 @@ window.DB.research.push(
 
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "knight-hennessy":      { t: 1, odds: "Very low, but uncapped in payoff", effort: "40+ hrs across two linked applications", note: "Fully funds any Stanford graduate degree for up to three years with no nationality restriction — the highest ceiling in this index if your plan is Stanford-shaped. Rated top tier because almost nobody outside the US even applies, which is its own kind of odds improvement." },
+  "knight-hennessy":      { t: 1, odds: "Very low, but uncapped in payoff", effort: "40+ hrs across two linked applications", note: "Fully funds any Stanford graduate degree for up to three years with no nationality restriction. The highest ceiling in this index if your plan is Stanford-shaped. Rated top tier because almost nobody outside the US even applies, which is its own kind of odds improvement." },
   "fogarty-fellowship":   { t: 1, odds: "Moderate — needs a mentor relationship in place first", effort: "30 hrs plus months building the mentor link", note: "US-government-funded, India-based, mentored research year that does not require relocating. The rare route where the funding comes to you rather than the other way round." },
-  "schwarzman-scholars":  { t: 2, odds: "Low, but genuinely open to any background", effort: "25 hrs", note: "One fully funded year at Tsinghua built around leadership, not medicine specifically — the fastest credentialed route into global health policy for someone who wants out of the lab bench." },
+  "schwarzman-scholars":  { t: 2, odds: "Low, but genuinely open to any background", effort: "25 hrs", note: "One fully funded year at Tsinghua built around leadership, not medicine specifically. The fastest credentialed route into global health policy for someone who wants out of the lab bench." },
   "msf-india-internship": { t: 2, odds: "High relative to the MSF name", effort: "5 hrs to apply", note: "The field roles need two years of clinical experience nobody has as a student. This is the office-side door that is actually open now, and it is how most people's MSF career starts." },
-  "jhu-summer-institute": { t: 3, odds: "Open enrolment, cost is the only gate", effort: "5 hrs to register, then the course itself", note: "Not a scholarship — a paid Johns Hopkins short course. The cheapest way that exists to find out whether public health is your direction before committing to a full MPH." },
+  "jhu-summer-institute": { t: 3, odds: "Open enrolment, cost is the only gate", effort: "5 hrs to register, then the course itself", note: "Not a scholarship. A paid Johns Hopkins short course. The cheapest way that exists to find out whether public health is your direction before committing to a full MPH." },
   "health-hackathons":    { t: 3, odds: "Open enrolment", effort: "One weekend", note: "No application, no essay, the smallest possible bet in this entire index. The real payoff is the team you meet, occasionally a funded ticket to Boston GrandHack for a standout performance." }
 });

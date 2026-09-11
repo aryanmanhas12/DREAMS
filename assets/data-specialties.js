@@ -25,7 +25,7 @@ window.DB.specialties = [
       "Psychiatric genomics — polygenic risk in South Asian populations is a genuine open problem",
       "Computational psychiatry — modelling symptoms mathematically; the barrier to entry is a laptop",
       "Digital phenotyping and voice biomarkers — screening where no psychiatrist exists",
-      "Global mental health and task-shifting — the field where Indian research already leads the world",
+      "Global mental health and task-shifting. The field where Indian research already leads the world",
       "Inflammatory and immune psychiatry"
     ],
     masters: ["MSc Global Mental Health (LSHTM/KCL)", "MSc Psychiatric Research (KCL IoPPN)", "MSc Genomic Medicine", "MSc Health Data Science"],
@@ -48,7 +48,7 @@ window.DB.specialties = [
     supers: ["Stroke and neurointervention", "Epilepsy and clinical neurophysiology", "Movement disorders", "Neuromuscular disease", "Neuroimmunology", "Behavioural neurology and dementia", "Sleep medicine"],
     research: [
       "Connectomics and network neuroscience",
-      "EEG signal processing and low-cost diagnostics — the translation gap is where most of the opportunity is",
+      "EEG signal processing and low-cost diagnostics. The translation gap is where most of the opportunity is",
       "Neuroimmunology — autoimmune encephalitis rewrote what a psychiatric presentation can mean",
       "Brain-computer interfaces and neuroprosthetics",
       "Neurogenetics in consanguineous populations, where India has data almost nobody else can access"
@@ -80,7 +80,7 @@ window.DB.specialties = [
     ],
     masters: ["MPH (LSHTM, Harvard, Hopkins, Melbourne)", "MSc Epidemiology (Imperial, Oxford)", "MSc Health Economics", "MSc Health Data Science"],
     fitIf: "Your anger is systemic rather than individual. You would rather prevent a thousand cases than treat one brilliantly. You can tolerate slow feedback loops and institutional politics.",
-    truth: "In India this specialty carries low prestige and people will assume you took it because you had to. Internationally it is the opposite — an MBBS with an MPH from a serious school is the standard profile at WHO, the Gates Foundation and every major health NGO, and the ceiling is genuinely global. The gap between how this specialty is regarded inside India and outside it is the largest of any discipline on this list, and that arbitrage is available to anyone willing to ignore the local status hierarchy."
+    truth: "In India this specialty carries low prestige and people will assume you took it because you had to. Internationally it is the opposite. An MBBS with an MPH from a serious school is the standard profile at WHO, the Gates Foundation and every major health NGO, and the ceiling is genuinely global. The gap between how this specialty is regarded inside India and outside it is the largest of any discipline on this list, and that arbitrage is available to anyone willing to ignore the local status hierarchy."
   },
   {
     id: "sp-medicine",
@@ -104,7 +104,7 @@ window.DB.specialties = [
     ],
     masters: ["MSc Clinical Epidemiology (NIHES Rotterdam)", "MPH", "MSc Health Data Science", "MRes in a subspecialty"],
     fitIf: "You want the widest possible clinical foundation before narrowing. You like complexity and are comfortable being the person who has to hold the whole picture.",
-    truth: "It is the safest choice and also the longest road to anything specific — the subspecialty you actually want is another entrance exam and another three years away. Internationally, US internal medicine residency is the single highest-volume route for Indian graduates, which makes it both the most achievable and the most crowded. If research is your real interest, note that a research-track residency or an academic clinical fellowship is a fundamentally different life from a standard one, and you have to select for it deliberately."
+    truth: "It is the safest choice and also the longest road to anything specific. The subspecialty you actually want is another entrance exam and another three years away. Internationally, US internal medicine residency is the single highest-volume route for Indian graduates, which makes it both the most achievable and the most crowded. If research is your real interest, note that a research-track residency or an academic clinical fellowship is a fundamentally different life from a standard one, and you have to select for it deliberately."
   },
   {
     id: "sp-surgery",
@@ -145,7 +145,7 @@ window.DB.specialties = [
     ],
     supers: ["Neonatology", "Paediatric neurology and neurodevelopment", "Paediatric oncology", "Paediatric cardiology", "Developmental and behavioural paediatrics", "Paediatric infectious disease"],
     research: [
-      "Early-life determinants of adult disease — the developmental origins hypothesis, where Indian cohorts are internationally important",
+      "Early-life determinants of adult disease. The developmental origins hypothesis, where Indian cohorts are internationally important",
       "Malnutrition and the double burden of under- and over-nutrition",
       "Neurodevelopmental disorders and early autism detection, where digital screening tools could work at scale",
       "Vaccine effectiveness and hesitancy"
@@ -193,7 +193,7 @@ window.DB.specialties = [
     ],
     supers: ["Critical care medicine", "Cardiac anaesthesia", "Neuroanaesthesia", "Pain medicine", "Transplant anaesthesia", "Paediatric anaesthesia"],
     research: [
-      "Physiological signal processing and closed-loop control — the most directly computational bedside specialty",
+      "Physiological signal processing and closed-loop control. The most directly computational bedside specialty",
       "Sepsis prediction models on ICU data; MIMIC, the reference public critical care dataset, is free after a short training module",
       "Perioperative outcomes and enhanced recovery",
       "Delirium and long-term cognitive outcomes after critical illness"
@@ -240,7 +240,7 @@ window.DB.specialties = [
     ],
     supers: ["Haematopathology", "Molecular pathology and genomics", "Cytopathology", "Forensic pathology", "Clinical microbiology and infection control", "Transfusion medicine"],
     research: [
-      "Clinical genomics and variant interpretation — a growing profession in its own right",
+      "Clinical genomics and variant interpretation. A growing profession in its own right",
       "Digital pathology and computational image analysis",
       "Antimicrobial resistance surveillance; your own hospital's antibiogram is already a dataset",
       "Biomarker discovery, which is where laboratory medicine meets every other specialty"
@@ -294,7 +294,7 @@ window.DB.specialties = [
     ],
     masters: ["MPH", "MSc Humanitarian Health (Hopkins)", "MSc Palliative Medicine", "Diploma in Tropical Medicine and Hygiene"],
     fitIf: "You want breadth over depth. Shift work suits you, or continuity does. You would rather be useful in many situations than expert in one.",
-    truth: "Both specialties carry low status in India and high status almost everywhere else, which is one of the clearest arbitrages available to a medical graduate. Canadian family medicine is two years to independent practice — the fastest route to being a fully qualified, well-paid, autonomous doctor of any pathway on this entire site. Nobody mentions this in Indian medical colleges because the local status hierarchy makes it invisible."
+    truth: "Both specialties carry low status in India and high status almost everywhere else, which is one of the clearest arbitrages available to a medical graduate. Canadian family medicine is two years to independent practice. The fastest route to being a fully qualified, well-paid, autonomous doctor of any pathway on this entire site. Nobody mentions this in Indian medical colleges because the local status hierarchy makes it invisible."
   },
   {
     id: "sp-exit",
@@ -311,7 +311,7 @@ window.DB.specialties = [
       "Health economics and HTA — deciding what a health system should pay for",
       "Medical writing, science communication and medical education",
       "Consulting — healthcare practices at the large firms recruit doctors deliberately",
-      "Bioethics and health policy — a field currently writing the rules for AI in medicine with very few clinically trained people in the room"
+      "Bioethics and health policy. A field currently writing the rules for AI in medicine with very few clinically trained people in the room"
     ],
     supers: ["Digital health product management", "Clinical data science", "Medical device regulation", "Health policy and governance"],
     research: [

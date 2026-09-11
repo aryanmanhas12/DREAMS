@@ -13,7 +13,7 @@
    None of those were visible as errors, because a date does not look wrong.
 
    So the review date is data, surfaced in the interface, and deliberately not
-   a hardcoded string in the HTML — that way it cannot quietly disagree with
+   a hardcoded string in the HTML. That way it cannot quietly disagree with
    itself in two places. Update it when, and only when, entries have actually
    been re-checked against their official pages. Backdating it is the one thing
    that would make this worse than having no stamp at all. */
@@ -53,7 +53,7 @@ window.DB.meta = {
      to the NSF Graduate Research Fellowship, which requires US citizenship,
      national status or a green card, so an Indian applicant is excluded before
      the first question. The entry's substance was right — US doctorates are
-     salaried and MBBS is accepted — but the link pointed at the one route
+     salaried and MBBS is accepted, but the link pointed at the one route
      closed to the reader. It now points at a real departmental admissions page
      and names the GRFP as the trap it is, because it is the first thing anyone
      searching will find.

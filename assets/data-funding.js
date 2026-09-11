@@ -17,7 +17,7 @@ window.DB.funding = [
     window: "Opened 4 Aug · closes 6 October, 11:00 UTC. That is 4:30 pm IST, and there are no extensions, ever",
     deadlineMonths: [8, 9, 10],
     url: "https://www.chevening.org/scholarships/",
-    why: "The largest fully-funded route from India to the UK. Roughly 8–10 % of Indian applicants are selected, which sounds brutal until you realise most applications are visibly rushed — the leadership and networking essays are where people lose, and they are the two you can actually prepare for.",
+    why: "The largest fully-funded route from India to the UK. Roughly 8–10 % of Indian applicants are selected, which sounds brutal until you realise most applications are visibly rushed. The leadership and networking essays are where people lose, and they are the two you can actually prepare for.",
     reqs: [
       "Indian citizenship and intent to return to India for 2 years after the award",
       "Completed undergraduate degree — MBBS qualifies",
@@ -54,9 +54,9 @@ window.DB.funding = [
     ],
     steps: [
       "Understand which of the two schemes you want. Master's Scholarships go through a nominating body in India; Shared Scholarships go through the UK university directly.",
-      "For the Master's route from India you must submit through TWO portals in the same cycle — the CSC's own system and the Ministry of Education's SAKSHAT portal. Completing only one disqualifies the application outright, and it is the most common way an otherwise strong Indian application is thrown out before anyone reads it.",
+      "For the Master's route from India you must submit through TWO portals in the same cycle. The CSC's own system and the Ministry of Education's SAKSHAT portal. Completing only one disqualifies the application outright, and it is the most common way an otherwise strong Indian application is thrown out before anyone reads it.",
       "Check the Indian nominating body's internal deadline, not just the CSC one. National nominating bodies routinely close earlier than the CSC date, and the CSC deadline is the one every listicle quotes.",
-      "For Shared Scholarships, check cscuk.fcdo.gov.uk's eligible-course list first — it changes yearly and LSHTM, UCL, Liverpool and Warwick usually feature.",
+      "For Shared Scholarships, check cscuk.fcdo.gov.uk's eligible-course list first. It changes yearly and LSHTM, UCL, Liverpool and Warwick usually feature.",
       "The development-impact statement is the whole application. Write about a specific problem in a specific Indian district, not about India's health system in general.",
       "Apply to the UK course AND the scholarship in parallel. The course deadline is usually later — do not let it set your pace."
     ],
@@ -139,7 +139,7 @@ window.DB.funding = [
       "Open the official EACEA catalogue and filter by field. Spend an evening on it; this is the single highest-value hour in this whole guide.",
       "Programmes worth knowing for a medic: Europubhealth+, IMSOGLO (global one health), Neurasmus (neuroscience), and several infectious-disease and bioinformatics consortia.",
       "One application per consortium covers admission and the scholarship together.",
-      "Check that the intake you are applying to actually has a scholarship round. A consortium's EU funding runs in multi-year editions, and some intakes admit on a self-funded basis only — the course page stays up either way, so it is entirely possible to write a full application for a year in which there is no money to win.",
+      "Check that the intake you are applying to actually has a scholarship round. A consortium's EU funding runs in multi-year editions, and some intakes admit on a self-funded basis only. The course page stays up either way, so it is entirely possible to write a full application for a year in which there is no money to win.",
       "Choose your three carefully and honestly rank fit over prestige — consortia reject people who obviously applied everywhere."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
@@ -153,7 +153,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full cost of study + maintenance allowance + family, fieldwork and conference allowances",
     duration: "Full length of an MPhil or PhD",
-    window: "International round closes 3 Dec OR 7 Jan — it depends on your course, so check the course directory",
+    window: "International round closes 3 Dec OR 7 Jan. It depends on your course, so check the course directory",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.gatescambridge.org/apply/how-to-apply/",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
@@ -205,7 +205,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + £20,000+ annual living stipend",
     duration: "Full length of the course",
-    window: "Tied to your Oxford course deadline — the early-January gathered field",
+    window: "Tied to your Oxford course deadline. The early-January gathered field",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.ox.ac.uk/clarendon",
     why: "About 200 awards a year across every Oxford department, and there is no separate application. You are automatically considered when you apply to Oxford by the relevant deadline. It is the single least-effort major scholarship in existence, and people still miss it by applying late.",
@@ -269,7 +269,7 @@ window.DB.funding = [
     ],
     steps: [
       "Apply between December and mid-March; the online form is straightforward but the interview is substantive.",
-      "You do NOT need a confirmed offer to apply — this makes it a useful early-cycle safety net.",
+      "You do NOT need a confirmed offer to apply. This makes it a useful early-cycle safety net.",
       "Top-ranked candidates also receive outright travel grants and gift awards on top of the loan."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0
@@ -286,7 +286,7 @@ window.DB.funding = [
     window: "Opens ~Jan · closes end-March/April",
     deadlineMonths: [1, 2, 3, 4],
     url: "https://www.kcmet.org/",
-    why: "Open to all disciplines including medicine, unlike Inlaks. The repayment terms are generous and it stacks freely with partial university scholarships — most winners use it to close the last ₹5–8 lakh of a gap.",
+    why: "Open to all disciplines including medicine, unlike Inlaks. The repayment terms are generous and it stacks freely with partial university scholarships. Most winners use it to close the last ₹5–8 lakh of a gap.",
     reqs: ["Indian citizen, graduate of an Indian university", "Confirmed admission to a foreign postgraduate programme", "Interview round in Mumbai"],
     steps: [
       "Have your admission letter ready — unlike J.N. Tata, this one wants confirmation.",
@@ -315,7 +315,7 @@ window.DB.funding = [
       "EXCLUDED fields: medicine (including MPH taken as a clinical qualification), engineering, computer science, business"
     ],
     steps: [
-      "Check the current exclusion list on the Inlaks site before doing anything else — the boundary between an excluded 'medicine' course and an eligible social-science course is where applications live or die.",
+      "Check the current exclusion list on the Inlaks site before doing anything else. The boundary between an excluded 'medicine' course and an eligible social-science course is where applications live or die.",
       "You need an admission offer in hand by the March deadline.",
       "Frame a public health or psychology application in social-science terms, honestly, if that is what the course actually is."
     ],
@@ -338,7 +338,7 @@ window.DB.funding = [
     steps: [
       "Apply in January; interviews happen in Mumbai around May.",
       "The interview panel probes whether you have thought your plan through. Come with specifics.",
-      "This stacks with partial university funding — most awardees combine several sources."
+      "This stacks with partial university funding. Most awardees combine several sources."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0
   },
@@ -377,7 +377,7 @@ window.DB.funding = [
     window: "Institutions nominate; internal deadlines run Oct–Jan",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program",
-    why: "You cannot apply directly — the French university nominates you. That sounds like a barrier and is actually an advantage: it means the number of competitors is capped by how many each institution puts forward, and simply asking the admissions office whether they will nominate you puts you ahead of everyone who did not ask.",
+    why: "You cannot apply directly. The French university nominates you. That sounds like a barrier and is actually an advantage: it means the number of competitors is capped by how many each institution puts forward, and simply asking the admissions office whether they will nominate you puts you ahead of everyone who did not ask.",
     reqs: ["Non-French citizen, under 25 for masters level", "Applying to a French institution", "Must be nominated by the institution — apply to them first"],
     steps: [
       "Apply to the French masters programme by October at the latest, and email the international office asking to be considered for Eiffel nomination. Say the word 'Eiffel'.",
@@ -536,7 +536,7 @@ window.DB.funding = [
     reqs: ["Under 35 for masters, under 40 for PhD in most schemes", "Bachelor's or MBBS", "Language study is funded where required"],
     steps: [
       "For GKS Korea, the embassy track in New Delhi generally has better odds than the university track.",
-      "For China CSC, secure a pre-admission letter from the host university first — it transforms the application.",
+      "For China CSC, secure a pre-admission letter from the host university first. It transforms the application.",
       "Taiwan MOE applications go through the Taipei Economic and Cultural Center in Delhi or Chennai.",
       "Confirm how the qualification will be recognised in India before committing, particularly for clinical degrees."
     ],
@@ -558,7 +558,7 @@ window.DB.funding = [
     reqs: ["SI requires 3,000 hours of work or volunteering experience", "Admission to an eligible Swedish masters first", "Baltic schemes vary — check each national agency"],
     steps: [
       "For Sweden, you must first apply through universityadmissions.se by 15 January, THEN apply to SI in the February window. Two steps, two deadlines.",
-      "The SI application is heavily weighted toward leadership and demonstrated commitment to change — a medic running community health drives fits perfectly.",
+      "The SI application is heavily weighted toward leadership and demonstrated commitment to change. A medic running community health drives fits perfectly.",
       "For the Baltics, check studyinlithuania.lt, studyinestonia.ee and studyinlatvia.lv directly. State scholarships there are small in number but almost unknown to Indian applicants."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 2
@@ -599,7 +599,7 @@ window.DB.funding = [
     url: "https://www.indiaalliance.org/apply",
     why: "The single most important structural fact for an Indian clinician-researcher: India Alliance runs a Clinical and Public Health Research fellowship stream where a medical degree plus a research record can substitute for a PhD. You can lead your own funded research programme in India without ever doing a doctorate. Almost nobody uses this.",
     reqs: [
-      "MBBS/MD/MS/DNB with a demonstrated research record — a PhD is NOT required for the clinical stream",
+      "MBBS/MD/MS/DNB with a demonstrated research record. A PhD is NOT required for the clinical stream",
       "A host institution in India that will support you",
       "A mentor and a clear five-year research plan"
     ],
@@ -630,7 +630,7 @@ window.DB.funding = [
       "A doctorate OR equivalent clinical research experience"
     ],
     steps: [
-      "If you are based in India, start at India Alliance, not here. Wellcome's own guidance routes India-based applicants there, and the International Training Fellowship that older guides point you to is closed — the page for it now exists only to say so.",
+      "If you are based in India, start at India Alliance, not here. Wellcome's own guidance routes India-based applicants there, and the International Training Fellowship that older guides point you to is closed. The page for it now exists only to say so.",
       "Wellcome's India route is the DBT/Wellcome India Alliance, which is separately listed on this site and whose clinical stream does not require a PhD. That is the entry worth your month.",
       "Come back to Wellcome direct once you hold a position at an eligible host organisation outside India, or a joint appointment that gives you one.",
       "Wellcome cares intensely about the research question. Vague proposals about 'AI in healthcare' do not survive triage; a specific, answerable question does."

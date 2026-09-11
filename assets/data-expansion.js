@@ -88,7 +88,7 @@ window.DB.study.push(
     why: "The answer to the question every clinically-minded researcher eventually asks: do I have to choose? An ACF gives you a quarter of your working week for research while you train as a psychiatrist, on a full salary. UK psychiatry is understaffed and recruits internationally, which makes this unusually reachable.",
     reqs: ["GMC registration (via UKMLA/PLAB for Indian graduates)", "Eligibility for UK specialty training", "A research track record helps enormously at interview"],
     steps: [
-      "Get GMC registration first — the ACF sits on top of the normal training application, it is not a separate entry route.",
+      "Get GMC registration first. The ACF sits on top of the normal training application, it is not a separate entry route.",
       "Apply through Oriel in the November round alongside standard specialty applications.",
       "Name the research group you want to work with in your application. ACFs are attached to specific academic departments.",
       "This route ends in a clinical lectureship and often a funded PhD, which is the classic UK physician-scientist ladder."
@@ -110,7 +110,7 @@ window.DB.study.push(
     deadlineMonths: [10, 11, 12, 1, 2, 3, 4, 5, 6],
     url: "https://www.findamasters.com/masters-degrees/biochemistry/",
     why: "The most direct conversion from a clinical degree into bench science. An MBBS gives you more physiology and pathology than most biochemistry graduates have, and less molecular technique, which is precisely the gap a taught masters closes. Choose the MRes variant over the MSc if a doctorate is the eventual aim, because it is mostly laboratory work rather than lectures.",
-    reqs: ["MBBS or a science degree with a strong biochemistry component", "IELTS 6.5–7.0", "Some programmes ask for prior laboratory experience — an ICMR STS project counts"],
+    reqs: ["MBBS or a science degree with a strong biochemistry component", "IELTS 6.5–7.0", "Some programmes ask for prior laboratory experience. An ICMR STS project counts"],
     steps: [
       "Choose MRes over MSc if you want a doctorate afterwards. An MRes is essentially a year in a lab with a thesis and reads far better to a PhD admissions panel.",
       "Email the programme director and ask which projects have been available in recent years. This tells you more than any prospectus.",
@@ -154,7 +154,7 @@ window.DB.study.push(
     why: "Built out of the 100,000 Genomes Project to retrain practising clinicians for genomic medicine, so it is designed around people with a medical degree and no bioinformatics. The part-time modular route means you can hold it while working, and it is the most direct on-ramp from clinical medicine into psychiatric or cancer genomics.",
     reqs: ["Medical, nursing or bioscience degree", "No prior programming required. That is the point of the course", "IELTS 7.0"],
     steps: [
-      "Take individual modules first if you are unsure — most of these programmes allow standalone module enrolment.",
+      "Take individual modules first if you are unsure. Most of these programmes allow standalone module enrolment.",
       "Pair this with a public dataset project. A genomics masters plus an independent analysis of GenomeIndia or UK Biobank data is a genuinely strong doctoral application.",
       "Check whether the programme includes a bioinformatics stream; some are clinically weighted and teach very little computation."
     ],
@@ -214,7 +214,7 @@ window.DB.study.push(
     window: "Applications typically Dec–Apr",
     deadlineMonths: [12, 1, 2, 3, 4],
     url: "https://cuni.cz/UKEN-1.html",
-    why: "One of the oldest universities in Europe, India is explicitly eligible for the Václav Havel scholarship, and Prague is among the cheapest capitals on the continent. A genuinely overlooked route — the competition from India is a fraction of what it is for the UK.",
+    why: "One of the oldest universities in Europe, India is explicitly eligible for the Václav Havel scholarship, and Prague is among the cheapest capitals on the continent. A genuinely overlooked route. The competition from India is a fraction of what it is for the UK.",
     reqs: ["Bachelor's or MBBS", "English-taught programmes carry a fee; Czech-taught programmes are free at public universities", "Scholarship applied for separately"],
     steps: [
       "Check the Václav Havel Scholarship eligibility list each cycle — India has featured, but lists change.",
@@ -264,7 +264,7 @@ window.DB.research.push(
     window: "Registration typically opens in spring",
     deadlineMonths: [3, 4, 5, 6],
     url: "https://translationalneuromodeling.org/cpcourse/",
-    why: "The definitive training course in the field — the one where the people who invented computational psychiatry teach it. It runs in a hybrid format, which means you can attend the whole thing from India for a fraction of the cost. For anyone whose interests sit between psychiatry, modelling and code, this is the single most targeted week available anywhere.",
+    why: "The definitive training course in the field. The one where the people who invented computational psychiatry teach it. It runs in a hybrid format, which means you can attend the whole thing from India for a fraction of the cost. For anyone whose interests sit between psychiatry, modelling and code, this is the single most targeted week available anywhere.",
     reqs: ["Basic programming and statistics", "Open to students, clinicians and researchers", "No degree requirement"],
     steps: [
       "Take the online option if travel is the barrier. The material and the lecturers are identical.",
@@ -327,7 +327,7 @@ window.DB.research.push(
     window: "Applications 3–5 months ahead of each course",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://meetings.cshl.edu/courseshome.aspx",
-    why: "The courses at Cold Spring Harbor are legendary — the computational neuroscience and genomics courses in particular have trained a substantial share of the people currently leading those fields. Scholarships exist and are worth applying for even when the sticker price looks impossible.",
+    why: "The courses at Cold Spring Harbor are legendary. The computational neuroscience and genomics courses in particular have trained a substantial share of the people currently leading those fields. Scholarships exist and are worth applying for even when the sticker price looks impossible.",
     reqs: ["Graduate-level background", "Scholarship application submitted with the course application", "Competitive — small cohorts"],
     steps: [
       "Apply for the scholarship in the same submission. The fee without one is genuinely prohibitive.",
@@ -452,6 +452,6 @@ Object.assign(window.DB.impact, {
   "dual-degrees":      { t: 2, odds: "Varies", effort: "Varies", note: "Ask whether it can be added later — at most institutions it cannot, and that decision is made once, at entry." },
   "ohbm-ashg":         { t: 2, odds: "High abstract acceptance", effort: "20 hrs", note: "A realistic first international presentation. Virtual attendance is often dramatically cheaper or free." },
   "czech-charles":     { t: 3, odds: "Accessible", effort: "15 hrs", note: "India has featured on the Václav Havel eligibility list. Learn Czech and public university tuition drops to zero entirely." },
-  "erasmus-traineeship": { t: 3, odds: "Host-dependent", effort: "Low, once a host says yes", note: "Most Indian students assume this is EU-only. When a European lab wants you, ask their international office about mobility funding — the answer is yes more often than you would guess." },
+  "erasmus-traineeship": { t: 3, odds: "Host-dependent", effort: "Low, once a host says yes", note: "Most Indian students assume this is EU-only. When a European lab wants you, ask their international office about mobility funding. The answer is yes more often than you would guess." },
   "baltics":           { t: 3, odds: "Low competition, but verify eligibility", effort: "15 hrs", note: "India has NOT consistently appeared on Baltic state scholarship lists. Verify before planning, but Tartu's genomics work is a real scientific draw regardless." }
 });

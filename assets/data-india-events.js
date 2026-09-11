@@ -69,7 +69,7 @@ window.DB.research.push(
     ],
     steps: [
       "Read faculty pages before you write anything. Applications that name a specific group and a specific recent paper are shortlisted; generic ones are not.",
-      "Apply to several IISERs and to the Indian Academy of Sciences fellowship in the same season — they run on similar timelines and cost you nothing but effort.",
+      "Apply to several IISERs and to the Indian Academy of Sciences fellowship in the same season. They run on similar timelines and cost you nothing but effort.",
       "Say plainly that you are an MBBS student. Basic-science groups value a clinical perspective and it is a differentiator in a pile of BSc applications, not a handicap.",
       "If nothing comes through the formal route, email individual faculty directly in January asking about an unfunded summer project. It works more often than the formal route for medical students."
     ],
@@ -80,7 +80,7 @@ window.DB.research.push(
 window.DB.study.push(
   {
     id: "present-first-paper",
-    name: "Your first presentation — the ladder from journal club to a national podium",
+    name: "Your first presentation. The ladder from journal club to a national podium",
     org: "Your own college, then your state chapter, then the national society",
     type: "skill", country: "India", city: "Wherever you already are",
     fields: ["clinical", "pubhealth", "psych", "neuro", "systems"],
@@ -119,9 +119,9 @@ window.DB.study.push(
     window: "Abstract deadlines usually fall 3–5 months before the meeting; most national meetings sit between November and March",
     deadlineMonths: [7, 8, 9, 10, 11, 12],
     url: "https://www.indianpsychiatricsociety.org/",
-    why: "Every major Indian specialty society runs an annual meeting with a paper session judged separately for students and postgraduates, and those sessions are chronically under-subscribed relative to the number of eligible students. This is where a network gets built — the person who chairs your session is often the person who later supervises your thesis or signs your reference. It is also the cheapest place in the world to learn how to answer a question you did not expect.",
+    why: "Every major Indian specialty society runs an annual meeting with a paper session judged separately for students and postgraduates, and those sessions are chronically under-subscribed relative to the number of eligible students. This is where a network gets built. The person who chairs your session is often the person who later supervises your thesis or signs your reference. It is also the cheapest place in the world to learn how to answer a question you did not expect.",
     reqs: [
-      "Membership of the relevant society, or a proposing member — most have a low student rate",
+      "Membership of the relevant society, or a proposing member. Most have a low student rate",
       "An accepted abstract, usually 250–300 words, submitted by the earlier abstract deadline rather than the registration deadline",
       "A supervising consultant as co-author for most clinical work",
       "Institutional ethics clearance for anything involving patient data — obtain it before you collect, not before you submit"
@@ -178,7 +178,7 @@ Object.assign(window.DB.impact, {
 
 /* ── August 2026: the events layer this index was thinnest on ──────────────
    Everything above is a programme you apply to. These are dates in the Indian
-   calendar you can put in a diary now — the difference matters, because the
+   calendar you can put in a diary now. The difference matters, because the
    commonest reason a student here has nothing to show is not that they were
    rejected, it is that nothing was ever on a date. */
 
@@ -205,7 +205,7 @@ window.DB.research.push(
     steps: [
       "Secure the overseas host before the call opens. As with every scheme of this shape, the invitation is the slow part and the form is the fast part.",
       "Check which tier you are applying under. Young Scientist buys you three to six months, which is long enough to learn a technique properly; the Senior route is ten to fifteen days and is for people going to do something specific.",
-      "Watch the same DHR portal that carries STS and the Fellowship Abroad — the HRD calls cluster, and one visit in April or May shows you all of them.",
+      "Watch the same DHR portal that carries STS and the Fellowship Abroad. The HRD calls cluster, and one visit in April or May shows you all of them.",
       "Write the proposal around a technique or dataset you cannot access in India. Reviewers are asking what the trip buys that staying would not."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 2
@@ -217,7 +217,7 @@ window.DB.research.push(
     type: "fellowship", country: "India", city: "National, based wherever you work",
     fields: ["global", "systems", "compbio", "pubhealth", "clinical"],
     stages: ["pg"], funding: "none",
-    money: "Membership rather than money — a five-year term, with funded meetings and outreach programmes attached",
+    money: "Membership rather than money. A five-year term, with funded meetings and outreach programmes attached",
     duration: "5-year non-renewable term",
     window: "Annual membership call, most recently open through the first half of the year",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
@@ -232,14 +232,14 @@ window.DB.research.push(
     steps: [
       "Check the age line first, because it is hard and it arrives sooner than people plan for. If you are finishing an MD at 32, you have roughly eight cycles, not a career's worth.",
       "The application is judged on independent contribution, not on volume. One line of work you clearly own reads better than a list you were the fourth author on.",
-      "Hold an academic position at the time of applying — a purely clinical post without an institutional academic role does not satisfy it.",
+      "Hold an academic position at the time of applying. A purely clinical post without an institutional academic role does not satisfy it.",
       "Look at the current membership before writing. Medical members are few, which is the argument for applying rather than against it, and it tells you which gap you would be filling."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 3
   },
   {
     id: "smart-india-hackathon",
-    name: "Smart India Hackathon — the healthcare problem statements",
+    name: "Smart India Hackathon. The healthcare problem statements",
     org: "Ministry of Education Innovation Cell with AICTE",
     type: "skill", country: "India", city: "Nodal centres nationwide",
     fields: ["compbio", "systems", "pubhealth", "clinical"],
@@ -256,7 +256,7 @@ window.DB.research.push(
       "Nothing else. No prior projects, no marks bar"
     ],
     steps: [
-      "Find out who your college's SPOC is, or whether it has one. This is the whole gate: registration is done by the institution, not by you, and colleges without a SPOC simply do not appear. If yours has none, ask the Dean's office to nominate one — that conversation is the actual task.",
+      "Find out who your college's SPOC is, or whether it has one. This is the whole gate: registration is done by the institution, not by you, and colleges without a SPOC simply do not appear. If yours has none, ask the Dean's office to nominate one. That conversation is the actual task.",
       "Read the health problem statements before forming a team, then recruit engineers to your problem rather than joining theirs as an afterthought.",
       "The internal college round comes first and is where most teams are actually chosen. Treat it as the real competition.",
       "Even losing produces something demonstrable in a weekend, which is more than most students have after a year of planning."
@@ -270,7 +270,7 @@ window.DB.research.push(
     type: "conference", country: "Global", city: "Online and hybrid",
     fields: ["clinical", "pubhealth", "global", "psych"],
     stages: ["pre", "clin", "intern"], funding: "none",
-    money: "Low or no registration fee, and no flight — the online format is the point",
+    money: "Low or no registration fee, and no flight. The online format is the point",
     duration: "2 days",
     window: "Abstracts open months ahead; the 2026 meeting ran 11–12 July",
     deadlineMonths: [2, 3, 4, 5, 6],
@@ -284,7 +284,7 @@ window.DB.research.push(
     steps: [
       "Submit to their journal in the same cycle if the work is finished. The conference and the journal share an audience and a standard, and a presentation plus a publication from one project is the efficient version of this.",
       "Present the thing you actually did, including what went wrong. Student audiences ask better questions than senior ones because they are not being polite.",
-      "Use this as the rehearsal before a physical international conference where a travel grant is at stake — the format is the same and the cost of a bad first outing is nothing."
+      "Use this as the rehearsal before a physical international conference where a travel grant is at stake. The format is the same and the cost of a bad first outing is nothing."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
@@ -319,7 +319,7 @@ Object.assign(window.DB.impact, {
     t: 1,
     odds: "Twelve Young Scientist places a year, nationally",
     effort: "20 hrs, free to apply, plus securing the host",
-    note: "Three thousand US dollars a month to spend up to six months in an overseas laboratory and return. Twelve places sounds impossible until you notice how few Indian clinicians know the scheme exists — the field is thinner than the number suggests."
+    note: "Three thousand US dollars a month to spend up to six months in an overseas laboratory and return. Twelve places sounds impossible until you notice how few Indian clinicians know the scheme exists. The field is thinner than the number suggests."
   },
   "inyas": {
     t: 2,
