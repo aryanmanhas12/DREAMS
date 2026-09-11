@@ -1349,9 +1349,9 @@
   // under reduced-motion it simply appears.
   /* Counts are formatted rather than concatenated. At today's sizes this is
      invisible — 211 renders as "211" in every locale — but this index went
-     from 155 to 217 in two months and will cross a thousand, and that is the
-     point where a hand-built string starts printing "1217" to a reader whose
-     locale wants "1,217". Falls back to the raw number on a browser without
+     from 155 to 220 in two months and will cross a thousand, and that is the
+     point where a hand-built string starts printing "1220" to a reader whose
+     locale wants "1,220". Falls back to the raw number on a browser without
      Intl rather than throwing. */
   const NUMFMT = (function () {
     try { return new Intl.NumberFormat(undefined); } catch (e) { return null; }

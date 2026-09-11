@@ -348,3 +348,98 @@ Object.assign(window.DB.impact, {
   "unicef-intern":       { t: 2, odds: "Posts all year, so the real limit is how often you look", effort: "An application per post; no fee", note: "A PAID UN internship open to every nationality, taking people still enrolled or within two years of graduating. Most students write the UN off until they have a masters; this door is open now and shuts quietly two years after you qualify." },
   "un-online-volunteer": { t: 3, odds: "Accessible. The constraint is finishing, not getting in", effort: "Weeks of unpaid but real work", note: "Unpaid, and still the fastest way to get an actual UN agency onto a CV before you hold a degree that would let you apply there. Pick research assignments and finish them; the reference is the point." }
 });
+
+/* ─── Youth health leadership, added September 2026. The index had 177 entries
+   and not one route into the rooms where health policy gets argued, which is
+   the gap a student feels hardest: everything here was "apply, wait, maybe
+   get in" and nothing was "you can join this on Tuesday". All three below are
+   open DURING MBBS. ─── */
+window.DB.research.push(
+  {
+    id: "un-mgcy",
+    name: "UN Major Group for Children and Youth — individual membership",
+    org: "United Nations, Department of Economic and Social Affairs",
+    type: "research", country: "Global", city: "Online, with UN meetings worldwide",
+    fields: ["pubhealth", "global", "systems", "env"],
+    stages: ["pre", "clin", "intern", "grad"], funding: "free",
+    money: "Free to join · some UN meetings fund youth delegates, most do not",
+    duration: "Ongoing, as much or as little as you give it",
+    window: "Open continuously · register whenever you are ready",
+    url: "https://www.unmgcy.org/get-involved",
+    why: "The UN's own youth constituency for sustainable development negotiations, and it takes INDIVIDUALS aged 30 and under, free, without requiring you to represent an organisation. Almost everything else in this index is an application you might lose. This is a door you can walk through this week, and it is the only realistic way a second-year in India starts reading UN health texts as a participant rather than as an outsider.",
+    reqs: [
+      "Aged 30 and below",
+      "Individual membership exists specifically for people who do not represent a youth organisation",
+      "Free, with no fee at any stage",
+      "Working English, and the patience for UN process documents"
+    ],
+    steps: [
+      "Register as an individual, then join a working group rather than lurking on the mailing list. The constituency is large and nothing finds you; you find it.",
+      "Read one negotiation text end to end before your first call. UN drafting is a dialect, and an hour spent learning it is the difference between listening and contributing.",
+      "The health-adjacent work sits across several SDG streams rather than in one health box. Follow the stream, not the label.",
+      "Written inputs are where a student actually influences anything. Submissions are read; attendance is not.",
+      "This is also the cheapest credential in the index for a very specific purpose: it makes a later WHO or UNICEF application read as continuation rather than as a first attempt."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "who-youth-council",
+    name: "WHO Youth Council — and why you cannot join it directly",
+    org: "World Health Organization",
+    type: "research", country: "Global", city: "Geneva and online",
+    fields: ["pubhealth", "global", "systems"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "free",
+    money: "Unpaid · WHO covers meeting costs for seated organisations",
+    duration: "Two-year terms",
+    window: "Expressions of interest open between terms · the 2026-2028 call closed 30 June 2026",
+    deadlineMonths: [5, 6],
+    url: "https://www.who.int/initiatives/who-youth-engagement/who-youth-council",
+    why: "WHO's own youth advisory body, and it is listed here mostly to correct a misunderstanding that wastes people's time. Seats go to ORGANISATIONS, not to individuals: youth-led groups, youth-focused organisations and youth chapters of larger bodies, with WHO Civil Society Commission membership required first. No matter how good you are, you cannot apply as a medical student. What you can do is be the person inside an organisation that holds a seat, which is a completely different and much more reachable plan.",
+    reqs: [
+      "Applicants are organisations, not people. An individual application is not possible",
+      "Youth-led, youth-focused, or a youth chapter of a larger international organisation",
+      "Membership of the WHO Civil Society Commission is required before the expression of interest",
+      "Terms run two years, so a missed call means waiting for the next one"
+    ],
+    steps: [
+      "Stop trying to apply as yourself. That is the whole reason this entry exists.",
+      "Get active in a body that already sits at this table or could: IFMSA is the obvious one for a medical student, and it is in this index.",
+      "Inside that organisation, take the role nobody wants: the one that writes submissions and attends the unglamorous calls. Delegations are chosen from people who have already done the work.",
+      "Watch for the next expression-of-interest call between terms, and have the Civil Society Commission membership sorted before it opens rather than during it."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "oyw-health",
+    name: "One Young World health scholarships",
+    org: "One Young World and its health partners",
+    type: "conference", country: "Global", city: "Summit city changes each year",
+    fields: ["pubhealth", "global", "psych", "systems", "repro"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "full",
+    money: "Fully funded: summit place, flights, accommodation and meals · some streams add grants up to US$25,000",
+    duration: "A four-day summit, then lifelong ambassador membership",
+    window: "Scholarship calls open in the northern winter and close in the spring",
+    deadlineMonths: [1, 2, 3, 4],
+    url: "https://www.oneyoungworld.com/scholarships",
+    why: "Several fully funded routes for people aged 18 to 30 doing health work, explicitly including applicants from Asia, covering flights and accommodation rather than just the ticket. It is the closest thing in this index to a shortcut into a global health network, and unlike most of what is here it rewards what you have already built rather than what you have studied.",
+    reqs: [
+      "Aged 18 to 30 at the time of the summit",
+      "Demonstrable impact on a health problem — a project you actually ran, not a project you plan",
+      "Separate scholarship streams have their own themes: youth health, women's and girls' health, mental health and others",
+      "Applications are individual and free"
+    ],
+    steps: [
+      "Start the project before you start the application. Every one of these streams asks what you have already changed, and that is the part that cannot be written the night before a deadline.",
+      "Read the individual scholarship pages rather than the index. The streams differ sharply in theme and in who funds them, and applying to the wrong one wastes the cycle.",
+      "Scale is not the test. A well-measured intervention in one district reads better than a vague national ambition, and the measurement is what most applications lack.",
+      "If you miss the year, the work still counts. These calls repeat annually and a project with twelve more months behind it is a materially stronger application."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 0
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "un-mgcy":          { t: 2, odds: "Open — registration, not selection", effort: "Free to join; the work is turning up", note: "The UN's own youth constituency, taking INDIVIDUALS aged 30 and under, free. Almost everything else here is an application you might lose; this is a door you can walk through this week. Written submissions are what count, not attendance." },
+  "who-youth-council": { t: 3, odds: "Closed to individuals entirely", effort: "Years inside an organisation that holds a seat", note: "Listed to correct a misunderstanding that wastes people's time: seats go to ORGANISATIONS, not individuals, and Civil Society Commission membership comes first. The reachable plan is to be the person inside a body that already sits there." },
+  "oyw-health":        { t: 1, odds: "Competitive, and it rewards work already done", effort: "A real project, then one application", note: "Fully funded including flights, for 18 to 30, with Asia explicitly in scope and some streams adding grants to US$25,000. The rare thing here that rewards what you have built rather than what you have studied." }
+});
