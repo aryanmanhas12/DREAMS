@@ -162,3 +162,125 @@ Object.assign(window.DB.impact, {
   "epfl-summer":       { t: 1, odds: "Competitive — roughly top 5–10% of your class", effort: "20 hrs", note: "Paid, housed, eight weeks inside one of Europe's best life-science schools — and it lands in July and August, so it fits the Indian summer break without needing leave from your college. That timing is what makes it more practical mid-MBBS than anything longer." },
   "oist-internship":   { t: 2, odds: "Competitive, with two shots a year", effort: "25 hrs plus the permission letter", note: "Four to six funded months in Okinawa, and two intakes a year rather than one. The gate is not academic. It is getting your medical college to release you for four months, which has to be negotiated months before the deadline." }
 });
+
+/* ─── WHO, global health policy and digital health, added September 2026.
+   The index was strong on degrees and scholarships and thin on the layer
+   above them: who actually sets health policy, and how a clinician gets into
+   that room. Every one below verified against the organisation's own page.
+
+   Checked and deliberately NOT added: Fellows@EMRO, which several roundups
+   offer to Indian applicants. It is the WHO Eastern Mediterranean Region.
+   India is in South-East Asia (SEARO), so an Indian doctor is outside it
+   before anything else is considered. ─── */
+window.DB.research.push(
+  {
+    id: "openwho",
+    name: "OpenWHO and the WHO Academy — free courses with a WHO certificate",
+    org: "World Health Organization",
+    type: "research", country: "Online", city: "Anywhere",
+    fields: ["pubhealth", "global", "infect", "systems", "env"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "free",
+    money: "Free · no fee, no entrance test, no English test",
+    duration: "Self-paced, hours to weeks per course",
+    window: "Open permanently · no deadline and no cohort to miss",
+    url: "https://openwho.org/",
+    why: "WHO's own learning platform, open to anyone in any country, in more than twenty languages, and it issues a certificate carrying the WHO name. For a second-year with no budget and no contacts, this is the cheapest credible line you can add to a CV this month, and it is the one that makes an email to a global health researcher read as serious rather than speculative.",
+    reqs: [
+      "None. No degree stage, no nationality restriction, no fee",
+      "An email address and enough bandwidth for text and slides"
+    ],
+    steps: [
+      "Pick courses that match a named ambition rather than collecting certificates. Three deep ones in epidemic preparedness read as a direction; fifteen scattered ones read as a hobby.",
+      "Do the outbreak and epidemic courses before an outbreak, not during. They are written by the people who ran the responses and are the closest thing to field training you can get from a bedroom.",
+      "The WHO Academy is the newer, more structured sibling of OpenWHO and is worth checking alongside it for longer programmes.",
+      "Put the certificate in the education section of your CV with the issuing body spelled out in full, and be ready to say in an interview what you actually learned from it."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "cpigh-policy",
+    name: "Global Health Policy Fellows Programme",
+    org: "Center for Policy Impact in Global Health, Duke University",
+    type: "fellowship", country: "Global", city: "Remote and Durham, USA",
+    fields: ["pubhealth", "global", "systems"],
+    stages: ["intern", "grad", "pg"], funding: "paid",
+    money: "Paid fellowship · stipend set per cohort",
+    duration: "Fixed term, set per cohort",
+    window: "Calls are announced on the Center's own page rather than aggregated anywhere",
+    deadlineMonths: [2, 3, 9, 10],
+    url: "https://centerforpolicyimpact.org/about/fellows-program/",
+    why: "A paid policy fellowship that names India in its own list of focus countries, alongside Ghana, Kenya, Myanmar, Nigeria and Sri Lanka. Most global health policy work is done to countries like yours by people from somewhere else; this is one of the few doors built the other way round, and it is aimed at health financing and governance rather than bench research.",
+    reqs: [
+      "Applications invited from candidates in low- and middle-income countries",
+      "India is named among the preferred focus countries",
+      "A background in health policy, health financing and delivery, or government financing of health services",
+      "Experience conducting health research, quantitative or qualitative, is preferred rather than required",
+      "Early- to mid-career researchers particularly encouraged"
+    ],
+    steps: [
+      "Read two of the Center's own working papers before applying and reference them specifically. The applicant pool here is small enough that a generic letter is obvious.",
+      "If your background is purely clinical, build one piece of health-systems work first — a costing exercise, a district-level access audit, an analysis of an existing NSSO or NFHS dataset. The open-data entry in this index is where to start tonight.",
+      "Health financing is the part clinicians consistently skip and the part this field actually runs on. A free course in health economics closes more of the gap than another clinical posting.",
+      "Watch their page directly. This role is not advertised through the usual scholarship aggregators."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 1
+  },
+  {
+    id: "dth-lab",
+    name: "DTH-Lab Fellowship — digital health governance",
+    org: "Digital Transformations for Health Lab",
+    type: "fellowship", country: "Global", city: "Remote",
+    fields: ["pubhealth", "global", "systems", "compbio"],
+    stages: ["clin", "intern", "grad"], funding: "stipend",
+    money: "Supported fellowship · terms set per call",
+    duration: "Project-length, alongside study or work",
+    window: "Applications have opened in the spring, with an April close in the last cycle",
+    deadlineMonths: [3, 4],
+    url: "https://www.dthlab.org/research-fellows",
+    why: "Digital health is being governed right now, by a small number of people writing the rules for data, AI and platforms in health systems. This fellowship exists specifically to put students and early-career researchers from low- and middle-income countries in that conversation instead of leaving them to inherit its conclusions.",
+    reqs: [
+      "Students or early-career researchers aged 30 or under",
+      "Based in a low- or middle-income country, which includes India",
+      "An interest in policy and governance rather than in building the technology itself"
+    ],
+    steps: [
+      "The age ceiling is real and it is 30, which makes this one of the few things in this index that is genuinely easier to reach as a student than as a consultant. Do not save it for later.",
+      "You do not need to code. The work is governance, and a clinician who can explain what a data rule does to a real patient is the rarer contributor.",
+      "Read the Lab's published reports before writing. Their output is short, specific, and tells you exactly what kind of thinking they want.",
+      "Pair this with the WHO digital health material and one open-data project, so the application shows a line of interest rather than a single application."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "takemi-harvard",
+    name: "Takemi Program in International Health",
+    org: "Harvard T.H. Chan School of Public Health",
+    type: "fellowship", country: "USA", city: "Boston",
+    fields: ["pubhealth", "global", "systems"],
+    stages: ["pg"], funding: "paid",
+    money: "Funded research year · fellows secure or are awarded support per cohort",
+    duration: "One academic year",
+    window: "Applications open in the autumn for the following academic year",
+    deadlineMonths: [11, 12, 1],
+    url: "https://www.hsph.harvard.edu/takemi-program/",
+    why: "A year at Harvard to work on health systems, aimed squarely at people who will go back and run them. Worth knowing about early even though you cannot apply yet, because it changes what a mid-career plan looks like: the people who get this spent their twenties building a health-systems record, not only a clinical one.",
+    reqs: [
+      "Mid-career health professionals and scholars — this is not an entry-level route",
+      "A track record in health systems, policy or health economics",
+      "A defined research project to pursue during the year"
+    ],
+    steps: [
+      "File this under 'later' deliberately, then work backwards from it. The record it requires takes a decade to build and almost none of it is clinical.",
+      "The Takemi fellows list is public. Read where five of them worked before their year, and you have an unusually honest map of what this career actually looks like.",
+      "In the meantime, the routes that lead here are in this index already: an MPH, a health-systems research post, or the Duke policy fellowship above."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 5
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "openwho":        { t: 3, odds: "Open to everyone, always", effort: "Hours per course, free", note: "The cheapest credible line you can add to a CV this month, and the one that makes a cold email to a global health researcher read as serious. Three deep courses beat fifteen scattered ones." },
+  "cpigh-policy":   { t: 1, odds: "Small pool, and India is a named focus country", effort: "A real health-systems piece of work first, then the application", note: "Most global health policy is done to countries like yours by people from elsewhere. This is one of the few doors built the other way round, and it is paid." },
+  "dth-lab":        { t: 2, odds: "Small cohort, narrow eligibility that works in your favour", effort: "An application and a reading week", note: "Aged 30 or under and based in an LMIC — a ceiling that makes this easier as a student than it will ever be again. Digital health rules are being written now; this is a seat at that table." },
+  "takemi-harvard": { t: 2, odds: "Mid-career only — years away for a student", effort: "A decade of health-systems record", note: "Listed so you can aim at it, not apply to it. Read where its fellows worked before their year and you have a map of the career." }
+});
