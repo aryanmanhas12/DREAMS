@@ -259,8 +259,8 @@ window.DB.research = [
   {
     id: "amgen-scholars",
     name: "Amgen Scholars Programme",
-    org: "Amgen Foundation — Europe, Japan, Australia and US hosts",
-    type: "research", country: "Global", city: "Cambridge, Munich, Kyoto, Melbourne and others",
+    org: "Amgen Foundation — Europe, Asia (including India), Australia, Canada and US hosts",
+    type: "research", country: "Global", city: "Cambridge, Munich, Kyoto, Melbourne, Hyderabad and others",
     fields: ["biochem", "genomics", "neuro", "onco", "compbio"],
     stages: ["pre", "clin"], funding: "full",
     money: "Fully funded: travel, accommodation and stipend · free to apply",
@@ -268,15 +268,17 @@ window.DB.research = [
     window: "Australia opens ~Aug · Europe and Asia close 1 February (noon CET at the European sites)",
     deadlineMonths: [8, 9, 11, 12, 1, 2],
     url: "https://amgenscholars.com/",
-    why: "The European, Japanese and Australian hubs accept students enrolled anywhere in the world — unlike the US hubs, which require enrolment at a US institution. Cambridge, LMU Munich, Karolinska and Kyoto all host, fully funded.",
+    why: "Fully funded summer research at Cambridge, LMU Munich, Karolinska, Kyoto and, more recently, IIIT Hyderabad. The Asia programme states plainly that it carries no citizenship requirement and takes undergraduates enrolled at universities in Asia, which is the cleanest eligibility line in this whole index for an Indian student. The US programme is the opposite, and the one people waste applications on: it requires US citizenship or permanent residency, so enrolment there is not enough.",
     reqs: [
       "Enrolled undergraduate in a science or medical programme",
-      "For Europe/Japan/Australia hubs: enrolment anywhere in the world is acceptable",
-      "For US hubs: must be enrolled at a US institution — check before applying",
+      "Asia programme: no citizenship requirement at all, open to undergraduates enrolled at universities in Asia, India included",
+      "Europe programme: no citizenship requirement either",
+      "US programme: US citizenship or permanent residency is REQUIRED, so even an Indian student studying in the US on a visa is excluded",
       "Free to apply"
     ],
     steps: [
-      "Apply to the EUROPE, JAPAN or AUSTRALIA hubs as an Indian student. The US hubs will reject you on enrolment grounds.",
+      "Apply to the ASIA and EUROPE programmes. The US programme rejects you on citizenship whatever your grades, and that rejection is automatic rather than competitive.",
+      "IIIT Hyderabad now hosts the Asia programme, so one version of this is a domestic flight rather than a visa. Far fewer Indian medical students know that than know about Cambridge.",
       "Applications for most regions open on 1 November.",
       "You may apply to multiple hubs. Do so.",
       "Cambridge and Karolinska hosting means this doubles as a way to get known at institutions you might later apply to for a PhD."
