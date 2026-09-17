@@ -178,7 +178,7 @@ audited.**
 | 1 | Privacy policy page | `privacy.html`, linked in the footer. The homepage `<details>` stays as the short version. |
 | 2 | Terms & conditions | `terms.html`. Leads with the one that matters: dates are a starting point, the official page is the authority. |
 | 3 | Secrets off the frontend | None exist; there is no backend to hold a key. Grep for `api_key|secret|token|password|bearer` before every release. |
-| 4 | Force HTTPS | GitHub Pages serves HTTPS only; the "Enforce HTTPS" toggle is on. No headers are settable on Pages, so HSTS is not available. |
+| 4 | Force HTTPS | GitHub Pages serves HTTPS only; the "Enforce HTTPS" toggle is on. **HSTS is live, and the earlier note here saying otherwise was wrong** — measured `strict-transport-security: max-age=31556952` on the response. No header is settable on Pages, but `github.io` is on the browser HSTS preload list and Pages sends the header itself. A custom domain would not inherit that, so re-measure if one is ever added. |
 | 5 | Cookie consent banner | **Deliberately absent, and that is the correct answer.** The site sets no cookies and runs no analytics, so there is nothing to consent to. Adding a banner would be theatre that implies tracking exists. Do not add one unless tracking is ever added. |
 | 6 | Meta title + description | Present. The counts inside them are asserted by the data check. |
 | 7 | Social preview image | `assets/og-image.png`, **rendered from data** by `tools/make-og.js`. |
@@ -214,6 +214,7 @@ mtime against the data files and its real size against the declared one.
 - **The category pages are deliberately NOT in the service worker precache.** They total about 950 KB of listings and are not app shell; precaching them would cost every installed reader that download for pages they may never open.
 - **`build.js` must rewrite every relative link for the bundle.** The single-file artifact has no `privacy.html` and no `study-abroad/` beside it, so both shapes are rewritten to absolute published URLs. Adding a new kind of internal link means extending that rewrite.
 - **Footer category links needed real height, not a `::after`.** The audit measured all nine at 226x20 and flagged them. They sit in normal flow in the footer with room beneath, so `min-height: 44px` on an `inline-flex` is the honest fix, the same call as `.tour-trigger`.
+- **A custom domain is a one-line change in four places, and nothing warns you.** Canonicals, `og:url`, the JSON-LD `@id` values, `sitemap.xml`, `llms.txt` and `build.js`'s `SITE` constant all name `aryanmanhas12.github.io/DREAMS` absolutely, because a canonical has to be absolute. Point a domain at Pages without changing them and every page canonicalises to the old host, which tells search engines to ignore the new one. The origin lives in `tools/make-pages.js` (`BASE`) and `build.js` (`SITE`); the rest regenerate from there. HSTS would also need re-measuring, since the preload that covers `github.io` does not follow a custom domain.
 
 ## Workflow
 
