@@ -1640,3 +1640,71 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
   content-visibility: auto;
   contain-intrinsic-size: auto 320px;
 }
+
+/* ─────────────── generated category pages ───────────────
+   /study-abroad/, /scholarships/ and the rest. These exist because the app
+   builds itself from data in the browser, so none of the 220 programmes was
+   in the HTML a crawler reads. They reuse .doc-page and add the listing
+   shapes. No new palette, no new fonts: a token edit still reaches them. */
+.listing-page { max-width: 74ch; }
+
+.crumbs { font-family: var(--font-mono); font-size: .72rem; margin: 0 0 6px; }
+.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; }
+.crumbs li + li::before { content: "→"; margin-right: 6px; color: var(--ink-3); }
+.crumbs a { color: var(--accent); }
+.crumbs [aria-current="page"] { color: var(--ink-3); }
+
+.listing {
+  margin: 0 0 8px; padding: 22px 0 4px;
+  border-top: 1px solid var(--line-soft);
+}
+.listing h2 {
+  font-family: var(--font-display); font-size: 1.45rem; line-height: 1.16;
+  margin: 0 0 8px; padding-top: 0; border-top: 0;
+}
+.listing h3 {
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+  margin: 18px 0 6px;
+}
+.listing-why { font-size: 1.02rem; line-height: 1.6; margin: 0 0 14px; }
+.listing-facts {
+  display: grid; grid-template-columns: minmax(min(8.5rem, 40%), auto) 1fr;
+  gap: 4px 14px; margin: 0 0 4px; font-size: .94rem;
+}
+.listing-facts dt {
+  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--ink-3); padding-top: 3px;
+}
+.listing-facts dd { margin: 0; color: var(--ink); }
+.listing-link { font-size: .94rem; margin: 16px 0 0; }
+.listing-link a { color: var(--accent); }
+
+.related { margin-top: 42px; padding-top: 20px; border-top: 2px solid var(--line); }
+.related h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 10px; padding-top: 0; border-top: 0; }
+.related ul { margin: 0; padding-left: 20px; }
+.related li { margin-bottom: 6px; }
+.related a { color: var(--accent); }
+
+/* Category links in the footer. They are navigation for a reader and the
+   crawl path for everything the app renders client-side. */
+.foot-map { margin: 26px 0 18px; }
+.foot-map-h {
+  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3);
+  margin: 0 0 8px; padding-top: 0; border-top: 0; font-weight: 400;
+}
+.foot-map ul {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 0 22px;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+}
+/* Real height rather than a ::after, same call as .tour-trigger: these sit in
+   normal flow in the footer with room beneath, so growing the box costs
+   nothing and a pseudo-element would only measure 38px between rows. The
+   audit measured these at 226x20 before this rule and flagged all nine. */
+.foot-map a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: .92rem; color: var(--accent);
+}
+.foot-map a:hover { color: var(--ink); }

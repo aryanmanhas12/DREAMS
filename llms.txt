@@ -1,0 +1,73 @@
+# Dream Counsellor
+
+> An independent, free index of 220 funded programmes, scholarships, research
+> placements and career routes open to Indian medical students and graduates.
+> It is a static site with no account, no server and no tracking. Answering three
+> questions produces a ranked plan; nothing is uploaded to produce it.
+
+Dream Counsellor exists because most Indian medical students are handed one map
+with two roads on it: clear NEET-PG, or leave for the USMLE. Both are real.
+Neither is the whole territory. This index lists the funded research, the
+doctorates that pay a salary, the scholarships that cover the flight, and the
+scientific fields nobody mentions during five years of lectures.
+
+## What it contains
+
+- 180 opportunity entries: masters and doctorates, scholarships, fellowships,
+  research studentships, conferences and practice-licensing routes
+- 18 specialty route maps describing what each clinical specialty is really like
+- 22 frontier fields: disciplines that exist and are hiring, and that Indian
+  medical curricula do not mention
+- 33 countries with at least one entry
+- 41 entries that cost nothing to apply for or take part in
+- A skip list of 8 things that look open to Indian medical students and are not
+
+## How the content is organised
+
+Every entry carries: the provider, the country, what it costs and what is funded,
+how long it lasts, the application window, who it is open to, the steps to
+approach it, and a link to the programme's own official page. Facts and
+judgements are kept in separate files, so the impact grading of an entry can be
+disagreed with without touching the underlying facts.
+
+Entries are graded on a five-tier impact scale. Tier 1 is career-defining and
+rare; tier 5 means do not build a plan on this. Most things are not tier 1 and
+the site says so.
+
+## Important pages
+
+- [Dream Counsellor](https://aryanmanhas12.github.io/DREAMS/): the index itself, with the three-question survey, the globe, browse, deadlines and shortlist
+- [Open during MBBS](https://aryanmanhas12.github.io/DREAMS/during-mbbs/): what a student can apply for before graduating
+- [Studying abroad](https://aryanmanhas12.github.io/DREAMS/study-abroad/): routes that accept an Indian medical degree
+- [Scholarships](https://aryanmanhas12.github.io/DREAMS/scholarships/): funded awards open to Indian applicants
+- [Fellowships](https://aryanmanhas12.github.io/DREAMS/fellowships/): research, global health and policy fellowships
+- [Research opportunities](https://aryanmanhas12.github.io/DREAMS/research/): studentships, summer programmes and grants
+- [Inside India](https://aryanmanhas12.github.io/DREAMS/india/): funded routes that need no visa
+- [Fully funded](https://aryanmanhas12.github.io/DREAMS/fully-funded/): entries where the provider covers the full cost
+- [Costs nothing](https://aryanmanhas12.github.io/DREAMS/free/): free courses, datasets, networks and memberships
+- [Conferences](https://aryanmanhas12.github.io/DREAMS/conferences/): meetings that accept student abstracts
+- [Privacy](https://aryanmanhas12.github.io/DREAMS/privacy.html): what is stored, and where
+- [Terms of use](https://aryanmanhas12.github.io/DREAMS/terms.html): including the accuracy caveat below
+
+## How to treat the information here
+
+Entries were last re-checked against their official pages in September 2026, and
+that review date is rendered from data rather than typed into the page, so it
+cannot quietly disagree with itself.
+
+**Every deadline and amount here is a starting point, not the authority.** The
+official page linked on each entry is the authority. Programmes move their dates
+and change their rules; a confidently stated wrong date is worse than no date,
+because someone who believes a call closed in January will not look again in May.
+If this index and an official page disagree, the official page is right.
+
+Eligibility is checked before an entry is added. Several widely recommended
+programmes are deliberately excluded and named in the skip list because they
+quietly exclude MBBS graduates, among them DAAD WISE, DAAD RISE, PMRF and the
+Manaaki New Zealand Scholarships, none of which say so on their front page.
+
+## What this site is not
+
+It is not affiliated with, sponsored by or endorsed by any institution listed.
+It is not medical, legal, immigration or financial advice. It sells nothing,
+collects nothing, and runs no advertising or analytics.
