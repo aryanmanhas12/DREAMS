@@ -122,6 +122,31 @@ const PAGES = [
     h1: "Conferences that take student work",
     lede: "Attending is not a credential; presenting is. Each of these takes abstracts from students, and several fund the trip.",
     pick: () => items.filter((i) => i.type === "conference")
+  },
+  /* The next two draw on pools that are NOT in `items`, and that is the
+     reason they exist. `specialties` and `frontiers` are the only places on
+     this site that explain what a career actually consists of rather than
+     listing something to apply to — postgraduate training, what the day
+     looks like, which superspecialities follow, how licensing works in four
+     countries. Forty records of it, and none of it was in any HTML a crawler
+     could read, because the first pass only covered the programme pools. */
+  {
+    slug: "specialties",
+    title: "Medical specialties, and where each one leads",
+    desc: "Eighteen specialties an Indian medical graduate can enter, with the training route through NEET-PG, the routes abroad, the superspecialities that follow and the honest trade-off in each.",
+    h1: "Specialties, and where each one actually leads",
+    lede: "Choosing a specialty is choosing a working life, and most of the information available treats it as choosing a rank. Each entry here says what the day consists of, how you train for it in India, what it takes to practise it abroad, and the part people leave out.",
+    pick: () => DB.specialties,
+    render: specialtyHTML
+  },
+  {
+    slug: "research-fields",
+    title: "Research fields in medicine that are open and unfinished",
+    desc: "Twenty-two active research areas — genomics, computational psychiatry, implementation science, medical devices, health economics — with why each one is under-studied in India and how a medical student enters it.",
+    h1: "Research fields that are open and unfinished",
+    lede: "These are areas rather than applications. Each says what the field is, why India is under-represented in it, what qualification gets you in, which groups are doing the work, and one thing you could start this week without permission from anybody.",
+    pick: () => DB.frontiers,
+    render: frontierHTML
   }
 ];
 
@@ -183,12 +208,15 @@ function jsonld(p, url, list) {
       mainEntity: {
         "@type": "ItemList",
         numberOfItems: list.length,
-        itemListElement: list.slice(0, 100).map((it, n) => ({
-          "@type": "ListItem",
-          position: n + 1,
-          name: it.name,
-          url: it.url
-        }))
+        /* `url` is omitted where the entry has none. Specialties and research
+           fields are things this site describes, not things it links out to,
+           and a ListItem is valid without one — inventing a URL to fill the
+           slot would point somewhere that does not answer for the text. */
+        itemListElement: list.slice(0, 100).map((it, n) => {
+          const li = { "@type": "ListItem", position: n + 1, name: it.name };
+          if (it.url) li.url = it.url;
+          return li;
+        })
       }
     }
   ];
@@ -220,6 +248,53 @@ function entryHTML(it) {
     ${reqs}
     ${steps}
     <p class="listing-link"><a href="${esc(it.url)}" rel="noopener nofollow" target="_blank">Official page for ${esc(it.name)}</a> — always the authority on dates and eligibility.</p>
+  </article>`;
+}
+
+/* Specialties and frontiers carry prose rather than an application, so they
+   get their own shape. Same <article class="listing"> wrapper and the same
+   heading levels, so the stylesheet and the heading-order check both hold. */
+const bullets = (title, arr) => (arr || []).length
+  ? `<h3>${title}</h3>\n    <ul>${arr.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>`
+  : "";
+
+function specialtyHTML(it) {
+  const facts = [
+    it.day && `<dt>What the day is</dt><dd>${esc(it.day)}</dd>`,
+    it.india && `<dt>Training for it in India</dt><dd>${esc(it.india)}</dd>`,
+    it.fitIf && `<dt>It fits you if</dt><dd>${esc(it.fitIf)}</dd>`
+  ].filter(Boolean).join("\n      ");
+
+  return `  <article class="listing" id="${esc(it.id)}">
+    <h2>${esc(it.name)}</h2>
+    <p class="listing-why">${esc(it.oneLine || "")}</p>
+    <dl class="listing-facts">
+      ${facts}
+    </dl>
+    ${bullets("Practising it outside India", it.abroad)}
+    ${bullets("Superspecialities that follow", it.supers)}
+    ${bullets("Where the research is", it.research)}
+    ${bullets("Masters that build on it", it.masters)}
+    ${it.truth ? `<h3>The part people leave out</h3>\n    <p>${esc(it.truth)}</p>` : ""}
+  </article>`;
+}
+
+function frontierHTML(it) {
+  const facts = [
+    it.what && `<dt>What the field is</dt><dd>${esc(it.what)}</dd>`,
+    it.whyIndia && `<dt>Why it matters from India</dt><dd>${esc(it.whyIndia)}</dd>`,
+    it.entry && `<dt>How you get into it</dt><dd>${esc(it.entry)}</dd>`
+  ].filter(Boolean).join("\n      ");
+
+  return `  <article class="listing" id="${esc(it.id)}">
+    <h2>${esc(it.name)}</h2>
+    <p class="listing-why">${esc(it.tagline || "")}</p>
+    <dl class="listing-facts">
+      ${facts}
+    </dl>
+    ${bullets("Groups doing the work", it.where)}
+    ${it.startNow ? `<h3>What you could start this week</h3>\n    <p>${esc(it.startNow)}</p>` : ""}
+    ${it.url ? `<p class="listing-link"><a href="${esc(it.url)}" rel="noopener nofollow" target="_blank">Official page for ${esc(it.name)}</a> — always the authority on dates and eligibility.</p>` : ""}
   </article>`;
 }
 
@@ -261,7 +336,7 @@ ${jsonld(p, url, list)}
     <a class="btn btn-ghost" href="../#browse">Browse all ${TOTAL} in the app</a>
   </p>
 
-${list.map(entryHTML).join("\n\n")}
+${list.map(p.render || entryHTML).join("\n\n")}
 
   <section class="related">
     <h2>Related pages</h2>

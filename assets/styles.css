@@ -1668,15 +1668,24 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
   margin: 18px 0 6px;
 }
 .listing-why { font-size: 1.02rem; line-height: 1.6; margin: 0 0 14px; }
+/* The value column needs BOTH halves of this, and the reason is subtle enough
+   to be worth writing down. A bare `1fr` track has an automatic minimum of
+   min-content, so the column cannot shrink below the widest unbreakable token
+   in it. That was measured: "genomics/bioinformatics" sets at 178px, which put
+   exactly 4px of horizontal scroll on /research-fields/ at 320px and nowhere
+   else, because no earlier entry happened to contain a long slash compound.
+   `minmax(0, 1fr)` removes that floor, and `overflow-wrap: anywhere` is what
+   then lets the token wrap — note `break-word` would NOT work here, because it
+   does not change intrinsic min-content sizing, only overflow painting. */
 .listing-facts {
-  display: grid; grid-template-columns: minmax(min(8.5rem, 40%), auto) 1fr;
+  display: grid; grid-template-columns: minmax(min(8.5rem, 40%), auto) minmax(0, 1fr);
   gap: 4px 14px; margin: 0 0 4px; font-size: .94rem;
 }
 .listing-facts dt {
   font-family: var(--font-mono); font-size: .68rem; letter-spacing: .05em;
   text-transform: uppercase; color: var(--ink-3); padding-top: 3px;
 }
-.listing-facts dd { margin: 0; color: var(--ink); }
+.listing-facts dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
 .listing-link { font-size: .94rem; margin: 16px 0 0; }
 .listing-link a { color: var(--accent); }
 

@@ -46,6 +46,8 @@ the site says so.
 - [Fully funded](https://aryanmanhas12.github.io/DREAMS/fully-funded/): entries where the provider covers the full cost
 - [Costs nothing](https://aryanmanhas12.github.io/DREAMS/free/): free courses, datasets, networks and memberships
 - [Conferences](https://aryanmanhas12.github.io/DREAMS/conferences/): meetings that accept student abstracts
+- [Specialties](https://aryanmanhas12.github.io/DREAMS/specialties/): 18 specialties, each with the day's work, the NEET-PG route, the superspecialities that follow, the routes to practising abroad, and the trade-off people leave out
+- [Research fields](https://aryanmanhas12.github.io/DREAMS/research-fields/): 22 active areas, what each one is, why India is under-represented in it, and one thing a student could start this week
 - [Privacy](https://aryanmanhas12.github.io/DREAMS/privacy.html): what is stored, and where
 - [Terms of use](https://aryanmanhas12.github.io/DREAMS/terms.html): including the accuracy caveat below
 
