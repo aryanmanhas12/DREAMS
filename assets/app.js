@@ -1938,6 +1938,8 @@
     top = Math.max(12, Math.min(top, vh - ph - 12));
     n.pop.style.top = top + "px";
     n.pop.style.left = left + "px";
+    // Only now is it safe to show. See the .tour-pop:not(.is-placed) rule.
+    n.pop.classList.add("is-placed");
   }
 
   function tourGo(i) {
@@ -2008,6 +2010,7 @@
     if (!tourOpen) return;
     tourOpen = false;
     tourNodes.wrap.classList.remove("is-on");
+    tourNodes.pop.classList.remove("is-placed");
     document.body.classList.remove("tour-locked");
     document.removeEventListener("keydown", tourKey);
     window.removeEventListener("resize", tourReposition);

@@ -1406,7 +1406,13 @@ body {
 .tour { position: fixed; inset: 0; z-index: 90; display: none; }
 .tour.is-on { display: block; }
 /* The page must not scroll behind the scrim while a step is anchored to a
-   rect measured against the viewport. */
+   rect measured against the viewport. The gutter has to be reserved on the
+   root for that to be free: without it, `overflow: hidden` takes the
+   scrollbar away, the content box widens by its width, and every element on
+   the page steps sideways — Lighthouse scored that at 0.0693 on its own.
+   `scrollbar-gutter` only reserves space where scrollbars are classic, so it
+   costs nothing on the overlay-scrollbar platforms most readers are on. */
+html { scrollbar-gutter: stable; }
 body.tour-locked { overflow: hidden; }
 
 .tour-scrim { position: absolute; inset: 0; background: rgba(6, 26, 34, .55); }
@@ -1427,6 +1433,17 @@ body.tour-locked { overflow: hidden; }
   box-shadow: 0 18px 44px rgba(0, 0, 0, .3);
   padding: 20px 20px 16px;
 }
+/* Hidden until tourPlace() has given it a position. tourGo defers placement
+   through a requestAnimationFrame AND a 220ms timeout so the target view can
+   paint and scroll first, which left the card visible at its default corner
+   for a quarter of a second and then jumping — measured by Lighthouse as
+   0.2713 of layout shift, nearly the whole of a failing 0.271 CLS on a first
+   visit. `visibility`, NOT `display: none`: tourPlace measures offsetWidth
+   and offsetHeight at line ~1923 to decide above/below/centred, and a
+   display:none element measures zero, which would centre every card.
+   Per-step moves after this are user-initiated and excluded from CLS, so
+   the class is only cleared when the tour closes. */
+.tour-pop:not(.is-placed) { visibility: hidden; }
 .tour-pop:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .tour-step {
   margin: 0 0 6px; font-family: var(--font-mono); font-size: .68rem;
