@@ -37,6 +37,27 @@ jobs:
           done
           echo "Static site looks intact."
 
+      # The repo root is the site, but not everything at the root belongs on
+      # the web. tools/ holds the generators (make-pages, make-og, make-icons,
+      # make-fonts) and make-fonts keeps the UNSUBSET original of Petit Formal
+      # Script as its build input — 28KB of font that nothing references and
+      # every deploy was publishing anyway. Checked live: it answered 200.
+      # robots.txt disallowing /tools/ only asks crawlers not to look; it does
+      # not stop the file being served.
+      #
+      # Deliberately a denylist, not an allowlist. Forgetting to remove a file
+      # here just leaves it served, which is the status quo; forgetting to
+      # COPY one in an allowlist 404s the live site. The direction of the
+      # failure is the whole argument.
+      - name: Drop build-only files from the published artifact
+        run: |
+          rm -rf tools build.js CLAUDE.md
+          test -f index.html || { echo "index.html went missing"; exit 1; }
+          test -f assets/styles.css || { echo "assets/styles.css went missing"; exit 1; }
+          test -f assets/fonts/petit-formal-script.woff2 || { echo "the subset font went missing"; exit 1; }
+          test ! -e tools || { echo "tools/ survived the removal"; exit 1; }
+          echo "Publishing $(find . -path ./.git -prune -o -type f -print | wc -l) files."
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
