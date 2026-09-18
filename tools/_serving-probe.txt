@@ -1,9 +1,0 @@
-Temporary probe. This file has never been deployed before, and pages.yml
-deletes tools/ before the artifact is uploaded. So after one deploy:
-
-  404 -> the Actions artifact is what Pages serves, and the build files
-         still answering 200 are stale copies at the serving layer.
-  200 -> Pages is serving the branch tree directly, the artifact is not
-         what reaches readers, and the removal step cannot achieve anything.
-
-Delete this once the question is answered.
