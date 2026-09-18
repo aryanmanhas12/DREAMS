@@ -154,7 +154,12 @@ const PAGES = [
 const NAV = PAGES.map((p) => ({ slug: p.slug, label: p.h1 }));
 
 function head(p, url, count) {
-  const ogImg = BASE + "/assets/og-image.png";
+  /* Each category has its own card, rendered from these same definitions by
+     tools/make-og.js. A share of /scholarships/ is answering a narrower
+     question than a share of the homepage, and repeating the homepage card
+     wastes the one impression most readers ever get. */
+  const ogImg = `${BASE}/assets/og/${p.slug}.png`;
+  const ogAlt = `${p.h1} — ${count} of ${TOTAL} entries in the Dream Counsellor index, beside a globe marking the countries they lead to.`;
   return `<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${esc(p.title)} — Dream Counsellor</title>
@@ -172,7 +177,7 @@ function head(p, url, count) {
 <meta property="og:image" content="${ogImg}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Dream Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
+<meta property="og:image:alt" content="${esc(ogAlt)}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(p.title)}" />
 <meta name="twitter:description" content="${esc(p.desc)}" />
@@ -352,30 +357,43 @@ ${list.map(p.render || entryHTML).join("\n\n")}
 `;
 }
 
-/* ── write ── */
-let written = 0, entries = 0;
-for (const p of PAGES) {
-  const dir = path.join(ROOT, p.slug);
-  fs.mkdirSync(dir, { recursive: true });
-  const out = page(p);
-  fs.writeFileSync(path.join(dir, "index.html"), out);
-  const n = p.pick().length;
-  entries += n;
-  written++;
-  console.log(`  /${p.slug}/`.padEnd(22) + String(n).padStart(3) + " entries   " + (Buffer.byteLength(out) / 1024).toFixed(0) + " KB");
-}
-console.log(`\n${written} pages written, ${entries} entry renderings in crawlable HTML`);
+/* ── exported so tools/make-og.js renders one share card per category from
+      the SAME definitions these pages are built from. A card is the first
+      impression far more often than the page is, and the project has already
+      shipped one advertising 155 programmes while the index held 207. Two
+      copies of a headline is how that happens again, so there is one copy. ── */
+module.exports = {
+  BASE,
+  TOTAL,
+  PAGES: PAGES.map((p) => ({ slug: p.slug, title: p.title, desc: p.desc, h1: p.h1, count: p.pick().length }))
+};
 
-/* ── sitemap, regenerated so it can never disagree with what exists ── */
-const today = new Date().toISOString().slice(0, 10);
-const urls = [
-  { loc: BASE + "/", pri: "1.0", freq: "monthly" },
-  ...PAGES.map((p) => ({ loc: `${BASE}/${p.slug}/`, pri: "0.8", freq: "monthly" })),
-  { loc: BASE + "/privacy.html", pri: "0.3", freq: "yearly" },
-  { loc: BASE + "/terms.html", pri: "0.3", freq: "yearly" }
-];
-fs.writeFileSync(path.join(ROOT, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`).join("\n") +
-  `\n</urlset>\n`);
-console.log(`sitemap.xml rewritten with ${urls.length} canonical URLs`);
+/* ── write ── */
+if (require.main === module) {
+  let written = 0, entries = 0;
+  for (const p of PAGES) {
+    const dir = path.join(ROOT, p.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const out = page(p);
+    fs.writeFileSync(path.join(dir, "index.html"), out);
+    const n = p.pick().length;
+    entries += n;
+    written++;
+    console.log(`  /${p.slug}/`.padEnd(22) + String(n).padStart(3) + " entries   " + (Buffer.byteLength(out) / 1024).toFixed(0) + " KB");
+  }
+  console.log(`\n${written} pages written, ${entries} entry renderings in crawlable HTML`);
+
+  /* ── sitemap, regenerated so it can never disagree with what exists ── */
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [
+    { loc: BASE + "/", pri: "1.0", freq: "monthly" },
+    ...PAGES.map((p) => ({ loc: `${BASE}/${p.slug}/`, pri: "0.8", freq: "monthly" })),
+    { loc: BASE + "/privacy.html", pri: "0.3", freq: "yearly" },
+    { loc: BASE + "/terms.html", pri: "0.3", freq: "yearly" }
+  ];
+  fs.writeFileSync(path.join(ROOT, "sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`).join("\n") +
+    `\n</urlset>\n`);
+  console.log(`sitemap.xml rewritten with ${urls.length} canonical URLs`);
+}
