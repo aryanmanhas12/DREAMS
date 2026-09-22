@@ -102,7 +102,7 @@ const PAGES = [
   {
     slug: "fully-funded",
     title: "Fully funded opportunities for Indian medical students",
-    desc: "Programmes that cover the full cost — tuition, stipend and often flights — for Indian medical students and graduates, with what each one actually pays.",
+    desc: "Programmes that cover the full cost (tuition, stipend and often flights) for Indian medical students and graduates, with what each one actually pays.",
     h1: "Fully funded, and what that actually means",
     lede: "Every entry on this page is marked as full funding by its own provider. Read the money line on each: some cover tuition and living and travel, others cover tuition alone and leave you to find the rest.",
     pick: () => items.filter((i) => i.funding === "full")
@@ -142,7 +142,7 @@ const PAGES = [
   {
     slug: "research-fields",
     title: "Research fields in medicine that are open and unfinished",
-    desc: "Twenty-two active research areas — genomics, computational psychiatry, implementation science, medical devices, health economics — with why each one is under-studied in India and how a medical student enters it.",
+    desc: "Twenty-two active research areas, from genomics and computational psychiatry to medical devices and health economics, with why each one is under-studied in India and how a medical student enters it.",
     h1: "Research fields that are open and unfinished",
     lede: "These are areas rather than applications. Each says what the field is, why India is under-represented in it, what qualification gets you in, which groups are doing the work, and one thing you could start this week without permission from anybody.",
     pick: () => DB.frontiers,

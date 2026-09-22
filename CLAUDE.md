@@ -245,6 +245,126 @@ Both of these were written down as open concerns and both were wrong. Recorded s
 - **Lighthouse's LCP is simulated and noisy; never report a single-run delta.** Measured across three identical runs of the same build: performance **86–88**, LCP **3.5–3.7s**, FCP **1.1–2.0s**. A run showing "85 / 4.0s" after a change that removed 18 KB is the bottom of that spread, not a regression. Run it at least three times before believing any movement smaller than the spread.
 - **The `&` in a `sed` replacement means "the whole match".** A test meant to break the font check by rewording the footer to "bigger & brighter" silently produced something else entirely, and the check's apparent silence looked like a broken assertion. Same replacement-token family as the `build.js` string-replacer trap. Use a function replacer, or escape it.
 
+## Design rules the user set, and what they cost here
+
+The user supplied a list of 30 patterns to avoid ("vibecoded" AI-website
+clichés) with the instruction that the site should feel designed for THIS
+product rather than replacing one set of trends with another. Audited all 30
+against the real CSS and markup rather than against this file's claims. Most
+were already clean. **These are standing rules — check a change against them
+before shipping it.**
+
+**Five were genuinely violated and are fixed:**
+
+- **Decorative radial gradients (#22, #1).** `.hero::before` carried two
+  full-width radial washes whose own comment admitted their job was to "stop
+  the hero reading as text on a flat rectangle", and `.read` had a corner
+  wash. Both removed. The hero separates by type scale and 68px of lead; the
+  globe is the colour in the composition. It also takes two full-viewport
+  gradient layers off first paint on a phone.
+- **Glassmorphism (#8).** `.topbar` had `backdrop-filter: saturate(140%)
+  blur(10px)`. A blur on a *sticky* element re-composites on every scroll
+  frame, paid on the phones this is mostly read on, for an effect whose only
+  job was to look expensive. Now an opaque `--paper` with the hairline rule.
+- **Hover flourish + stacked shadows (#28, #5).** `.card:hover` lifted 2.5px
+  under two drop shadows. Hover only needs to say *which* card the pointer is
+  on, so the border does it. Still gated on `(hover: hover)`.
+- **Decorative em dashes (#9).** Measured, not guessed: index.html was at
+  **12.7 per 1,000 words** against a human norm of 1–2. Visible prose on all
+  four hand-written pages is now **0**. See the dash rules already documented
+  above for the safe transforms.
+- **Em dash as a loading state (#9 + #21).** Eight counts shipped as `—`
+  until `app.js` filled them, so a reader whose JS failed saw "This page has
+  — of them" as though the dash were content. They now ship EMPTY with a
+  `.num-pending:empty::before` skeleton that vanishes the instant
+  `textContent` is set. No JS knows it exists.
+
+**Deliberately NOT "fixed", because the rule does not apply here:**
+
+- **Three cards in a row (#6).** The three `.statement` blocks are *stacked*,
+  not a 3-across grid, and each carries a distinct claim rendered from live
+  data. Not filler.
+- **Pillowy radii (#19).** `--r` is **3px**. The `border-radius: 100px` hits
+  are all pill-shaped *controls*. A crisp surface radius with pill buttons is
+  a coherent system, not softness everywhere.
+- **Banned typefaces (#10).** Cormorant Garamond, IBM Plex Sans/Mono, Petit
+  Formal Script. No Inter, Geist or Space Grotesk.
+- **Emoji, sparkles, checkmark bullets, animated arrows, bento, fake
+  terminals, testimonials, pricing tiers (#7, #24, #16, #25, #13, #14, #12,
+  #17).** Grepped. Zero instances of any of them.
+- **ToS and Privacy (#26, #27).** Both present and linked.
+
+**The count-up went too.** `countUp()` rolled the four stat tiles to their
+values over 900ms. A number that is rolling is a number you cannot read yet:
+the reader came to find out how many routes exist and the animation answered
+a third of a second late, while spending 900ms of `requestAnimationFrame`
+during first paint on a phone. `setNum()` sets them directly. The code's own
+comment already said prose must not count up "like a slot machine" — the
+tiles were not different.
+
+**Not done, and this is a judgement call worth re-examining rather than a
+miss.** The `data-*.js` entry text is 74,800 words carrying **558** dashes
+(7.4/1,000). Only **1** of the 483 lone-dash lines matches the safe
+conjunction transform; the rest are appositives and clause joins inside
+sentences that state eligibility rules and deadlines. A regex pass over 483
+hand-written programme descriptions to win a stylistic metric risks garbling
+a line that tells a student who may apply, and this repo has already broken
+a sentence that way once. A dash is cheaper than a wrong eligibility line.
+If this is ever done it should be a reviewed pass, entry by entry.
+
+## The app icon is drawn, not captured
+
+- **Rendering the real globe into the icon was the wrong call, and the
+  measurement is why.** `tools/make-icons.js` used to run `globe.js` against
+  real data. Rendered at the sizes an icon is actually used — 60px on a home
+  screen, 40px in a switcher, 29px in settings — the coastlines collapsed
+  into grey mush, the twenty programme dots became noise, and by 29px there
+  was no readable mark. It was detail drawn for a 340px canvas shown at an
+  eighth of that, sitting in a soft glow inside a large dark margin.
+- **The mark is now three strokes and one disc:** outer circle, meridian
+  ellipse, equator, plus a vermilion marker on India that punches a
+  ground-coloured hole through the strokes behind it.
+- **The marker's position is derived by arithmetic from the favicon**, not
+  eyeballed: the favicon's globe is r=12.5 in a 32 box with the dot at
+  (+4.5, +3.5) r=3, which scales to (+12.2, +9.5) r=8.2 in the icon's 100
+  box. "Favicon matches the app icon" is an invariant this project has
+  already broken once, and matching by construction is the only version that
+  survives.
+- **An earlier offset put the marker's hole within 2 units of the outer
+  stroke** and bit a notch out of it, which reads as a rendering fault rather
+  than a marker. It has to sit ON the face with clear ground around it.
+- **The generator asserts legibility before it writes**, by downscaling the
+  shipped 192 to 29px and requiring the warm marker and the cool globe to
+  still be distinct pixel clusters. A mark that has dissolved fails the build.
+- **Worth 344 KB to every installed reader.** The icon set went 394 KB → 50 KB
+  (192: 47.9→8.4, 512: 236.5→23.8, maskable: 110.2→18.0). All three are in
+  `sw.js`'s `SHELL`, so that is download every install used to pay.
+- Maskable is at `scale: 0.72` inside the 80% safe zone; Android crops
+  adaptive icons to an OEM-chosen shape and anything outside gets shaved.
+
+## Mobile
+
+- **`100vh` is a bug on iOS Safari, and there were two.** It measures the
+  LARGEST viewport, as though the address bar were hidden. `.survey-shell`
+  sized to it put the Next button under the browser chrome, and `.topnav`'s
+  `max-height` ran the drawer past the bottom of the screen so the last
+  category could not be reached. Both now declare `vh` first and `dvh`
+  second, so an old browser still gets a sane value and everything else gets
+  the viewport that is actually on screen. Verified resolving to 782px on an
+  844px viewport.
+- Already sound, checked rather than assumed: the globe pauses via
+  `IntersectionObserver` when off-screen and does not auto-spin under
+  `prefers-reduced-motion`; `-webkit-text-size-adjust: 100%` is set;
+  `overscroll-behavior` is contained on the drawer and the tour;
+  `env(safe-area-inset-*)` is honoured on `.wrap`, the browse footer and
+  `.stale-bar`; `content-visibility: auto` keeps the 180-card style pass at
+  ~8ms.
+- **Measured on Lighthouse mobile, three runs:** performance **86–88**,
+  accessibility **100**, best practices **100**, SEO **100**. CLS improved
+  **0.081 → 0.069**. LCP sits at 3.6s and is the webfont swap on
+  `.hero-lede`, which the font-preload prohibition rules out attacking
+  directly.
+
 ## Workflow
 
 - **Branching: work on the feature branch, and keep `main` identical to it.** `.github/workflows/pages.yml` deploys on push to `main` **only**, so nothing a feature branch alone can do will ever reach the live site. The sequence that has worked every time: commit to the feature branch → push it → fast-forward `main` to it → push `main` (that push is what triggers the deploy). Never commit directly on `main`, and never let the two diverge — a divergence means the published site and the branch you are reviewing are different pages, which is the most confusing state this repo can be in. The branch name changes per work session and does not matter; the invariant is that `main` is a fast-forward of it when you finish.

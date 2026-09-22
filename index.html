@@ -158,7 +158,7 @@
 
         <h1 class="hero-h">
           You were told there were two options.<br />
-          <span class="hero-em">This page has <span id="heroCount">—</span> of them.</span>
+          <span class="hero-em">This page has <span id="heroCount" class="num-pending"></span> of them.</span>
         </h1>
 
         <figure class="hero-globe">
@@ -169,8 +169,8 @@
 
         <p class="hero-lede">
           Funded research you can hold in second year, doctorates that pay a salary, and
-          scholarships that cover the flight — indexed for Indian medical students, graded
-          honestly, every one linked to its official page.
+          scholarships that cover the flight. All of it indexed for Indian medical students,
+          graded honestly, every one linked to its official page.
         </p>
 
         <!-- Two lengths, stated honestly. The primary button used to promise
@@ -179,12 +179,12 @@
              three, and the long one says its own price on the label. -->
         <div class="hero-actions">
           <button type="button" class="btn btn-primary" id="startBtn">Answer the Three Questions</button>
-          <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper — all 16</button>
+          <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper: all 16</button>
           <button type="button" class="btn btn-ghost" data-goto="browse">Just Show Me Everything</button>
         </div>
         <p class="hero-choice-note">
           Three questions take about a minute and give you fields, specialties and a starting list.
-          The full sixteen add money, category, year, climate and time — the constraints that decide
+          The full sixteen add money, category, year, climate and time, the constraints that decide
           what is <em>actually</em> open to you, and sharpen the ranking considerably. You can start
           short and continue later without losing your answers.
         </p>
@@ -233,10 +233,10 @@
       </div>
 
       <dl class="hero-stats">
-        <div><dt>Programmes indexed</dt><dd id="statTotal">—</dd></div>
-        <div><dt>Cost you nothing</dt><dd id="statFree">—</dd></div>
-        <div><dt>Open to current MBBS students</dt><dd id="statStudent">—</dd></div>
-        <div><dt>Countries covered</dt><dd id="statCountries">—</dd></div>
+        <div><dt>Programmes indexed</dt><dd id="statTotal" class="num-pending"></dd></div>
+        <div><dt>Cost you nothing</dt><dd id="statFree" class="num-pending"></dd></div>
+        <div><dt>Open to current MBBS students</dt><dd id="statStudent" class="num-pending"></dd></div>
+        <div><dt>Countries covered</dt><dd id="statCountries" class="num-pending"></dd></div>
       </dl>
     </div>
   </div>
@@ -255,17 +255,17 @@
          #heroCount, so nothing reads as a broken template if JS never runs. -->
     <blockquote class="statement reveal">
       <p>Funded research you can hold in second year, doctorates that pay a salary, and
-      scholarships that cover the flight. <b><span id="claimTotal">—</span> of them, across
-      <span id="claimCountries">—</span> countries.</b></p>
+      scholarships that cover the flight. <b><span id="claimTotal" class="num-pending"></span> of them, across
+      <span id="claimCountries" class="num-pending"></span> countries.</b></p>
     </blockquote>
 
     <blockquote class="statement reveal">
-      <p>Every entry is graded by how much it would <b>actually change</b> — not by how
+      <p>Every entry is graded by how much it would <b>actually change</b>, not by how
       good it looks on a CV. Most things are not tier 1, and this says so.</p>
     </blockquote>
 
     <blockquote class="statement reveal">
-      <p>Built around what you can afford, tolerate and reach. <b><span id="claimFree">—</span>
+      <p>Built around what you can afford, tolerate and reach. <b><span id="claimFree" class="num-pending"></span>
       of these cost nothing at all</b>, and the ones gated by money say so plainly.</p>
     </blockquote>
 
@@ -342,14 +342,14 @@
       <div class="search-wrap">
         <input type="search" id="browseSearch" class="search-input"
                autocomplete="off" spellcheck="false"
-               placeholder="Search by name, institution or field — try &quot;Germany&quot;, &quot;psychiatry&quot;, &quot;free&quot;…"
+               placeholder="Search by name, institution or field. Try &quot;Germany&quot;, &quot;psychiatry&quot;, &quot;free&quot;…"
                aria-label="Search programmes" />
       </div>
       <div class="sort-wrap">
         <label for="browseSort">Sort</label>
         <select id="browseSort" class="sort-select">
           <option value="tier">Impact tier</option>
-          <option value="deadline">Deadline — soonest first</option>
+          <option value="deadline">Deadline (soonest first)</option>
           <option value="az">A–Z</option>
         </select>
       </div>
@@ -369,7 +369,7 @@
     <header class="page-head">
       <p class="eyebrow">Yours, kept</p>
       <h2>Your shortlist</h2>
-      <p class="page-lede">Every programme you have starred, anywhere on the site — while comparing
+      <p class="page-lede">Every programme you have starred, anywhere on the site, whether comparing
       options across sessions, or just building a list to sit with for a few days before deciding.
       Saved in this browser only.</p>
     </header>
@@ -419,7 +419,7 @@
       <h2>Deadline calendar</h2>
       <p class="page-lede">
         Most opportunities are missed for one reason: the application window opened while you were
-        revising for an exam and closed before you looked up. Deadlines shift year to year — always
+        revising for an exam and closed before you looked up. Deadlines shift year to year. Always
         confirm on the official page before you plan around a date.
       </p>
       <p class="reviewed" id="reviewedCal"></p>
@@ -454,14 +454,14 @@
         </ul>
         <p class="privacy-small">
           Because there is no account, a shortlist saved on your laptop will not appear on your
-          phone by itself — copy the link across, or use <em>Copy my plan as text</em> on the
+          phone by itself. Copy the link across, or use <em>Copy my plan as text</em> on the
           results page. Nothing here uses cookies, analytics or trackers of any kind.
         </p>
       </div>
     </details>
 
     <p class="foot-note">
-      <strong>Dream Counsellor</strong> — built for Indian medical students, starting with one.
+      <strong>Dream Counsellor</strong>, built for Indian medical students, starting with one.
       Every deadline and figure here is a starting point for your own check, not a substitute for it:
       programmes change their rules, and the official page is always the authority. Nothing on this
       site is affiliated with any institution listed.

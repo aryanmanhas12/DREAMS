@@ -1358,16 +1358,16 @@
   })();
   function fmtNum(n) { return NUMFMT ? NUMFMT.format(n) : String(n); }
 
-  function countUp(el, target) {
-    if (prefersReduced || target <= 0) { el.textContent = fmtNum(target); return; }
-    const dur = 900, t0 = performance.now();
-    (function step(now) {
-      const p = Math.min(1, (now - t0) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmtNum(Math.round(target * eased));
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = fmtNum(target);
-    })(t0);
+  /* Was a 900ms eased count-up. Removed, and the reasoning is the same one
+     already written a few lines below about the claim cards: a number that
+     rolls is a number you cannot read yet. The reader came here to find out
+     how many routes exist, and the animation answered a third of a second
+     late while spending 900ms of requestAnimationFrame during first paint on
+     a phone. It showed nothing the final value does not.
+     Kept as a function rather than inlined so the four call sites still read
+     as one decision, and so this note sits where the next person looks. */
+  function setNum(el, target) {
+    if (el) el.textContent = fmtNum(target);
   }
 
   // Reveal-on-scroll. Falls back to visible when IntersectionObserver is
@@ -1401,9 +1401,8 @@
     const student = items.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
     const nCountries = Object.keys(countries).length;
 
-    // The headline number appears immediately. It is part of a sentence and
-    // must not read as "This page has — of them" for a beat. The stat tiles,
-    // being data rather than prose, count up.
+    // Every count is set directly, prose and tiles alike. Nothing on this
+    // page animates its way to a number.
     const hc = $("#heroCount");
     if (hc) hc.textContent = fmtNum(total);
 
@@ -1418,10 +1417,10 @@
       if (el) el.textContent = fmtNum(claims[sel]);
     });
 
-    countUp($("#statTotal"), total);
-    countUp($("#statFree"), free);
-    countUp($("#statStudent"), student);
-    countUp($("#statCountries"), nCountries);
+    setNum($("#statTotal"), total);
+    setNum($("#statFree"), free);
+    setNum($("#statStudent"), student);
+    setNum($("#statCountries"), nCountries);
   }
 
   /* ───────────────── shortlist ───────────────── */
