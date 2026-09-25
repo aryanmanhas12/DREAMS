@@ -337,45 +337,45 @@ window.DB.study = [
   /* ───────────────────────── GERMANY ───────────────────────── */
   {
     id: "heidelberg-mscph",
-    name: "MSc International Health / Master of Science in Health Economics",
+    name: "MSc International Health (MScIH)",
     org: "Heidelberg Institute of Global Health, Universität Heidelberg",
     type: "masters", country: "Germany", city: "Heidelberg",
     fields: ["global", "pubhealth", "systems"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "Tuition ≈ €7,000–14,000 · DAAD EPOS covers it fully",
-    duration: "1 year full-time, or modular over 3 years",
-    window: "DAAD EPOS applications close Aug–Oct for the following year",
-    deadlineMonths: [7, 8, 9, 10],
-    url: "https://www.klinikum.uni-heidelberg.de/",
-    why: "Germany's flagship international health masters, and one of the courses DAAD EPOS funds completely — tuition, a monthly stipend, flights and health insurance. The modular tropEd route lets you take individual modules across European partner schools.",
-    reqs: ["MBBS + normally 2 years professional experience for the DAAD-funded route", "English-taught — no German needed for the degree", "IELTS 6.5 or equivalent"],
+    money: "Full-time tuition €14,100 for the year; part-time €7,863 plus about €6,000 of short courses. DAAD EPOS is the funded route",
+    duration: "1 year full-time, or part-time through the tropEd network",
+    window: "DAAD-EPOS applicants: 15 Aug to 15 Oct 2026. Self-funded: 16 Oct 2026 to 31 Mar 2027 (planned). Course starts September 2027",
+    deadlineMonths: [8, 9, 10, 11, 12, 1, 2, 3],
+    url: "https://www.klinikum.uni-heidelberg.de/heidelberger-institut-fuer-global-health/education/master-of-science-in-international-health/how-to-apply",
+    why: "Germany's flagship international health masters, and one of the courses on the DAAD EPOS list, which pays a monthly stipend, travel and insurance. Heidelberg names medical degrees as a qualifying first degree, and the part-time tropEd route lets you take modules across European partner schools while you keep working.",
+    reqs: ["A 240-ECTS first degree in a public-health-relevant discipline; Heidelberg names medical degrees", "At least one year of relevant work experience, including public health work in a low- or middle-income setting", "For the DAAD-EPOS route: two years of professional experience and a degree no older than six years", "English-taught; no German needed for the degree"],
     steps: [
-      "Check whether your target course sits on the DAAD EPOS development-related postgraduate list. If it does, apply through DAAD, not only through the university.",
-      "The two-year experience requirement for EPOS is firm — plan this for after internship plus a year, not straight out of MBBS.",
-      "Learn A1–A2 German anyway. It changes daily life and it is free at Goethe-Institut partner centres in India.",
-      "Apply to the university AND to DAAD; they are separate processes with separate deadlines."
+      "Decide the route first. The EPOS scholarship window closes on 15 October 2026 and the self-funded window only opens the day after.",
+      "The experience rules differ: one year gets you admitted, two years gets you EPOS funding. Count yours honestly before choosing.",
+      "Ask the course in writing whether the €14,100 fee is waived for EPOS scholars before you rely on it. The stipend covers living costs, not necessarily fees.",
+      "Learn A1–A2 German anyway. It changes daily life, and EPOS can include a German course before the programme starts."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 2
   },
   {
     id: "charite-msc",
-    name: "MSc Molecular Medicine / International Health / Health & Society",
+    name: "MSc Molecular Medicine / MSc International Health",
     org: "Charité — Universitätsmedizin Berlin",
     type: "masters", country: "Germany", city: "Berlin",
     fields: ["biochem", "genomics", "global", "pubhealth"],
-    stages: ["grad", "pg"], funding: "free",
-    money: "No tuition fee — only a semester contribution of ≈ €350",
-    duration: "2 years",
-    window: "Applications typically Feb–May for October start",
-    deadlineMonths: [2, 3, 4, 5],
-    url: "https://www.charite.de/en/",
-    why: "Europe's largest university hospital, and the degree is effectively free — German public universities charge no tuition even to international students. Your only real cost is living in Berlin, which is the cheapest major capital in Western Europe.",
-    reqs: ["MBBS or biomedical bachelor's", "Some courses require German B2, molecular tracks are English-taught", "Blocked account of ≈ €11,900 for the student visa"],
+    stages: ["grad", "pg"], funding: "partial",
+    money: "Both charge tuition. Molecular Medicine: €2,500 a semester (2026/27) plus fees. International Health: €12,900 in total, or DAAD EPOS for three scholars a year",
+    duration: "Molecular Medicine 2 years; International Health 1 year full-time",
+    window: "International Health DAAD-EPOS: 1 Aug to 15 Oct 2026. Molecular Medicine: portal opens December 2026, closes 31 May 2027",
+    deadlineMonths: [8, 9, 10, 12, 1, 2, 3, 4, 5],
+    url: "https://internationalhealth.charite.de/en/application_admission/",
+    why: "Europe's largest university hospital, with two English-taught masters an Indian doctor can reach. Neither is free, whatever the general rule about German public universities suggests. Molecular Medicine is for someone who wants the lab side of disease and has real bench experience. International Health is Charité's tropEd programme; its EPOS scholars take a German course in July and write their thesis at Mexico's National Institute of Public Health.",
+    reqs: ["Molecular Medicine wants substantial hands-on lab training, not only a degree; the programme offers no stipends", "International Health EPOS route: a 240-ECTS degree with results in the upper third, two years' related work after it, and a degree under six years old", "Visa: a blocked account of about €12,000"],
     steps: [
-      "Verify the teaching language of the specific track before anything else. This is where most Indian applicants waste a cycle.",
-      "Get your MBBS assessed on ANABIN / uni-assist early — German recognition of Indian degrees is procedural and slow.",
-      "Open the blocked account (Sperrkonto) with Expatrio, Fintiba or Coracle before the visa appointment; it is the hard requirement, not the university offer.",
-      "Book the German student visa appointment the day you get an offer. Indian slots at the Consulate run months behind."
+      "Price it honestly first. Tuition plus about €12,000 of blocked-account living money is the real cost; the EPOS route is the only funded one here.",
+      "International Health gets over 800 EPOS applications for three places. Apply, but put Heidelberg's EPOS course alongside it rather than instead.",
+      "For Molecular Medicine, the lab experience is the application. List specific techniques you have run yourself.",
+      "Book the German student visa appointment the day you get an offer. Indian slots at the consulates run months behind."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -386,40 +386,70 @@ window.DB.study = [
     type: "phd", country: "Germany", city: "Various",
     fields: ["neuro", "genomics", "biochem", "compbio", "psych"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Fully funded — TVöD contract or fellowship ≈ €1,800–2,500/month net, no tuition",
-    duration: "3–4 years",
-    window: "IMPRS calls usually open Sept–Nov and Mar–May",
-    deadlineMonths: [3, 4, 5, 9, 10, 11],
+    money: "A Max Planck doctoral support contract, from 65 % of public-sector pay grade E13: just under €2,700 a month gross, about €2,100 net, with pension and no tuition",
+    duration: "3 years, extendable by one",
+    window: "Each school sets its own call; many run one or two a year, often closing October to January",
+    deadlineMonths: [8, 9, 10, 11, 12, 1],
     url: "https://www.mpg.de/en/imprs",
-    why: "The International Max Planck Research Schools are free to apply to, taught entirely in English, fully funded, and take applicants directly from a medical degree. The Max Planck Institute of Psychiatry in Munich is one of the few places in the world doing exactly the molecular-plus-clinical psychiatry you would otherwise have to invent for yourself.",
-    reqs: ["MBBS accepted; some schools ask for a masters, many do not for medical graduates", "No German required", "Research experience matters far more than marks"],
+    why: "The International Max Planck Research Schools are free to apply to, taught in English and paid as employment, and some of them name a medical degree in their entry rules. The Max Planck Institute of Psychiatry's school in Munich is the clearest example and has its own card here. Entry rules differ school by school, so the degree question has to be settled for each one rather than assumed.",
+    reqs: ["A master's or a medical degree, depending on the school. Check each school's own page for whether MBBS is named", "No German required", "Research experience matters far more than marks"],
     steps: [
-      "Browse imprs.mpg.de by topic, not by city. Find the three institutes doing your exact question.",
-      "IMPRS runs a single central application per school — one form, several possible labs.",
-      "Write to the group leader before applying. German PIs answer specific emails and ignore generic ones.",
-      "If you have no masters, apply anyway and address it directly: many IMPRS schools take medical graduates on a 'fast-track' basis."
+      "Browse the IMPRS list by topic, not by city. Find the three schools doing your exact question.",
+      "Open each school's application page and search it for 'medical'. If a medical degree is not named, email the coordinator before writing anything.",
+      "Most schools run one central application: one form, several possible labs. Name the group leaders you want and say why.",
+      "Write to the group leader before applying. German PIs answer specific emails and ignore generic ones."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "imprs-tp",
+    name: "IMPRS for Translational Psychiatry: PhD",
+    org: "Max Planck Institute of Psychiatry · LMU Munich",
+    type: "phd", country: "Germany", city: "Munich",
+    fields: ["psych", "neuro", "genomics"],
+    stages: ["intern", "grad", "pg"], funding: "paid",
+    money: "A salary and contract on the public-sector scale (TV-L), no tuition, conference travel funded, and interview travel covered",
+    duration: "PhD, starting September to October 2027",
+    window: "Open 15 Aug 2026. Applications close 31 Oct 2026, 24:00 CET; references by 7 Nov 2026. Selection March to May 2027",
+    deadlineMonths: [8, 9, 10],
+    url: "https://www.imprs-tp.mpg.de/2879/application",
+    why: "One of the very few doctoral schools that names a medical degree in its entry rules and says it particularly wants trainee doctors with lab experience. Depression, schizophrenia and anxiety are studied here from molecule to clinic, which is the psychiatry most Indian training never shows you. It is paid, English-taught, and the interview trip to Munich is on them.",
+    reqs: [
+      "A medical degree or a master's in a relevant field, completed by the time you start (not by the time you apply)",
+      "MBBS holders qualify for the traditional PhD. The joint residency and PhD track does not accept an MBBS or an MD: it needs a degree equivalent to the German state exam, plus German at C1",
+      "English proficiency (TOEFL or IELTS); no German for the PhD itself"
+    ],
+    steps: [
+      "Apply for the traditional PhD position. Do not tick the joint residency track with an MBBS; the school says plainly that it will not qualify.",
+      "Read the faculty list and name two or three PIs whose papers you have actually read. The two short essays are about your prior research and why these labs.",
+      "Line up two referees now. References are due on 7 November, a week after your own deadline, and a late one sinks the application.",
+      "A final-year student or intern can apply this October, because the degree only has to be finished by the September 2027 start."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },
   {
     id: "germany-drmed",
-    name: "Dr. med. / Dr. rer. nat. clinical doctorate",
-    org: "German university hospitals (Hannover MHH, LMU, TUM, Tübingen)",
+    name: "Dr. med. or a medical-faculty PhD in Germany",
+    org: "German university medical faculties (Charité, LMU, Heidelberg, Hannover MHH and others)",
     type: "phd", country: "Germany", city: "Various",
     fields: ["clinical", "biochem", "neuro", "genomics"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "Often a research scholarship of ≈ €800–1,500/month; no tuition",
+    money: "No tuition for the doctorate, but no funding is built in either. You live on a paid research post or a scholarship you find yourself",
     duration: "1–3 years",
-    window: "Rolling — depends entirely on the supervising professor",
+    window: "Rolling. It starts when a professor agrees to supervise you",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://www.mhh.de/en",
-    why: "A shorter research doctorate that runs alongside or just after clinical training. There is no admissions committee. You find a professor who agrees to supervise you, and that is the entire gate. For a doctor with a specific question and a contact, it is the least bureaucratic research doctorate in Europe.",
-    reqs: ["Medical degree", "A willing supervisor. This is the whole process", "German usually needed for clinical work; lab-based projects often English"],
+    url: "https://promotion.charite.de/en/doctoral_procedure/regulations_2017/requirements/",
+    why: "The least bureaucratic research doctorate in Europe for a doctor with a question and a contact: there is no national admissions round, and the supervisor is the real gate. Know which degree you are signing up for, though. The Dr. med. is shorter and clinical, and outside Germany it is often read as a professional title rather than a research doctorate. Freiburg's medical faculty, advising its own doctors on European Research Council eligibility in 2025, lists a PhD, a postdoc, a professorship or a Habilitation as proof of doctoral equivalence, and a Dr. med. is not on the list. Charité and several other faculties also offer a PhD to medicine graduates, which is the one that travels.",
+    reqs: [
+      "A completed medical degree; Charité's rule for the Dr. med. is exactly that, and its PhD accepts medicine too",
+      "A statement from Germany's Central Office for Foreign Education (ZAB) that your MBBS entitles you to a doctorate, obtained before the project is registered. Your supervisor normally requests it",
+      "A supervising professor. German is usually needed for clinical projects; lab projects often run in English"
+    ],
     steps: [
       "Identify the professor first, the institution second. The relationship is the application.",
       "Send a two-paragraph email: what you have done, what you want to study, what you can contribute. Attach a one-page CV.",
-      "Ask directly whether the project is Dr. med. (clinical, shorter) or Dr. rer. nat. (science, longer, more portable). The second travels better internationally.",
-      "Learn German to B1 regardless. It is what turns a research stay into a career."
+      "Ask directly whether the project leads to a Dr. med. or a PhD. If you want a research career outside Germany, choose the PhD.",
+      "Ask how you will be paid before you accept. A Dr. med. is often done unpaid alongside clinical work, which is not an option on a visa."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
@@ -621,25 +651,35 @@ window.DB.study = [
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
   {
-    id: "nordic-free",
-    name: "Tuition-free masters — Norway, Finland, Denmark",
-    org: "Oslo, Bergen, Helsinki, Copenhagen, Aarhus",
-    type: "masters", country: "Nordics", city: "Various",
-    fields: ["pubhealth", "global", "neuro", "env"],
-    stages: ["grad", "pg"], funding: "free",
-    money: "Norway: no tuition at public universities for many programmes · others ≈ €10,000–16,000",
-    duration: "2 years",
-    window: "Deadlines cluster Dec–Feb for an August start",
-    deadlineMonths: [11, 12, 1, 2, 3],
-    url: "https://www.studyinnorway.no/",
-    why: "Norway's public universities have historically charged no tuition at all, including to international students. You pay only living costs. The trade is a high cost of living and long dark winters, but the degree itself can be free.",
-    reqs: ["Recognised bachelor's or MBBS", "IELTS 6.5", "Proof of ≈ NOK 150,000 in a Norwegian account for the study permit"],
-    steps: [
-      "Verify current tuition policy for your exact programme before planning around it — Norway has been revising fees for non-EU students.",
-      "The financial-proof requirement is the real barrier, not the tuition. Arrange it months ahead.",
-      "Winter daylight in Oslo is under six hours in December. Be honest with yourself about that before committing two years."
+    /* Replaced September 2026. This slot used to be "Tuition-free masters in
+       Norway, Finland, Denmark", which has been false for Indian applicants
+       since Denmark (2006), Finland (2017) and Norway (autumn 2023) began
+       charging non-EU students. The free Nordic route is the doctorate, which
+       is a salaried job; the old claim now sits in skipList. */
+    id: "nordic-phd",
+    name: "Nordic PhD positions: a salaried job, not a scholarship",
+    org: "Universities of Oslo, Bergen, Copenhagen, Aarhus, Helsinki · Karolinska Institutet",
+    type: "phd", country: "Nordics", city: "Various",
+    fields: ["pubhealth", "global", "neuro", "genomics", "biochem", "psych"],
+    stages: ["grad", "pg"], funding: "paid",
+    money: "An employment contract with pension, and no tuition. Oslo pays doctoral research fellows from NOK 550,800 a year (position code 1017); Sweden, Denmark and Finland also employ PhD candidates on salary",
+    duration: "3–4 years",
+    window: "Rolling: every position is advertised on its own, usually with three to six weeks to apply",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://www.uio.no/english/research/phd/before-applying/",
+    why: "The masters degrees in these countries now charge Indian students, but the doctorates never stopped paying. A Nordic PhD candidate is usually an employee with a salary, a pension and parental leave, hired into a funded project rather than admitted to a course. That makes it one of the few routes where an MBBS graduate can go abroad, earn and train at the same time, and it is under-used because people search for 'scholarships' and these are advertised as jobs.",
+    reqs: [
+      "A master's-level degree or an equivalent the faculty accepts. Oslo asks for a relevant five-year master's or equivalent; Karolinska asks for 240 credits with 60 at advanced level. An MBBS is assessed case by case, so ask before you write a proposal",
+      "Fluent English; no Nordic language needed for the research",
+      "You apply to a specific advertised post, so your fit with that project matters more than your marks"
     ],
-    indiaSpecific: false, competitiveness: "medium", workExp: 0
+    steps: [
+      "Search the job boards, not scholarship lists: Jobbnorge for Norway, Varbi for Karolinska, and each Danish and Finnish university's vacancies page.",
+      "Before applying, email the named contact and ask in one line whether an Indian MBBS meets the degree requirement. The answer decides whether the rest is worth your time.",
+      "Research experience and a first-author paper count for far more than exam ranks here. A finished ICMR-STS project is exactly the right evidence.",
+      "Winter daylight in Oslo and Helsinki is under six hours in December. Be honest with yourself about that before committing four years."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 0
   },
 
   /* ───────────────────────── CANADA & ASIA ───────────────────────── */

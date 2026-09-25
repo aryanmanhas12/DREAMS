@@ -46,7 +46,7 @@ window.DB.countries = {
     visa: "Student visa requires a blocked account of roughly €11,900. After graduating you get an 18-month job-seeker residence permit, and the path to permanent residency is one of the clearest in Europe.",
     work: "120 full or 240 half days per year. PhD positions are usually salaried employment contracts with full social security.",
     allergy: "Birch pollen in spring is severe. Air quality is good. Housing is well insulated and mould is less of an issue than in the UK.",
-    honest: "The best value in the developed world: no tuition, real salaries for doctoral researchers, strong institutions. The cost is bureaucracy that will test your patience and a language you need for a life, though not for a degree. Learn German or accept a smaller world."
+    honest: "The best value in the developed world: no tuition at most public universities, real salaries for doctoral researchers, strong institutions. Check the exceptions before you budget: Baden-Württemberg, which includes Heidelberg, charges non-EU students €1,500 a semester, TUM charges non-EU fees, and several English-taught medical masters, Charité's among them, charge thousands. The cost is bureaucracy that will test your patience and a language you need for a life, though not for a degree. Learn German or accept a smaller world."
   },
   Australia: {
     name: "Australia",
@@ -102,7 +102,7 @@ window.DB.countries = {
     visa: "Residence permit for studies. 12 months to seek work after graduating.",
     work: "No formal hourly limit for students, but the labour market expects Swedish for most roles.",
     allergy: "Birch pollen in April–May is among the most severe in Europe. Very clean air otherwise.",
-    honest: "Karolinska is world-class and the Swedish Institute scholarship is fully funded. Be honest with yourself about the darkness: six hours of grey light for three months affects most people, and it affects people prone to low mood more. Vitamin D and a daylight lamp are standard equipment, not a joke."
+    honest: "Karolinska is world-class, but know that the Swedish Institute scholarship every list mentions excludes India; the realistic funding is a Karolinska or Lund tuition scholarship, and those do not pay living costs. Be honest with yourself about the darkness: six hours of grey light for three months affects most people, and it affects people prone to low mood more. Vitamin D and a daylight lamp are standard equipment, not a joke."
   },
   Switzerland: {
     name: "Switzerland",

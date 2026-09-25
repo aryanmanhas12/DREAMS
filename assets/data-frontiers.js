@@ -258,22 +258,23 @@ window.DB.residency = [
     type: "residency", country: "Germany", city: "Various",
     fields: ["clinical", "psych", "neuro"],
     stages: ["grad"], funding: "paid",
-    money: "Assistenzarzt salary ≈ €4,800–5,800/month gross from day one",
+    money: "Resident (Assistenzarzt) pay at municipal hospitals starts at €5,722 a month gross from 1 June 2026 (TV-Ärzte/VKA, grade I, step 1)",
     duration: "German B2 → C1 medical → Fachsprachprüfung → Kenntnisprüfung → 5–6 yrs Facharzt",
-    window: "Rolling — no annual cycle, apply when ready",
+    window: "Rolling, with no annual cycle. A new federal law changes the recognition route from 1 November 2026",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://www.bundesgesundheitsministerium.de/",
-    why: "No entrance exam lottery, no match, no application season. You learn the language, pass a professional exam, and get a salaried training post. Germany has a genuine physician shortage and specialty training pays from the first day. Psychiatry and neurology posts are widely available.",
+    url: "https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/berufsanerkennung-heilberufe-bundestag-26-03-26",
+    why: "No entrance exam lottery, no match, no application season. You learn the language, pass a licensing exam, and get a salaried training post. The rules just got simpler for Indian doctors: from 1 November 2026 a federal law makes the knowledge exam (Kenntnisprüfung) the standard route for degrees from outside the EU, so you no longer wait months for a state office to compare your MBBS syllabus with the German one, which was the slowest and least predictable step.",
     reqs: [
       "MBBS + internship",
       "German to B2 general and C1 medical. This is the real barrier and it takes 12–18 months",
-      "Fachsprachprüfung (medical language exam) and usually Kenntnisprüfung (knowledge exam)",
-      "Recognition of your degree by the state medical board"
+      "Fachsprachprüfung (medical language exam), then the Kenntnisprüfung. Under the new law it is a licensing exam held to the same standard for everyone, rather than a test aimed at gaps found in your documents",
+      "A residence permit for recognition measures (§16d of the Residence Act) lets you live in Germany while you prepare: generally A2 German to get it, up to 24 months, extendable to three years in total"
     ],
     steps: [
       "Start German now if this interests you at all. Everything else in this pathway is downstream of the language.",
       "Goethe-Institut A1 to B2 in India costs a fraction of what agencies charge for the same thing.",
-      "Choose the federal state carefully — recognition procedures and Kenntnisprüfung requirements vary considerably between them.",
+      "Plan on sitting the Kenntnisprüfung rather than on a document check. The document-based comparison survives only as an option from 1 November 2026, and states may now test your German before looking at your degree at all.",
+      "Choose the federal state carefully. Waiting times for exam dates and how the Fachsprachprüfung is run still differ between states.",
       "Avoid paid recruitment agencies until you have B2. Before that they cannot help you and will charge you anyway."
     ],
     indiaSpecific: false, competitiveness: "accessible", workExp: 1

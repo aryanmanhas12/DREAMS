@@ -119,27 +119,6 @@ window.DB.study.push(
     zeroCost: false, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
   {
-    id: "molmed-europe",
-    name: "MSc Molecular Medicine / Molecular Biosciences",
-    org: "Göttingen, Uppsala, Amsterdam UMC, Charité, Heidelberg",
-    type: "masters", country: "Europe", city: "Various",
-    fields: ["biochem", "genomics", "neuro", "onco", "infect"],
-    stages: ["grad", "pg"], funding: "free",
-    money: "German and Nordic public universities: no tuition, only a semester fee",
-    duration: "2 years",
-    window: "Applications Dec–May depending on country",
-    deadlineMonths: [12, 1, 2, 3, 4, 5],
-    url: "https://www.mastersportal.com/search/master/molecular-medicine/",
-    why: "Molecular medicine is biochemistry taught for people who intend to apply it clinically, and continental Europe teaches it in English at close to zero tuition. Göttingen's programme in particular is a well-known feeder into German doctoral schools, which is the natural next step.",
-    reqs: ["MBBS or bioscience bachelor's", "English proficiency; no German required for these tracks", "Blocked account or proof of funds for the visa"],
-    steps: [
-      "Verify the teaching language of the specific track. This is where most Indian applicants lose a whole cycle.",
-      "Get your MBBS assessed on ANABIN and uni-assist early for Germany; recognition is procedural and slow.",
-      "Two years with no tuition means your only cost is living, which in Leipzig or Göttingen is far lower than in any UK city."
-    ],
-    zeroCost: false, indiaSpecific: false, competitiveness: "medium", workExp: 0
-  },
-  {
     id: "genomic-medicine-msc",
     name: "MSc Genomic Medicine",
     org: "Cambridge, Imperial, Queen Mary, Exeter, Manchester",
@@ -448,7 +427,6 @@ Object.assign(window.DB.impact, {
   "health-data-science": { t: 2, odds: "~30 %", effort: "25 hrs", note: "The highest-employability degree here, and the one that keeps every door open. US biostatistics departments fund masters students more often than they advertise." },
   "cajal":             { t: 2, odds: "Moderate; IBRO stipends under-applied", effort: "2–3 weeks", note: "Two weeks of doing rather than watching. Signals hands-on competence in a way no online certificate can." },
   "cshl-courses":      { t: 2, odds: "Competitive, small cohorts", effort: "1–3 weeks", note: "These courses trained a substantial share of the people currently leading genomics and computational neuroscience." },
-  "molmed-europe":     { t: 2, odds: "~35 %", effort: "25 hrs", note: "Two years, no tuition, taught in English. Your only real cost is living in a cheap German city." },
   "dual-degrees":      { t: 2, odds: "Varies", effort: "Varies", note: "Ask whether it can be added later — at most institutions it cannot, and that decision is made once, at entry." },
   "ohbm-ashg":         { t: 2, odds: "High abstract acceptance", effort: "20 hrs", note: "A realistic first international presentation. Virtual attendance is often dramatically cheaper or free." },
   "czech-charles":     { t: 3, odds: "Accessible", effort: "15 hrs", note: "India has featured on the Václav Havel eligibility list. Learn Czech and public university tuition drops to zero entirely." },

@@ -40,23 +40,25 @@ window.DB.funding = [
     type: "scholarship", country: "UK", city: "Various",
     fields: ["pubhealth", "global", "systems", "infect", "repro"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full tuition + stipend + airfare + warm-clothing allowance + thesis grant",
-    duration: "1-year masters (PhD route also exists)",
-    window: "Opens ~Aug–Sept · Master's deadline around mid-October; Shared Scholarships vary by university",
+    money: "Full tuition, return airfare and a stipend of £1,712/month (£2,000 in London) at the CSC's current Master's rate, plus a study travel grant",
+    duration: "1-year taught masters starting Sept/Oct 2027",
+    window: "Master's: CSC Central closes 16:00 BST, Tue 20 Oct 2026, and the Ministry of Education's own nomination deadline can be earlier. Shared: opens after early November, closes mid-December",
     deadlineMonths: [9, 10, 11, 12],
-    url: "https://cscuk.fcdo.gov.uk/scholarships/",
+    url: "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
     why: "Explicitly designed for people from lower- and middle-income Commonwealth countries who cannot otherwise afford UK study, which means, unusually, that limited financial means is an advantage rather than something to hide. Health and wellbeing is one of its six named priority themes.",
     reqs: [
       "Indian citizenship, resident in India",
       "Upper second-class degree or equivalent — MBBS qualifies",
       "Must be unable to afford UK study without the award, and be prepared to say so",
-      "Shared Scholarships are applied for THROUGH the university, not the Commission"
+      "You sign an undertaking to return home when the award ends, so there is no Graduate Route stay afterwards",
+      "Shared Scholarships also need a separate admission to an approved course at the university"
     ],
     steps: [
-      "Understand which of the two schemes you want. Master's Scholarships go through a nominating body in India; Shared Scholarships go through the UK university directly.",
+      "Understand which of the two schemes you want. Master's Scholarships need a nomination from India's national nominating agency; for Shared Scholarships the UK university picks its candidates from CSC Central applications. The CSC takes no direct Master's applications at all.",
       "For the Master's route from India you must submit through TWO portals in the same cycle. The CSC's own system and the Ministry of Education's SAKSHAT portal. Completing only one disqualifies the application outright, and it is the most common way an otherwise strong Indian application is thrown out before anyone reads it.",
       "Check the Indian nominating body's internal deadline, not just the CSC one. National nominating bodies routinely close earlier than the CSC date, and the CSC deadline is the one every listicle quotes.",
-      "For Shared Scholarships, check cscuk.fcdo.gov.uk's eligible-course list first. It changes yearly and LSHTM, UCL, Liverpool and Warwick usually feature.",
+      "For Shared Scholarships, check the approved-course list first. It changes yearly; universities bid for up to ten awards each and the CSC expects about 180 in total for 2027/28, so the list is only final once bids are decided in November.",
+      "Nominators forward candidates to the CSC by December 2026 and results come by July 2027. Nomination is not selection; the CSC chooses from the nominated pool.",
       "The development-impact statement is the whole application. Write about a specific problem in a specific Indian district, not about India's health system in general.",
       "Apply to the UK course AND the scholarship in parallel. The course deadline is usually later — do not let it set your pace."
     ],
@@ -96,21 +98,21 @@ window.DB.funding = [
     type: "scholarship", country: "Germany", city: "Various",
     fields: ["global", "pubhealth", "systems", "env"],
     stages: ["grad", "pg"], funding: "full",
-    money: "€992/month + tuition + travel + health insurance + a German language course before you start",
+    money: "€992/month, plus a travel allowance and health, accident and liability insurance; a German course before the start where the programme includes one",
     duration: "12–24 months",
-    window: "Course-dependent, mostly Aug–Oct for the following year",
-    deadlineMonths: [7, 8, 9, 10],
+    window: "Each course sets its own date. For 2027 starts most close between 1 October and 15 December 2026; Heidelberg's International Health closes 15 October 2026",
+    deadlineMonths: [8, 9, 10, 11, 12],
     url: "https://www.daad.in/en/find-funding/scholarship-database/",
-    why: "Germany charges no tuition and then pays you on top. EPOS funds a fixed list of English-taught masters — including Heidelberg's International Health and several health-systems programmes — and is aimed squarely at professionals from developing countries, which puts Indian doctors right in the target group.",
+    why: "Most German public universities charge no tuition, and EPOS pays a monthly stipend on top. It funds a fixed list of mostly English-taught masters, including Heidelberg's International Health and several health-systems programmes, and is aimed squarely at professionals from developing countries, which puts Indian doctors right in the target group. A few listed courses do charge fees, Heidelberg's among them, so ask each course how it treats EPOS scholars.",
     reqs: [
       "Bachelor's or MBBS with above-average marks",
       "TWO years of relevant professional experience after the degree — non-negotiable for EPOS",
-      "Degree completed no more than 6 years ago",
+      "Degree no more than six years old at the time you apply (October 2026 for this cycle)",
       "English proficiency; German not required for the degree itself"
     ],
     steps: [
       "Go to the DAAD scholarship database and filter by 'Development-Related Postgraduate Courses'. Only courses on that list are funded.",
-      "You apply to the UNIVERSITY and to DAAD separately, with different documents and different deadlines. Missing one wastes the other.",
+      "The course reads your admission and scholarship application together and nominates candidates to DAAD. You may apply to up to three EPOS courses, and the ranking must be the same on every form.",
       "The two-year experience rule is checked strictly. Plan for this at two to three years post-MBBS.",
       "DAAD also runs research grants for PhD candidates and short-term stays — those have no experience requirement and are worth checking separately."
     ],
@@ -374,16 +376,16 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "€1,181/month + return airfare + health cover + cultural allowance",
     duration: "12–36 months",
-    window: "Institutions nominate; internal deadlines run Oct–Jan",
+    window: "Institutions nominate. The 2026 session opened 1 Oct 2025 and closed at Campus France on 8 Jan 2026; university internal deadlines fall earlier",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program",
     why: "You cannot apply directly. The French university nominates you. That sounds like a barrier and is actually an advantage: it means the number of competitors is capped by how many each institution puts forward, and simply asking the admissions office whether they will nominate you puts you ahead of everyone who did not ask.",
-    reqs: ["Non-French citizen, under 25 for masters level", "Applying to a French institution", "Must be nominated by the institution — apply to them first"],
+    reqs: ["Non-French citizen, up to 29 at masters level and up to 35 at PhD level (Campus France, 2026 session)", "Applying to a French institution", "Must be nominated by the institution; apply to them first"],
     steps: [
       "Apply to the French masters programme by October at the latest, and email the international office asking to be considered for Eiffel nomination. Say the word 'Eiffel'.",
       "The institution's internal deadline is what matters to you; the ministry's deadline is theirs.",
       "France has excellent, cheap, English-taught public health and biology masters — Sorbonne, Paris-Saclay, Institut Pasteur's programmes.",
-      "Tuition at French public universities is a few hundred euros a year even before any scholarship."
+      "Budget for tuition separately, because Eiffel pays an allowance and travel, not fees. A non-EU master's student at a French public university pays the differentiated rate, €3,941 a year in 2025/26, against €254 for EU students. From the 2026/27 intake France is directing universities to charge it, and fee exemptions are capped at 30% of non-EU students, falling to 25% then 20%. Ask the university directly whether you would be exempt."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -425,8 +427,8 @@ window.DB.funding = [
     window: "Opens ~20 Aug · country deadlines run Sept–Dec, and India's recent cycle closed 10 November",
     deadlineMonths: [8, 9, 10, 11, 12],
     url: "https://www.sbfi.admin.ch/en/swiss-government-excellence-scholarships",
-    why: "Switzerland pays doctoral researchers more than anywhere else on earth, and this scheme has a dedicated India quota that is chronically under-subscribed compared to its value. The research-fellowship track accepts medical graduates directly.",
-    reqs: ["Indian citizen with a masters or MBBS/MD", "A Swiss supervisor who has agreed in writing to host you", "Under 35 for most tracks"],
+    why: "Switzerland pays doctoral researchers more than almost anywhere, and this is one of the few government schemes whose own target-group wording names you: SERI describes the research fellowship as for early-career researchers \"including young medical doctors\". Nothing proceeds without a Swiss supervisor, which is the real gate.",
+    reqs: ["Master's degree or equivalent completed by 31 July 2027 (ETH Zurich: 30 June 2027); SERI names young medical doctors in the target group", "Born after 31 December 1991", "A Swiss supervisor who has agreed in writing to host you; applications without one are not considered"],
     steps: [
       "Secure the Swiss supervisor's letter of support first — nothing proceeds without it. Start emailing in June.",
       "Applications go through the Swiss Embassy in New Delhi, and the deadline is country-specific rather than global — India's recent cycle opened in early August and closed on 10 November. Do not trust a date quoted for another country, and do not trust a September date you saw repeated on aggregator sites; check the India page each year.",
@@ -435,25 +437,40 @@ window.DB.funding = [
     indiaSpecific: true, competitiveness: "medium", workExp: 0
   },
   {
+    /* CORRECTED September 2026, and the error was the dangerous kind. This
+       entry used to send Indian students to the standard Australia Awards
+       round (Feb to April, through OASIS) with "Indian citizen, resident in
+       India" as its eligibility line, graded tier 2. That round is NOT open to
+       Indians. The South Asia & Mongolia administrator's own scholarships page
+       says it is "open to suitably qualified nationals of Bangladesh, Bhutan,
+       Maldives, Nepal, Pakistan, Sri Lanka and Mongolia", and India is not in
+       that list, although it sits in the site's country selector, which is how
+       aggregators keep getting it wrong. What India does have is a SEPARATE,
+       India-specific Masters programme, and at the time of checking its page
+       said applications were closed with no reopening date. So this entry now
+       describes that programme, carries no deadline months, and says so. */
     id: "australia-awards",
-    name: "Australia Awards Scholarships",
-    org: "Australian Government, DFAT",
+    name: "Australia Awards Scholarship for India (Masters)",
+    org: "Australian Government, DFAT · Australia Awards South Asia & Mongolia",
     type: "scholarship", country: "Australia", city: "Various",
-    fields: ["pubhealth", "global", "systems", "env"],
+    fields: ["pubhealth", "global", "systems"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full tuition + return air travel + establishment allowance + living stipend + health cover",
-    duration: "Full masters or PhD",
-    window: "Opens Feb · closes ~end April",
-    deadlineMonths: [2, 3, 4],
-    url: "https://www.dfat.gov.au/people-to-people/australia-awards",
-    why: "Fully funded, and Australia's post-study work rights are the most generous of the major destinations. Health and public policy are priority sectors for the India programme.",
-    reqs: ["Indian citizen, resident in India", "Minimum 2 years relevant work experience for most cycles", "Must return to India for 2 years after the award"],
-    steps: [
-      "Check whether India is in the current eligible-country list for the round; DFAT rotates priority countries.",
-      "Applications go through OASIS, the DFAT online system.",
-      "Also look at each university's own international scholarships — Melbourne, Monash and UQ fund heavily and independently."
+    money: "Full tuition, return airfares, a contribution to living expenses and medical insurance",
+    duration: "Masters (coursework)",
+    window: "Closed at last check, with no reopening date announced; the India page says future rounds will be posted there",
+    url: "https://australiaawardsindia.org/opportunities/",
+    why: "Watch this one rather than plan around it. Australia runs a Masters scholarship specifically for India, created under its India Economic Strategy to 2035 and framed around future business and community leaders. It is NOT the standard Australia Awards round that aggregators list for Indian applicants: that round covers Bangladesh, Bhutan, Maldives, Nepal, Pakistan, Sri Lanka and Mongolia, and India is excluded from it.",
+    reqs: [
+      "Indian national, for the India-specific programme only",
+      "The standard Feb–April Australia Awards round does NOT accept Indian applicants, whatever an aggregator says",
+      "Exact criteria are published with each India round; none is open at present"
     ],
-    indiaSpecific: false, competitiveness: "high", workExp: 2
+    steps: [
+      "Bookmark the India opportunities page and check it when you plan the year; that is where a new round will appear.",
+      "Do not apply through the general OASIS round. An Indian application there is ineligible on nationality before anyone reads it.",
+      "Meanwhile the fundable Australian routes are university-level: the Research Training Program for a PhD, and each university's own international awards."
+    ],
+    indiaSpecific: true, competitiveness: "high", workExp: 2
   },
   {
     id: "mext",
@@ -543,25 +560,38 @@ window.DB.funding = [
     indiaSpecific: false, competitiveness: "accessible", workExp: 0
   },
   {
+    /* CORRECTED September 2026. This entry led with the Swedish Institute
+       Scholarship for Global Professionals and walked Indian students through
+       its two-deadline application. SI's own page limits it to citizens of "one
+       of the 34 eligible countries", and India is not among them: Bangladesh is
+       the only South Asian country on the list. An Indian application is out on
+       nationality before anyone reads it. The routes below are the ones SI's
+       exclusion does NOT touch: university scholarships that ask only that you
+       be a non-EU fee payer, verified on each university's page. */
     id: "nordic-govt",
-    name: "Nordic and Baltic government scholarships",
-    org: "Sweden (SI), Norway, Finland, Estonia, Lithuania, Latvia",
-    type: "scholarship", country: "Nordics", city: "Various",
+    name: "Sweden: Karolinska and Lund tuition scholarships (not the Swedish Institute)",
+    org: "Karolinska Institutet · Lund University",
+    type: "scholarship", country: "Nordics", city: "Stockholm · Lund",
     fields: ["pubhealth", "global", "neuro", "env", "compbio"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "Swedish Institute: full tuition + SEK 12,000/month + travel + insurance",
+    stages: ["grad", "pg"], funding: "partial",
+    money: "Tuition only, up to 100%. Living costs, housing and travel are yours, and the Swedish Migration Agency requires proof you can cover them",
     duration: "1–2 year masters",
-    window: "SI opens Feb · closes late Feb — a very narrow window",
-    deadlineMonths: [1, 2, 3],
-    url: "https://si.se/en/apply/scholarships/",
-    why: "The Swedish Institute Scholarship for Global Professionals is fully funded and explicitly targets people who will work on societal change in their home country. The Baltic states — Lithuania, Estonia, Latvia — run cheaper, less-known state scholarships with almost no Indian competition.",
-    reqs: ["SI requires 3,000 hours of work or volunteering experience", "Admission to an eligible Swedish masters first", "Baltic schemes vary — check each national agency"],
-    steps: [
-      "For Sweden, you must first apply through universityadmissions.se by 15 January, THEN apply to SI in the February window. Two steps, two deadlines.",
-      "The SI application is heavily weighted toward leadership and demonstrated commitment to change. A medic running community health drives fits perfectly.",
-      "For the Baltics, check studyinlithuania.lt, studyinestonia.ee and studyinlatvia.lv directly. State scholarships there are small in number but almost unknown to Indian applicants."
+    window: "Apply to the programme through universityadmissions.se (mid-Oct to 15 Jan), then KI's scholarship window runs 8–24 Feb 2027; Lund's opens in early February",
+    deadlineMonths: [10, 11, 12, 1, 2],
+    url: "https://education.ki.se/bachelors-masters-studies/scholarships/the-ki-global-masters-scholarships-for-fee-paying-students",
+    why: "The Swedish scholarship every list recommends to Indians, the Swedish Institute's, is not open to you: it covers 34 named countries and India is not one. What IS open is narrower and nationality-blind. Karolinska's Global Master's Scholarship and Lund's Global Scholarship both ask only that you be a non-EU student who owes tuition, and both can cover all of it. Neither pays a stipend, so this is a route for someone who can fund their own living costs.",
+    reqs: [
+      "Citizen of a country outside the EU/EEA and Switzerland, liable for tuition fees",
+      "A complete application to the degree programme in the regular round; only admitted students are considered at KI",
+      "NOT eligible: the Swedish Institute Scholarship for Global Professionals, which excludes India"
     ],
-    indiaSpecific: false, competitiveness: "medium", workExp: 2
+    steps: [
+      "Apply to the master's through universityadmissions.se between mid-October and 15 January. Both scholarships are decided on the programme application, so that is where the CV and statement have to be strong.",
+      "For Karolinska, apply for the scholarship directly to KI between 8 and 24 February 2027; results come out on 26 April. KI runs the strongest public health, epidemiology and global health master's in Scandinavia.",
+      "For Lund, rank the Lund programme as your first choice: the university says it gives that preference. Awards range from 25% to 100% of tuition.",
+      "Work out your living budget before you apply. A tuition-only award does not help if you cannot show the Migration Agency the rest."
+    ],
+    indiaSpecific: false, competitiveness: "high", workExp: 0
   },
   {
     id: "holland-orange",

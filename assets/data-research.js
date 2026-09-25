@@ -312,18 +312,23 @@ window.DB.research = [
     org: "Council for the Lindau Nobel Laureate Meetings, Germany",
     type: "conference", country: "Germany", city: "Lindau",
     fields: ["neuro", "genomics", "biochem", "onco", "pubhealth"],
-    stages: ["clin", "intern", "grad", "pg"], funding: "full",
-    money: "Fully funded including international travel · free to apply",
-    duration: "1 week, late June/July",
-    window: "Nominations through partner institutions, roughly Aug–Oct",
-    deadlineMonths: [8, 9, 10],
-    url: "https://www.lindau-nobel.org/",
-    why: "Six hundred young scientists from around the world spend a week with thirty to forty Nobel laureates, with everything paid. The medicine meeting runs every three years. It is the highest-prestige thing on this list that costs a student nothing.",
-    reqs: ["Undergraduate, masters, PhD or postdoc in the relevant field", "Nomination via an academic partner — in India, INSA, DST and DBT nominate", "Free to apply"],
+    stages: ["grad", "pg"], funding: "full",
+    money: "DST pays international travel, local transport, twin-share lodging and meals · free to apply",
+    duration: "1 week: 27 June to 2 July 2027",
+    window: "The 2027 meeting is Physiology/Medicine. Lindau's own form closes in November 2026; DST's Indian call has closed on 31 Oct (2022) and 30 Sept (2024) in past years and was not yet posted at last check",
+    deadlineMonths: [9, 10, 11],
+    url: "https://www.lindau-nobel.org/young-scientists/",
+    why: "About six hundred young scientists spend a week with Nobel laureates, and 2027 is a medicine year, the first since 2023. From India the only door is the Department of Science & Technology, which pays the whole trip. That door is narrower than it looks and wider for doctors than people assume: in 2023 DST chose 16 of 223 applicants, and several were MD residents from AIIMS and government medical colleges.",
+    reqs: [
+      "Indian citizen studying or working at an institution in India. DST's award excludes Indians studying or working abroad, and Lindau's open application is closed to anyone in a country with a partner, which India is",
+      "DST nominates master's students (MD and MS residents were selected in 2023), PhD students at least two years in, and postdocs under 35, ranked in the top three of their class. MBBS students are not among its categories",
+      "Two detailed reference letters in English, and no previous Lindau meeting"
+    ],
     steps: [
-      "Find the Indian nominating partner for the current cycle — usually the Indian National Science Academy or DST.",
-      "Nominations open roughly a year ahead of the meeting.",
-      "The medicine and physiology meeting is triennial. Check which discipline the next meeting covers before applying."
+      "Watch dst.gov.in's calls page from September. The application goes to DST first, forwarded by your head of institution, and only DST's shortlist is sent on to Lindau.",
+      "Get the rank certificate from your head of department now. DST asks for it and it takes longer to obtain than anything else in the file.",
+      "In past calls DST required a posted hard copy by the deadline as well as an emailed PDF. Read the new call for the exact format; a late or incomplete file is rejected outright.",
+      "If you are an MBBS student, DST's categories do not include you. Keep a research record now so that a later medicine meeting finds you ready as a resident."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
