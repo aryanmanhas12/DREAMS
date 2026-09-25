@@ -470,7 +470,34 @@ window.DB.funding = [
       "Do not apply through the general OASIS round. An Indian application there is ineligible on nationality before anyone reads it.",
       "Meanwhile the fundable Australian routes are university-level: the Research Training Program for a PhD, and each university's own international awards."
     ],
+    noOpenCall: true,
     indiaSpecific: true, competitiveness: "high", workExp: 2
+  },
+  {
+    id: "maitri-phd",
+    name: "Maitri Scholarships: PhD in Australia for Indian scholars",
+    org: "Australian Government, Centre for Australia-India Relations (DFAT)",
+    type: "scholarship", country: "Australia", city: "Nominating university",
+    fields: ["pubhealth", "genomics", "biochem", "neuro", "compbio"],
+    stages: ["grad", "pg"], funding: "full",
+    money: "A government grant to your Australian university to fund your PhD; the amounts are set in each round's grant guidelines",
+    duration: "Up to 4 years",
+    window: "Universities apply, not students. The 2025-26 round opened in late 2025 and has closed; a 2026-27 round had not been published at last check",
+    deadlineMonths: [9, 10, 11, 12, 1],
+    url: "https://www.grants.gov.au/Fo/Show?FoUuid=a48c97d8-cdcf-41ce-a65c-55a3f90561d7",
+    why: "The one Australian government PhD award built specifically for Indian scholars. The 2025-26 round named health among its priority fields, alongside agribusiness, clean energy and technology, and the round before that listed life sciences and medical technology. You cannot apply directly: an Australian university applies and nominates you, which means the route runs through a supervisor who wants you. Many listings describe Maitri only as a manufacturing, critical-minerals and clean-energy award, which is how a health applicant misses it.",
+    reqs: [
+      "An Indian citizen, not an Australian citizen or permanent resident",
+      "An eligible PhD application at the nominating Australian university, in a field on that round's priority list",
+      "Nomination by the university; the Centre for Australia-India Relations makes the final selection"
+    ],
+    steps: [
+      "Find the supervisor first, exactly as for any Australian PhD, and ask outright whether the university will nominate you for Maitri in the next round.",
+      "Frame the project in the round's own words. Health was a named field in 2025-26; say how your project serves it.",
+      "Apply for the university's own research scholarship in parallel. Maitri is a second chance at funding, not a replacement for the normal round.",
+      "Watch GrantConnect for the next Maitri round. Past rounds were forecast for release between July and December."
+    ],
+    indiaSpecific: true, competitiveness: "high", workExp: 0
   },
   {
     id: "mext",

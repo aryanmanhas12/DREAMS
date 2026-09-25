@@ -89,16 +89,16 @@ window.DB.research.push(
     type: "fellowship", country: "Global", city: "Placed with a partner research institution or product developer",
     fields: ["infect", "global", "pubhealth", "clinical"],
     stages: ["pg"], funding: "full",
-    money: "Funded placement — TDR covers the fellowship; your home institution holds your post open",
-    duration: "12 months",
-    window: "Calls run roughly annually; watch the capacity-strengthening page",
-    deadlineMonths: [6, 7, 8, 9],
+    money: "Economy return airfare, a monthly stipend set by placement location, health insurance and support to present at a conference, plus reintegration funds",
+    duration: "6–12 months at a training partner, then up to 12 months of reintegration at home",
+    window: "Calls have run once or twice a year since 2023; the 2025 call closed 30 March 2025. Watch TDR's calls page for the next",
+    deadlineMonths: [2, 3],
     url: "https://tdr.who.int/home/our-work/strengthening-research-capacity",
     why: "A WHO programme built specifically so that clinical trials in diseases of poverty are led from the countries where those diseases actually are, rather than run remotely from Europe. It trains you to run a trial, not to assist on one, and it is explicitly reserved for people working in low- and middle-income countries, which for once puts an Indian applicant inside the target group rather than competing against it.",
     reqs: [
-      "Employed in a clinical research role for at least 24 months at a registered institution in an LMIC",
-      "Demonstrable experience in trial-related work in diseases of poverty",
-      "Your institution must agree to release you and take you back"
+      "A national and resident of an LMIC, holding an MD or PhD (or a pharma MSc), with your first degree obtained within the last 15 years",
+      "Employed for the last 24 months at an LMIC institution doing clinical research on infectious diseases, emerging infections, pandemic preparedness, AMR or NTDs",
+      "Your institution must agree to release you, and you commit to returning to it for at least two years afterwards"
     ],
     steps: [
       "The institutional commitment is the hard part, not the form. Secure your head of department's written agreement before you draft anything.",
@@ -112,27 +112,28 @@ window.DB.research.push(
     id: "tdr-implementation-research",
     name: "TDR Implementation Research Leadership Fellowship",
     org: "TDR (WHO), with UNICEF, UNDP and the World Bank",
-    type: "fellowship", country: "Global", city: "Hosted at a partner university in the global South",
+    type: "fellowship", country: "Global", city: "Universitas Gadjah Mada, Yogyakarta, Indonesia (2026/27 round)",
     fields: ["global", "pubhealth", "systems", "infect"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "Fully funded, including the taught component · free to apply",
-    duration: "About 12 months, blended",
-    window: "Annual call, recent rounds closing end of January",
-    deadlineMonths: [11, 12, 1],
-    url: "https://tdr.who.int/home/our-work/strengthening-research-capacity",
-    why: "Implementation research is the discipline that asks why a treatment that works in a trial does not work in a district, which is the single most common frustration of anyone who has done a rural posting. This fellowship teaches it formally, hosts it in the global South rather than flying you to Geneva, and costs nothing. For a doctor whose anger is about the gap between guideline and reality, it is the most direct training that exists.",
+    stages: ["pg"], funding: "full",
+    money: "Return airfare, a monthly stipend, medical insurance, an Indonesian language course and support for your project's fieldwork at home · free to apply",
+    duration: "6 months, in person",
+    window: "The 2026/27 call opened 17 Dec 2025 and closed 30 Jan 2026. The next round has not been posted; a similar timing would mean drafting over December 2026",
+    deadlineMonths: [12, 1],
+    url: "https://tdr.who.int/docs/librariesprovider10/calls-for-applications/ir-leadership-fellowship-call-for-applications-december-2026.pdf",
+    why: "Implementation research asks why a treatment that works in a trial does not work in a district, which is the most common frustration of anyone who has done a rural posting. This fellowship trains you to lead it, and it is restricted to low- and middle-income countries in three WHO regions, South-East Asia among them, so an Indian applicant is inside a small pool. It is a mid-career step, not a first one: read the degree rules before planning around it.",
     reqs: [
-      "Working in a health-related role in a low- or middle-income country",
-      "A concrete implementation problem you can actually study where you work",
-      "Institutional support to take on the taught component alongside your post"
+      "A national and resident of a low- or middle-income country in WHO's South-East Asia, Western Pacific or Eastern Mediterranean region, under 40 when you apply",
+      "Researcher stream: an MPH or MSc in implementation research, plus either a PhD in public health or an MD with at least three years of research experience and publications, and at least one peer-reviewed article on an IR theme",
+      "Practitioner stream: an MPH or equivalent and three years of programme management at a health ministry, NGO or similar body",
+      "Employed at a university, research institute, health ministry or public health institution, with a letter confirming study leave"
     ],
     steps: [
-      "Bring a real problem. The strongest applications name one specific failure in one specific place — a stockout, a follow-up rate, a referral that never happens — rather than a topic.",
-      "Get your supervisor's agreement in writing early; the blended format needs protected time and departments agree to it far more slowly than you expect.",
-      "The host university changes between rounds, so check where the current cohort sits before assuming a location.",
-      "Recent rounds have closed at the end of January, which means drafting over December. Confirm the current date on the TDR page. This call has moved before."
+      "Check the degree rules first. With an MBBS alone you do not qualify for either stream; this is the fellowship to aim for after an MPH.",
+      "Bring a real problem. The strongest applications name one specific failure in one specific place, such as a stockout, a follow-up rate or a referral that never happens, rather than a topic.",
+      "Get your employer's study-leave letter early. Six months away needs protected time, and departments agree to it far more slowly than you expect.",
+      "The host university changes between rounds, so confirm where the next cohort sits and whether the dates hold when the new call appears."
     ],
-    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 1
+    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 3
   },
   {
     id: "icgeb-falaschi",

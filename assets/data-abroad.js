@@ -293,10 +293,10 @@ window.DB.research.push(
     id: "unicef-intern",
     name: "UNICEF Internship Programme",
     org: "United Nations Children's Fund",
-    type: "fellowship", country: "Global", city: "Country offices, HQ, or remote",
+    type: "fellowship", country: "Global", city: "Country offices and headquarters",
     fields: ["pubhealth", "global", "nutrition", "systems", "repro"],
     stages: ["clin", "intern", "grad", "pg"], funding: "stipend",
-    money: "Paid: a monthly stipend up to about US$1,700 depending on duty station · travel and visa support where funding allows · no application fee",
+    money: "Paid: a monthly stipend, set by duty station · a one-time lump sum towards travel and visa costs when funding allows · no application fee",
     duration: "6 to 26 weeks",
     window: "No single deadline — posts appear continuously on the careers portal",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -312,7 +312,7 @@ window.DB.research.push(
       "Treat the careers portal as a feed rather than a deadline. Posts appear all year, so check it fortnightly instead of waiting for a cycle that does not exist.",
       "Filter for health, nutrition and WASH, and read the country-office posts as seriously as the headquarters ones. A field office gives you more responsibility and less competition.",
       "The two-year post-graduation window is the part people miss. If you are in internship year, this is open to you now and closes quietly two years after you qualify.",
-      "Remote posts exist. If you cannot leave India this year, that removes the usual objection entirely."
+      "Internships can be full-time or part-time. Check each post's terms, because the part-time option is what makes one fit around clinical postings."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -416,16 +416,16 @@ window.DB.research.push(
     type: "conference", country: "Global", city: "Summit city changes each year",
     fields: ["pubhealth", "global", "psych", "systems", "repro"],
     stages: ["clin", "intern", "grad", "pg"], funding: "full",
-    money: "Fully funded: summit place, flights, accommodation and meals · some streams add grants up to US$25,000",
-    duration: "A four-day summit, then lifelong ambassador membership",
-    window: "Scholarship calls open in the northern winter and close in the spring",
-    deadlineMonths: [1, 2, 3, 4],
+    money: "Partner health scholarships pay the summit place, economy flights, hotel and meals. The flagship Leading Scholarship decides travel and accommodation case by case",
+    duration: "A four-day summit (Cape Town, 3–6 Nov 2026), then ambassador membership",
+    window: "Health partner streams run in spring (Sandoz 2026: 23 March to 27 April). The Leading Scholarship for the 2026 summit is open until 31 October 2026",
+    deadlineMonths: [3, 4, 6, 7, 8, 9, 10],
     url: "https://www.oneyoungworld.com/scholarships",
-    why: "Several fully funded routes for people aged 18 to 30 doing health work, explicitly including applicants from Asia, covering flights and accommodation rather than just the ticket. It is the closest thing in this index to a shortcut into a global health network, and unlike most of what is here it rewards what you have already built rather than what you have studied.",
+    why: "Fully funded routes for young people already doing health work, covering flights and a hotel rather than just the ticket. It is the closest thing in this index to a shortcut into a global health network, and unlike most of what is here it rewards what you have already built rather than what you have studied. It is also crowded: One Young World reports 74,847 applications for 554 scholarships in 2024.",
     reqs: [
-      "Aged 18 to 30 at the time of the summit",
-      "Demonstrable impact on a health problem — a project you actually ran, not a project you plan",
-      "Separate scholarship streams have their own themes: youth health, women's and girls' health, mental health and others",
+      "Sandoz health scholarship: aged 18 to 30. Leading Scholarship: aged 18 to 35",
+      "Demonstrable impact on a health problem: a project you actually ran, not a project you plan",
+      "Each partner stream has its own theme; the 2026 health stream was access to medicines and care",
       "Applications are individual and free"
     ],
     steps: [
@@ -441,5 +441,69 @@ window.DB.research.push(
 Object.assign(window.DB.impact, {
   "un-mgcy":          { t: 2, odds: "Open — registration, not selection", effort: "Free to join; the work is turning up", note: "The UN's own youth constituency, taking INDIVIDUALS aged 30 and under, free. Almost everything else here is an application you might lose; this is a door you can walk through this week. Written submissions are what count, not attendance." },
   "who-youth-council": { t: 3, odds: "Closed to individuals entirely", effort: "Years inside an organisation that holds a seat", note: "Listed to correct a misunderstanding that wastes people's time: seats go to ORGANISATIONS, not individuals, and Civil Society Commission membership comes first. The reachable plan is to be the person inside a body that already sits there." },
-  "oyw-health":        { t: 1, odds: "Competitive, and it rewards work already done", effort: "A real project, then one application", note: "Fully funded including flights, for 18 to 30, with Asia explicitly in scope and some streams adding grants to US$25,000. The rare thing here that rewards what you have built rather than what you have studied." }
+  "oyw-health":        { t: 1, odds: "About 1 in 135 across all 2024 scholarships", effort: "A real project, then one application", note: "The health streams pay flights and a hotel. The rare thing here that rewards what you have built rather than what you have studied." }
+});
+
+/* ────────────────────────────────────────────────────────────────────
+   UN-system additions, September 2026. Both checked against the
+   organisation's own documents: UNV's Conditions of Service and its
+   2026 proforma guidelines, and IARC's own call pages.
+   ──────────────────────────────────────────────────────────────────── */
+window.DB.research.push(
+  {
+    id: "unv-international",
+    name: "International UN Volunteer assignments, including medical posts",
+    org: "United Nations Volunteers (UNV)",
+    type: "fellowship", country: "Global", city: "UN missions and agency offices worldwide",
+    fields: ["global", "pubhealth", "clinical", "infect"],
+    stages: ["intern", "grad", "pg"], funding: "stipend",
+    money: "A monthly living allowance (2026 base rate for Specialists USD 1,970, adjusted for the duty station), a settling-in grant, travel, and medical and life insurance",
+    duration: "Youth assignments 6 months to 2 years; Specialist assignments usually 6 to 24 months",
+    window: "Assignments are posted continuously on UNV's platform; each has its own closing date",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://app.unv.org/",
+    why: "The paid, on-site version of UN volunteering, and a different thing from the online programme. Medicine is one of UNV's listed professional categories, alongside humanitarian and HIV work, so doctors are recruited for missions and agency offices. It is one of the few ways a young Indian doctor can work inside a UN operation, with the allowance, travel and insurance covered, without first passing a competitive exam India is not eligible to sit.",
+    reqs: [
+      "UN Youth Volunteer: aged 18 to 29 for the whole assignment. With under two years of experience, Youth assignments are the only ones open to you",
+      "UN Volunteer (Specialist): at least 25, and typically two or more years of relevant experience. Each post sets its own requirements, and clinical posts will ask for registration and experience",
+      "You cannot serve in a country whose nationality you hold, so an international assignment is always outside India"
+    ],
+    steps: [
+      "Create a profile on UNV's platform and set alerts for medical, health and humanitarian assignments. Posts close individually, so the alert is the deadline.",
+      "Count your experience honestly. Between 25 and 29 with two years behind you, you may apply for both Youth and Specialist posts, which roughly doubles what you can see.",
+      "Read the duty station before you apply. Many medical posts are with peacekeeping and humanitarian operations, and the security conditions are part of the job.",
+      "The online volunteering programme elsewhere in this index is the step before this one: a finished UN assignment there is evidence a recruiter can check."
+    ],
+    zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 2
+  },
+  {
+    id: "iarc-summer-school",
+    name: "IARC Summer School in cancer epidemiology and prevention",
+    org: "International Agency for Research on Cancer (IARC), the WHO cancer agency",
+    type: "conference", country: "France", city: "Lyon, after an online phase",
+    fields: ["onco", "pubhealth", "global"],
+    stages: ["pg"], funding: "partial",
+    money: "Scholarships for applicants working at institutions in low- and middle-income countries; each call sets what they cover",
+    duration: "An online phase, then one week in person at IARC in Lyon",
+    window: "Runs every two years. The 2025 call opened 6 November 2024 and closed 6 January 2025; the 2027 call had not been posted at last check",
+    deadlineMonths: [11, 12, 1],
+    url: "https://learning.iarc.fr/",
+    why: "WHO's cancer research agency trains epidemiologists, statisticians, physicians and oncologists in the methods behind cancer registries, screening and prevention, and it funds people from institutions in low- and middle-income countries to come. For an Indian MD in community medicine, pathology, radiotherapy or oncology, it is a funded week at the institution that publishes the carcinogen classifications.",
+    reqs: [
+      "Aimed at working epidemiologists, statisticians, physicians, oncologists and public health specialists",
+      "Scholarships go to applicants working at institutions in low- and middle-income countries, which includes India",
+      "Two modules were offered in 2025: Introduction to Cancer Epidemiology, and Implementing Cancer Prevention and Early Detection"
+    ],
+    steps: [
+      "Check IARC's learning site from October 2026. If the pattern holds, the call opens in November and closes in early January.",
+      "Pick the module that matches your work: epidemiology if you are near a registry or a cohort, prevention and early detection if you run or evaluate screening.",
+      "Ask your head of department now for the release letter. A week in Lyon in term time is agreed far more easily in advance than at selection."
+    ],
+    zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 1
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "unv-international":  { t: 2, odds: "Competitive per post; posted all year", effort: "A strong profile, then an application per post", note: "Paid, insured UN field work with medicine a listed category. Youth posts take people with under two years of experience." },
+  "iarc-summer-school": { t: 3, odds: "Competitive; LMIC applicants funded", effort: "15 hrs when the call opens", note: "A funded week at WHO's cancer agency. Biennial, so the 2027 call is the one to watch from November 2026." }
 });

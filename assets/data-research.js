@@ -382,17 +382,21 @@ window.DB.research = [
     org: "World Health Organization",
     type: "research", country: "Global", city: "Geneva, New Delhi (SEARO) and country offices",
     fields: ["global", "pubhealth", "systems", "psych", "infect"],
-    stages: ["grad", "pg"], funding: "partial",
-    money: "WHO now provides a stipend to interns in most duty stations",
-    duration: "6–24 weeks",
-    window: "Rolling — the roster is open continuously",
+    stages: ["clin", "intern", "grad", "pg"], funding: "partial",
+    money: "Since January 2020 WHO pays a living allowance to selected interns who need financial support; each vacancy states the amount. Medical and accident insurance included; travel is yours",
+    duration: "6–24 weeks, full time",
+    window: "Posted as individual internship vacancies on WHO's careers site; there is no general roster to join",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.who.int/careers/internship-programme",
-    why: "The SEARO regional office is in New Delhi, which means a WHO placement without leaving India or paying for international travel. WHO began paying interns a stipend after decades of not doing so, which finally makes it viable for people without family money.",
-    reqs: ["Enrolled in or recently completed a relevant degree", "At least a bachelor's-level qualification — MBBS qualifies", "Applications through the WHO careers portal"],
+    why: "The South-East Asia regional office is in New Delhi, which means a WHO placement is possible without paying for international travel. WHO paid interns nothing for decades; the living allowance it has offered since 2020 is what makes this viable for someone without family money, and it goes to interns who say they need it.",
+    reqs: [
+      "At least 20 on the day you apply, and three years of full-time university study completed before you start. A clinical-year MBBS student can qualify",
+      "Enrolled in a relevant degree, or applying within 18 months of finishing it",
+      "Fluent in at least one WHO working language; never a WHO intern before; no close relative on WHO staff"
+    ],
     steps: [
-      "Apply to the SEARO New Delhi office as well as Geneva — far fewer applicants, same institution on your CV.",
-      "The roster is continuous; apply and wait rather than watching for a deadline.",
+      "Search WHO's careers site for internship vacancies in the regional office for South-East Asia as well as Geneva. Applications only go through those posted notices.",
+      "Watch the 18-month clock. It runs from the day your degree is completed, which for an Indian MBBS means after internship, so the window closes about a year and a half into your first job.",
       "Mental health, NCDs and health systems are the units most relevant to a medic with public-health interests."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
@@ -423,21 +427,21 @@ window.DB.research = [
   {
     id: "conf-globalhealth",
     name: "Global health & public health congresses with student bursaries",
-    org: "CUGH · World Health Summit · Union World Conference on Lung Health · IAS",
+    org: "International AIDS Society · The Union (World Conference on Lung Health) · CUGH",
     type: "conference", country: "Global", city: "Rotating",
     fields: ["global", "pubhealth", "infect", "systems"],
     stages: ["clin", "intern", "grad", "pg"], funding: "partial",
-    money: "Full scholarships covering registration, flights and accommodation for delegates from LMICs",
+    money: "In-person scholarships can cover travel, accommodation, a daily allowance and registration; sponsored registrations cover the fee only",
     duration: "3–5 days",
-    window: "Scholarship applications 4–8 months ahead",
+    window: "Scholarship deadlines fall 4–8 months before each meeting, usually alongside or just after the abstract deadline",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://www.cugh.org/",
-    why: "These conferences have explicit budgets for delegates from low- and middle-income countries and routinely fail to spend them. The International AIDS Society and the Union both run full scholarships including international flights.",
-    reqs: ["Usually an accepted abstract for the full scholarship", "Residency in an eligible country — India qualifies for most", "Student or early-career status"],
+    url: "https://www.iasociety.org/scholarships",
+    why: "The big infectious-disease meetings set money aside for people from low- and middle-income countries, and they say so in their rules. The Union's full scholarships for presenters are reserved for low- and lower-middle-income countries, which includes India. The IAS gives priority to abstract presenters, applicants from LMICs, people under 35 and first-time recipients. Very few Indian medical students apply for either.",
+    reqs: ["An accepted abstract is the strongest route; the Union's full scholarship is for presenters and symposium speakers", "India qualifies for the Union's full scholarships as a lower-middle-income country", "IAS: aged 18 or over, and studying, working or volunteering in HIV"],
     steps: [
-      "Write the abstract first; the scholarship follows the abstract in almost every case.",
-      "The World Health Summit runs a free or low-cost student track and streams sessions publicly.",
-      "CUGH's annual meeting has a student and trainee rate plus travel awards for LMIC delegates."
+      "Write the abstract first. At both meetings, presenting is what moves you into the fully funded group.",
+      "Apply for the scholarship through your conference profile as soon as the abstract is in. The IAS closed its AIDS 2026 round in January for a July meeting, and nearly everything was awarded before the late-breaker stage.",
+      "If the full scholarship does not come, ask for a sponsored registration. It removes the fee, which is often the largest cost for a meeting held in India or nearby."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },

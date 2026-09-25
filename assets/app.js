@@ -430,6 +430,9 @@
   /* ───────────────── deadline urgency ───────────────── */
   function urgency(item) {
     const m = new Date().getMonth() + 1;
+    // A programme with no round open and no date announced has no months to
+    // list, which would otherwise read as "always open", the opposite of true.
+    if (item.noOpenCall) return "none";
     if (!item.deadlineMonths || !item.deadlineMonths.length) return "always";
     if (item.deadlineMonths.length >= 12) return "always";
     if (item.deadlineMonths.indexOf(m) !== -1) return "open";
@@ -437,7 +440,7 @@
     if (item.deadlineMonths.indexOf(next) !== -1 || item.deadlineMonths.indexOf(next2) !== -1) return "soon";
     return "closed";
   }
-  const URG_TEXT = { open: "Window open now", soon: "Opens soon", closed: "Next cycle", always: "Rolling / always open" };
+  const URG_TEXT = { open: "Window open now", soon: "Opens soon", closed: "Next cycle", always: "Rolling / always open", none: "No call open" };
 
   /* ───────────────── scoring ───────────────── */
   function score(item, p) {
@@ -560,7 +563,7 @@
     if (p.horizon === "now") {
       if (u === "open") { s += 22; reasons.push("the window is open right now"); }
       else if (u === "soon") s += 12;
-      else if (u === "closed") s -= 8;
+      else if (u === "closed" || u === "none") s -= 8;
     } else {
       if (u === "open") s += 10;
       else if (u === "soon") s += 6;

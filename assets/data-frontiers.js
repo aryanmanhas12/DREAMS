@@ -286,20 +286,52 @@ window.DB.residency = [
     type: "residency", country: "Australia", city: "Various",
     fields: ["clinical", "psych"],
     stages: ["grad"], funding: "paid",
-    money: "Resident medical officer ≈ AUD 75,000–95,000/year",
-    duration: "AMC MCQ → clinical exam or workplace-based assessment → registration → training",
-    window: "Rolling",
+    money: "Salaried from the first hospital post, at state award rates. The exams cost: portfolio AUD 642, CAT MCQ AUD 2,920, then the clinical exam (AUD 3,000 in person, 3,400 online) or a workplace-based assessment (AUD 1,070)",
+    duration: "AMC CAT MCQ → clinical exam or 6–12 month workplace-based assessment → registration → training",
+    window: "Rolling; book exam dates through the AMC",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    url: "https://www.amc.org.au/",
-    why: "High salaries, strong working-hours culture and a clear route to permanent residency. Psychiatry is on Australia's skilled occupation shortage lists, which shortens the immigration path considerably.",
-    reqs: ["MBBS recognised by the AMC", "IELTS 7.0 across all bands or OET B", "AMC MCQ examination, sittable in India", "Registration with AHPRA"],
+    url: "https://www.amc.org.au/pathways/standard-pathway/",
+    why: "High salaries, a strong working-hours culture and a clear route to permanent residency. The standard pathway for an Indian MBBS is two AMC steps: the computer-adaptive MCQ, then either a clinical exam or a workplace-based assessment done while you work. Psychiatrist is on the Core Skills Occupation List that the Skills in Demand visa has used since December 2024, which matters if psychiatry is where you are heading.",
+    reqs: [
+      "An MBBS from a medical school the AMC lists as eligible; check your school, degree title and graduation year on the AMC site",
+      "English under Ahpra's 2025 standard: IELTS Academic overall 7, with 7 in listening, reading and speaking and 6.5 in writing (two sittings within 12 months may be combined), or an OET, PTE or TOEFL equivalent",
+      "AMC CAT MCQ at a Pearson VUE centre; the AMC runs it in Australia and other countries, so check Pearson's locator for an Indian venue",
+      "Registration with the Medical Board of Australia through Ahpra"
+    ],
     steps: [
-      "Sit the AMC MCQ in India first. It is the cheapest way to test your commitment to the pathway.",
-      "The workplace-based assessment route is often faster than the clinical examination if you can secure a post.",
-      "Check the current skilled occupation list; psychiatry's presence on it changes the visa maths substantially.",
-      "New Zealand's NZREX is a parallel and often less contested route into the same region."
+      "Check your medical school's eligibility on the AMC site before paying anything. It takes minutes and settles whether the rest applies to you.",
+      "Sit the CAT MCQ first. At AUD 2,920 it is the cheapest real test of your commitment to the pathway.",
+      "The workplace-based assessment replaces the clinical exam and runs over 6 to 12 months in a job, so it only works once you have an Australian post.",
+      "New Zealand's NZREX Clinical is a separate, parallel route into the same region, and is still running for 2026–27."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 1
+  },
+  {
+    id: "aus-short-term-training",
+    name: "Short-term specialist training in Australia, without the AMC exams",
+    org: "Medical Board of Australia · the relevant specialist college",
+    type: "residency", country: "Australia", city: "Teaching hospitals",
+    fields: ["clinical", "psych", "neuro", "onco"],
+    stages: ["pg"], funding: "paid",
+    money: "A salaried training post under limited registration",
+    duration: "Usually up to 24 months",
+    window: "Rolling. It starts with a training-post offer from an Australian hospital, which you must hold before applying to the Board",
+    deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    url: "https://www.medicalboard.gov.au/registration/international-medical-graduates/short-term-training",
+    why: "Most Indian doctors think Australia means the AMC exams first. This pathway skips them: it lets specialists, and specialists-in-training within two years of finishing, do up to two years of training in Australia under limited registration, with no AMC exam and no full college comparability assessment. For an Indian MD or MS resident near the end of training, a subspecialty fellowship year in Australia is a real option.",
+    reqs: [
+      "A primary medical degree from an institution recognised by the AMC and listed in the World Directory of Medical Schools",
+      "Specialist training and exams completed, or within two years of completion",
+      "An offer of a training position secured before you apply to the Medical Board",
+      "The Board's English language standard, and the college's confirmation that the post suits your training"
+    ],
+    steps: [
+      "Start with the post, not the paperwork. Fellowship posts are advertised by hospitals and colleges; write to units whose work you know with a specific training goal.",
+      "Check your specialist college's own short-term training page. RACP, RANZCR and ANZCA each publish how they assess applicants.",
+      "Time it for your final year of MD or MS. The two-year window before completion is what makes this reachable while still a resident.",
+      "Treat it as training, not migration. Limited registration is tied to the post; staying longer means moving to the specialist or standard pathway."
+    ],
+    indiaSpecific: false, competitiveness: "medium", workExp: 3
   },
   {
     id: "india-pg",
