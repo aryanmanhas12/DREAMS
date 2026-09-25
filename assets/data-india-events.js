@@ -346,3 +346,38 @@ Object.assign(window.DB.impact, {
     note: "Worth it if cheap, and it is: free entry. Useful specifically if science communication or misinformation is your anger; useless as a line on a CV, which is the honest framing."
   }
 });
+
+/* Added September 2026 from a lead the site's author heard about in person,
+   then checked against the summit's own symposium page, 2026 guidelines PDF
+   and ticket page. */
+window.DB.research.push(
+  {
+    id: "gdhs-symposium",
+    name: "Digital Health Scientific Symposium at the Global Digital Health Summit",
+    org: "Global Digital Health Summit, with the Academy of Digital Health Sciences",
+    type: "conference", country: "India", city: "New Delhi (2026: Bharat Mandapam)",
+    fields: ["compbio", "systems", "pubhealth", "psych"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "partial",
+    money: "Prizes of ₹50,000, ₹30,000 and ₹20,000 for the top three papers. Summit passes are priced for industry: the 2026 ticket page starts at ₹5,600 for a basic delegate pass and lists no student rate",
+    duration: "Two days; the 2026 summit runs 20–21 November",
+    window: "Abstract submissions for 2026 have closed. The call is posted on the summit's symposium page ahead of each November meeting",
+    url: "https://www.globalsummit.health/scientific_symposium26",
+    why: "A digital-health research prize a medical student can realistically win without a lab. The symposium takes 300-word abstracts on primary or secondary data, policy analyses and evidence-based editorials, and the 2025 first prize went to a narrative review of mental health apps. Its scientific committee includes a professor of community medicine from AIIMS Bhopal and a former Additional Deputy Director General of Health Services, so a paper here is read by people who shape Indian digital health.",
+    reqs: [
+      "A 300-word abstract, emailed to the organisers",
+      "Original research on primary or secondary data, a policy analysis, or an editorial that follows a research-backed approach",
+      "Topics across AI in clinical care, generative AI, public health, mental health, diagnostics and responsible AI"
+    ],
+    steps: [
+      "Start a narrative or systematic review now on one digital-health question you care about. It is the format that won in 2025 and it needs no patients or ethics approval.",
+      "Check the symposium page through 2027 for the next call. It closes some weeks before the November meeting, so a finished draft by late summer is the safe plan.",
+      "Before paying for a pass, write to the organisers and ask whether accepted presenters attend free or at a reduced rate. The ticket page does not say."
+    ],
+    noOpenCall: true,
+    zeroCost: false, indiaSpecific: true, competitiveness: "medium", workExp: 0
+  }
+);
+
+Object.assign(window.DB.impact, {
+  "gdhs-symposium": { t: 3, odds: "Top three papers win; a review can place", effort: "A month on a review, then a 300-word abstract", note: "A narrative review won ₹50,000 in 2025. Digital health rewards secondary research, which is what a student can do." }
+});

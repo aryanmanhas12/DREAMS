@@ -56,7 +56,6 @@ window.DB.impact = {
   "weizmann-kupcinet": { t: 1, odds: "Small international cohort", effort: "15 hrs, free to apply", note: "Flights, accommodation, meals and a stipend, at one of the great research institutes. Almost no Indian medical students apply." },
   "amgen-scholars":    { t: 1, odds: "~5–10 %", effort: "20 hrs per hub, multiple hubs allowed", note: "Apply to the Europe, Japan and Australia hubs. The US hubs require enrolment at a US institution and will reject you on that alone." },
   "lindau":            { t: 1, odds: "16 of 223 via DST in the last medicine year", effort: "15 hrs plus a rank certificate and two references", note: "A week with Nobel laureates in medicine, fully paid by DST. Open to MD/MS residents, PhD students and young postdocs, not to MBBS students." },
-  "mitacs":            { t: 1, odds: "~10 % of Indian applicants", effort: "10 hrs. You rank projects, no supervisor hunt", note: "Flights, visa, housing, insurance and a stipend all covered, and no need to find your own supervisor. The most accessible fully-funded international research internship open to an Indian undergraduate." },
   "harvard-mph45":     { t: 1, odds: "~10 %", effort: "40 hrs via SOPHAS", note: "MBBS satisfies the doctoral-degree requirement, so you are eligible for the accelerated route most applicants are not. That is a full year and roughly $30,000 saved." },
   "jhu-mph":           { t: 1, odds: "~15 %", effort: "40 hrs", note: "The school that most reliably converts an MBBS into a global health career. A large share of every cohort already holds a medical degree." },
   "cam-mphil":         { t: 1, odds: "~10 %", effort: "35 hrs", note: "The standard Cambridge on-ramp to a doctorate, and the vehicle for a Gates Cambridge application." },
@@ -155,6 +154,18 @@ window.DB.skipList = [
   {
     name: "Government scholarships whose country list leaves India out: the Swedish Institute and the standard Australia Awards",
     why: "Both are recommended to Indian doctors in almost every list of fully funded masters, and neither will take you. The Swedish Institute Scholarship for Global Professionals is open to a published list of countries and India is not on it. The standard Australia Awards round for South and West Asia covers Bangladesh, Bhutan, the Maldives, Nepal, Pakistan, Sri Lanka and Mongolia, and India is excluded from it; India's own Australia Awards programme is a separate scheme with no round open at present. Aggregators copy the programme's headline and skip the country table, which is the only part that matters. For Sweden the realistic funding is a Karolinska or Lund tuition scholarship, and for Australia it is a university research scholarship; both are in this index. Before you write a single essay for any government scholarship, open the eligible-countries list and find India on it yourself."
+  },
+  {
+    name: "Internships that promise a stipend but ask you to pay first, especially 'Government of India' or 'MSME-approved' ones",
+    why: "The pattern is always the same: a work-from-home internship, a named domain such as molecular biology, a stipend of several thousand rupees a month, and a 'registration' or 'training' fee of a few thousand, often split into instalments to make it feel small. In July 2026 the Press Information Bureau's Fact Check unit said that forms offering doctors and other professionals an internship 'approved by the Ministry of MSME and the Ministry of Corporate Affairs' were fake, and that neither ministry had announced any such programme. A real internship never charges you to be selected, and a real government scheme is applied for only on its own .gov.in portal: the PM Internship Scheme, for one, is free and runs only through pminternship.mca.gov.in. If you have already paid, stop further instalments, keep the payment receipts, and report it at cybercrime.gov.in or on the 1930 helpline."
+  },
+  {
+    name: "Mitacs Globalink from India, for medical students",
+    why: "Mitacs is fully funded and hugely popular, and for 2027 its Indian intake runs only through AICTE: the call is open to full-time BE and BTech students at eligible institutions, with at least two years completed. An MBBS student cannot apply through it, however often it appears in lists for Indian undergraduates. This index recommended it to medical students until September 2026. The funded research internships that do take MBBS students are OIST's, which needs you in your final two years, and the Science Academies' summer fellowship."
+  },
+  {
+    name: "Faculty for the Future (Schlumberger Foundation), for Indian women",
+    why: "It pays up to USD 50,000 a year for a PhD abroad and is routinely listed for women from India. Its eligible-country list for 2026-27 names Nepal, Bangladesh, Bhutan and Myanmar and does not include India, and in the biological sciences it funds only work that crosses into the physical sciences. This index said India qualified until September 2026. Women doctors looking for funded PhDs should look instead at the Nordic and Max Planck doctoral posts, which are salaried jobs, and at L'Oréal India for earlier stages."
   },
   {
     name: "The UN Young Professionals Programme exam",

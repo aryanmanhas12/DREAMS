@@ -18,22 +18,22 @@ window.DB.funding.push(
     type: "fellowship", country: "India", city: "IITs, IISc, IISERs, NITs, central universities",
     fields: ["compbio", "genomics", "biochem", "neuro", "env"],
     stages: ["grad", "pg"], funding: "full",
-    money: "₹70,000–80,000/month rising to ₹80,000 in later years, plus a ₹2 lakh annual research grant",
+    money: "₹70,000 a month in years 1–2, ₹75,000 in year 3 and ₹80,000 in years 4–5, plus a ₹2 lakh annual research grant",
     duration: "4–5 years",
-    window: "Two cycles a year, typically closing around March and October",
-    deadlineMonths: [2, 3, 4, 9, 10, 11],
-    url: "https://pmrf.in/",
-    why: "The best-paid doctoral fellowship in India by a wide margin — more than most junior residents earn, with a research grant attached and a travel allowance for international conferences. It is aimed at technology and science disciplines, which means a medical graduate moving into computational biology, health data science or biomedical engineering is an unusual and often welcome applicant rather than a competitor in a crowded field.",
+    window: "Two selection cycles a year (May and December); granting institutes call for nominations around July–August and January–February",
+    deadlineMonths: [1, 2, 7, 8],
+    url: "https://pmrf.in/documents/PMRF-Overall-guideline-document_-19-January-2026.pdf",
+    why: "The best-paid doctoral fellowship in India, more than most junior residents earn, with a research grant attached. For a medical graduate the door is the lateral one, and that is the detail most people miss. Direct entry is written for science and technology degrees and does not name MBBS. Lateral entry has no degree-stream rule at all: once you are in a PhD at a granting institute and have four courses at a CGPA of 8.5, you can apply.",
     reqs: [
-      "Admission to, or application for, a PhD at a participating institution — IITs, IISc, IISERs, NITs and select central universities",
-      "The direct-entry channel assesses your academic record and research proposal",
-      "Interdisciplinary applicants are explicitly encouraged, which is where a medical degree becomes an advantage rather than an oddity"
+      "Direct entry: a science or technology degree with a CGPA of 8, either from the IITs, IISc, NITs, IISERs, IIEST or central IIITs, or from elsewhere with GATE 650+ or a CSIR/UGC JRF rank of 100 or better. MBBS is not named, so confirm with the PMRF office before relying on it",
+      "Lateral entry: already in a PhD at a PMRF granting institute, a CGPA of at least 8.5 over four full PhD courses, and applying within 24 months of joining after a bachelor's degree (12 after a master's). At most two attempts",
+      "Indian students only"
     ],
     steps: [
-      "Identify a PhD programme at a participating institution first — biomedical engineering, computational biology and health informatics groups at the IITs and IISc all take medical graduates.",
-      "Apply through the PMRF portal in one of the two annual cycles; the direct-entry channel is the relevant one for most applicants.",
-      "Your research proposal carries the application. Write it about a specific answerable question, not a field you find interesting.",
-      "Contact the prospective supervisor before applying. At Indian institutions this matters as much as it does abroad and is done far less often."
+      "Plan for lateral entry. Get into a PhD at a granting institute first, in a biomedical engineering, computational biology or life-science group that admits MBBS graduates; check each department's own admission rules.",
+      "Treat your first four PhD courses as the application. The 8.5 CGPA on them is the gate.",
+      "Watch the 24-month clock from the day you join. It is the limit for someone who entered the PhD after MBBS.",
+      "Contact the prospective supervisor before applying for the PhD. At Indian institutions this matters as much as it does abroad and is done far less often."
     ],
     indiaSpecific: true, competitiveness: "high", workExp: 0
   },
@@ -185,7 +185,7 @@ window.DB.research.push(
 /* impact tiers for this batch */
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "pmrf":          { t: 1, odds: "~10 %", effort: "30 hrs including the proposal", note: "The best-paid doctorate in India, and a medical graduate applying to a computational or biomedical engineering group is an unusual applicant rather than one of a thousand." },
+  "pmrf":          { t: 2, odds: "Via lateral entry, after four PhD courses at 8.5", effort: "A PhD admission first, then the application", note: "The best-paid doctorate in India. Direct entry does not name MBBS; lateral entry has no degree-stream rule, so it is reachable from inside a PhD at a granting institute." },
   "dbt-jrf":       { t: 2, odds: "Exam-dependent, roughly 5–10 %", effort: "Months of exam preparation", note: "Turns an Indian PhD from something you pay for into something that pays you. Portable across institutions, which inverts the conversation with a prospective supervisor." },
   "gulf-research": { t: 2, odds: "Moderate — few Indian medical applicants", effort: "15 hrs", note: "KAUST's visiting programme is fully funded including flights, four hours from India, and frequently converts into a doctoral offer." },
   "us-electives":  { t: 2, odds: "Open, but costly", effort: "$1,500–4,000 per rotation", note: "Do it DURING MBBS. Hands-on electives are largely closed to graduates, and that one fact reshapes the entire USMLE timeline. Apply directly, never through an agency." },

@@ -50,20 +50,20 @@ window.DB.funding.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Full cost of any Stanford graduate degree — tuition, housing, a living stipend, health insurance and one round-trip flight a year, for up to three years",
     duration: "Length of the Stanford graduate degree, up to 3 years of KHS funding",
-    window: "Opens roughly May · KHS closed 6 October, 1 pm Pacific · the Stanford programme has its OWN, often earlier, deadline",
+    window: "2027 cohort: KHS closes 6 October 2026, 1 pm Pacific · your Stanford degree application must be in by 1 December 2026, or the programme's own earlier deadline",
     deadlineMonths: [5, 6, 7, 8, 9, 10],
     url: "https://knight-hennessy.stanford.edu/admission/before-you-apply/eligibility",
     why: "This is not a scholarship you apply to on its own — you win a place in a Stanford graduate programme (an MS, a PhD, an MPP, occasionally the MD) and Knight-Hennessy then funds all of it, badged with a two-year leadership curriculum on top. No nationality restriction and no requirement that your first degree be American. The two-step nature — get into Stanford, then get funded — is exactly why almost nobody outside the US even considers it.",
     reqs: [
-      "First bachelor's degree completed no earlier than January 2020 for the current cohort (the window rolls forward each year)",
+      "First bachelor's degree earned in January 2020 or later for the 2027 cohort (the window rolls forward each year). Check how Stanford treats an MBBS awarded after internship",
       "Separate admission to, and enrolment in, an eligible full-time Stanford graduate degree programme",
-      "Under 29 as of 1 August of your enrolment year"
+      "No age limit and no nationality restriction; Stanford states both plainly"
     ],
     steps: [
       "Identify the actual Stanford graduate programme first. An MS in Epidemiology, Health Policy, or a relevant PhD track are the realistic entry points for a medical graduate, not the MD.",
-      "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes in early October; the Stanford programme is due by its own deadline or 1 December, whichever falls first, and for many programmes that is earlier than the KHS date. Look up your specific programme's deadline before you plan around October, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
-      "Because this funds up to three years and stacks a leadership cohort of ~70 scholars from every country on top, treat it as the single highest-ceiling entry in this whole index if your graduate plan is Stanford-shaped.",
-      "Confirm the current cohort's exact age and degree-date cut-offs on the eligibility page before investing the months this application takes."
+      "The KHS application and the Stanford programme application are two separate submissions on two separate systems, and they do NOT share a deadline. KHS closes 6 October 2026; the degree application is due by 1 December 2026 or the programme's own deadline if that is earlier. Look up your programme's date before you plan, because assuming they are the same is how people lose the degree application while winning the scholarship one.",
+      "Because this funds up to three years and adds a leadership cohort drawn from every country, treat it as the single highest-ceiling entry in this whole index if your graduate plan is Stanford-shaped.",
+      "Confirm the current cohort's degree-date cut-off on the eligibility page before investing the months this application takes."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },

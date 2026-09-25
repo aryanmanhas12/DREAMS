@@ -662,21 +662,21 @@
     if (p.asked.money && p.money === "none") {
       mid += "You told me you cannot pay, so everything below has been reordered around that and nothing has been quietly dropped. " +
         "The thing worth understanding is that the funded routes are not the consolation prize — a funded doctorate pays you a salary, " +
-        "German public universities charge no tuition at all, and a self-funded masters is the <em>worst</em>-value option on this entire site, not the best. ";
+        "most German public universities charge no tuition, and a self-funded masters is the <em>worst</em>-value option on this entire site, not the best. ";
     } else if (p.asked.money && p.money === "loan") {
       mid += "You would consider a loan, so here is the arithmetic nobody offers: ₹50 lakh at 10 % is roughly ₹65,000 a month for ten years. " +
         "That is survivable if the degree leads to income in that currency and punishing if it does not. Take the funded routes first and treat the loan as what closes a gap, not what opens a door. ";
     }
     if (p.asked.category && (p.category === "sc" || p.category === "st")) {
       mid += "Given what you told me about your background, the National Overseas Scholarship is at the top of your list for a reason: " +
-        "it funds a full masters or doctorate abroad including flights, and in most years places go <strong>unfilled</strong> because almost nobody applies. " +
+        "it funds a full masters or doctorate abroad including flights, and its own rules provide a <strong>second round</strong> when places are left unfilled, which tells you the competition is thinner than people assume. " +
         "That is the single highest-value item on your page. ";
     }
     if (p.asked.stage && p.stage === "pre") {
       mid += "Being in your first two years is the widest window you will ever have: ICMR STS is open to you now and closes permanently after second year, " +
-        "and Mitacs Globalink, Charpak Lab and the Science Academies' summer fellowship all take currently-enrolled students. Most people discover these in final year, when three of them have already closed. ";
+        "and Charpak Lab and the Science Academies' summer fellowship both take currently-enrolled students. Most people discover these in final year, when the student-only ones have already closed. ";
     } else if (p.asked.stage && p.stage === "clin") {
-      mid += "You are in the years where the international research internships open — Khorana specifically wants pre-final-year MBBS students and lowers its marks bar for them. " +
+      mid += "You are in the years where the international research internships open: OIST takes students in their final two years, and Khorana, when it runs, wants pre-final-year MBBS students and lowers its marks bar for them. " +
         "ICMR STS has closed to you, so MedEngage and the summer fellowships are the substitutes that keep the record moving. ";
     } else if (p.asked.stage && (p.stage === "grad" || p.stage === "pg")) {
       mid += "With the degree finished, the funded doctorate becomes the main event, and the misconception worth killing early is that you need a masters first. " +

@@ -166,12 +166,13 @@ window.DB.research = [
     type: "research", country: "USA", city: "US host university",
     fields: ["genomics", "biochem", "compbio", "neuro", "onco"],
     stages: ["clin"], funding: "full",
-    money: "Fully funded: stipend, travel and accommodation · free to apply",
+    money: "A USD 3,000 stipend for the 10–12 weeks, USD 600 health insurance and round-trip economy flights up to USD 2,500 (2025 guidelines) · free to apply",
     duration: "10–12 weeks, summer",
-    window: "Opens Sept · recent cycles have closed in the first week of October",
-    deadlineMonths: [9, 10, 11],
+    window: "The last published call closed 7 October 2024, for summer 2025. No later call had been posted at last check; past deadlines fell in the first week of October",
+    deadlineMonths: [9, 10],
+    noOpenCall: true,
     url: "https://iusstf.org/khorana-program-for-scholars",
-    why: "A fully funded American summer research placement that a current MBBS student can hold — no graduation required, no fees, travel paid. The academic bar is lowered specifically for MBBS candidates (65 % rather than 80 %) because the programme knows medical marking is different.",
+    why: "A fully funded American summer research placement that a current MBBS student can hold — no graduation required, no fees, travel paid. The academic bar is set lower for MBBS candidates, 65 per cent rather than 80. Whether it runs again for 2027 is not yet known, so treat it as one to watch rather than to plan around.",
     reqs: [
       "Currently enrolled MBBS at a recognised Indian institution",
       "PRE-FINAL year — at least one year of your course must remain",
@@ -185,34 +186,6 @@ window.DB.research = [
       "The statement of purpose should name a specific research area, not a general interest in the United States."
     ],
     zeroCost: true, indiaSpecific: true, competitiveness: "high", workExp: 0
-  },
-  {
-    id: "mitacs",
-    name: "Mitacs Globalink Research Internship",
-    org: "Mitacs, Canada",
-    type: "research", country: "Canada", city: "Canadian host university",
-    fields: ["compbio", "neuro", "genomics", "pubhealth", "biochem"],
-    stages: ["pre", "clin"], funding: "full",
-    money: "Fully funded: airfare, visa, accommodation, health insurance and a stipend · free to apply",
-    duration: "12 weeks, May–October",
-    window: "Opens mid-July · 2027 cycle closed 16 September, 1 pm Pacific",
-    deadlineMonths: [7, 8, 9],
-    url: "https://www.mitacs.ca/our-programs/globalink-research-internship-students/",
-    why: "India is one of Mitacs's largest partner countries — AICTE and Mitacs now run a joint track funding up to 300 Indian students a year — and the programme covers everything: flights, visa, housing, insurance. You browse a catalogue of pre-approved projects and rank them, so you do not need to find a supervisor yourself. It is the most accessible fully-funded international research internship available to an Indian undergraduate.",
-    reqs: [
-      "Enrolled at an eligible Indian institution, with at least one semester remaining after the internship",
-      "Usually years 1–3 of an undergraduate degree — MBBS qualifies",
-      "Free to apply"
-    ],
-    steps: [
-      "Check which route applies to you first. AICTE and Mitacs now run a joint India track under which up to 300 Indian students a year are funded, and it is advertised through AICTE rather than through Mitacs — people miss it because they only watch the Canadian site.",
-      "Browse the project catalogue when it opens in July and rank up to seven projects.",
-      "Your ranking matters more than a personal statement — choose projects that genuinely match your background, because supervisors read for fit.",
-      "Note the closing time, not just the date: 1 pm Pacific is roughly 1:30 am the following morning in India. Treat the deadline as a day earlier than it looks.",
-      "Successful interns get preferential entry and funding for a later Canadian masters through Globalink Graduate Fellowship.",
-      "Check your institution's eligibility on the Mitacs list before applying."
-    ],
-    zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
   {
     id: "weizmann-kupcinet",
@@ -575,7 +548,8 @@ window.DB.research = [
     steps: [
       "Join one national network properly rather than five superficially.",
       "Volunteer to organise something in the first three months. Organisers hear about opportunities before members do.",
-      "Write up what you organise. An undocumented campaign is invisible on an application; a one-page field report with numbers is a credential."
+      "Write up what you organise. An undocumented campaign is invisible on an application; a one-page field report with numbers is a credential.",
+      "Watch for the national competitions these bodies run. GAIMS, a registered Section 8 non-profit with state and international chapters, ran a 2026 reel competition on the importance of HPV vaccination for MBBS students, interns and nurses, with a ₹100 entry fee and cash prizes, and posts calls for expressions of interest for its committees."
     ],
     zeroCost: false, indiaSpecific: true, competitiveness: "accessible", workExp: 0
   }

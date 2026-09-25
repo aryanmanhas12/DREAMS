@@ -10,57 +10,27 @@ window.DB.research = window.DB.research || [];
 
 window.DB.funding.push(
   {
-    id: "faculty-future",
-    name: "Faculty for the Future Fellowship",
-    org: "Schlumberger Foundation",
-    type: "fellowship", country: "Any", city: "Any host institution abroad",
-    fields: ["genomics", "biochem", "compbio", "neuro", "pubhealth", "env"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "Up to USD 50,000 a year for a PhD, renewable to completion; postdoctoral awards up to USD 40,000",
-    duration: "Full doctorate or postdoc",
-    window: "Opens ~September · closes ~November",
-    deadlineMonths: [9, 10, 11],
-    url: "https://www.facultyforthefuture.net/",
-    why: "For women from developing countries in STEM, and India qualifies. Fifty thousand US dollars a year, renewable until you finish, for a doctorate anywhere in the world. It is one of the largest awards an Indian woman in science can hold and the applicant pool is a fraction of what the sum warrants — largely because it is filed under 'engineering' in most people's minds and never reaches medical students at all.",
-    reqs: [
-      "Female, and a citizen of a developing or emerging economy — India qualifies",
-      "Dual citizenship with a developed country makes you ineligible",
-      "PhD or postdoctoral level only — masters programmes are not funded",
-      "Applied to, admitted by, or enrolled at a host institution abroad",
-      "A record of community outreach and of encouraging girls into science is assessed, not decorative",
-      "Commitment to return to your home country afterwards"
-    ],
-    steps: [
-      "Confirm the current URL and cycle at the Schlumberger Foundation site. The programme has been renamed alongside the company and links move.",
-      "The outreach requirement is real and weighted. If you have taught, mentored or run anything for girls in science, document it with numbers before you apply.",
-      "You do not need a confirmed place to start the application, only to have applied, so this runs in parallel with your doctoral applications, not after them.",
-      "Applications open around September and close in November for the following academic year."
-    ],
-    indiaSpecific: false, competitiveness: "medium", workExp: 0
-  },
-  {
     id: "women-in-science",
-    name: "L'Oréal-UNESCO For Women in Science & AAUW International Fellowships",
-    org: "L'Oréal Foundation with UNESCO · American Association of University Women",
-    type: "fellowship", country: "Any", city: "Various",
+    name: "L'Oréal India For Young Women in Science & AAUW International Fellowships",
+    org: "L'Oréal India (with Buddy4Study) · American Association of University Women",
+    type: "fellowship", country: "Any", city: "India, or a US university",
     fields: ["biochem", "genomics", "neuro", "pubhealth", "compbio", "onco"],
-    stages: ["grad", "pg"], funding: "partial",
-    money: "L'Oréal India For Young Women in Science: ₹2.5 lakh · International Rising Talents: €15,000 · AAUW International: USD 20,000–50,000",
-    duration: "1 year, often renewable",
-    window: "L'Oréal India around Oct–Dec · AAUW closes mid-November",
-    deadlineMonths: [8, 9, 10, 11, 12],
-    url: "https://www.forwomeninscience.com/",
-    why: "A whole tier of funding exists specifically because women leave science at every career stage, and it is chronically under-applied in India relative to the number of eligible candidates. AAUW funds women who are not US citizens to study in the United States, which most Indian applicants never discover because they search for 'scholarships for Indians' rather than 'fellowships for women'.",
+    stages: ["pre", "clin", "grad", "pg"], funding: "partial",
+    money: "L'Oréal India: ₹62,500 for undergraduates, up to ₹1,00,000 for PG and PhD students · AAUW International: USD 20,000 for a master's, 25,000 doctoral, 50,000 postdoctoral",
+    duration: "1 year",
+    window: "L'Oréal India: an annual round run through Buddy4Study; the 2025-26 round is the latest posted. AAUW: the 2027-28 round ran 17 August to 17 September 2026 and has closed",
+    deadlineMonths: [8, 9, 10],
+    url: "https://www.foryoungwomeninscience.co.in/",
+    why: "Two funding pools that exist because women leave science at every career stage, and that people searching 'scholarships for Indians' tend to miss. L'Oréal India names medicine among its eligible fields and takes MBBS students in any year but the last, which makes it one of the few awards here open to a first-year. AAUW funds women who are not US citizens to study full-time in the United States.",
     reqs: [
-      "Female applicants",
-      "AAUW: non-US citizen, studying or researching in the US, closes mid-November",
-      "L'Oréal India runs a separate national programme with its own criteria",
-      "Research record and outreach both assessed"
+      "Women only, for both",
+      "L'Oréal India (UG): at least 85% in Class 12 science, family income under ₹6 lakh a year, studying a science degree in India in any year except the final one",
+      "AAUW: not a US citizen or permanent resident; a bachelor's-equivalent degree with a GPA of at least 3.5 on the highest degree; full-time study at an accredited US institution"
     ],
     steps: [
-      "Search by both axes. Almost everyone searches nationality and stops; the gendered schemes are a second, largely separate pool.",
-      "AAUW's International Fellowship is the largest of these and specifically funds women who are not US citizens.",
-      "Regional and national For Women in Science awards often have far smaller fields than the global one — check the India programme first."
+      "If you are an MBBS student with the marks and the income profile, apply to L'Oréal India first. It is the one that fits you now.",
+      "Watch Buddy4Study and the L'Oréal India site for the next round; the criteria are revised each cycle, so read the current year's page before applying.",
+      "AAUW is a postgraduate route. The next round will be for 2028-29; line up a US admission and your GPA evidence before it opens."
     ],
     indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
@@ -147,8 +117,7 @@ window.DB.research.push(
 
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "faculty-future":       { t: 1, odds: "Under-applied for the sum involved", effort: "30 hrs plus documenting outreach", note: "USD 50,000 a year, renewable to completion, for women from developing countries. Most Indian medical students never encounter it because it is mentally filed under engineering." },
-  "women-in-science":     { t: 2, odds: "Smaller fields than the general schemes", effort: "20 hrs", note: "A second, largely separate funding pool. Almost everyone searches by nationality and never searches by gender." },
+  "women-in-science":     { t: 2, odds: "Criteria-gated rather than a lottery", effort: "10–20 hrs", note: "L'Oréal India takes MBBS students from first year on marks and income; AAUW is the postgraduate route to the US. A second pool most searches miss." },
   "ai-health-programmes": { t: 2, odds: "Competitive, but the clinical half is scarce", effort: "Ongoing. The repository is the application", note: "A doctor who can code is the scarce half of the pair here, not the redundant one." },
   "summer-schools-global":{ t: 3, odds: "Accessible; scholarships more competitive", effort: "10 hrs", note: "The cheapest way to test a field before committing years. The scholarship deadline is weeks before the course deadline. That is how people lose it." },
   "disability-support":   { t: 3, odds: "Chronically under-spent", effort: "One email per institution", note: "Access and hardship funds are separately budgeted and separately under-claimed. Institutions assume you will ask." }

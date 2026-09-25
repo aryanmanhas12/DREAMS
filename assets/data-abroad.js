@@ -29,14 +29,14 @@ window.DB.research.push(
     type: "research", country: "Japan", city: "Onna, Okinawa",
     fields: ["neuro", "compbio", "genomics", "biochem"],
     stages: ["clin", "intern"], funding: "full",
-    money: "Stipend, flights and accommodation covered · ¥5,000 application fee, non-refundable",
+    money: "¥2,400 per working day, one round-trip flight and furnished accommodation · ¥5,000 application fee, non-refundable",
     duration: "4–6 months (minimum 120 days)",
-    window: "Two cycles a year — closes 15 October and 15 April",
+    window: "Two cycles a year. Spring 2027 closes 15 October 2026, 23:59 Japan time; the autumn cycle closes 15 April",
     deadlineMonths: [10, 4],
     url: "https://www.oist.jp/research-internship-program",
     why: "A fully funded four-to-six-month placement in a real laboratory, open to undergraduates, at an English-language graduate university with world-class neuroscience and computational biology. Two intakes a year rather than one, so missing a deadline costs six months instead of twelve. The catch that filters most Indian applicants is not academic: it is that you need written permission from your medical college to be away for four months, and that has to be negotiated long before the deadline.",
     reqs: [
-      "Enrolled in the final two years of an undergraduate degree — for MBBS this means 2nd or 3rd professional year",
+      "In the final two years of an undergraduate or master's programme, or graduated within the past year. For MBBS that means the later professional years, and a recent graduate can still apply",
       "Formal written permission from your medical college. This is the real gate; start it early",
       "English proficiency; TOEFL and IELTS are optional, not required",
       "Statement of purpose of no more than 250 words — the limit is strict",
@@ -65,10 +65,10 @@ window.DB.research.push(
     window: "Annual deadline 15 November, for the following July–August",
     deadlineMonths: [9, 10, 11],
     url: "https://www.epfl.ch/schools/sv/education/summer-research-program/",
-    why: "Eight paid weeks inside one of Europe's strongest life-science schools — the Brain Mind Institute, the Global Health Institute, ISREC for cancer research — with travel and housing covered. Eight weeks fits an Indian summer vacation without needing leave from your college, which is what makes it far more practical mid-MBBS than a four-month placement. The bar is academic standing: they ask for roughly the top 5–10 per cent of your class.",
+    why: "Eight paid weeks inside one of Europe's strongest life-science schools — the Brain Mind Institute, the Global Health Institute, ISREC for cancer research — with travel and housing covered. Eight weeks fits an Indian summer vacation without needing leave from your college, which is what makes it far more practical mid-MBBS than a four-month placement. The bar is academic standing: a GPA of 3.75 out of 4 or the top 5 per cent of your class.",
     reqs: [
       "At least two years of undergraduate study completed — 1st and 2nd professional MBBS satisfies this",
-      "Strong academic standing, around the top 5–10 per cent of your cohort",
+      "A GPA of 3.75/4.0 or the top 5 per cent of your class, and a degree in the life sciences or a related field with a life-science career in mind",
       "Academic CV of one to two pages: research experience, relevant coursework, technical skills",
       "Official transcripts for every completed MBBS year",
       "One recommendation letter from a research mentor or faculty member",
@@ -500,10 +500,62 @@ window.DB.research.push(
       "Ask your head of department now for the release letter. A week in Lyon in term time is agreed far more easily in advance than at selection."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 1
+  },
+  {
+    id: "un-young-leaders",
+    name: "UN Young Leaders for the SDGs",
+    org: "United Nations Youth Office",
+    type: "fellowship", country: "Global", city: "Remote, with UN events",
+    fields: ["global", "pubhealth", "psych"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "none",
+    money: "A two-year role alongside the UN Youth Office; the programme page describes no stipend",
+    duration: "Two years",
+    window: "Biennial. The 2025 call closed 18 April 2025 and the cohort was named on 24 October 2025; no new call is open",
+    url: "https://www.un.org/youthaffairs/en/engage/young-leaders-sdgs",
+    why: "Every two years the UN names 17 young people already leading work on the Goals, and the 2025 cohort, aged 16 to 33, included physicians and people working on mental health. It is recognition for something you have built, not a course you apply your way into: 33,000 people from over 150 countries applied last time. Listed so that the project you start now is old enough to count when the next call opens.",
+    reqs: [
+      "A real, running initiative with evidence of what it changed",
+      "The 2025 cohort ranged from 16 to 33; each call sets its own age rule",
+      "Open worldwide, with every region represented"
+    ],
+    steps: [
+      "Bookmark the Youth Office page; future cycles are announced there and nowhere earlier.",
+      "Build the record now. A mental-health or health-access project that has run for two years reads very differently from one launched for the application.",
+      "Treat it as a long shot with about 1 in 2,000 odds, and put effort first into the funded items in this index."
+    ],
+    noOpenCall: true,
+    zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
+  {
+    id: "who-youth-video",
+    name: "WHO Global Youth Competition: a 90-second video on influenza and COVID-19",
+    org: "World Health Organization",
+    type: "conference", country: "Global", city: "Online",
+    fields: ["pubhealth", "global", "infect"],
+    stages: ["pre", "clin", "intern", "grad", "pg"], funding: "free",
+    money: "Free to enter. The winners present their video at a global WHO webinar and receive a WHO certificate naming them",
+    duration: "One video of up to 90 seconds; winners announced in October",
+    window: "The 2026 round ran 3 August to 13 September 2026 (23:45 CEST) and has closed; WHO has not announced a next round",
+    url: "https://www.who.int/news-room/events/detail/2026/08/03/default-calendar/global-youth-competition-advocating-for-influenza-and-covid-19-prevention-and-control",
+    why: "One of the few WHO opportunities a first-year medical student can win outright, with no degree, fee or travel. The 2026 brief asked how you shield your circle from respiratory infections, and wanted videos that tackle myths directly. The prize is small in money and large in signal: a WHO certificate with your name on it and a slot on a global webinar, the kind of line that makes a later WHO internship application read as continuous rather than cold.",
+    reqs: [
+      "Students or young professionals aged 18 to 35",
+      "A video of no more than 90 seconds answering at least one of WHO's prompts; up to three entries, alone or as a team",
+      "Anyone who appears on screen must be over 18 and have consented; any use of AI must be declared"
+    ],
+    steps: [
+      "Keep a short film ready rather than waiting for the call. The 2026 window was six weeks long, which is not much time to write, shoot and edit.",
+      "Answer the prompt literally. WHO's reviewers score against a rubric that includes impact and how easily the video could be used in a community.",
+      "Watch WHO's youth engagement pages and its Health for All Film Festival, which has run a separate Student Film Prize in past editions."
+    ],
+    noOpenCall: true,
+    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
   }
 );
 
 Object.assign(window.DB.impact, {
+  "who-youth-video":    { t: 3, odds: "One winner and up to six runners-up worldwide", effort: "A weekend of filming and a week of editing", note: "Free, open from first year, and ends in a WHO certificate and webinar slot. Keep a film ready; the window is about six weeks." },
+  "un-young-leaders":   { t: 4, odds: "17 places, 33,000+ applicants in 2025", effort: "Years of real work, then one application", note: "Recognition, not funding, and a long shot. Worth knowing so a health or mental-health project is mature when the next call opens." },
   "unv-international":  { t: 2, odds: "Competitive per post; posted all year", effort: "A strong profile, then an application per post", note: "Paid, insured UN field work with medicine a listed category. Youth posts take people with under two years of experience." },
   "iarc-summer-school": { t: 3, odds: "Competitive; LMIC applicants funded", effort: "15 hrs when the call opens", note: "A funded week at WHO's cancer agency. Biennial, so the 2027 call is the one to watch from November 2026." }
 });

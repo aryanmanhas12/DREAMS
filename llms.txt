@@ -1,6 +1,6 @@
 # Dream Counsellor
 
-> An independent, free index of 223 funded programmes, scholarships, research
+> An independent, free index of 224 funded programmes, scholarships, research
 > placements and career routes open to Indian medical students and graduates.
 > It is a static site with no account, no server and no tracking. Answering three
 > questions produces a ranked plan; nothing is uploaded to produce it.
