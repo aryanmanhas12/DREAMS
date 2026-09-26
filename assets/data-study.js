@@ -166,14 +166,14 @@ window.DB.study = [
     stages: ["grad", "pg"], funding: "full",
     money: "≈ £40,000 · Gates Cambridge covers it entirely",
     duration: "9–12 months",
-    window: "Opens Sept · Gates deadline early Dec for international",
+    window: "Opens Sept · for Gates Cambridge funding the deadline is the course funding deadline: 8 December 2026 or 6 January 2027, depending on course",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://www.postgraduate.study.cam.ac.uk/courses",
     why: "The MPhil is the standard Cambridge on-ramp to a PhD. Gates Cambridge funds roughly 25 international scholars a year at full cost and explicitly looks for people committed to improving the lives of others, which is exactly the framing a public-health medic already has.",
     reqs: ["High 2:1 / first equivalent", "IELTS 7.5", "Research proposal for research-track MPhils"],
     steps: [
       "One Cambridge application form covers both course admission and Gates Cambridge — tick the funding box.",
-      "The international Gates deadline is in early December and is HARD. Cambridge course deadlines are later; do not use the later one.",
+      "For funding, the date that matters is the Course Funding Deadline on the course page (8 December 2026 or 6 January 2027), not the later admission deadline. Gates Cambridge applications must be in by that date.",
       "Gates wants a clear answer to 'why you, why this, why now' — write the leadership and service parts honestly, they are assessed."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
@@ -203,23 +203,27 @@ window.DB.study = [
   /* ───────────────────────── UNITED STATES ───────────────────────── */
   {
     id: "harvard-mph45",
-    name: "MPH-45 (accelerated) — Global Health, Epidemiology, or Health Policy",
+    name: "MPH-45 (one-year MPH): Global Health, Health Policy and other fields",
     org: "Harvard T.H. Chan School of Public Health",
     type: "masters", country: "USA", city: "Boston",
     fields: ["pubhealth", "global", "systems", "infect"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "≈ $75,000 total · Fulbright-Nehru and Inlaks both fund Harvard",
-    duration: "11 months (on-campus) or 2 years part-time online",
-    window: "Opens Sept · Round 1 early Dec, final deadline Jan",
-    deadlineMonths: [9, 10, 11, 12, 1],
-    url: "https://hsph.harvard.edu/admissions/",
-    why: "This is the single most important fact on this page for an Indian medical graduate: Harvard's 45-credit MPH requires a prior DOCTORAL degree, and MBBS counts. You are eligible for the accelerated route that most applicants are not, and it costs a year less than the 65-credit programme.",
-    reqs: ["MBBS satisfies the doctoral-degree requirement", "TOEFL/IELTS unless prior degree taught in English", "GRE not required for most departments"],
+    money: "Tuition $77,400 for 2026-27 plus $4,954 health insurance, before living costs · Fulbright-Nehru and Inlaks both fund Harvard",
+    duration: "1 year full-time (the 2-year part-time online MPH is a separate programme, MPH-GEN)",
+    window: "Apply through SOPHAS. One deadline, 1 December, with decisions in late February or early March",
+    deadlineMonths: [9, 10, 11],
+    url: "https://hsph.harvard.edu/admissions/applying-to-a-degree-program/program-eligibility-requirements/",
+    why: "The 45-credit MPH is Harvard's one-year route, and its entry rule is what makes it matter to a medical graduate: a master's or a doctoral degree, or, in Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus five years of work. Harvard reads a foreign degree by its US equivalent through WES. If WES reads your MBBS as a doctoral-level medical degree, every field is open straight after internship; if it reads it as a bachelor's, the five-year route still gets you in later.",
+    reqs: [
+      "A master's or doctoral degree. For Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus at least five years of work also qualifies",
+      "Clinical Effectiveness, Occupational and Environmental Health and Quantitative Methods take a master's or doctoral degree only",
+      "A WES credential evaluation for degrees from outside the US; Harvard points applicants to WES's Degree Equivalency Tool",
+      "TOEFL, IELTS or the Duolingo English Test, if applicable"
+    ],
     steps: [
-      "Confirm your MBBS is being read as the doctoral-equivalent qualification — state it plainly in the application, do not assume the reader knows what MBBS is.",
-      "Apply through SOPHAS (the shared public-health application system), not directly to Harvard.",
-      "Round 1 in early December carries the best funding odds. The January round is effectively for people who missed it.",
-      "Ask for the WES or ECE credential evaluation early — Indian transcripts take weeks to verify.",
+      "Run your MBBS through WES's free Degree Equivalency Tool before anything else. What it says decides which fields you can apply to this year.",
+      "Apply through SOPHAS (the shared public-health application system), to one programme only.",
+      "There is a single deadline, 1 December. Order the full WES evaluation by early October, because Indian transcripts take weeks to verify.",
       "Apply to Fulbright-Nehru in parallel, one cycle ahead: it needs three years of work experience, so plan for it during internship and junior residency rather than immediately."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0

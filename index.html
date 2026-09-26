@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Dream Counsellor" />
 <meta property="og:locale" content="en_IN" />
 <meta property="og:title" content="Dream Counsellor — you were told there were two options" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 224 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 223 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -32,7 +32,7 @@
 <meta property="og:image:alt" content="Dream Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Dream Counsellor — you were told there were two options" />
-<meta name="twitter:description" content="224 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:description" content="223 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -240,6 +240,119 @@
       </dl>
     </div>
   </div>
+
+  <!-- The atlas. Scrolling through the regions turns a second globe to each
+       one, so the motion on this page is the answer to "where are the doors?"
+       rather than decoration. Scroll stays native: nothing here intercepts the
+       wheel or touch, the text below is complete without the canvas, and every
+       region ends in a real button into Browse. All numbers are counted from
+       the index at load, never typed here. -->
+  <section class="atlas" id="atlas" aria-labelledby="atlas-h">
+    <div class="wrap atlas-in">
+      <figure class="atlas-stage">
+        <canvas id="atlasCanvas" role="img"
+                aria-label="A globe that turns to each region as you read about it. Every region below can also be opened in Browse."></canvas>
+      </figure>
+
+      <div class="atlas-steps">
+        <header class="atlas-head">
+          <h2 class="sec-h" id="atlas-h">Where the doors are</h2>
+          <p class="atlas-intro">Read down through the regions and the globe turns to each one. Every number here is counted from the index itself, including how many are open this month.</p>
+        </header>
+
+        <article class="atlas-step" data-region="india">
+          <p class="atlas-tag"><span>01</span> India</p>
+          <h3>Where every route starts</h3>
+          <p class="atlas-copy">Most of what you can do this year is here and much of it is free: research studentships, the science academies' summer fellowships, and national meetings where a first abstract costs a train ticket.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="india">See every route in India</button>
+        </article>
+
+        <article class="atlas-step" data-region="uk">
+          <p class="atlas-tag"><span>02</span> The UK and Ireland</p>
+          <h3>One-year masters and two scholarships open to Indian doctors</h3>
+          <p class="atlas-copy">The schools that train much of global health, with Chevening and the Commonwealth Scholarships paying tuition, flights and a stipend for the ones that fit.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="uk">See every route in the UK and Ireland</button>
+        </article>
+
+        <article class="atlas-step" data-region="europe">
+          <p class="atlas-tag"><span>03</span> Europe</p>
+          <h3>Doctorates that pay a salary</h3>
+          <p class="atlas-copy">Germany, Switzerland and the Nordic countries hire PhD candidates as employees rather than charging them, and Germany's route into practice runs through a language exam and a licensing exam.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="europe">See every route in Europe</button>
+        </article>
+
+        <article class="atlas-step" data-region="americas">
+          <p class="atlas-tag"><span>04</span> The USA and Canada</p>
+          <h3>Summer labs, two big awards, and the USMLE</h3>
+          <p class="atlas-copy">Paid summer research, the Knight-Hennessy and Fulbright-Nehru awards for graduate study, and the long exam route into American residency.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="americas">See every route in the USA and Canada</button>
+        </article>
+
+        <article class="atlas-step" data-region="anz">
+          <p class="atlas-tag"><span>05</span> Australia and New Zealand</p>
+          <h3>Research degrees on a tax-free stipend</h3>
+          <p class="atlas-copy">University research scholarships open to international candidates, and in Australia a trade agreement that gives Indian graduates longer post-study work rights than most nationalities get.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="anz">See every route in Australia and New Zealand</button>
+        </article>
+
+        <article class="atlas-step" data-region="asia">
+          <p class="atlas-tag"><span>06</span> Elsewhere in Asia, and Africa</p>
+          <h3>Paid internships and government scholarships</h3>
+          <p class="atlas-copy">OIST's paid research internship in Japan, the Weizmann Institute in Israel, Singapore's public health school, government scholarships from Japan, Korea, China, Taiwan and Türkiye, and HIV and tuberculosis research in Johannesburg and Cape Town.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="asia">See every route elsewhere in Asia and Africa</button>
+        </article>
+
+        <article class="atlas-step" data-region="global">
+          <p class="atlas-tag"><span>07</span> No single country</p>
+          <h3>The UN, WHO and the open internet</h3>
+          <p class="atlas-copy">Internships, volunteer posts, youth competitions and online courses you can reach from wherever you study, including several that take students in their first year.</p>
+          <dl class="atlas-facts">
+            <div><dt>Routes</dt><dd data-stat="total" class="num-pending"></dd></div>
+            <div><dt>Funded or free</dt><dd data-stat="funded" class="num-pending"></dd></div>
+            <div><dt>Open this month</dt><dd data-stat="open" class="num-pending"></dd></div>
+          </dl>
+          <p class="atlas-pick" data-stat="pick"></p>
+          <button type="button" class="btn btn-ghost atlas-go" data-region-go="global">See every route with no single country</button>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <!-- Three claims rather than three feature bullets. Each one is something
        this site asserts and can be held to, which is why they carry quote

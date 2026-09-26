@@ -19,7 +19,8 @@ window.DB.funding.push(
     money: "L'Oréal India: ₹62,500 for undergraduates, up to ₹1,00,000 for PG and PhD students · AAUW International: USD 20,000 for a master's, 25,000 doctoral, 50,000 postdoctoral",
     duration: "1 year",
     window: "L'Oréal India: an annual round run through Buddy4Study; the 2025-26 round is the latest posted. AAUW: the 2027-28 round ran 17 August to 17 September 2026 and has closed",
-    deadlineMonths: [8, 9, 10],
+    deadlineMonths: [],
+    noOpenCall: true,
     url: "https://www.foryoungwomeninscience.co.in/",
     why: "Two funding pools that exist because women leave science at every career stage, and that people searching 'scholarships for Indians' tend to miss. L'Oréal India names medicine among its eligible fields and takes MBBS students in any year but the last, which makes it one of the few awards here open to a first-year. AAUW funds women who are not US citizens to study full-time in the United States.",
     reqs: [

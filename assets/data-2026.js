@@ -137,27 +137,30 @@ window.DB.research.push(
   },
   {
     id: "icgeb-falaschi",
-    name: "Arturo Falaschi Fellowships (PhD, short-term and postdoctoral)",
+    name: "ICGEB PhD: the New Delhi programme and the Arturo Falaschi Fellowships",
     org: "ICGEB — International Centre for Genetic Engineering and Biotechnology",
     type: "fellowship", country: "India", city: "New Delhi, Trieste (Italy) or Cape Town (South Africa)",
     fields: ["genomics", "biochem", "infect", "compbio", "onco"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full stipend, health insurance and travel · free to apply",
-    duration: "1–12 months (short-term) · 3–4 years (full PhD) · 2 years (postdoctoral)",
-    window: "Main call closes 31 March; a second short-term round runs to 30 September",
-    deadlineMonths: [1, 2, 3, 8, 9],
+    money: "New Delhi PhD: paid by the JRF you bring · Falaschi PhD: €1,500/month in Trieste, US$1,122 in New Delhi, ZAR 16,500 in Cape Town, plus tuition, travel and health insurance · free to apply",
+    duration: "3 years PhD with a possible fourth · 1–12 months (short-term) · postdoctoral fellowships separately",
+    window: "New Delhi PhD: yearly call, the 2026 one closed 30 May with interviews 22–24 June. Falaschi: the next round opens January 2027 and closes 31 March 2027; a September round (expression of interest by mid-August) covers short-term and postdoctoral places only",
+    deadlineMonths: [1, 2, 3, 4, 5, 7, 8],
     url: "https://www.icgeb.org/fellowship/",
-    why: "An intergovernmental research centre with one of its three laboratories in New Delhi, which makes this the rare world-class fellowship you can hold without leaving India, and the rare Indian position that comes with an automatic route to Trieste or Cape Town. India is a founding member state, so Indian nationals are inside the priority group rather than competing as foreign applicants. Almost no medical students have heard of it, because it recruits through biotechnology departments and never through medical colleges.",
+    why: "An intergovernmental research centre with one of its three laboratories in New Delhi. There are two doors and they admit different people. The ICGEB-JNU PhD for Indian nationals names MBBS in its eligibility list outright, runs entirely in New Delhi, and is paid through the national fellowship you already hold. The international Falaschi fellowships add Trieste and Cape Town with their own stipend, but name a BSc (Honours) or an MSc rather than MBBS. Almost no medical students hear of either, because ICGEB recruits through biotechnology departments and never through medical colleges.",
     reqs: [
-      "A degree in life sciences, medicine or a related field — MBBS is accepted",
-      "A written statement of support from the ICGEB group leader you want to work with. This is mandatory and there is no way around it.",
-      "For the short-term route, current enrolment in a PhD elsewhere; the long-term route is the PhD itself"
+      "New Delhi PhD (Indian nationals): MBBS is named, alongside a first-class MSc, M.Tech, M.V.Sc, M.Pharm or a four-year research BSc (Honours)",
+      "It also needs a fellowship already in hand: CSIR, UGC, ICMR, DBT, DST-INSPIRE, BINC or an equivalent JRF, valid for at least four years. ICMR-JRF is the usual one for a medical graduate.",
+      "Falaschi PhD: nationality of an ICGEB Member State (India is one); a BSc (Honours) for Trieste and an MSc for New Delhi or Cape Town. MBBS is not named, so ask the fellowships office before building an application on it.",
+      "Falaschi: a written statement of support from the ICGEB group leader you want to join. It is mandatory.",
+      "Short-term places need current enrolment in a PhD elsewhere; postdoctoral places need the PhD. No age limit on any of them."
     ],
     steps: [
-      "Choose the group before the fellowship. Read the ICGEB New Delhi group pages, find two or three whose actual published work you can discuss, and write to those group leaders directly.",
-      "The supporting statement from the group leader is the application's spine. Allow two months to secure it. This is the step that fails, not the form.",
-      "If you are still in MBBS, the short-term route is not yet open to you; build toward it by finishing a real project first, then apply as a PhD student or a graduate.",
-      "Note the two windows. The main call closes at the end of March, and a separate short-term round runs through to the end of September, so a missed deadline is not a missed year."
+      "Sit ICMR-JRF first. The New Delhi PhD takes MBBS graduates only with a valid JRF-level fellowship, and that fellowship is what pays you.",
+      "Watch ICGEB's fellowship page in spring for the ICGEB-JNU announcement. In 2026 it ran two streams, Human Health & Industrial Biotechnology and Plant Science, and closed on 30 May.",
+      "Before the interview, read the New Delhi group pages and pick two or three groups whose published work you can discuss in detail.",
+      "For Trieste or Cape Town, the Falaschi round opens in January and closes 31 March. Write to the fellowships office to ask whether your MBBS meets the degree rule, and allow two months for the group leader's statement, which is the step that usually fails.",
+      "Once you are enrolled in a PhD in any member state, the September round (expression of interest by mid-August, full application by 30 September) funds short stays in an ICGEB lab."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -245,9 +248,9 @@ window.DB.impact["tdr-implementation-research"] = {
 };
 window.DB.impact["icgeb-falaschi"] = {
   t: 1,
-  odds: "Small intake per laboratory, but a founding-member-state field",
-  effort: "20 hrs, free to apply, plus two months to secure the group leader's statement",
-  note: "A world-class intergovernmental fellowship with a laboratory in New Delhi, which means you can hold it without emigrating and still be inside an international system. Recruits through biotechnology departments, so medical students almost never see it. That thin field is the whole opportunity."
+  odds: "Small intake per laboratory; the JRF requirement filters the New Delhi field before interview",
+  effort: "A JRF exam first, then 20 hrs to apply; two months for a Falaschi group leader's statement",
+  note: "A PhD at an intergovernmental centre that you can hold without emigrating, through a door that names MBBS in writing. The price of entry is a JRF, which most medical graduates never sit, and that is why the field is thin. The international Falaschi route is the stretch: stronger money abroad, but a degree rule that does not name MBBS."
 };
 window.DB.impact["icddrb"] = {
   t: 2,

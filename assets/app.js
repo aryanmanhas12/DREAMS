@@ -1235,6 +1235,9 @@
   // description mentions Indian students, which is useful when you typed it but
   // wrong when the globe just told you the country holds 16 programmes.
   let countryFilter = "";
+  // Set from the atlas: a named group of countries, such as Europe. Exact
+  // matches on item.country for the same reason as countryFilter above.
+  let regionFilter = null;
 
   function matchesSearch(item, q) {
     if (!q) return true;
@@ -1293,6 +1296,8 @@
     else if (activeFilter !== "all") list = list.filter((i) => i.type === activeFilter);
 
     if (countryFilter) list = list.filter((i) => i.country === countryFilter);
+    else if (regionFilter) list = list.filter((i) => regionFilter.countries.indexOf(i.country) !== -1);
+    const placeLabel = countryFilter || (regionFilter && regionFilter.label) || "";
 
     const preSearchCount = list.length;
     list = list.filter((i) => matchesSearch(i, searchQuery));
@@ -1300,7 +1305,7 @@
 
     const SORT_LABEL = { tier: "sorted by impact tier", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
     let countText = fmtNum(list.length) + " programme" + (list.length === 1 ? "" : "s");
-    if (countryFilter) countText += " in " + countryFilter;
+    if (placeLabel) countText += " in " + placeLabel;
     if (searchQuery) countText += " matching “" + searchQuery + "” of " + fmtNum(preSearchCount);
     countText += " · " + SORT_LABEL[sortMode];
     $("#browseCount").textContent = countText;
@@ -1310,13 +1315,13 @@
     // inexplicably short with nothing on screen explaining why.
     const chipSlot = $("#activeCountry");
     if (chipSlot) {
-      chipSlot.innerHTML = countryFilter
+      chipSlot.innerHTML = placeLabel
         ? '<button type="button" class="country-chip" id="clearCountry">' +
-          'Showing ' + esc(countryFilter) + ' only <span aria-hidden="true">×</span>' +
+          'Showing ' + esc(placeLabel) + ' only <span aria-hidden="true">×</span>' +
           '<span class="sr-only">, clear this filter</span></button>'
         : "";
       const clear = $("#clearCountry");
-      if (clear) clear.addEventListener("click", function () { countryFilter = ""; renderBrowse(); });
+      if (clear) clear.addEventListener("click", function () { countryFilter = ""; regionFilter = null; renderBrowse(); });
     }
 
     $("#browseCards").innerHTML = list.length
@@ -2116,23 +2121,118 @@
   /* The globe is an enhancement, never the only route: picking a country just
      drives the same search the Browse box does, so nothing here is reachable
      only by pointing at a canvas. */
+  function openPlace(country, region) {
+    countryFilter = country || "";
+    regionFilter = region || null;
+    searchQuery = "";
+    activeFilter = "all";
+    const box = $("#browseSearch");
+    if (box) box.value = "";
+    renderBrowse();
+    showView("browse");
+  }
+
   function initHeroGlobe() {
     const canvas = $("#globeCanvas");
     if (!canvas || typeof window.initGlobe !== "function") return;
-    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) {
-      countryFilter = country;
-      searchQuery = "";
-      activeFilter = "all";
-      const box = $("#browseSearch");
-      if (box) box.value = "";
-      renderBrowse();
-      showView("browse");
-    });
+    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); });
     // Theme switches change every colour the globe draws with.
     if (globe) {
       const btn = $("#themeToggle");
       if (btn) btn.addEventListener("click", function () { setTimeout(globe.redraw, 30); });
     }
+  }
+
+  /* ───────────────── atlas ─────────────────
+     The regions the scroll chapter walks through. `countries` are exact
+     item.country values, so each region's count is the same number Browse
+     shows after the button is pressed. `focus` is where the globe turns.
+     The last region has no single place, so it highlights nothing and turns
+     to Geneva, where most of the organisations in it sit. */
+  const ATLAS = {
+    india:    { label: "India", countries: ["India"], focus: [21, 78] },
+    uk:       { label: "the UK and Ireland", countries: ["UK", "Ireland"], focus: [53.5, -4] },
+    europe:   { label: "Europe", focus: [50, 12], countries: [
+                "Germany", "Switzerland", "France", "Netherlands", "Nordics", "Sweden", "Norway", "Denmark",
+                "Czechia", "Baltics", "Belgium", "Spain", "Lithuania", "Poland", "Hungary", "Italy",
+                "Portugal", "Austria", "Russia", "Europe"] },
+    americas: { label: "the USA and Canada", countries: ["USA", "Canada"], focus: [42, -96] },
+    anz:      { label: "Australia and New Zealand", countries: ["Australia", "New Zealand"], focus: [-32, 150] },
+    // Africa rides with this step because the index holds a single African
+    // entry, too thin for a step of its own, and leaving it out of every
+    // region made it the one programme the atlas could not reach. The focus
+    // sits over the Arabian Sea so Japan, Israel and South Africa all stay on
+    // the visible hemisphere.
+    asia:     { label: "Asia beyond India, and Africa", focus: [10, 75], countries: [
+                "Japan", "China", "South Korea", "Taiwan", "Singapore", "Thailand", "Asia", "Bangladesh",
+                "Israel", "Turkey", "Gulf", "South Africa"] },
+    global:   { label: "no single country", countries: ["Global", "Any", "Online"], focus: [46.2, 6.1], highlight: false }
+  };
+
+  function atlasStats(region) {
+    const list = allOpportunities().filter((i) => region.countries.indexOf(i.country) !== -1);
+    const funded = list.filter((i) => ["full", "free", "stipend", "paid"].indexOf(i.funding) !== -1).length;
+    const open = list.filter((i) => urgency(i) === "open").length;
+    // The one to read first: best tier, and among equals the one open now.
+    const pick = list.slice().sort(function (a, b) {
+      return impactOf(a).t - impactOf(b).t ||
+        (urgency(b) === "open") - (urgency(a) === "open") ||
+        a.name.localeCompare(b.name);
+    })[0];
+    return { total: list.length, funded: funded, open: open, pick: pick };
+  }
+
+  function initAtlas() {
+    const section = $("#atlas");
+    const steps = $$(".atlas-step");
+    if (!section || !steps.length) return;
+
+    steps.forEach(function (step) {
+      const region = ATLAS[step.dataset.region];
+      if (!region) return;
+      const s = atlasStats(region);
+      ["total", "funded", "open"].forEach(function (k) {
+        const el = step.querySelector('[data-stat="' + k + '"]');
+        if (el) el.textContent = fmtNum(s[k]);
+      });
+      const pickEl = step.querySelector('[data-stat="pick"]');
+      if (pickEl && s.pick) {
+        pickEl.innerHTML = "Highest-graded here: <b>" + esc(s.pick.name) + "</b>, tier " + impactOf(s.pick).t +
+          (urgency(s.pick) === "open" ? ", with its window open now." : ".");
+      }
+      const go = step.querySelector("[data-region-go]");
+      if (go) go.addEventListener("click", function () {
+        openPlace("", { label: region.label, countries: region.countries });
+      });
+    });
+
+    const canvas = $("#atlasCanvas");
+    const globe = canvas && typeof window.initGlobe === "function"
+      ? window.initGlobe(canvas, null, function (country) { openPlace(country, null); }, { autoSpin: false })
+      : null;
+    // Without a globe the chapter is still a complete list of regions; the
+    // empty stage would only be a hole in the page.
+    if (!globe) { section.classList.add("no-globe"); return; }
+    const btn = $("#themeToggle");
+    if (btn) btn.addEventListener("click", function () { setTimeout(globe.redraw, 30); });
+
+    let current = null;
+    function activate(step) {
+      if (step === current) return;
+      current = step;
+      steps.forEach((s) => s.classList.toggle("is-active", s === step));
+      const region = ATLAS[step.dataset.region];
+      if (region) globe.focus(region.focus[0], region.focus[1], region.highlight === false ? null : region.countries);
+    }
+    activate(steps[0]);
+    if (!("IntersectionObserver" in window)) return;
+    // A thin band just below the middle of the viewport: the region whose text
+    // is crossing it is the one on the globe. On a phone that band sits just
+    // under the sticky globe, which is exactly where the eye is reading.
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) activate(en.target); });
+    }, { rootMargin: "-50% 0px -44% 0px", threshold: 0 });
+    steps.forEach((s) => io.observe(s));
   }
 
   /* The review stamp. Rendered from data rather than written into the HTML in
@@ -2388,6 +2488,7 @@
     initTheme();
     initMobileNav();
     initHeroGlobe();
+    initAtlas();
     initReveals();
     bindGoto(document);
     initTour();

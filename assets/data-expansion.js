@@ -10,66 +10,55 @@ window.DB.research = window.DB.research || [];
 /* ═══════════ PHYSICIAN-SCIENTIST ROUTES — built for people with a medical degree ═══════════ */
 window.DB.study.push(
   {
-    id: "emerald-mdphd",
-    name: "EMERALD — European PhD Programme for Medical Doctors",
-    org: "EU-funded consortium of seven European centres of excellence",
-    type: "phd", country: "Europe", city: "Multi-country",
-    fields: ["clinical", "genomics", "neuro", "biochem", "compbio", "onco"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "Fully funded doctoral contract with an EU salary, mobility and family allowances",
-    duration: "3–4 years",
-    window: "Cohort calls; watch the site from autumn",
-    deadlineMonths: [9, 10, 11, 12, 1],
-    url: "https://emerald-mdphd.eu/",
-    why: "The first Europe-wide doctoral programme designed specifically for medical doctors rather than for science graduates who happen to accept doctors. It exists precisely because the physician-scientist pipeline was broken, and it recruits a small cohort across seven European institutes. If you have wondered whether anyone builds a route for people exactly like you, this is that route.",
-    reqs: ["A medical degree — MBBS qualifies", "Research interest matched to one of the consortium centres", "English; no other language required", "Mobility rule: you generally cannot have lived in the host country for long recently"],
-    steps: [
-      "Read the consortium list first and identify the two centres whose work genuinely overlaps with your question.",
-      "Cohort recruitment is periodic rather than annual — check the site every few months rather than assuming a fixed date.",
-      "Because it is Marie Skłodowska-Curie style funding, the salary and conditions are unusually good and the mobility rules are strict. Read them before you invest.",
-      "Contact a supervisor at your target centre before the call opens. Every European doctoral application improves with that."
-    ],
-    zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
-  },
-  {
     id: "fmi-basel",
-    name: "International MD-PhD Programme",
+    name: "FMI MD-PhD Program",
     org: "Friedrich Miescher Institute & University of Basel, Switzerland",
     type: "phd", country: "Switzerland", city: "Basel",
     fields: ["biochem", "genomics", "neuro", "onco", "compbio"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full Swiss doctoral salary — among the highest in the world",
-    duration: "3–4 years",
-    window: "Annual call, typically closing in the first half of the year",
-    deadlineMonths: [1, 2, 3, 4, 5],
+    money: "Paid on the Swiss National Science Foundation doctoral scale, among the highest in the world",
+    duration: "Typically 4 years",
+    window: "Two rounds a year. Autumn: opens 1 September, closes 15 November 2026, interviews January 2027. Spring: closes in May for June selection",
+    deadlineMonths: [3, 4, 5, 9, 10, 11],
     url: "https://www.fmi.ch/education-careers/programs/",
-    why: "Built for medical students and physicians who want serious bench or computational research, affiliated with the Novartis research institutes and the Basel medical faculty. The combination of a clinical degree, a Swiss salary and industry proximity is rare.",
-    reqs: ["Medical degree or final-year medical student", "Strong research motivation and ideally some prior lab exposure", "English only"],
+    why: "Launched in 2016 for people who have studied medicine and want a real PhD in fundamental biology, with the Basel medical faculty behind the degree and Novartis research next door. The entry rule is a degree that would qualify you for residency, which an MBBS does, so this is one of the few MD-PhD programmes outside your own country that is written for someone exactly like you.",
+    reqs: [
+      "A medical degree that qualifies you for clinical training or residency, held or expected before enrolment",
+      "Some laboratory research experience and an experimental Master's or Diploma thesis, which the University of Basel must approve. This is the hurdle for most MBBS graduates: a published project with real bench or computational work is what stands in for it, and only the programme can say whether yours does.",
+      "English only"
+    ],
     steps: [
-      "Apply through the FMI PhD programme portal, flagging the MD-PhD track specifically.",
-      "Interviews are held in Basel or remotely; the scientific discussion is the whole assessment.",
-      "The Swiss Government Excellence Scholarship is a parallel route to the same institutions — apply to both."
+      "Before anything else, write to info.mdphd@fmi.ch with a one-page summary of your research experience and ask whether it meets the experimental-thesis requirement. It costs a day and decides whether the rest is worth doing.",
+      "Apply through the separate MD-PhD form, not the general PhD one. Deadlines fall about two months before each selection: mid-November for January, May for June.",
+      "Selection is an interview in Basel or remotely, and the scientific discussion is the whole assessment.",
+      "The Swiss Government Excellence Scholarship is a parallel route to Swiss institutions. Apply to both."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
   {
     id: "pasteur-mdphd",
-    name: "MD-PhD Programme",
-    org: "Institut Pasteur, Paris",
+    name: "PPU MD-PhD: Pasteur-Paris University International Doctoral Program",
+    org: "Institut Pasteur, with Université Paris Cité, Sorbonne Université and Université Paris-Saclay",
     type: "phd", country: "France", city: "Paris",
     fields: ["infect", "biochem", "genomics", "neuro", "global"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Funded doctoral position with a stipend; French public tuition is negligible",
-    duration: "3–4 years",
-    window: "Annual call, typically opening in the first quarter",
-    deadlineMonths: [1, 2, 3, 4],
-    url: "https://www.pasteur.fr/en/education",
-    why: "Institut Pasteur is one of the great research institutions in the history of medicine, and it explicitly designs this programme to bridge clinical practice and fundamental research. Infectious disease and global health work here is world-leading and directly relevant to Indian disease burden.",
-    reqs: ["Medical degree", "Research project aligned with a Pasteur unit", "English is sufficient for the science; French helps for life in Paris"],
+    money: "A three-year salaried contract from Institut Pasteur, with health insurance, unemployment insurance and a pension",
+    duration: "3 years",
+    window: "The call for October 2027 entry runs 1 October to 16 November 2026. Shortlisted candidates interview in early February; results by mid-February",
+    deadlineMonths: [10, 11],
+    url: "https://www.pasteur.fr/en/about-us/our-missions/education/training-programs/doctoral-programs/pasteur-paris-university-international-doctoral-program-ppu",
+    why: "Institut Pasteur runs an MD-PhD track inside its international doctoral programme and says in writing that it wants international MDs and medical students, not only French ones. Infectious disease and epidemiology here are world-leading and map directly onto the disease burden you already treat, and the PhD comes as a salaried job with benefits rather than a stipend.",
+    reqs: [
+      "A master's degree or the equivalent in life or medical sciences. The MD-PhD track names international MDs and medical students; confirm with phd@pasteur.fr that your MBBS is read as the equivalent.",
+      "Chosen first by a host laboratory: you may apply to up to four posted projects, and each laboratory can put forward only one candidate",
+      "No more than 12 months' residence in France in the three years before the deadline",
+      "English; no French required"
+    ],
     steps: [
-      "Identify the Pasteur unit first. The institute is a federation of units and the unit matters more than the brand.",
-      "Contact the unit head with a specific question about their published work.",
-      "Combine with the Charpak or Eiffel scholarship routes if the internal funding does not cover everything."
+      "Read the projects posted on the call page from 1 October and pick up to four whose published work you can discuss in detail.",
+      "Contact those laboratories early. The first cut is theirs: a lab presents one candidate per project, so the conversation with the group leader is the real selection.",
+      "Submit through the application platform only (email applications are refused) with a CV and a motivation letter, by 16 November 2026.",
+      "If shortlisted, prepare to present past and future work at the February interview."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -414,7 +403,6 @@ window.DB.research.push(
 /* ═══════════ impact tiers for the expansion set ═══════════ */
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "emerald-mdphd":     { t: 1, odds: "24 places across Europe per cohort", effort: "30 hrs", note: "A doctoral programme designed for medical doctors rather than one that merely tolerates them. If the physician-scientist path is what you want, this was built for you." },
   "fmi-basel":         { t: 1, odds: "~5 %", effort: "20 hrs", note: "Clinical degree, Swiss salary and Novartis proximity in one place. Rare combination." },
   "pasteur-mdphd":     { t: 1, odds: "~8 %", effort: "20 hrs", note: "Pick the unit, not the brand. Pasteur is a federation and the unit is what you actually join." },
   "uk-acf":            { t: 1, odds: "Competitive but IMG-accessible in psychiatry", effort: "Follows GMC registration", note: "A quarter of your working week protected for research, on a full salary, while you train. The answer to 'do I have to choose?'" },

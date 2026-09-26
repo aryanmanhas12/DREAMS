@@ -203,19 +203,20 @@ window.DB.research.push(
     org: "Center for Policy Impact in Global Health, Duke University",
     type: "fellowship", country: "Global", city: "Remote and Durham, USA",
     fields: ["pubhealth", "global", "systems"],
-    stages: ["intern", "grad", "pg"], funding: "paid",
+    stages: ["pg"], funding: "paid",
     money: "Paid fellowship · stipend set per cohort",
-    duration: "Fixed term, set per cohort",
-    window: "Calls are announced on the Center's own page rather than aggregated anywhere",
-    deadlineMonths: [2, 3, 9, 10],
+    duration: "2–5 months of in-country preparation, then 8 weeks on site at Duke",
+    window: "The Center's page says the application process is currently closed and gives no next date (checked September 2026)",
+    deadlineMonths: [],
+    noOpenCall: true,
     url: "https://centerforpolicyimpact.org/about/fellows-program/",
-    why: "A paid policy fellowship that names India in its own list of focus countries, alongside Ghana, Kenya, Myanmar, Nigeria and Sri Lanka. Most global health policy work is done to countries like yours by people from somewhere else; this is one of the few doors built the other way round, and it is aimed at health financing and governance rather than bench research.",
+    why: "A paid policy fellowship that names India in its own list of focus countries, alongside Ghana, Kenya, Myanmar, Nigeria and Sri Lanka. Most global health policy work is done to countries like yours by people from somewhere else; this is one of the few doors built the other way round, and it is aimed at health financing and governance rather than bench research. It is a mid-career door: the Center asks for a master's and five years of relevant work, and its call is closed at present, so treat it as a target for later rather than something to apply to now.",
     reqs: [
-      "Applications invited from candidates in low- and middle-income countries",
-      "India is named among the preferred focus countries",
+      "At least a master's degree and at least five years of relevant work experience",
+      "From a low- or middle-income country, with India among the countries given preference",
       "A background in health policy, health financing and delivery, or government financing of health services",
-      "Experience conducting health research, quantitative or qualitative, is preferred rather than required",
-      "Early- to mid-career researchers particularly encouraged"
+      "Available to be a resident fellow at Duke University in Durham, North Carolina, for the on-site phase",
+      "Experience conducting health research, quantitative or qualitative, is preferred rather than required"
     ],
     steps: [
       "Read two of the Center's own working papers before applying and reference them specifically. The applicant pool here is small enough that a generic letter is obvious.",
@@ -223,7 +224,7 @@ window.DB.research.push(
       "Health financing is the part clinicians consistently skip and the part this field actually runs on. A free course in health economics closes more of the gap than another clinical posting.",
       "Watch their page directly. This role is not advertised through the usual scholarship aggregators."
     ],
-    indiaSpecific: false, competitiveness: "high", workExp: 1
+    indiaSpecific: false, competitiveness: "high", workExp: 5
   },
   {
     id: "dth-lab",
@@ -280,7 +281,7 @@ window.DB.research.push(
 
 Object.assign(window.DB.impact, {
   "openwho":        { t: 3, odds: "Open to everyone, always", effort: "Hours per course, free", note: "The cheapest credible line you can add to a CV this month, and the one that makes a cold email to a global health researcher read as serious. Three deep courses beat fifteen scattered ones." },
-  "cpigh-policy":   { t: 1, odds: "Small pool, and India is a named focus country", effort: "A real health-systems piece of work first, then the application", note: "Most global health policy is done to countries like yours by people from elsewhere. This is one of the few doors built the other way round, and it is paid." },
+  "cpigh-policy":   { t: 2, odds: "Small pool, and India is a named focus country", effort: "A master's and five years of health-systems work first", note: "Most global health policy is done to countries like yours by people from elsewhere. This is one of the few doors built the other way round, and it is paid, but it asks for a master's and five years' experience and its call is closed at present." },
   "dth-lab":        { t: 2, odds: "Small cohort, narrow eligibility that works in your favour", effort: "An application and a reading week", note: "Aged 30 or under and based in an LMIC. A ceiling that makes this easier as a student than it will ever be again. Digital health rules are being written now; this is a seat at that table." },
   "takemi-harvard": { t: 2, odds: "Mid-career only — years away for a student", effort: "A decade of health-systems record", note: "Listed so you can aim at it, not apply to it. Read where its fellows worked before their year and you have a map of the career." }
 });

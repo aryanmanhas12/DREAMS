@@ -91,10 +91,16 @@
     return { x: cx + R * x0, y: cy - R * y, z: z };
   }
 
-  window.initGlobe = function initGlobe(canvas, labelEl, onPick) {
+  /* opts.autoSpin (default true): the hero globe drifts on its own. The atlas
+     globe further down the page does not; it only moves when the reader's
+     position asks it to, via focus(). A globe that turns by itself beside text
+     that is trying to point at a region would be arguing with the text. */
+  window.initGlobe = function initGlobe(canvas, labelEl, onPick, opts) {
     if (!canvas || !canvas.getContext) return null;
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
+    opts = opts || {};
+    const autoSpin = opts.autoSpin !== false;
 
     // Count programmes per country straight from the database.
     const counts = {};
@@ -117,6 +123,10 @@
     let dragging = false, lastX = 0, lastY = 0, idleAt = 0, hovered = null;
     let W = 0, H = 0, R = 0, cx = 0, cy = 0, dpr = 1;
     let raf = null, running = false;
+    // Where focus() is steering to, and which dots belong to the region being
+    // read about. Dots outside it are dimmed, never hidden: the rest of the
+    // world is still there, it is just not the subject of this paragraph.
+    let target = null, focusSet = null;
 
     const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -145,13 +155,17 @@
       // faint halo just outside the limb is what gives it air around it and
       // reads as a planet rather than a diagram. Two stops only, both weak — the
       // moment this is visible as a ring it looks like a glow effect.
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.86, cx, cy, R * 1.2);
+      // The outer radius is capped at the canvas edge: R * 1.2 overshoots it on
+      // any canvas wider than ~170px, and a gradient cut off before it reaches
+      // zero paints a hard-edged square around the globe.
+      const haloR = Math.min(R * 1.2, Math.min(W, H) / 2);
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.86, cx, cy, haloR);
       halo.addColorStop(0, withAlpha(accent, 0.16));
       halo.addColorStop(0.55, withAlpha(accent, 0.06));
       halo.addColorStop(1, withAlpha(accent, 0));
       ctx.fillStyle = halo;
       ctx.beginPath();
-      ctx.arc(cx, cy, R * 1.2, 0, Math.PI * 2);
+      ctx.arc(cx, cy, haloR, 0, Math.PI * 2);
       ctx.fill();
 
       // Body: a barely-there fill so the near hemisphere is a surface the
@@ -233,10 +247,11 @@
       drawn.forEach(function (d) {
         const isHome = d.pl.name === HOME;
         const isHover = hovered && hovered.name === d.pl.name;
+        const outside = focusSet && !focusSet.has(d.pl.name);
         // Radius carries the count; depth only fades opacity.
         const r = 2.2 + (d.pl.n / maxN) * 4.6;
         const depth = Math.max(0, Math.min(1, d.p.z));
-        ctx.globalAlpha = 0.25 + depth * 0.75;
+        ctx.globalAlpha = (0.25 + depth * 0.75) * (outside ? 0.28 : 1);
 
         if (isHome) {
           ctx.beginPath();
@@ -262,13 +277,33 @@
       ctx.globalAlpha = 1;
     }
 
+    // Shortest way round, so a turn from Australia to the UK goes west rather
+    // than all the way east.
+    function angleDelta(from, to) {
+      return ((to - from + 540) % 360 + 360) % 360 - 180;
+    }
+
     function tick() {
+      raf = null;
       if (!running) return;
-      // The world keeps turning when nobody is holding it — but stays where you
-      // put it for a beat after you let go.
-      if (!dragging && !reduced && Date.now() - idleAt > 1800) spin += 0.12;
+      if (target && !dragging) {
+        const ds = angleDelta(spin, target.spin), dt = target.tilt - tilt;
+        spin += ds * 0.075;
+        tilt += dt * 0.075;
+        if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05) { spin = target.spin; tilt = target.tilt; target = null; }
+      } else if (autoSpin && !dragging && !reduced && Date.now() - idleAt > 1800) {
+        // The world keeps turning when nobody is holding it — but stays where
+        // you put it for a beat after you let go.
+        spin += 0.12;
+      }
       draw();
-      raf = requestAnimationFrame(tick);
+      // A globe without auto-spin draws only while it has somewhere to go,
+      // so the atlas costs nothing once it has arrived.
+      if (autoSpin || target || dragging) raf = requestAnimationFrame(tick);
+    }
+
+    function kick() {
+      if (running && !raf) raf = requestAnimationFrame(tick);
     }
 
     function hitTest(mx, my) {
@@ -297,8 +332,10 @@
 
     canvas.addEventListener("pointerdown", function (e) {
       dragging = true; lastX = e.clientX; lastY = e.clientY;
+      target = null;           // a hand on the globe outranks the page steering it
       canvas.setPointerCapture(e.pointerId);
       canvas.classList.add("is-grabbing");
+      kick();
     });
 
     canvas.addEventListener("pointermove", function (e) {
@@ -308,14 +345,14 @@
         tilt = Math.max(-70, Math.min(70, tilt + (e.clientY - lastY) * -0.3));
         lastX = e.clientX; lastY = e.clientY;
         idleAt = Date.now();
-        if (reduced) draw();
+        if (!raf) draw();
       } else {
         const hit = hitTest(pt.x, pt.y);
         if ((hit && hit.name) !== (hovered && hovered.name)) {
           hovered = hit;
           setLabel(hit);
           canvas.style.cursor = hit ? "pointer" : "grab";
-          if (reduced) draw();
+          if (!raf) draw();
         }
       }
     });
@@ -332,7 +369,7 @@
     canvas.addEventListener("pointerleave", function () {
       if (dragging) return;
       hovered = null; setLabel(null);
-      if (reduced) draw();
+      if (!raf) draw();
     });
 
     canvas.addEventListener("click", function (e) {
@@ -360,21 +397,31 @@
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         const visible = entries.some((en) => en.isIntersecting);
-        if (visible && !running) { running = true; raf = requestAnimationFrame(tick); }
-        else if (!visible && running) { running = false; if (raf) cancelAnimationFrame(raf); }
+        if (visible && !running) { running = true; kick(); }
+        else if (!visible && running) { running = false; if (raf) cancelAnimationFrame(raf); raf = null; }
       }, { threshold: 0.05 }).observe(canvas);
     } else {
-      running = true; raf = requestAnimationFrame(tick);
+      running = true; kick();
     }
 
     resize();
     setLabel(null);
     draw();
-    if (!running) { running = true; raf = requestAnimationFrame(tick); }
+    if (!running) { running = true; kick(); }
 
     return {
       redraw: function () { resize(); draw(); },
-      countries: places.length
+      countries: places.length,
+      /* Turn to a point and pick out the countries a passage is about. Under
+         reduced motion it cuts straight there: the information is the same,
+         only the journey is dropped. */
+      focus: function (lat, lon, names) {
+        focusSet = names && names.length ? new Set(names) : null;
+        const t = { spin: -lon, tilt: Math.max(-55, Math.min(55, lat * 0.85)) };
+        if (reduced || !running) { spin = t.spin; tilt = t.tilt; target = null; draw(); return; }
+        target = t;
+        kick();
+      }
     };
   };
 })();

@@ -27,45 +27,37 @@ window.DB.meta = {
   /* What that pass actually covered, so the stamp does not over-claim. Spot
      checks are not a full audit and the interface should not imply one.
 
-     This cycle re-swept all 180 links from an unrestricted host and, for the
-     first time, checked the failures against a public resolver rather than
-     trusting the sweep box. That distinction found the pass's real work.
-     Three domains in this index have stopped existing — NXDOMAIN, confirmed
-     independently, not a firewall and not bot protection:
+     This is the second September pass. It re-read three groups of entries
+     against their official pages: the UN, Germany and Australia routes; every
+     tier-1 programme the index marked open this month, plus each programme
+     the scroll atlas names as a region's highest-graded; and the tier-2
+     entries whose own window text contradicted an "open" badge.
 
-       felixscholarship.org.uk  the Felix Scholarship's own site
-       medengage.in             MedEngage
-       cpcourse.org             the Computational Psychiatry Course
+     It found more wrong than right in that last group, and the errors were
+     the dangerous kind: an open badge on something that cannot be entered.
 
-     All three programmes are alive; only their addresses died. Felix now runs
-     through its partner universities, MedEngage moved to med-engage.com, and
-     the Zurich course sits under the TNU's own domain. Every one is repointed.
+       EMERALD, the European PhD for medical doctors, was listed as recruiting.
+       Its last call closed on 28 August 2022 and its grant ends in June 2027;
+       only its search description still says the call is open. Now skipList.
+       Amgen Scholars told Indian students to apply to the Europe programme,
+       which takes only students enrolled in a Bologna-process country. Only
+       the Asia hosts are open from India, and they close 1 February.
+       ICGEB's Falaschi PhD fellowships were said to accept MBBS. They name a
+       BSc (Honours) or an MSc. The door that names MBBS is the ICGEB-JNU PhD
+       in New Delhi, which also needs a JRF-level fellowship in hand.
+       Harvard's MPH-45 was described as requiring a doctoral degree that MBBS
+       satisfies; it takes a master's or doctoral degree, or in some fields a
+       bachelor's plus five years, as read through WES. One deadline, 1 Dec.
+       Auckland's PhD asks for a thesis-bearing honours or master's degree, so
+       the New Zealand domestic-fee doctorate opens after an MD or MS.
+       The Duke policy fellowship wants a master's and five years' work, and
+       its call is closed. Schwarzman closed on 9 September. Gates Cambridge
+       moved to 8 December or 6 January. BIRAC BIG has not run a call since
+       November 2025. FMI Basel's MD-PhD needs an approved experimental thesis.
 
-     Checking Felix turned up a second error worth more than the link. This
-     index listed its partners as Oxford, Cambridge, SOAS, Reading and LSHTM,
-     and told public-health applicants that "LSHTM is a Felix partner, which
-     makes this one of the best public-health funding routes available". Felix
-     runs at three universities: Oxford, Reading and SOAS. Cambridge and LSHTM
-     are not among them, so that sentence sent people to build a plan around a
-     scholarship they could not hold there.
-
-     The US PhD entry had an eligibility trap of the DAAD WISE kind. It linked
-     to the NSF Graduate Research Fellowship, which requires US citizenship,
-     national status or a green card, so an Indian applicant is excluded before
-     the first question. The entry's substance was right — US doctorates are
-     salaried and MBBS is accepted, but the link pointed at the one route
-     closed to the reader. It now points at a real departmental admissions page
-     and names the GRFP as the trap it is, because it is the first thing anyone
-     searching will find.
-
-     Two links had drifted and were repointed: the J N Tata Endowment loan
-     scholarship and the Inlaks scholarship page. ICMR-STS was re-read against
-     the DHR portal and is correct as written, including the ₹60,000 stipend,
-     the 1st and 2nd professional year restriction, and the 30 May close that
-     DHR extended to 10 June. Nothing else in the Indian schemes had moved.
-
-     What this pass did NOT do: re-verify all 161 fixed-window deadlines
-     one by one. The Indian schemes and the dead links were the priority, and
-     the rest carry the dates confirmed in the August pass. */
-  scope: "All 180 links re-swept and every failure re-checked against a public resolver, which found three programmes whose domains have lapsed (Felix, MedEngage, the Zurich computational psychiatry course), all now repointed; the Felix partner list corrected from five universities to the three that actually run it; and an NSF fellowship closed to Indian nationals removed from the US doctorate entry and named as a trap."
+     What this pass did NOT do: re-verify the generic cycles (US PhD
+     admissions, most US MPH programmes, conference abstract windows) or the
+     145 entries not marked open this month. Those carry the dates
+     confirmed in the August pass. */
+  scope: "The UN, Germany and Australia routes, and every tier-1 programme marked open in September 2026, re-read against official pages. That found an EU doctorate for doctors whose last call closed in 2022, two programmes whose stated degree rules exclude a bare MBBS (ICGEB's Falaschi fellowships and Auckland's PhD), Amgen's Europe programme wrongly listed as open to students in India, and stale dates for Gates Cambridge, Schwarzman and Harvard's MPH-45, all corrected."
 };

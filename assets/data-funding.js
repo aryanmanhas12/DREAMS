@@ -155,7 +155,7 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full cost of study + maintenance allowance + family, fieldwork and conference allowances",
     duration: "Full length of an MPhil or PhD",
-    window: "International round closes 3 Dec OR 7 Jan. It depends on your course, so check the course directory",
+    window: "Entry 2027/28: opened 11 September 2026. The deadline is your course's funding deadline, either Tuesday 8 December 2026 or Wednesday 6 January 2027, 11:59pm UK time, so check the course directory. Outcomes by 8 March; interview panels 22–23 March 2027",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.gatescambridge.org/apply/how-to-apply/",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
@@ -165,10 +165,10 @@ window.DB.funding = [
       "One application form covers both the course and the scholarship"
     ],
     steps: [
-      "The international-round deadline in early December is earlier than the course deadline. Use the December one.",
+      "Apply by the Course Funding Deadline shown on your course's page in the University Course Directory. It is either 8 December or 6 January, and it can be earlier than the course's own admission deadline.",
       "Tick the Gates Cambridge funding box on the Cambridge Graduate Application. There is no separate form.",
       "The 'commitment to improving the lives of others' section is scored. Write about what you have actually done, at whatever scale you did it.",
-      "Shortlisted candidates are interviewed in late January."
+      "Shortlisted candidates in the international round face panels on 22 and 23 March 2027. The late-January panels are for the separate round for US citizens living in the US."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -483,7 +483,8 @@ window.DB.funding = [
     money: "A government grant to your Australian university to fund your PhD; the amounts are set in each round's grant guidelines",
     duration: "Up to 4 years",
     window: "Universities apply, not students. The 2025-26 round opened in late 2025 and has closed; a 2026-27 round had not been published at last check",
-    deadlineMonths: [9, 10, 11, 12, 1],
+    deadlineMonths: [],
+    noOpenCall: true,
     url: "https://www.grants.gov.au/Fo/Show?FoUuid=a48c97d8-cdcf-41ce-a65c-55a3f90561d7",
     why: "The one Australian government PhD award built specifically for Indian scholars. The 2025-26 round named health among its priority fields, alongside agribusiness, clean energy and technology, and the round before that listed life sciences and medical technology. You cannot apply directly: an Australian university applies and nominates you, which means the route runs through a supervisor who wants you. Many listings describe Maitri only as a manufacturing, critical-minerals and clean-energy award, which is how a health applicant misses it.",
     reqs: [

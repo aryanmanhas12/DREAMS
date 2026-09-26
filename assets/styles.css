@@ -237,7 +237,9 @@ body {
 
 .skip {
   position: absolute; left: -9999px; top: 0; z-index: 100;
-  background: var(--accent); color: #fff; padding: 12px 18px;
+  /* --paper, not #fff: the dark accent is a bright teal, and white on it
+     measured 1.53:1 on the one control a keyboard user meets first. */
+  background: var(--accent); color: var(--paper); padding: 12px 18px;
 }
 .skip:focus { left: 8px; top: 8px; }
 
@@ -257,17 +259,9 @@ body {
 }
 .topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 62px; }
 
-/* A script face sets much wider than a serif at the same nominal size, so the
-   wordmark that fits at 390px pushes the theme and menu buttons off a 320px
-   screen. Step it down rather than truncating it — a clipped wordmark looks
-   broken, a smaller one does not. */
-@media (max-width: 400px) {
-  .topbar-in { gap: 10px; }
-  .brand { min-width: 0; }
-  .brand-text { font-size: 1.02rem; }
-}
-
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+/* min-height, because the smaller wordmark under 400px left the home link
+   32px tall; the 62px bar has the room, so the target grows into it. */
+.brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .brand-mark {
   width: 15px; height: 15px; flex: none; border-radius: 50%;
   border: 2px solid var(--accent);
@@ -285,6 +279,19 @@ body {
 .brand-text em {
   font-family: var(--font-script); font-style: normal; font-weight: 400;
   font-size: 1.18em; color: var(--accent); padding-left: .12em;
+}
+
+/* A script face sets much wider than a serif at the same nominal size, so the
+   wordmark that fits at 390px pushes the theme and menu buttons off a 320px
+   screen. Step it down rather than truncating it — a clipped wordmark looks
+   broken, a smaller one does not. This block must come AFTER the base
+   .brand-text rule: it sat above it for a long time, lost the cascade to the
+   later rule of equal specificity, and the wordmark ran under the theme
+   button at 320px while the rule that was meant to prevent it looked fine. */
+@media (max-width: 400px) {
+  .topbar-in { gap: 10px; }
+  .brand { min-width: 0; gap: 8px; }
+  .brand-text { font-size: .98rem; }
 }
 
 .topnav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
@@ -1773,3 +1780,93 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
   font-size: .92rem; color: var(--accent);
 }
 .foot-map a:hover { color: var(--ink); }
+
+/* ─────────────── atlas ───────────────
+   The scroll chapter under the hero. A second globe stays in view while the
+   regions pass by, and turns to whichever one is being read. The motion is
+   the content: it answers "where are these?" in the time it takes to scroll.
+   Nothing here hijacks scrolling, and every region is complete as text.
+
+   Phones: the globe sticks under the topbar on an opaque ground, so the text
+   passes cleanly beneath it rather than through it, and it only claims
+   horizontal drags (pan-y) so a thumb landing on it still scrolls the page.
+   The hero globe can take every gesture because it is not in the way of
+   reading; this one is, so it must not trap the scroll. */
+.atlas { border-top: 1px solid var(--line-soft); margin-top: 56px; padding: 8px 0 28px; }
+.atlas-in { position: relative; }
+.atlas-stage {
+  position: sticky; top: 62px; z-index: 2;
+  margin: 0; height: 36vh; height: 36svh; min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line-soft);
+}
+#atlasCanvas {
+  display: block; height: 100%; width: auto; max-width: 100%; aspect-ratio: 1;
+  cursor: grab; touch-action: pan-y;
+}
+#atlasCanvas.is-grabbing { cursor: grabbing; }
+.atlas-steps { position: relative; z-index: 1; }
+.atlas-head { padding: 30px 0 4px; }
+.atlas-intro { max-width: 60ch; margin: 0; color: var(--ink-2); line-height: 1.65; }
+.atlas-step {
+  min-height: 58vh; min-height: 58svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 34px 0; border-top: 1px solid var(--line-soft);
+}
+.atlas-head + .atlas-step { border-top: 0; }
+.atlas-tag {
+  margin: 0 0 10px; font-family: var(--font-mono); font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3);
+}
+/* The only state change on a step: its number takes the accent while it is
+   the region on the globe. Text never fades, because faded body copy is
+   copy that fails contrast for whoever is reading ahead. */
+.atlas-tag span { margin-right: .6em; transition: color .3s ease; }
+.atlas-step.is-active .atlas-tag span { color: var(--accent); }
+.atlas-step h3 {
+  margin: 0 0 12px; font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.45rem, 3.2vw, 2.05rem); line-height: 1.15; text-wrap: balance;
+}
+.atlas-copy { margin: 0 0 18px; max-width: 58ch; line-height: 1.65; color: var(--ink-2); }
+.atlas-facts {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px; margin: 0 0 16px; max-width: 460px;
+  background: var(--line-soft); border: 1px solid var(--line-soft);
+}
+.atlas-facts > div { background: var(--paper); padding: 12px 12px 10px; display: flex; flex-direction: column; gap: 6px; }
+.atlas-facts dt {
+  margin: 0; font-family: var(--font-mono); font-size: .64rem;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3);
+}
+.atlas-facts dd {
+  margin: auto 0 0; font-family: var(--font-display); font-weight: 600;
+  font-size: 1.7rem; line-height: 1; color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.atlas-pick { margin: 0 0 18px; max-width: 58ch; font-size: .95rem; line-height: 1.55; color: var(--ink-2); }
+.atlas-pick b { color: var(--ink); font-weight: 600; }
+.atlas-pick:empty { display: none; }
+.atlas-go { align-self: flex-start; }
+
+/* Desktop: the globe takes the left column and stays centred in the viewport
+   while the regions scroll on the right. The stage sticks within the row the
+   two columns share, which is why the grid aligns to the start. */
+@media (min-width: 920px) {
+  .atlas-in {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 5vw, 80px); align-items: start;
+  }
+  .atlas-stage {
+    top: 86px; height: calc(100vh - 124px); height: calc(100dvh - 124px);
+    background: transparent; border-bottom: 0;
+  }
+  #atlasCanvas { width: min(100%, calc(100vh - 170px)); height: auto; }
+  .atlas-head { padding-top: 12vh; }
+  .atlas-step { min-height: 76vh; min-height: 76svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-tag span { transition: none; }
+}
+.atlas.no-globe .atlas-stage { display: none; }

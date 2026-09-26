@@ -76,20 +76,20 @@ window.DB.funding.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition, room and board at Schwarzman College, round-trip airfare, in-country study tours, a laptop and a personal stipend",
     duration: "1-year Master's in Global Affairs",
-    window: "Opens spring · closes early October",
-    deadlineMonths: [4, 5, 6, 7, 8, 9, 10],
+    window: "The round for 2027-28 closed on 9 September 2026. The Global round for 2028-29 runs from April 2027 to September 2027; interviews follow in late October and early November",
+    deadlineMonths: [4, 5, 6, 7, 8],
     url: "https://www.schwarzmanscholars.org/admissions/",
     why: "A one-year, fully funded Master's in Global Affairs at Tsinghua built explicitly around leadership across public health, economics, technology and policy — open to any nationality, any first degree, no GPA cut-off published. For an MBBS graduate aiming at health policy or global health leadership rather than a lab bench, this is a faster and less specialised route than a two-year MPH, and it is barely applied to from Indian medical schools.",
     reqs: [
       "Bachelor's degree or equivalent completed by the programme's August start",
-      "Aged 18 to 29 as of 1 August of the enrolment year",
+      "At least 18 and not yet 29 on 1 August of the enrolment year (for the class of 2028-29, 1 August 2028)",
       "Strong English; the programme is taught in English",
       "A leadership record — student government, research leadership, organising, not necessarily healthcare-specific"
     ],
     steps: [
       "Write the essays around a genuinely health-systems angle — reviewers see enough generic 'China is rising' essays that a specific, medical-background argument stands out.",
       "Two references who can speak to leadership, not just academic performance, matter more here than in a typical scholarship.",
-      "The interview round (for shortlisted candidates) is conducted in person or by video in late autumn/winter — keep that window free.",
+      "Shortlisted candidates interview in late October and early November before an international panel. Keep that window free.",
       "One year is short by design: treat it as a credential and network year before returning to clinical practice, an MPH, or policy work, not as a destination in itself."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0

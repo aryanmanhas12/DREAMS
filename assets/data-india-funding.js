@@ -206,15 +206,15 @@ window.DB.study.push(
     org: "University of Otago · University of Auckland · and the other NZ universities",
     type: "phd", country: "New Zealand", city: "Dunedin, Auckland, Wellington, Christchurch",
     fields: ["pubhealth", "clinical", "neuro", "genomics", "global", "env"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "Tuition ≈ NZ$8,800/year at the domestic rate, against NZ$45,000+ charged to international doctoral students almost everywhere else · Otago's doctoral scholarship adds NZ$34,128/year plus a fee waiver for 36 months",
+    stages: ["pg"], funding: "full",
+    money: "Tuition at the domestic rate: NZ$8,347.20 a year at Auckland in 2025, under US$5,000 · Otago's doctoral scholarship adds NZ$34,128/year plus a fee waiver for 36 months",
     duration: "3–4 years",
     window: "Applications accepted year-round · Otago assesses scholarships in quarterly rounds",
     deadlineMonths: [3, 6, 9, 11],
     url: "https://www.auckland.ac.nz/en/study/international-students/study-options-for-international-students/postgraduate-study-for-international-students/doctoral-programmes-international-students.html",
-    why: "A government scheme lets New Zealand universities charge international PhD candidates what they charge New Zealanders. The comparison is not subtle: the same degree costs a fifth of what it costs in Australia or the UK, and that is the sticker price before any scholarship. It is the least-known affordability fact in this entire index, and it exists because the country is trying to attract research students rather than bill them.",
+    why: "A government scheme lets New Zealand universities charge international PhD candidates what they charge New Zealanders. The comparison is not subtle: Auckland states its annual doctoral fee as under US$5,000, a fraction of what an international PhD costs in Australia or the UK, and that is before any scholarship. The entry bar is a research degree: Auckland asks for a thesis-bearing honours or master's degree, so for an Indian doctor this door opens after an MD or MS, whose thesis is exactly what it wants to see.",
     reqs: [
-      "A research degree or a strong research record; MBBS is accepted as the qualifying degree",
+      "A significant research project such as a dissertation or thesis, and an honours or master's degree at a B+ equivalent (Auckland typically wants a Grade Point Equivalent of 6.0 for overseas grades). MBBS alone is not named; an Indian MD or MS, which requires a thesis, is the matching qualification",
       "You must RESIDE in New Zealand for the doctorate to keep the domestic rate — research abroad is capped at about 12 months cumulative",
       "A supervisor who has agreed to take you, which is the real gate rather than the paperwork",
       "IELTS or equivalent English evidence"
@@ -260,7 +260,7 @@ window.DB.residency.push(
 );
 
 Object.assign(window.DB.impact, {
-  "nz-doctorate": { t: 1, odds: "Turns on finding a supervisor, not on a competition", effort: "Emails to supervisors, then one application", note: "International candidates pay the DOMESTIC tuition rate — roughly NZ$8,800 against NZ$45,000+ elsewhere. The single most useful affordability fact in this index, and almost nobody outside New Zealand knows it." },
+  "nz-doctorate": { t: 1, odds: "Turns on finding a supervisor, not on a competition", effort: "Emails to supervisors, then one application", note: "International candidates pay the DOMESTIC tuition rate, which Auckland puts at under US$5,000 a year. The door opens after an MD or MS, because the entry rule asks for a thesis-bearing degree, and it is the single most useful affordability fact in this index for a doctor who wants a PhD abroad." },
   "nzrex":        { t: 2, odds: "Smaller pool than the USMLE or AMC", effort: "A qualifying exam, then NZREX, then a PGY1 hunt", note: "Cheaper and less contested than the usual routes, with one catch worth knowing first: passing the exam does not register you, securing a PGY1 post does, and those posts are the real bottleneck." }
 });
 
@@ -278,8 +278,9 @@ window.DB.research.push(
     stages: ["clin", "intern", "grad", "pg"], funding: "full",
     money: "Up to ₹50 lakh grant-in-aid over 18 months · no equity taken",
     duration: "Up to 18 months",
-    window: "Calls open roughly twice a year · check the live call before planning",
-    deadlineMonths: [3, 9],
+    window: "BIRAC's page says calls open on 1 January and 1 July for about 45 days, but the 25th call actually ran 1–30 November 2025 and none has been listed since (checked September 2026). Watch the call-for-proposals page rather than the calendar",
+    deadlineMonths: [],
+    noOpenCall: true,
     url: "https://birac.nic.in/big.php",
     why: "The largest sum in this index that an individual student can hold, and almost no medical student applies. BIRAC's own eligibility names medical degree holders alongside PhDs and biomedical engineers, so a clinician with a diagnostic or device idea is inside the intended audience rather than at its edge. Doctors see the unmet need every day in outpatients; the people who usually win these grants have to go looking for it.",
     reqs: [

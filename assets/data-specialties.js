@@ -66,7 +66,7 @@ window.DB.specialties = [
     india: "MD Community Medicine (3 years) via NEET-PG — historically among the easier MD seats to obtain, which says nothing about the ceiling of the career. Alternatively an MPH at PGIMER, PHFI's Indian Institutes of Public Health, TISS or CMC Vellore.",
     abroad: [
       "UK — Public Health specialty training, or MSc/MPH at LSHTM, which is the global reference institution",
-      "USA — MPH then a career at the CDC, WHO, Gates Foundation, PATH or a university; Harvard's accelerated MPH-45 accepts MBBS as the doctoral degree",
+      "USA — MPH then a career at the CDC, WHO, Gates Foundation, PATH or a university; Harvard's one-year MPH-45 takes a master's or doctoral degree, and in Global Health and Health Policy a bachelor's plus five years of work; WES decides which your MBBS counts as",
       "Australia — the ANU Master of Applied Epidemiology places you inside a health department doing real outbreak investigation as your degree",
       "Field Epidemiology Training Programmes — India runs its own EIS with the NCDC and US CDC"
     ],
