@@ -23,22 +23,13 @@
 
 const fs = require("fs");
 const path = require("path");
-const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const BASE = "https://aryanmanhas12.github.io/DREAMS";
 
-/* ── load the data exactly as index.html does ── */
-const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-const FILES = [...html.matchAll(/<script src="assets\/(data-[^"]+\.js)"><\/script>/g)].map((m) => m[1]);
-const sandbox = { window: {}, document: { addEventListener() {} }, console };
-sandbox.window.window = sandbox.window;
-vm.createContext(sandbox);
-for (const f of FILES) vm.runInContext(fs.readFileSync(path.join(ROOT, "assets", f), "utf8"), sandbox, { filename: f });
-const DB = sandbox.window.DB;
-
-const POOLS = ["study", "funding", "research", "residency", "equity"];
-const items = POOLS.reduce((a, k) => a.concat(DB[k] || []), []);
+/* ── load the data exactly as index.html does (tools/lib/data.js) ── */
+const { load } = require("./lib/data");
+const { DB, items } = load(ROOT);
 const REGIONS = ["Global", "Online", "Any", "Europe", "Nordics", "Asia", "Gulf", "Baltics"];
 const TOTAL = items.length + DB.frontiers.length + DB.specialties.length;
 
@@ -365,7 +356,11 @@ ${list.map(p.render || entryHTML).join("\n\n")}
 module.exports = {
   BASE,
   TOTAL,
-  PAGES: PAGES.map((p) => ({ slug: p.slug, title: p.title, desc: p.desc, h1: p.h1, count: p.pick().length }))
+  PAGES: PAGES.map((p) => ({ slug: p.slug, title: p.title, desc: p.desc, h1: p.h1, count: p.pick().length })),
+  /* The pages as they would be written now, without writing them, so
+     tools/verify.js can tell whether the committed copies are out of date
+     by content rather than by timestamp (a fresh clone scrambles mtimes). */
+  render: () => PAGES.map((p) => ({ file: path.join(p.slug, "index.html"), html: page(p) }))
 };
 
 /* ── write ── */
@@ -396,4 +391,26 @@ if (require.main === module) {
     urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`).join("\n") +
     `\n</urlset>\n`);
   console.log(`sitemap.xml rewritten with ${urls.length} canonical URLs`);
+
+  /* ── the hand-typed counts, now written from data ──
+     Link scrapers read raw HTML and never run the script, so the share-card
+     descriptions in index.html and the summary in llms.txt cannot render
+     their number in the browser. They used to be typed by hand, and got
+     updated by hand every time an entry was added or removed. They are
+     written here instead; tools/check.js still asserts them. Function
+     replacers only: a string replacement treats `$` in the text as a
+     pattern token, which is how build.js once corrupted the bundle. Each
+     pattern throws if it stops matching, rather than silently skipping. */
+  const COUNTS = [
+    ["index.html", /(<meta property="og:description" content="[^"]*?then )(\d+)( real programmes)/],
+    ["index.html", /(<meta name="twitter:description" content=")(\d+)( funded programmes)/],
+    ["llms.txt", /(independent, free index of )(\d+)( funded programmes)/]
+  ];
+  for (const [file, re] of COUNTS) {
+    const abs = path.join(ROOT, file);
+    const src = fs.readFileSync(abs, "utf8");
+    if (!re.test(src)) throw new Error(`make-pages: the count pattern ${re} no longer matches ${file}. The markup changed; update COUNTS here and the assertion in tools/check.js together.`);
+    const out = src.replace(re, (m, a, n, b) => a + TOTAL + b);
+    if (out !== src) { fs.writeFileSync(abs, out); console.log(`${file}: count set to ${TOTAL}`); }
+  }
 }

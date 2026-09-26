@@ -15,28 +15,21 @@
    og:image:height meta tags declare, and a card whose real size disagrees with
    its declaration is a defect scrapers actually trip over. */
 
-const { chromium } = require("/opt/node22/lib/node_modules/playwright");
+const { launch } = require("./lib/browser");
+const { load } = require("./lib/data");
 const fs = require("fs");
 const path = require("path");
-const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const TMP = path.join(ROOT, "_og-render.html");
 const OUT = path.join(ROOT, "assets/og-image.png");
 
-const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-const DATA = [...html.matchAll(/<script src="(assets\/data-[^"]+\.js)"><\/script>/g)].map((m) => m[1]);
-
 /* Count exactly the way app.js counts for the hero: the five opportunity
-   pools plus frontiers plus specialty routes. */
-const sandbox = { window: {}, document: { addEventListener() {} }, console };
-sandbox.window.window = sandbox.window;
-vm.createContext(sandbox);
-for (const f of DATA) vm.runInContext(fs.readFileSync(path.join(ROOT, f), "utf8"), sandbox, { filename: f });
-const DB = sandbox.window.DB;
-const TOTAL = ["study", "funding", "research", "residency", "equity"]
-  .reduce((n, k) => n + (DB[k] || []).length, 0) +
-  (DB.frontiers || []).length + (DB.specialties || []).length;
+   pools plus frontiers plus specialty routes, loaded in index.html's order. */
+const L = load(ROOT);
+const DB = L.DB;
+const TOTAL = L.total;
+const DATA = L.files.map((f) => "assets/" + f);
 
 /* Counted the way app.js counts for the stat tile: real places only, with the
    region pseudo-countries excluded. Typed into the card as "33 countries" at
@@ -185,7 +178,7 @@ async function shoot(p, html, out, mustSay) {
 }
 
 (async () => {
-  const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+  const browser = await launch();
   const ctx = await browser.newContext({
     viewport: { width: 1240, height: 700 },
     deviceScaleFactor: 1, reducedMotion: "reduce"

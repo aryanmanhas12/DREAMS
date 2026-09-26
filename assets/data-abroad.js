@@ -34,6 +34,7 @@ window.DB.research.push(
     window: "Two cycles a year. Spring 2027 closes 15 October 2026, 23:59 Japan time; the autumn cycle closes 15 April",
     deadlineMonths: [10, 4],
     url: "https://www.oist.jp/research-internship-program",
+    checked: "2026-09",
     why: "A fully funded four-to-six-month placement in a real laboratory, open to undergraduates, at an English-language graduate university with world-class neuroscience and computational biology. Two intakes a year rather than one, so missing a deadline costs six months instead of twelve. The catch that filters most Indian applicants is not academic: it is that you need written permission from your medical college to be away for four months, and that has to be negotiated long before the deadline.",
     reqs: [
       "In the final two years of an undergraduate or master's programme, or graduated within the past year. For MBBS that means the later professional years, and a recent graduate can still apply",
@@ -65,6 +66,7 @@ window.DB.research.push(
     window: "Annual deadline 15 November, for the following July–August",
     deadlineMonths: [9, 10, 11],
     url: "https://www.epfl.ch/schools/sv/education/summer-research-program/",
+    checked: "2026-09",
     why: "Eight paid weeks inside one of Europe's strongest life-science schools — the Brain Mind Institute, the Global Health Institute, ISREC for cancer research — with travel and housing covered. Eight weeks fits an Indian summer vacation without needing leave from your college, which is what makes it far more practical mid-MBBS than a four-month placement. The bar is academic standing: a GPA of 3.75 out of 4 or the top 5 per cent of your class.",
     reqs: [
       "At least two years of undergraduate study completed — 1st and 2nd professional MBBS satisfies this",
@@ -210,6 +212,7 @@ window.DB.research.push(
     deadlineMonths: [],
     noOpenCall: true,
     url: "https://centerforpolicyimpact.org/about/fellows-program/",
+    checked: "2026-09",
     why: "A paid policy fellowship that names India in its own list of focus countries, alongside Ghana, Kenya, Myanmar, Nigeria and Sri Lanka. Most global health policy work is done to countries like yours by people from somewhere else; this is one of the few doors built the other way round, and it is aimed at health financing and governance rather than bench research. It is a mid-career door: the Center asks for a master's and five years of relevant work, and its call is closed at present, so treat it as a target for later rather than something to apply to now.",
     reqs: [
       "At least a master's degree and at least five years of relevant work experience",
@@ -302,6 +305,7 @@ window.DB.research.push(
     window: "No single deadline — posts appear continuously on the careers portal",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.unicef.org/careers/internships",
+    checked: "2026-09",
     why: "A paid UN internship open to every nationality, with health, nutrition and WASH among the posted fields, and it takes people still enrolled or within two years of graduating. Most students assume the UN is closed to them until they have a masters and a decade of work. This one is not, and it posts all year.",
     reqs: [
       "At least 18 and enrolled in an undergraduate, graduate or PhD programme, or graduated within the past two years",
@@ -392,9 +396,11 @@ window.DB.research.push(
     stages: ["clin", "intern", "grad", "pg"], funding: "free",
     money: "Unpaid · WHO covers meeting costs for seated organisations",
     duration: "Two-year terms",
-    window: "Expressions of interest open between terms · the 2026-2028 call closed 30 June 2026",
-    deadlineMonths: [5, 6],
+    window: "Organisations only. The call for the 2026-2028 term ran 12 to 30 June 2026, so the next is not expected before 2028",
+    deadlineMonths: [],
+    noOpenCall: true,
     url: "https://www.who.int/initiatives/who-youth-engagement/who-youth-council",
+    checked: "2026-09",
     why: "WHO's own youth advisory body, and it is listed here mostly to correct a misunderstanding that wastes people's time. Seats go to ORGANISATIONS, not to individuals: youth-led groups, youth-focused organisations and youth chapters of larger bodies, with WHO Civil Society Commission membership required first. No matter how good you are, you cannot apply as a medical student. What you can do is be the person inside an organisation that holds a seat, which is a completely different and much more reachable plan.",
     reqs: [
       "Applicants are organisations, not people. An individual application is not possible",
@@ -422,6 +428,7 @@ window.DB.research.push(
     window: "Health partner streams run in spring (Sandoz 2026: 23 March to 27 April). The Leading Scholarship for the 2026 summit is open until 31 October 2026",
     deadlineMonths: [3, 4, 6, 7, 8, 9, 10],
     url: "https://www.oneyoungworld.com/scholarships",
+    checked: "2026-09",
     why: "Fully funded routes for young people already doing health work, covering flights and a hotel rather than just the ticket. It is the closest thing in this index to a shortcut into a global health network, and unlike most of what is here it rewards what you have already built rather than what you have studied. It is also crowded: One Young World reports 74,847 applications for 554 scholarships in 2024.",
     reqs: [
       "Sandoz health scholarship: aged 18 to 30. Leading Scholarship: aged 18 to 35",
@@ -463,6 +470,7 @@ window.DB.research.push(
     window: "Assignments are posted continuously on UNV's platform; each has its own closing date",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://app.unv.org/",
+    checked: "2026-09",
     why: "The paid, on-site version of UN volunteering, and a different thing from the online programme. Medicine is one of UNV's listed professional categories, alongside humanitarian and HIV work, so doctors are recruited for missions and agency offices. It is one of the few ways a young Indian doctor can work inside a UN operation, with the allowance, travel and insurance covered, without first passing a competitive exam India is not eligible to sit.",
     reqs: [
       "UN Youth Volunteer: aged 18 to 29 for the whole assignment. With under two years of experience, Youth assignments are the only ones open to you",
@@ -489,6 +497,7 @@ window.DB.research.push(
     window: "Runs every two years. The 2025 call opened 6 November 2024 and closed 6 January 2025; the 2027 call had not been posted at last check",
     deadlineMonths: [11, 12, 1],
     url: "https://learning.iarc.fr/",
+    checked: "2026-09",
     why: "WHO's cancer research agency trains epidemiologists, statisticians, physicians and oncologists in the methods behind cancer registries, screening and prevention, and it funds people from institutions in low- and middle-income countries to come. For an Indian MD in community medicine, pathology, radiotherapy or oncology, it is a funded week at the institution that publishes the carcinogen classifications.",
     reqs: [
       "Aimed at working epidemiologists, statisticians, physicians, oncologists and public health specialists",
@@ -513,6 +522,7 @@ window.DB.research.push(
     duration: "Two years",
     window: "Biennial. The 2025 call closed 18 April 2025 and the cohort was named on 24 October 2025; no new call is open",
     url: "https://www.un.org/youthaffairs/en/engage/young-leaders-sdgs",
+    checked: "2026-09",
     why: "Every two years the UN names 17 young people already leading work on the Goals, and the 2025 cohort, aged 16 to 33, included physicians and people working on mental health. It is recognition for something you have built, not a course you apply your way into: 33,000 people from over 150 countries applied last time. Listed so that the project you start now is old enough to count when the next call opens.",
     reqs: [
       "A real, running initiative with evidence of what it changed",
@@ -538,6 +548,7 @@ window.DB.research.push(
     duration: "One video of up to 90 seconds; winners announced in October",
     window: "The 2026 round ran 3 August to 13 September 2026 (23:45 CEST) and has closed; WHO has not announced a next round",
     url: "https://www.who.int/news-room/events/detail/2026/08/03/default-calendar/global-youth-competition-advocating-for-influenza-and-covid-19-prevention-and-control",
+    checked: "2026-09",
     why: "One of the few WHO opportunities a first-year medical student can win outright, with no degree, fee or travel. The 2026 brief asked how you shield your circle from respiratory infections, and wanted videos that tackle myths directly. The prize is small in money and large in signal: a WHO certificate with your name on it and a slot on a global webinar, the kind of line that makes a later WHO internship application read as continuous rather than cold.",
     reqs: [
       "Students or young professionals aged 18 to 35",

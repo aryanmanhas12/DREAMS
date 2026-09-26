@@ -263,6 +263,7 @@ window.DB.residency = [
     window: "Rolling, with no annual cycle. A new federal law changes the recognition route from 1 November 2026",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/berufsanerkennung-heilberufe-bundestag-26-03-26",
+    checked: "2026-09",
     why: "No entrance exam lottery, no match, no application season. You learn the language, pass a licensing exam, and get a salaried training post. The rules just got simpler for Indian doctors: from 1 November 2026 a federal law makes the knowledge exam (Kenntnisprüfung) the standard route for degrees from outside the EU, so you no longer wait months for a state office to compare your MBBS syllabus with the German one, which was the slowest and least predictable step.",
     reqs: [
       "MBBS + internship",
@@ -291,6 +292,7 @@ window.DB.residency = [
     window: "Rolling; book exam dates through the AMC",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.amc.org.au/pathways/standard-pathway/",
+    checked: "2026-09",
     why: "High salaries, a strong working-hours culture and a clear route to permanent residency. The standard pathway for an Indian MBBS is two AMC steps: the computer-adaptive MCQ, then either a clinical exam or a workplace-based assessment done while you work. Psychiatrist is on the Core Skills Occupation List that the Skills in Demand visa has used since December 2024, which matters if psychiatry is where you are heading.",
     reqs: [
       "An MBBS from a medical school the AMC lists as eligible; check your school, degree title and graduation year on the AMC site",
@@ -318,6 +320,7 @@ window.DB.residency = [
     window: "Rolling. It starts with a training-post offer from an Australian hospital, which you must hold before applying to the Board",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.medicalboard.gov.au/registration/international-medical-graduates/short-term-training",
+    checked: "2026-09",
     why: "Most Indian doctors think Australia means the AMC exams first. This pathway skips them: it lets specialists, and specialists-in-training within two years of finishing, do up to two years of training in Australia under limited registration, with no AMC exam and no full college comparability assessment. For an Indian MD or MS resident near the end of training, a subspecialty fellowship year in Australia is a real option.",
     reqs: [
       "A primary medical degree from an institution recognised by the AMC and listed in the World Directory of Medical Schools",
@@ -371,6 +374,7 @@ window.DB.equity = [
     window: "2026-27 first round opened 24 April and closed 2 June · corrections 4–7 June · the guidelines add a second 40-day cycle in September/October only when slots remain unfilled, with priority to offers from QS top-500 institutions, so check the portal in September",
     deadlineMonths: [4, 5, 6, 9, 10],
     url: "https://nosmsje.gov.in/",
+    checked: "2026-09",
     why: "Fully funded overseas masters or PhD for students from Scheduled Caste, Denotified/Nomadic/Semi-Nomadic tribe, landless agricultural labourer and traditional artisan families. Total family income must be under ₹8 lakh. It is one of the most generous awards available to any Indian student and it is routinely under-subscribed — places go unfilled in some years.",
     reqs: [
       "SC, DNT, landless agricultural labourer or traditional artisan category",

@@ -4,6 +4,28 @@ A career-guidance site for Indian medical students. Three questions (skill / ang
 plus practical and emotional constraints → a ranked list of real programmes with application
 steps. Static, client-side, no backend.
 
+## Maintenance: start here
+
+Recurring work is scripted, and `tools/README.md` is the runbook. The whole cycle:
+
+```
+node tools/recheck.js        the monthly worklist: open-now tier 1-2 first, then stale text,
+                             no-call entries, and anything unchecked for six months
+node tools/find.js <q>       where an entry lives (file:line), its badge today, its window
+node tools/stamp.js <ids>    record that you re-read those entries' official pages
+node tools/refresh.js        pages, sitemap, share-card counts, share cards, bundle
+node tools/verify.js         every check with a pass/fail summary (--quick: data + SEO)
+tools/ship.sh                push the branch, fast-forward main, which deploys
+```
+
+The data check and all browser tests live in the repo (`tools/check.js`, `tools/test/`), not
+in a scratchpad; the deploy deletes `tools/` so none of it is published. Each entry can carry
+`checked: "YYYY-MM"`, written only by `stamp.js` and only for an entry whose official page was
+actually read. It is data only; the page never shows it, because the official page is the
+authority on dates. Shared code: `tools/lib/data.js` (the one data loader, and `urgency()`
+lifted from `app.js` so tools cannot disagree with the badge) and `tools/lib/browser.js` (finds
+Playwright and Chromium; serves the repo like Pages does).
+
 ## Architecture — do not break these
 
 - **No framework, no build step for the site itself.** Plain `<script>` files that attach to
@@ -83,7 +105,7 @@ steps. Static, client-side, no backend.
 
 - **Check eligibility before impact — a programme you cannot enter is worse than one you never listed.** DAAD WISE was in the index for months telling MBBS students "MBBS qualifies from year 2". It does not: WISE is restricted to Engineering, Maths and Science, to a 4-year bachelor's or 5-year integrated masters, and to a fixed institution list, so a medical student fails three separate tests. PMRF's *direct* entry fails the same way (science and technology degrees from the IITs, IISc, NITs and IISERs), but its *lateral* entry, from inside a PhD at a granting institute, has no degree-stream rule; the entry now says so, and the skipList line was corrected to match. WISE does not say no on its front page; you find out after weeks of cold-emailing for an invitation letter. **Before adding any entry, find the eligibility PDF and search it for the degree list. If MBBS is not named, assume excluded until the programme office says otherwise.** WISE lives in `skipList`, which is where "looks open, is not" belongs.
 - **Aggregator listicles recycle these traps.** Every "fully funded internships for Indian students" roundup still lists WISE for medics. Aggregators are fine for *finding* candidates and worthless for *verifying* them — always land on the programme's own eligibility page before writing an entry.
-- **The `<head>` social-card counts cannot be rendered from data.** Link scrapers read raw HTML and never run the script, so those two numbers are typed by hand — and therefore have to be *asserted* by the data check, which is the only thing standing between a share card and last month's number. The three claim cards in the body are the opposite case: they render from data, because nothing scrapes them.
+- **The `<head>` social-card counts cannot be rendered from data in the browser.** Link scrapers read raw HTML and never run the script. They were typed by hand and fixed by hand after every addition; `tools/make-pages.js` now writes them (and the count in `llms.txt`) from data at build time, and the data check still *asserts* all three, which is the only thing standing between a share card and last month's number. The three claim cards in the body are the opposite case: they render from data, because nothing scrapes them.
 - **Touch targets grow under the visual box, never through it.** The topbar has to survive 320px next to a script wordmark that sets far wider than a serif, so the theme and menu buttons stay 32–36px visually and get to 44px via a centred `::after`. That adds zero layout. Two cautions: keep `.topbar-controls` gap at 12px or the two hit areas overlap and an edge tap on the theme toggle opens the menu instead; and always re-check 320px afterwards, because this is exactly the horizontally-bleeding overlay the `.hero::before` rule above warns about.
 
 - **The service worker is network-first, and on this site that is a correctness rule, not a preference.** A cache-first worker serves a copy from three months ago to a reader sitting on full bars, which turns a closed deadline into an open one. That is the exact failure the whole project exists to prevent, so `sw.js` always tries the network and falls back to cache only when the fetch throws.
@@ -105,10 +127,10 @@ steps. Static, client-side, no backend.
 - **Never write "X is not A, it is B".** It is the most commonly identified AI construction there is, and the site had eight. Say the thing directly instead. The vocabulary tells (*delve, tapestry, testament, landscape, realm, leverage, seamless, robust*) are already near-absent here and should stay that way — specificity is what keeps them out.
 - **A cleanup pass exposes pre-existing errors; do not assume you caused them.** Removing a dash surfaced "helps nobody — but so is the arithmetic", which had no antecedent for "so is" and had been wrong since it was written. Check `git show HEAD:<file>` before apologising for a bug you did not introduce.
 
-- **An "open now" badge is the most consequential claim on the site, so it gets its own check.** In September 2026 the scroll atlas started naming each region's highest-graded programme "with its window open now", and verifying those seven names against official pages found something wrong with six of them. EMERALD (EU PhD for doctors) had not recruited since its second call closed on 28 August 2022; Amgen Scholars was telling Indian students to apply to the Europe programme, which takes only students enrolled in a Bologna-process country; ICGEB's Falaschi PhD fellowships name a BSc (Honours) or MSc, not MBBS (the MBBS door is the ICGEB-JNU PhD, which also needs a JRF); the Duke policy fellowship wants a master's plus five years and its call is closed; BIRAC BIG has not run a call since November 2025. Widening the check to every tier-1 entry marked open found stale Gates Cambridge, Schwarzman and Harvard MPH-45 dates and an unsupported "MBBS qualifies" on the New Zealand PhD. **Each cycle, list every tier-1 and tier-2 entry whose `deadlineMonths` include the current month and re-read each one's official page.** That is roughly 40 entries, and it is the set a student acts on this week.
+- **An "open now" badge is the most consequential claim on the site, so it gets its own check.** In September 2026 the scroll atlas started naming each region's highest-graded programme "with its window open now", and verifying those seven names against official pages found something wrong with six of them. EMERALD (EU PhD for doctors) had not recruited since its second call closed on 28 August 2022; Amgen Scholars was telling Indian students to apply to the Europe programme, which takes only students enrolled in a Bologna-process country; ICGEB's Falaschi PhD fellowships name a BSc (Honours) or MSc, not MBBS (the MBBS door is the ICGEB-JNU PhD, which also needs a JRF); the Duke policy fellowship wants a master's plus five years and its call is closed; BIRAC BIG has not run a call since November 2025. Widening the check to every tier-1 entry marked open found stale Gates Cambridge, Schwarzman and Harvard MPH-45 dates and an unsupported "MBBS qualifies" on the New Zealand PhD. **Each cycle, re-read the official page of every tier-1 and tier-2 entry whose badge says open or opening soon.** `node tools/recheck.js` lists exactly that set first (roughly 40 to 75 entries depending on the month); it is what a student acts on this week.
 - **`noOpenCall: true` is how an entry says "real, but you cannot apply now".** `urgency()` returns `"none"`, the badge reads "No call open", and ranking treats it like a closed window. Use it when the official page says the call is closed with no next date, or when a funder's stated calendar is not being followed (BIRAC's page says 1 January and 1 July; its last call ran in November). Empty `deadlineMonths` alone is worse than nothing: `urgency()` reads an empty list as "Rolling / always open", the opposite of true.
 - **Search descriptions and `<meta>` tags lie the same way a 200 status can.** EMERALD's page body says "Closed call for PhD positions"; its `og:description`, which is what a search result shows, still says "Applications for the 2nd call are open!" four years later. Read the page body, never the snippet.
-- **Window text and `deadlineMonths` must agree; `check.js` now catches the plain contradictions.** Maitri's window said no round had been published while its months still marked it open, and L'Oréal/AAUW said "has closed" under an open badge. When you write "closed" or "not published" into a window, set `noOpenCall` in the same edit.
+- **Window text and `deadlineMonths` must agree; `tools/check.js` catches the plain contradictions, and `tools/recheck.js` flags windows whose every date has passed.** Maitri's window said no round had been published while its months still marked it open, and L'Oréal/AAUW said "has closed" under an open badge. When you write "closed" or "not published" into a window, set `noOpenCall` in the same edit.
 - **A media query written ABOVE the base rule it overrides loses the cascade silently.** The under-400px wordmark step-down sat above `.brand-text { font-size: 1.22rem }`; equal specificity, later rule wins, so the step-down never applied and "Counsellor" ran under the theme button at 320px for months while the rule looked correct in review. `audit.js` now measures the wordmark's text box against `.topbar-controls` at every viewport. Put responsive overrides after the rules they override.
 - **Never hard-code `#fff` on `--accent`.** The dark-theme accent is a bright teal, and white on it measured 1.53:1 on the skip link. Use `var(--paper)`, as `.btn-primary` does. This surfaced only because the contrast sweep was extended to the dark theme; it previously ran light-only at 390px.
 
@@ -149,7 +171,7 @@ steps. Static, client-side, no backend.
 - **iOS zoom-on-focus is a text-entry behaviour.** Only `input`, `select` and `textarea`
   trigger it. Flagging every `<button>` under 16px buried two real findings under 190 lines
   of noise.
-- Playwright is installed; Chromium at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
+- Playwright is installed. `tools/lib/browser.js` finds it and the newest Chromium under `PLAYWRIGHT_BROWSERS_PATH` (currently `/opt/pw-browsers/chromium-1194`); override with `PLAYWRIGHT_PATH` / `CHROME_PATH`. Never hard-code either path in a test again.
 - `github.io` is blocked by this sandbox's proxy (403 on CONNECT). A failed fetch there says
   nothing about whether the site is live — never report it as a site problem.
 
@@ -203,8 +225,8 @@ audited.**
 | 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
 | 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
 | 12 | Page load speed | CSS is non-blocking (preload + print-swap). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured: homepage **87 perf / 100 a11y / 100 best-practices / 100 SEO**, `/specialties/` **99 / 100 / 100 / 100**. |
-| 13 | Colour contrast | `audit.js` sweeps AA across 6 viewports × 2 themes on the app; `pagecheck.js` does the same over the 11 generated pages plus the 404, at 4 widths × 2 themes. Both selector lists are whitelists and rot — add new components in the same change. Lighthouse scores accessibility **100**. |
-| 14 | Mobile friendly | `audit.js` covers 320–1280 on the app and `pagecheck.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
+| 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths × 2 themes. Both selector lists are whitelists and rot — add new components in the same change. Lighthouse scores accessibility **100**. |
+| 14 | Mobile friendly | `tools/test/audit.js` covers 320–1280 on the app and `tools/test/pages.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
 | 15 | Custom 404 | `404.html`; Pages serves it automatically with a real 404 status (verified live). Links are absolute `/DREAMS/...` because Pages serves it from any depth, and it carries the category nav. |
 | 16 | Broken links | Full sweep from an unrestricted host via Composio. **403/405/000 are not failures** — see the sweep-reading rules above. |
 | 17 | Form validation | The only inputs are the survey and search, all client-side with no submission. Nothing to validate server-side. |
@@ -241,7 +263,7 @@ mtime against the data files and its real size against the declared one.
 - **A first visit scored CLS 0.271; the tour was 0.34 of the 0.35 total.** Every harness in this project seeds `dc-tour-seen` — it has to, or the scrim intercepts its clicks — so every harness was measuring the returning-visitor page and the first-visit experience went unmeasured for months. Lighthouse runs a fresh profile, which is what surfaced it. **When a check must disable a feature to work, something else has to test that feature.**
 - **The cause: `tourGo` defers placement through a `requestAnimationFrame` AND a 220ms timeout** so the target view can paint and scroll first. The card was therefore visible at its default corner for a quarter of a second and then jumped to its real position. Fixed with `.tour-pop:not(.is-placed) { visibility: hidden }`, the class added at the end of `tourPlace` and cleared in `tourEnd`. **`visibility`, never `display: none`** — `tourPlace` measures `offsetWidth`/`offsetHeight` to choose above, below or centred, and a `display: none` element measures zero, which would silently centre every card.
 - **`overflow: hidden` on a locked body is itself a layout shift**, worth 0.0693 alone: taking the scrollbar away widens the content box and steps every element sideways. `html { scrollbar-gutter: stable }` reserves it up front, and costs nothing on the overlay-scrollbar platforms most readers use.
-- Result: **CLS 0.271 → 0.081, performance 71 → 87, FCP 1.8s → 1.1s**, no remaining shift sources. `tour.js` in the scratchpad now asserts the card is genuinely *visible* and inside the viewport at every step across three widths — because the gating rule's failure mode is a permanently invisible tour behind a dark scrim, which every other check would still pass.
+- Result: **CLS 0.271 → 0.081, performance 71 → 87, FCP 1.8s → 1.1s**, no remaining shift sources. `tools/test/tour.js` asserts the card is genuinely *visible* and inside the viewport at every step across three widths — because the gating rule's failure mode is a permanently invisible tour behind a dark scrim, which every other check would still pass.
 - **That harness is the one place `dc-tour-seen` must NOT be seeded.** Everywhere else, seeding it is mandatory.
 
 ## Two performance worries that measurement killed, and the one that was real
@@ -413,10 +435,10 @@ If this is ever done it should be a reviewed pass, entry by entry.
   redirects and read `url_effective` too — that is how the ICMR-STS portal move from
   `sts.icmr.org.in` to `schemes.dhr.gov.in` surfaced.
 - **A 200 can lie about its body, and that is a fourth code to read carefully.** `unv.org` answers every path with HTTP **200** whose content is an Imperva/Incapsula block page — "Request unsuccessful. Incapsula incident ID: …", about 950 bytes. A status-only sweep records that as healthy. So for any host that matters, check the BODY as well as the code: a few hundred bytes, a missing `<title>`, or the words "Request unsuccessful", "Just a moment", "Attention Required" or "enable JavaScript to run this app" all mean the sweep did not see the real page. The last of those is usually a JS app and genuinely fine (med-engage.com, app.unv.org); the others mean the check was blocked and the link needs verifying another way.
-- Data integrity check lives in the scratchpad, not the repo; recreate it if needed. It should
-  assert unique ids, that every `data-impact.js` key resolves to a real programme, that every
+- The data integrity check is `tools/check.js` (it used to live in a scratchpad and was lost and
+  rebuilt several times). It asserts unique ids, that every `data-impact.js` key resolves to a real programme, that every
   field/stage tag is in the taxonomy, that every URL is https, and that every referenced
-  country has a profile in `data-countries.js`. It must also assert that every `country` value belongs to exactly one `ATLAS` region in
+  country has a profile in `data-countries.js`. It also asserts that every `country` value belongs to exactly one `ATLAS` region in
   `app.js`, and that no entry marked open this month has window text saying "has closed",
   "currently closed" or "not been published" (the Maitri and L'Oréal contradictions).
 

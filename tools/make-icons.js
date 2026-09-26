@@ -37,7 +37,7 @@
    screen is ordinary. A cream icon on a dark home screen is a lit panel among
    unlit ones, which is what the installed app actually looked like. */
 
-const { chromium } = require("/opt/node22/lib/node_modules/playwright");
+const { launch } = require("./lib/browser");
 const fs = require("fs");
 const path = require("path");
 
@@ -100,7 +100,7 @@ const SPECS = [
 (async () => {
   const outDir = path.join(ROOT, "assets/icons");
   fs.mkdirSync(outDir, { recursive: true });
-  const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+  const browser = await launch();
 
   for (const s of SPECS) {
     fs.writeFileSync(TMP, `<!DOCTYPE html><html><head><meta charset="utf-8"><style>

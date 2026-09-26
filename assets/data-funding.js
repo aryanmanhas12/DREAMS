@@ -17,6 +17,7 @@ window.DB.funding = [
     window: "Opened 4 Aug · closes 6 October, 11:00 UTC. That is 4:30 pm IST, and there are no extensions, ever",
     deadlineMonths: [8, 9, 10],
     url: "https://www.chevening.org/scholarships/",
+    checked: "2026-09",
     why: "The largest fully-funded route from India to the UK. Roughly 8–10 % of Indian applicants are selected, which sounds brutal until you realise most applications are visibly rushed. The leadership and networking essays are where people lose, and they are the two you can actually prepare for.",
     reqs: [
       "Indian citizenship and intent to return to India for 2 years after the award",
@@ -45,6 +46,7 @@ window.DB.funding = [
     window: "Master's: CSC Central closes 16:00 BST, Tue 20 Oct 2026, and the Ministry of Education's own nomination deadline can be earlier. Shared: opens after early November, closes mid-December",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+    checked: "2026-09",
     why: "Explicitly designed for people from lower- and middle-income Commonwealth countries who cannot otherwise afford UK study, which means, unusually, that limited financial means is an advantage rather than something to hide. Health and wellbeing is one of its six named priority themes.",
     reqs: [
       "Indian citizenship, resident in India",
@@ -103,6 +105,7 @@ window.DB.funding = [
     window: "Each course sets its own date. For 2027 starts most close between 1 October and 15 December 2026; Heidelberg's International Health closes 15 October 2026",
     deadlineMonths: [8, 9, 10, 11, 12],
     url: "https://www.daad.in/en/find-funding/scholarship-database/",
+    checked: "2026-09",
     why: "Most German public universities charge no tuition, and EPOS pays a monthly stipend on top. It funds a fixed list of mostly English-taught masters, including Heidelberg's International Health and several health-systems programmes, and is aimed squarely at professionals from developing countries, which puts Indian doctors right in the target group. A few listed courses do charge fees, Heidelberg's among them, so ask each course how it treats EPOS scholars.",
     reqs: [
       "Bachelor's or MBBS with above-average marks",
@@ -158,6 +161,7 @@ window.DB.funding = [
     window: "Entry 2027/28: opened 11 September 2026. The deadline is your course's funding deadline, either Tuesday 8 December 2026 or Wednesday 6 January 2027, 11:59pm UK time, so check the course directory. Outcomes by 8 March; interview panels 22–23 March 2027",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.gatescambridge.org/apply/how-to-apply/",
+    checked: "2026-09",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
     reqs: [
       "Citizen of any country outside the UK",
@@ -376,9 +380,10 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "€1,181/month + return airfare + health cover + cultural allowance",
     duration: "12–36 months",
-    window: "Institutions nominate. The 2026 session opened 1 Oct 2025 and closed at Campus France on 8 Jan 2026; university internal deadlines fall earlier",
+    window: "Institutions nominate. The 2026 session ran 1 October 2025 to 8 January 2026, with results from 30 March; Campus France had not posted the 2027 call at the end of September 2026. University internal deadlines fall earlier",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program",
+    checked: "2026-09",
     why: "You cannot apply directly. The French university nominates you. That sounds like a barrier and is actually an advantage: it means the number of competitors is capped by how many each institution puts forward, and simply asking the admissions office whether they will nominate you puts you ahead of everyone who did not ask.",
     reqs: ["Non-French citizen, up to 29 at masters level and up to 35 at PhD level (Campus France, 2026 session)", "Applying to a French institution", "Must be nominated by the institution; apply to them first"],
     steps: [
@@ -459,6 +464,7 @@ window.DB.funding = [
     duration: "Masters (coursework)",
     window: "Closed at last check, with no reopening date announced; the India page says future rounds will be posted there",
     url: "https://australiaawardsindia.org/opportunities/",
+    checked: "2026-09",
     why: "Watch this one rather than plan around it. Australia runs a Masters scholarship specifically for India, created under its India Economic Strategy to 2035 and framed around future business and community leaders. It is NOT the standard Australia Awards round that aggregators list for Indian applicants: that round covers Bangladesh, Bhutan, Maldives, Nepal, Pakistan, Sri Lanka and Mongolia, and India is excluded from it.",
     reqs: [
       "Indian national, for the India-specific programme only",
@@ -486,6 +492,7 @@ window.DB.funding = [
     deadlineMonths: [],
     noOpenCall: true,
     url: "https://www.grants.gov.au/Fo/Show?FoUuid=a48c97d8-cdcf-41ce-a65c-55a3f90561d7",
+    checked: "2026-09",
     why: "The one Australian government PhD award built specifically for Indian scholars. The 2025-26 round named health among its priority fields, alongside agribusiness, clean energy and technology, and the round before that listed life sciences and medical technology. You cannot apply directly: an Australian university applies and nominates you, which means the route runs through a supervisor who wants you. Many listings describe Maitri only as a manufacturing, critical-minerals and clean-energy award, which is how a health applicant misses it.",
     reqs: [
       "An Indian citizen, not an Australian citizen or permanent resident",

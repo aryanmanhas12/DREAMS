@@ -55,6 +55,12 @@ window.DB.meta = {
        moved to 8 December or 6 January. BIRAC BIG has not run a call since
        November 2025. FMI Basel's MD-PhD needs an approved experimental thesis.
 
+     The first run of the new tools/recheck.js worklist then found three
+     windows still describing finished rounds (Eiffel's 2026 session, the JHU
+     Summer Institute's 2026 dates, and the WHO Youth Council call that closed
+     in June and will not recur before 2028). All three were re-read and
+     rewritten, and every entry verified this month carries checked: "2026-09".
+
      What this pass did NOT do: re-verify the generic cycles (US PhD
      admissions, most US MPH programmes, conference abstract windows) or the
      145 entries not marked open this month. Those carry the dates

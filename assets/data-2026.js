@@ -94,6 +94,7 @@ window.DB.research.push(
     window: "Calls have run once or twice a year since 2023; the 2025 call closed 30 March 2025. Watch TDR's calls page for the next",
     deadlineMonths: [2, 3],
     url: "https://tdr.who.int/home/our-work/strengthening-research-capacity",
+    checked: "2026-09",
     why: "A WHO programme built specifically so that clinical trials in diseases of poverty are led from the countries where those diseases actually are, rather than run remotely from Europe. It trains you to run a trial, not to assist on one, and it is explicitly reserved for people working in low- and middle-income countries, which for once puts an Indian applicant inside the target group rather than competing against it.",
     reqs: [
       "A national and resident of an LMIC, holding an MD or PhD (or a pharma MSc), with your first degree obtained within the last 15 years",
@@ -120,6 +121,7 @@ window.DB.research.push(
     window: "The 2026/27 call opened 17 Dec 2025 and closed 30 Jan 2026. The next round has not been posted; a similar timing would mean drafting over December 2026",
     deadlineMonths: [12, 1],
     url: "https://tdr.who.int/docs/librariesprovider10/calls-for-applications/ir-leadership-fellowship-call-for-applications-december-2026.pdf",
+    checked: "2026-09",
     why: "Implementation research asks why a treatment that works in a trial does not work in a district, which is the most common frustration of anyone who has done a rural posting. This fellowship trains you to lead it, and it is restricted to low- and middle-income countries in three WHO regions, South-East Asia among them, so an Indian applicant is inside a small pool. It is a mid-career step, not a first one: read the degree rules before planning around it.",
     reqs: [
       "A national and resident of a low- or middle-income country in WHO's South-East Asia, Western Pacific or Eastern Mediterranean region, under 40 when you apply",
@@ -147,6 +149,7 @@ window.DB.research.push(
     window: "New Delhi PhD: yearly call, the 2026 one closed 30 May with interviews 22–24 June. Falaschi: the next round opens January 2027 and closes 31 March 2027; a September round (expression of interest by mid-August) covers short-term and postdoctoral places only",
     deadlineMonths: [1, 2, 3, 4, 5, 7, 8],
     url: "https://www.icgeb.org/fellowship/",
+    checked: "2026-09",
     why: "An intergovernmental research centre with one of its three laboratories in New Delhi. There are two doors and they admit different people. The ICGEB-JNU PhD for Indian nationals names MBBS in its eligibility list outright, runs entirely in New Delhi, and is paid through the national fellowship you already hold. The international Falaschi fellowships add Trieste and Cape Town with their own stipend, but name a BSc (Honours) or an MSc rather than MBBS. Almost no medical students hear of either, because ICGEB recruits through biotechnology departments and never through medical colleges.",
     reqs: [
       "New Delhi PhD (Indian nationals): MBBS is named, alongside a first-class MSc, M.Tech, M.V.Sc, M.Pharm or a four-year research BSc (Honours)",

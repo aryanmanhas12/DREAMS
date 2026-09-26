@@ -23,6 +23,7 @@ window.DB.funding.push(
     window: "Two selection cycles a year (May and December); granting institutes call for nominations around July–August and January–February",
     deadlineMonths: [1, 2, 7, 8],
     url: "https://pmrf.in/documents/PMRF-Overall-guideline-document_-19-January-2026.pdf",
+    checked: "2026-09",
     why: "The best-paid doctoral fellowship in India, more than most junior residents earn, with a research grant attached. For a medical graduate the door is the lateral one, and that is the detail most people miss. Direct entry is written for science and technology degrees and does not name MBBS. Lateral entry has no degree-stream rule at all: once you are in a PhD at a granting institute and have four courses at a CGPA of 8.5, you can apply.",
     reqs: [
       "Direct entry: a science or technology degree with a CGPA of 8, either from the IITs, IISc, NITs, IISERs, IIEST or central IIITs, or from elsewhere with GATE 650+ or a CSIR/UGC JRF rank of 100 or better. MBBS is not named, so confirm with the PMRF office before relying on it",
@@ -212,6 +213,7 @@ window.DB.study.push(
     window: "Applications accepted year-round · Otago assesses scholarships in quarterly rounds",
     deadlineMonths: [3, 6, 9, 11],
     url: "https://www.auckland.ac.nz/en/study/international-students/study-options-for-international-students/postgraduate-study-for-international-students/doctoral-programmes-international-students.html",
+    checked: "2026-09",
     why: "A government scheme lets New Zealand universities charge international PhD candidates what they charge New Zealanders. The comparison is not subtle: Auckland states its annual doctoral fee as under US$5,000, a fraction of what an international PhD costs in Australia or the UK, and that is before any scholarship. The entry bar is a research degree: Auckland asks for a thesis-bearing honours or master's degree, so for an Indian doctor this door opens after an MD or MS, whose thesis is exactly what it wants to see.",
     reqs: [
       "A significant research project such as a dissertation or thesis, and an honours or master's degree at a B+ equivalent (Auckland typically wants a Grade Point Equivalent of 6.0 for overseas grades). MBBS alone is not named; an Indian MD or MS, which requires a thesis, is the matching qualification",
@@ -282,6 +284,7 @@ window.DB.research.push(
     deadlineMonths: [],
     noOpenCall: true,
     url: "https://birac.nic.in/big.php",
+    checked: "2026-09",
     why: "The largest sum in this index that an individual student can hold, and almost no medical student applies. BIRAC's own eligibility names medical degree holders alongside PhDs and biomedical engineers, so a clinician with a diagnostic or device idea is inside the intended audience rather than at its edge. Doctors see the unmet need every day in outpatients; the people who usually win these grants have to go looking for it.",
     reqs: [
       "An idea at nascent or planning stage. A prototype is not required to apply",

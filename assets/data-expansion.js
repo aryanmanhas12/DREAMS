@@ -21,6 +21,7 @@ window.DB.study.push(
     window: "Two rounds a year. Autumn: opens 1 September, closes 15 November 2026, interviews January 2027. Spring: closes in May for June selection",
     deadlineMonths: [3, 4, 5, 9, 10, 11],
     url: "https://www.fmi.ch/education-careers/programs/",
+    checked: "2026-09",
     why: "Launched in 2016 for people who have studied medicine and want a real PhD in fundamental biology, with the Basel medical faculty behind the degree and Novartis research next door. The entry rule is a degree that would qualify you for residency, which an MBBS does, so this is one of the few MD-PhD programmes outside your own country that is written for someone exactly like you.",
     reqs: [
       "A medical degree that qualifies you for clinical training or residency, held or expected before enrolment",
@@ -47,6 +48,7 @@ window.DB.study.push(
     window: "The call for October 2027 entry runs 1 October to 16 November 2026. Shortlisted candidates interview in early February; results by mid-February",
     deadlineMonths: [10, 11],
     url: "https://www.pasteur.fr/en/about-us/our-missions/education/training-programs/doctoral-programs/pasteur-paris-university-international-doctoral-program-ppu",
+    checked: "2026-09",
     why: "Institut Pasteur runs an MD-PhD track inside its international doctoral programme and says in writing that it wants international MDs and medical students, not only French ones. Infectious disease and epidemiology here are world-leading and map directly onto the disease burden you already treat, and the PhD comes as a salaried job with benefits rather than a stipend.",
     reqs: [
       "A master's degree or the equivalent in life or medical sciences. The MD-PhD track names international MDs and medical students; confirm with phd@pasteur.fr that your MBBS is read as the equivalent.",

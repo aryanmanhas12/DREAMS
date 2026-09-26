@@ -53,6 +53,7 @@ window.DB.funding.push(
     window: "2027 cohort: KHS closes 6 October 2026, 1 pm Pacific · your Stanford degree application must be in by 1 December 2026, or the programme's own earlier deadline",
     deadlineMonths: [5, 6, 7, 8, 9, 10],
     url: "https://knight-hennessy.stanford.edu/admission/before-you-apply/eligibility",
+    checked: "2026-09",
     why: "This is not a scholarship you apply to on its own — you win a place in a Stanford graduate programme (an MS, a PhD, an MPP, occasionally the MD) and Knight-Hennessy then funds all of it, badged with a two-year leadership curriculum on top. No nationality restriction and no requirement that your first degree be American. The two-step nature — get into Stanford, then get funded — is exactly why almost nobody outside the US even considers it.",
     reqs: [
       "First bachelor's degree earned in January 2020 or later for the 2027 cohort (the window rolls forward each year). Check how Stanford treats an MBBS awarded after internship",
@@ -79,6 +80,7 @@ window.DB.funding.push(
     window: "The round for 2027-28 closed on 9 September 2026. The Global round for 2028-29 runs from April 2027 to September 2027; interviews follow in late October and early November",
     deadlineMonths: [4, 5, 6, 7, 8],
     url: "https://www.schwarzmanscholars.org/admissions/",
+    checked: "2026-09",
     why: "A one-year, fully funded Master's in Global Affairs at Tsinghua built explicitly around leadership across public health, economics, technology and policy — open to any nationality, any first degree, no GPA cut-off published. For an MBBS graduate aiming at health policy or global health leadership rather than a lab bench, this is a faster and less specialised route than a two-year MPH, and it is barely applied to from Indian medical schools.",
     reqs: [
       "Bachelor's degree or equivalent completed by the programme's August start",
@@ -106,9 +108,10 @@ window.DB.study.push(
     stages: ["clin", "intern", "grad", "pg"], funding: "self",
     money: "Paid tuition per course — typically $1,000–3,000 depending on course length; no stipend",
     duration: "Individual courses run 4 hours to 2 weeks, taken across a 3-week Institute in June",
-    window: "Registration opens in winter · Institute runs 8–26 June 2026",
+    window: "A three-week institute each June, with registration opening in winter. The 2026 institute ran 8–26 June; 2027 dates were not posted at the end of September 2026",
     deadlineMonths: [1, 2, 3, 4, 5, 6],
     url: "https://publichealth.jhu.edu/academics/graduate-summer-institute-of-epidemiology-and-biostatistics",
+    checked: "2026-09",
     why: "This is the one entry in the whole index that is neither a scholarship nor a competition. It is a paid short course, open to anyone, that hands you a real Johns Hopkins transcript line in epidemiology or biostatistics without a multi-year admissions process. For a student who wants to test whether public health is actually their direction before committing to an MPH, a single two-week course here is the cheapest possible way to find out, and the credit is transferable if you do go on to a Hopkins degree.",
     reqs: [
       "None — open to clinicians, students, and public health practitioners worldwide",

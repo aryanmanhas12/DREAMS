@@ -172,6 +172,7 @@ window.DB.research = [
     deadlineMonths: [9, 10],
     noOpenCall: true,
     url: "https://iusstf.org/khorana-program-for-scholars",
+    checked: "2026-09",
     why: "A fully funded American summer research placement that a current MBBS student can hold — no graduation required, no fees, travel paid. The academic bar is set lower for MBBS candidates, 65 per cent rather than 80. Whether it runs again for 2027 is not yet known, so treat it as one to watch rather than to plan around.",
     reqs: [
       "Currently enrolled MBBS at a recognised Indian institution",
@@ -241,6 +242,7 @@ window.DB.research = [
     window: "Opens 1 November; all five Asia hosts close 1 February 2027. Programme dates are announced later",
     deadlineMonths: [11, 12, 1],
     url: "https://amgenscholars.com/asia-program/",
+    checked: "2026-09",
     why: "Fully funded summer research at Kyoto, Tokyo, the National University of Singapore, Tsinghua and, since it joined, IIIT Hyderabad. The Asia programme has no citizenship rule and takes undergraduates enrolled at universities in Asia, which is the cleanest eligibility line in this index for an Indian student, and the Hyderabad site makes one version of it a domestic flight. The other regions are where people waste applications: Europe takes only students enrolled in a Bologna-process country, Australia only students in Oceania, and the US only its own students.",
     reqs: [
       "Enrolled undergraduate at a university in Asia, India included, with at least the first year complete by the time the programme starts",
@@ -290,6 +292,7 @@ window.DB.research = [
     window: "The 2027 meeting is Physiology/Medicine. Lindau's own form closes in November 2026; DST's Indian nomination call ended on 31 October in 2022 and 30 September in 2024, and the 2027 call was not yet posted at last check",
     deadlineMonths: [9, 10, 11],
     url: "https://www.lindau-nobel.org/young-scientists/",
+    checked: "2026-09",
     why: "About six hundred young scientists spend a week with Nobel laureates, and 2027 is a medicine year, the first since 2023. From India the only door is the Department of Science & Technology, which pays the whole trip. That door is narrower than it looks and wider for doctors than people assume: in 2023 DST chose 16 of 223 applicants, and several were MD residents from AIIMS and government medical colleges.",
     reqs: [
       "Indian citizen studying or working at an institution in India. DST's award excludes Indians studying or working abroad, and Lindau's open application is closed to anyone in a country with a partner, which India is",
@@ -360,6 +363,7 @@ window.DB.research = [
     window: "Posted as individual internship vacancies on WHO's careers site; there is no general roster to join",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.who.int/careers/internship-programme",
+    checked: "2026-09",
     why: "The South-East Asia regional office is in New Delhi, which means a WHO placement is possible without paying for international travel. WHO paid interns nothing for decades; the living allowance it has offered since 2020 is what makes this viable for someone without family money, and it goes to interns who say they need it.",
     reqs: [
       "At least 20 on the day you apply, and three years of full-time university study completed before you start. A clinical-year MBBS student can qualify",
@@ -408,6 +412,7 @@ window.DB.research = [
     window: "Scholarship deadlines fall 4–8 months before each meeting, usually alongside or just after the abstract deadline",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.iasociety.org/scholarships",
+    checked: "2026-09",
     why: "The big infectious-disease meetings set money aside for people from low- and middle-income countries, and they say so in their rules. The Union's full scholarships for presenters are reserved for low- and lower-middle-income countries, which includes India. The IAS gives priority to abstract presenters, applicants from LMICs, people under 35 and first-time recipients. Very few Indian medical students apply for either.",
     reqs: ["An accepted abstract is the strongest route; the Union's full scholarship is for presenters and symposium speakers", "India qualifies for the Union's full scholarships as a lower-middle-income country", "IAS: aged 18 or over, and studying, working or volunteering in HIV"],
     steps: [

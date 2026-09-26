@@ -213,6 +213,7 @@ window.DB.study = [
     window: "Apply through SOPHAS. One deadline, 1 December, with decisions in late February or early March",
     deadlineMonths: [9, 10, 11],
     url: "https://hsph.harvard.edu/admissions/applying-to-a-degree-program/program-eligibility-requirements/",
+    checked: "2026-09",
     why: "The 45-credit MPH is Harvard's one-year route, and its entry rule is what makes it matter to a medical graduate: a master's or a doctoral degree, or, in Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus five years of work. Harvard reads a foreign degree by its US equivalent through WES. If WES reads your MBBS as a doctoral-level medical degree, every field is open straight after internship; if it reads it as a bachelor's, the five-year route still gets you in later.",
     reqs: [
       "A master's or doctoral degree. For Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus at least five years of work also qualifies",
@@ -351,6 +352,7 @@ window.DB.study = [
     window: "DAAD-EPOS applicants: 15 Aug to 15 Oct 2026. Self-funded: 16 Oct 2026 to 31 Mar 2027 (planned). Course starts September 2027",
     deadlineMonths: [8, 9, 10, 11, 12, 1, 2, 3],
     url: "https://www.klinikum.uni-heidelberg.de/heidelberger-institut-fuer-global-health/education/master-of-science-in-international-health/how-to-apply",
+    checked: "2026-09",
     why: "Germany's flagship international health masters, and one of the courses on the DAAD EPOS list, which pays a monthly stipend, travel and insurance. Heidelberg names medical degrees as a qualifying first degree, and the part-time tropEd route lets you take modules across European partner schools while you keep working.",
     reqs: ["A 240-ECTS first degree in a public-health-relevant discipline; Heidelberg names medical degrees", "At least one year of relevant work experience, including public health work in a low- or middle-income setting", "For the DAAD-EPOS route: two years of professional experience and a degree no older than six years", "English-taught; no German needed for the degree"],
     steps: [
@@ -373,6 +375,7 @@ window.DB.study = [
     window: "International Health DAAD-EPOS: 1 Aug to 15 Oct 2026. Molecular Medicine: portal opens December 2026, closes 31 May 2027",
     deadlineMonths: [8, 9, 10, 12, 1, 2, 3, 4, 5],
     url: "https://internationalhealth.charite.de/en/application_admission/",
+    checked: "2026-09",
     why: "Europe's largest university hospital, with two English-taught masters an Indian doctor can reach. Neither is free, whatever the general rule about German public universities suggests. Molecular Medicine is for someone who wants the lab side of disease and has real bench experience. International Health is Charité's tropEd programme; its EPOS scholars take a German course in July and write their thesis at Mexico's National Institute of Public Health.",
     reqs: ["Molecular Medicine wants substantial hands-on lab training, not only a degree; the programme offers no stipends", "International Health EPOS route: a 240-ECTS degree with results in the upper third, two years' related work after it, and a degree under six years old", "Visa: a blocked account of about €12,000"],
     steps: [
@@ -395,6 +398,7 @@ window.DB.study = [
     window: "Each school sets its own call; many run one or two a year, often closing October to January",
     deadlineMonths: [8, 9, 10, 11, 12, 1],
     url: "https://www.mpg.de/en/imprs",
+    checked: "2026-09",
     why: "The International Max Planck Research Schools are free to apply to, taught in English and paid as employment, and some of them name a medical degree in their entry rules. The Max Planck Institute of Psychiatry's school in Munich is the clearest example and has its own card here. Entry rules differ school by school, so the degree question has to be settled for each one rather than assumed.",
     reqs: ["A master's or a medical degree, depending on the school. Check each school's own page for whether MBBS is named", "No German required", "Research experience matters far more than marks"],
     steps: [
@@ -417,6 +421,7 @@ window.DB.study = [
     window: "Open 15 Aug 2026. Applications close 31 Oct 2026, 24:00 CET; references by 7 Nov 2026. Selection March to May 2027",
     deadlineMonths: [8, 9, 10],
     url: "https://www.imprs-tp.mpg.de/2879/application",
+    checked: "2026-09",
     why: "One of the very few doctoral schools that names a medical degree in its entry rules and says it particularly wants trainee doctors with lab experience. Depression, schizophrenia and anxiety are studied here from molecule to clinic, which is the psychiatry most Indian training never shows you. It is paid, English-taught, and the interview trip to Munich is on them.",
     reqs: [
       "A medical degree or a master's in a relevant field, completed by the time you start (not by the time you apply)",
@@ -443,6 +448,7 @@ window.DB.study = [
     window: "Rolling. It starts when a professor agrees to supervise you",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://promotion.charite.de/en/doctoral_procedure/regulations_2017/requirements/",
+    checked: "2026-09",
     why: "The least bureaucratic research doctorate in Europe for a doctor with a question and a contact: there is no national admissions round, and the supervisor is the real gate. Know which degree you are signing up for, though. The Dr. med. is shorter and clinical, and outside Germany it is often read as a professional title rather than a research doctorate. Freiburg's medical faculty, advising its own doctors on European Research Council eligibility in 2025, lists a PhD, a postdoc, a professorship or a Habilitation as proof of doctoral equivalence, and a Dr. med. is not on the list. Charité and several other faculties also offer a PhD to medicine graduates, which is the one that travels.",
     reqs: [
       "A completed medical degree; Charité's rule for the Dr. med. is exactly that, and its PhD accepts medicine too",
@@ -471,6 +477,7 @@ window.DB.study = [
     window: "February and July intakes. The February 2027 intake closes 30 November 2026; the July 2026 intake closed 31 May 2026",
     deadlineMonths: [3, 4, 5, 9, 10, 11],
     url: "https://study.unimelb.edu.au/find/courses/graduate/master-of-public-health/how-to-apply/",
+    checked: "2026-09",
     why: "One of Australia's strongest public health schools, and Melbourne says applicants with a professional health degree or relevant work experience may be granted advanced standing, which is where an MBBS helps. The part Indian applicants rarely know: under the Australia-India trade agreement (AI-ECTA), Indian graduates of a coursework master's can stay and work for up to three years afterwards, a year longer than most nationalities get.",
     reqs: ["An undergraduate degree with a weighted average of at least 2.8 on a 4-point scale; MBBS qualifies", "Advanced standing is assessed on application, not promised", "Post-study work (subclass 485): apply within six months of finishing, aged 35 or under for a coursework master's"],
     steps: [
@@ -493,6 +500,7 @@ window.DB.study = [
     window: "February and September 2027 intakes are listed; check the programme page for each closing date",
     deadlineMonths: [1, 2, 5, 6, 9, 10],
     url: "https://www.unsw.edu.au/study/postgraduate/master-of-public-health",
+    checked: "2026-09",
     why: "Home to the Kirby Institute and closely linked to the George Institute for Global Health, which runs an India office alongside its Sydney base. If you want to work on Indian populations from an Australian base, this is the most direct link.",
     reqs: ["MBBS or health-related bachelor's", "IELTS 6.5", "Recognition of prior learning available"],
     steps: [
@@ -514,6 +522,7 @@ window.DB.study = [
     window: "Each university runs its own rounds. Melbourne's for 2027 starts closes 31 October 2026",
     deadlineMonths: [4, 5, 8, 9, 10],
     url: "https://scholarships.unimelb.edu.au/awards/graduate-research-scholarships",
+    checked: "2026-09",
     why: "Australian research scholarships are tax-free, domestic and international candidates compete for the same stipend-plus-fee awards at universities such as Melbourne, and the country lets you stay afterwards: under the Australia-India trade agreement, an Indian PhD graduate can hold a post-study work visa for up to four years, a year more than most nationalities. A medical degree plus one solid research project is a competitive application.",
     reqs: ["MBBS + demonstrated research capacity (a thesis, publication, or substantial project)", "A supervisor who has agreed to take you. This is mandatory before you apply", "IELTS 6.5"],
     steps: [
@@ -650,6 +659,7 @@ window.DB.study = [
     window: "Rolling: every position is advertised on its own, usually with three to six weeks to apply",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.uio.no/english/research/phd/before-applying/",
+    checked: "2026-09",
     why: "The masters degrees in these countries now charge Indian students, but the doctorates never stopped paying. A Nordic PhD candidate is usually an employee with a salary, a pension and parental leave, hired into a funded project rather than admitted to a course. That makes it one of the few routes where an MBBS graduate can go abroad, earn and train at the same time, and it is under-used because people search for 'scholarships' and these are advertised as jobs.",
     reqs: [
       "A master's-level degree or an equivalent the faculty accepts. Oslo asks for a relevant five-year master's or equivalent; Karolinska asks for 240 credits with 60 at advanced level. An MBBS is assessed case by case, so ask before you write a proposal",

@@ -362,6 +362,7 @@ window.DB.research.push(
     duration: "Two days; the 2026 summit runs 20–21 November",
     window: "Abstract submissions for 2026 have closed. The call is posted on the summit's symposium page ahead of each November meeting",
     url: "https://www.globalsummit.health/scientific_symposium26",
+    checked: "2026-09",
     why: "A digital-health research prize a medical student can realistically win without a lab. The symposium takes 300-word abstracts on primary or secondary data, policy analyses and evidence-based editorials, and the 2025 first prize went to a narrative review of mental health apps. Its scientific committee includes a professor of community medicine from AIIMS Bhopal and a former Additional Deputy Director General of Health Services, so a paper here is read by people who shape Indian digital health.",
     reqs: [
       "A 300-word abstract, emailed to the organisers",

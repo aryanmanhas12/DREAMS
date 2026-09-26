@@ -22,6 +22,7 @@ window.DB.funding.push(
     deadlineMonths: [],
     noOpenCall: true,
     url: "https://www.foryoungwomeninscience.co.in/",
+    checked: "2026-09",
     why: "Two funding pools that exist because women leave science at every career stage, and that people searching 'scholarships for Indians' tend to miss. L'Oréal India names medicine among its eligible fields and takes MBBS students in any year but the last, which makes it one of the few awards here open to a first-year. AAUW funds women who are not US citizens to study full-time in the United States.",
     reqs: [
       "Women only, for both",
