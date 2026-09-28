@@ -46,7 +46,6 @@ retry git push origin HEAD:main
 
 echo
 echo "✓ shipped $(git rev-parse --short HEAD): $branch and main are identical."
-echo "  Two deploys start now: 'Deploy to GitHub Pages' (ours, strips tools/) and, while the"
-echo "  repo's Pages source is still 'Deploy from a branch', GitHub's 'pages build and"
-echo "  deployment', which publishes the whole branch and usually finishes last. Check both"
-echo "  in the Actions list. Settings → Pages → Source: GitHub Actions removes the second."
+echo "  'Deploy to GitHub Pages' is now running; it should be the ONLY deploy in the Actions"
+echo "  list. If 'pages build and deployment' also appears, the repo's Pages source has been"
+echo "  switched back to a branch and the whole branch, tools/ included, is being published."

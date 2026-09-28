@@ -5,11 +5,11 @@ and shipping. Each is a handful of commands. Everything here runs from the repo
 root with plain `node`; nothing needs installing except Playwright for the
 browser checks, which this environment already has.
 
-`tools/` is meant to stay unpublished: our deploy workflow deletes it before
-uploading the site. **That only works once the repository's Pages source is set
-to GitHub Actions** (Settings → Pages → Build and deployment → Source). While it
-is still "Deploy from a branch", GitHub also publishes the whole branch after
-every push, `tools/` included. Nothing here is secret, but that is the reason.
+Nothing in `tools/` is published: the deploy workflow deletes it before
+uploading the site. That depends on the repository's Pages source being set to
+GitHub Actions (Settings → Pages → Build and deployment → Source), which it has
+been since 28 September 2026. If it were ever switched back to "Deploy from a
+branch", GitHub would publish the whole branch again, `tools/` included.
 
 ## The monthly recheck
 
@@ -103,8 +103,8 @@ tools/ship.sh             push the branch, fast-forward main, which deploys
 tags and `llms.txt`, which used to be typed by hand. `ship.sh` refuses to run
 with uncommitted changes, on `main`, or when `main` has commits the branch
 lacks. After shipping, check the Actions list: "Deploy to GitHub Pages" should
-be green, and "pages build and deployment" should not appear at all once the
-Pages source is GitHub Actions.
+be green, and "pages build and deployment" should not appear at all. If it
+does, the Pages source has been switched back to a branch.
 
 ## What each tool is for
 
