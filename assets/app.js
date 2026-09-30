@@ -920,6 +920,7 @@
   // old page fades and settles as the new one arrives (styles.css, "views").
   // Under reduced motion, or without the API, it is the plain swap.
   const canTransition = typeof document.startViewTransition === "function" &&
+    !document.documentElement.classList.contains("lite") &&
     !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   if (canTransition) document.documentElement.classList.add("has-vt");
   let currentView = "intro";
@@ -2179,6 +2180,27 @@
     });
   }
 
+  /* Desktop only: the spotlight in styles.css (.card-in::after) follows the
+     pointer across the card under it. One card at a time, one write per
+     frame, and nothing at all on touch screens. */
+  function initSpotlight() {
+    if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let pending = null, queued = false;
+    document.addEventListener("pointermove", function (e) {
+      const core = e.target && e.target.closest ? e.target.closest(".card-in") : null;
+      if (!core) return;
+      pending = { core: core, x: e.clientX, y: e.clientY };
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        const r = pending.core.getBoundingClientRect();
+        pending.core.style.setProperty("--mx", (pending.x - r.left).toFixed(0) + "px");
+        pending.core.style.setProperty("--my", (pending.y - r.top).toFixed(0) + "px");
+      });
+    }, { passive: true });
+  }
+
   /* The first time the galaxy's sound starts on this device, say so and say
      how to stop it. Once only: after that the speaker button speaks for it. */
   function initSoundNotice() {
@@ -2220,7 +2242,10 @@
   function initHeroGlobe() {
     const canvas = $("#globeCanvas");
     if (!canvas || typeof window.initGlobe !== "function") return;
-    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); }, { intro: true });
+    // On html.lite phones the globe holds still until touched: no intro, no
+    // idle spin, so a 2GB phone spends nothing on it while the reader reads.
+    const lite = document.documentElement.classList.contains("lite");
+    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); }, { intro: !lite, autoSpin: !lite });
     // Theme switches change every colour the globe draws with.
     if (globe) {
       const btn = $("#themeToggle");
@@ -2572,6 +2597,7 @@
     renderReviewed();
     initTheme();
     initSoundNotice();
+    initSpotlight();
     initMobileNav();
     initHeroGlobe();
     initAtlas();

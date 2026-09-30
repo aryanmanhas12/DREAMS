@@ -137,6 +137,7 @@
   --readw: 64ch;   /* 68ch measured long once the base size went up */
 
   --ease-out: cubic-bezier(.22, 1, .36, 1);   /* fast start, soft landing */
+  --ease-spring: cubic-bezier(.32, .72, 0, 1); /* presses and reveals: weight, then settle */
 
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.8);
 
@@ -205,19 +206,26 @@
    is the separate `translate` property, eased by a transition. The two
    compose without either overwriting the other. */
 .sky-par { position: absolute; inset: 0; will-change: transform; }
-.sky-lean { translate: var(--lx) var(--ly); transition: translate 1.2s var(--ease-out); }
-.sky-lean-milky { translate: calc(var(--lx) * .2) calc(var(--ly) * .2); }
+.sky-lean { position: absolute; inset: 0; transform: translate3d(var(--lx), var(--ly), 0); transition: transform 1.2s var(--ease-out); }
+.sky-lean-milky { transform: translate3d(calc(var(--lx) * .2), calc(var(--ly) * .2), 0); }
 
 .sky-milky-wrap { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
 .sky-milky {
   position: absolute; left: 0; top: 0;
-  translate: -50% -50%; rotate: -28deg;
+  transform: translate(-50%, -50%) rotate(-28deg);
   opacity: 0; transition: opacity 1.4s ease;
   animation: sky-turn 960s linear infinite;
 }
 .sky-milky.is-ready { opacity: .95; }
 :root[data-theme="light"] .sky-milky.is-ready { opacity: .6; }
-@keyframes sky-turn { from { rotate: -28deg; } to { rotate: 332deg; } }
+/* `transform` keyframes, not the individual `rotate:` property: the sister
+   project (Ronak) measured individual-property and SVG-child animations on
+   the main thread, and transform keyframes on HTML elements on the
+   compositor. */
+@keyframes sky-turn {
+  from { transform: translate(-50%, -50%) rotate(-28deg); }
+  to   { transform: translate(-50%, -50%) rotate(332deg); }
+}
 
 /* The twinkling stars: tiny elements with their own duration and delay
    (--d, --dl, set by space.js), so only small squares animate. The largest
@@ -249,7 +257,7 @@
 :root[data-theme="light"] .sky-galaxy { opacity: .22; }
 .sky-galaxy-tilt { width: 100%; height: 100%; transform: rotate(-31deg) scaleY(.55); }
 .sky-galaxy-disc { display: block; width: 100%; height: 100%; animation: galaxy-spin 180s linear infinite; }
-@keyframes galaxy-spin { to { rotate: 360deg; } }
+@keyframes galaxy-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 /* Shooting stars and comets: space.js adds one, its animation carries it
    along --ang for --dist, and it removes itself on animationend. The head
@@ -287,7 +295,7 @@
 /* Stilled by the footer button (html.sky-still) or by the system setting. */
 .sky-still .sky-milky, .sky-still .sky-tw-star, .sky-still .sky-galaxy-disc { animation: none; }
 .sky-still .sky-shoot, .sky-still .sky-comet { display: none; }
-.sky-still .sky-lean { translate: none; }
+.sky-still .sky-lean { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .sky-milky, .sky-tw-star, .sky-galaxy-disc { animation: none; }
   .sky-milky, .sky-lean { transition: none; }
@@ -474,21 +482,22 @@ body {
    .topnav lays out inline and there is nothing to toggle. */
 .nav-toggle {
   display: none; width: 36px; height: 36px; padding: 0; margin: 0;
-  border: 1px solid var(--line); background: var(--surface); border-radius: var(--r);
+  border: 1px solid var(--line); background: var(--surface); border-radius: 50%;
   cursor: pointer; place-items: center;
   position: relative;
 }
 .nav-toggle-bars { position: relative; width: 16px; height: 11px; display: block; }
+/* The bars morph into an X with transform and opacity only: they used to
+   animate `top`, a layout property, which re-lays the button every frame. */
 .nav-toggle-bars span {
-  position: absolute; left: 0; width: 100%; height: 1.5px; background: var(--ink);
-  border-radius: 1px; transition: transform .18s ease, opacity .18s ease, top .18s ease;
+  position: absolute; left: 0; top: 5px; width: 100%; height: 1.5px; background: var(--ink);
+  border-radius: 1px; transition: transform .32s var(--ease-spring), opacity .2s var(--ease-out);
 }
-.nav-toggle-bars span:nth-child(1) { top: 0; }
-.nav-toggle-bars span:nth-child(2) { top: 5px; }
-.nav-toggle-bars span:nth-child(3) { top: 10px; }
-.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { top: 5px; transform: rotate(45deg); }
-.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+.nav-toggle-bars span:nth-child(1) { transform: translateY(-5px); }
+.nav-toggle-bars span:nth-child(3) { transform: translateY(5px); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; transform: scaleX(.3); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { transform: rotate(-45deg); }
 
 @media (max-width: 760px) {
   .nav-toggle { display: grid; }
@@ -521,7 +530,16 @@ body {
   }
   .navlink:first-child { border-top: 0; }
   .navlink[aria-current="true"] { background: var(--accent-wash); }
+  /* The links arrive one after another as the drawer opens, rising a few
+     pixels, 30ms apart: the menu reads as a list being dealt, not a slab. */
+  .topnav.is-open .navlink { animation: link-in .34s var(--ease-spring) both; }
+  .topnav.is-open .navlink:nth-child(2) { animation-delay: .03s; }
+  .topnav.is-open .navlink:nth-child(3) { animation-delay: .06s; }
+  .topnav.is-open .navlink:nth-child(4) { animation-delay: .09s; }
+  .topnav.is-open .navlink:nth-child(5) { animation-delay: .12s; }
+  .topnav.is-open .navlink:nth-child(6) { animation-delay: .15s; }
 }
+@keyframes link-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 /* ─────────────── views ─────────────── */
 .view { display: none; }
@@ -565,7 +583,6 @@ body {
   from { opacity: 0; transform: translateY(10px) scale(.96); }
   to   { opacity: 1; transform: none; }
 }
-@keyframes wave { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 
 .q-anim .q-say .q-title { animation: bubble-in .26s var(--ease-out) both; }
 .q-anim .q-say .q-help  { animation: bubble-in .26s var(--ease-out) .06s both; }
@@ -578,14 +595,52 @@ body {
 .read-main > .say:nth-of-type(3) { animation-delay: .16s; }
 .read-main > .say:nth-of-type(4) { animation-delay: .24s; }
 .read-main > .say:nth-of-type(n+5) { animation-delay: .32s; }
-.sound-toggle.is-on .wave { animation: wave 2.4s ease-in-out infinite; }
 .bubble-toast { animation: bubble-in .3s var(--ease-out) both; }
+
+/* The hero headline rises word by word on arrival (index.html splits it into
+   .w spans with an --i index). 30ms apart, 520ms each: the whole line has
+   landed by about 0.9s. inline-block is what lets a word take a transform;
+   text-wrap: balance still breaks between them at the spaces. */
+.rise .w {
+  display: inline-block;
+  animation: word-rise .52s var(--ease-spring) both;
+  animation-delay: calc(var(--i, 0) * 30ms + 60ms);
+}
+@keyframes word-rise { from { opacity: 0; transform: translateY(.42em); } to { opacity: 1; transform: none; } }
+
+/* A star orbits the one primary action on the first screen: a conic
+   gradient on an oversized square, turned by a transform keyframe (the
+   compositor's job), showing only as a 2px ring because ::after fills the
+   inside with the button's own pink. The button keeps its real background
+   too, so contrast checks read the true colour behind the label. */
+.btn-orbit { position: relative; overflow: hidden; isolation: isolate; }
+.btn-orbit::before, .btn-orbit::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+.btn-orbit::before {
+  left: 50%; top: 50%; width: 125%; aspect-ratio: 1;
+  background: conic-gradient(from 0deg, var(--fill) 0 64%, var(--star) 74%, var(--starlight) 78%, var(--fill-2) 84%, var(--fill) 92%);
+  animation: orbit 3.6s linear infinite;
+}
+.btn-orbit::after { inset: 2px; border-radius: inherit; background: var(--fill); transition: background-color .15s ease; }
+.btn-orbit:hover::after { background: var(--fill-2); }
+@keyframes orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.sky-still .btn-orbit::before, .is-scrolling .btn-orbit::before { animation-play-state: paused; }
+
+/* html.lite (set in <head> for phones reporting 2GB of memory or less, and
+   for Data Saver): the sky is the static CSS tile the script-free pages use,
+   with no canvases and nothing turning, and the orbit ring holds still.
+   Pattern from the sister project, which measured what 2GB phones can carry. */
+.lite .btn-orbit::before { animation: none; transform: translate(-50%, -50%) rotate(40deg); }
 
 @media (prefers-reduced-motion: reduce) {
   .q-anim .q-say .q-title, .q-anim .q-say .q-help, .q-anim .opts,
   .opt[aria-pressed="true"] .opt-box, .star-btn.is-saved,
   .disclose[open] .disclose-body, .prep[open] > :not(summary),
-  .read-main > .say, .sound-toggle.is-on .wave, .bubble-toast, .view.is-active { animation: none; }
+  .read-main > .say, .bubble-toast, .view.is-active, .rise .w, .btn-orbit::before,
+  .topnav.is-open .navlink { animation: none; }
+  .btn-orbit::before { transform: translate(-50%, -50%) rotate(40deg); }
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 
@@ -765,7 +820,7 @@ body {
   min-height: 48px;
   border: 1px solid transparent;
   transition: background-color .15s ease, color .15s ease, border-color .15s ease,
-    box-shadow .25s var(--ease-out), transform .15s var(--ease-out);
+    box-shadow .25s var(--ease-out), transform .2s var(--ease-spring);
 }
 /* Nebula pink with near-black text in BOTH themes, so the primary action
    looks identical wherever it appears. On hover it lights up like the cloud
@@ -775,7 +830,7 @@ body {
 @media (hover: hover) {
   .btn-primary:hover { box-shadow: 0 0 0 4px var(--nebula-a), 0 8px 28px -8px var(--fill); }
 }
-.btn-primary:active { transform: translateY(1px); }
+.btn:active { transform: scale(.97); }
 
 /* The stronger violet edge, not the hairline: over a starfield a hairline
    pill stops reading as a button at all (design-critique pass). Still
@@ -1098,10 +1153,26 @@ body {
 /* ─────────────── cards ─────────────── */
 .cards { display: grid; gap: 16px; margin: 0 0 60px; }
 .card {
-  border: 1px solid var(--line); background: var(--surface);
-  border-radius: var(--r); overflow: hidden; position: relative;
+  /* Double-bezel: the card is a shell with a 5px lip and a hairline edge,
+     and the content sits in a core inside it with its own surface, a lit
+     top edge and a concentric radius (outer 20px minus the 5px lip). It
+     reads as a plate seated in a tray rather than a box on the page. The
+     radius is rounder than the 3px surfaces elsewhere on purpose: cards
+     are the objects you handle, like the speech bubbles (18px).
+     min-width: 0 is load-bearing. The card used to carry overflow: hidden,
+     which quietly zeroes a grid item's automatic minimum; moving that to the
+     core left the card's minimum at its contain-intrinsic-size width (320px),
+     and every card at 320px ran 30px off the screen. */
+  position: relative; padding: 5px; border-radius: 20px; min-width: 0;
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
 }
-.card:hover { border-color: var(--ink-3); }
+.card-in {
+  position: relative; overflow: hidden; border-radius: 15px; isolation: isolate;
+  background: var(--surface);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 9%, transparent);
+}
+.card:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 /* Status used to be a 3px coloured stripe down the card's left edge, which
    is the single most recognised tell of a generated layout and said nothing
    to anyone who cannot separate green from amber. It is a labelled pill in
@@ -1321,14 +1392,14 @@ body {
    star/theme buttons sitting right next to body text. */
 @media (max-width: 640px) {
   .star-btn { width: 40px; height: 40px; }
-  .theme-toggle { width: 40px; height: 40px; }
+  .theme-toggle, .nav-toggle { width: 40px; height: 40px; }
   .fbtn { padding: 9px 15px; font-size: .78rem; }
 }
 
 /* The speaker added a third control to the top bar, and at 320px the
    wordmark then ran 44px into it (audit.js measures exactly this). Under
    370px: the little globe beside the name goes (the wordmark alone is the
-   brand), the wordmark steps down once more, and the two round buttons draw
+   brand), the wordmark steps down once more, and the three round buttons draw
    at 34px while their ::after keeps the tap area at 44px. The 10px gap is the
    least that keeps those enlarged tap areas from overlapping (5px + 5px).
    This block must stay AFTER the 640px rule above, which it overrides. */
@@ -1336,7 +1407,7 @@ body {
   .brand-mark { display: none; }
   .brand-text { font-size: .9rem; }
   .topbar-controls { gap: 10px; }
-  .theme-toggle { width: 34px; height: 34px; }
+  .theme-toggle, .nav-toggle { width: 34px; height: 34px; }
 }
 
 .result-count { font-family: var(--font-ui); font-size: .76rem; color: var(--ink-3); margin: 0 0 18px; letter-spacing: 0; }
@@ -1761,8 +1832,17 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
    Still gated on a real pointer: on a touchscreen :hover sticks after a tap,
    so an un-gated hover state leaves a card marked until you tap elsewhere. */
 @media (hover: hover) and (pointer: fine) {
-  .card { transition: border-color .15s ease, background-color .15s ease; }
-  .card:hover { border-color: var(--accent); background: var(--surface); }
+  .card { transition: border-color .2s var(--ease-out); }
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+  /* Spotlight: a soft nebula light follows the pointer across the card
+     under it. app.js writes --mx/--my on that one card's core, gated to a
+     frame; the light only fades in on hover. Mouse and trackpad only. */
+  .card-in::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), var(--nebula-a), transparent 60%);
+    opacity: 0; transition: opacity .35s var(--ease-out);
+  }
+  .card:hover .card-in::after { opacity: 1; }
 }
 
 /* No frosted-topbar rule here on purpose. .topbar already carries

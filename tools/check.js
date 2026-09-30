@@ -249,6 +249,51 @@ print("".join(sorted(chr(c) for c in need - cps)))
   }
 }
 
+/* ── 5b. DESIGN.md matches the stylesheet ──
+   DESIGN.md is the design source of truth an agent reads before visual work.
+   A token that changes in styles.css and not there (or the reverse) is how
+   the two drift apart, so every colour in its front matter is compared, in
+   both directions, with the three token blocks it names. */
+{
+  const designPath = path.join(ROOT, "DESIGN.md");
+  if (!fs.existsSync(designPath)) E("DESIGN.md is missing: it is the design source of truth (see CLAUDE.md)");
+  else {
+    const md = fs.readFileSync(designPath, "utf8");
+    const css = fs.readFileSync(path.join(ROOT, "assets/styles.css"), "utf8");
+    const front = md.split(/^---$/m)[1] || "";
+    const section = (name) => {
+      const m = front.match(new RegExp("^  " + name + ":[^\\n]*\\n((?:    .*\\n)+)", "m"));
+      const out = {};
+      if (m) for (const l of m[1].split("\n")) { const t = l.match(/"(--[a-z0-9-]+)":\s*"([^"]+)"/); if (t) out[t[1]] = t[2]; }
+      return out;
+    };
+    const cssBlock = (sel) => {
+      const i = css.indexOf(sel);
+      if (i < 0) return null;
+      const out = {};
+      for (const t of css.slice(i, css.indexOf("}", i)).matchAll(/(--[a-z0-9-]+):\s*(#[0-9A-Fa-f]{6}|rgba\([^)]*\))/g)) out[t[1]] = t[2];
+      return out;
+    };
+    const norm = (v) => v.replace(/\s+/g, "").toLowerCase();
+    const compare = (label, want, sel) => {
+      const have = cssBlock(sel);
+      if (!have) { E(`styles.css has no ${sel} block to compare DESIGN.md's ${label} colours with`); return; }
+      for (const k of Object.keys(want)) {
+        if (!(k in have)) E(`DESIGN.md ${label} lists ${k}, which ${sel} in styles.css does not define`);
+        else if (norm(have[k]) !== norm(want[k])) E(`DESIGN.md ${label} says ${k} is ${want[k]}; ${sel} in styles.css says ${have[k]}`);
+      }
+      for (const k of Object.keys(have)) if (!(k in want)) E(`${sel} in styles.css defines ${k}, which DESIGN.md ${label} does not list`);
+    };
+    const space = section("space"), daylight = section("daylight");
+    if (!Object.keys(space).length || !Object.keys(daylight).length) E("DESIGN.md front matter has no colors.space / colors.daylight tokens to check");
+    else {
+      compare("space", space, ":root {");
+      compare("space", space, ':root[data-theme="dark"] {');
+      compare("daylight", daylight, ':root[data-theme="light"] {');
+    }
+  }
+}
+
 /* ── 6. something open every month ── */
 const byMonth = Array.from({ length: 13 }, () => 0);
 items.forEach((i) => (i.deadlineMonths || []).forEach((m) => byMonth[m]++));

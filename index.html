@@ -59,8 +59,9 @@
      still download in parallel and run in order before DOMContentLoaded. The
      one thing that must happen before first paint is the reader's chosen
      theme, or a daylight reader sees a flash of the space theme first, so
-     that runs here, inline and tiny. -->
-<script>try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")document.documentElement.classList.add("sky-still")}catch(e){}</script>
+     that runs here, inline and tiny, along with html.lite for phones with 2GB
+     of memory or less and for Data Saver (a static sky, no idle motion). -->
+<script>(function(d){try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")d.classList.add("sky-still")}catch(e){}var m=navigator.deviceMemory,c=navigator.connection;if((m&&m<=2)||(c&&c.saveData))d.classList.add("lite")})(document.documentElement)</script>
 
 <!-- Installable to a phone home screen. Relative paths throughout so this
      works both at the GitHub Pages sub-path and from the filesystem.
@@ -172,9 +173,13 @@
            way rather than with `order` keeps tab order identical to reading
            order — reordering visually with `order` desyncs the two. -->
       <div class="hero-grid">
-        <h1 class="hero-h">
-          You were told there were two options.<br />
-          <span class="hero-em">This page has <span id="heroCount" class="num-pending"></span> of them.</span>
+        <!-- Each word is its own span so the headline can rise word by word on
+             arrival: the page's one orchestrated moment, with the globe turning
+             to India beside it. Pure CSS from the first paint (no JavaScript
+             to wait for), transform and opacity only, off under reduced motion. -->
+        <h1 class="hero-h rise">
+          <span class="w" style="--i:0">You</span> <span class="w" style="--i:1">were</span> <span class="w" style="--i:2">told</span> <span class="w" style="--i:3">there</span> <span class="w" style="--i:4">were</span> <span class="w" style="--i:5">two</span> <span class="w" style="--i:6">options.</span><br />
+          <span class="hero-em"><span class="w" style="--i:7">This</span> <span class="w" style="--i:8">page</span> <span class="w" style="--i:9">has</span> <span class="w" style="--i:10"><span id="heroCount" class="num-pending"></span></span> <span class="w" style="--i:11">of</span> <span class="w" style="--i:12">them.</span></span>
         </h1>
 
         <figure class="hero-globe">
@@ -194,7 +199,7 @@
              set the tone for everything after it. Now the short run really is
              three, and the long one says its own price on the label. -->
         <div class="hero-actions">
-          <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
+          <button type="button" class="btn btn-primary btn-orbit" id="startBtn">Answer the three questions</button>
           <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper: all 16</button>
           <button type="button" class="btn btn-ghost" data-goto="browse">Show me everything</button>
         </div>

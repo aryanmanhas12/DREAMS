@@ -245,9 +245,11 @@ Playwright and Chromium; serves the repo like Pages does).
   tick when an answer is chosen, the pop when a card is saved, the unfold of a disclosure,
   the read arriving bubble by bubble, and the view transitions (`document.startViewTransition`,
   skipped under reduced motion; `html.has-vt` turns off the old per-view fade).
-- **Buttons are pills at every width; surfaces keep the 3px `--r`.** Desktop used to square
-  the hero buttons while phones and the large CTA were round, so one button changed shape
-  at 760px.
+- **Buttons are pills at every width, and every top-bar control is a circle; surfaces keep the
+  3px `--r`.** Desktop used to square the hero buttons while phones and the large CTA were
+  round, so one button changed shape at 760px; the menu button was a 3px square beside two
+  round buttons until the September 2026 pass. The exceptions are deliberate and are the
+  things you handle: programme cards (20px, double-bezel) and speech bubbles (18px).
 - **Template tells removed in the Marigold redesign; still out under the galaxy.** All-caps
   tracked labels (26 rules), eyebrow labels above headings, an italic or coloured phrase
   inside the headline, coloured left-edge stripes on panels and a status stripe on cards,
@@ -260,13 +262,17 @@ Playwright and Chromium; serves the repo like Pages does).
 ## The galaxy: sky, sound, bubbles (30 September 2026)
 
 - **`assets/space.js` draws the sky** into one fixed container (`.sky`, z-index -1, no pointer
-  events, aria-hidden) with three layers: `.sky-nebula` (CSS clouds that breathe),
-  `.sky-milky` (the Milky Way, painted ONCE in three idle-time passes, glow, dust lanes,
-  stars, then turned by a 16-minute CSS `rotate` animation, so it costs nothing per frame),
-  and `.sky-stars` (the live 30fps canvas: twinkling stars in three depths, a spiral galaxy
-  turning on its own axis, drifting dust, shooting stars, a comet every 30 to 60 seconds).
-  Scroll and, on a fine pointer, the mouse move every layer by depth. The container is fixed
-  with `overflow: hidden`, which is why its oversized children cannot add page scroll.
+  events, aria-hidden). The nebula clouds are the container's own background. Inside it:
+  `.sky-milky`, the ONE full-screen canvas (Milky Way glow, lanes, field stars), painted once
+  in idle-time chunks and turned by a 16-minute CSS `transform` keyframe; a few dozen
+  `.sky-tw-star` elements twinkling on their own CSS rhythms; a spiral galaxy disc turning
+  inside a tilted wrapper; shooting stars and a comet as short-lived elements that remove
+  themselves on `animationend`. Nothing in the sky runs a per-frame loop. Each depth sits in
+  a `.sky-par` (scroll parallax, written by space.js) wrapping a `.sky-lean` (pointer lean,
+  `--lx`/`--ly`, fine pointers only): two wrappers because one element cannot take two
+  transforms, and the first version that tried had the lean silently overwrite the scroll.
+  The container is fixed with `overflow: hidden`, which is why its oversized children
+  cannot add page scroll.
 - **Canvas pixels are invisible to every contrast check, and that shipped a real failure.**
   The first Milky Way put a warm core behind the hero headline at about 2.5:1 for `--ink-3`,
   and a spiral-galaxy core burned by additive compositing measured 1.6:1, while `audit.js`
@@ -369,6 +375,74 @@ main-thread scripting numbers as they are.
   serve the tree with `tools/lib/browser.js` `serve({ gzip: true })`, run
   three times, report the median and the spread.
 
+## The craft pass: effects ported from the design skills (30 September 2026)
+
+The user asked for every uploaded skill to be used. What each contributed, and what was
+declined and why, so the next pass does not re-litigate it:
+
+- **high-end-visual-design** gave the double-bezel card (a 5px translucent shell with a
+  hairline edge holding a surface core with a lit top edge, radii 20/15 so the curves are
+  concentric), the spring curve `--ease-spring: cubic-bezier(.32, .72, 0, 1)`, a press scale
+  of .97 on every button, the hamburger that folds into an X, and the drawer links arriving in
+  a 30ms stagger. **Declined:** the floating glass nav island and screen-filling blurred menu
+  (glassmorphism is out here, and a blur on a sticky bar re-composites every scroll frame on
+  a phone), eyebrow tags (a listed template tell), fade-and-blur reveals on every section
+  (`initReveals` was removed on purpose), `py-24` macro whitespace (the primary button
+  already sits at y=674 of 844 on a phone; 96px more above it lands it on the fold), and the arrow-in-a-circle button (the `→` tell).
+- **animated-ui-libraries** (Aceternity, Cult UI, Componentry) is React + Tailwind + Motion,
+  so nothing was installed: three effects were ported to plain CSS on the compositor.
+  Card Spotlight is a `::after` radial light at `--mx`/`--my`, written by one rAF-gated
+  `pointermove` on the hovered card only, under `(hover: hover) and (pointer: fine)`.
+  Moving Border is `.btn-orbit`: a conic gradient on an oversized square turned by a
+  `transform` keyframe, clipped to a 2px ring because `::after` refills the inside with the
+  button's own pink (the button keeps its real background, so contrast checks read the true
+  colour behind the label). Text Generate is `.rise`: the hero headline's words are spans
+  that rise 30ms apart, once. **Declined:** 3D tilt, sparkles, marquees, meteors (the sky
+  already has shooting stars).
+- **design-md** gave `DESIGN.md` at the root: every colour token in YAML, plus radii,
+  motion and component rules. **`tools/check.js` compares it with `styles.css` in both
+  directions and fails on drift**, so a token change without the matching DESIGN.md line
+  breaks the build (proved by changing `--fill`: three errors). The deploy removes it like
+  the other build-only files.
+- **web-design-guidelines**, and the Design plugin's **design-critique**,
+  **accessibility-review** and **ux-copy** (read from
+  `anthropics/knowledge-work-plugins/design/skills/`, because the plugin is not enabled on
+  this account) were run as reviews. Their findings were field edges under 3:1 (WCAG 1.4.11,
+  now `--line-strong` and asserted by `audit.js`), the sound and sky needing on-page stops
+  (WCAG 1.4.2 and 2.2.2), and label wording.
+
+What measurement taught in this pass:
+
+- **Moving `overflow: hidden` off a grid item changes its minimum width.** The card used to
+  clip itself, which silently zeroes a grid item's automatic minimum. The double-bezel moved
+  the clip to the inner core, the card's minimum became its `contain-intrinsic-size` width
+  (320px), and every card at 320px ran 30px off screen. `audit.js` caught it; `min-width: 0`
+  on `.card` is the fix and the comment says why.
+- **A new continuous effect costs nothing only if it stays on the compositor.** Measured with
+  the orbit ring on and off at 4x CPU: identical main-thread time. Every new loop also gets a
+  still state under `html.sky-still`, `html.lite` and reduced motion.
+- **`html.lite`** is set by the inline head script when `navigator.deviceMemory <= 2` or
+  Save-Data is on, so it applies before first paint: the sky becomes the CSS-only static
+  tile, the globe does not auto-spin or play its intro, view transitions are skipped and the
+  orbit ring holds still.
+- **Asking for an animation frame and then not drawing still costs a whole frame.** The globe
+  requested 60 frames a second and drew 30; each skipped frame still ran style, animations
+  and lifecycle for the whole page. The idle spin now waits on a 25ms timer between frames,
+  and `kick()` cancels the timer the moment the reader grabs the globe. With the hero on
+  screen at 4x: about 3,870ms to 3,390ms of main thread per 4s here.
+- **Most of that remaining number is this container, not a phone.** With the hero on screen,
+  about 2,500ms per 4s is `CanvasResourceProviderSharedImage::ProduceCanvasResource`, the
+  software GPU (SwiftShader) uploading the globe canvas; a phone's GPU does not pay it. The
+  honest phone-relevant part is the globe's script (~170ms/4s at 4x) and the style pass the
+  sky's ~44 CSS animations add to each frame the globe draws (~230ms/4s at 4x). With the hero
+  off screen no main frames run at all and the whole page costs ~10ms/4s, which is what
+  `perf.js` asserts.
+- **Lighthouse mobile after this pass, three runs each, same machine and session:** performance
+  **88** (88-91), CLS **0.000**, TBT ~200ms, simulated LCP 3.2s. The previous commit measured
+  **93** (92-93), TBT ~135ms. An A/B with only the old globe loop put back scored 85 (73-91),
+  so the idle-spin timer is not the cost; the remaining gap sits inside this machine's spread
+  and was not isolated to one effect. Re-measure with three runs before claiming a direction.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this
@@ -389,7 +463,7 @@ audited.**
 | 9 | Sitemap + robots.txt | Both at the repo root. `sitemap.xml` is **regenerated by `tools/make-pages.js`** and lists 14 canonical URLs (home, 11 category pages, privacy, terms), so it cannot name a page that does not exist. `robots.txt` disallows `/dist/`, `/tools/` and `/sw.js` and points at the sitemap. `llms.txt` sits beside them. |
 | 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
 | 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Since the galaxy, `make-og.js` **throws if any card passes 300 KB** (WhatsApp drops larger previews). Chrome dithers gradients and PNG compresses dither worst: the full sky took cards to ~830 KB, and even a stars-only Milky Way cost ~110 KB, so cards carry the twinkling stars, ONE cloud, the spiral galaxy and the globe, and no Milky Way (homepage card ~238 KB). The card's sky CSS is read out of `styles.css` itself, so it cannot drift. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
-| 12 | Page load speed | CSS is render-blocking and scripts are `defer` (see Known traps: the non-blocking CSS was the CLS 0.563 defect). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured (30 Sep 2026, three runs): homepage performance **92** median (91-97), CLS **0.000**, TBT ~100ms. Runner pattern and flags in "Mobile performance". |
+| 12 | Page load speed | CSS is render-blocking and scripts are `defer` (see Known traps: the non-blocking CSS was the CLS 0.563 defect). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured (30 Sep 2026, three runs, after the craft pass): homepage performance **88** median (88-91), CLS **0.000**, TBT ~200ms; the commit before it measured 92-93. Runner pattern and flags in "Mobile performance". |
 | 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths in the one theme they can show. `audit.js`'s `fieldEdgeCheck` holds editable fields to 3:1 non-text contrast (WCAG 1.4.11): the search box, sort menu and free-text box had sat at 1.3-1.6:1 in both themes until the Design plugin's accessibility-review checklist named the criterion. Both selector lists are whitelists and rot — add new components in the same change. `tools/test/sky.js` checks text against the painted sky, which neither of the others can see. Lighthouse scores accessibility **100**. |
 | 14 | Mobile friendly | `tools/test/audit.js` covers 320–1280 on the app and `tools/test/pages.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
 | 15 | Custom 404 | `404.html`; Pages serves it automatically with a real 404 status (verified live). Links are absolute `/DREAMS/...` because Pages serves it from any depth, and it carries the category nav. |

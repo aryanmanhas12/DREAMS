@@ -180,7 +180,7 @@
     const twHolder = document.createElement("div");
     twHolder.className = "sky-tw-field";
     twHolder.appendChild(frag);
-    enqueue(function () { if (alive()) swap("twField", L.parNear, twHolder); return true; });
+    enqueue(function () { if (alive()) swap("twField", L.leanNear, twHolder); return true; });
 
     /* A distant spiral galaxy, face-on; CSS tilts it and turns it. */
     paintGalaxy(alive);
@@ -543,11 +543,22 @@
   function init() {
     root = div("sky");
     root.setAttribute("aria-hidden", "true");
-    L.parMilky = div("sky-par sky-lean sky-lean-milky", root);
-    L.milkyWrap = div("sky-milky-wrap", L.parMilky);
-    L.parNear = div("sky-par sky-lean", root);
+    // html.lite (2GB phones, Data Saver): the static CSS star tile the
+    // script-free pages use, and nothing else. No canvases, no timers.
+    if (document.documentElement.classList.contains("lite")) {
+      root.classList.add("sky-static");
+      document.body.insertBefore(root, document.body.firstChild);
+      return;
+    }
+    // Each depth is two nested wrappers: .sky-par takes the scroll offset
+    // (set from JS) and .sky-lean the pointer lean (a CSS transition). Both
+    // are `transform`, so they must live on different elements.
+    L.parMilky = div("sky-par", root);
+    L.milkyWrap = div("sky-milky-wrap", div("sky-lean sky-lean-milky", L.parMilky));
+    L.parNear = div("sky-par", root);
+    L.leanNear = div("sky-lean", L.parNear);
     L.parGalaxy = div("sky-par", root);
-    L.galaxy = div("sky-galaxy sky-lean", L.parGalaxy);
+    L.galaxy = div("sky-galaxy", div("sky-lean", L.parGalaxy));
     L.galaxyTilt = div("sky-galaxy-tilt", L.galaxy);
     document.body.insertBefore(root, document.body.firstChild);
 

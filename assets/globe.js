@@ -196,7 +196,7 @@
       };
       return pal;
     }
-    new MutationObserver(function () { pal = null; if (!raf) draw(); })
+    new MutationObserver(function () { pal = null; if (!raf && !wait) draw(); })
       .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     // Opens centred on India — the origin every route on this site starts from —
@@ -204,7 +204,9 @@
     let spin = -COORDS[HOME][1], tilt = 12;
     let dragging = false, lastX = 0, lastY = 0, idleAt = 0, hovered = null;
     let W = 0, H = 0, R = 0, cx = 0, cy = 0, dpr = 1;
-    let raf = null, running = false;
+    // raf is the next animation frame; wait is the timer that paces the idle
+    // spin. At most one of them is pending at a time.
+    let raf = null, wait = null, running = false;
     // Where focus() is steering to, and which dots belong to the region being
     // read about. Dots outside it are dimmed, never hidden: the rest of the
     // world is still there, it is just not the subject of this paragraph.
@@ -358,7 +360,7 @@
       return ((to - from + 540) % 360 + 360) % 360 - 180;
     }
 
-    let lastTick = 0, lastDraw = 0;
+    let lastTick = 0;
     function tick(now) {
       raf = null;
       if (!running) return;
@@ -386,14 +388,24 @@
       // And while the page is scrolling (space.js sets html.is-scrolling),
       // the idle spin holds still, so the frame goes to the scroll.
       const scrolling = document.documentElement.classList.contains("is-scrolling");
-      if (!idleOnly || (!scrolling && now - lastDraw >= 32)) { draw(); lastDraw = now; }
+      if (!idleOnly || !scrolling) draw();
       // A globe without auto-spin draws only while it has somewhere to go,
       // so the atlas costs nothing once it has arrived.
-      if (autoSpin || target || dragging || intro) raf = requestAnimationFrame(tick);
+      if (!(autoSpin || target || dragging || intro)) return;
+      // The 30fps idle spin waits on a timer, not on every animation frame.
+      // Asking for a frame and then skipping the draw still costs a full
+      // main-thread frame (style, animations, lifecycle): measured at 4x CPU
+      // with the hero on screen, that was about 270ms in every 4s for frames
+      // that drew nothing. kick() cancels the wait the moment the reader grabs
+      // the globe, so a drag still answers on the next frame.
+      if (idleOnly) wait = setTimeout(function () { wait = null; if (running) raf = requestAnimationFrame(tick); }, 25);
+      else raf = requestAnimationFrame(tick);
     }
 
     function kick() {
-      if (running && !raf) raf = requestAnimationFrame(tick);
+      if (!running || raf) return;
+      if (wait) { clearTimeout(wait); wait = null; }
+      raf = requestAnimationFrame(tick);
     }
 
     function hitTest(mx, my) {
@@ -435,14 +447,14 @@
         tilt = Math.max(-70, Math.min(70, tilt + (e.clientY - lastY) * -0.3));
         lastX = e.clientX; lastY = e.clientY;
         idleAt = Date.now();
-        if (!raf) draw();
+        if (!raf && !wait) draw();
       } else {
         const hit = hitTest(pt.x, pt.y);
         if ((hit && hit.name) !== (hovered && hovered.name)) {
           hovered = hit;
           setLabel(hit);
           canvas.style.cursor = hit ? "pointer" : "grab";
-          if (!raf) draw();
+          if (!raf && !wait) draw();
         }
       }
     });
@@ -459,7 +471,7 @@
     canvas.addEventListener("pointerleave", function () {
       if (dragging) return;
       hovered = null; setLabel(null);
-      if (!raf) draw();
+      if (!raf && !wait) draw();
     });
 
     canvas.addEventListener("click", function (e) {
@@ -488,7 +500,12 @@
       new IntersectionObserver(function (entries) {
         const visible = entries.some((en) => en.isIntersecting);
         if (visible && !running) { running = true; kick(); }
-        else if (!visible && running) { running = false; if (raf) cancelAnimationFrame(raf); raf = null; }
+        else if (!visible && running) {
+          running = false;
+          if (raf) cancelAnimationFrame(raf);
+          if (wait) clearTimeout(wait);
+          raf = wait = null;
+        }
       }, { threshold: 0.05 }).observe(canvas);
     } else {
       running = true; kick();
