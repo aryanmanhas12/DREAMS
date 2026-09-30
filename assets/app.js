@@ -775,9 +775,12 @@
   function recordLine(item, urg) {
     const bits = [];
     bits.push('<span>' + esc(TYPE_LABEL[item.type] || item.type) + '</span>');
-    bits.push('<span>' + esc(item.country) + (item.city && item.city !== item.country ? " · " + esc(item.city) : "") + '</span>');
+    bits.push('<span>' + (item.city && item.city !== item.country ? esc(item.city) + ", " : "") + esc(item.country) + '</span>');
     if (item.duration) bits.push('<span>' + esc(item.duration) + '</span>');
-    bits.push('<span class="' + (urg === "open" ? "r-deadline" : "") + '">' + esc(URG_TEXT[urg]) + '</span>');
+    // A dot for scanning and words for meaning: the status used to be a
+    // coloured stripe down the card's edge, which said nothing to anyone who
+    // cannot tell green from amber.
+    bits.push('<span class="urg urg-' + urg + '">' + esc(URG_TEXT[urg]) + '</span>');
     if (item.zeroCost) bits.push('<span class="r-free">Costs you nothing</span>');
     return '<p class="record">' + bits.join('<span class="sep">/</span>') + '</p>';
   }
@@ -800,10 +803,10 @@
     let h = '<article class="card" data-urg="' + urg + '" data-tier="' + imp.t + '">';
     h += '<div class="card-in">';
     h += '<header class="card-head"><div class="card-top">';
-    if (idx != null) h += '<span class="card-rank">' + String(idx + 1).padStart(2, "0") + '</span>';
+    if (idx != null) h += '<span class="card-rank">' + (idx + 1) + '</span>';
     h += '<h3 translate="no">' + esc(item.name) + '</h3>';
     h += '<span class="tier tier-' + imp.t + '" title="' + esc(tierName) + '">Tier ' + imp.t +
-         ' · ' + esc(tierName) + '</span>';
+         ': ' + esc(tierName) + '</span>';
     // Icon-only, so the accessible name has to be spelled out. title is a
     // tooltip and not a reliable name; aria-label names the ACTION and the
     // programme, because "Save to shortlist" repeated 171 times down a card
@@ -846,7 +849,7 @@
     if (item.window) h += '<div class="rail-cell rail-when"><b>Application window</b>' + esc(item.window) + '</div>';
     if (imp.odds) h += '<div class="rail-cell"><b>Odds</b>' + esc(imp.odds) + '</div>';
     if (imp.effort) h += '<div class="rail-cell"><b>Effort</b>' + esc(imp.effort) + '</div>';
-    h += '<a class="card-link" href="' + esc(item.url) + '" target="_blank" rel="noopener noreferrer">Official page &rarr;</a>';
+    h += '<a class="card-link" href="' + esc(item.url) + '" target="_blank" rel="noopener noreferrer">Open the official page<span class="sr-only"> (new tab)</span></a>';
     h += '</aside>';
 
     h += '</div></article>';
@@ -1039,7 +1042,7 @@
     h += '<div class="tier-legend">';
     [1, 2, 3, 4, 5].forEach(function (t) {
       const ti = window.DB.tierInfo[t];
-      h += '<div class="tl"><span class="tier tier-' + t + '">Tier ' + t + " · " + esc(ti.name) + "</span>";
+      h += '<div class="tl"><span class="tier tier-' + t + '">Tier ' + t + ": " + esc(ti.name) + "</span>";
       h += "<p>" + esc(ti.blurb) + "</p></div>";
     });
     h += "</div></section>";
@@ -1220,8 +1223,8 @@
     h += '<p class="f-why">' + esc(f.whyIndia) + "</p>";
     h += "<p><strong>Getting in:</strong> " + esc(f.entry) + "</p>";
     h += '<p class="f-start"><b>Start this week</b>' + esc(f.startNow) + "</p>";
-    h += '<p class="f-where">' + esc(f.where.join(" · ")) + "</p>";
-    h += '<a class="card-link" href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">Where to look &rarr;</a>';
+    h += '<p class="f-where">' + esc(f.where.join(", ")) + "</p>";
+    h += '<a class="card-link" href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">Where to look<span class="sr-only"> (new tab)</span></a>';
     h += "</article>";
     return h;
   }
@@ -1307,7 +1310,7 @@
     let countText = fmtNum(list.length) + " programme" + (list.length === 1 ? "" : "s");
     if (placeLabel) countText += " in " + placeLabel;
     if (searchQuery) countText += " matching “" + searchQuery + "” of " + fmtNum(preSearchCount);
-    countText += " · " + SORT_LABEL[sortMode];
+    countText += ", " + SORT_LABEL[sortMode];
     $("#browseCount").textContent = countText;
 
     // A country filter arrives from the globe, not from the visible controls, so
@@ -1337,7 +1340,7 @@
     for (let m = 1; m <= 12; m++) {
       const inMonth = items.filter((i) => i.deadlineMonths && i.deadlineMonths.length && i.deadlineMonths.length < 12 && i.deadlineMonths.indexOf(m) !== -1);
       h += '<article class="month' + (m === now ? " is-now" : "") + '">';
-      h += "<h3>" + esc(MONTHS[m - 1]) + (m === now ? " · now" : "") + "</h3>";
+      h += "<h3>" + esc(MONTHS[m - 1]) + (m === now ? " (this month)" : "") + "</h3>";
       h += '<p class="m-count">' + inMonth.length + "</p>";
       h += "<ul>";
       inMonth.slice(0, 9).forEach((i) => { h += '<li title="' + esc(i.name) + '">' + esc(i.name) + "</li>"; });
@@ -1376,25 +1379,6 @@
      as one decision, and so this note sits where the next person looks. */
   function setNum(el, target) {
     if (el) el.textContent = fmtNum(target);
-  }
-
-  // Reveal-on-scroll. Falls back to visible when IntersectionObserver is
-  // missing, so content is never left stranded at opacity 0.
-  function initReveals() {
-    const els = $$(".reveal");
-    if (!els.length) return;
-    if (prefersReduced || !("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("is-in"));
-      return;
-    }
-    const io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add("is-in");
-        io.unobserve(en.target);   // reveal once; re-animating on scroll-back is noise
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    els.forEach((el) => io.observe(el));
   }
 
   /* ───────────────── stats ───────────────── */
@@ -1857,7 +1841,7 @@
      was right until this line stopped always being true. */
   function renderTourNote() {
     const el = $("#tourLineNote");
-    if (el) el.textContent = tourSteps().length + " steps · about a minute";
+    if (el) el.textContent = tourSteps().length + " steps, about a minute";
   }
 
   let tourStep = 0, tourOpen = false, tourReturnFocus = null, tourNodes = null;
@@ -1879,7 +1863,7 @@
       '<div class="tour-scrim" id="tourScrim"></div>' +
       '<div class="tour-hole" id="tourHole" aria-hidden="true"></div>' +
       '<div class="tour-pop" id="tourPop" role="dialog" aria-modal="true" aria-labelledby="tourTitle" tabindex="-1">' +
-        '<p class="tour-step"><span id="tourStep"></span><span class="tour-esc"> · Esc to close</span></p>' +
+        '<p class="tour-step"><span id="tourStep"></span><span class="tour-esc">. Esc closes it.</span></p>' +
         '<h2 class="tour-title" id="tourTitle"></h2>' +
         '<p class="tour-body" id="tourBody"></p>' +
         '<div class="tour-nav">' +
@@ -2109,13 +2093,26 @@
     let stored = null;
     try { stored = localStorage.getItem("dc-theme"); } catch (e) { /* private mode */ }
     if (stored) document.documentElement.setAttribute("data-theme", stored);
+    syncThemeColor();
     btn.addEventListener("click", function () {
       const cur = document.documentElement.getAttribute("data-theme");
       const sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       const next = cur ? (cur === "dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("dc-theme", next); } catch (e) { /* ignore */ }
+      syncThemeColor();
     });
+  }
+
+  /* The theme-color metas follow the SYSTEM scheme through their media
+     attributes, so a reader who picked the other theme by hand got a light
+     browser bar over a dark page. Once a theme is chosen, both metas take that
+     theme's ground, read from the token so it cannot drift from styles.css. */
+  function syncThemeColor() {
+    if (!document.documentElement.getAttribute("data-theme")) return;
+    const bg = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim();
+    if (!bg) return;
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", bg); });
   }
 
   /* The globe is an enhancement, never the only route: picking a country just
@@ -2135,7 +2132,7 @@
   function initHeroGlobe() {
     const canvas = $("#globeCanvas");
     if (!canvas || typeof window.initGlobe !== "function") return;
-    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); });
+    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); }, { intro: true });
     // Theme switches change every colour the globe draws with.
     if (globe) {
       const btn = $("#themeToggle");
@@ -2489,7 +2486,6 @@
     initMobileNav();
     initHeroGlobe();
     initAtlas();
-    initReveals();
     bindGoto(document);
     initTour();
     loadShortlist();

@@ -41,43 +41,56 @@ const COUNTRIES = new Set(["study", "funding", "research", "residency", "equity"
   .filter((c) => c && !REGIONS.includes(c))).size;
 
 /* Light tokens, mirrored from styles.css — the card is always the light
-   ground, because link-preview surfaces sit on white in every client. */
-const TOKENS = `--accent:#00787E;--paper:#F2EFE4;--paper-2:#FBF8F0;--surface:#FFFEF9;
-  --line:#D8CFBC;--line-soft:#E8E1D2;--ink:#131E2C;--ink-2:#46566E;--ink-3:#5E6B7B;
-  --signal:#C63A0E;--accent-2:#005C63`;
+   ground, because link-preview surfaces sit on white in every client. --globe
+   and --fill are what globe.js reads for the dots and the India marker. */
+const TOKENS = `--paper:#F3F4EC;--surface:#FFFFFA;--line:#D3D7C6;--ink:#10231A;
+  --ink-2:#3D5246;--ink-3:#56685C;--accent:#1D5C38;--globe:#1F7A42;
+  --fill:#FFCC2E;--on-fill:#1A1604`;
+
+/* The faces the page uses, minus the italic (nothing on a card is italic).
+   The script is the subset build, which covers the wordmark by design. */
+const FACES = `
+@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorant-garamond.woff2")format("woff2");font-weight:300 700;font-style:normal;font-display:block}
+@font-face{font-family:"IBM Plex Sans";src:url("assets/fonts/ibm-plex-sans.woff2")format("woff2");font-weight:100 700;font-display:block}
+@font-face{font-family:"Petit Formal Script";src:url("assets/fonts/petit-formal-script.woff2")format("woff2");font-weight:400;font-display:block}`;
+
+/* The wordmark is the page's own: "Dream" in the display serif, "Counsellor"
+   in the script. It replaced an all-caps monospace eyebrow, which is one of
+   the commonest tells of a generated page and said nothing the wordmark
+   does not. */
+const MARK = `.mark{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:26px;
+  color:var(--ink);margin:0 0 22px}
+.mark em{font-family:"Petit Formal Script",cursive;font-style:normal;font-weight:400;
+  font-size:1.18em;color:var(--accent);padding-left:.12em}`;
 
 const page = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 :root{${TOKENS}}
-@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorant-garamond.woff2")format("woff2");font-weight:300 700;font-style:normal;font-display:block}
-@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorant-garamond-italic.woff2")format("woff2");font-weight:300 700;font-style:italic;font-display:block}
-@font-face{font-family:"IBM Plex Sans";src:url("assets/fonts/ibm-plex-sans.woff2")format("woff2");font-weight:100 700;font-display:block}
-@font-face{font-family:"IBM Plex Mono";src:url("assets/fonts/ibm-plex-mono.woff2")format("woff2");font-weight:400 600;font-display:block}
+${FACES}
 html,body{margin:0;padding:0}
 #card{width:1200px;height:630px;background:var(--paper);position:relative;
   display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:center;
   padding:0 64px;box-sizing:border-box;font-family:"IBM Plex Sans",sans-serif}
-.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+${MARK}
 h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:60px;line-height:1.04;
   margin:0 0 22px;color:var(--ink);font-variant-numeric:lining-nums}
-h1 em{display:block;font-style:italic;color:var(--accent);font-variant-numeric:lining-nums}
+h1 span{display:block}
 p{font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:56ch}
 .last{color:var(--ink);margin:0}
 #globeWrap{display:grid;place-items:center}
 #globeCanvas{width:340px;height:340px;display:block}
-.cap{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
-  letter-spacing:.05em;margin-top:14px;text-align:center}
+.cap{font-size:15px;font-weight:600;color:var(--ink-2);margin-top:14px;text-align:center;
+  font-variant-numeric:lining-nums}
 </style></head><body>
 <div id="card">
   <div>
-    <p class="eyebrow">For students of medicine in India</p>
-    <h1>You were told there were two options.<em>This page has ${TOTAL} of them.</em></h1>
+    <p class="mark">Dream<em>Counsellor</em></p>
+    <h1>You were told there were two options.<span>This page has ${TOTAL} of them.</span></h1>
     <p>Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the USMLE. Both are real. Neither is the whole territory. There are funded research programmes you can hold in second year, doctorates that pay you a salary, and entire scientific fields nobody mentioned once in five years of lectures.</p>
     <p class="last">Three questions that have nothing to do with marks, then the research you do not have time to do.</p>
   </div>
   <div id="globeWrap">
     <canvas id="globeCanvas"></canvas>
-    <div class="cap">Drag to spin · tap a country</div>
+    <div class="cap">${TOTAL} routes in ${COUNTRIES} countries</div>
   </div>
 </div>
 ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}
@@ -102,40 +115,34 @@ const CATS = require("./make-pages.js").PAGES;
 
 const catPage = (c) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 :root{${TOKENS}}
-@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorant-garamond.woff2")format("woff2");font-weight:300 700;font-style:normal;font-display:block}
-@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorant-garamond-italic.woff2")format("woff2");font-weight:300 700;font-style:italic;font-display:block}
-@font-face{font-family:"IBM Plex Sans";src:url("assets/fonts/ibm-plex-sans.woff2")format("woff2");font-weight:100 700;font-display:block}
-@font-face{font-family:"IBM Plex Mono";src:url("assets/fonts/ibm-plex-mono.woff2")format("woff2");font-weight:400 600;font-display:block}
+${FACES}
 html,body{margin:0;padding:0}
 #card{width:1200px;height:630px;background:var(--paper);position:relative;
   display:grid;grid-template-columns:1fr 340px;gap:44px;align-items:center;
   padding:0 64px;box-sizing:border-box;font-family:"IBM Plex Sans",sans-serif}
-#card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--accent)}
-.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+${MARK}
 h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:52px;line-height:1.06;
   margin:0 0 20px;color:var(--ink);font-variant-numeric:lining-nums}
-/* --accent-2, NOT --signal. Vermilion is reserved for deadlines on this site
-   and a count is not a deadline; spending the signal colour on decoration is
-   exactly what --gold was introduced to stop on the tier-1 badge. */
-.count{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.04em;
-  color:var(--accent-2);margin:0 0 16px;font-variant-numeric:lining-nums}
+/* --accent, never --signal: the chilli red is reserved for deadlines on this
+   site and a count is not a deadline. */
+.count{font-size:17px;font-weight:600;color:var(--accent);margin:0 0 16px;
+  font-variant-numeric:lining-nums}
 p.desc{font-size:18px;line-height:1.55;color:var(--ink-2);margin:0;max-width:52ch}
 #globeWrap{display:grid;place-items:center}
 #globeCanvas{width:300px;height:300px;display:block}
-.cap{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
-  letter-spacing:.05em;margin-top:14px;text-align:center}
+.cap{font-size:15px;font-weight:600;color:var(--ink-2);margin-top:14px;text-align:center;
+  font-variant-numeric:lining-nums}
 </style></head><body>
 <div id="card">
   <div id="copy">
-    <p class="eyebrow">Dream Counsellor · for students of medicine in India</p>
+    <p class="mark">Dream<em>Counsellor</em></p>
     <h1>${c.h1.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</h1>
-    <p class="count">${c.count} of ${TOTAL} entries · every one links its official page</p>
+    <p class="count">${c.count} of ${TOTAL} entries, every one linked to its official page</p>
     <p class="desc">${c.desc.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</p>
   </div>
   <div id="globeWrap">
     <canvas id="globeCanvas"></canvas>
-    <div class="cap">${TOTAL} routes · ${COUNTRIES} countries</div>
+    <div class="cap">${TOTAL} routes in ${COUNTRIES} countries</div>
   </div>
 </div>
 ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}

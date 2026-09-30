@@ -114,7 +114,9 @@ async function runSurvey(page, startSel) {
     ok(errs.length === 0, "bundle has no page errors", errs.join(" | "));
     ok(/\d/.test(hero), "bundle renders its count from data", `heroCount=${hero}`);
     const faces = await page.evaluate(() => document.fonts ? document.fonts.size : -1);
-    ok(faces >= 5, "bundle inlines the fonts", `${faces} faces`);
+    // Four faces since the redesign dropped IBM Plex Mono: Cormorant roman and
+    // italic, Plex Sans, and the subset script.
+    ok(faces >= 4, "bundle inlines the fonts", `${faces} faces`);
     const manifest = await page.locator('link[rel="manifest"]').count();
     ok(manifest === 0, "bundle carries no manifest link (so it registers no worker)");
     await ctx.close();

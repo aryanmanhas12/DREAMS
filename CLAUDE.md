@@ -86,18 +86,21 @@ Playwright and Chromium; serves the repo like Pages does).
   change this markup, the regex is written to throw loudly rather than silently stop matching,
   because a silent miss here ships a bundle that 404s on `assets/styles.css` with no local
   `assets/` directory beside it.
-- **The hero grid is flat, and that is deliberate.** `eyebrow / h1 / globe / lede /
-  actions / how` are direct grid children so the source order *is* the phone order,
+- **The hero grid is flat, and that is deliberate.** `h1 / globe / lede /
+  actions / how` are direct grid children (the eyebrow went in the 2026 redesign) so the source order *is* the phone order,
   with `grid-template-areas` moving the globe into a second column from 920px.
   Do not reintroduce a `.hero-copy` wrapper or reach for `order:` — `order` would
   desync tab order from reading order, which is the thing this layout avoids.
 - **Space in the hero belongs to the grid `gap`, not to element margins.** Both
   `.hero-lede` and `.hero-actions` carried bottom/top margins that doubled with the
   row gap and pushed the primary button below the fold on a 390×844 phone.
-- **Quote marks on `.statement` mean "this is a claim", and only that.** The three
-  intro cards carry them because they are positions the site asserts; the survey
-  question reuses the same card shape *without* them, because a question is not a
-  quotation and the mark would misdescribe the text. Do not add them there.
+- **The three claims are ruled lines, not quoted cards.** They carried big quote
+  marks in a boxed card until September 2026; three identical quoted cards is one of
+  the most recognised generated-page patterns, so each is now a `div.statement` with a
+  top rule and a display-face sentence. Every number in them is still rendered from
+  data. **Any claim written there must be checked against the data first:** the
+  redesign draft said "most things are tier 3 or below", and the index held 50 tier-1
+  and 75 tier-2 entries against 58 at tier 3 and below.
 - **`REGIONS` in `app.js` must list every non-place `country` value**, and every country it
   does *not* exclude must have coordinates in `globe.js`. Counted-but-unplottable makes the
   stat tile and the globe disagree on screen — the same class of bug as the old India 16-vs-65.
@@ -133,7 +136,7 @@ Playwright and Chromium; serves the repo like Pages does).
 - **Search descriptions and `<meta>` tags lie the same way a 200 status can.** EMERALD's page body says "Closed call for PhD positions"; its `og:description`, which is what a search result shows, still says "Applications for the 2nd call are open!" four years later. Read the page body, never the snippet.
 - **Window text and `deadlineMonths` must agree; `tools/check.js` catches the plain contradictions, and `tools/recheck.js` flags windows whose every date has passed.** Maitri's window said no round had been published while its months still marked it open, and L'Oréal/AAUW said "has closed" under an open badge. When you write "closed" or "not published" into a window, set `noOpenCall` in the same edit.
 - **A media query written ABOVE the base rule it overrides loses the cascade silently.** The under-400px wordmark step-down sat above `.brand-text { font-size: 1.22rem }`; equal specificity, later rule wins, so the step-down never applied and "Counsellor" ran under the theme button at 320px for months while the rule looked correct in review. `audit.js` now measures the wordmark's text box against `.topbar-controls` at every viewport. Put responsive overrides after the rules they override.
-- **Never hard-code `#fff` on `--accent`.** The dark-theme accent is a bright teal, and white on it measured 1.53:1 on the skip link. Use `var(--paper)`, as `.btn-primary` does. This surfaced only because the contrast sweep was extended to the dark theme; it previously ran light-only at 390px.
+- **Never hard-code `#fff` on a coloured fill.** Under the old palette the dark-theme accent was a bright teal and white on it measured 1.53:1 on the skip link. Today every pressable fill is `var(--fill)` with `var(--on-fill)` text in both themes, as `.btn-primary` does. This surfaced only because the contrast sweep was extended to the dark theme; it previously ran light-only at 390px.
 
 ## The scroll atlas
 
@@ -141,7 +144,7 @@ Playwright and Chromium; serves the repo like Pages does).
 - **`ATLAS` in `app.js` is the region table.** Every `country` value in the data must belong to exactly one region, or the atlas silently undercounts; `check.js` asserts both directions. South Africa rides with the Asia step because one African entry is too thin for its own step.
 - **Every number and name in the atlas is computed from data**: routes, funded-or-free, open this month, and the highest-graded pick. The copy paragraphs are hand-written and must stay free of counts.
 - **Each step's button opens Browse filtered to that region** (`regionFilter`, separate from `countryFilter`), so the globe is never the only route, as the architecture rule requires.
-- **The halo radius is capped at the canvas edge.** `R * 1.2` overshoots any canvas wider than about 170px, and a gradient cut off before it reaches zero paints a hard-edged square round the globe.
+- **The globe has no halo at all now** (a glow round a sphere is the "glowing orb" the design rules ban). Historical note, in case one is ever reintroduced: `R * 1.2` overshoots any canvas wider than about 170px, and a gradient cut off before it reaches zero paints a hard-edged square round the globe.
 
 ## Test-harness rules (a false-negative cost a real bug this time)
 
@@ -178,9 +181,11 @@ Playwright and Chromium; serves the repo like Pages does).
 
 ## Design system
 
-- **Fonts are self-hosted woff2 in `assets/fonts/`** — no CDN. Cormorant Garamond (display),
-  IBM Plex Sans (body), IBM Plex Mono (instrument layer: tags, dates, counts), Petit Formal
-  Script (`--font-script`). The first three are variable; the script ships one weight.
+- **Fonts are self-hosted woff2 in `assets/fonts/`** — no CDN. Cormorant Garamond (display,
+  roman and italic), IBM Plex Sans (body and every label, date and count), Petit Formal
+  Script (`--font-script`). IBM Plex Mono was removed in September 2026: a monospace face
+  on small data labels is one of the standard generated-page tells, and it cost 14.7 KB to
+  set tags that read better in the UI face. Do not bring back a third family.
   `build.js` inlines all of them as data URIs because the published artifact runs under a CSP
   that blocks external requests.
 - **The script is the counsellor's voice and nothing else** — wordmark, the salutation on your
@@ -196,14 +201,39 @@ Playwright and Chromium; serves the repo like Pages does).
 - **Palette is entirely `:root` custom properties**, defined three times: `:root`, the
   `prefers-color-scheme: dark` media query, and both `:root[data-theme=…]` overrides. Swapping
   the palette is a token edit — never hard-code a colour in a component.
-- **Vermilion `--signal` is reserved for deadlines only.** Teal `--accent` is for anything
-  interactive, and `--gold` is tier 1 and nothing else. Signal used to leak onto the tier-1
-  badge; `--gold` exists so it does not. Do not spend the signal colour on decoration.
+- **"Marigold & Neem" (September 2026). Every colour has one job; do not give it a second.**
+  - `--fill` / `--on-fill`: marigold with near-black text, in both themes. Things you press:
+    the primary button, a chosen answer's tick, the progress bar, India's marker on the globe.
+  - `--accent`: interactive text and focus. Neem green on the light theme, marigold on dark.
+  - `--signal`: chilli red, **deadlines only**. It had leaked onto the tier-1 badge, the 404
+    label, a "What nobody tells you" label and the globe's India marker; all four were moved.
+  - `--gold`: saffron, the filled tier-1 chip and nothing else.
+  - `--ok` leaf (open, funded, free), `--warn` turmeric (opening soon), `--globe` the dots.
+  - `--note` / `--note-line`: the counsellor's read. Butter paper on light; a lifted green on
+    dark, because a yellow wash over the dark ground mixed to a muddy olive.
+  Every pair is AA in both themes; the lowest is chilli on the dark surface at 4.67:1.
 - **Tier badges are an ordinal scale and are drawn as one** — tier 1 is the only filled chip
   on the page, and weight drops with the grade down to a dashed outline at tier 5. That is
   what lets someone find the handful of transformative entries by scanning.
 - **All motion must be disabled under `prefers-reduced-motion`**, and reveal states must fall
   back to *visible* — never stranded at `opacity: 0` when `IntersectionObserver` is missing.
+- **Motion answers the reader; only one moment plays on its own.** Section fade-ups on
+  scroll (`initReveals`) were removed: fade-and-slide on every section is the generic
+  default. What is left: the hero globe's intro (it turns into place over India and the
+  programme dots arrive nearest-first, once, about two seconds, `{ intro: true }`), and
+  responses to actions — the tick when an answer is chosen, the pop when a card is saved,
+  the unfold of a disclosure, the step between questions.
+- **Buttons are pills at every width; surfaces keep the 3px `--r`.** Desktop used to square
+  the hero buttons while phones and the large CTA were round, so one button changed shape
+  at 760px.
+- **Template tells removed in the 2026 redesign; do not reintroduce them.** All-caps
+  tracked labels (26 rules), eyebrow labels above headings, an italic or coloured phrase
+  inside the headline, coloured left-edge stripes on panels and a status stripe on cards,
+  quote-mark cards, zero-padded "01" rank tags, strings joined with ` · `, `→` appended to
+  link text, and the globe's glow. The urgency line on a card is a dot plus a word
+  (`.urg-open`, `.urg-soon`...), so colour is never the only signal. Sources: Anthropic's
+  `frontend-design` skill (github.com/anthropics/claude-plugins-official), and Krebs'
+  sixteen AI-slop patterns.
 
 ## Pre-launch checklist — run this before any release, every time
 
@@ -361,7 +391,7 @@ If this is ever done it should be a reviewed pass, entry by entry.
   was no readable mark. It was detail drawn for a 340px canvas shown at an
   eighth of that, sitting in a soft glow inside a large dark margin.
 - **The mark is now three strokes and one disc:** outer circle, meridian
-  ellipse, equator, plus a vermilion marker on India that punches a
+  ellipse, equator, plus a marigold marker on India that punches a
   ground-coloured hole through the strokes behind it.
 - **The marker's position is derived by arithmetic from the favicon**, not
   eyeballed: the favicon's globe is r=12.5 in a 32 box with the dot at
@@ -446,10 +476,12 @@ If this is ever done it should be a reviewed pass, entry by entry.
 
 ## Open with the user
 
-- **Colour palette**: settled. They picked "Citrus & Slate" from their own research, then asked
-  for it turned up; the chroma was raised across both themes and the dark ground moved off
-  neutral navy onto a real petrol. They have signed off on the result — do not change hues
-  again without being asked.
+- **Colour palette**: changed at the user's request on 30 September 2026. They asked for
+  something "attention grabbing and calming like yellow brighter, red, orange, green" and for
+  the site to stop reading as AI-made. "Citrus & Slate" (teal on petrol) became "Marigold &
+  Neem": marigold for what you press, neem green grounds and accents, chilli red for
+  deadlines, saffron for tier 1. Roles are under Design system. Do not change hues again
+  without being asked.
 - **GitHub Pages: settled, and this time verified from outside.** The source setting was
   "Deploy from a branch" for weeks while this file claimed otherwise, on the false theory that
   a green `actions/deploy-pages@v4` step proves the source is Actions (it does not; GitHub's

@@ -23,20 +23,30 @@
    The first three are variable fonts: one file each covers the whole weight
    range. The script ships a single weight, which is all a script needs.
 
-   Colour — "Citrus & Slate", turned up. Deep petrol ground in dark, bright
-   ceramic bone in light; never pure black or white, so the extremes stay tinted
-   and organic. The earlier version of this palette sat at low chroma and read
-   flat, so every hue here carries more saturation and the dark ground was moved
-   off neutral navy onto a genuine teal-black that has colour in it.
+   Colour — "Marigold & Neem", September 2026. The user asked for something
+   attention-grabbing and calming at once: brighter yellow, red, orange and
+   green. The earlier teal-on-petrol palette put one colour on everything,
+   which is the monotone, cyan-glow look generated sites default to. Here the
+   calm comes from the ground (a deep neem-leaf green-black in dark, a pale
+   green-tinted paper in light) and the energy is spent only where it means
+   something. The hues are the ones an Indian medical student already lives
+   with: marigold, turmeric, chilli, saffron, leaf.
 
-   Four roles, and each owns its meaning exclusively:
-     --accent  teal      everything interactive
-     --signal  citrus    deadlines, and nothing else — the only truly
-                         time-critical thing on the site
-     --gold              tier 1 only. The rarest grade gets the rarest colour,
-                         which is also what keeps --signal off the tier badges
-                         where it used to leak.
-     --ok/--warn         verdict states inside a card
+   Each role owns its colour exclusively, and every status also carries a
+   text label, so nothing depends on telling red from green:
+     --fill / --on-fill  marigold  anything you can press: the primary button,
+                         a chosen filter, a selected answer. Like a highlighter
+                         on a textbook: one job, used sparingly.
+     --accent            interactive TEXT and outlines. Marigold on the dark
+                         ground; a deep neem green on light paper, where yellow
+                         text would be unreadable.
+     --signal  chilli    deadlines, and nothing else
+     --gold    saffron   tier 1 only. The rarest grade gets the rarest colour.
+     --ok      leaf      open now, funded, costs nothing. Also the globe's dots.
+     --warn    turmeric  opening soon
+   Research behind it: dark accents stay bright but never neon (Material's
+   dark-theme guidance on vibration), yellow does one job per screen, and
+   colour is never the only carrier of a status (WCAG 1.4.1).
 
    Every value is a token on :root, redefined in the dark media query and in both
    [data-theme] overrides. Swapping the palette is a token edit; no component
@@ -65,13 +75,6 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "IBM Plex Mono";
-  src: url("fonts/ibm-plex-mono.woff2") format("woff2");
-  font-weight: 300 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Petit Formal Script";
   src: url("fonts/petit-formal-script.woff2") format("woff2");
   font-weight: 400;
@@ -85,40 +88,47 @@
      a deep midnight blue rather than black, which keeps the darkest value on the
      page tinted and organic. Brightened from the first version of this palette,
      which sat low enough to read as dusty. */
-  --paper:      #F2EFE4;
-  --paper-2:    #FBF8F0;
-  --surface:    #FFFEF9;
-  --line:       #D8CFBC;
-  --line-soft:  #E8E1D2;
+  --paper:      #F3F4EC;
+  --paper-2:    #FAFBF5;
+  --surface:    #FFFFFA;
+  --line:       #D3D7C6;
+  --line-soft:  #E4E7D9;
 
-  --ink:        #131E2C;
-  --ink-2:      #46566E;
-  --ink-3:      #5E6B7B;
+  --ink:        #10231A;
+  --ink-2:      #3D5246;
+  --ink-3:      #56685C;
 
-  --accent:     #00787E;   /* slate teal — everything interactive */
-  --accent-2:   #005C63;
-  --accent-wash:#EAF6F4;   /* was #CDE8E6 — 4.08:1 against --accent text, fails AA on the small chip labels. This clears 4.76:1 */
+  --accent:     #1D5C38;   /* neem — interactive text and outlines on paper */
+  --accent-2:   #123F26;
+  --accent-wash:#FFF3C4;   /* pale marigold: hovers, the tier-2 chip, a chosen answer */
 
-  --signal:     #C63A0E;   /* citrus — deadlines only, the one high-energy tone */
-  --signal-wash:#FADFCF;
+  --fill:       #FFCC2E;   /* marigold — things you press */
+  --fill-2:     #FFBE0B;
+  --on-fill:    #1A1604;
 
-  --gold:       #8A6206;   /* tier 1 only */
-  --gold-wash:  #F6E6BE;
-  --gold-ink:   #FFFDF7;   /* text on a filled gold chip */
+  --signal:     #C22E1B;   /* chilli — deadlines only */
+  --signal-wash:#FBE0DA;
 
-  --ok:         #1E7A50;
-  --warn:       #8A5A05;
+  --gold:       #E07A12;   /* saffron — tier 1 only, always a filled chip */
+  --gold-wash:  #FDE7CC;
+  --gold-ink:   #1F1104;
+
+  --ok:         #1F7A42;   /* leaf — open, funded, free */
+  --warn:       #9A5A00;   /* turmeric — opening soon */
+  --globe:      #1F7A42;
+
+  --note:       #FFF3C4;   /* the counsellor's read: a note on butter paper */
+  --note-line:  #E8C04A;
 
   --font-display: "Cormorant Garamond", Georgia, "Iowan Old Style", Palatino, serif;
   --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-script: "Petit Formal Script", "Snell Roundhand", "Apple Chancery", cursive;
 
   --r: 3px;
   --maxw: 1180px;
   --readw: 64ch;   /* 68ch measured long once the base size went up */
 
-  --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
+  --shadow: 0 1px 2px rgba(16,35,26,.07), 0 8px 24px -12px rgba(16,35,26,.18);
 
   /* Tells the browser to paint scrollbars, native form controls and the
      pre-paint background to match. Without it a dark page still flashes a
@@ -126,37 +136,43 @@
   color-scheme: light;
 }
 
-/* Dark: a deep petrol ground with real chroma in it, not neutral navy — the
-   earlier #0D1622 was so close to grey that the whole dark theme read flat.
-   Text stays warm ivory rather than grey; that warmth is what stops a dark UI
-   reading as cold and machine-made. Accent and signal both brighten to hold
-   contrast on the darker ground. */
+/* Dark: a deep neem-leaf green-black, calm and never pure black, with warm
+   ivory text. Marigold, chilli, saffron and leaf sit on it at full brightness
+   but short of neon, and each appears only where it carries meaning. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #061A22;
-    --paper-2:    #0B2831;
-    --surface:    #103440;
-    --line:       #245460;
-    --line-soft:  #1A404B;
+    --paper:      #14261C;
+    --paper-2:    #1A2E22;
+    --surface:    #213729;
+    --line:       #3E5B48;
+    --line-soft:  #2A4232;
 
-    --ink:        #F3EDE1;   /* warm bone text, not grey — this is what stops a
+    --ink:        #F5F0E1;   /* warm ivory, never grey: that warmth is what stops a
                                 dark UI reading as cold and machine-made */
-    --ink-2:      #B2C3C7;
-    --ink-3:      #93A5AD;
+    --ink-2:      #CAD1C2;
+    --ink-3:      #A0AC9A;
 
-    --accent:     #3FE8D8;
-    --accent-2:   #8DF4EA;
-    --accent-wash:#0C3D42;
+    --accent:     #FFD24D;
+    --accent-2:   #FFE28C;
+    --accent-wash:#35341B;
 
-    --signal:     #FF7A45;
-    --signal-wash:#40200F;
+    --fill:       #FFD24D;
+    --fill-2:     #FFE070;
+    --on-fill:    #1A1604;
 
-    --gold:       #F5C046;
-    --gold-wash:  #3A2C08;
-    --gold-ink:   #241A02;
+    --signal:     #FF6F5B;
+    --signal-wash:#452520;
 
-    --ok:         #5FE0A4;
-    --warn:       #F2C24E;
+    --gold:       #FF9E45;
+    --gold-wash:  #45311B;
+    --gold-ink:   #231404;
+
+    --ok:         #72DC92;
+    --warn:       #FFB84D;
+    --globe:      #72DC92;
+
+    --note:       #1F3527;
+    --note-line:  #7D6B2B;
 
     --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
     color-scheme: dark;
@@ -164,27 +180,28 @@
 }
 
 :root[data-theme="dark"] {
-  --paper:#061A22; --paper-2:#0B2831; --surface:#103440;
-  --line:#245460; --line-soft:#1A404B;
-  --ink:#F3EDE1; --ink-2:#B2C3C7; --ink-3:#93A5AD;
-  --accent:#3FE8D8; --accent-2:#8DF4EA; --accent-wash:#0C3D42;
-  --signal:#FF7A45; --signal-wash:#40200F;
-  --gold:#F5C046; --gold-wash:#3A2C08; --gold-ink:#241A02;
-  --ok:#5FE0A4; --warn:#F2C24E;
+  --paper: #14261C; --paper-2: #1A2E22; --surface: #213729;
+  --line: #3E5B48; --line-soft: #2A4232; --ink: #F5F0E1;
+  --ink-2: #CAD1C2; --ink-3: #A0AC9A; --accent: #FFD24D;
+  --accent-2: #FFE28C; --accent-wash:#35341B; --fill: #FFD24D;
+  --fill-2: #FFE070; --on-fill: #1A1604; --signal: #FF6F5B;
+  --signal-wash:#452520; --gold: #FF9E45; --gold-wash: #45311B;
+  --gold-ink: #231404; --ok: #72DC92; --warn: #FFB84D;
+  --globe: #72DC92; --note: #1F3527; --note-line: #7D6B2B;
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.78);
   color-scheme: dark;
 }
 :root[data-theme="light"] {
-  --paper:#F2EFE4; --paper-2:#FBF8F0; --surface:#FFFEF9;
-  --line:#D8CFBC; --line-soft:#E8E1D2;
-  --ink:#131E2C; --ink-2:#46566E; --ink-3:#5E6B7B;
-  --accent:#00787E; --accent-2:#005C63; --accent-wash:#EAF6F4;
-  --signal:#C63A0E; --signal-wash:#FADFCF;
-  --gold:#8A6206; --gold-wash:#F6E6BE; --gold-ink:#FFFDF7;
-  --ok:#1E7A50; --warn:#8A5A05;
-  /* Warm-tinted shadow rather than neutral black — a grey shadow on a warm
-     ground is the flat, synthetic look worth avoiding. */
-  --shadow: 0 1px 2px rgba(74,54,36,.07), 0 8px 24px -12px rgba(74,54,36,.18);
+  --paper: #F3F4EC; --paper-2: #FAFBF5; --surface: #FFFFFA;
+  --line: #D3D7C6; --line-soft: #E4E7D9; --ink: #10231A;
+  --ink-2: #3D5246; --ink-3: #56685C; --accent: #1D5C38;
+  --accent-2: #123F26; --accent-wash:#FFF3C4; --fill: #FFCC2E;
+  --fill-2: #FFBE0B; --on-fill: #1A1604; --signal: #C22E1B;
+  --signal-wash:#FBE0DA; --gold: #E07A12; --gold-wash: #FDE7CC;
+  --gold-ink: #1F1104; --ok: #1F7A42; --warn: #9A5A00;
+  --globe: #1F7A42; --note: #FFF3C4; --note-line: #E8C04A;
+  /* Shadow tinted with the ink's own green rather than neutral black. */
+  --shadow: 0 1px 2px rgba(16,35,26,.07), 0 8px 24px -12px rgba(16,35,26,.18);
   color-scheme: light;
 }
 
@@ -210,6 +227,9 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
   font-size: 106.25%;
+  /* The topbar is sticky and 62px tall; this keeps whatever is scrolled to
+     (a focused control, an in-page jump) below it rather than under it. */
+  scroll-padding-top: 76px;
 }
 @media (min-width: 700px) { html { font-size: 112.5%; } }
 @media (prefers-reduced-motion: reduce) {
@@ -237,9 +257,9 @@ body {
 
 .skip {
   position: absolute; left: -9999px; top: 0; z-index: 100;
-  /* --paper, not #fff: the dark accent is a bright teal, and white on it
-     measured 1.53:1 on the one control a keyboard user meets first. */
-  background: var(--accent); color: var(--paper); padding: 12px 18px;
+  /* The fill pair, never #fff: white on the old dark-theme teal measured
+     1.53:1 on the one control a keyboard user meets first. */
+  background: var(--fill); color: var(--on-fill); padding: 12px 18px;
 }
 .skip:focus { left: 8px; top: 8px; }
 
@@ -262,15 +282,10 @@ body {
 /* min-height, because the smaller wordmark under 400px left the home link
    32px tall; the 62px bar has the room, so the target grows into it. */
 .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
-.brand-mark {
-  width: 15px; height: 15px; flex: none; border-radius: 50%;
-  border: 2px solid var(--accent);
-  position: relative;
-}
-.brand-mark::after {
-  content: ""; position: absolute; inset: 3px auto 3px 50%;
-  width: 1px; background: var(--accent); transform: translateX(-50%);
-}
+/* The favicon and app icon, drawn small: globe strokes in the accent, and the
+   marigold marker on India punched out of them by a ring of page colour. */
+.brand-mark { width: 20px; height: 20px; flex: none; color: var(--accent); }
+.brand-mark .bm-dot { fill: var(--fill); stroke: var(--paper); stroke-width: 2.2; paint-order: stroke; }
 .brand-text { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; letter-spacing: 0; }
 /* "Dream" is set upright in the display serif and "Counsellor" in the script —
    the name is two different voices because the site is two things: a catalogue,
@@ -296,8 +311,8 @@ body {
 
 .topnav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .navlink {
-  font: inherit; font-size: .84rem; font-family: var(--font-mono);
-  letter-spacing: .02em;
+  font: inherit; font-size: .84rem; font-family: var(--font-ui);
+  letter-spacing: 0;
   background: none; border: 0; color: var(--ink-2);
   padding: 8px 11px; cursor: pointer; border-radius: var(--r);
 }
@@ -307,10 +322,9 @@ body {
 .shortlist-count {
   display: inline-block; min-width: 15px; margin-left: 6px; padding: 0 4px;
   font-size: .68rem; line-height: 15px; text-align: center;
-  background: var(--accent); color: var(--paper); border-radius: 100px;
+  background: var(--fill); color: var(--on-fill); border-radius: 100px;
   font-variant-numeric: tabular-nums;
 }
-:root[data-theme="light"] .shortlist-count { color: #fff; }
 .shortlist-count:empty { display: none; }
 
 /* 12px, not 8px: the two controls carry 44px touch targets that are wider
@@ -406,42 +420,32 @@ body {
 @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* ─────────────── motion ───────────────
-   Four deliberate moments, not effects sprinkled everywhere:
-     1. the hero assembles itself once, on arrival
-     2. the stat numbers count up, so "150" registers as a quantity
-     3. the three questions rise as you reach them — they are the thesis
-     4. each survey question arrives, so answering reads as a conversation
-   Every one of them is off entirely under prefers-reduced-motion; the
-   reveal states in particular must fall back to fully visible, never to
-   permanently transparent. */
+   One orchestrated moment and otherwise only motion that answers you.
+   The frontend-design guidance this site now follows is blunt about it:
+   fade-and-slide-up entrances on every section are the generic default and
+   read as generated, and this page had exactly that (.reveal) on the claims
+   and the three questions. They are gone. What is left:
+     1. the globe turns to India on arrival (drawn in globe.js, not CSS)
+     2. each survey question arrives when you press Next
+     3. small confirmations when you act: ticking an answer, saving a card,
+        opening "how to actually apply"
+   Every one is off under prefers-reduced-motion. */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
 }
+@keyframes tick { 0% { transform: scale(.6); } 60% { transform: scale(1.18); } 100% { transform: none; } }
+@keyframes pop  { 0% { transform: scale(1); } 45% { transform: scale(1.22); } 100% { transform: none; } }
+@keyframes open-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
-.hero-copy > *, .hero-globe {
-  animation: rise .62s cubic-bezier(.22,.68,.3,1) both;
-}
-.hero-copy > *:nth-child(1) { animation-delay: .04s; }
-.hero-copy > *:nth-child(2) { animation-delay: .12s; }
-.hero-copy > *:nth-child(3) { animation-delay: .20s; }
-.hero-copy > *:nth-child(4) { animation-delay: .26s; }
-.hero-copy > *:nth-child(5) { animation-delay: .32s; }
-.hero-globe { animation-delay: .18s; animation-duration: .9s; }
-
-.reveal { opacity: 0; transform: translateY(18px); }
-.reveal.is-in {
-  opacity: 1; transform: none;
-  transition: opacity .66s cubic-bezier(.22,.68,.3,1), transform .66s cubic-bezier(.22,.68,.3,1);
-}
-.reveal.is-in:nth-child(2) { transition-delay: .08s; }
-.reveal.is-in:nth-child(3) { transition-delay: .16s; }
-
-.q-anim { animation: rise .4s cubic-bezier(.22,.68,.3,1) both; }
+.q-anim { animation: rise .36s cubic-bezier(.22,.68,.3,1) both; }
+.opt[aria-pressed="true"] .opt-box { animation: tick .26s cubic-bezier(.3,.7,.3,1.3); }
+.star-btn.is-saved { animation: pop .3s cubic-bezier(.3,.7,.3,1.3); }
+.disclose[open] .disclose-body, .prep[open] > :not(summary) { animation: open-in .22s ease-out; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-copy > *, .hero-globe, .q-anim { animation: none; }
-  .reveal, .reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .q-anim, .opt[aria-pressed="true"] .opt-box, .star-btn.is-saved,
+  .disclose[open] .disclose-body, .prep[open] > :not(summary) { animation: none; }
 }
 
 /* ─────────────── hero ─────────────── */
@@ -473,13 +477,11 @@ body {
     grid-template-columns: minmax(0, 1fr) 360px;
     column-gap: 56px; row-gap: 24px; align-items: center;
     grid-template-areas:
-      "eyebrow globe"
       "title   globe"
       "lede    globe"
       "actions globe"
       "how     how";
   }
-  .hero-grid > .eyebrow      { grid-area: eyebrow; }
   .hero-grid > .hero-h       { grid-area: title; }
   .hero-grid > .hero-globe   { grid-area: globe; }
   .hero-grid > .hero-lede    { grid-area: lede; }
@@ -497,7 +499,7 @@ body {
 #globeCanvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 50%; }
 
 .globe-label {
-  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em;
+  font-family: var(--font-ui); font-size: .72rem; letter-spacing: 0;
   color: var(--ink-3); text-align: center; min-height: 1.2em;
   transition: color .16s;
 }
@@ -519,16 +521,14 @@ body {
 }
 .how li {
   counter-increment: how;
-  display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 4px 12px;
+  display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 4px 8px;
   align-items: baseline;
 }
 .how li::before {
-  content: counter(how);
+  content: counter(how) ".";
   grid-row: 1 / span 2;
-  font-family: var(--font-mono); font-size: .78rem; font-variant-numeric: lining-nums;
-  color: var(--accent); border: 1px solid var(--line);
-  width: 26px; height: 26px; border-radius: 50%;
-  display: grid; place-items: center; align-self: start;
+  font-weight: 600; font-size: .95rem; font-variant-numeric: lining-nums;
+  color: var(--ink-3); align-self: start;
 }
 .how b { font-size: .95rem; font-weight: 600; color: var(--ink); }
 .how span { color: var(--ink-2); font-size: .92rem; line-height: 1.5; }
@@ -540,18 +540,14 @@ body {
   }
 }
 
-.eyebrow {
-  font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
-  letter-spacing: .16em; color: var(--accent); margin: 0 0 18px;
-}
-
 .hero-h {
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 5.5vw, 3.85rem);
   line-height: 1.04; letter-spacing: -.018em;
   margin: 0 0 26px; font-weight: 400; text-wrap: balance;
 }
-.hero-em { font-style: italic; color: var(--accent); }
+
+.hero-em { display: block; }   /* each sentence balances on its own lines */
 
 .hero-lede { max-width: var(--readw); color: var(--ink-2); font-size: 1.06rem; margin: 0; }
 
@@ -567,18 +563,22 @@ body {
 /* 48px floor on every button — below that a thumb misses it. Pill radius on
    phones, where the buttons go full-width and a square corner reads as a slab;
    the sharper corner returns on desktop where they sit inline. */
+/* Every button is a pill, at every width. Surfaces keep the crisp --r; the
+   things you press are round. Desktop used to square them off while phones
+   and the large CTA were pills, so the same button changed shape at 760px. */
 .btn {
   font: inherit; font-size: .95rem; cursor: pointer;
-  padding: 14px 24px; border-radius: var(--r);
+  padding: 14px 24px; border-radius: 100px;
   min-height: 48px;
   border: 1px solid transparent;
   transition: background-color .15s ease, color .15s ease, border-color .15s ease;
 }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
-:root[data-theme="dark"] .btn-primary, .btn-primary { color: var(--paper); }
-@media (prefers-color-scheme: dark) { .btn-primary { color: #071316; } }
-:root[data-theme="light"] .btn-primary { color: #fff; }
+/* Marigold with near-black text in BOTH themes: yellow is the one hue that
+   stays bright enough to carry dark type on dark and light grounds alike, so
+   the primary action looks identical wherever it appears. */
+.btn-primary { background: var(--fill); color: var(--on-fill); border-color: var(--fill); font-weight: 600; }
+.btn-primary:hover { background: var(--fill-2); border-color: var(--fill-2); }
+.btn-primary:active { transform: translateY(1px); }
 
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
@@ -597,8 +597,8 @@ body {
   display: flex; flex-direction: column; gap: 6px;
 }
 .hero-stats dt {
-  font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--ink-3); margin: 0;
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3); margin: 0; font-weight: 600;
 }
 .hero-stats dd {
   margin: auto 0 0; font-family: var(--font-display); font-weight: 600; font-size: 2.15rem; line-height: 1;
@@ -607,32 +607,25 @@ body {
   font-variant-numeric: lining-nums tabular-nums; color: var(--accent);
 }
 
-/* ─────────────── statement cards ───────────────
-   One assertion per card, set large and centred, on a filled ground so it reads
-   as a thing being said rather than as body copy. The quote marks are the whole
-   point of the form: they mark this as a claim the site is making and can be
-   held to. They are NOT used on survey questions — a question is not a
-   quotation, and the mark would be a lie about what the text is. */
+/* ─────────────── the three claims ───────────────
+   These were three identical filled cards with oversized quote marks, centred
+   text and a coloured phrase in each: three of the commonest tells of a
+   generated page at once. They are now three plain paragraphs in the display
+   face, left-aligned, separated by a hairline, with the load-bearing phrase
+   in bold and nothing else. The argument is the design. */
 .claims { padding: 12px 0 8px; }
 .claims .sec-h { margin-bottom: 22px; }
 
 .statement {
-  position: relative;
-  margin: 0 0 16px;
-  padding: 34px 26px;
-  background: var(--accent-2);
-  border-radius: 6px;
-  isolation: isolate;
+  margin: 0; padding: 20px 0 24px;
+  border-top: 1px solid var(--line);
 }
 .statement p {
-  margin: 0; text-align: center; text-wrap: balance;
-  color: var(--paper-2);
-  font-size: clamp(1.08rem, 2.4vw, 1.35rem);
-  font-weight: 500; line-height: 1.45;
+  margin: 0; text-wrap: pretty; color: var(--ink);
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.28rem, 2.3vw, 1.55rem); line-height: 1.32;
 }
-/* b, not a colour change alone — the emphasis has to survive being read by
-   someone who cannot separate these two tones. */
-.statement b { color: #fff; font-weight: 700; }
+.statement b { font-weight: 700; color: var(--ink); }
 
 /* Every count on this page is rendered from data, so there is a moment before
    app.js fills it. That moment used to be spelled with an em dash, which is
@@ -653,33 +646,10 @@ body {
   vertical-align: -.02em;
 }
 
-/* Quote marks sit outside the corners, as in a pull quote. aria-hidden via
-   ::before/::after means they are never announced as characters. */
-.statement::before,
-.statement::after {
-  position: absolute; z-index: -1;
-  font-family: var(--font-display); font-size: 4.6rem; line-height: 1;
-  color: var(--accent); font-weight: 700;
-}
-.statement::before { content: "\201C"; top: -.18em; left: 8px; }
-.statement::after  { content: "\201D"; bottom: -.52em; right: 12px; }
-
-@media (prefers-color-scheme: dark) {
-  .statement { background: var(--surface); border: 1px solid var(--line); }
-  .statement p { color: var(--ink); }
-  .statement b { color: var(--accent-2); }
-}
-:root[data-theme="dark"] .statement { background: var(--surface); border: 1px solid var(--line); }
-:root[data-theme="dark"] .statement p { color: var(--ink); }
-:root[data-theme="dark"] .statement b { color: var(--accent-2); }
-:root[data-theme="light"] .statement { background: var(--accent-2); border: 0; }
-:root[data-theme="light"] .statement p { color: var(--paper-2); }
-:root[data-theme="light"] .statement b { color: #fff; }
-
 .claims-cta { text-align: center; margin: 26px 0 4px; }
 .claims-note {
-  font-family: var(--font-mono); font-size: .72rem; color: var(--ink-3);
-  margin: 12px 0 0; letter-spacing: .03em;
+  font-family: var(--font-ui); font-size: .72rem; color: var(--ink-3);
+  margin: 12px 0 0; letter-spacing: 0;
 }
 
 /* The "you took the short version" panel on the results page. Uses --accent
@@ -689,7 +659,6 @@ body {
   margin: 26px 0 4px; padding: 22px 22px 24px;
   background: var(--surface-2, var(--surface));
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
   border-radius: var(--r);
 }
 .upgrade h3 {
@@ -702,7 +671,7 @@ body {
 /* Large pill for the primary action. Thumb-sized on a phone without becoming a
    slab on desktop. */
 .btn-lg {
-  border-radius: 100px; padding: 16px 34px; font-size: 1rem;
+  padding: 16px 34px; font-size: 1rem;
   min-height: 54px; width: 100%; max-width: 420px;
 }
 @media (min-width: 640px) { .btn-lg { width: auto; } }
@@ -710,7 +679,7 @@ body {
 @media (min-width: 760px) {
   .claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .claims .sec-h { grid-column: 1 / -1; }
-  .statement { margin: 0; height: 100%; display: grid; align-items: center; }
+  .claims { column-gap: 40px; }
   .claims-cta { grid-column: 1 / -1; }
 }
 
@@ -719,10 +688,10 @@ body {
 .band-h { font-family: var(--font-display); font-weight: 600; font-size: 1.85rem; margin: 0 0 30px; letter-spacing: -.005em; }
 
 .triptych { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(255px, 100%), 1fr)); gap: 26px; }
-.tri { border-top: 2px solid var(--accent); padding-top: 18px; }
+.tri { border-top: 1px solid var(--line); padding-top: 18px; }
 .tri-num {
-  font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
-  letter-spacing: .13em; color: var(--ink-3);
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3); font-weight: 600;
 }
 .tri h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 10px 0 10px; line-height: 1.2; }
 .tri p { margin: 0; color: var(--ink-2); font-size: .95rem; }
@@ -739,13 +708,13 @@ body {
   display: flex; flex-direction: column;
 }
 .progress { height: 2px; background: var(--line-soft); }
-.progress-bar { height: 100%; width: 0; background: var(--accent); transition: width .35s ease; }
+.progress-bar { height: 100%; width: 0; background: var(--fill); transition: width .35s ease; }
 
 .survey-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-block: 54px 40px; max-width: 880px; }
 
 .q-eyebrow {
-  font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
-  letter-spacing: .15em; color: var(--accent); margin: 0 0 16px;
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--accent); margin: 0 0 16px; font-weight: 600;
 }
 /* The question gets the same card shape as a claim, so the survey and the
    intro read as one system — but deliberately without the quote marks, which
@@ -785,10 +754,10 @@ body {
   width: 15px; height: 15px; flex: none; margin-top: 4px;
   border: 1.5px solid var(--ink-3); border-radius: 2px; position: relative;
 }
-.opt[aria-pressed="true"] .opt-box { border-color: var(--accent); background: var(--accent); }
+.opt[aria-pressed="true"] .opt-box { border-color: var(--on-fill); background: var(--fill); }
 .opt[aria-pressed="true"] .opt-box::after {
   content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px;
-  border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(42deg);
+  border: solid var(--on-fill); border-width: 0 2px 2px 0; transform: rotate(42deg);
 }
 .opt-body strong { display: block; font-weight: 600; font-size: 1rem; }
 .opt-body span { display: block; color: var(--ink-2); font-size: .84rem; margin-top: 2px; }
@@ -802,7 +771,7 @@ body {
   border-radius: var(--r); padding: 13px 15px; margin-top: 6px; resize: vertical;
 }
 .q-free::placeholder { color: var(--ink-3); }
-.q-note { font-size: .84rem; color: var(--ink-3); margin: 12px 0 0; font-family: var(--font-mono); }
+.q-note { font-size: .84rem; color: var(--ink-3); margin: 12px 0 0; font-family: var(--font-ui); }
 
 /* The forward action is the one people reach for 16 times in a row, so on a
    phone it becomes a full-width pill pinned to the bottom of the flow with the
@@ -822,14 +791,14 @@ body {
   .survey-nav .survey-count { grid-area: count; text-align: right; }
   .survey-nav #nextBtn {
     grid-area: next; width: 100%;
-    border-radius: 100px; min-height: 54px; font-size: 1rem;
+    min-height: 54px; font-size: 1rem;
   }
   /* Same treatment for the pair on the intro, so the primary action is one
      full-width target rather than two half-width ones. */
   .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { width: 100%; border-radius: 100px; min-height: 54px; }
+  .hero-actions .btn { width: 100%; min-height: 54px; }
 }
-.survey-count { font-family: var(--font-mono); font-size: .76rem; color: var(--ink-3); letter-spacing: .06em; }
+.survey-count { font-family: var(--font-ui); font-size: .76rem; color: var(--ink-3); letter-spacing: 0; }
 
 /* ─────────────── page heads ─────────────── */
 .page-head { padding: 54px 0 30px; max-width: 780px; }
@@ -844,13 +813,15 @@ body {
 /* This block is the one place on the site that talks to you rather than at you,
    so it is drawn as a note someone left rather than as a UI panel: a warm wash
    in the corner behind the salutation, no hard accent rail. */
-/* A flat accent tint, not the corner gradient this used to carry. The job is
+/* A flat note colour, not the corner gradient this used to carry. The job is
    to say "this block is the counsellor talking, not another UI panel", and a
-   different surface colour says that completely. The gradient was a light
-   source implying a room that does not exist. */
+   different surface colour says that completely. --note is butter paper in the
+   light theme and a lifted leaf green in the dark one: a yellow wash over the
+   dark ground mixed to a muddy olive, so the dark theme keeps its warmth in
+   the marigold salutation instead. */
 .read {
-  border: 1px solid var(--accent);
-  background: var(--accent-wash);
+  border: 1px solid var(--note-line);
+  background: var(--note);
   padding: 30px 32px; margin: 40px 0 12px;
   border-radius: var(--r);
 }
@@ -859,13 +830,12 @@ body {
 /* The last thing on the page is a line in the same hand that opened your read.
    It is the only decorative text on the site and it is there so the page ends
    like a letter rather than like a footer. */
-/* The review stamp reads as an instrument, not as prose — it is metadata about
-   the data, so it takes the mono face like every other count and date on the
-   site. Quiet, but never invisible: a student should be able to find out how
-   old these figures are without being told. */
+/* The review stamp is metadata about the data, so it is set small and quiet
+   in the UI face. Quiet, but never invisible: a student should be able to
+   find out how old these figures are without being told. */
 .reviewed {
-  font-family: var(--font-mono); font-size: .72rem; line-height: 1.55;
-  color: var(--ink-3); letter-spacing: .01em; max-width: 72ch;
+  font-family: var(--font-ui); font-size: .72rem; line-height: 1.55;
+  color: var(--ink-3); letter-spacing: 0; max-width: 72ch;
 }
 .page-head .reviewed { margin: 14px 0 0; }
 
@@ -895,14 +865,14 @@ body {
 }
 .read-rail .rr:first-of-type { border-top: 0; }
 .read-rail .rr b {
-  font-family: var(--font-mono); font-size: .64rem; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--ink-3); font-weight: 400; flex: none; max-width: 46%;
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3); font-weight: 400; flex: none; max-width: 46%;
 }
 .read-rail .rr span { text-align: right; color: var(--ink); }
 .rr-note { font-size: .76rem; color: var(--ink-3); margin: 14px 0 0; line-height: 1.5; }
 .read h2 {
   font-family: var(--font-display); font-weight: 600; font-size: 1.78rem;
-  margin: 0 0 16px; letter-spacing: -.005em;
+  line-height: 1.15; margin: 0 0 16px; letter-spacing: -.005em;
 }
 .read p { margin: 0 0 14px; max-width: var(--readw); color: var(--ink-2); }
 .read p:last-child { margin-bottom: 0; }
@@ -910,7 +880,7 @@ body {
 
 .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0 0; }
 .chip {
-  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em;
+  font-family: var(--font-ui); font-size: .72rem; letter-spacing: 0;
   border: 1px solid var(--line); border-radius: 100px; padding: 4px 11px;
   color: var(--ink-2); background: var(--paper-2);
 }
@@ -927,8 +897,8 @@ body {
 .steps-now { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
 .steps-now li { background: var(--paper); padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
 .steps-now .sn-when {
-  font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--accent); flex: none; width: 108px; padding-top: 3px;
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--accent); flex: none; width: 108px; padding-top: 3px; font-weight: 600;
 }
 .steps-now .sn-what { font-size: .95rem; }
 .steps-now .sn-what b { font-weight: 600; }
@@ -938,16 +908,13 @@ body {
 .card {
   border: 1px solid var(--line); background: var(--surface);
   border-radius: var(--r); overflow: hidden; position: relative;
-  transition: border-color .15s;
 }
 .card:hover { border-color: var(--ink-3); }
-.card::before {
-  content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--line);
-}
-.card[data-urg="open"]::before { background: var(--ok); }
-.card[data-urg="soon"]::before { background: var(--warn); }
-.card[data-urg="closed"]::before { background: var(--line); }
-.card[data-urg="always"]::before { background: var(--accent); }
+/* Status used to be a 3px coloured stripe down the card's left edge, which
+   is the single most recognised tell of a generated layout and said nothing
+   to anyone who cannot separate green from amber. It is a labelled pill in
+   the card's record line now (.urg below): a dot for scanning, words for
+   meaning. */
 
 .card-in { padding: 22px 26px 22px 28px; }
 
@@ -975,19 +942,19 @@ body {
   font-size: .84rem; color: var(--ink);
 }
 .card-rail .rail-cell b {
-  display: block; font-family: var(--font-mono); font-size: .62rem;
-  text-transform: uppercase; letter-spacing: .13em; color: var(--ink-3);
+  display: block; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3);
   font-weight: 400; margin-bottom: 4px;
 }
-.card-rail .rail-when { color: var(--signal); }
+.card-rail .rail-when b { color: var(--signal); }
 .card-rail .card-link { margin: 0; background: var(--paper-2); padding: 12px 14px; border-bottom: 0; }
 .card-rail .card-link:hover { background: var(--accent-wash); }
 
 .card-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; margin-bottom: 4px; }
+/* The ranked list is a real sequence, so it earns a number, but set as a
+   numeral in the display face beside the name rather than a boxed "01" tag. */
 .card-rank {
-  font-family: var(--font-mono); font-size: .7rem; color: var(--accent);
-  border: 1px solid var(--accent); border-radius: 2px; padding: 1px 6px;
-  letter-spacing: .05em; flex: none;
+  font-family: var(--font-display); font-size: 1.44rem; font-weight: 500; line-height: 1.2;
+  color: var(--ink-3); font-variant-numeric: lining-nums; flex: none;
 }
 .card h3 {
   font-family: var(--font-display); font-weight: 600; font-size: 1.44rem;
@@ -1007,9 +974,8 @@ body {
 
 /* impact tier badge — the judgement layer, visually distinct from the facts */
 .tier {
-  font-family: var(--font-mono); font-size: .65rem; letter-spacing: .07em;
-  text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
-  border: 1px solid currentColor; white-space: nowrap; flex: none;
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; padding: 3px 9px; border-radius: 100px;
+  border: 1px solid currentColor; white-space: nowrap; flex: none; font-weight: 600;
 }
 /* An ordinal scale, so it is drawn as one: the badge loses weight as the grade
    drops. Tier 1 is the only filled chip on the page, which is what lets you find
@@ -1029,12 +995,12 @@ body {
 
 .card-verdict {
   margin: 14px 0 0; font-size: .91rem; color: var(--ink);
-  border-left: 2px solid var(--signal); padding: 2px 0 2px 14px;
+  background: var(--paper-2); border: 1px solid var(--line-soft);
+  border-radius: 6px; padding: 12px 14px;
 }
 .card-verdict b {
-  display: block; font-family: var(--font-mono); font-size: .64rem;
-  text-transform: uppercase; letter-spacing: .13em; color: var(--signal);
-  font-weight: 400; margin-bottom: 4px;
+  display: block; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3);
+  font-weight: 600; margin-bottom: 4px;
 }
 
 .tier-legend { display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
@@ -1044,14 +1010,14 @@ body {
 
 .skip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; }
 .skip-card {
-  border: 1px solid var(--line); border-left: 3px solid var(--signal);
+  border: 1px solid var(--line);
   background: var(--surface); border-radius: var(--r); padding: 20px 22px;
 }
 .skip-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.24rem; margin: 0 0 9px; line-height: 1.25; }
 .skip-card p { margin: 0; font-size: .91rem; color: var(--ink-2); }
 
 .record {
-  font-family: var(--font-mono); font-size: .715rem; letter-spacing: .045em;
+  font-family: var(--font-ui); font-size: .715rem; letter-spacing: 0;
   color: var(--ink-3); margin: 14px 0 0; display: flex; flex-wrap: wrap;
   gap: 6px 0; align-items: center;
 }
@@ -1066,20 +1032,29 @@ body {
 .record .sep { padding: 0 9px; color: var(--ink-3); opacity: .65; }
 .record .r-deadline { color: var(--signal); }
 .record .r-free { color: var(--ok); }
+.urg { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.urg::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor; flex: none;
+}
+.urg-open, .urg-always { color: var(--ok); }
+.urg-soon { color: var(--warn); }
+.urg-closed, .urg-none { color: var(--ink-3); }
+.urg-none::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
 
 .card-why { margin: 15px 0 0; font-size: .95rem; color: var(--ink-2); max-width: var(--readw); }
 
 .card-money {
-  font-family: var(--font-mono); font-size: .78rem; color: var(--ink);
+  font-family: var(--font-ui); font-size: .78rem; color: var(--ink);
   background: var(--paper-2); border: 1px solid var(--line-soft);
   padding: 9px 12px; border-radius: var(--r); margin: 15px 0 0;
 }
 
 .disclose { margin: 16px 0 0; }
 .disclose summary {
-  cursor: pointer; font-family: var(--font-mono); font-size: .74rem;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
-  list-style: none; display: inline-flex; align-items: center; gap: 7px;
+  cursor: pointer; font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--accent);
+  list-style: none; display: inline-flex; align-items: center; gap: 7px; font-weight: 600;
 }
 .disclose summary::-webkit-details-marker { display: none; }
 .disclose summary::before { content: "+"; font-size: .9rem; line-height: 1; }
@@ -1087,29 +1062,21 @@ body {
 .disclose-body { padding: 16px 0 2px; border-top: 1px solid var(--line-soft); margin-top: 12px; }
 
 .mini-h {
-  font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
-  letter-spacing: .12em; color: var(--ink-3); margin: 0 0 9px;
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3); margin: 0 0 9px; font-weight: 600;
 }
 .disclose-body ol, .disclose-body ul { margin: 0 0 20px; padding-left: 20px; }
 .disclose-body li { margin-bottom: 8px; font-size: .92rem; color: var(--ink-2); }
-.disclose-body li::marker { color: var(--accent); font-family: var(--font-mono); font-size: .8rem; }
+.disclose-body li::marker { color: var(--accent); font-family: var(--font-ui); font-size: .8rem; }
 .disclose-body > *:last-child { margin-bottom: 0; }
 
 .card-link {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em;
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0;
   color: var(--accent); text-decoration: none; margin-top: 4px;
   border-bottom: 1px solid currentColor; padding-bottom: 1px;
 }
 .card-link:hover { color: var(--ink); }
-
-.flag {
-  display: inline-block; font-family: var(--font-mono); font-size: .67rem;
-  letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px;
-  border-radius: 2px; margin: 0 0 0 0;
-}
-.flag-free { background: var(--accent-wash); color: var(--accent); }
-.flag-warn { background: var(--signal-wash); color: var(--signal); }
 
 /* ─────────────── search + sort ─────────────── */
 .browse-tools { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 4px 0 18px; }
@@ -1133,13 +1100,13 @@ body {
    content, whatever the basis says. */
 .sort-wrap { display: flex; align-items: center; gap: 9px; flex: 1 1 auto; min-width: 0; }
 .sort-wrap label {
-  font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--ink-3);
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3); font-weight: 600;
 }
 .sort-select {
   /* 1rem: same iOS zoom-on-focus reasoning as .q-free above — a <select>
      triggers it too, not just text inputs. */
-  font: inherit; font-family: var(--font-mono); font-size: 1rem; color: var(--ink);
+  font: inherit; font-family: var(--font-ui); font-size: 1rem; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   padding: 8px 12px; cursor: pointer;
   flex: 1 1 auto; min-width: 0; max-width: 100%;
@@ -1149,13 +1116,12 @@ body {
 /* ─────────────── filters ─────────────── */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line-soft); }
 .fbtn {
-  font-family: var(--font-mono); font-size: .74rem; letter-spacing: .05em;
+  font-family: var(--font-ui); font-size: .74rem; letter-spacing: 0;
   border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
   padding: 6px 13px; border-radius: 100px; cursor: pointer;
 }
 .fbtn:hover { border-color: var(--accent); color: var(--accent); }
-.fbtn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-:root[data-theme="light"] .fbtn[aria-pressed="true"] { color: #fff; }
+.fbtn[aria-pressed="true"] { background: var(--fill); border-color: var(--fill); color: var(--on-fill); }
 
 /* Comfortable thumb targets: 44px is the standard minimum recommendation
    (iOS HIG / WCAG 2.5.5) and the desktop sizes below it are fine for a
@@ -1167,7 +1133,7 @@ body {
   .fbtn { padding: 9px 15px; font-size: .78rem; }
 }
 
-.result-count { font-family: var(--font-mono); font-size: .76rem; color: var(--ink-3); margin: 0 0 18px; letter-spacing: .05em; }
+.result-count { font-family: var(--font-ui); font-size: .76rem; color: var(--ink-3); margin: 0 0 18px; letter-spacing: 0; }
 
 /* Visually hidden but read aloud — clarifies what the × actually does. */
 .sr-only {
@@ -1176,14 +1142,13 @@ body {
 }
 
 .country-chip {
-  font-family: var(--font-mono); font-size: .76rem; letter-spacing: .05em;
+  font-family: var(--font-ui); font-size: .76rem; letter-spacing: 0;
   display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
   background: var(--accent-wash); color: var(--accent);
   border: 1px solid var(--accent); border-radius: 100px;
   padding: 7px 15px; margin: 0 0 16px;
 }
-.country-chip:hover { background: var(--accent); color: var(--surface); }
-:root[data-theme="light"] .country-chip:hover { color: #fff; }
+.country-chip:hover { background: var(--fill); border-color: var(--fill); color: var(--on-fill); }
 .country-chip span[aria-hidden] { font-size: 1rem; line-height: 1; }
 
 .shortlist-bar {
@@ -1200,14 +1165,13 @@ body {
 /* prep list — the shared work across a shortlist, collapsed by default so it
    never competes with the cards themselves for first attention */
 .prep {
-  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border: 1px solid var(--line);
   background: var(--surface); border-radius: var(--r); margin: 0 0 22px;
 }
 .prep > summary {
   cursor: pointer; list-style: none; padding: 15px 20px;
-  font-family: var(--font-mono); font-size: .76rem; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--accent);
-  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--accent);
+  display: flex; align-items: center; gap: 9px; font-weight: 600;
 }
 .prep > summary::-webkit-details-marker { display: none; }
 .prep > summary::before { content: "+"; font-size: 1rem; line-height: 1; }
@@ -1219,7 +1183,7 @@ body {
 .prep-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
 .prep-head strong { font-size: 1rem; font-weight: 600; }
 .prep-count {
-  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em;
+  font-family: var(--font-ui); font-size: .68rem; letter-spacing: 0;
   color: var(--accent); border: 1px solid var(--accent); border-radius: 100px;
   padding: 2px 9px; font-variant-numeric: tabular-nums;
 }
@@ -1230,12 +1194,12 @@ body {
 .frontier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 18px; margin-bottom: 70px; }
 .fcard { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 24px 26px; }
 .fcard h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.62rem; margin: 0 0 4px; letter-spacing: -.005em; }
-.fcard .f-tag { font-family: var(--font-mono); font-size: .72rem; color: var(--accent); letter-spacing: .04em; margin: 0 0 15px; }
+.fcard .f-tag { font-family: var(--font-ui); font-size: .72rem; color: var(--accent); letter-spacing: 0; margin: 0 0 15px; }
 .fcard p { font-size: .93rem; color: var(--ink-2); margin: 0 0 13px; }
-.fcard .f-why { border-left: 2px solid var(--accent); padding-left: 14px; color: var(--ink); }
+.fcard .f-why { background: var(--paper-2); border-radius: 6px; padding: 12px 14px; color: var(--ink); }
 .fcard .f-start { background: var(--paper-2); border: 1px solid var(--line-soft); padding: 13px 15px; border-radius: var(--r); font-size: .89rem; margin-top: 4px; }
-.fcard .f-start b { display: block; font-family: var(--font-mono); font-size: .67rem; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); margin-bottom: 6px; font-weight: 400; }
-.f-where { font-family: var(--font-mono); font-size: .75rem; color: var(--ink-3); margin: 14px 0 0; line-height: 1.7; }
+.fcard .f-start b { display: block; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3); margin-bottom: 6px; font-weight: 400; }
+.f-where { font-family: var(--font-ui); font-size: .75rem; color: var(--ink-3); margin: 14px 0 0; line-height: 1.7; }
 
 /* ─────────────── specialty routes ─────────────── */
 .routes { display: grid; gap: 18px; margin-bottom: 60px; }
@@ -1266,24 +1230,22 @@ body {
   padding: 14px 16px; border-radius: var(--r);
 }
 .route-fit b, .route-truth b {
-  display: block; font-family: var(--font-mono); font-size: .64rem;
-  text-transform: uppercase; letter-spacing: .13em; color: var(--ink-3);
+  display: block; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3);
   font-weight: 400; margin-bottom: 6px;
 }
 .route-truth {
-  margin: 24px 0 0; padding: 18px 20px; font-size: .94rem; color: var(--ink);
-  border-left: 3px solid var(--signal); background: var(--paper-2);
-  border-radius: 0 var(--r) var(--r) 0; max-width: 88ch;
+  margin: 24px 0 0; padding: 18px 20px; font-size: .94rem; color: var(--ink); background: var(--paper-2);
+  border-radius: 6px; max-width: 88ch;
 }
-.route-truth b { color: var(--signal); }
+.route-truth b { color: var(--ink); font-weight: 600; }
 
 /* ─────────────── calendar ─────────────── */
 .calendar { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(268px, 100%), 1fr)); gap: 16px; margin-bottom: 70px; }
 .month { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 18px 20px; }
 .month.is-now { border-color: var(--signal); }
 .month h3 {
-  font-family: var(--font-mono); font-size: .76rem; text-transform: uppercase;
-  letter-spacing: .14em; margin: 0 0 4px; color: var(--ink-2);
+  font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; margin: 0 0 4px; color: var(--ink-2); font-weight: 600;
 }
 .month.is-now h3 { color: var(--signal); }
 .month .m-count { font-family: var(--font-display); font-weight: 600; font-size: 2.1rem; color: var(--accent); line-height: 1; margin: 0 0 12px; font-variant-numeric: lining-nums tabular-nums; }
@@ -1303,11 +1265,11 @@ body {
 .cty { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 20px 24px; }
 .cty-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
 .cty h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0; flex: 1 1 auto; }
-.cty-score { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 2px; }
+.cty-score { font-family: var(--font-ui); font-size: .72rem; letter-spacing: 0; color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 2px; }
 .cty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 12px 22px; margin: 16px 0 0; }
 .cty-grid div { font-size: .87rem; color: var(--ink-2); }
-.cty-grid b { display: block; font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); font-weight: 400; margin-bottom: 3px; }
-.cty-honest { margin: 16px 0 0; padding: 14px 16px; background: var(--paper-2); border-left: 2px solid var(--accent); font-size: .92rem; color: var(--ink); }
+.cty-grid b { display: block; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3); font-weight: 400; margin-bottom: 3px; }
+.cty-honest { margin: 16px 0 0; padding: 14px 16px; background: var(--paper-2); font-size: .92rem; color: var(--ink); }
 
 /* ─────────────── misc ─────────────── */
 .restart { margin: 10px 0 70px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
@@ -1322,15 +1284,14 @@ body {
   padding: 34px 0 calc(46px + env(safe-area-inset-bottom));
 }
 .privacy {
-  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border: 1px solid var(--line);
   background: var(--surface); border-radius: var(--r);
   margin: 0 0 24px; max-width: 82ch;
 }
 .privacy > summary {
   cursor: pointer; list-style: none; padding: 14px 18px;
-  font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--accent);
-  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--accent);
+  display: flex; align-items: center; gap: 9px; font-weight: 600;
 }
 .privacy > summary::-webkit-details-marker { display: none; }
 .privacy > summary::before { content: "+"; font-size: 1rem; line-height: 1; }
@@ -1354,7 +1315,8 @@ body {
     --paper: #fff; --paper-2: #fff; --surface: #fff;
     --ink: #000; --ink-2: #222; --ink-3: #555;
     --line: #bbb; --line-soft: #ddd;
-    --accent: #0A4F53; --accent-wash: #fff; --signal: #8C1E3F; --signal-wash: #fff;
+    --accent: #1D5C38; --accent-wash: #fff; --signal: #A32616; --signal-wash: #fff;
+    --note: #fff; --note-line: #bbb;
     --shadow: none;
   }
   .topbar, .restart, .survey-nav, .progress, .foot-small { display: none !important; }
@@ -1411,8 +1373,8 @@ body {
 }
 .tour-trigger:hover { color: var(--ink); }
 .tour-line-note {
-  font-family: var(--font-mono); font-size: .7rem;
-  color: var(--ink-3); letter-spacing: .03em;
+  font-family: var(--font-ui); font-size: .7rem;
+  color: var(--ink-3); letter-spacing: 0;
 }
 
 /* The install offer. A real bordered button rather than a text link, because
@@ -1435,11 +1397,11 @@ body {
   border: 2px solid currentColor; border-top: 0; border-radius: 0 0 2px 2px;
   box-shadow: inset 0 -2px 0 currentColor;
 }
-.install-btn:hover { color: var(--paper-2); background: var(--accent); }
+.install-btn:hover { color: var(--on-fill); background: var(--fill); border-color: var(--fill); }
 .install-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .install-note {
-  font-family: var(--font-mono); font-size: .7rem;
-  color: var(--ink-3); letter-spacing: .03em;
+  font-family: var(--font-ui); font-size: .7rem;
+  color: var(--ink-3); letter-spacing: 0;
 }
 /* iOS has no install prompt to call, so the steps are spelled out instead of
    promised. Full width so it drops under the button rather than beside it. */
@@ -1461,14 +1423,14 @@ body {
 html { scrollbar-gutter: stable; }
 body.tour-locked { overflow: hidden; }
 
-.tour-scrim { position: absolute; inset: 0; background: rgba(6, 26, 34, .55); }
+.tour-scrim { position: absolute; inset: 0; background: rgba(10, 24, 16, .55); }
 
 /* The spotlight is a hole punched by an enormous outward shadow rather than
    an SVG mask — no extra element, no layout cost, and box-shadow never
    contributes to scrollWidth, so it cannot put a scrollbar on a 320px page. */
 .tour-hole {
   position: absolute; border-radius: 10px; pointer-events: none;
-  box-shadow: 0 0 0 9999px rgba(6, 26, 34, .55), 0 0 0 2px var(--accent) inset;
+  box-shadow: 0 0 0 9999px rgba(10, 24, 16, .55), 0 0 0 2px var(--accent) inset;
   transition: top .2s ease, left .2s ease, width .2s ease, height .2s ease;
 }
 
@@ -1492,9 +1454,9 @@ body.tour-locked { overflow: hidden; }
 .tour-pop:not(.is-placed) { visibility: hidden; }
 .tour-pop:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .tour-step {
-  margin: 0 0 6px; font-family: var(--font-mono); font-size: .68rem;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
-  font-variant-numeric: lining-nums;
+  margin: 0 0 6px; font-family: var(--font-ui); font-size: .78rem;
+  letter-spacing: 0; color: var(--ink-3);
+  font-variant-numeric: lining-nums; font-weight: 600;
 }
 .tour-title {
   margin: 0 0 8px; font-family: var(--font-display);
@@ -1630,11 +1592,11 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 .stale-bar-btn {
   font: inherit; font-weight: 600;
   padding: 9px 16px; min-height: 44px;
-  background: var(--accent); color: var(--paper-2);
+  background: var(--fill); color: var(--on-fill);
   border: 1px solid var(--accent-2); border-radius: var(--r);
   cursor: pointer;
 }
-.stale-bar-btn:hover { background: var(--accent-2); }
+.stale-bar-btn:hover { background: var(--fill-2); }
 .stale-bar-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 /* ─────────────── standalone document pages ───────────────
@@ -1664,21 +1626,22 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 .doc-page ul { margin: 0 0 14px; padding-left: 20px; }
 .doc-page li { margin-bottom: 8px; }
 .doc-page code {
-  font-family: var(--font-mono); font-size: .88em;
+  font-family: var(--font-ui); font-size: .88em;
   background: var(--accent-wash); padding: 1px 5px; border-radius: 2px;
 }
 .doc-lede {
   font-size: 1.12rem !important; line-height: 1.55 !important;
   color: var(--ink-2); margin-bottom: 22px !important;
 }
+/* The status code, in ink rather than --signal: chilli red means a deadline on
+   this site, and a missing page is not one. */
 .doc-eyebrow {
-  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--signal); margin: 0;
+  font-family: var(--font-ui); font-size: .82rem; letter-spacing: 0; color: var(--ink-3); margin: 0; font-weight: 600;
 }
 .doc-back { font-size: .92rem; margin: 0 0 8px; }
 .doc-back a { color: var(--accent); }
 .doc-stamp {
-  font-family: var(--font-mono); font-size: .72rem;
+  font-family: var(--font-ui); font-size: .72rem;
   color: var(--ink-3); margin-top: 34px !important;
   padding-top: 14px; border-top: 1px solid var(--line-soft);
 }
@@ -1711,7 +1674,7 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
    shapes. No new palette, no new fonts: a token edit still reaches them. */
 .listing-page { max-width: 74ch; }
 
-.crumbs { font-family: var(--font-mono); font-size: .72rem; margin: 0 0 6px; }
+.crumbs { font-family: var(--font-ui); font-size: .72rem; margin: 0 0 6px; }
 .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; }
 .crumbs li + li::before { content: "→"; margin-right: 6px; color: var(--ink-3); }
 .crumbs a { color: var(--accent); }
@@ -1727,7 +1690,7 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 }
 .listing h3 {
   font-family: var(--font-ui); font-size: .78rem; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+  letter-spacing: 0; color: var(--ink-3);
   margin: 18px 0 6px;
 }
 .listing-why { font-size: 1.02rem; line-height: 1.6; margin: 0 0 14px; }
@@ -1745,8 +1708,7 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
   gap: 4px 14px; margin: 0 0 4px; font-size: .94rem;
 }
 .listing-facts dt {
-  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .05em;
-  text-transform: uppercase; color: var(--ink-3); padding-top: 3px;
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3); padding-top: 3px; font-weight: 600;
 }
 .listing-facts dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
 .listing-link { font-size: .94rem; margin: 16px 0 0; }
@@ -1762,8 +1724,7 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
    crawl path for everything the app renders client-side. */
 .foot-map { margin: 26px 0 18px; }
 .foot-map-h {
-  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--ink-3);
+  font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3);
   margin: 0 0 8px; padding-top: 0; border-top: 0; font-weight: 400;
 }
 .foot-map ul {
@@ -1816,14 +1777,12 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 }
 .atlas-head + .atlas-step { border-top: 0; }
 .atlas-tag {
-  margin: 0 0 10px; font-family: var(--font-mono); font-size: .72rem;
-  text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3);
+  margin: 0 0 10px; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3); font-weight: 600;
 }
 /* The only state change on a step: its number takes the accent while it is
    the region on the globe. Text never fades, because faded body copy is
    copy that fails contrast for whoever is reading ahead. */
-.atlas-tag span { margin-right: .6em; transition: color .3s ease; }
-.atlas-step.is-active .atlas-tag span { color: var(--accent); }
+.atlas-step.is-active .atlas-tag { color: var(--accent); }
 .atlas-step h3 {
   margin: 0 0 12px; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(1.45rem, 3.2vw, 2.05rem); line-height: 1.15; text-wrap: balance;
@@ -1836,8 +1795,7 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 }
 .atlas-facts > div { background: var(--paper); padding: 12px 12px 10px; display: flex; flex-direction: column; gap: 6px; }
 .atlas-facts dt {
-  margin: 0; font-family: var(--font-mono); font-size: .64rem;
-  text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3);
+  margin: 0; font-family: var(--font-ui); font-size: .78rem; letter-spacing: 0; color: var(--ink-3); font-weight: 600;
 }
 .atlas-facts dd {
   margin: auto 0 0; font-family: var(--font-display); font-weight: 600;
@@ -1867,6 +1825,5 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atlas-tag span { transition: none; }
 }
 .atlas.no-globe .atlas-stage { display: none; }

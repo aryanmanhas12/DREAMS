@@ -11,11 +11,11 @@
      icon. It was the old compass mark until the app icon became the globe and
      the two stopped agreeing. No extra request, and it scales rather than
      pixellating on retina tabs. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12.5' fill='none' stroke='%2300787E' stroke-width='2.4'/%3E%3Cellipse cx='16' cy='16' rx='5.5' ry='12.5' fill='none' stroke='%2300787E' stroke-width='1.5'/%3E%3Cline x1='3.5' y1='16' x2='28.5' y2='16' stroke='%2300787E' stroke-width='1.5'/%3E%3Ccircle cx='20.5' cy='19.5' r='3' fill='%23C63A0E'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314261C'/%3E%3Ccircle cx='16' cy='16' r='12.5' fill='none' stroke='%2372DC92' stroke-width='2.4'/%3E%3Cellipse cx='16' cy='16' rx='5.5' ry='12.5' fill='none' stroke='%2372DC92' stroke-width='1.5'/%3E%3Cline x1='3.5' y1='16' x2='28.5' y2='16' stroke='%2372DC92' stroke-width='1.5'/%3E%3Ccircle cx='20.5' cy='19.5' r='4.2' fill='%2314261C'/%3E%3Ccircle cx='20.5' cy='19.5' r='3' fill='%23FFD24D'/%3E%3C/svg%3E" />
 <link rel="canonical" href="https://aryanmanhas12.github.io/DREAMS/" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="theme-color" content="#F2EFE4" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#061A22" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#F3F4EC" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#14261C" media="(prefers-color-scheme: dark)" />
 
 <!-- Link previews. This gets shared student-to-student on WhatsApp and
      Telegram far more than it gets found by search, so the card is the
@@ -118,7 +118,10 @@
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="#" id="brandHome">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor"><circle cx="16" cy="16" r="12.5" stroke-width="2.6"/><ellipse cx="16" cy="16" rx="5.5" ry="12.5" stroke-width="1.8"/><line x1="3.5" y1="16" x2="28.5" y2="16" stroke-width="1.8"/></g>
+        <circle class="bm-dot" cx="20.5" cy="19.5" r="3.6"/>
+      </svg>
       <span class="brand-text" translate="no">Dream<em>Counsellor</em></span>
     </a>
     <nav class="topnav" id="topnav" aria-label="Primary">
@@ -154,8 +157,6 @@
            way rather than with `order` keeps tab order identical to reading
            order — reordering visually with `order` desyncs the two. -->
       <div class="hero-grid">
-        <p class="eyebrow">For students of medicine in India</p>
-
         <h1 class="hero-h">
           You were told there were two options.<br />
           <span class="hero-em">This page has <span id="heroCount" class="num-pending"></span> of them.</span>
@@ -164,7 +165,7 @@
         <figure class="hero-globe">
           <canvas id="globeCanvas" role="img"
                   aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
-          <figcaption class="globe-label" id="globeLabel">Drag to spin · tap a country</figcaption>
+          <figcaption class="globe-label" id="globeLabel">Drag to spin, or tap a country</figcaption>
         </figure>
 
         <p class="hero-lede">
@@ -183,10 +184,8 @@
           <button type="button" class="btn btn-ghost" data-goto="browse">Just Show Me Everything</button>
         </div>
         <p class="hero-choice-note">
-          Three questions take about a minute and give you fields, specialties and a starting list.
-          The full sixteen add money, category, year, climate and time, the constraints that decide
-          what is <em>actually</em> open to you, and sharpen the ranking considerably. You can start
-          short and continue later without losing your answers.
+          Three questions take about a minute. All sixteen add money, year, category and climate,
+          which sharpens the list, and you can switch to them later without losing an answer.
         </p>
 
         <!-- Placed AFTER the primary action, never before it. Anything added
@@ -207,7 +206,7 @@
              button that does nothing. -->
         <div class="install-line" id="installLine" hidden>
           <button type="button" class="install-btn" id="installBtn" aria-expanded="false">Install as an app</button>
-          <span class="install-note" id="installNote">Opens like an app · works with no signal</span>
+          <span class="install-note" id="installNote">Opens like an app and works with no signal</span>
           <p class="install-steps" id="installSteps" hidden></p>
         </div>
 
@@ -261,7 +260,7 @@
         </header>
 
         <article class="atlas-step" data-region="india">
-          <p class="atlas-tag"><span>01</span> India</p>
+          <p class="atlas-tag">India</p>
           <h3>Where every route starts</h3>
           <p class="atlas-copy">Most of what you can do this year is here and much of it is free: research studentships, the science academies' summer fellowships, and national meetings where a first abstract costs a train ticket.</p>
           <dl class="atlas-facts">
@@ -274,7 +273,7 @@
         </article>
 
         <article class="atlas-step" data-region="uk">
-          <p class="atlas-tag"><span>02</span> The UK and Ireland</p>
+          <p class="atlas-tag">The UK and Ireland</p>
           <h3>One-year masters and two scholarships open to Indian doctors</h3>
           <p class="atlas-copy">The schools that train much of global health, with Chevening and the Commonwealth Scholarships paying tuition, flights and a stipend for the ones that fit.</p>
           <dl class="atlas-facts">
@@ -287,7 +286,7 @@
         </article>
 
         <article class="atlas-step" data-region="europe">
-          <p class="atlas-tag"><span>03</span> Europe</p>
+          <p class="atlas-tag">Europe</p>
           <h3>Doctorates that pay a salary</h3>
           <p class="atlas-copy">Germany, Switzerland and the Nordic countries hire PhD candidates as employees rather than charging them, and Germany's route into practice runs through a language exam and a licensing exam.</p>
           <dl class="atlas-facts">
@@ -300,7 +299,7 @@
         </article>
 
         <article class="atlas-step" data-region="americas">
-          <p class="atlas-tag"><span>04</span> The USA and Canada</p>
+          <p class="atlas-tag">The USA and Canada</p>
           <h3>Summer labs, two big awards, and the USMLE</h3>
           <p class="atlas-copy">Paid summer research, the Knight-Hennessy and Fulbright-Nehru awards for graduate study, and the long exam route into American residency.</p>
           <dl class="atlas-facts">
@@ -313,7 +312,7 @@
         </article>
 
         <article class="atlas-step" data-region="anz">
-          <p class="atlas-tag"><span>05</span> Australia and New Zealand</p>
+          <p class="atlas-tag">Australia and New Zealand</p>
           <h3>Research degrees on a tax-free stipend</h3>
           <p class="atlas-copy">University research scholarships open to international candidates, and in Australia a trade agreement that gives Indian graduates longer post-study work rights than most nationalities get.</p>
           <dl class="atlas-facts">
@@ -326,7 +325,7 @@
         </article>
 
         <article class="atlas-step" data-region="asia">
-          <p class="atlas-tag"><span>06</span> Elsewhere in Asia, and Africa</p>
+          <p class="atlas-tag">Elsewhere in Asia, and Africa</p>
           <h3>Paid internships and government scholarships</h3>
           <p class="atlas-copy">OIST's paid research internship in Japan, the Weizmann Institute in Israel, Singapore's public health school, government scholarships from Japan, Korea, China, Taiwan and Türkiye, and HIV and tuberculosis research in Johannesburg and Cape Town.</p>
           <dl class="atlas-facts">
@@ -339,7 +338,7 @@
         </article>
 
         <article class="atlas-step" data-region="global">
-          <p class="atlas-tag"><span>07</span> No single country</p>
+          <p class="atlas-tag">No single country</p>
           <h3>The UN, WHO and the open internet</h3>
           <p class="atlas-copy">Internships, volunteer posts, youth competitions and online courses you can reach from wherever you study, including several that take students in their first year.</p>
           <dl class="atlas-facts">
@@ -366,21 +365,21 @@
          tile six inches above it, which is the same class of bug as the old
          India 16-vs-65. Em dashes are the pre-script placeholder, matching
          #heroCount, so nothing reads as a broken template if JS never runs. -->
-    <blockquote class="statement reveal">
+    <div class="statement">
       <p>Funded research you can hold in second year, doctorates that pay a salary, and
       scholarships that cover the flight. <b><span id="claimTotal" class="num-pending"></span> of them, across
       <span id="claimCountries" class="num-pending"></span> countries.</b></p>
-    </blockquote>
+    </div>
 
-    <blockquote class="statement reveal">
-      <p>Every entry is graded by how much it would <b>actually change</b>, not by how
-      good it looks on a CV. Most things are not tier 1, and this says so.</p>
-    </blockquote>
+    <div class="statement">
+      <p>Every entry is graded by <b>how much it would change your career</b>. Most are
+      not tier 1, and each card says which tier it is.</p>
+    </div>
 
-    <blockquote class="statement reveal">
+    <div class="statement">
       <p>Built around what you can afford, tolerate and reach. <b><span id="claimFree" class="num-pending"></span>
       of these cost nothing at all</b>, and the ones gated by money say so plainly.</p>
-    </blockquote>
+    </div>
 
     <div class="claims-cta">
       <button type="button" class="btn btn-primary btn-lg" id="startShortBtn2">Start the Three Questions</button>
@@ -391,19 +390,19 @@
   <div class="wrap band">
     <h2 class="band-h">Three questions, and why these three</h2>
     <div class="triptych">
-      <article class="tri reveal">
+      <article class="tri">
         <span class="tri-num">Question one</span>
         <h3>What do people come to you for?</h3>
         <p>Not what you are good at on paper. What people actually knock on your door about. That is
         your real skill, and it is usually invisible to you because it costs you no effort.</p>
       </article>
-      <article class="tri reveal">
+      <article class="tri">
         <span class="tri-num">Question two</span>
         <h3>What angers you about this world?</h3>
         <p>Anger is the most reliable compass anyone has. The thing that makes you furious at 2 a.m.
         is the thing you will still care about in fifteen years, when the prestige has worn off.</p>
       </article>
-      <article class="tri reveal">
+      <article class="tri">
         <span class="tri-num">Question three</span>
         <h3>What makes time stop?</h3>
         <p>The task where you look up and three hours have gone. Treat that as data rather than mood: it tells
@@ -446,7 +445,6 @@
 <section class="view" id="view-browse">
   <div class="wrap">
     <header class="page-head">
-      <p class="eyebrow">The full index</p>
       <h2>Everything, unfiltered</h2>
       <p class="page-lede">Every programme in the database, with no profile applied. Search, filter and
       sort if you already know roughly what you are looking for.</p>
@@ -455,7 +453,7 @@
       <div class="search-wrap">
         <input type="search" id="browseSearch" class="search-input"
                autocomplete="off" spellcheck="false"
-               placeholder="Search by name, institution or field. Try &quot;Germany&quot;, &quot;psychiatry&quot;, &quot;free&quot;…"
+               placeholder="Search by name, institution or field. Try “Germany”, “psychiatry”, “free”…"
                aria-label="Search programmes" />
       </div>
       <div class="sort-wrap">
@@ -480,7 +478,6 @@
 <section class="view" id="view-shortlist">
   <div class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Yours, kept</p>
       <h2>Your shortlist</h2>
       <p class="page-lede">Every programme you have starred, anywhere on the site, whether comparing
       options across sessions, or just building a list to sit with for a few days before deciding.
@@ -494,7 +491,6 @@
 <section class="view" id="view-routes">
   <div class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Every road out of MBBS</p>
       <h2>Specialty routes</h2>
       <p class="page-lede">
         What each specialty is actually like day to day, how you enter it in India, how you
@@ -512,7 +508,6 @@
 <section class="view" id="view-frontiers">
   <div class="wrap">
     <header class="page-head">
-      <p class="eyebrow">Fields nobody mentioned in five years of lectures</p>
       <h2>The frontier</h2>
       <p class="page-lede">
         Every one of these is a real discipline with journals, funding and people currently hiring.
@@ -528,7 +523,6 @@
 <section class="view" id="view-calendar">
   <div class="wrap">
     <header class="page-head">
-      <p class="eyebrow">The year, laid out</p>
       <h2>Deadline calendar</h2>
       <p class="page-lede">
         Most opportunities are missed for one reason: the application window opened while you were

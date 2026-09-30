@@ -88,13 +88,17 @@ async function zoomFocusCheck(page, label) {
 async function contrastCheck(page, label) {
   const samples = await page.evaluate(() => {
     const sels = ["p", "li", "h1", "h2", "h3", "a", "button", "dt", "dd", "span.record", "figcaption",
-      ".reviewed", ".eyebrow", ".foot-note", ".tri-num", ".q-help", ".chip", ".flag-free",
+      ".reviewed", ".q-eyebrow", ".foot-note", ".tri-num", ".q-help", ".chip",
+      // Marigold & Neem: the status dot-and-word, the claim lines, the ranked
+      // numeral and the panels that replaced the coloured left-edge stripes.
+      ".urg", ".statement p", ".statement b", ".card-rank", ".card-verdict", ".card-verdict b",
+      ".route-truth", ".route-truth b", ".btn-primary", ".opt-box",
       ".country-chip", ".tier", ".stale-bar", ".stale-bar-btn", ".install-btn", ".install-note",
       ".install-steps", ".result-count", ".card-org", ".doc-lede",
-      // The scroll atlas: its own mono tag, fact tiles and pick line, and the
-      // tag number switches to the accent only on the active step, so the
-      // sweep runs with one step active and the rest idle to see both.
-      ".atlas-intro", ".atlas-tag", ".atlas-tag span", ".atlas-copy", ".atlas-facts dt",
+      // The scroll atlas: its region tag, fact tiles and pick line. The tag
+      // switches to the accent only on the active step, so the sweep runs
+      // with one step active and the rest idle to see both.
+      ".atlas-intro", ".atlas-tag", ".atlas-copy", ".atlas-facts dt",
       ".atlas-facts dd", ".atlas-pick", ".atlas-pick b", ".atlas-go"];
     const out = [], seen = new Set();
     sels.forEach((sel) => document.querySelectorAll(sel).forEach((el) => {

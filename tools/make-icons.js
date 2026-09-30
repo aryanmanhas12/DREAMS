@@ -18,7 +18,7 @@
        same construction as the inline SVG favicon in index.html, so the two
        now agree BY CONSTRUCTION rather than by somebody remembering to
        update both. They diverged once already.
-     - one vermilion disc on India, which is where the reader is standing and
+     - one marigold disc on India, which is where the reader is standing and
        the whole premise of the site. It punches a ground-coloured hole
        through the strokes behind it so it stays clean at every size.
 
@@ -45,11 +45,13 @@ const ROOT = path.join(__dirname, "..");
 const TMP = path.join(ROOT, "_icon-render.html");
 
 /* Real tokens from styles.css, not approximations. On the dark ground the
-   dark-theme accent is the legible one; the light-theme #00787E would sit at
-   barely 2:1 against #061A22 and vanish. */
+   dark-theme globe green is the legible one; the light-theme #1F7A42 would sit
+   near 3:1 against #14261C and read as a dim ring. The marker is the marigold
+   fill, the one colour the page spends on "press this", so the icon and the
+   primary button are visibly the same product. */
 const PALETTE = {
-  light: { ground: "#F2EFE4", stroke: "#00787E", mark: "#C63A0E" },
-  dark:  { ground: "#061A22", stroke: "#3FE8D8", mark: "#FF7A45" }
+  light: { ground: "#F3F4EC", stroke: "#1F7A42", mark: "#E07A12" },
+  dark:  { ground: "#14261C", stroke: "#72DC92", mark: "#FFD24D" }
 };
 const SHIP = "dark";
 const { ground: GROUND, stroke: STROKE, mark: MARK } = PALETTE[SHIP];

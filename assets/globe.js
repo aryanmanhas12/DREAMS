@@ -101,6 +101,11 @@
     if (!ctx) return null;
     opts = opts || {};
     const autoSpin = opts.autoSpin !== false;
+    // The one orchestrated moment on the page: the hero globe arrives turned
+    // away over the Atlantic, comes round to India, and each country's dot
+    // appears as the turn reaches it, nearest to India first. Off under
+    // reduced motion, where the globe simply opens on India.
+    let intro = !!opts.intro;
 
     // Count programmes per country straight from the database.
     const counts = {};
@@ -129,6 +134,16 @@
     let target = null, focusSet = null;
 
     const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) intro = false;
+    let introStart = 0;
+    const homeLon = COORDS[HOME][1], homeLat = COORDS[HOME][0];
+    // How far round the world each place is from India, 0 to 1, which sets
+    // when its dot arrives during the intro.
+    places.forEach(function (pl) {
+      const d = Math.abs(((pl.lon - homeLon + 540) % 360) - 180) + Math.abs(pl.lat - homeLat) * 0.5;
+      pl.delay = Math.min(1, d / 200);
+    });
+    if (intro) { spin = -homeLon + 150; tilt = -6; target = { spin: -homeLon, tilt: 12 }; }
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
@@ -144,29 +159,21 @@
 
     function draw() {
       if (!R) return;
-      const accent = readCssVar("--accent", "#0E6B70");
+      const accent = readCssVar("--globe", readCssVar("--accent", "#1F7A42"));
       const ink = readCssVar("--ink", "#0D1E24");
-      const signal = readCssVar("--signal", "#B32450");
+      // India, where the reader is standing, is marked in the marigold fill,
+      // the same disc the app icon puts there. It used to borrow --signal,
+      // which on this site means a deadline and nothing else. The dark rim
+      // keeps a pale yellow disc visible on the light theme's pale globe.
+      const home = readCssVar("--fill", "#FFCC2E");
+      const homeRim = readCssVar("--on-fill", "#1A1604");
       const line = readCssVar("--line", "#C9CFC9");
 
       ctx.clearRect(0, 0, W, H);
 
-      // Atmosphere. A sphere drawn as pure wireframe sits flat on the page; a
-      // faint halo just outside the limb is what gives it air around it and
-      // reads as a planet rather than a diagram. Two stops only, both weak — the
-      // moment this is visible as a ring it looks like a glow effect.
-      // The outer radius is capped at the canvas edge: R * 1.2 overshoots it on
-      // any canvas wider than ~170px, and a gradient cut off before it reaches
-      // zero paints a hard-edged square around the globe.
-      const haloR = Math.min(R * 1.2, Math.min(W, H) / 2);
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.86, cx, cy, haloR);
-      halo.addColorStop(0, withAlpha(accent, 0.16));
-      halo.addColorStop(0.55, withAlpha(accent, 0.06));
-      halo.addColorStop(1, withAlpha(accent, 0));
-      ctx.fillStyle = halo;
-      ctx.beginPath();
-      ctx.arc(cx, cy, haloR, 0, Math.PI * 2);
-      ctx.fill();
+      // There was a soft halo outside the limb here. A glow round a sphere is
+      // exactly the "glowing orb" this site's design rules ban, and it said
+      // nothing, so it is gone; the body fill below is enough to make it solid.
 
       // Body: a barely-there fill so the near hemisphere is a surface the
       // graticule sits on, offset towards the upper left as if lit from there.
@@ -251,19 +258,30 @@
         // Radius carries the count; depth only fades opacity.
         const r = 2.2 + (d.pl.n / maxN) * 4.6;
         const depth = Math.max(0, Math.min(1, d.p.z));
-        ctx.globalAlpha = (0.25 + depth * 0.75) * (outside ? 0.28 : 1);
+        let arrive = 1;
+        if (intro) {
+          const t = (performance.now() - introStart) / 1100 - d.pl.delay * 0.7;
+          arrive = Math.max(0, Math.min(1, t / 0.3));
+        }
+        ctx.globalAlpha = (0.25 + depth * 0.75) * (outside ? 0.28 : 1) * arrive;
+        if (arrive === 0) return;
 
         if (isHome) {
           ctx.beginPath();
           ctx.arc(d.p.x, d.p.y, r + 4.5, 0, Math.PI * 2);
-          ctx.strokeStyle = signal;
+          ctx.strokeStyle = ink;
           ctx.lineWidth = 1.2;
           ctx.stroke();
         }
         ctx.beginPath();
         ctx.arc(d.p.x, d.p.y, isHover ? r + 1.6 : r, 0, Math.PI * 2);
-        ctx.fillStyle = isHome ? signal : accent;
+        ctx.fillStyle = isHome ? home : accent;
         ctx.fill();
+        if (isHome) {
+          ctx.strokeStyle = homeRim;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
 
         if (isHover) {
           ctx.beginPath();
@@ -286,11 +304,13 @@
     function tick() {
       raf = null;
       if (!running) return;
+      if (intro && !introStart) introStart = performance.now();
+      if (intro && performance.now() - introStart > 2000) intro = false;
       if (target && !dragging) {
         const ds = angleDelta(spin, target.spin), dt = target.tilt - tilt;
         spin += ds * 0.075;
         tilt += dt * 0.075;
-        if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05) { spin = target.spin; tilt = target.tilt; target = null; }
+        if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05) { spin = target.spin; tilt = target.tilt; target = null; idleAt = Date.now(); }
       } else if (autoSpin && !dragging && !reduced && Date.now() - idleAt > 1800) {
         // The world keeps turning when nobody is holding it — but stays where
         // you put it for a beat after you let go.
@@ -299,7 +319,7 @@
       draw();
       // A globe without auto-spin draws only while it has somewhere to go,
       // so the atlas costs nothing once it has arrived.
-      if (autoSpin || target || dragging) raf = requestAnimationFrame(tick);
+      if (autoSpin || target || dragging || intro) raf = requestAnimationFrame(tick);
     }
 
     function kick() {
@@ -320,8 +340,8 @@
     function setLabel(pl) {
       if (!labelEl) return;
       labelEl.textContent = pl
-        ? pl.name + " · " + pl.n + " programme" + (pl.n === 1 ? "" : "s")
-        : "Drag to spin · tap a country";
+        ? pl.name + ": " + pl.n + " programme" + (pl.n === 1 ? "" : "s")
+        : "Drag to spin, or tap a country";
       labelEl.classList.toggle("is-active", !!pl);
     }
 
