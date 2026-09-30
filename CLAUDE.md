@@ -33,7 +33,8 @@ Playwright and Chromium; serves the repo like Pages does).
   `window`, deliberately NOT ES modules, so `index.html` works over `file://`. `build.js`
   exists only to produce the single-file artifact bundle in `dist/` (gitignored).
 - **Script load order in `index.html` matters.** All `data-*.js` files push into `window.DB.*`;
-  `app.js` must load last, `data-coast.js` before `globe.js`.
+  `app.js` must load last, `data-coast.js` before `globe.js`, and `space.js` and `sound.js`
+  before `app.js`. Every tag is `defer` (see "Known traps"), which preserves this order.
 - **Facts and judgements live in separate files.** `data-impact.js` holds tiers, odds and
   verdicts; the programme data files hold facts. Anyone forking should be able to disagree
   with a tier without touching data. Keep them separate.
@@ -77,15 +78,25 @@ Playwright and Chromium; serves the repo like Pages does).
   every local open. This page must work from the filesystem, and the published
   bundle inlines every face as a data URI, so there is nothing to win. Tried and
   reverted once already.
-- **The stylesheet link IS preloaded, deliberately, and that is a different case.** `index.html`
-  loads `styles.css` as `<link rel="preload" as="style">` + a `media="print"` swap-on-load +
-  a `<noscript>` fallback, to stop 61KB of CSS blocking first paint (Lighthouse: ~2.9s on Slow
-  4G). This does not hit the font-preload trap above because a stylesheet preload needs no
-  `crossorigin` — that restriction is specific to fonts. `build.js` matches all three tags as
-  one block (`STYLE_BLOCK` regex) and collapses them to a single inline `<style>`; if you ever
-  change this markup, the regex is written to throw loudly rather than silently stop matching,
-  because a silent miss here ships a bundle that 404s on `assets/styles.css` with no local
-  `assets/` directory beside it.
+- **The stylesheet is RENDER-BLOCKING, deliberately; the preload pattern it replaced was a
+  defect.** For weeks `styles.css` loaded as preload + `media="print"` swap + `<noscript>`, to
+  take CSS off first paint, with no critical CSS inlined behind it. Measured on 30 September
+  2026: whenever the page painted before the stylesheet landed it showed unstyled text and then
+  the whole `body` jumped from the browser's 8px default margin to 0, and Lighthouse scored the
+  LIVE site **CLS 0.563, performance 62**. The records here said 0.069 and 86-88; nobody had
+  re-measured. One plain `<link rel="stylesheet">` took CLS to **0.000**. `build.js`'s
+  `STYLE_BLOCK` now matches that single link and still throws loudly if it stops matching.
+- **Every script is `defer`, and one tiny inline script in `<head>` applies the stored theme.**
+  The 18 data files were render-blocking: Lighthouse put 2-3s of LCP "render delay" on them
+  before the hero text (plain HTML) could paint. Deferred, they download in parallel and run in
+  order before DOMContentLoaded, so load order still matters exactly as above. The inline head
+  script exists because a daylight reader would otherwise see the space theme flash first; it
+  also restores `sky-still`. `build.js`, `tools/lib/data.js` and `tools/check.js` all parse
+  these tags and accept the optional ` defer`: add a new attribute and all three need it.
+- **The body face is `font-display: optional`; the display serif and script stay `swap`.** With
+  `swap`, the hero paragraph painted twice and the second paint (the Plex swap) was the LCP.
+  Now the observed LCP equals FCP. A first-time reader on a slow link keeps the system sans for
+  that one view; the service worker caches the file, so every later view is Plex from frame one.
 - **The hero grid is flat, and that is deliberate.** `h1 / globe / lede /
   actions / how` are direct grid children (the eyebrow went in the 2026 redesign) so the source order *is* the phone order,
   with `grid-template-areas` moving the globe into a second column from 920px.
@@ -303,6 +314,61 @@ Playwright and Chromium; serves the repo like Pages does).
   bar, never at the bottom, where the survey's Continue button would be under them. Removing a
   saved programme is the destructive direction, so it gets an Undo bubble.
 
+## Mobile performance: what was measured, and what fixed it (30 September 2026)
+
+Measured on a 390x844 phone viewport at 3x density with the CPU throttled 4x
+(Lighthouse's mobile profile), using Chrome traces rather than impressions.
+**This container has no GPU**: Chrome composites and rasterises in software
+here, so compositor and canvas-upload costs are exaggerated compared with a
+phone. Read `VizCompositorThread` time as a proxy for GPU overdraw, and trust
+main-thread scripting numbers as they are.
+
+- **The live Marigold site was already saturating the main thread at rest**
+  (idle, the hero globe re-projected ~3,200 points with seven trig calls each,
+  every frame). Taps took up to 328ms at 4x.
+- **The first galaxy made it worse**: a full-screen sky canvas redrawn at 30fps
+  on the main thread, 24 long tasks during load, scrolling at 64 frames in
+  3.2s, taps at 400ms. A second attempt moved the motion to CSS but stacked six
+  full-screen layers, which a trace measured at 8.6x the compositing work of
+  the page without a sky: on a phone that is GPU overdraw, battery and heat.
+- **What fixed it** (all in `space.js`, `globe.js`, `styles.css`):
+  - the sky has ONE full-screen layer (the Milky Way canvas, which also holds
+    the field stars and dust); the nebula is the container's static
+    background; twinkling is a few dozen tiny elements with their own CSS
+    rhythm; nothing in the sky runs a per-frame loop;
+  - every sky canvas is painted once, in idle-time chunks small enough never
+    to make a long task, and the sky is not even built until after `load`;
+  - it is painted for the tallest viewport, so a phone's address bar hiding
+    or showing never repaints it mid-scroll;
+  - `html.is-scrolling` pauses the sky's animations and holds the globe's
+    idle spin while the page scrolls;
+  - the globe precomputes every point's unit vector (six multiplications per
+    point per frame instead of seven trig calls), caches its colours instead
+    of eight `getComputedStyle` reads a frame, strokes the graticule as one
+    path, and idles at 30fps with time-based speed. Main-thread script time
+    at rest fell 57% (618ms to 264ms per 4s at 4x);
+  - `content-visibility: auto` on `.claims`, `.band` and `.foot`: the first
+    style and layout pass was the biggest load task (281ms at 4x) and fell to
+    about 200ms;
+  - the audio engine starts after the first tap has painted, not inside it;
+  - the stylesheet is render-blocking (CLS 0.563 to 0.000), every script is `defer`, and the
+    body face is `font-display: optional` (see Known traps for all three).
+- **Result at 4x, phone viewport:** load long tasks 24 to 6-10, worst tap 400ms to ~250ms
+  (the live site: 328ms), scrolling 64 to 111 frames per 3.2s (live: 119), and ZERO animation
+  frames requested at rest with the hero off screen. Lighthouse: 62 to 92.
+- **`tools/test/sky.js` hides the twinkling star sprites** before it measures: at 6-13px they
+  are bigger than its 8px averaging block, so one star read as "bright background". They are
+  point sources; the glow text sits on is the Milky Way, nebula and galaxy.
+- **`tools/test/perf.js` holds the line**: nothing may request an animation
+  frame while the page rests with the hero off screen, no load task over
+  450ms, no tap over 450ms, all at 4x. Budgets sit well above today's numbers
+  because this machine wanders; they catch regressions, not noise.
+- **Lighthouse here needs two flags or it hangs**: `--no-proxy-server` in
+  `--chrome-flags` (the sandbox proxy refuses Chrome's background requests)
+  and `--max-wait-for-load=25000`. See the scratchpad runner pattern:
+  serve the tree with `tools/lib/browser.js` `serve({ gzip: true })`, run
+  three times, report the median and the spread.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this
@@ -322,16 +388,16 @@ audited.**
 | 8 | Favicon | Inline SVG globe data URI on a deep-space tile (violet strokes, pink India marker), matching the installed app icon, which adds three yellow stars. Was a compass until the two diverged. |
 | 9 | Sitemap + robots.txt | Both at the repo root. `sitemap.xml` is **regenerated by `tools/make-pages.js`** and lists 14 canonical URLs (home, 11 category pages, privacy, terms), so it cannot name a page that does not exist. `robots.txt` disallows `/dist/`, `/tools/` and `/sw.js` and points at the sitemap. `llms.txt` sits beside them. |
 | 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
-| 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Since the galaxy, `make-og.js` **throws if any card passes 300 KB** (WhatsApp drops larger previews): the Milky Way's dithered glow once took every card to ~830 KB, so cards carry the stars, two clouds, spiral galaxy and globe but not the Milky Way layer (`data-sky-lite`, `.sky-milky{display:none}`). Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
-| 12 | Page load speed | CSS is non-blocking (preload + print-swap). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured: homepage **87 perf / 100 a11y / 100 best-practices / 100 SEO**, `/specialties/` **99 / 100 / 100 / 100**. |
-| 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths in the one theme they can show. Both selector lists are whitelists and rot — add new components in the same change. `tools/test/sky.js` checks text against the painted sky, which neither of the others can see. Lighthouse scores accessibility **100**. |
+| 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Since the galaxy, `make-og.js` **throws if any card passes 300 KB** (WhatsApp drops larger previews). Chrome dithers gradients and PNG compresses dither worst: the full sky took cards to ~830 KB, and even a stars-only Milky Way cost ~110 KB, so cards carry the twinkling stars, ONE cloud, the spiral galaxy and the globe, and no Milky Way (homepage card ~238 KB). The card's sky CSS is read out of `styles.css` itself, so it cannot drift. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
+| 12 | Page load speed | CSS is render-blocking and scripts are `defer` (see Known traps: the non-blocking CSS was the CLS 0.563 defect). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured (30 Sep 2026, three runs): homepage performance **92** median (91-97), CLS **0.000**, TBT ~100ms. Runner pattern and flags in "Mobile performance". |
+| 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths in the one theme they can show. `audit.js`'s `fieldEdgeCheck` holds editable fields to 3:1 non-text contrast (WCAG 1.4.11): the search box, sort menu and free-text box had sat at 1.3-1.6:1 in both themes until the Design plugin's accessibility-review checklist named the criterion. Both selector lists are whitelists and rot — add new components in the same change. `tools/test/sky.js` checks text against the painted sky, which neither of the others can see. Lighthouse scores accessibility **100**. |
 | 14 | Mobile friendly | `tools/test/audit.js` covers 320–1280 on the app and `tools/test/pages.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
 | 15 | Custom 404 | `404.html`; Pages serves it automatically with a real 404 status (verified live). Links are absolute `/DREAMS/...` because Pages serves it from any depth, and it carries the category nav. |
 | 16 | Broken links | Full sweep from an unrestricted host via Composio. **403/405/000 are not failures** — see the sweep-reading rules above. |
 | 17 | Form validation | The only inputs are the survey and search, all client-side with no submission. Nothing to validate server-side. |
 | 18 | Spam protection | No forms post anywhere, so there is no attack surface. |
 | 19 | Analytics | **Deliberately absent.** The site's central promise is "nothing is uploaded", and `privacy.html` states it. Adding third-party analytics would make both false. If it is ever wanted, say so on the privacy page *before* shipping it, and prefer a cookieless self-hosted count. |
-| 20 | One clear call to action | "Answer the Three Questions" is the single primary button; everything else in the hero is a ghost button. |
+| 20 | One clear call to action | "Answer the three questions" is the single primary button (sentence case, like every other button, since the design-critique pass); everything else in the hero is a ghost button. |
 
 **The lesson worth keeping from the first run of this list:** the three real
 defects it caught were all things no automated check could see — a share card
@@ -371,7 +437,7 @@ Both of these were written down as open concerns and both were wrong. Recorded s
 
 - **"The app ships ~237 KB gzipped of JavaScript and should be split."** It should not, and the weight is not the problem. The network waterfall shows **every request complete by 380ms**, `app.js` finishing at 92ms, with total blocking time of 10–30ms. Splitting would buy nothing measurable and would cost the `file://` guarantee the whole architecture rests on. Closed.
 - **"The category pages should get critical CSS."** They score **99** on Lighthouse performance as they stand. There is nothing to win, and forking the stylesheet to chase it would create drift between the app and the pages. Closed.
-- **What was actually costing LCP: the webfont swap.** `.hero-lede` registers a first LCP candidate at FCP with the fallback face and a *second* at ~1.7s when the real font swaps in. Geometry is settled by 571ms, so this is a repaint, not a reflow. The documented font-preload prohibition still stands, so the lever is bytes.
+- **What was actually costing LCP: the webfont swap.** `.hero-lede` registers a first LCP candidate at FCP with the fallback face and a *second* at ~1.7s when the real font swaps in. Geometry is settled by 571ms, so this is a repaint, not a reflow. The documented font-preload prohibition still stands, so the lever is bytes. **Resolved 30 September 2026 a different way:** the body face is now `font-display: optional` (see Known traps), and the observed LCP equals FCP.
 - **Only the script face may be subset, and `tools/make-fonts.js` does it.** Petit Formal Script was shipping 215 codepoints and 221 glyphs to render three fixed strings — the wordmark, the salutation and the closing line. Subset to 44 codepoints: **27.5 KB → 9.3 KB, 66% smaller**. The three strings are read from source by regex (throwing loudly if one stops matching), the original stays at `tools/fonts/petit-formal-script.full.woff2` as build input, and the tool re-opens what it wrote to confirm every needed glyph survived.
 - **`robots.txt` disallowing a path does not stop it being served, and that caught me out.** The note above originally claimed the unsubset original was "never served". It was: `/tools/fonts/petit-formal-script.full.woff2` answered **200** on the live site, because `pages.yml` uploads `path: '.'` and `Disallow` only asks crawlers not to look. The deploy now removes `tools/`, `build.js` and `CLAUDE.md` before the artifact is uploaded. That removal step is deliberately a **denylist**: forgetting to remove a file leaves it served, which is merely the status quo, whereas forgetting to copy one in an allowlist 404s the live site. It asserts `index.html`, `styles.css` and the subset font survive, and that `tools/` is genuinely gone.
 - **OVERTURNED in September 2026: two deploys run on every push, and the branch one wins.** The two bullets below concluded that the Actions artifact is what Pages serves. It is not. Every push to `main` starts BOTH our "Deploy to GitHub Pages" workflow AND GitHub's own "pages build and deployment" (the branch publisher, `dynamic/pages/pages-build-deployment`, which had run 60 times by then). The branch publisher checks out the whole branch and deploys it unfiltered, and it usually finishes last: on `3d1b25c` ours deployed at 10:42:33 and the branch build at 10:43:14. Proof: `tools/recheck.js` and `tools/README.md`, files that had NEVER been in any artifact, answered 200 with their new content, while a made-up path under `tools/` answered 404. So `tools/`, `build.js` and `CLAUDE.md` are publicly served, the "Drop build-only files" step changes nothing, and the old "stale paths" were never stale. The site pages themselves are identical in both deploys, so readers see nothing wrong. **The fix was one setting only the repo owner could change: Settings → Pages → Build and deployment → Source: GitHub Actions. The user switched it on 28 September 2026**, and the next deploy (run 58) was verified from an unrestricted host: `/tools/README.md`, `/tools/recheck.js`, the unsubset font, `/build.js` and `/CLAUDE.md` all answer 404, while every page, `sitemap.xml`, `llms.txt` and the assets answer 200. `README.md` and `.gitignore` are still served because the removal step never listed them; both are harmless. **If a "pages build and deployment" run ever appears in the Actions list again, the source has been switched back**, and the artifact's tar listing stops being the published file set.
@@ -496,11 +562,12 @@ If this is ever done it should be a reviewed pass, entry by entry.
   `env(safe-area-inset-*)` is honoured on `.wrap`, the browse footer and
   `.stale-bar`; `content-visibility: auto` keeps the 180-card style pass at
   ~8ms.
-- **Measured on Lighthouse mobile, three runs:** performance **86–88**,
-  accessibility **100**, best practices **100**, SEO **100**. CLS improved
-  **0.081 → 0.069**. LCP sits at 3.6s and is the webfont swap on
-  `.hero-lede`, which the font-preload prohibition rules out attacking
-  directly.
+- **Measured on Lighthouse mobile, three runs each, 30 September 2026** (see "Mobile
+  performance" above for method): the live Marigold site scored **62**, CLS **0.563**, TBT
+  **294ms**. The galaxy build ships at **92** (91-97), CLS **0.000**, TBT **~100ms**, FCP
+  **1.66s**. Simulated LCP is 3.2s; the OBSERVED LCP equals FCP, and the simulation's gap is its
+  pessimistic model counting the deferred scripts, which start before first paint but no
+  longer block it.
 
 ## Workflow
 

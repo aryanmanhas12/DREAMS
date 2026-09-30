@@ -27,7 +27,7 @@ css = css.replace(/url\("fonts\/([^"]+)"\)/g, function (whole, file) {
 });
 
 // Preserve load order exactly as index.html declares it.
-const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map((m) => m[1]);
+const scripts = [...html.matchAll(/<script src="([^"]+)"(?: defer)?><\/script>/g)].map((m) => m[1]);
 const js = scripts
   .map((src) => "/* ==== " + src + " ==== */\n" + fs.readFileSync(path.join(root, src), "utf8"))
   .join("\n\n");
@@ -36,19 +36,16 @@ const js = scripts
 // String.replace() special-cases "$$", "$&", "$`" etc. as pattern tokens,
 // which silently corrupts source that legitimately contains "$$" (as ours
 // does — the $$ selector helper in app.js).
-// index.html loads the stylesheet as preload + media="print" swap (a
-// non-blocking-CSS technique — see the comment above the link in index.html)
-// with a <noscript> fallback for a JS-disabled browser. All three exist only
-// to fetch assets/styles.css over the network; in the bundle there is no
-// assets/ directory beside the file and the CSP blocks the request anyway,
-// so the whole three-tag block collapses to one inline <style>. Matched as
-// one block, not tag-by-tag — matching only the plain <link> (as a single-tag
-// regex would, since it is now the only one of the three with no extra
-// attributes) inlines the CSS into a <noscript> that never applies with JS
-// on, and leaves the other two pointing at a path that no longer exists.
-const STYLE_BLOCK = /<link rel="preload" href="assets\/styles\.css"[^>]*\/>\s*<link rel="stylesheet" href="assets\/styles\.css" media="print"[^>]*\/>\s*<noscript><link rel="stylesheet" href="assets\/styles\.css" \/><\/noscript>/;
+// index.html loads the stylesheet with one plain, render-blocking <link>
+// (the preload + print-swap pattern it used before caused a flash of
+// unstyled text and CLS 0.563; see the comment above the link). In the
+// bundle there is no assets/ directory beside the file and the CSP blocks
+// the request anyway, so that link becomes one inline <style>. If the <head>
+// ever changes shape again, this throws rather than silently shipping a
+// bundle that 404s on its stylesheet.
+const STYLE_BLOCK = /<link rel="stylesheet" href="assets\/styles\.css" \/>/;
 if (!STYLE_BLOCK.test(html)) {
-  throw new Error("build.js: the preload/print-swap/noscript stylesheet block in index.html did not match — index.html's <head> markup changed shape, update this regex to match it.");
+  throw new Error("build.js: the stylesheet <link> in index.html did not match — index.html's <head> markup changed shape, update this regex to match it.");
 }
 // The single-file bundle has no manifest.webmanifest or sw.js beside it, and
 // runs under a CSP that blocks the fetch anyway. Dropping the manifest link
@@ -64,7 +61,7 @@ if (!MANIFEST_BLOCK.test(html)) {
 let out = html
   .replace(STYLE_BLOCK, () => "<style>\n" + css + "\n</style>")
   .replace(MANIFEST_BLOCK, () => "")
-  .replace(/<script src="[^"]+"><\/script>\s*/g, "");
+  .replace(/<script src="[^"]+"(?: defer)?><\/script>\s*/g, "");
 
 // The bundle is one file with nothing beside it, so every relative link to
 // another page would dead-end. Point them at the published copies instead.

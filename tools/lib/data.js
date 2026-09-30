@@ -20,7 +20,7 @@ const POOLS = ["study", "funding", "research", "residency", "equity"];
 
 function load(root = ROOT) {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  const files = [...html.matchAll(/<script src="assets\/(data-[^"]+\.js)"><\/script>/g)].map((m) => m[1]);
+  const files = [...html.matchAll(/<script src="assets\/(data-[^"]+\.js)"(?: defer)?><\/script>/g)].map((m) => m[1]);
   const onDisk = fs.readdirSync(path.join(root, "assets")).filter((f) => /^data-.*\.js$/.test(f));
   const sandbox = { window: {}, document: { addEventListener() {} }, console };
   sandbox.window.window = sandbox.window;

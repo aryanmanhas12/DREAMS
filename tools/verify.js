@@ -38,6 +38,7 @@ const SUITES = [
   { name: "atlas", file: "tools/test/atlas.js" },
   { name: "pages", file: "tools/test/pages.js" },
   { name: "sky", file: "tools/test/sky.js" },
+  { name: "perf", file: "tools/test/perf.js" },
   { name: "audit", file: "tools/test/audit.js" }
 ];
 

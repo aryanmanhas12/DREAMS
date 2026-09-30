@@ -304,15 +304,40 @@
 
   // The first gesture anywhere unlocks audio. Several event types, because
   // iOS unlocks Web Audio on touchend and others on pointerdown or a key.
+  function listen(on) {
+    ["pointerdown", "touchend", "keydown", "click"].forEach(function (ev) {
+      if (on) document.addEventListener(ev, unlock, true);
+      else document.removeEventListener(ev, unlock, true);
+    });
+  }
   function unlock(e) {
     if (unlocked) return;
     unlocked = true;
-    ["pointerdown", "touchend", "keydown", "click"].forEach(function (ev) {
-      document.removeEventListener(ev, unlock, true);
-    });
+    listen(false);
+    if (retrySync) { unlockSync(e); return; }
     // A first gesture ON the speaker button is the reader choosing, so the
     // button's own handler decides; starting here too would play a second of
     // sound they were in the act of refusing.
+    if (e && btn && e.target && btn.contains(e.target)) return;
+    if (!isOn()) return;
+    // Start AFTER this tap has painted. Creating an AudioContext and its
+    // noise buffer inside the tap's own handler put tens of milliseconds in
+    // front of that tap's next frame on Android, which is the first thing a
+    // reader does on the page. The page already has user activation by then,
+    // so the browser lets the context start. If one refuses anyway (older
+    // iOS wants the call inside the gesture), the next tap tries again,
+    // synchronously this time.
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        turnOn(true);
+        setTimeout(function () {
+          if (ac && ac.state !== "running" && isOn()) { unlocked = false; retrySync = true; listen(true); }
+        }, 300);
+      }, 0);
+    });
+  }
+  let retrySync = false;
+  function unlockSync(e) {
     if (e && btn && e.target && btn.contains(e.target)) return;
     if (isOn()) turnOn(true);
   }
@@ -336,9 +361,7 @@
       if (audible) { setPref("off"); turnOff(); }
       else { setPref("on"); turnOn(false); setTimeout(function () { play("gamma"); }, 60); }
     });
-    ["pointerdown", "touchend", "keydown", "click"].forEach(function (ev) {
-      document.addEventListener(ev, unlock, true);
-    });
+    listen(true);
     document.addEventListener("visibilitychange", function () {
       if (!ac) return;
       if (document.hidden) ac.suspend();

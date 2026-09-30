@@ -42,19 +42,25 @@
      page has to work from the filesystem, and the published bundle inlines
      every face as a data URI anyway, so the preload would buy nothing there.
      The faces are same-origin and discovered one hop after this stylesheet. -->
-<!-- Loaded non-blocking: media="print" makes the browser fetch this at high
-     priority without holding up first paint, then the onload swaps it to
-     "all" once it lands. Pure HTML/inline-attribute technique — no external
-     loader script, so it still works over file:// and needs no build step.
-     Lighthouse flagged 61KB of render-blocking CSS costing ~2.9s on Slow 4G;
-     this is the standard fix that does not need a bundler. The <noscript>
-     fallback covers a JS-disabled browser, which would otherwise get no
-     styles at all under this pattern. Font preloading is still deliberately
-     NOT done here — see the note above; that restriction is about fonts
-     specifically, not this stylesheet. -->
-<link rel="preload" href="assets/styles.css" as="style" />
-<link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'; this.onload=null;" />
-<noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
+<!-- Render-blocking, deliberately. This was loaded non-blocking (preload +
+     media="print" swap) to take 61KB of CSS off first paint, with no critical
+     CSS inlined behind it. Measured on 30 September 2026: whenever the page
+     painted before the stylesheet landed, it showed unstyled text and then
+     the whole body jumped (the browser's 8px default margin vanishing), and
+     Lighthouse scored CLS 0.563 on the live site. A flash of unstyled text
+     followed by a page-wide jump is worse than ~28KB (gzipped) of CSS on the
+     critical path, and a returning or installed reader gets it from the
+     service worker's cache anyway. The generated category pages always
+     loaded it this way and scored 99. -->
+<link rel="stylesheet" href="assets/styles.css" />
+<!-- Every script below is `defer`: the data files were render-blocking, and
+     Lighthouse measured 2-3s of LCP "render delay" waiting on them before the
+     hero text (plain HTML, no JavaScript needed) could paint. Deferred, they
+     still download in parallel and run in order before DOMContentLoaded. The
+     one thing that must happen before first paint is the reader's chosen
+     theme, or a daylight reader sees a flash of the space theme first, so
+     that runs here, inline and tiny. -->
+<script>try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")document.documentElement.classList.add("sky-still")}catch(e){}</script>
 
 <!-- Installable to a phone home screen. Relative paths throughout so this
      works both at the GitHub Pages sub-path and from the filesystem.
@@ -188,9 +194,9 @@
              set the tone for everything after it. Now the short run really is
              three, and the long one says its own price on the label. -->
         <div class="hero-actions">
-          <button type="button" class="btn btn-primary" id="startBtn">Answer the Three Questions</button>
+          <button type="button" class="btn btn-primary" id="startBtn">Answer the three questions</button>
           <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper: all 16</button>
-          <button type="button" class="btn btn-ghost" data-goto="browse">Just Show Me Everything</button>
+          <button type="button" class="btn btn-ghost" data-goto="browse">Show me everything</button>
         </div>
         <p class="hero-choice-note">
           Three questions take about a minute. All sixteen add money, year, category and climate,
@@ -391,7 +397,7 @@
     </div>
 
     <div class="claims-cta">
-      <button type="button" class="btn btn-primary btn-lg" id="startShortBtn2">Start the Three Questions</button>
+      <button type="button" class="btn btn-primary btn-lg" id="startShortBtn2">Start the three questions</button>
       <p class="claims-note">About a minute. No account, nothing uploaded. Sixteen questions if you want the sharper version.</p>
     </div>
   </section>
@@ -623,27 +629,27 @@
   </div>
 </footer>
 
-<script src="assets/data-study.js"></script>
-<script src="assets/data-funding.js"></script>
-<script src="assets/data-research.js"></script>
-<script src="assets/data-frontiers.js"></script>
-<script src="assets/data-countries.js"></script>
-<script src="assets/data-impact.js"></script>
-<script src="assets/data-expansion.js"></script>
-<script src="assets/data-india-funding.js"></script>
-<script src="assets/data-specialties.js"></script>
-<script src="assets/data-equity-plus.js"></script>
-<script src="assets/data-world.js"></script>
-<script src="assets/data-india-events.js"></script>
-<script src="assets/data-abroad.js"></script>
-<script src="assets/data-newroutes.js"></script>
-<script src="assets/data-2026.js"></script>
-<script src="assets/data-fields-2026.js"></script>
-<script src="assets/data-meta.js"></script>
-<script src="assets/data-coast.js"></script>
-<script src="assets/globe.js"></script>
-<script src="assets/space.js"></script>
-<script src="assets/sound.js"></script>
-<script src="assets/app.js"></script>
+<script src="assets/data-study.js" defer></script>
+<script src="assets/data-funding.js" defer></script>
+<script src="assets/data-research.js" defer></script>
+<script src="assets/data-frontiers.js" defer></script>
+<script src="assets/data-countries.js" defer></script>
+<script src="assets/data-impact.js" defer></script>
+<script src="assets/data-expansion.js" defer></script>
+<script src="assets/data-india-funding.js" defer></script>
+<script src="assets/data-specialties.js" defer></script>
+<script src="assets/data-equity-plus.js" defer></script>
+<script src="assets/data-world.js" defer></script>
+<script src="assets/data-india-events.js" defer></script>
+<script src="assets/data-abroad.js" defer></script>
+<script src="assets/data-newroutes.js" defer></script>
+<script src="assets/data-2026.js" defer></script>
+<script src="assets/data-fields-2026.js" defer></script>
+<script src="assets/data-meta.js" defer></script>
+<script src="assets/data-coast.js" defer></script>
+<script src="assets/globe.js" defer></script>
+<script src="assets/space.js" defer></script>
+<script src="assets/sound.js" defer></script>
+<script src="assets/app.js" defer></script>
 </body>
 </html>

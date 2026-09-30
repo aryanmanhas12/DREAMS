@@ -122,6 +122,83 @@
     if (!places.length) return null;
     const maxN = Math.max.apply(null, places.map((p) => p.n));
 
+    /* Geometry, computed ONCE. Every coastline and graticule point is stored
+       as its unit vector, so projecting it each frame is six multiplications
+       against the frame's spin and tilt, where project() costs seven trig
+       calls. On a phone-speed CPU (4x throttle) the per-point trig was most
+       of what kept the main thread saturated while the globe idled. */
+    function vecs(pairs) {
+      const v = new Float32Array(pairs.length / 2 * 3);
+      for (let i = 0, j = 0; i < pairs.length; i += 2, j += 3) {
+        const phi = pairs[i] * RAD, lam = pairs[i + 1] * RAD;
+        v[j] = Math.cos(phi) * Math.sin(lam);
+        v[j + 1] = Math.sin(phi);
+        v[j + 2] = Math.cos(phi) * Math.cos(lam);
+      }
+      return v;
+    }
+    const coastLines = ((window.DB && window.DB.coast) || []).map(function (ring) {
+      const latlon = [];
+      for (let i = 0; i < ring.length; i += 2) latlon.push(ring[i + 1], ring[i]);   // stored lon,lat
+      return vecs(latlon);
+    });
+    const gratLines = [];
+    for (let lon = -180; lon < 180; lon += 30) {          // meridians
+      const pts = [];
+      for (let lat = -90; lat <= 90; lat += 3) pts.push(lat, lon);
+      gratLines.push(vecs(pts));
+    }
+    for (let lat = -60; lat <= 60; lat += 30) {           // parallels
+      const pts = [];
+      for (let lon = -180; lon <= 180; lon += 3) pts.push(lat, lon);
+      gratLines.push(vecs(pts));
+    }
+    // Trace every line into the current path, near hemisphere only; crossing
+    // the limb starts a new sub-path, which is what stops a landmass smearing
+    // across the sphere as it rotates.
+    function traceLines(lines, cs, ss, ct, st) {
+      for (let l = 0; l < lines.length; l++) {
+        const v = lines[l];
+        let started = false;
+        for (let j = 0; j < v.length; j += 3) {
+          const a = v[j], y0 = v[j + 1], b = v[j + 2];
+          const x = a * cs + b * ss;
+          const z0 = b * cs - a * ss;
+          const z = y0 * st + z0 * ct;
+          if (z > 0) {
+            const X = cx + R * x, Y = cy - R * (y0 * ct - z0 * st);
+            if (started) ctx.lineTo(X, Y); else ctx.moveTo(X, Y);
+            started = true;
+          } else started = false;
+        }
+      }
+    }
+
+    /* Colours are read from the tokens once and cached, not eight
+       getComputedStyle calls per frame; a theme change clears the cache. */
+    let pal = null;
+    function palette() {
+      if (pal) return pal;
+      const accent = readCssVar("--globe", readCssVar("--accent", "#B79BFF"));
+      pal = {
+        accent: accent,
+        // Programme dots are the stars on this globe: yellow on space, violet
+        // on the daylight theme.
+        star: readCssVar("--star", accent),
+        ink: readCssVar("--ink", "#0D1E24"),
+        // India, where the reader is standing, is marked in the pink fill,
+        // the same disc the app icon puts there. It must never borrow
+        // --signal, which on this site means a deadline and nothing else.
+        home: readCssVar("--fill", "#FF4FA8"),
+        homeRim: readCssVar("--on-fill", "#1A0414"),
+        line: readCssVar("--line", "#C9CFC9"),
+        paper: readCssVar("--paper", "#0F0A26")
+      };
+      return pal;
+    }
+    new MutationObserver(function () { pal = null; if (!raf) draw(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
     // Opens centred on India — the origin every route on this site starts from —
     // then drifts outward, which is the argument the page is making.
     let spin = -COORDS[HOME][1], tilt = 12;
@@ -159,18 +236,10 @@
 
     function draw() {
       if (!R) return;
-      const accent = readCssVar("--globe", readCssVar("--accent", "#B79BFF"));
-      // Programme dots are the stars on this globe: yellow on space, violet on
-      // the daylight theme, read from --star so the theme toggle recolours them.
-      const starC = readCssVar("--star", accent);
-      const ink = readCssVar("--ink", "#0D1E24");
-      // India, where the reader is standing, is marked in the pink fill, the
-      // same disc the app icon puts there. It must never borrow --signal,
-      // which on this site means a deadline and nothing else. The dark rim
-      // keeps the disc crisp against the pale daylight globe.
-      const home = readCssVar("--fill", "#FF4FA8");
-      const homeRim = readCssVar("--on-fill", "#1A0414");
-      const line = readCssVar("--line", "#C9CFC9");
+      const P = palette();
+      const accent = P.accent, starC = P.star, ink = P.ink, home = P.home, homeRim = P.homeRim, line = P.line;
+      const sr = spin * RAD, tr = tilt * RAD;
+      const cs = Math.cos(sr), ss = Math.sin(sr), ct = Math.cos(tr), st = Math.sin(tr);
 
       ctx.clearRect(0, 0, W, H);
 
@@ -189,7 +258,7 @@
 
       // A planet hides the stars behind it: fill the disc with the page's own
       // ground first, so the Milky Way does not show through the globe.
-      ctx.fillStyle = withAlpha(readCssVar("--paper", "#0F0A26"), 0.94);
+      ctx.fillStyle = withAlpha(P.paper, 0.94);
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fill();
@@ -212,56 +281,25 @@
       ctx.stroke();
 
       // Coastlines first, so the graticule reads as an overlay on the land
-      // rather than the land floating on a grid. Each ring is stroked only
-      // where it faces us; crossing the limb starts a new sub-path, which is
-      // what stops a landmass smearing across the sphere as it rotates.
-      const coast = window.DB && window.DB.coast;
-      if (coast) {
+      // rather than the land floating on a grid.
+      if (coastLines.length) {
         ctx.strokeStyle = ink;
         ctx.globalAlpha = 0.34;
         ctx.lineWidth = 0.9;
         ctx.lineJoin = "round";
         ctx.beginPath();
-        for (let r = 0; r < coast.length; r++) {
-          const ring = coast[r];
-          let started = false;
-          for (let i = 0; i < ring.length; i += 2) {
-            const p = project(ring[i + 1], ring[i], spin, tilt, R, cx, cy);
-            if (p.z > 0) {
-              if (started) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y);
-              started = true;
-            } else started = false;
-          }
-        }
+        traceLines(coastLines, cs, ss, ct, st);
         ctx.stroke();
       }
 
-      // Graticule. Only the near hemisphere is stroked, so the sphere reads as
-      // solid without any shading.
+      // Graticule, near hemisphere only so the sphere reads as solid without
+      // shading. One path and one stroke for all seventeen lines.
       ctx.strokeStyle = accent;
       ctx.globalAlpha = 0.16;
       ctx.lineWidth = 1;
-
-      for (let lon = -180; lon < 180; lon += 30) {       // meridians
-        ctx.beginPath();
-        let started = false;
-        for (let lat = -90; lat <= 90; lat += 3) {
-          const p = project(lat, lon, spin, tilt, R, cx, cy);
-          if (p.z > 0) { started ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); started = true; }
-          else started = false;
-        }
-        ctx.stroke();
-      }
-      for (let lat = -60; lat <= 60; lat += 30) {        // parallels
-        ctx.beginPath();
-        let started = false;
-        for (let lon = -180; lon <= 180; lon += 3) {
-          const p = project(lat, lon, spin, tilt, R, cx, cy);
-          if (p.z > 0) { started ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); started = true; }
-          else started = false;
-        }
-        ctx.stroke();
-      }
+      ctx.beginPath();
+      traceLines(gratLines, cs, ss, ct, st);
+      ctx.stroke();
       ctx.globalAlpha = 1;
 
       // Points, far-to-near so nearer ones overlap correctly.
@@ -320,9 +358,13 @@
       return ((to - from + 540) % 360 + 360) % 360 - 180;
     }
 
-    function tick() {
+    let lastTick = 0, lastDraw = 0;
+    function tick(now) {
       raf = null;
       if (!running) return;
+      now = now || performance.now();
+      const dtms = lastTick ? Math.min(64, now - lastTick) : 16.7;
+      lastTick = now;
       if (intro && !introStart) introStart = performance.now();
       if (intro && performance.now() - introStart > 2000) intro = false;
       if (target && !dragging) {
@@ -330,12 +372,21 @@
         spin += ds * 0.075;
         tilt += dt * 0.075;
         if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05) { spin = target.spin; tilt = target.tilt; target = null; idleAt = Date.now(); }
-      } else if (autoSpin && !dragging && !reduced && Date.now() - idleAt > 1800) {
+      } else if (autoSpin && !dragging && !reduced && Date.now() - idleAt > 1800 &&
+                 !document.documentElement.classList.contains("is-scrolling")) {
         // The world keeps turning when nobody is holding it — but stays where
-        // you put it for a beat after you let go.
-        spin += 0.12;
+        // you put it for a beat after you let go. Time-based, so the speed is
+        // the same whatever the frame rate.
+        spin += 0.0072 * dtms;
       }
-      draw();
+      // While the ONLY motion is the slow idle spin, 30 frames a second looks
+      // identical and halves the cost. Easing, dragging and the intro draw
+      // every frame, because those answer the reader.
+      const idleOnly = !target && !dragging && !intro;
+      // And while the page is scrolling (space.js sets html.is-scrolling),
+      // the idle spin holds still, so the frame goes to the scroll.
+      const scrolling = document.documentElement.classList.contains("is-scrolling");
+      if (!idleOnly || (!scrolling && now - lastDraw >= 32)) { draw(); lastDraw = now; }
       // A globe without auto-spin draws only while it has somewhere to go,
       // so the atlas costs nothing once it has arrived.
       if (autoSpin || target || dragging || intro) raf = requestAnimationFrame(tick);

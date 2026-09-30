@@ -64,12 +64,20 @@
   font-style: italic;
   font-display: swap;
 }
+/* `optional`, not `swap`, for the body face only. The hero paragraph is the
+   largest thing on the first screen, and with `swap` it painted twice: once
+   in the fallback, then again when this file arrived, and that second paint
+   was the LCP (2.8s of "render delay" in Lighthouse's slow-4G simulation).
+   With `optional` a first-time reader on a slow link keeps the system sans
+   for that one page view; the service worker caches this file, so every
+   later view renders in Plex from the first frame. The display serif and the
+   script keep `swap`: they carry the brand, and they are not the LCP. */
 @font-face {
   font-family: "IBM Plex Sans";
   src: url("fonts/ibm-plex-sans.woff2") format("woff2");
   font-weight: 300 700;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: "Petit Formal Script";
@@ -87,6 +95,7 @@
   --surface:    #1C1340;
   --line:       #3A2C6E;
   --line-soft:  #261B52;
+  --line-strong:#7A6AB8;   /* edges of fields you type into: 3:1 or more (WCAG 1.4.11) */
 
   --ink:        #F6F1FF;
   --ink-2:      #D3C9F2;
@@ -140,7 +149,7 @@
 /* The toggle's explicit "space" choice: identical to the default on purpose. */
 :root[data-theme="dark"] {
   --paper: #0F0A26; --paper-2: #150E33; --surface: #1C1340;
-  --line: #3A2C6E; --line-soft: #261B52; --ink: #F6F1FF;
+  --line: #3A2C6E; --line-soft: #261B52; --line-strong: #7A6AB8; --ink: #F6F1FF;
   --ink-2: #D3C9F2; --ink-3: #B8ADE0; --accent: #FF9AD5;
   --accent-2: #FFC2E6; --accent-wash:#2A1A4E; --fill: #FF4FA8;
   --fill-2: #FF74BB; --on-fill: #1A0414; --signal: #FF8C5A;
@@ -156,7 +165,7 @@
    starfield is drawn in violet here, faintly, so the page stays a galaxy. */
 :root[data-theme="light"] {
   --paper: #F4F0FF; --paper-2: #FAF8FF; --surface: #FFFCFF;
-  --line: #D9D0F0; --line-soft: #E8E2F8; --ink: #1A1036;
+  --line: #D9D0F0; --line-soft: #E8E2F8; --line-strong: #8A7CB8; --ink: #1A1036;
   --ink-2: #41366A; --ink-3: #54497F; --accent: #A0106E;
   --accent-2: #780B52; --accent-wash:#FBE3F2; --fill: #FF4FA8;
   --fill-2: #FF74BB; --on-fill: #1A0414; --signal: #B3301A;
@@ -172,31 +181,33 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 /* ─────────────── the sky ───────────────
-   space.js builds one fixed container as the first child of <body>:
-     .sky-nebula      two soft clouds that breathe (CSS only)
-     .sky-milky-wrap  the Milky Way canvas, painted once and turned by CSS
-     .sky-stars       the live canvas: twinkles, spiral galaxy, dust,
-                      shooting stars and comets
-   The container is FIXED with overflow hidden, so the oversized children
-   (the nebula's -12% inset, the Milky Way's diagonal-sized canvas) are
-   clipped to the viewport and can never add page scroll. That is the
-   difference from the in-flow .hero::before overlay this file warns about.
-   Everything here animates only transform and opacity, on the compositor. */
+   space.js builds one fixed container as the first child of <body> and
+   paints every layer once, in idle time. ALL the motion is here, as CSS
+   animations of transform and opacity, so the compositor runs it and the
+   main thread does nothing per frame (measured: see CLAUDE.md, "The galaxy").
+   The container is FIXED with overflow hidden, so oversized children (the
+   nebula's -12% inset, the Milky Way's diagonal-sized canvas, the star layers
+   painted twice as tall for the scroll wrap) are clipped to the viewport and
+   can never add page scroll, unlike the in-flow .hero::before this file
+   warns about. */
+/* The nebula clouds are the container's own static background: no layer
+   of their own, nothing to composite per frame. */
 .sky {
   position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-}
-.sky-nebula {
-  position: absolute; inset: -12%;
+  --lx: 0px; --ly: 0px;
   background:
     radial-gradient(52% 38% at 86% 10%, var(--nebula-a), transparent 72%),
     radial-gradient(50% 44% at 8% 86%, var(--nebula-b), transparent 72%),
     radial-gradient(30% 24% at 40% 45%, var(--nebula-b), transparent 75%);
-  animation: nebula-breathe 46s ease-in-out infinite alternate;
 }
-@keyframes nebula-breathe {
-  from { transform: scale(1); opacity: .8; }
-  to   { transform: scale(1.08) translate3d(-2%, 1.5%, 0); opacity: 1; }
-}
+
+/* Parallax wrappers: space.js sets `transform` on scroll; the pointer lean
+   is the separate `translate` property, eased by a transition. The two
+   compose without either overwriting the other. */
+.sky-par { position: absolute; inset: 0; will-change: transform; }
+.sky-lean { translate: var(--lx) var(--ly); transition: translate 1.2s var(--ease-out); }
+.sky-lean-milky { translate: calc(var(--lx) * .2) calc(var(--ly) * .2); }
+
 .sky-milky-wrap { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
 .sky-milky {
   position: absolute; left: 0; top: 0;
@@ -207,17 +218,80 @@
 .sky-milky.is-ready { opacity: .95; }
 :root[data-theme="light"] .sky-milky.is-ready { opacity: .6; }
 @keyframes sky-turn { from { rotate: -28deg; } to { rotate: 332deg; } }
-.sky-stars { position: absolute; inset: 0; }
+
+/* The twinkling stars: tiny elements with their own duration and delay
+   (--d, --dl, set by space.js), so only small squares animate. The largest
+   carry a four-point glint. */
+.sky-tw-field { position: absolute; left: 0; top: 0; }
+.sky-tw-star {
+  position: absolute; width: var(--s); height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  background: radial-gradient(circle, var(--c) 0 16%, color-mix(in srgb, var(--c) 30%, transparent) 32%, transparent 62%);
+  animation: twinkle var(--d) ease-in-out var(--dl) infinite alternate;
+}
+.sky-tw-star.is-glint {
+  background:
+    radial-gradient(circle, var(--c) 0 12%, color-mix(in srgb, var(--c) 30%, transparent) 26%, transparent 55%),
+    linear-gradient(var(--c), var(--c)) center / 100% 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) center / 1px 100% no-repeat;
+}
+@keyframes twinkle { from { opacity: 1; transform: scale(1); } to { opacity: .2; transform: scale(.72); } }
+
+/* The distant spiral: a face-on disc turning inside a tilted, flattened
+   wrapper, which is how a tilted disc really rotates. */
+.sky-galaxy {
+  --gd: 120px;
+  position: absolute; left: 84%; top: 80%;
+  width: var(--gd); height: var(--gd);
+  margin: calc(var(--gd) / -2) 0 0 calc(var(--gd) / -2);
+  opacity: .5;
+}
+:root[data-theme="light"] .sky-galaxy { opacity: .22; }
+.sky-galaxy-tilt { width: 100%; height: 100%; transform: rotate(-31deg) scaleY(.55); }
+.sky-galaxy-disc { display: block; width: 100%; height: 100%; animation: galaxy-spin 180s linear infinite; }
+@keyframes galaxy-spin { to { rotate: 360deg; } }
+
+/* Shooting stars and comets: space.js adds one, its animation carries it
+   along --ang for --dist, and it removes itself on animationend. The head
+   is the element's right end, which is also its transform origin. */
+.sky-shoot, .sky-comet { position: absolute; transform-origin: 100% 50%; opacity: 0; }
+.sky-shoot {
+  width: 110px; height: 1.5px; margin: -1px 0 0 -110px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--starlight));
+  animation: streak 1s ease-out forwards;
+}
+.sky-comet {
+  width: 170px; height: 7px; margin: -3.5px 0 0 -170px;
+  background:
+    radial-gradient(circle at calc(100% - 3px) 50%, var(--starlight) 0 2.6px, transparent 3.6px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--fill) 45%, transparent) 70%, var(--starlight));
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  animation: streak 12s linear forwards;
+}
+@keyframes streak {
+  0%   { opacity: 0; transform: rotate(var(--ang)) translateX(0); }
+  12%  { opacity: .9; }
+  85%  { opacity: .9; }
+  100% { opacity: 0; transform: rotate(var(--ang)) translateX(var(--dist)); }
+}
 
 /* The cloud-chamber tracks drawn where you act. Above the page but never in
    the way: no pointer events, so elementFromPoint and every tap go through. */
 .fx { position: fixed; inset: 0; z-index: 95; pointer-events: none; }
 
+/* Held while the page scrolls (space.js sets html.is-scrolling): the
+   frame budget goes to the scroll, and nobody watches a star mid-scroll. */
+.is-scrolling .sky-milky, .is-scrolling .sky-tw-star,
+.is-scrolling .sky-galaxy-disc { animation-play-state: paused; }
+
 /* Stilled by the footer button (html.sky-still) or by the system setting. */
-.sky-still .sky-nebula, .sky-still .sky-milky { animation: none; }
+.sky-still .sky-milky, .sky-still .sky-tw-star, .sky-still .sky-galaxy-disc { animation: none; }
+.sky-still .sky-shoot, .sky-still .sky-comet { display: none; }
+.sky-still .sky-lean { translate: none; }
 @media (prefers-reduced-motion: reduce) {
-  .sky-nebula, .sky-milky { animation: none; }
-  .sky-milky { transition: none; }
+  .sky-milky, .sky-tw-star, .sky-galaxy-disc { animation: none; }
+  .sky-milky, .sky-lean { transition: none; }
+  .sky-shoot, .sky-comet { display: none; }
 }
 
 .foot-controls { margin: 4px 0 16px; }
@@ -463,14 +537,14 @@ body {
 .has-vt .view.is-active { animation: none; }
 .topbar { view-transition-name: topbar; }
 .sky { view-transition-name: sky; }
-::view-transition-old(root) { animation: warp-out .26s var(--ease-out) both; }
-::view-transition-new(root) { animation: warp-in .34s var(--ease-out) both; }
+::view-transition-old(root) { animation: warp-out .2s var(--ease-out) both; }
+::view-transition-new(root) { animation: warp-in .28s var(--ease-out) both; }
 @keyframes warp-out { to { opacity: 0; transform: scale(.985); } }
 @keyframes warp-in { from { opacity: 0; transform: scale(1.015); } }
 
 /* ─────────────── motion ───────────────
-   Fluid, and always an answer to something. Durations sit between 150ms and
-   400ms on one ease-out curve (--ease-out: fast start, soft landing), and
+   Fluid, and always an answer to something. Durations sit between 200ms and
+   300ms on one ease-out curve (--ease-out: fast start, soft landing), and
    only transform and opacity animate, so nothing reflows mid-motion.
      1. the globe turns to India on arrival (drawn in globe.js)
      2. the sky twinkles and a shooting star crosses now and then (space.js)
@@ -493,17 +567,17 @@ body {
 }
 @keyframes wave { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 
-.q-anim .q-say .q-title { animation: bubble-in .34s var(--ease-out) both; }
-.q-anim .q-say .q-help  { animation: bubble-in .34s var(--ease-out) .12s both; }
-.q-anim .opts           { animation: rise .36s var(--ease-out) .2s both; }
+.q-anim .q-say .q-title { animation: bubble-in .26s var(--ease-out) both; }
+.q-anim .q-say .q-help  { animation: bubble-in .26s var(--ease-out) .06s both; }
+.q-anim .opts           { animation: rise .28s var(--ease-out) .1s both; }
 .opt[aria-pressed="true"] .opt-box { animation: tick .26s cubic-bezier(.3,.7,.3,1.3); }
 .star-btn.is-saved { animation: pop .3s cubic-bezier(.3,.7,.3,1.3); }
 .disclose[open] .disclose-body, .prep[open] > :not(summary) { animation: open-in .22s var(--ease-out); }
-.read-main > .say { animation: bubble-in .38s var(--ease-out) both; }
-.read-main > .say:nth-of-type(2) { animation-delay: .12s; }
-.read-main > .say:nth-of-type(3) { animation-delay: .24s; }
-.read-main > .say:nth-of-type(4) { animation-delay: .36s; }
-.read-main > .say:nth-of-type(n+5) { animation-delay: .48s; }
+.read-main > .say { animation: bubble-in .3s var(--ease-out) both; }
+.read-main > .say:nth-of-type(2) { animation-delay: .08s; }
+.read-main > .say:nth-of-type(3) { animation-delay: .16s; }
+.read-main > .say:nth-of-type(4) { animation-delay: .24s; }
+.read-main > .say:nth-of-type(n+5) { animation-delay: .32s; }
 .sound-toggle.is-on .wave { animation: wave 2.4s ease-in-out infinite; }
 .bubble-toast { animation: bubble-in .3s var(--ease-out) both; }
 
@@ -703,7 +777,10 @@ body {
 }
 .btn-primary:active { transform: translateY(1px); }
 
-.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+/* The stronger violet edge, not the hairline: over a starfield a hairline
+   pill stops reading as a button at all (design-critique pass). Still
+   plainly secondary to the filled pink one. */
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn:disabled { opacity: .4; cursor: not-allowed; }
 
@@ -889,7 +966,7 @@ body {
      forced zoom-on-focus on iOS, which yanks the whole layout every time
      someone taps in to type. */
   width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--line);
+  background: var(--surface); border: 1px solid var(--line-strong);
   border-radius: var(--r); padding: 13px 15px; margin-top: 6px; resize: vertical;
 }
 .q-free::placeholder { color: var(--ink-3); }
@@ -1199,7 +1276,7 @@ body {
 .search-input {
   /* 1rem: same iOS zoom-on-focus reasoning as .q-free above. */
   width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r);
   padding: 11px 15px;
 }
 .search-input::placeholder { color: var(--ink-3); }
@@ -1222,7 +1299,7 @@ body {
   /* 1rem: same iOS zoom-on-focus reasoning as .q-free above — a <select>
      triggers it too, not just text inputs. */
   font: inherit; font-family: var(--font-ui); font-size: 1rem; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r);
   padding: 8px 12px; cursor: pointer;
   flex: 1 1 auto; min-width: 0; max-width: 100%;
 }
@@ -1794,6 +1871,15 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 .card {
   content-visibility: auto;
   contain-intrinsic-size: auto 320px;
+}
+/* The same, for the big blocks below the intro's first screen. The first
+   style-and-layout pass over the whole intro was the largest task in a
+   phone-speed load trace (281ms at 4x); these three are skipped until the
+   reader scrolls near them. The atlas is deliberately NOT included: its
+   sticky globe measures itself on load, and a skipped section measures 0. */
+.claims, .band, .foot {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 /* ─────────────── generated category pages ───────────────

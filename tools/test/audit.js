@@ -130,6 +130,28 @@ async function contrastCheck(page, label) {
   });
 }
 
+/* WCAG 1.4.11: the edge of a field you type into must reach 3:1 against what
+   surrounds it, or a reader cannot see where to tap. The Design plugin's
+   accessibility-review checklist named this, and no check here measured it:
+   the search box, the sort menu and the survey's free-text box were all drawn
+   in the hairline --line at 1.3 to 1.6:1, in both themes. */
+async function fieldEdgeCheck(page, label) {
+  const fields = await page.evaluate(() => [...document.querySelectorAll("input:not([type=hidden]), select, textarea")]
+    .filter((el) => { const r = el.getBoundingClientRect(); return r.width > 4 && r.height > 4; })
+    .map((el) => {
+      const cs = getComputedStyle(el);
+      let p = el.parentElement, bg = "rgba(0, 0, 0, 0)";
+      while (p) { const b = getComputedStyle(p).backgroundColor; if (b && !/rgba?\([^)]*,\s*0\)$/.test(b) && b !== "transparent") { bg = b; break; } p = p.parentElement; }
+      return { id: el.id || el.className || el.tagName, border: cs.borderTopColor, width: parseFloat(cs.borderTopWidth), bg };
+    }));
+  fields.forEach((f) => {
+    const fg = parseColor(f.border), bgc = parseColor(f.bg);
+    if (!fg || !bgc || !f.width) return;
+    const ratio = contrast(over(fg, bgc), bgc);
+    if (ratio < 3) F("BUG", label, `field edge ${ratio.toFixed(2)}:1 (needs 3:1, WCAG 1.4.11): ${f.id} border=${f.border} on ${f.bg}`);
+  });
+}
+
 async function revealCheck(page, label) {
   const stranded = await page.evaluate(() => {
     const out = [];
@@ -253,7 +275,7 @@ async function goto(page, view) {
 
       await goto(page, "browse");
       await scrollWidthCheck(page, label + " browse");
-      if (vp.name === "390-iPhone") await contrastCheck(page, label + " browse");
+      if (vp.name === "390-iPhone") { await contrastCheck(page, label + " browse"); await fieldEdgeCheck(page, label + " browse"); }
       if (vp.name === "390-iPhone" && theme === "light") {
         const n = await page.locator("#browseCards .card").count();
         F("INFO", label, `browse renders ${n} cards`);

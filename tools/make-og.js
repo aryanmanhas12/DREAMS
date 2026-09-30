@@ -49,15 +49,21 @@ const TOKENS = `--paper:#0F0A26;--surface:#1C1340;--line:#3A2C6E;--ink:#F6F1FF;
   --ink-2:#D3C9F2;--ink-3:#B8ADE0;--accent:#FF9AD5;--globe:#B79BFF;--star:#FFE58A;
   --fill:#FF4FA8;--on-fill:#1A0414;--starlight:#FFF6FF;
   --nebula-a:rgba(255,79,168,.16);--nebula-b:rgba(124,77,255,.17)`;
-const SKY = `.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.sky-nebula{position:absolute;inset:-12%;background:
-  radial-gradient(52% 38% at 86% 10%,var(--nebula-a),transparent 72%),
-  radial-gradient(50% 44% at 8% 86%,var(--nebula-b),transparent 72%)}
-.sky-milky-wrap{position:absolute;left:50%;top:50%;width:0;height:0}
-/* No Milky Way on a card: its glow is dithered by the browser into noise PNG
-   cannot compress, and it took every card past 800 KB. */
+/* The sky's CSS comes out of styles.css itself, between its "the sky"
+   heading and .foot-controls, so a card can never drift from the page. The
+   card then adds only what differs (below): no Milky Way and one cloud,
+   because gradient dither is what PNG compresses worst. */
+const CSS = fs.readFileSync(path.join(ROOT, "assets/styles.css"), "utf8");
+const SKY_START = CSS.indexOf("/* ─────────────── the sky ───────────────");
+const SKY_END = CSS.indexOf(".foot-controls {");
+if (SKY_START < 0 || SKY_END < SKY_START) throw new Error("make-og.js: could not find the sky block in styles.css; its markers moved");
+const SKY = CSS.slice(SKY_START, SKY_END) + `
+/* One cloud, not three, and no Milky Way. Chrome dithers gradients, and
+   dither is noise PNG cannot compress: the full sky took cards past 400 KB.
+   Measured: no Milky Way and one cloud keeps the homepage card near 250 KB,
+   under the 300 KB WhatsApp limit with room for a longer headline. */
 .sky-milky{display:none}
-.sky-stars{position:absolute;inset:0}
+.sky{background:radial-gradient(46% 42% at 88% 8%,var(--nebula-a),transparent 70%)}
 body{background:var(--paper)}`;
 
 /* The faces the page uses, minus the italic (nothing on a card is italic).

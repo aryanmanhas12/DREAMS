@@ -190,7 +190,7 @@ if (fs.existsSync(swPath)) {
   if (!shellMatch) E("sw.js: could not parse the SHELL precache array");
   else {
     const shell = new Set([...shellMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]));
-    [...htmlSrc.matchAll(/<script src="(assets\/[^"]+\.js)"><\/script>/g)].map((m) => m[1])
+    [...htmlSrc.matchAll(/<script src="(assets\/[^"]+\.js)"(?: defer)?><\/script>/g)].map((m) => m[1])
       .forEach((f) => { if (!shell.has(f)) E(`sw.js precache is missing ${f} — installed users get a broken page offline`); });
     if (!shell.has("assets/styles.css")) E("sw.js precache is missing assets/styles.css");
     shell.forEach((f) => {

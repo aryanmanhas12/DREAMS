@@ -54,7 +54,12 @@ const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
         const cs = getComputedStyle(document.documentElement);
         return names.map((n) => [n, cs.getPropertyValue(n).trim()]);
       }, TOKENS);
-      await page.addStyleTag({ content: "main, .foot, .topbar, .bubble-dock { visibility: hidden !important; }" });
+      // The twinkling stars (and any shooting star or comet caught mid-flight)
+      // are point sources: a sprite of 6-13px is bigger than the 8px block, so
+      // left in, one star reads as "bright background". The glow a line of
+      // text actually sits on is the Milky Way, the nebula and the galaxy.
+      await page.addStyleTag({ content: "main, .foot, .topbar, .bubble-dock { visibility: hidden !important; }" +
+        " .sky-tw-star, .sky-shoot, .sky-comet, .fx { display: none !important; }" });
       await page.waitForTimeout(250);
       const png = (await page.screenshot()).toString("base64");
 

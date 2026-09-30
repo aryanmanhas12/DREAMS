@@ -121,9 +121,12 @@ does, the Pages source has been switched back to a branch.
 | `node tools/make-pages.js`, `make-og.js`, `make-icons.js`, `make-fonts.js` | the individual generators (`refresh.js` runs the first two) |
 
 The browser checks live in `tools/test/`: `seo`, `font`, `console`, `survey`,
-`tour`, `atlas`, `pages`, `sky` and `audit`. `sky` photographs the painted
-galaxy with the page hidden and fails if any text colour would drop under
-4.5:1 on its brightest patch, which no CSS-based contrast check can see. `verify.js` runs them all; each can also
+`tour`, `atlas`, `pages`, `sky`, `perf` and `audit`. `sky` photographs the
+painted galaxy with the page hidden and fails if any text colour would drop
+under 4.5:1 on its brightest patch, which no CSS-based contrast check can
+see. `perf` runs a phone viewport at 4x CPU and fails if anything requests
+animation frames while the page rests, if a load task runs over 450ms, or if
+a tap takes over 450ms to paint. `verify.js` runs them all; each can also
 run alone with `node tools/test/<name>.js`. When you build a new component with
 its own text colour or background, add its selector to the contrast list in
 `tools/test/audit.js` or `tools/test/pages.js` in the same change. Those lists
