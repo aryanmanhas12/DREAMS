@@ -159,21 +159,40 @@
 
     function draw() {
       if (!R) return;
-      const accent = readCssVar("--globe", readCssVar("--accent", "#1F7A42"));
+      const accent = readCssVar("--globe", readCssVar("--accent", "#B79BFF"));
+      // Programme dots are the stars on this globe: yellow on space, violet on
+      // the daylight theme, read from --star so the theme toggle recolours them.
+      const starC = readCssVar("--star", accent);
       const ink = readCssVar("--ink", "#0D1E24");
-      // India, where the reader is standing, is marked in the marigold fill,
-      // the same disc the app icon puts there. It used to borrow --signal,
+      // India, where the reader is standing, is marked in the pink fill, the
+      // same disc the app icon puts there. It must never borrow --signal,
       // which on this site means a deadline and nothing else. The dark rim
-      // keeps a pale yellow disc visible on the light theme's pale globe.
-      const home = readCssVar("--fill", "#FFCC2E");
-      const homeRim = readCssVar("--on-fill", "#1A1604");
+      // keeps the disc crisp against the pale daylight globe.
+      const home = readCssVar("--fill", "#FF4FA8");
+      const homeRim = readCssVar("--on-fill", "#1A0414");
       const line = readCssVar("--line", "#C9CFC9");
 
       ctx.clearRect(0, 0, W, H);
 
-      // There was a soft halo outside the limb here. A glow round a sphere is
-      // exactly the "glowing orb" this site's design rules ban, and it said
-      // nothing, so it is gone; the body fill below is enough to make it solid.
+      // Atmosphere: a thin violet haze just outside the limb, so the globe
+      // reads as a planet hanging in the sky behind it. It ends at R + 12,
+      // inside the 14px margin size() leaves, because a gradient cut off by
+      // the canvas edge before it reaches zero paints a hard square (it did,
+      // once, at R * 1.2).
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.96, cx, cy, R + 12);
+      halo.addColorStop(0, withAlpha(accent, 0.28));
+      halo.addColorStop(1, withAlpha(accent, 0));
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R + 12, 0, Math.PI * 2);
+      ctx.fill();
+
+      // A planet hides the stars behind it: fill the disc with the page's own
+      // ground first, so the Milky Way does not show through the globe.
+      ctx.fillStyle = withAlpha(readCssVar("--paper", "#0F0A26"), 0.94);
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fill();
 
       // Body: a barely-there fill so the near hemisphere is a surface the
       // graticule sits on, offset towards the upper left as if lit from there.
@@ -275,7 +294,7 @@
         }
         ctx.beginPath();
         ctx.arc(d.p.x, d.p.y, isHover ? r + 1.6 : r, 0, Math.PI * 2);
-        ctx.fillStyle = isHome ? home : accent;
+        ctx.fillStyle = isHome ? home : starC;
         ctx.fill();
         if (isHome) {
           ctx.strokeStyle = homeRim;

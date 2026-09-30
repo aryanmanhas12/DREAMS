@@ -25,7 +25,11 @@ const ROOT = path.join(__dirname, "..", "..");
 const VIEWPORTS = [
   { w: 320, h: 568 }, { w: 390, h: 844 }, { w: 768, h: 1024 }, { w: 1280, h: 900 }
 ];
-const THEMES = ["light", "dark"];
+/* The generated pages, privacy, terms and the 404 carry no JavaScript, so
+   they have no theme toggle and are always the default space theme; the
+   system colour scheme no longer changes them. One pass covers what a reader
+   can actually see. The daylight theme is swept in the app by audit.js. */
+const THEMES = ["space"];
 
 /* Components on these pages that introduce their own text-on-background
    combination. Generic tags alone would miss the breadcrumb and the fact
@@ -138,7 +142,7 @@ async function styleReady(page) {
 
   let bugs = 0, combos = 0;
   for (const theme of THEMES) {
-    const ctx = await browser.newContext({ colorScheme: theme, reducedMotion: "reduce" });
+    const ctx = await browser.newContext({ reducedMotion: "reduce" });
     const page = await ctx.newPage();
     for (const p of paths) {
       for (const v of VIEWPORTS) {

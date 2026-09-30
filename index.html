@@ -11,11 +11,11 @@
      icon. It was the old compass mark until the app icon became the globe and
      the two stopped agreeing. No extra request, and it scales rather than
      pixellating on retina tabs. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314261C'/%3E%3Ccircle cx='16' cy='16' r='12.5' fill='none' stroke='%2372DC92' stroke-width='2.4'/%3E%3Cellipse cx='16' cy='16' rx='5.5' ry='12.5' fill='none' stroke='%2372DC92' stroke-width='1.5'/%3E%3Cline x1='3.5' y1='16' x2='28.5' y2='16' stroke='%2372DC92' stroke-width='1.5'/%3E%3Ccircle cx='20.5' cy='19.5' r='4.2' fill='%2314261C'/%3E%3Ccircle cx='20.5' cy='19.5' r='3' fill='%23FFD24D'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F0A26'/%3E%3Ccircle cx='16' cy='16' r='12.5' fill='none' stroke='%23B79BFF' stroke-width='2.4'/%3E%3Cellipse cx='16' cy='16' rx='5.5' ry='12.5' fill='none' stroke='%23B79BFF' stroke-width='1.5'/%3E%3Cline x1='3.5' y1='16' x2='28.5' y2='16' stroke='%23B79BFF' stroke-width='1.5'/%3E%3Ccircle cx='20.5' cy='19.5' r='4.2' fill='%230F0A26'/%3E%3Ccircle cx='20.5' cy='19.5' r='3' fill='%23FF4FA8'/%3E%3C/svg%3E" />
 <link rel="canonical" href="https://aryanmanhas12.github.io/DREAMS/" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="theme-color" content="#F3F4EC" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#14261C" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0F0A26" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0A26" media="(prefers-color-scheme: dark)" />
 
 <!-- Link previews. This gets shared student-to-student on WhatsApp and
      Telegram far more than it gets found by search, so the card is the
@@ -135,6 +135,15 @@
       </button>
     </nav>
     <div class="topbar-controls">
+      <!-- The galaxy's sound can play by itself once the page has been tapped,
+           so its off switch sits here, first among the controls (WCAG 1.4.2). -->
+      <button type="button" class="theme-toggle sound-toggle" id="soundToggle" aria-label="Galaxy sound" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path class="spk" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
+          <path class="wave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.6a7.6 7.6 0 0 1 0 10.8"/>
+          <path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/>
+        </svg>
+      </button>
       <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme">
         <span class="theme-dot"></span>
       </button>
@@ -573,6 +582,12 @@
       programmes change their rules, and the official page is always the authority. Nothing on this
       site is affiliated with any institution listed.
     </p>
+    <!-- The sky moves for as long as the page is open, so there has to be a
+         way to stop it from the page itself (WCAG 2.2.2). The system's
+         reduced-motion setting stills it too, and then this says so. -->
+    <p class="foot-controls">
+      <button type="button" class="btn btn-ghost btn-sm" id="skyToggle" aria-pressed="false">Pause the moving sky</button>
+    </p>
     <p class="foot-note foot-small reviewed" id="reviewedFoot"></p>
     <p class="foot-note foot-small">
       If you are struggling right now, that is not a career problem and it does not wait for a
@@ -627,6 +642,8 @@
 <script src="assets/data-meta.js"></script>
 <script src="assets/data-coast.js"></script>
 <script src="assets/globe.js"></script>
+<script src="assets/space.js"></script>
+<script src="assets/sound.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

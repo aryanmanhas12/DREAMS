@@ -203,9 +203,18 @@ async function goto(page, view) {
     for (const vp of VIEWPORTS) {
       const ctx = await browser.newContext({
         viewport: { width: vp.width, height: vp.height },
-        reducedMotion: "reduce", colorScheme: theme, deviceScaleFactor: 2
+        reducedMotion: "reduce", deviceScaleFactor: 2
       });
-      await ctx.addInitScript(() => { try { localStorage.setItem("dc-tour-seen", "1"); } catch (e) {} });
+      // Space is the default whatever the system scheme says, so the theme is
+      // chosen the way a reader chooses it: the stored toggle value. Emulating
+      // colorScheme would test the space theme twice and daylight never.
+      // dc-sound-told stops the one-time "galaxy is playing" bubble covering
+      // the controls this sweep probes.
+      await ctx.addInitScript((t) => { try {
+        localStorage.setItem("dc-tour-seen", "1");
+        localStorage.setItem("dc-theme", t);
+        localStorage.setItem("dc-sound-told", "1");
+      } catch (e) {} }, theme);
       const page = await ctx.newPage();
       const label = `${vp.name}/${theme}`;
       page.on("console", (m) => { if (m.type() === "error") F("BUG", label, "console error: " + m.text().slice(0, 180)); });

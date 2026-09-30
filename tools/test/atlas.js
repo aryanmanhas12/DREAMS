@@ -10,8 +10,13 @@ if (OUT) require("fs").mkdirSync(OUT, { recursive: true });
   let fails = 0;
   for (const vp of [{ w: 390, h: 844, n: "phone" }, { w: 320, h: 640, n: "small" }, { w: 1280, h: 800, n: "desk" }]) {
     for (const theme of ["light", "dark"]) {
-      const ctx = await b.newContext({ viewport: { width: vp.w, height: vp.h }, colorScheme: theme });
-      await ctx.addInitScript(() => localStorage.setItem("dc-tour-seen", "1"));
+      const ctx = await b.newContext({ viewport: { width: vp.w, height: vp.h } });
+      // The theme is the stored toggle value: space is the default whatever
+      // the system scheme says, so colorScheme alone would never reach daylight.
+      await ctx.addInitScript((t) => {
+        localStorage.setItem("dc-tour-seen", "1");
+        localStorage.setItem("dc-theme", t);
+      }, theme);
       const pg = await ctx.newPage();
       const errs = [];
       pg.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); });

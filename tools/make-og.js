@@ -40,12 +40,25 @@ const COUNTRIES = new Set(["study", "funding", "research", "residency", "equity"
   .flatMap((k) => (DB[k] || []).map((i) => i.country))
   .filter((c) => c && !REGIONS.includes(c))).size;
 
-/* Light tokens, mirrored from styles.css — the card is always the light
-   ground, because link-preview surfaces sit on white in every client. --globe
-   and --fill are what globe.js reads for the dots and the India marker. */
-const TOKENS = `--paper:#F3F4EC;--surface:#FFFFFA;--line:#D3D7C6;--ink:#10231A;
-  --ink-2:#3D5246;--ink-3:#56685C;--accent:#1D5C38;--globe:#1F7A42;
-  --fill:#FFCC2E;--on-fill:#1A1604`;
+/* Space tokens, mirrored from styles.css. The card is the galaxy on purpose:
+   a night sky with its stars stands out in a feed of white link previews,
+   and it is what the site actually looks like now. space.js draws the stars
+   (one still frame, because the render runs under reduced motion), globe.js
+   the globe, both reading these tokens. */
+const TOKENS = `--paper:#0F0A26;--surface:#1C1340;--line:#3A2C6E;--ink:#F6F1FF;
+  --ink-2:#D3C9F2;--ink-3:#B8ADE0;--accent:#FF9AD5;--globe:#B79BFF;--star:#FFE58A;
+  --fill:#FF4FA8;--on-fill:#1A0414;--starlight:#FFF6FF;
+  --nebula-a:rgba(255,79,168,.16);--nebula-b:rgba(124,77,255,.17)`;
+const SKY = `.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.sky-nebula{position:absolute;inset:-12%;background:
+  radial-gradient(52% 38% at 86% 10%,var(--nebula-a),transparent 72%),
+  radial-gradient(50% 44% at 8% 86%,var(--nebula-b),transparent 72%)}
+.sky-milky-wrap{position:absolute;left:50%;top:50%;width:0;height:0}
+/* No Milky Way on a card: its glow is dithered by the browser into noise PNG
+   cannot compress, and it took every card past 800 KB. */
+.sky-milky{display:none}
+.sky-stars{position:absolute;inset:0}
+body{background:var(--paper)}`;
 
 /* The faces the page uses, minus the italic (nothing on a card is italic).
    The script is the subset build, which covers the wordmark by design. */
@@ -63,11 +76,12 @@ const MARK = `.mark{font-family:"Cormorant Garamond",serif;font-weight:600;font-
 .mark em{font-family:"Petit Formal Script",cursive;font-style:normal;font-weight:400;
   font-size:1.18em;color:var(--accent);padding-left:.12em}`;
 
-const page = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+const page = `<!DOCTYPE html><html data-sky-lite><head><meta charset="utf-8"><style>
 :root{${TOKENS}}
 ${FACES}
 html,body{margin:0;padding:0}
-#card{width:1200px;height:630px;background:var(--paper);position:relative;
+${SKY}
+#card{width:1200px;height:630px;background:transparent;position:relative;
   display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:center;
   padding:0 64px;box-sizing:border-box;font-family:"IBM Plex Sans",sans-serif}
 ${MARK}
@@ -95,6 +109,7 @@ p{font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:5
 </div>
 ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}
 <script src="assets/globe.js"><\/script>
+<script src="assets/space.js"><\/script>
 <script>window.initGlobe(document.getElementById("globeCanvas"), null, function(){});<\/script>
 </body></html>`;
 
@@ -113,18 +128,19 @@ ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}
    headline is worse than a plain card, and a screenshot will not tell you. */
 const CATS = require("./make-pages.js").PAGES;
 
-const catPage = (c) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+const catPage = (c) => `<!DOCTYPE html><html data-sky-lite><head><meta charset="utf-8"><style>
 :root{${TOKENS}}
 ${FACES}
 html,body{margin:0;padding:0}
-#card{width:1200px;height:630px;background:var(--paper);position:relative;
+${SKY}
+#card{width:1200px;height:630px;background:transparent;position:relative;
   display:grid;grid-template-columns:1fr 340px;gap:44px;align-items:center;
   padding:0 64px;box-sizing:border-box;font-family:"IBM Plex Sans",sans-serif}
 ${MARK}
 h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:52px;line-height:1.06;
   margin:0 0 20px;color:var(--ink);font-variant-numeric:lining-nums}
-/* --accent, never --signal: the chilli red is reserved for deadlines on this
-   site and a count is not a deadline. */
+/* --accent, never --signal: the solar-flare orange is reserved for deadlines
+   on this site and a count is not a deadline. */
 .count{font-size:17px;font-weight:600;color:var(--accent);margin:0 0 16px;
   font-variant-numeric:lining-nums}
 p.desc{font-size:18px;line-height:1.55;color:var(--ink-2);margin:0;max-width:52ch}
@@ -147,6 +163,7 @@ p.desc{font-size:18px;line-height:1.55;color:var(--ink-2);margin:0;max-width:52c
 </div>
 ${DATA.map((s) => `<script src="${s}"><\/script>`).join("\n")}
 <script src="assets/globe.js"><\/script>
+<script src="assets/space.js"><\/script>
 <script>window.initGlobe(document.getElementById("globeCanvas"), null, function(){});<\/script>
 </body></html>`;
 
@@ -156,7 +173,8 @@ async function shoot(p, html, out, mustSay) {
   const onErr = (e) => { failed = String(e); };
   p.on("pageerror", onErr);
   await p.goto("file://" + TMP);
-  await p.waitForTimeout(1400);
+  // 2200ms: the Milky Way is painted in three idle-time passes after load.
+  await p.waitForTimeout(2200);
   p.off("pageerror", onErr);
   if (failed) throw new Error(out + ": card failed to render: " + failed);
 
@@ -181,6 +199,10 @@ async function shoot(p, html, out, mustSay) {
   const d = fs.readFileSync(out);
   const pw = d.readUInt32BE(16), ph = d.readUInt32BE(20);
   if (pw !== 1200 || ph !== 630) throw new Error(`${out} is ${pw}x${ph}, meta tags declare 1200x630`);
+  // WhatsApp, the channel these cards mostly travel on, shows no preview for
+  // an og:image much over 300 KB. The Milky Way's thousands of 1px stars once
+  // took every card to ~830 KB; fail here rather than lose the preview quietly.
+  if (d.length > 300 * 1024) throw new Error(`${out} is ${(d.length / 1024).toFixed(0)} KB; keep share cards under 300 KB`);
   return { kb: (d.length / 1024).toFixed(0), pw, ph };
 }
 

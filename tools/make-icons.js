@@ -18,7 +18,7 @@
        same construction as the inline SVG favicon in index.html, so the two
        now agree BY CONSTRUCTION rather than by somebody remembering to
        update both. They diverged once already.
-     - one marigold disc on India, which is where the reader is standing and
+     - one nebula-pink disc on India, which is where the reader is standing and
        the whole premise of the site. It punches a ground-coloured hole
        through the strokes behind it so it stays clean at every size.
 
@@ -44,16 +44,21 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const TMP = path.join(ROOT, "_icon-render.html");
 
-/* Real tokens from styles.css, not approximations. On the dark ground the
-   dark-theme globe green is the legible one; the light-theme #1F7A42 would sit
-   near 3:1 against #14261C and read as a dim ring. The marker is the marigold
-   fill, the one colour the page spends on "press this", so the icon and the
-   primary button are visibly the same product. */
+/* Real tokens from styles.css, not approximations. Deep space ground, the
+   globe's violet for the strokes and the nebula pink the page spends on
+   "press this" for India, so the icon and the primary button are visibly the
+   same product. Space is the site's default theme, so it is the icon too. */
 const PALETTE = {
-  light: { ground: "#F3F4EC", stroke: "#1F7A42", mark: "#E07A12" },
-  dark:  { ground: "#14261C", stroke: "#72DC92", mark: "#FFD24D" }
+  light: { ground: "#F4F0FF", stroke: "#6A45D9", mark: "#FF4FA8" },
+  dark:  { ground: "#0F0A26", stroke: "#B79BFF", mark: "#FF4FA8" }
 };
 const SHIP = "dark";
+/* Three stars in the corners, in the --star yellow: the third galaxy colour.
+   They sit outside the globe's rim, and they are small enough that at 29px
+   they fade into the ground rather than competing with the marker, which the
+   legibility check below would catch (it counts pink and violet, not yellow). */
+const STAR = "#FFE58A";
+const STARS = [[15, 17, 1.9], [86, 21, 1.4], [19, 85, 1.5]];
 const { ground: GROUND, stroke: STROKE, mark: MARK } = PALETTE[SHIP];
 
 /* The mark, in a 100x100 box. `inset` is how much of the tile the globe
@@ -89,6 +94,13 @@ function mark(scale) {
   </g>
   <circle cx="${mx}" cy="${my}" r="${hole}" fill="${GROUND}"/>
   <circle cx="${mx}" cy="${my}" r="${dot}" fill="${MARK}"/>
+  ${STARS.map(([x, y, r]) => {
+    // Pulled toward the centre with the globe, so a maskable crop keeps them.
+    const sx = 50 + (x - 50) * scale, sy = 50 + (y - 50) * scale, sr = r * scale;
+    return `<circle cx="${sx}" cy="${sy}" r="${sr}" fill="${STAR}"/>` +
+      `<rect x="${sx - sr * 2.6}" y="${sy - sr * 0.22}" width="${sr * 5.2}" height="${sr * 0.44}" fill="${STAR}" opacity=".7"/>` +
+      `<rect x="${sx - sr * 0.22}" y="${sy - sr * 2.6}" width="${sr * 0.44}" height="${sr * 5.2}" fill="${STAR}" opacity=".7"/>`;
+  }).join("")}
 </svg>`;
 }
 
@@ -134,7 +146,7 @@ const SPECS = [
 
   /* The whole point is that it survives being small, so prove it. Downscale
      the shipped 192 to 29px and require that the marker is still a distinct
-     warm pixel cluster and the globe is still a distinct cool one — i.e. the
+     pink pixel cluster and the globe is still a distinct violet one — i.e. the
      mark has not averaged into a single smudge. */
   const ctx = await browser.newContext({ viewport: { width: 64, height: 64 }, deviceScaleFactor: 1 });
   const p = await ctx.newPage();
@@ -145,7 +157,7 @@ const SPECS = [
       x.drawImage(i,0,0,29,29);
       const d=x.getImageData(0,0,29,29).data; let warm=0,cool=0;
       for(let k=0;k<d.length;k+=4){const R=d[k],G=d[k+1],B=d[k+2];
-        if(R>150&&R>B+40)warm++; else if(G>110&&G>R+30)cool++;}
+        if(R>170&&R>B+40&&R>G+60)warm++; else if(B>110&&B>R+25&&B>G+40)cool++;}
       r({warm,cool});};i.src="data:image/png;base64,${b64}";});<\/script></body>`);
   const legible = await p.evaluate(() => window.done);
   await ctx.close();

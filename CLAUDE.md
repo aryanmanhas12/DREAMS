@@ -198,42 +198,110 @@ Playwright and Chromium; serves the repo like Pages does).
   other.
 - **Do not use Inter.** It is the single font that most makes a page read as AI-generated.
   Same caution applies to the warm-cream + terracotta + serif combination.
-- **Palette is entirely `:root` custom properties**, defined three times: `:root`, the
-  `prefers-color-scheme: dark` media query, and both `:root[data-theme=…]` overrides. Swapping
-  the palette is a token edit — never hard-code a colour in a component.
-- **"Marigold & Neem" (September 2026). Every colour has one job; do not give it a second.**
-  - `--fill` / `--on-fill`: marigold with near-black text, in both themes. Things you press:
-    the primary button, a chosen answer's tick, the progress bar, India's marker on the globe.
-  - `--accent`: interactive text and focus. Neem green on the light theme, marigold on dark.
-  - `--signal`: chilli red, **deadlines only**. It had leaked onto the tier-1 badge, the 404
-    label, a "What nobody tells you" label and the globe's India marker; all four were moved.
-  - `--gold`: saffron, the filled tier-1 chip and nothing else.
-  - `--ok` leaf (open, funded, free), `--warn` turmeric (opening soon), `--globe` the dots.
-  - `--note` / `--note-line`: the counsellor's read. Butter paper on light; a lifted green on
-    dark, because a yellow wash over the dark ground mixed to a muddy olive.
-  Every pair is AA in both themes; the lowest is chilli on the dark surface at 4.67:1.
+- **Palette is entirely `:root` custom properties.** Since the galaxy redesign, `:root` IS the
+  space theme (the default whatever the system scheme says), `:root[data-theme="dark"]` repeats
+  it for the toggle, and `:root[data-theme="light"]` is the daylight variant. There is no
+  `prefers-color-scheme` block any more. Swapping the palette is a token edit; never hard-code
+  a colour in a component.
+- **"Nebula" (30 September 2026). Every colour has one job; do not give it a second.**
+  - `--fill` / `--on-fill`: nebula pink #FF4FA8 with near-black text, both themes. Things you
+    press: the primary button, a chosen answer, the progress bar, India on the globe.
+  - `--accent`: interactive text and focus. Pale pink on space, deep magenta on daylight.
+  - `--signal`: solar-flare orange, **deadlines only**, kept well away from the pink so a
+    deadline never reads as a button.
+  - `--gold`: star yellow, the filled tier-1 chip and nothing else.
+  - `--ok` aurora (open, funded, free), `--warn` amber (opening soon).
+  - `--globe` violet graticule, `--star` the globe's dots, `--starlight` the sky's stars,
+    `--nebula-a` / `--nebula-b` the two clouds.
+  - `--note` / `--note-line`: the counsellor's speech bubbles.
+  Every text pair is AA in both themes. `--ink-3` was raised (space #B8ADE0, daylight
+  #54497F) so it still clears 4.5:1 over the brightest patch of sky; see `tools/test/sky.js`.
+- **The user overrode several of the earlier design rules for the galaxy, deliberately.** They
+  asked for purple, pink and yellow, a Milky Way, "everything that moves", a glow and constant
+  sound. So a violet-on-deep-indigo ground, nebula gradients, the globe's atmosphere, the pink
+  glow on the primary button and a moving sky are now intended, where the older sections
+  below call them tells. What still holds: no neon or glassmorphism on the UI itself, no
+  emoji, no gradient text, no accent phrase in the headline, and every piece of motion
+  optional (see the sky and sound sections).
 - **Tier badges are an ordinal scale and are drawn as one** — tier 1 is the only filled chip
   on the page, and weight drops with the grade down to a dashed outline at tier 5. That is
   what lets someone find the handful of transformative entries by scanning.
 - **All motion must be disabled under `prefers-reduced-motion`**, and reveal states must fall
   back to *visible* — never stranded at `opacity: 0` when `IntersectionObserver` is missing.
-- **Motion answers the reader; only one moment plays on its own.** Section fade-ups on
-  scroll (`initReveals`) were removed: fade-and-slide on every section is the generic
-  default. What is left: the hero globe's intro (it turns into place over India and the
-  programme dots arrive nearest-first, once, about two seconds, `{ intro: true }`), and
-  responses to actions — the tick when an answer is chosen, the pop when a card is saved,
-  the unfold of a disclosure, the step between questions.
+- **Motion answers the reader, and the sky moves on its own.** Section fade-ups on scroll
+  (`initReveals`) stay removed. What plays unprompted is the sky (below) and the hero globe's
+  intro, once. Everything else answers an action: the speech bubbles of each question, the
+  tick when an answer is chosen, the pop when a card is saved, the unfold of a disclosure,
+  the read arriving bubble by bubble, and the view transitions (`document.startViewTransition`,
+  skipped under reduced motion; `html.has-vt` turns off the old per-view fade).
 - **Buttons are pills at every width; surfaces keep the 3px `--r`.** Desktop used to square
   the hero buttons while phones and the large CTA were round, so one button changed shape
   at 760px.
-- **Template tells removed in the 2026 redesign; do not reintroduce them.** All-caps
+- **Template tells removed in the Marigold redesign; still out under the galaxy.** All-caps
   tracked labels (26 rules), eyebrow labels above headings, an italic or coloured phrase
   inside the headline, coloured left-edge stripes on panels and a status stripe on cards,
   quote-mark cards, zero-padded "01" rank tags, strings joined with ` · `, `→` appended to
-  link text, and the globe's glow. The urgency line on a card is a dot plus a word
+  link text. The urgency line on a card is a dot plus a word
   (`.urg-open`, `.urg-soon`...), so colour is never the only signal. Sources: Anthropic's
   `frontend-design` skill (github.com/anthropics/claude-plugins-official), and Krebs'
   sixteen AI-slop patterns.
+
+## The galaxy: sky, sound, bubbles (30 September 2026)
+
+- **`assets/space.js` draws the sky** into one fixed container (`.sky`, z-index -1, no pointer
+  events, aria-hidden) with three layers: `.sky-nebula` (CSS clouds that breathe),
+  `.sky-milky` (the Milky Way, painted ONCE in three idle-time passes, glow, dust lanes,
+  stars, then turned by a 16-minute CSS `rotate` animation, so it costs nothing per frame),
+  and `.sky-stars` (the live 30fps canvas: twinkling stars in three depths, a spiral galaxy
+  turning on its own axis, drifting dust, shooting stars, a comet every 30 to 60 seconds).
+  Scroll and, on a fine pointer, the mouse move every layer by depth. The container is fixed
+  with `overflow: hidden`, which is why its oversized children cannot add page scroll.
+- **Canvas pixels are invisible to every contrast check, and that shipped a real failure.**
+  The first Milky Way put a warm core behind the hero headline at about 2.5:1 for `--ink-3`,
+  and a spiral-galaxy core burned by additive compositing measured 1.6:1, while `audit.js`
+  and Lighthouse would both have passed. **`tools/test/sky.js`** hides the page, photographs
+  the sky alone in both themes at two widths, averages 8px blocks (a star is a point, the glow
+  under a line of text is the background), and fails if any text token on the sky drops under
+  4.5:1. Raise any glow alpha and run it.
+- **`lighter` compositing saturates.** Additive blending is right for faint glows and wrong
+  wherever points pile up: the spiral's packed core went to a white dot. Arms are drawn with
+  `source-over`; only the soft core gradient adds.
+- **The sky must be stoppable from the page (WCAG 2.2.2).** Motion that starts on its own and
+  lasts over five seconds beside content needs an on-page pause, and `prefers-reduced-motion`
+  alone does not satisfy it. `#skyToggle` in the footer ("Pause the moving sky") sets
+  `html.sky-still` and `dc-sky` in localStorage; reduced motion also stills it and disables
+  the button with a title saying why.
+- **The pages with no JavaScript** (categories, privacy, terms, 404) carry
+  `<div class="sky sky-static">`: a CSS-only 240px star tile plus the clouds. `make-pages.js`
+  writes it, so do not delete it from the hand-written three.
+- **Cloud-chamber tracks** (`DCSpace.burst`) draw on `.fx`, a fixed canvas ABOVE the page that
+  exists only while tracks live and has `pointer-events: none`, so `elementFromPoint` and taps
+  pass through it: alpha tracks on choosing an answer, beta curls on Continue, a gamma ring on
+  saving, a decay chain when results arrive. None under reduced motion or a paused sky.
+- **`assets/sound.js` synthesises everything with Web Audio** (no files, works offline and in
+  the bundle): a drone, a four-chord A-minor pad that changes every 12s, filtered-noise wind,
+  pentatonic chimes through an echo, Poisson-timed cosmic-ray clicks; effects `decay`,
+  `alpha`, `gamma`, `fade`, `orbit`, `chain`. Measured from a real page run: peak 0.245,
+  RMS -26.7 dBFS, so no clipping and a background level.
+- **Browsers block sound until a gesture, so it starts on the first tap anywhere**, as the user
+  asked ("constantly"), unless muted. WCAG 1.4.2 needs an on-page stop: the speaker button is
+  first among the top-bar controls, and a one-time bubble says where it is. **A first gesture
+  ON the speaker button must not also auto-start**: `unlock()` returns early there, or the
+  sound plays for a moment and stops in the same click. The button shows what is actually
+  playing (`audible`), not the stored wish, so before the first tap it reads as off.
+- **Three top-bar controls do not fit 320px** beside the script wordmark: `audit.js` measured
+  the wordmark 44px into the controls. Under 370px the little globe beside the name goes, the
+  wordmark steps down to .9rem, and the round buttons draw at 34px with 44px tap areas. That
+  block sits AFTER the 640px rule it overrides, for the reason the wordmark trap above gives.
+- **Space is the default theme, so the harnesses set the theme the way a reader does:**
+  `localStorage.setItem("dc-theme", t)` in an init script. `colorScheme` emulation no longer
+  changes anything and would test space twice and daylight never. `pages.js` runs one pass,
+  because the script-free pages can only ever show space. Seed `dc-sound-told` wherever a
+  harness probes the top of the page, or the one-time bubble covers what it measures.
+- **Speech bubbles** (`.q-say`, `.read-main > .say`, `.bubble-toast`) are rounder than
+  surfaces (18px against 3px) on purpose: a voice, not a panel. Notices dock under the top
+  bar, never at the bottom, where the survey's Continue button would be under them. Removing a
+  saved programme is the destructive direction, so it gets an Undo bubble.
 
 ## Pre-launch checklist — run this before any release, every time
 
@@ -251,12 +319,12 @@ audited.**
 | 5 | Cookie consent banner | **Deliberately absent, and that is the correct answer.** The site sets no cookies and runs no analytics, so there is nothing to consent to. Adding a banner would be theatre that implies tracking exists. Do not add one unless tracking is ever added. |
 | 6 | Meta title + description | Present. The counts inside them are asserted by the data check. |
 | 7 | Social preview image | **Twelve cards**, all rendered from data by `tools/make-og.js`: `assets/og-image.png` for the homepage and legal pages, plus `assets/og/<slug>.png` per category, each carrying its own count. The headlines come from `make-pages.js`, not a second copy. |
-| 8 | Favicon | Inline SVG globe data URI, matching the installed app icon. Was a compass until the two diverged. |
+| 8 | Favicon | Inline SVG globe data URI on a deep-space tile (violet strokes, pink India marker), matching the installed app icon, which adds three yellow stars. Was a compass until the two diverged. |
 | 9 | Sitemap + robots.txt | Both at the repo root. `sitemap.xml` is **regenerated by `tools/make-pages.js`** and lists 14 canonical URLs (home, 11 category pages, privacy, terms), so it cannot name a page that does not exist. `robots.txt` disallows `/dist/`, `/tools/` and `/sw.js` and points at the sitemap. `llms.txt` sits beside them. |
 | 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
-| 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
+| 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Since the galaxy, `make-og.js` **throws if any card passes 300 KB** (WhatsApp drops larger previews): the Milky Way's dithered glow once took every card to ~830 KB, so cards carry the stars, two clouds, spiral galaxy and globe but not the Milky Way layer (`data-sky-lite`, `.sky-milky{display:none}`). Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
 | 12 | Page load speed | CSS is non-blocking (preload + print-swap). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured: homepage **87 perf / 100 a11y / 100 best-practices / 100 SEO**, `/specialties/` **99 / 100 / 100 / 100**. |
-| 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths × 2 themes. Both selector lists are whitelists and rot — add new components in the same change. Lighthouse scores accessibility **100**. |
+| 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths in the one theme they can show. Both selector lists are whitelists and rot — add new components in the same change. `tools/test/sky.js` checks text against the painted sky, which neither of the others can see. Lighthouse scores accessibility **100**. |
 | 14 | Mobile friendly | `tools/test/audit.js` covers 320–1280 on the app and `tools/test/pages.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
 | 15 | Custom 404 | `404.html`; Pages serves it automatically with a real 404 status (verified live). Links are absolute `/DREAMS/...` because Pages serves it from any depth, and it carries the category nav. |
 | 16 | Broken links | Full sweep from an unrestricted host via Composio. **403/405/000 are not failures** — see the sweep-reading rules above. |
@@ -391,7 +459,7 @@ If this is ever done it should be a reviewed pass, entry by entry.
   was no readable mark. It was detail drawn for a 340px canvas shown at an
   eighth of that, sitting in a soft glow inside a large dark margin.
 - **The mark is now three strokes and one disc:** outer circle, meridian
-  ellipse, equator, plus a marigold marker on India that punches a
+  ellipse, equator, plus a nebula-pink marker on India that punches a
   ground-coloured hole through the strokes behind it.
 - **The marker's position is derived by arithmetic from the favicon**, not
   eyeballed: the favicon's globe is r=12.5 in a 32 box with the dot at
@@ -476,12 +544,11 @@ If this is ever done it should be a reviewed pass, entry by entry.
 
 ## Open with the user
 
-- **Colour palette**: changed at the user's request on 30 September 2026. They asked for
-  something "attention grabbing and calming like yellow brighter, red, orange, green" and for
-  the site to stop reading as AI-made. "Citrus & Slate" (teal on petrol) became "Marigold &
-  Neem": marigold for what you press, neem green grounds and accents, chilli red for
-  deadlines, saffron for tier 1. Roles are under Design system. Do not change hues again
-  without being asked.
+- **Colour palette**: changed twice on 30 September 2026 at the user's request. "Citrus &
+  Slate" became "Marigold & Neem" (yellow, red, orange, green), which they then found too
+  yellow and asked to become a galaxy: purple, yellow and pink, a Milky Way, stars, things
+  that move, and a constant galaxy sound with nuclear-decay and alpha-particle effects. That
+  is "Nebula", above. Do not change hues again without being asked.
 - **GitHub Pages: settled, and this time verified from outside.** The source setting was
   "Deploy from a branch" for weeks while this file claimed otherwise, on the false theory that
   a green `actions/deploy-pages@v4` step proves the source is Actions (it does not; GitHub's

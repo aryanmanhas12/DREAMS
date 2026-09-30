@@ -868,14 +868,75 @@
     h.focus({ preventScroll: true });
   }
 
+  /* ───────────────── sound and bubbles ───────────────── */
+  // sound.js owns the audio; this only names the moment. A missing or muted
+  // engine makes every call a no-op.
+  function sfx(name) { if (window.DCSound) window.DCSound.play(name); }
+
+  // A cloud-chamber burst centred on an element (space.js draws it, and
+  // skips it when the sky is paused or the system asks for reduced motion).
+  function fxAt(kind, el) {
+    if (!window.DCSpace || !el) return;
+    const r = el.getBoundingClientRect();
+    window.DCSpace.burst(kind, r.left + r.width / 2, r.top + r.height / 2);
+  }
+
+  // The small globe the counsellor speaks from: the favicon's construction.
+  const MARK_SVG = '<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">' +
+    '<g fill="none" stroke="currentColor"><circle cx="16" cy="16" r="12.5" stroke-width="2.6"/>' +
+    '<ellipse cx="16" cy="16" rx="5.5" ry="12.5" stroke-width="1.8"/>' +
+    '<line x1="3.5" y1="16" x2="28.5" y2="16" stroke-width="1.8"/></g>' +
+    '<circle class="bm-dot" cx="20.5" cy="19.5" r="3.6"/></svg>';
+
+  /* A notice in a speech bubble at the bottom of the screen, announced
+     politely to screen readers. One at a time: a new one replaces the last.
+     `action` adds a button (Undo) that runs once and dismisses the bubble. */
+  let toastTimer = null;
+  function toast(text, action) {
+    let dock = $("#bubbleDock");
+    if (!dock) {
+      dock = document.createElement("div");
+      dock.id = "bubbleDock"; dock.className = "bubble-dock";
+      dock.setAttribute("role", "status"); dock.setAttribute("aria-live", "polite");
+      document.body.appendChild(dock);
+    }
+    clearTimeout(toastTimer);
+    dock.innerHTML = "";
+    const b = document.createElement("div");
+    b.className = "bubble-toast";
+    const t = document.createElement("span"); t.textContent = text; b.appendChild(t);
+    if (action) {
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.textContent = action.label;
+      btn.addEventListener("click", function () { action.run(); dock.innerHTML = ""; });
+      b.appendChild(btn);
+    }
+    dock.appendChild(b);
+    toastTimer = setTimeout(function () { dock.innerHTML = ""; }, action ? 7000 : 4500);
+  }
+
   /* ───────────────── views ───────────────── */
-  function showView(name) {
+  // Where the browser supports it, a view change is a view transition: the
+  // old page fades and settles as the new one arrives (styles.css, "views").
+  // Under reduced motion, or without the API, it is the plain swap.
+  const canTransition = typeof document.startViewTransition === "function" &&
+    !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  if (canTransition) document.documentElement.classList.add("has-vt");
+  let currentView = "intro";
+
+  function swapView(name) {
     $$(".view").forEach((v) => v.classList.remove("is-active"));
     const v = $("#view-" + name);
     if (v) v.classList.add("is-active");
     $$(".navlink").forEach((b) => b.setAttribute("aria-current", b.dataset.goto === name ? "true" : "false"));
     window.scrollTo(0, 0);
     if (v) focusHeading(v);
+  }
+  function showView(name) {
+    if (name !== currentView) sfx(name === "results" ? "chain" : "orbit");
+    currentView = name;
+    if (canTransition) document.startViewTransition(function () { swapView(name); });
+    else swapView(name);
   }
 
   /* ───────────────── survey rendering ───────────────── */
@@ -887,8 +948,10 @@
     const chosen = answers[q.id] || (q.type === "multi" ? [] : null);
 
     let h = '<p class="q-eyebrow">' + esc(q.act) + '</p>';
+    h += '<div class="q-say"><span class="q-avatar" aria-hidden="true">' + MARK_SVG + '</span><div class="q-bubbles">';
     h += '<h2 class="q-title">' + esc(q.title) + '</h2>';
     h += '<p class="q-help">' + q.help + '</p>';
+    h += '</div></div>';
     h += '<div class="opts' + (q.options.length > 6 ? " two" : "") + '">';
     q.options.forEach(function (o) {
       const on = q.type === "multi" ? chosen.indexOf(o.v) !== -1 : chosen === o.v;
@@ -904,7 +967,7 @@
            esc(answers[q.id + "_text"] || "") + '</textarea>';
       h += '<p class="q-note">Optional, but the words you use here shape the answer.</p>';
     }
-    if (q.type === "multi") h += '<p class="q-note">Choose as many as are true. None is also an answer.</p>';
+    if (q.type === "multi") h += '<p class="q-note" id="qPicked" aria-live="polite">' + pickedText(chosen.length) + '</p>';
 
     slot.innerHTML = h;
     // Retrigger the arrival animation on every question, so the survey reads
@@ -918,11 +981,15 @@
     $$(".opt", slot).forEach(function (btn) {
       btn.addEventListener("click", function () {
         const v = btn.dataset.v;
+        sfx("decay");
+        if (btn.getAttribute("aria-pressed") !== "true") fxAt("alpha", btn.querySelector(".opt-box"));
         if (q.type === "multi") {
           const arr = answers[q.id] || (answers[q.id] = []);
           const i = arr.indexOf(v);
           if (i === -1) arr.push(v); else arr.splice(i, 1);
           btn.setAttribute("aria-pressed", i === -1 ? "true" : "false");
+          const note = $("#qPicked");
+          if (note) note.textContent = pickedText(arr.length);
         } else {
           answers[q.id] = v;
           $$(".opt", slot).forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
@@ -939,6 +1006,13 @@
     const pct = (qIndex / QS.length) * 100;
     $("#progressBar").style.width = pct + "%";
     $(".progress").setAttribute("aria-valuenow", String(Math.round(pct)));
+  }
+
+  // Honest running feedback on a multi-choice question: how many are picked,
+  // and that none is a valid answer too. Counts only; it never interprets.
+  function pickedText(n) {
+    if (!n) return "Choose as many as are true. None is also an answer.";
+    return (n === 1 ? "1 picked." : n + " picked.") + " Choose more, or continue.";
   }
 
   /* ───────────────── results ───────────────── */
@@ -959,7 +1033,7 @@
     h += '<div class="read-main">';
     h += '<p class="salutation">Alright. Here is what I see.</p>';
     h += "<h2>What your answers actually say</h2>";
-    counsellorRead(p, ranked, ctys).forEach((para) => { h += "<p>" + para + "</p>"; });
+    counsellorRead(p, ranked, ctys).forEach((para) => { h += '<p class="say">' + para + "</p>"; });
 
     /* On a three-question run, say plainly what this read is missing rather
        than letting it pass as the finished article. The ranking below is real
@@ -2095,12 +2169,26 @@
     if (stored) document.documentElement.setAttribute("data-theme", stored);
     syncThemeColor();
     btn.addEventListener("click", function () {
-      const cur = document.documentElement.getAttribute("data-theme");
-      const sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const next = cur ? (cur === "dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+      // Space is the default whatever the system says (styles.css, :root), so
+      // the first press always goes to daylight.
+      const cur = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("dc-theme", next); } catch (e) { /* ignore */ }
       syncThemeColor();
+    });
+  }
+
+  /* The first time the galaxy's sound starts on this device, say so and say
+     how to stop it. Once only: after that the speaker button speaks for it. */
+  function initSoundNotice() {
+    window.addEventListener("dcsound", function (e) {
+      if (!e.detail || !e.detail.on || !e.detail.first) return;
+      let told = null;
+      try { told = localStorage.getItem("dc-sound-told"); } catch (err) { /* private mode */ }
+      if (told) return;
+      try { localStorage.setItem("dc-sound-told", "1"); } catch (err) { /* ignore */ }
+      toast("Galaxy sound is on. Turn it off with the speaker button at the top.");
     });
   }
 
@@ -2483,6 +2571,7 @@
     renderStats();
     renderReviewed();
     initTheme();
+    initSoundNotice();
     initMobileNav();
     initHeroGlobe();
     initAtlas();
@@ -2496,8 +2585,22 @@
     document.addEventListener("click", function (e) {
       const btn = e.target.closest(".star-btn");
       if (!btn) return;
-      toggleShortlist(btn.dataset.star);
+      const id = btn.dataset.star;
+      const wasSaved = isShortlisted(id);
+      toggleShortlist(id);
       if ($("#view-shortlist").classList.contains("is-active")) renderShortlist();
+      if (!wasSaved) { sfx("gamma"); fxAt("gamma", btn); return; }
+      // Removing is the destructive direction, so it can be taken back.
+      sfx("fade");
+      const item = allOpportunities().find((i) => i.id === id);
+      toast("Removed " + (item ? item.name : "it") + " from your shortlist.", {
+        label: "Undo",
+        run: function () {
+          if (!isShortlisted(id)) toggleShortlist(id);
+          if ($("#view-shortlist").classList.contains("is-active")) renderShortlist();
+          sfx("gamma");
+        }
+      });
     });
 
     $("#startBtn").addEventListener("click", function () { startSurvey("short", 0); });
@@ -2525,7 +2628,13 @@
     });
 
     $("#nextBtn").addEventListener("click", function () {
-      if (qIndex === activeQuestions().length - 1) { renderResults(); showView("results"); return; }
+      if (qIndex === activeQuestions().length - 1) {
+        renderResults(); showView("results");
+        if (window.DCSpace) window.DCSpace.burst("chain", window.innerWidth / 2, 150);
+        return;
+      }
+      sfx("alpha");
+      fxAt("beta", $("#nextBtn"));
       qIndex++; renderQuestion();
     });
     $("#backBtn").addEventListener("click", function () {
