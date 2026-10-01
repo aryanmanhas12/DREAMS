@@ -36,7 +36,9 @@ const THEMES = ["space"];
    list, which is exactly how .chip.is-key got through. */
 const SELS = "h1, h2, h3, p, li, dt, dd, a, .crumbs a, .crumbs li, .listing-why, " +
              ".listing-facts dt, .listing-facts dd, .listing-link a, .related a, " +
-             ".doc-lede, .doc-small, .doc-back a, .btn";
+             ".doc-lede, .doc-small, .doc-back a, .btn, " +
+             // the grouped pages (India, fully funded) and Ooh's line on them
+             ".listing-group-h, .listing-group-n, .ooh-say, .ooh-name";
 
 const probe = (sels) => {
   /* WCAG relative luminance. The float-syntax trap is the reason for the

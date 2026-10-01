@@ -99,7 +99,11 @@ async function contrastCheck(page, label) {
       // switches to the accent only on the active step, so the sweep runs
       // with one step active and the rest idle to see both.
       ".atlas-intro", ".atlas-tag", ".atlas-copy", ".atlas-facts dt",
-      ".atlas-facts dd", ".atlas-pick", ".atlas-pick b", ".atlas-go"];
+      ".atlas-facts dd", ".atlas-pick", ".atlas-pick b", ".atlas-go",
+      // Ooh (October 2026): the paper bubble, its gold name plate and "Next",
+      // the "What do you want?" chips, and the survey's live line. Each sets
+      // its own text-on-background pair, so each is listed.
+      ".ooh-say", ".ooh-name", ".ooh-next", ".want-chip", ".q-live", ".q-live b", ".bubble-toast"];
     const out = [], seen = new Set();
     sels.forEach((sel) => document.querySelectorAll(sel).forEach((el) => {
       const r = el.getBoundingClientRect();

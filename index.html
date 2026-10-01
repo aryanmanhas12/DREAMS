@@ -23,16 +23,16 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Dream Counsellor" />
 <meta property="og:locale" content="en_IN" />
-<meta property="og:title" content="Dream Counsellor — you were told there were two options" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 223 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:title" content="Dream Counsellor: the world is full of opportunities. What do you want?" />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 228 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Dream Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Dream Counsellor — you were told there were two options" />
-<meta name="twitter:description" content="223 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:title" content="Dream Counsellor: the world is full of opportunities. What do you want?" />
+<meta name="twitter:description" content="228 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -168,44 +168,64 @@
   <div class="hero">
     <div class="wrap hero-in">
       <!-- Flat grid rather than nested columns, so the DOM order IS the phone
-           order: headline, globe, what it is, what to do. Desktop moves the
-           globe into a second column with grid-template-areas. Doing it this
-           way rather than with `order` keeps tab order identical to reading
-           order — reordering visually with `order` desyncs the two. -->
+           order: the headline, the question, its answers, what this is, what
+           to do. On a phone the globe now comes after the buttons, so the first
+           screen holds the question and both ways of answering it (a chip for
+           Ooh, or the three questions). From 920px grid-template-areas moves
+           the globe into its own column beside all of it. Doing it this way
+           rather than with `order` keeps tab order identical to reading order. -->
       <div class="hero-grid">
         <!-- Each word is its own span so the headline can rise word by word on
-             arrival: the page's one orchestrated moment, with the globe turning
-             to India beside it. Pure CSS from the first paint (no JavaScript
-             to wait for), transform and opacity only, off under reduced motion. -->
+             arrival: the page's one orchestrated moment. Pure CSS from the first
+             paint (no JavaScript to wait for), transform and opacity only, off
+             under reduced motion. -->
         <h1 class="hero-h rise">
-          <span class="w" style="--i:0">You</span> <span class="w" style="--i:1">were</span> <span class="w" style="--i:2">told</span> <span class="w" style="--i:3">there</span> <span class="w" style="--i:4">were</span> <span class="w" style="--i:5">two</span> <span class="w" style="--i:6">options.</span><br />
-          <span class="hero-em"><span class="w" style="--i:7">This</span> <span class="w" style="--i:8">page</span> <span class="w" style="--i:9">has</span> <span class="w" style="--i:10"><span id="heroCount" class="num-pending"></span></span> <span class="w" style="--i:11">of</span> <span class="w" style="--i:12">them.</span></span>
+          <span class="w" style="--i:0">The</span> <span class="w" style="--i:1">world</span> <span class="w" style="--i:2">is</span> <span class="w" style="--i:3">full</span> <span class="w" style="--i:4">of</span> <span class="w" style="--i:5">opportunities.</span>
         </h1>
+        <p class="hero-ask rise" id="wantQ"><span class="w" style="--i:8">What</span> <span class="w" style="--i:9">do</span> <span class="w" style="--i:10">you</span> <span class="w" style="--i:11">want?</span></p>
 
-        <figure class="hero-globe">
-          <canvas id="globeCanvas" role="img"
-                  aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
-          <figcaption class="globe-label" id="globeLabel">Drag to spin, or tap a country</figcaption>
-        </figure>
-
-        <p class="hero-lede">
-          Funded research you can hold in second year, doctorates that pay a salary, and
-          scholarships that cover the flight. All of it indexed for Indian medical students,
-          graded honestly, every one linked to its official page.
-        </p>
+        <!-- Ooh answers the question above. A fixed script, not a chatbot: each
+             chip has one reply, and every number in it is counted from the
+             index when it is said. Ooh's figure box is its final size in the
+             HTML, so drawing Ooh in afterwards moves nothing. -->
+        <div class="want" id="want">
+          <div class="want-chips" role="group" aria-labelledby="wantQ">
+            <button type="button" class="want-chip" data-want="research" aria-pressed="false">Research during MBBS</button>
+            <button type="button" class="want-chip" data-want="abroad" aria-pressed="false">Fully funded abroad</button>
+            <button type="button" class="want-chip" data-want="phd" aria-pressed="false">A PhD that pays</button>
+            <button type="button" class="want-chip" data-want="india" aria-pressed="false">Exposure in India</button>
+            <button type="button" class="want-chip" data-want="specialty" aria-pressed="false">A specialty that fits</button>
+            <button type="button" class="want-chip" data-want="unsure" aria-pressed="false">Not sure yet</button>
+          </div>
+          <div class="want-say">
+            <span class="ooh-figure want-ooh" data-ooh-figure="hello" data-size="64" aria-hidden="true"></span>
+            <div class="ooh-bubble want-bubble" id="wantBubble">
+              <p class="ooh-say ooh-say-static"><span class="ooh-name" aria-hidden="true" translate="no">Ooh</span><span class="ooh-text"><span class="ooh-typed">Tap whichever is closest and I'll show you where to start.</span><span class="ooh-rest" aria-hidden="true"></span></span></p>
+              <p class="ooh-sr" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="want-go" id="wantGo"></div>
+        </div>
 
         <!-- Two lengths, stated honestly. The primary button used to promise
              three questions and then ask sixteen, which is a small lie that
              set the tone for everything after it. Now the short run really is
-             three, and the long one says its own price on the label. -->
+             three, and the full set says what it adds. -->
         <div class="hero-actions">
           <button type="button" class="btn btn-primary btn-orbit" id="startBtn">Answer the three questions</button>
-          <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper: all 16</button>
+          <button type="button" class="btn btn-ghost" id="startFullBtn">Go deeper: the full set</button>
           <button type="button" class="btn btn-ghost" data-goto="browse">Show me everything</button>
         </div>
         <p class="hero-choice-note">
-          Three questions take about a minute. All sixteen add money, year, category and climate,
-          which sharpens the list, and you can switch to them later without losing an answer.
+          Three questions take about a minute. The full set adds your year, money, category and where
+          you could live, which sharpens the list, and you can switch to it later without losing an answer.
+        </p>
+
+        <p class="hero-lede">
+          This index holds <b><span id="heroCount" class="num-pending"></span></b> of them for Indian
+          medical students: funded research you can hold in second year, doctorates that pay a salary,
+          and scholarships that cover the flight. Every one is graded honestly and linked to its
+          official page.
         </p>
 
         <!-- Placed AFTER the primary action, never before it. Anything added
@@ -230,6 +250,12 @@
           <p class="install-steps" id="installSteps" hidden></p>
         </div>
 
+        <figure class="hero-globe">
+          <canvas id="globeCanvas" role="img"
+                  aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
+          <figcaption class="globe-label" id="globeLabel">Drag to spin, or tap a country</figcaption>
+        </figure>
+
         <!-- An ordered list because it genuinely is a sequence. You cannot get
              step 3 without step 1. That is what earns the numbering. -->
         <ol class="how">
@@ -240,8 +266,8 @@
           </li>
           <li>
             <b>Your real constraints</b>
-            <span>Money in the bank, cold tolerance, year of study, category. The things that
-            actually decide what is open to you.</span>
+            <span>Year of study, money, category and where you could actually live. The things
+            that decide what is open to you.</span>
           </li>
           <li>
             <b>A ranked shortlist</b>
@@ -403,7 +429,7 @@
 
     <div class="claims-cta">
       <button type="button" class="btn btn-primary btn-lg" id="startShortBtn2">Start the three questions</button>
-      <p class="claims-note">About a minute. No account, nothing uploaded. Sixteen questions if you want the sharper version.</p>
+      <p class="claims-note">About a minute. No account, nothing uploaded. The full set takes about two, if you want the sharper version.</p>
     </div>
   </section>
 
@@ -457,6 +483,7 @@
 <!-- ══════════════════ RESULTS ══════════════════ -->
 <section class="view" id="view-results">
   <div class="wrap">
+    <div class="ooh-slot" data-ooh="results"></div>
     <div id="resultsSlot"></div>
   </div>
 </section>
@@ -469,6 +496,7 @@
       <p class="page-lede">Every programme in the database, with no profile applied. Search, filter and
       sort if you already know roughly what you are looking for.</p>
     </header>
+    <div class="ooh-slot" data-ooh="browse"></div>
     <div class="browse-tools">
       <div class="search-wrap">
         <input type="search" id="browseSearch" class="search-input"
@@ -503,6 +531,7 @@
       options across sessions, or just building a list to sit with for a few days before deciding.
       Saved in this browser only.</p>
     </header>
+    <div class="ooh-slot" data-ooh="shortlist"></div>
     <div id="shortlistSlot"></div>
   </div>
 </section>
@@ -520,6 +549,7 @@
         defeats.
       </p>
     </header>
+    <div class="ooh-slot" data-ooh="routes"></div>
     <div class="routes" id="routesGrid"></div>
   </div>
 </section>
@@ -535,6 +565,7 @@
         includes one thing you could start this week, from where you are, with what you have.
       </p>
     </header>
+    <div class="ooh-slot" data-ooh="frontiers"></div>
     <div class="frontier-grid" id="frontierGrid"></div>
   </div>
 </section>
@@ -551,6 +582,7 @@
       </p>
       <p class="reviewed" id="reviewedCal"></p>
     </header>
+    <div class="ooh-slot" data-ooh="calendar"></div>
     <div class="calendar" id="calendarGrid"></div>
   </div>
 </section>
@@ -598,6 +630,7 @@
          reduced-motion setting stills it too, and then this says so. -->
     <p class="foot-controls">
       <button type="button" class="btn btn-ghost btn-sm" id="skyToggle" aria-pressed="false">Pause the moving sky</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="oohToggle" aria-pressed="false">Hide Ooh, the guide</button>
     </p>
     <p class="foot-note foot-small reviewed" id="reviewedFoot"></p>
     <p class="foot-note foot-small">
@@ -619,8 +652,8 @@
         <li><a href="scholarships/">Scholarships</a></li>
         <li><a href="fellowships/">Fellowships</a></li>
         <li><a href="research/">Research opportunities</a></li>
-        <li><a href="india/">Funded routes inside India</a></li>
-        <li><a href="fully-funded/">Fully funded</a></li>
+        <li><a href="india/">Exposure inside India</a></li>
+        <li><a href="fully-funded/">Fully funded, abroad and at home</a></li>
         <li><a href="free/">Costs nothing</a></li>
         <li><a href="conferences/">Conferences taking student work</a></li>
         <li><a href="specialties/">Specialties and where they lead</a></li>
@@ -650,11 +683,14 @@
 <script src="assets/data-newroutes.js" defer></script>
 <script src="assets/data-2026.js" defer></script>
 <script src="assets/data-fields-2026.js" defer></script>
+<script src="assets/data-india-exposure.js" defer></script>
 <script src="assets/data-meta.js" defer></script>
 <script src="assets/data-coast.js" defer></script>
 <script src="assets/globe.js" defer></script>
 <script src="assets/space.js" defer></script>
 <script src="assets/sound.js" defer></script>
+<script src="assets/ooh.js" defer></script>
+<script src="assets/ooh-guide.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>

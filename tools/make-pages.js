@@ -84,19 +84,55 @@ const PAGES = [
   },
   {
     slug: "india",
-    title: "Research, funding and training inside India",
-    desc: "Fellowships, studentships, grants and training programmes for medical students inside India, from ICMR-STS to BIRAC, with deadlines and eligibility.",
-    h1: "What is available inside India",
-    lede: "Leaving is not the only plan, and for many people it is not the first one. These are the funded routes that do not need a visa.",
-    pick: () => items.filter((i) => i.country === "India")
+    title: "Exposure inside India for medical students: research, rural medicine, policy and free courses",
+    desc: "Research studentships from first year, a paid year in a rural hospital, NIRMAN at SEARCH Gadchiroli, a year in Parliament and free research methods courses, for Indian medical students and graduates.",
+    h1: "Get your exposure inside India",
+    lede: "Leaving is not the only plan, and for many people it is not the first one. These routes need no visa: research you can start in first year, weeks in hospitals where the nearest specialist is a day away, a year inside Parliament, national meetings where a first abstract costs a train ticket, and courses that cost nothing.",
+    ooh: ["happy", "Still in MBBS? The first two groups are open to you now. The last one is for after the degree."],
+    pick: () => items.filter((i) => i.country === "India" || (i.country === "Online" && i.indiaSpecific)),
+    groups: [
+      { h: "Research you can start during MBBS",
+        lede: "Summer fellowships, studentships and labs that take students before they graduate, most of them with a stipend.",
+        test: (i) => i.type === "research" && (i.stages || []).some((s) => s === "pre" || s === "clin") },
+      { h: "Rural and community medicine",
+        lede: "Where most of India is treated. A week of holidays, a few residential workshops, or a paid year after MBBS.",
+        ids: ["rural-hospital-electives", "nirman-search", "azim-premji-hef", "msf-india-internship"] },
+      { h: "Policy, public health and innovation",
+        lede: "Parliament, public health degrees, device design and the national hackathon: the routes into how health care is planned and built.",
+        ids: ["prs-lamp", "india-mph", "sib-biodesign", "birac-big", "smart-india-hackathon", "gdhs-symposium"] },
+      { h: "Presenting your work",
+        lede: "The ladder from your own department's research day to a national society meeting.",
+        test: (i) => i.type === "conference" || ["present-first-paper", "campus-research-culture", "networks"].indexOf(i.id) !== -1 },
+      { h: "Courses and skills, mostly free",
+        lede: "Things you can start this week without anybody's permission.",
+        test: (i) => i.type === "skill" },
+      { h: "After MBBS: fellowships, doctorates and postgraduate training",
+        lede: "The funded routes that open once you have the degree, from the India Alliance to NEET-PG.",
+        test: () => true }
+    ]
   },
   {
     slug: "fully-funded",
-    title: "Fully funded opportunities for Indian medical students",
-    desc: "Programmes that cover the full cost (tuition, stipend and often flights) for Indian medical students and graduates, with what each one actually pays.",
-    h1: "Fully funded, and what that actually means",
-    lede: "Every entry on this page is marked as full funding by its own provider. Read the money line on each: some cover tuition and living and travel, others cover tuition alone and leave you to find the rest.",
-    pick: () => items.filter((i) => i.funding === "full")
+    title: "Fully funded opportunities for Indian medical students, abroad and at home",
+    desc: "Programmes abroad and in India that cover the full cost (tuition, stipend and often flights) for Indian medical students and graduates, grouped by kind, with what each one actually pays.",
+    h1: "Fully funded, abroad and at home",
+    lede: "Every entry on this page is marked as full funding by its own provider. Abroad comes first, grouped by what you would be doing. Read the money line on each: some cover tuition and living and travel, others cover tuition alone and leave you to find the rest.",
+    ooh: ["think", "Fully funded means different things to different funders. The money line on each card says which."],
+    pick: () => items.filter((i) => i.funding === "full"),
+    groups: [
+      { h: "Abroad: masters and doctorates",
+        lede: "Degrees where someone else pays, and doctorates that pay you.",
+        test: (i) => i.country !== "India" && (i.type === "masters" || i.type === "phd") },
+      { h: "Abroad: scholarships",
+        lede: "Awards that pay for a degree you choose, usually with flights and a stipend.",
+        test: (i) => i.country !== "India" && i.type === "scholarship" },
+      { h: "Abroad: research, fellowships and everything else",
+        lede: "Summers in a lab, fellowships, training programmes and meetings that pay your way.",
+        test: (i) => i.country !== "India" },
+      { h: "Inside India",
+        lede: "The fully funded routes that need no visa.",
+        test: () => true }
+    ]
   },
   {
     slug: "free",
@@ -294,6 +330,38 @@ function frontierHTML(it) {
   </article>`;
 }
 
+/* A page with `groups` renders its entries in sections. Each entry lands in
+   exactly one: first the groups that name it by id, then the first group
+   whose test it passes. The order of `list` is the rendered order, so the
+   JSON-LD ItemList and the page agree on every position. */
+function grouped(p, list) {
+  if (!p.groups) return null;
+  const buckets = p.groups.map(() => []);
+  const placed = new Set();
+  p.groups.forEach((g, gi) => (g.ids || []).forEach((id) => {
+    const it = list.find((x) => x.id === id);
+    if (it && !placed.has(id)) { buckets[gi].push(it); placed.add(id); }
+  }));
+  list.forEach((it) => {
+    if (placed.has(it.id)) return;
+    const gi = p.groups.findIndex((g) => g.test && g.test(it));
+    if (gi === -1) throw new Error(`${p.slug}: ${it.id} fits none of the page's groups`);
+    buckets[gi].push(it); placed.add(it.id);
+  });
+  return p.groups.map((g, gi) => ({ g, items: buckets[gi] })).filter((x) => x.items.length);
+}
+
+/* Ooh's line at the top of a page, drawn at build time from the same
+   ooh.js the app uses. Static: these pages carry no JavaScript at all. */
+const OohArt = require("../assets/ooh.js");
+function oohHTML(line) {
+  if (!line) return "";
+  return `  <div class="ooh-strip ooh-static">
+    <span class="ooh-figure" aria-hidden="true"><span class="ooh-bobw"><span class="ooh-talkw">${OohArt.oohSvg({ mood: line[0], size: 72 })}</span></span></span>
+    <div class="ooh-bubble"><p class="ooh-say ooh-say-static"><span class="ooh-name" aria-hidden="true" translate="no">Ooh</span><span class="ooh-text">${esc(line[1])}</span></p></div>
+  </div>`;
+}
+
 function related(slug) {
   const others = NAV.filter((n) => n.slug !== slug);
   return others.map((n) => `<li><a href="../${n.slug}/">${esc(n.label)}</a></li>`).join("\n      ");
@@ -301,8 +369,17 @@ function related(slug) {
 
 function page(p) {
   const url = `${BASE}/${p.slug}/`;
-  const list = p.pick();
-  if (list.length < 8) throw new Error(`${p.slug}: only ${list.length} entries — too thin to publish as its own page`);
+  const picked = p.pick();
+  if (picked.length < 8) throw new Error(`${p.slug}: only ${picked.length} entries — too thin to publish as its own page`);
+  const groups = grouped(p, picked);
+  const list = groups ? groups.flatMap((x) => x.items) : picked;
+  const body = groups
+    ? groups.map((x) => `  <section class="listing-group" aria-labelledby="g-${esc(p.slug)}-${p.groups.indexOf(x.g)}">
+    <h2 class="listing-group-h" id="g-${esc(p.slug)}-${p.groups.indexOf(x.g)}">${esc(x.g.h)} <span class="listing-group-n">${x.items.length}</span></h2>
+    <p class="doc-small">${esc(x.g.lede)}</p>
+${x.items.map(p.render || entryHTML).join("\n\n")}
+  </section>`).join("\n\n")
+    : list.map(p.render || entryHTML).join("\n\n");
   const stamp = (DB.meta && DB.meta.reviewedLabel) || "";
 
   return `<!DOCTYPE html>
@@ -326,6 +403,7 @@ ${jsonld(p, url, list)}
 
   <h1>${esc(p.h1)}</h1>
   <p class="doc-lede">${esc(p.lede)}</p>
+${oohHTML(p.ooh)}
   <p class="doc-small">${list.length} of ${TOTAL} entries in this index match this page.${stamp ? ` Entries last checked against their official pages in ${esc(stamp)}; the official page linked on each one is always the authority.` : ""}</p>
 
   <p class="doc-actions">
@@ -333,7 +411,7 @@ ${jsonld(p, url, list)}
     <a class="btn btn-ghost" href="../#browse">Browse all ${TOTAL} in the app</a>
   </p>
 
-${list.map(p.render || entryHTML).join("\n\n")}
+${body}
 
   <section class="related">
     <h2>Related pages</h2>

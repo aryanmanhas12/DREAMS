@@ -163,7 +163,13 @@ const nCountries = counted.size;
 /* ── 5b. app.js must not spell counts out in words ── */
 const WORDNUM = { ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15,
                   sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 };
-const N_SPEC = DB.specialties.length, N_FRONT = DB.frontiers.length, N_Q = 16, N_CORE = 3;
+// The survey's length is counted from app.js itself (each question object
+// opens with `id:` on its own line), so trimming or adding a question can
+// never leave a stale "sixteen questions" behind.
+const qBlock = (appSrc.match(/const QUESTIONS = \[([\s\S]*?)\n  \];/) || [])[1] || "";
+const N_Q = (qBlock.match(/^\s{4}\{\s*\n\s{6}id: "/gm) || []).length;
+if (!N_Q) E("check.js could not count the survey questions in app.js; the QUESTIONS block changed shape");
+const N_SPEC = DB.specialties.length, N_FRONT = DB.frontiers.length, N_CORE = 3;
 const COUNTED = {
   "specialty route": [N_SPEC], "specialty routes": [N_SPEC],
   "route map": [N_SPEC], "route maps": [N_SPEC],

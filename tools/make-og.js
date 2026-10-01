@@ -104,9 +104,9 @@ p{font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:5
 <div id="card">
   <div>
     <p class="mark">Dream<em>Counsellor</em></p>
-    <h1>You were told there were two options.<span>This page has ${TOTAL} of them.</span></h1>
-    <p>Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the USMLE. Both are real. Neither is the whole territory. There are funded research programmes you can hold in second year, doctorates that pay you a salary, and entire scientific fields nobody mentioned once in five years of lectures.</p>
-    <p class="last">Three questions that have nothing to do with marks, then the research you do not have time to do.</p>
+    <h1>The world is full of opportunities.<span>What do you want?</span></h1>
+    <p>Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the USMLE. Both are real. Neither is the whole territory. There are funded research programmes you can hold in second year, doctorates that pay you a salary, and whole fields nobody mentioned once in five years of lectures.</p>
+    <p class="last">${TOTAL} of them in one index. Three questions that have nothing to do with marks, then a ranked plan.</p>
   </div>
   <div id="globeWrap">
     <canvas id="globeCanvas"></canvas>

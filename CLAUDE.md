@@ -33,8 +33,9 @@ Playwright and Chromium; serves the repo like Pages does).
   `window`, deliberately NOT ES modules, so `index.html` works over `file://`. `build.js`
   exists only to produce the single-file artifact bundle in `dist/` (gitignored).
 - **Script load order in `index.html` matters.** All `data-*.js` files push into `window.DB.*`;
-  `app.js` must load last, `data-coast.js` before `globe.js`, and `space.js` and `sound.js`
-  before `app.js`. Every tag is `defer` (see "Known traps"), which preserves this order.
+  `app.js` must load last, `data-coast.js` before `globe.js`, and `space.js`, `sound.js`,
+  `ooh.js` and then `ooh-guide.js` before `app.js` (the guide draws with `ooh.js`, and
+  `app.js` calls the guide). Every tag is `defer` (see "Known traps"), which preserves this order.
 - **Facts and judgements live in separate files.** `data-impact.js` holds tiers, odds and
   verdicts; the programme data files hold facts. Anyone forking should be able to disagree
   with a tier without touching data. Keep them separate.
@@ -168,9 +169,9 @@ Playwright and Chromium; serves the repo like Pages does).
 - **Wait for `load`, not `domcontentloaded`, on the generated category pages.** They carry **no JavaScript at all**, and `DOMContentLoaded` does not wait for a stylesheet unless a script follows it — with no script, nothing holds it, so the probe can run against a completely unstyled page. That reported **175 contrast failures at 1.00:1** with links at `rgb(0, 0, 238)`, the browser default blue, which reads exactly like the stylesheet having been deleted. It had not been. `pagecheck.js` now waits for `load` AND re-checks that `document.styleSheets[0].cssRules` is populated and `body` has a real background, so a stylesheet that genuinely 404s still fails instead of quietly passing on the same condition. Verified by hiding `styles.css` and watching it fail, then restoring it.
 - **Tap-target checks must probe `elementFromPoint`, not `getBoundingClientRect`.** The rect is the *visual* box and cannot see the `::after` that takes the topbar controls to 44px. Measuring the rect reports `36×36` on a button that is genuinely fine — a seventh false failure of the same family. Probe ±21px in all four directions and only report if a probe misses.
 - **Seed `dc-tour-seen` before every Playwright load, or every click times out.** The tour auto-opens on a first visit, and *every fresh browser context is a first visit* — so it drops a modal scrim over the page and each click fails with "subtree intercepts pointer events", which reads exactly like a broken button and is not one. Use `ctx.addInitScript(() => localStorage.setItem("dc-tour-seen","1"))` so the run tests the returning-visitor page. The tour has its own harness (`tour.js`); do not exercise it by accident anywhere else.
-- **The survey has two lengths, and `#startBtn` is now the SHORT one.** Three questions (skill/anger/flow) or all sixteen; `#startFullBtn` starts the long run and `#continueFullBtn` on the results page upgrades a short run in place, resuming at question 4. A harness that only clicks `#startBtn` therefore tests three questions and 44 result cards, not sixteen and 50 — that is correct behaviour, not a regression. Test all three paths (short, upgrade, full) or you are covering a third of the flow.
+- **The survey has two lengths, and `#startBtn` is now the SHORT one.** Three questions (skill/anger/flow) or the full set; `#startFullBtn` starts the long run and `#continueFullBtn` on the results page upgrades a short run in place, resuming at question 4. A harness that only clicks `#startBtn` therefore tests three questions and 44 result cards, not the full set and 50, which is correct behaviour, not a regression. Test all the paths (short, upgrade, full, and full while staying in India) or you are covering a fraction of the flow.
 - **Rank on the defaults, speak only from `p.asked`.** `buildProfile` fills every constraint with a default so ranking still works on a three-question run. The prose must not. Saying "You told me you cannot pay" to someone never asked about money is a fabrication, and it is the precise failure this site exists to avoid — so every attributed sentence in `counsellorRead` is guarded on `p.asked.<id>`. The guards belong in `counsellorRead` ONLY; adding them to `score()` or `rankCountries()` breaks short-mode ranking entirely.
-- **The survey is 16 questions, not 14.** A completion loop that stops early reports "never reached results" — a harness limit that looks exactly like a dead end in the flow. Give it headroom and assert on `#view-results.is-active`.
+- **Since October 2026 the full survey is 9 questions, or 8.** `living` carries a `when` that skips it for a reader who answered "I want to build something here", so the count depends on an earlier answer: `survey.js` runs both and expects 9 and 8. A completion loop that stops early reports "never reached results", a harness limit that looks exactly like a dead end in the flow, so give it headroom and assert on `#view-results.is-active`. `check.js` counts the questions from `app.js` itself, so prose like "sixteen questions" fails the build the moment it is stale.
 
 - **Always scope selectors.** `[data-goto="x"]` matches several elements across views, some
   hidden. Use `#topnav .navlink[data-goto="x"]`.
@@ -224,7 +225,8 @@ Playwright and Chromium; serves the repo like Pages does).
   - `--ok` aurora (open, funded, free), `--warn` amber (opening soon).
   - `--globe` violet graticule, `--star` the globe's dots, `--starlight` the sky's stars,
     `--nebula-a` / `--nebula-b` the two clouds.
-  - `--note` / `--note-line`: the counsellor's speech bubbles.
+  - `--ooh-paper` / `--ooh-ink` / `--ooh-gold` / `--ooh-mouth`: Ooh's speech bubble, the same in
+    both themes and in all three apps. `--note` / `--note-line` remain for the mark fallback.
   Every text pair is AA in both themes. `--ink-3` was raised (space #B8ADE0, daylight
   #54497F) so it still clears 4.5:1 over the brightest patch of sky; see `tools/test/sky.js`.
 - **The user overrode several of the earlier design rules for the galaxy, deliberately.** They
@@ -249,7 +251,7 @@ Playwright and Chromium; serves the repo like Pages does).
   3px `--r`.** Desktop used to square the hero buttons while phones and the large CTA were
   round, so one button changed shape at 760px; the menu button was a 3px square beside two
   round buttons until the September 2026 pass. The exceptions are deliberate and are the
-  things you handle: programme cards (20px, double-bezel) and speech bubbles (18px).
+  things you handle: programme cards (20px, double-bezel) and Ooh's speech bubbles (20px).
 - **Template tells removed in the Marigold redesign; still out under the galaxy.** All-caps
   tracked labels (26 rules), eyebrow labels above headings, an italic or coloured phrase
   inside the headline, coloured left-edge stripes on panels and a status stripe on cards,
@@ -315,8 +317,9 @@ Playwright and Chromium; serves the repo like Pages does).
   changes anything and would test space twice and daylight never. `pages.js` runs one pass,
   because the script-free pages can only ever show space. Seed `dc-sound-told` wherever a
   harness probes the top of the page, or the one-time bubble covers what it measures.
-- **Speech bubbles** (`.q-say`, `.read-main > .say`, `.bubble-toast`) are rounder than
-  surfaces (18px against 3px) on purpose: a voice, not a panel. Notices dock under the top
+- **Speech bubbles** (`.q-say`, `.read-main > .say`, `.bubble-toast`, `.ooh-say`) are Ooh's
+  paper since October 2026, rounder than surfaces (20px against 3px) on purpose: a voice,
+  not a panel. Notices dock under the top
   bar, never at the bottom, where the survey's Continue button would be under them. Removing a
   saved programme is the destructive direction, so it gets an Undo bubble.
 
@@ -443,6 +446,106 @@ What measurement taught in this pass:
   so the idle-spin timer is not the cost; the remaining gap sits inside this machine's spread
   and was not isolated to one effect. Re-measure with three runs before claiming a direction.
 
+## Ooh, the shorter survey and the India pages (1 October 2026)
+
+The user asked for: the headline "The world is full of opportunities." with the question "What
+do you want?"; good, researched answers to it; the 16-question survey trimmed as far as it
+will go and made interesting; Ooh, the guide from their apps Ronak (aryanmanhas12/Psych) and
+Arun (aryanmanhas12/Well-beings), with the same bubbles and sounds; and a special page for
+exposure inside India plus the abroad fully funded one.
+
+- **Ooh comes from the sister apps and is not redrawn here.** `assets/ooh.js` is their
+  `ooh.mjs` (byte-identical between Arun's `lib/ooh.mjs` and Ronak's root) with only the
+  `export` keywords removed and a wrapper that sets `window.OohArt` and `module.exports`.
+  This site must work from `file://`, where a browser refuses ES module imports, which is
+  the whole reason it is not the `.mjs`. Change the drawing in Arun, copy it to Ronak, then
+  regenerate this file; its header records the source hash.
+- **`assets/ooh-guide.js` is Ronak's `companion.js`, cut down.** A view's first visit gets
+  Ooh's full lines typed into the bubble with the `typing` blip (pitch follows the mood);
+  later visits get one line; × tucks Ooh into a corner button that brings the line back.
+  Lines live in `OOH_LINES` in `app.js`: 120 characters or fewer, no em dashes, and nothing
+  that implies anyone is watching or waiting (the sister apps' rules). It is a fixed script
+  and the page says so; never present it as an AI.
+- **Ooh asks the survey questions** (the figure replaces the little globe; the title is
+  typed, but the whole title is in the `<h2>` from the first frame as typed + rest spans, so
+  focus lands on a complete heading), **answers "What do you want?"** in the hero (six chips,
+  each with a reply whose every number is counted from the index when it is said, and real
+  buttons onward that appear at once rather than after the typing), and **says one line at
+  the top of each view**. No corner Ooh on the intro or the survey, where Ooh already is,
+  or while the tour has `body.tour-locked`.
+- **Sounds: the sister apps' 17 CC0 uisfx files** in `assets/sounds/` (about 120 KB),
+  fetched after the first tap, never precached. They play only while `DCSound.isOn()`, so
+  the one speaker button silences the galaxy and Ooh together. Taps that already answer
+  with a galaxy effect (an answer, Continue, saving a card) are skipped, so no tap makes two
+  sounds, and changing view no longer plays the galaxy "orbit" because the tap already has
+  its cue. Over `file://` the fetch is refused, so Ooh is silent there by design.
+- **"Hide Ooh, the guide" in the footer** sets `html.ooh-off`; the survey falls back to the
+  globe mark and the hero keeps the reply text without the figure.
+- **Every speech bubble is Ooh's paper now** (`--ooh-paper`, `--ooh-ink`, `--ooh-gold`,
+  `--ooh-mouth`, identical in both themes). Two contrast bugs this caused, both caught by
+  looking at screenshots before any test ran, and both the same trap: **an older, later
+  rule still set the colour the new bubble had replaced.** `.q-say .q-help { background:
+  var(--surface) }` put plum ink on the dark surface, and `.read-main > .say { color:
+  var(--ink) }` put lavender text on cream. When a component's palette changes, grep every
+  rule that names it, not just the one you are editing.
+- **The contrast sweep reads a background from the element or its ancestors**, so Ooh's ×
+  (absolutely positioned over a sibling's paper) measured 1.16:1 against the page. The fix
+  was structural, not a test exception: `.ooh-bubble` itself carries the paper at the same
+  radius, so the × sits on paper by the DOM as well as by eye.
+- **The dock watches `body`'s class, never `hidden` attributes across the subtree.** The
+  first version observed `hidden` everywhere and set the dock's own `hidden` from the
+  callback; re-setting an attribute to the same value still queues a mutation, which is an
+  infinite microtask loop. Write only on change, and observe something the callback does
+  not touch.
+- **The survey went from 16 questions to 9.** The three core questions keep their wording
+  with 8 options each (from 17 or 18): merged options carry the union of their old fields,
+  so no ranking signal was lost. Stage, money, leaving India and category stay;
+  climate, health and what you need around you became one multi-choice `living` (skipped
+  for anyone staying in India); record and passport/test became `have`; age, time, timeline
+  and named countries went, because each moved a handful of entries at most. `buildProfile`
+  unpacks `living` and `have` into the fields `score()` and `rankCountries()` always read,
+  and still reads the old answers, and `LEGACY` maps every merged option value, so a plan
+  link saved before the trim reopens with the same results.
+- **The survey talks back.** Under each question `liveLine()` says, from the live ranking,
+  what the answers so far point at (fields), how many programmes are open at your stage,
+  how many cost nothing, which country fits how you want to live, or your top pick right
+  now. It is computed on every tap, so it can never be a canned compliment. It also exposed
+  an older false sentence: the read told a first-year SC student the National Overseas
+  Scholarship was "at the top of your list" when the ranking put it lower (it funds a
+  postgraduate degree). That sentence now follows the real rank.
+- **Only asked answers are shown as the reader's.** The results rail used to list time,
+  timeline and paperwork from defaults; it now shows only what was answered, and marks an
+  unasked stage as "Assumed". Same rule as `p.asked` in the prose.
+- **The hero.** `h1` "The world is full of opportunities." then `.hero-ask` "What do you
+  want?" (outside the `h1`, so the headline carries no accent phrase), the chips with Ooh,
+  then the buttons, then the lede with the count. On a phone the lede and the globe now
+  follow the buttons, which put the primary button at y=558 of 844 (it was 674 before this
+  round). On desktop `grid-template-areas` puts the lede above the buttons; it holds no
+  links, so tab order is unaffected.
+- **Five new India entries** in `assets/data-india-exposure.js`, each read on its official
+  page on 30 September and 1 October 2026: the Azim Premji Health Equity Fellowship (MBBS
+  track ₹40,000 a month plus ₹1.2 lakh, postgraduate track ₹60,000 plus ₹2.4 lakh; both 2026
+  calls closed, so `noOpenCall`), PRS's LAMP Fellowship (25 or under, any bachelor's,
+  ₹23,000 a month, applications in December), NIRMAN at SEARCH Gadchiroli (18 to 29, rolling,
+  about ₹2,100 a workshop with waivers), ICMR-NIE's research methods courses (the official
+  FAQ says MBBS students cannot take the BCBR and sends them to Health Research
+  Fundamentals), and arranging a rural hospital elective (SEWA Rural's page asks Indians to
+  email). **Deliberately not added:** SBI Youth for India (its site hides an "update about
+  the programme" notice that could not be read) and the NITI Aayog internship (its page
+  refuses every non-browser fetch, so eligibility for MBBS students could not be confirmed).
+- **Category pages can be grouped.** A page in `make-pages.js` may carry `groups` (named by
+  `ids`, then by the first matching `test`) and an `ooh` line, drawn at build time from
+  `ooh.js` into a static bubble on a page with no JavaScript. `/india/` is now "Get your
+  exposure inside India" in six groups, and `/fully-funded/` puts abroad first in three
+  groups, with India last. The JSON-LD list is built in rendered order, and an entry that
+  fits no group throws instead of vanishing.
+- **Measured after this round** (Lighthouse mobile, three runs each, same session): the
+  published build and this one both score **89** median, CLS **0.000** for both, TBT 181ms
+  and 146ms. Simulated LCP rose from 2.6s to 3.4s; the OBSERVED LCP equals FCP at about
+  0.2s in both, so the gap is the simulation's model charging the three new deferred
+  scripts (22 KB), and the LCP element is now `.hero-choice-note`, the largest text block
+  on the first screen since the lede moved below the buttons.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this
@@ -463,7 +566,7 @@ audited.**
 | 9 | Sitemap + robots.txt | Both at the repo root. `sitemap.xml` is **regenerated by `tools/make-pages.js`** and lists 14 canonical URLs (home, 11 category pages, privacy, terms), so it cannot name a page that does not exist. `robots.txt` disallows `/dist/`, `/tools/` and `/sw.js` and points at the sitemap. `llms.txt` sits beside them. |
 | 10 | Alt text on images | No `<img>` elements at all; the globe is a `<canvas>` with `role="img"` and an `aria-label`, and `og:image:alt` is set. |
 | 11 | Compress images | og-image went 335KB → ~195KB when it stopped being a 2x render. Since the galaxy, `make-og.js` **throws if any card passes 300 KB** (WhatsApp drops larger previews). Chrome dithers gradients and PNG compresses dither worst: the full sky took cards to ~830 KB, and even a stars-only Milky Way cost ~110 KB, so cards carry the twinkling stars, ONE cloud, the spiral galaxy and the globe, and no Milky Way (homepage card ~238 KB). The card's sky CSS is read out of `styles.css` itself, so it cannot drift. Icons are checked by `tools/make-icons.js` at `deviceScaleFactor: 1`. |
-| 12 | Page load speed | CSS is render-blocking and scripts are `defer` (see Known traps: the non-blocking CSS was the CLS 0.563 defect). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured (30 Sep 2026, three runs, after the craft pass): homepage performance **88** median (88-91), CLS **0.000**, TBT ~200ms; the commit before it measured 92-93. Runner pattern and flags in "Mobile performance". |
+| 12 | Page load speed | CSS is render-blocking and scripts are `defer` (see Known traps: the non-blocking CSS was the CLS 0.563 defect). **Lighthouse is not installed in this sandbox; `npm install lighthouse` into the scratchpad works and takes about a minute.** Serve over HTTP with gzip on text (a `file://` or uncompressed run measures the wrong thing). Last measured (1 Oct 2026, three runs, after Ooh): homepage performance **89** median (84-89), CLS **0.000**, TBT ~150ms, observed LCP = FCP (~0.2s); the published build before it measured 89 in the same session. Runner pattern and flags in "Mobile performance". |
 | 13 | Colour contrast | `tools/test/audit.js` sweeps AA across 6 viewports × 2 themes on the app; `tools/test/pages.js` does the same over the 11 generated pages plus the 404, at 4 widths in the one theme they can show. `audit.js`'s `fieldEdgeCheck` holds editable fields to 3:1 non-text contrast (WCAG 1.4.11): the search box, sort menu and free-text box had sat at 1.3-1.6:1 in both themes until the Design plugin's accessibility-review checklist named the criterion. Both selector lists are whitelists and rot — add new components in the same change. `tools/test/sky.js` checks text against the painted sky, which neither of the others can see. Lighthouse scores accessibility **100**. |
 | 14 | Mobile friendly | `tools/test/audit.js` covers 320–1280 on the app and `tools/test/pages.js` covers the generated pages, both asserting no horizontal scroll, ≥44px targets probed via `elementFromPoint`, and a visible focus ring on the first Tab. |
 | 15 | Custom 404 | `404.html`; Pages serves it automatically with a real 404 status (verified live). Links are absolute `/DREAMS/...` because Pages serves it from any depth, and it carries the category nav. |
@@ -471,7 +574,7 @@ audited.**
 | 17 | Form validation | The only inputs are the survey and search, all client-side with no submission. Nothing to validate server-side. |
 | 18 | Spam protection | No forms post anywhere, so there is no attack surface. |
 | 19 | Analytics | **Deliberately absent.** The site's central promise is "nothing is uploaded", and `privacy.html` states it. Adding third-party analytics would make both false. If it is ever wanted, say so on the privacy page *before* shipping it, and prefer a cookieless self-hosted count. |
-| 20 | One clear call to action | "Answer the three questions" is the single primary button (sentence case, like every other button, since the design-critique pass); everything else in the hero is a ghost button. |
+| 20 | One clear call to action | "Answer the three questions" is the single primary button (sentence case, like every other button, since the design-critique pass); everything else in the hero is a ghost button, and so are Ooh's onward buttons under "What do you want?". |
 
 **The lesson worth keeping from the first run of this list:** the three real
 defects it caught were all things no automated check could see — a share card

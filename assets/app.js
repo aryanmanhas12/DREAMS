@@ -48,254 +48,168 @@
   const MONTHS = ["January","February","March","April","May","June",
                   "July","August","September","October","November","December"];
 
-  /* ───────────────── the survey ───────────────── */
+  /* ───────────────── the survey ─────────────────
+     Trimmed in October 2026 from 16 questions and up to 18 options
+     each to three core questions of eight options and six short practical
+     ones. Nothing the ranking uses was dropped: merged options carry the
+     union of their old fields, and the questions folded together (climate,
+     health and what you need around you into `living`; record and passport
+     into `have`) are unpacked again in buildProfile. Age, time, timeline and
+     named countries went, because each moved the list for a handful of
+     entries at most. `ooh` is the mood Ooh asks the question in; `when`
+     skips a question that cannot apply, so a reader staying in India is
+     never asked how they would cope with a Swedish winter. */
   const QUESTIONS = [
     {
-      id: "skills", act: "Question one of three", type: "multi", free: true,
+      id: "skills", ooh: "hello", act: "Question one of three", type: "multi", free: true,
       title: "What do people come to you for?",
-      help: "Not what you score well in. What people actually knock on your door about — the thing you do so easily you have stopped noticing it is a skill. <em>Pick everything that is true.</em>",
-      placeholder: "In your own words — what do people ask you for?",
+      help: "Not what you score well in. What people actually knock on your door about: the thing you do so easily you have stopped noticing it is a skill. <em>Pick everything that is true.</em>",
+      placeholder: "In your own words, what do people ask you for?",
       options: [
-        { v: "execute",  t: "Getting things actually done",       d: "You are the one who finishes it", f: ["systems"] },
-        { v: "findopps", t: "Knowing where the opportunities are", d: "People ask you what to apply for", f: ["global"] },
-        { v: "lead",     t: "Leading and speaking",               d: "Rooms where communication carries weight", f: ["systems","global"] },
-        { v: "listen",   t: "Listening when someone falls apart", d: "People tell you things they tell nobody else", f: ["psych","clinical"] },
-        { v: "explain",  t: "Explaining hard things simply",      d: "You are the one who makes it click", f: ["global","pubhealth"] },
-        { v: "build",    t: "Building or fixing things",          d: "Code, tools, systems, machines", f: ["compbio"] },
-        { v: "numbers",  t: "Numbers and spotting patterns",      d: "You see the thing in the data", f: ["compbio","pubhealth"] },
-        { v: "write",    t: "Writing",                            d: "People send you their drafts", f: ["global"] },
-        { v: "calm",     t: "Staying calm when it goes wrong",    d: "You are who they want in an emergency", f: ["clinical"] },
-        { v: "connect",  t: "Introducing people to each other",   d: "You are the node in the network", f: ["global","systems"] },
-        { v: "hands2",   t: "Anything needing steady hands",      d: "Sutures, cannulas, the fiddly practical thing", f: ["clinical","onco"] },
-        { v: "detail",   t: "Catching what everyone else missed", d: "The error on page four; the sign nobody examined for", f: ["clinical","pubhealth"] },
-        { v: "reliable", t: "Being the one who never drops it",   d: "If you said you would, it is done", f: ["systems","clinical"] },
-        { v: "mediate",  t: "Getting people who disagree to agree", d: "You are who they send into the difficult conversation", f: ["systems","global"] },
-        { v: "memory",   t: "Remembering things nobody wrote down", d: "Facts, faces, who said what in which meeting", f: ["clinical","biochem"] },
-        { v: "make",     t: "Making things look and feel right",  d: "Design, layout, the aesthetics of a thing", f: ["global","compbio"] },
-        { v: "comfort",  t: "Making frightened people feel safe", d: "Children, the very ill, families in a corridor", f: ["clinical","psych","repro"] }
+        { v: "execute",  t: "Getting things done",                 d: "You finish it, and people know you will", f: ["systems", "clinical"] },
+        { v: "findopps", t: "Knowing people and openings",         d: "Who to ask, what to apply for, who should meet whom", f: ["global", "systems"] },
+        { v: "lead",     t: "Leading a room",                      d: "Speaking, organising, getting people who disagree to agree", f: ["systems", "global"] },
+        { v: "listen",   t: "Listening when someone falls apart",  d: "People tell you what they tell nobody else", f: ["psych", "clinical", "repro"] },
+        { v: "explain",  t: "Explaining and writing",              d: "You make hard things click, on paper or out loud", f: ["global", "pubhealth"] },
+        { v: "build",    t: "Building things",                     d: "Code, tools, designs: something that works when you are done", f: ["compbio"] },
+        { v: "numbers",  t: "Numbers, and the detail others miss", d: "The pattern in the data, the error on page four", f: ["compbio", "pubhealth", "clinical", "biochem"] },
+        { v: "calm",     t: "Steady hands and a calm head",        d: "The one they want when it goes wrong", f: ["clinical", "onco"] }
       ]
     },
     {
-      id: "anger", act: "Question two of three", type: "multi", free: true,
+      id: "anger", ooh: "listen", act: "Question two of three", type: "multi", free: true,
       title: "What angers you about this world?",
-      help: "Anger is the most reliable compass anyone has. The thing that makes you furious at 2 a.m. is the thing you will still care about in fifteen years, when the prestige has worn off. <em>Be honest rather than noble.</em>",
+      help: "Anger is the most reliable compass anyone has. The thing that makes you furious at 2 a.m. is the thing you will still care about in fifteen years. <em>Be honest rather than noble.</em>",
       placeholder: "What actually makes you angry?",
       options: [
-        { v: "stigma",   t: "Mental illness treated as weakness",        d: "Stigma, silence, and families who will not name it", f: ["psych","global"] },
-        { v: "prevent",  t: "People dying of things we know how to stop", d: "The gap between the guideline and the ward", f: ["pubhealth","infect","global"] },
-        { v: "money",    t: "Healthcare only for those who can pay",     d: "Care rationed by bank balance", f: ["pubhealth","systems","global"] },
-        { v: "caste",    t: "Caste and class deciding who lives",        d: "Whose body counts as worth studying", f: ["pubhealth","genomics","global"] },
-        { v: "women",    t: "Women's health treated as a footnote",      d: "Half the population, a fraction of the research", f: ["repro","pubhealth"] },
-        { v: "eurocent", t: "Science built entirely on other populations", d: "Every model trained somewhere that is not here", f: ["genomics","compbio"] },
-        { v: "systemic", t: "Corruption and systems that do not work",    d: "Drains that flood, files that vanish", f: ["systems","global"] },
-        { v: "climate",  t: "Air, heat and a poisoned environment",       d: "The health cost nobody counts", f: ["env","pubhealth"] },
-        { v: "unsolved", t: "Diseases nobody has solved yet",             d: "We still do not know what schizophrenia is", f: ["biochem","neuro","genomics","onco"] },
-        { v: "misinfo",  t: "Confident nonsense drowning out evidence",   d: "Misinformation as a health emergency", f: ["global","pubhealth"] },
-        { v: "mentor",   t: "Talent wasted for lack of a single mentor",  d: "Brilliant people with nobody to open a door", f: ["global","systems"] },
-        { v: "rural",    t: "Travelling 200 km for something basic",      d: "Where you live deciding whether you are treated", f: ["pubhealth","systems","global"] },
-        { v: "doctors",  t: "How the system treats its own doctors",      d: "Violence on duty, unpaid stipends, burnout as a rite of passage", f: ["systems","psych"] },
-        { v: "children", t: "Children dying of things a vaccine prevents", d: "Solved problems that keep killing anyway", f: ["repro","infect","pubhealth"] },
-        { v: "elderly",  t: "Old people quietly abandoned",               d: "By families, by wards, by the whole design of care", f: ["clinical","psych"] },
-        { v: "pain",     t: "How little we still understand pain",        d: "Dismissed, undertreated, barely measured", f: ["neuro","clinical"] },
-        { v: "paywall",  t: "Knowledge locked behind paywalls",           d: "Research that Indian institutions cannot afford to read", f: ["global","compbio"] },
-        { v: "quack",    t: "Untrained people treating the desperate",    d: "Because nothing real was within reach or affordable", f: ["pubhealth","systems"] }
+        { v: "stigma",   t: "Mental illness treated as weakness",       d: "Stigma, silence, and families who will not name it", f: ["psych", "global", "clinical"] },
+        { v: "prevent",  t: "People dying of things we can stop",       d: "Vaccines, TB, the gap between the guideline and the ward", f: ["pubhealth", "infect", "global", "repro"] },
+        { v: "money",    t: "Care that depends on money or where you live", d: "Caste, class, and 200 km for something basic", f: ["pubhealth", "systems", "global", "genomics"] },
+        { v: "women",    t: "Women's health treated as a footnote",     d: "Half the population, a fraction of the research", f: ["repro", "pubhealth"] },
+        { v: "systemic", t: "Systems that fail, doctors included",      d: "Files that vanish, violence on duty, burnout as a rite of passage", f: ["systems", "psych"] },
+        { v: "climate",  t: "Air, heat and a poisoned environment",     d: "The health cost nobody counts", f: ["env", "pubhealth"] },
+        { v: "unsolved", t: "Diseases nobody has solved",               d: "Schizophrenia, pain, cancers, in people nobody has studied", f: ["biochem", "neuro", "genomics", "onco", "compbio", "clinical"] },
+        { v: "misinfo",  t: "Knowledge kept from people",               d: "Confident nonsense, paywalls, and talent with no mentor", f: ["global", "pubhealth", "compbio", "systems"] }
       ]
     },
     {
-      id: "flow", act: "Question three of three", type: "multi", free: true,
+      id: "flow", ooh: "ooh", act: "Question three of three", type: "multi", free: true,
       title: "What makes time stop?",
-      help: "The task where you look up and three hours have gone. Treat that as data rather than mood. It tells you which <em>method</em> you belong in, regardless of which subject you love.",
+      help: "The task where you look up and three hours have gone. Treat that as data rather than mood. It tells you which <em>method</em> you belong in, whatever subject you love.",
       placeholder: "When did you last lose track of time completely?",
       options: [
-        { v: "building", t: "Building something that works",       d: "Code, a tool, a thing that runs", f: ["compbio"] },
-        { v: "reading",  t: "Falling down a paper at 1 a.m.",      d: "One citation leads to the next", f: ["biochem","neuro","genomics"] },
-        { v: "patient",  t: "A proper conversation with a patient", d: "The history nobody else took", f: ["clinical","psych"] },
-        { v: "teaching", t: "Teaching someone until they get it",   d: "The moment their face changes", f: ["global","pubhealth"] },
-        { v: "organis",  t: "Organising something into existence",  d: "An event, a drive, a team", f: ["systems","global"] },
-        { v: "writing",  t: "Writing until the argument is right",  d: "Sentence by sentence", f: ["global"] },
-        { v: "hands",    t: "Working with my hands in a lab",       d: "Pipettes, slides, protocols", f: ["biochem","genomics"] },
-        { v: "data",     t: "Finding the pattern in a dataset",     d: "The plot that finally makes sense", f: ["compbio","pubhealth"] },
-        { v: "arguing",  t: "Arguing an idea out with someone",     d: "Until one of you changes your mind", f: ["global","systems"] },
-        { v: "designing",t: "Designing a study properly",           d: "Sample size, controls, confounders", f: ["pubhealth","compbio"] },
-        { v: "procedure",t: "Repeating a procedure until it is clean", d: "Until your hands know it without you", f: ["clinical","onco"] },
-        { v: "sitting",  t: "Sitting with someone who is frightened", d: "Not fixing anything — just staying", f: ["psych","clinical"] },
-        { v: "takeapart",t: "Taking something apart to see how it works", d: "A machine, a pathway, an argument", f: ["biochem","genomics","compbio"] },
-        { v: "curious",  t: "Reading with no exam attached to it",   d: "Down a rabbit hole nobody assigned", f: ["neuro","biochem","genomics"] },
-        { v: "team",     t: "Getting a group to actually function",  d: "The rota works, everyone knows their part", f: ["systems","global"] },
-        { v: "making",   t: "Making something with my hands",        d: "Drawing, cooking, building, playing an instrument", f: ["clinical","compbio"] },
-        { v: "outdoors", t: "Being out in the field, not the building", d: "Villages, camps, sites, households", f: ["pubhealth","global","env"] }
+        { v: "building", t: "Building or taking things apart", d: "Code, a machine, a pathway, an argument", f: ["compbio", "biochem", "genomics"] },
+        { v: "reading",  t: "A paper at 1 a.m.",               d: "One citation leads to the next, with no exam attached", f: ["biochem", "neuro", "genomics"] },
+        { v: "patient",  t: "A real conversation with a patient", d: "The history nobody else took, or staying with someone frightened", f: ["clinical", "psych"] },
+        { v: "teaching", t: "Teaching, writing, arguing it out", d: "Until it clicks for them, or one of you changes your mind", f: ["global", "pubhealth", "systems"] },
+        { v: "organis",  t: "Getting a group to work",         d: "An event, a drive, a rota that finally holds", f: ["systems", "global"] },
+        { v: "hands",    t: "Hands at work",                   d: "A lab bench or a procedure, until your hands know it", f: ["biochem", "genomics", "clinical", "onco"] },
+        { v: "data",     t: "The pattern in a dataset",        d: "Designing the study, then the plot that finally makes sense", f: ["compbio", "pubhealth"] },
+        { v: "outdoors", t: "Out in the field",                d: "Villages, camps and households, away from the building", f: ["pubhealth", "global", "env"] }
       ]
     },
     {
-      id: "stage", act: "Where you are", type: "single",
+      id: "stage", ooh: "think", act: "Where you are", type: "single",
       title: "Where are you right now?",
-      help: "This is the single hardest filter. Several of the best programmes on this site are open <em>only</em> to students in the first two years and close permanently afterwards.",
+      help: "The hardest filter there is. Some programmes take only current MBBS students and close the day you graduate.",
       options: [
-        { v: "pre",    t: "1st or 2nd professional MBBS", d: "The widest window you will ever have" },
-        { v: "clin",   t: "3rd or final professional MBBS", d: "International research internships open up here" },
-        { v: "intern", t: "Internship year", d: "Experience starts counting toward the big scholarships" },
-        { v: "grad",   t: "MBBS complete", d: "Masters, funded PhDs and residency routes all open" },
-        { v: "pg",     t: "Post-MD / MS / DNB", d: "Fellowships and independent research funding" }
+        { v: "pre",    t: "1st or 2nd professional",  d: "The widest window you will ever have" },
+        { v: "clin",   t: "3rd or final professional", d: "International research internships open up" },
+        { v: "intern", t: "Internship year",           d: "Experience starts counting" },
+        { v: "grad",   t: "MBBS done",                 d: "Masters, funded PhDs and residency routes" },
+        { v: "pg",     t: "MD, MS or DNB done",        d: "Fellowships and your own research funding" }
       ]
     },
     {
-      id: "age", act: "Where you are", type: "single",
-      title: "How old are you?",
-      help: "Several major scholarships have hard age ceilings that nobody mentions until you are already invested — Rhodes, MEXT, Inlaks and the national overseas schemes all cap.",
-      options: [
-        { v: "u21", t: "Under 21", d: "Every age-capped scheme is open to you" },
-        { v: "2124", t: "21 to 24", d: "Rhodes and Inlaks still within reach" },
-        { v: "2529", t: "25 to 29", d: "Rhodes closes; most others remain open" },
-        { v: "3034", t: "30 to 34", d: "MEXT and Swiss schemes still open" },
-        { v: "35p", t: "35 or older", d: "Focus on merit-based and fellowship routes" }
-      ]
-    },
-    {
-      id: "money", act: "What is actually possible", type: "single",
+      id: "money", ooh: "care", act: "What is possible", type: "single",
       title: "Be honest about money.",
-      help: "This changes the entire answer, and there is no wrong reply. Roughly a third of everything indexed here costs nothing at all and pays for your travel. If money is tight, that is a filter, not a disqualification.",
+      help: "This changes the whole answer, and there is no wrong reply. If money is tight, that is a filter, not a disqualification.",
       options: [
-        { v: "none",    t: "I cannot pay anything", d: "Show me only what is free or fully funded, including travel" },
-        { v: "small",   t: "I could find ₹1–3 lakh", d: "Exam fees, applications, maybe a short trip" },
-        { v: "loan",    t: "I would take an education loan", d: "Show me the arithmetic honestly too" },
-        { v: "family",  t: "My family can support a degree abroad", d: "Full range, funded routes still preferred" }
+        { v: "none",   t: "I cannot pay anything",           d: "Only what is free or fully funded" },
+        { v: "small",  t: "I could find ₹1 to 3 lakh",       d: "Fees, applications, maybe a short trip" },
+        { v: "loan",   t: "I would take an education loan",  d: "Show me the arithmetic too" },
+        { v: "family", t: "My family can back a degree abroad", d: "The full range, funded routes still first" }
       ]
     },
     {
-      id: "category", act: "What is actually possible", type: "single",
+      id: "abroad", ooh: "think", act: "What is possible", type: "single",
+      title: "Do you want to leave India?",
+      help: "There is a real answer here that is not yes. NIMHANS, AIIMS, IISc and NCBS produce work cited worldwide, and the India Alliance funds clinicians to lead research without a doctorate.",
+      options: [
+        { v: "yes",    t: "Yes, that is the plan",          d: "Show me the world" },
+        { v: "funded", t: "Only if someone else pays",      d: "Fully funded routes only" },
+        { v: "short",  t: "Short trips, not moving",        d: "Summer programmes, exchanges, conferences" },
+        { v: "india",  t: "I want to build something here", d: "Routes inside India, and Indian funding" },
+        { v: "unsure", t: "I do not know yet",              d: "Show me both" }
+      ]
+    },
+    {
+      id: "category", ooh: "listen", act: "What is possible", type: "single",
       title: "Do any of these apply to you?",
-      help: "Asked only because the Government of India runs fully-funded overseas scholarships for specific categories that go <em>unclaimed</em> most years. Skip if you would rather not say — nothing is stored anywhere.",
+      help: "Asked only because the Government of India runs fully funded overseas scholarships for specific categories, and places can go unfilled. Nothing is stored anywhere.",
       options: [
-        { v: "sc",   t: "Scheduled Caste / DNT / landless labourer family", d: "National Overseas Scholarship — full funding, under-subscribed" },
-        { v: "st",   t: "Scheduled Tribe", d: "Ministry of Tribal Affairs overseas scheme, ~20 awards a year" },
-        { v: "obc",  t: "OBC / EWS / minority community", d: "Loan interest subsidy and national fellowships" },
-        { v: "gen",  t: "None of these", d: "Everything else on this site still applies" },
-        { v: "skip", t: "Prefer not to say", d: "" }
+        { v: "sc",  t: "Scheduled Caste, DNT or landless labourer family", d: "The National Overseas Scholarship funds a full degree abroad" },
+        { v: "st",  t: "Scheduled Tribe",                d: "The Ministry of Tribal Affairs overseas scheme" },
+        { v: "obc", t: "OBC, EWS or a minority community", d: "Loan interest subsidy and national fellowships" },
+        { v: "gen", t: "None of these, or I would rather not say", d: "Everything else here still applies" }
       ]
     },
     {
-      id: "abroad", act: "What is actually possible", type: "single",
-      title: "Do you actually want to leave India?",
-      help: "There is a real answer here that is not 'yes'. NIMHANS, AIIMS, IISc and NCBS produce internationally cited work, and India Alliance funds clinicians to lead their own research without a doctorate.",
+      id: "living", ooh: "care", act: "Living abroad", type: "multi",
+      when: function (a) { return a.abroad !== "india"; },
+      title: "What would make living abroad hard for you?",
+      help: "Stockholm gets about six hours of grey light in December, and prospectuses never say so. A degree you leave in March because you cannot get out of bed is worth nothing. <em>Pick everything that matters.</em>",
       options: [
-        { v: "yes",    t: "Yes. That is the plan", d: "Show me the world" },
-        { v: "funded", t: "Only if someone else pays", d: "Fully funded routes only" },
-        { v: "short",  t: "Short trips yes, moving no", d: "Summer programmes, exchanges, conferences" },
-        { v: "india",  t: "I want to build something here", d: "Domestic routes, remote work, Indian funding" },
-        { v: "unsure", t: "Genuinely do not know yet", d: "Show me both and let me decide later" }
+        { v: "cold",      t: "Cold, dark winters",          d: "Warm places and long daylight first" },
+        { v: "veg",       t: "I am vegetarian or Jain",      d: "Some countries make this genuinely hard" },
+        { v: "halal",     t: "I eat halal",                  d: "Availability varies a lot by city" },
+        { v: "breath",    t: "Asthma or bad allergies",      d: "Pollen seasons and air quality get flagged" },
+        { v: "home",      t: "Being far from home",          d: "A short flight home counts for more" },
+        { v: "community", t: "Having no Indians around",     d: "Big Indian communities count for more" },
+        { v: "support",   t: "Getting mental health support", d: "Places where help is easier to reach" },
+        { v: "none",      t: "None of these",                d: "I would manage almost anywhere" }
       ]
     },
     {
-      id: "countries", act: "What is actually possible", type: "multi",
-      title: "Anywhere you already know you want — or do not want?",
-      help: "Leave this blank and the country ranking will be worked out for you from your climate, food, community and budget answers instead.",
-      options: [
-        { v: "UK", t: "United Kingdom", d: "One-year masters, Chevening, Commonwealth" },
-        { v: "USA", t: "United States", d: "Funded PhDs, the Match, highest ceiling" },
-        { v: "Germany", t: "Germany", d: "No tuition, salaried doctorates" },
-        { v: "Australia", t: "Australia", d: "Warm, tax-free stipends, easy landing" },
-        { v: "Canada", t: "Canada", d: "Clearest immigration pathway" },
-        { v: "Netherlands", t: "Netherlands", d: "All English, strong epidemiology" },
-        { v: "Sweden", t: "Sweden", d: "Karolinska, fully funded, very dark winters" },
-        { v: "Switzerland", t: "Switzerland", d: "Highest-paid doctorates on earth" },
-        { v: "France", t: "France", d: "Nearly free tuition, Charpak for Indians" },
-        { v: "Ireland", t: "Ireland", d: "English, two-year work visa, lower cost" },
-        { v: "Singapore", t: "Singapore", d: "Close to home, warm, easy food" },
-        { v: "Japan", t: "Japan", d: "MEXT pays for everything" },
-        { v: "Israel", t: "Israel", d: "Weizmann summer school, fully funded" },
-        { v: "Hungary", t: "Hungary", d: "200 funded Indian places a year" },
-        { v: "Russia", t: "Russia", d: "Won by exam, not by essays" },
-        { v: "India", t: "India", d: "Staying, deliberately" }
-      ]
-    },
-    {
-      id: "cold", act: "Can you actually live there", type: "single",
-      title: "How do you handle cold and darkness?",
-      help: "This is not a soft question. Stockholm gets six hours of grey light in December, and a degree you abandon in March because you cannot get out of bed is worth nothing.",
-      options: [
-        { v: "love",  t: "I love the cold", d: "Snow is a feature, not a bug" },
-        { v: "fine",  t: "I can manage it", d: "Not my favourite, not a problem" },
-        { v: "hard",  t: "I struggle, but I would cope", d: "Prefer milder places" },
-        { v: "cant",  t: "Cold and darkness genuinely affect me", d: "Warm countries and long daylight only" }
-      ]
-    },
-    {
-      id: "health", act: "Can you actually live there", type: "multi",
-      title: "Anything your body needs you to plan around?",
-      help: "Melbourne has thunderstorm asthma. Japan has a cedar pollen season that floors newcomers. Japanese cooking puts fish stock in food that looks vegetarian. These are the things prospectuses never mention.",
-      options: [
-        { v: "asthma",  t: "Asthma or breathing problems", d: "Pollen and air-quality warnings will be flagged" },
-        { v: "pollen",  t: "Bad hay fever or allergies", d: "Birch, cedar and ragweed seasons matter" },
-        { v: "veg",     t: "Vegetarian", d: "Some countries make this hard" },
-        { v: "jain",    t: "Jain or strictly vegetarian", d: "Significantly narrows practical options" },
-        { v: "halal",   t: "Halal", d: "Availability varies sharply by city" },
-        { v: "chronic", t: "A chronic condition needing regular care", d: "Health system access will be flagged" },
-        { v: "mh",      t: "I have needed mental health support before", d: "Support availability will be weighted heavily" },
-        { v: "none",    t: "Nothing to plan around", d: "" }
-      ]
-    },
-    {
-      id: "emotional", act: "Can you actually live there", type: "multi",
-      title: "What do you need around you to be okay?",
-      help: "The people who come home early rarely come home because the work was too hard. They come home because they were alone in a grey city for eight months.",
-      options: [
-        { v: "family",   t: "To be able to get home quickly", d: "Flight time and cost weighted heavily" },
-        { v: "community",t: "Other Indians around me", d: "Diaspora size weighted" },
-        { v: "warmpeople", t: "People who are easy to befriend", d: "Some cultures are much harder to enter" },
-        { v: "support",  t: "Mental health support I can actually reach", d: "Waiting lists and language matter" },
-        { v: "light",    t: "Daylight and sun", d: "Winter darkness weighted heavily" },
-        { v: "alone",    t: "I am genuinely fine on my own", d: "Widens the map considerably" }
-      ]
-    },
-    {
-      id: "english", act: "Practicalities", type: "single",
-      title: "Where are you with English tests and a passport?",
-      help: "IELTS or TOEFL and a valid passport are the two things that quietly delay applications by months. Both take longer than people expect.",
-      options: [
-        { v: "both",  t: "Passport and test both done", d: "You can apply to anything today" },
-        { v: "pass",  t: "Passport yes, test not yet", d: "Book the test — results take 2 weeks" },
-        { v: "test",  t: "Test done, no passport", d: "Passport takes 3–6 weeks, apply now" },
-        { v: "none",  t: "Neither yet", d: "Start both this month; nothing else moves without them" }
-      ]
-    },
-    {
-      id: "time", act: "Practicalities", type: "single",
-      title: "Realistically, how much time do you have each week?",
-      help: "Not the time you wish you had. The plan that works is the one built for your bad weeks, not your best ones.",
-      options: [
-        { v: "t2",  t: "Under 2 hours", d: "Exams are eating everything right now" },
-        { v: "t5",  t: "About 5 hours", d: "Enough for one thread, done properly" },
-        { v: "t10", t: "Around 10 hours", d: "A project and a course together" },
-        { v: "t20", t: "20 hours or more", d: "Vacation, gap, or post-internship" }
-      ]
-    },
-    {
-      id: "record", act: "Practicalities", type: "multi",
+      id: "have", ooh: "happy", act: "What you already have", type: "multi",
       title: "What do you already have?",
-      help: "This decides what you are competitive for <em>today</em> versus what you should be building toward. Tick nothing if the answer is nothing. That is the normal starting point and it is fine.",
+      help: "This decides what you can win today and what to build towards. Ticking nothing is the normal starting point, and it is fine.",
       options: [
-        { v: "project",  t: "A research project running", d: "Even unfinished" },
-        { v: "pub",      t: "A publication or accepted abstract", d: "Any journal, any conference" },
-        { v: "code",     t: "I can write some code", d: "Python or R, even badly" },
-        { v: "poster",   t: "Presented at a conference", d: "National counts" },
-        { v: "lead",     t: "Organised or led something real", d: "An event, a drive, a society" },
-        { v: "mentor",   t: "A faculty member who would back me", d: "The rarest and most valuable item here" },
-        { v: "lang",     t: "A second language beyond English and Hindi", d: "German, French or Japanese especially" },
-        { v: "nothing",  t: "None of this yet", d: "Then that is exactly where we start" }
-      ]
-    },
-    {
-      id: "horizon", act: "Practicalities", type: "single",
-      title: "When do you want to be somewhere else?",
-      help: "Application cycles run 12 to 18 months ahead of the start date. Whatever you answer here, the work begins about a year earlier than feels natural.",
-      options: [
-        { v: "now",  t: "This year, if possible", d: "Focus on what is open right now" },
-        { v: "y1",   t: "Within a year or two", d: "The realistic planning horizon" },
-        { v: "y3",   t: "Three to five years out", d: "Build the record now, apply later" },
-        { v: "open", t: "No fixed timeline", d: "Show me the whole map" }
+        { v: "project",  t: "A research project",            d: "Even an unfinished one" },
+        { v: "pub",      t: "A paper, abstract or poster",   d: "Any journal, any conference" },
+        { v: "code",     t: "Some coding",                   d: "Python or R, even badly" },
+        { v: "mentor",   t: "A faculty member who would back me", d: "The rarest thing on this list" },
+        { v: "lead",     t: "Something I organised or led",  d: "An event, a drive, a society" },
+        { v: "passport", t: "A passport",                    d: "It takes weeks to get one" },
+        { v: "test",     t: "IELTS or TOEFL done",           d: "Most applications abroad ask for it" },
+        { v: "nothing",  t: "None of this yet",              d: "Then that is where we start" }
       ]
     }
   ];
+
+  /* Answers saved before the trim used option values that were merged. A
+     plan link from then still opens: each old value maps to the option it
+     was folded into, and the old practical answers are still read in
+     buildProfile. */
+  const LEGACY = {
+    skills: { reliable: "execute", connect: "findopps", mediate: "lead", comfort: "listen", write: "explain",
+              make: "build", detail: "numbers", memory: "numbers", hands2: "calm" },
+    anger:  { children: "prevent", caste: "money", rural: "money", quack: "money", doctors: "systemic",
+              eurocent: "unsolved", pain: "unsolved", paywall: "misinfo", mentor: "misinfo", elderly: "stigma" },
+    flow:   { takeapart: "building", making: "building", curious: "reading", sitting: "patient", writing: "teaching",
+              arguing: "teaching", team: "organis", procedure: "hands", designing: "data" },
+    category: { skip: "gen" }
+  };
+  function upgradeAnswers() {
+    Object.keys(LEGACY).forEach(function (qid) {
+      const map = LEGACY[qid], a = answers[qid];
+      if (Array.isArray(a)) {
+        const out = [];
+        a.forEach(function (v) { const nv = map[v] || v; if (out.indexOf(nv) === -1) out.push(nv); });
+        answers[qid] = out;
+      } else if (a && map[a]) answers[qid] = map[a];
+    });
+  }
 
   /* ───────────────── state ───────────────── */
   const answers = {};
@@ -319,7 +233,8 @@
   const CORE_COUNT = 3;
   function surveyMode() { return answers._mode === "short" ? "short" : "full"; }
   function activeQuestions() {
-    return surveyMode() === "short" ? QUESTIONS.slice(0, CORE_COUNT) : QUESTIONS;
+    const qs = QUESTIONS.filter(function (q) { return !q.when || q.when(answers); });
+    return surveyMode() === "short" ? qs.slice(0, CORE_COUNT) : qs;
   }
   function startSurvey(mode, fromIndex) {
     answers._mode = mode === "short" ? "short" : "full";
@@ -346,20 +261,35 @@
 
   /* ───────────────── derive a profile ───────────────── */
   function buildProfile() {
+    // `living` and `have` each stand for several of the old questions. They
+    // are unpacked into the same fields score() and rankCountries() have
+    // always read; a plan saved before the trim still carries the old ones.
+    const living = answers.living || [];
+    const have = answers.have || [];
+    const pick = function (arr, v, out) { return arr.indexOf(v) !== -1 ? out : []; };
+    const livCold = living.indexOf("cold") !== -1 ? "cant" : living.indexOf("none") !== -1 ? "fine" : null;
+    const livHealth = [].concat(pick(living, "veg", ["veg"]), pick(living, "halal", ["halal"]),
+      pick(living, "breath", ["asthma", "pollen"]), pick(living, "support", ["mh"]));
+    const livEmotional = [].concat(pick(living, "cold", ["light"]), pick(living, "home", ["family"]),
+      pick(living, "community", ["community"]), pick(living, "support", ["support"]), pick(living, "none", ["alone"]));
+    const haveRecord = have.filter(function (v) { return ["project", "pub", "code", "mentor", "lead", "nothing"].indexOf(v) !== -1; })
+      .concat(pick(have, "pub", ["poster"]));
+    const pass = have.indexOf("passport") !== -1, test = have.indexOf("test") !== -1;
+    const haveEnglish = pass && test ? "both" : pass ? "pass" : test ? "test" : "none";
     const p = {
       fields: {},          // field -> weight
       stage: answers.stage || "pre",
       age: answers.age || "2124",
       money: answers.money || "family",
-      category: answers.category || "skip",
+      category: answers.category || "gen",
       abroad: answers.abroad || "unsure",
       countries: answers.countries || [],
-      cold: answers.cold || "fine",
-      health: answers.health || [],
-      emotional: answers.emotional || [],
-      english: answers.english || "none",
+      cold: living.length ? (livCold || "fine") : (answers.cold || "fine"),
+      health: living.length ? livHealth : (answers.health || []),
+      emotional: living.length ? livEmotional : (answers.emotional || []),
+      english: have.length ? haveEnglish : (answers.english || "none"),
       time: answers.time || "t5",
-      record: answers.record || [],
+      record: have.length ? haveRecord : (answers.record || []),
       horizon: answers.horizon || "open",
       notes: {
         skills: answers.skills_text || "",
@@ -420,10 +350,18 @@
        from `asked`. */
     p.short = surveyMode() === "short";
     p.asked = {};
-    QUESTIONS.forEach(function (q) {
-      const a = answers[q.id];
-      p.asked[q.id] = Array.isArray(a) ? a.length > 0 : a != null && a !== "";
-    });
+    const has = function (k) {
+      const a = answers[k];
+      return Array.isArray(a) ? a.length > 0 : a != null && a !== "";
+    };
+    QUESTIONS.forEach(function (q) { p.asked[q.id] = has(q.id); });
+    // The prose still speaks of record, climate and so on. Each counts as
+    // asked when the merged question that now covers it was answered, or
+    // when an older saved plan answered it directly.
+    p.asked.record = p.asked.have || has("record");
+    p.asked.english = p.asked.have || has("english");
+    ["cold", "health", "emotional"].forEach(function (k) { p.asked[k] = p.asked.living || has(k); });
+    ["time", "horizon", "countries", "age"].forEach(function (k) { p.asked[k] = has(k); });
     return p;
   }
 
@@ -668,9 +606,18 @@
         "That is survivable if the degree leads to income in that currency and punishing if it does not. Take the funded routes first and treat the loan as what closes a gap, not what opens a door. ";
     }
     if (p.asked.category && (p.category === "sc" || p.category === "st")) {
-      mid += "Given what you told me about your background, the National Overseas Scholarship is at the top of your list for a reason: " +
+      // Where it actually ranks, not where it would rank for a graduate: the
+      // scheme funds a masters or doctorate, so a student still in MBBS sees
+      // it lower on the list, marked as one to plan for.
+      const nosId = p.category === "sc" ? "nos-sc" : "nos-st";
+      const nosAt = ranked.findIndex((r) => r.item.id === nosId);
+      const nos = nosAt === -1 ? null : ranked[nosAt].item;
+      const nosOpen = nos && (!nos.stages || nos.stages.indexOf(p.stage) !== -1);
+      mid += "Given what you told me about your background, the National Overseas Scholarship " +
+        (nosAt === 0 ? "is at the top of your list for a reason: " : "is on your list, and it matters more than its place suggests: ") +
         "it funds a full masters or doctorate abroad including flights, and its own rules provide a <strong>second round</strong> when places are left unfilled, which tells you the competition is thinner than people assume. " +
-        "That is the single highest-value item on your page. ";
+        (nosAt === 0 ? "That is the single highest-value item on your page. "
+          : nos && !nosOpen ? "It opens once you have your degree, so it belongs in your plan now rather than in this year's applications. " : "");
     }
     if (p.asked.stage && p.stage === "pre") {
       mid += "Being in your first two years is the widest window you will ever have: ICMR STS is open to you now and closes permanently after second year, " +
@@ -915,6 +862,32 @@
     toastTimer = setTimeout(function () { dock.innerHTML = ""; }, action ? 7000 : 4500);
   }
 
+  /* What Ooh says at the top of each view: the first time in full, then one
+     line. 120 characters a line at most and no em dashes, the sister apps'
+     rule. The intro and the survey have none: Ooh is already in both. */
+  const OOH_LINES = {
+    results: { id: "results",
+      lines: [["happy", "Here is your read. It is built only from what you told me, and it changes if you answer again."],
+              ["think", "Every card links its official page. Dates move every year, so check there before you plan."]],
+      short: ["think", "Ranked from your answers. Check each official page before you plan around a date."] },
+    browse: { id: "browse",
+      lines: [["hello", "This is the whole index. Filter by kind, search for a name, or sort by the nearest deadline."],
+              ["think", "Tier 1 changes what you can apply for next. Most entries are lower, and that is fine."]],
+      short: ["think", "Filter, search, or sort by deadline. Every card links its official page."] },
+    shortlist: { id: "shortlist",
+      lines: [["happy", "Everything you star lands here. It stays in this browser, and nothing is uploaded."]],
+      short: ["happy", "Your starred programmes, kept in this browser only."] },
+    routes: { id: "routes",
+      lines: [["think", "Each map shows the day's work, the NEET-PG route and what follows. Pick the day you want to live."]],
+      short: ["think", "The day's work, the route in, and where each specialty leads."] },
+    frontiers: { id: "frontiers",
+      lines: [["ooh", "Each of these is a whole field you could join. Every one ends with something to start this week."]],
+      short: ["ooh", "Whole fields you could join, each with one thing to start this week."] },
+    calendar: { id: "calendar",
+      lines: [["think", "Every deadline in the index, month by month. Dates move, so confirm on the official page."]],
+      short: ["think", "Deadlines by month. Confirm each date on its official page."] }
+  };
+
   /* ───────────────── views ───────────────── */
   // Where the browser supports it, a view change is a view transition: the
   // old page fades and settles as the new one arrives (styles.css, "views").
@@ -930,11 +903,14 @@
     const v = $("#view-" + name);
     if (v) v.classList.add("is-active");
     $$(".navlink").forEach((b) => b.setAttribute("aria-current", b.dataset.goto === name ? "true" : "false"));
+    if (window.Ooh) window.Ooh.view(name, OOH_LINES[name] || null);
     window.scrollTo(0, 0);
     if (v) focusHeading(v);
   }
   function showView(name) {
-    if (name !== currentView) sfx(name === "results" ? "chain" : "orbit");
+    // Moving between views is a tap, and taps make Ooh's sounds now
+    // (ooh-guide.js). Only arriving at your results keeps its galaxy chord.
+    if (name !== currentView && name === "results") sfx("chain");
     currentView = name;
     if (canTransition) document.startViewTransition(function () { swapView(name); });
     else swapView(name);
@@ -948,9 +924,14 @@
     const slot = $("#questionSlot");
     const chosen = answers[q.id] || (q.type === "multi" ? [] : null);
 
+    // Ooh asks the question, typing it out with the sister apps' blip. The
+    // whole title is in the heading from the first frame (typed + rest), so
+    // a screen reader focusing it hears the full question.
+    const oohOn = !!(window.Ooh && window.Ooh.on() && window.OohArt);
     let h = '<p class="q-eyebrow">' + esc(q.act) + '</p>';
-    h += '<div class="q-say"><span class="q-avatar" aria-hidden="true">' + MARK_SVG + '</span><div class="q-bubbles">';
-    h += '<h2 class="q-title">' + esc(q.title) + '</h2>';
+    h += '<div class="q-say"><span class="q-avatar' + (oohOn ? "" : " is-mark") + '" aria-hidden="true">' +
+      (oohOn ? window.Ooh.figure(q.ooh || "hello", 64) : MARK_SVG) + '</span><div class="q-bubbles">';
+    h += '<h2 class="q-title"><span class="q-typed"></span><span class="q-rest">' + esc(q.title) + '</span></h2>';
     h += '<p class="q-help">' + q.help + '</p>';
     h += '</div></div>';
     h += '<div class="opts' + (q.options.length > 6 ? " two" : "") + '">';
@@ -969,8 +950,12 @@
       h += '<p class="q-note">Optional, but the words you use here shape the answer.</p>';
     }
     if (q.type === "multi") h += '<p class="q-note" id="qPicked" aria-live="polite">' + pickedText(chosen.length) + '</p>';
+    h += '<p class="q-live" id="qLive" aria-live="polite">' + liveLine(q) + '</p>';
 
     slot.innerHTML = h;
+    const typed = $(".q-typed", slot), rest = $(".q-rest", slot);
+    if (oohOn) window.Ooh.type(typed, rest, q.title, q.ooh || "hello", $(".q-avatar .ooh-bobw", slot));
+    else { typed.textContent = q.title; rest.textContent = ""; }
     // Retrigger the arrival animation on every question, so the survey reads
     // as a sequence of things being asked rather than a form being repainted.
     slot.classList.remove("q-anim");
@@ -994,7 +979,12 @@
         } else {
           answers[q.id] = v;
           $$(".opt", slot).forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+          // Choosing to stay in India removes the living-abroad question
+          // ahead, so the count has to follow.
+          $("#qCount").textContent = "Question " + (qIndex + 1) + " of " + activeQuestions().length;
         }
+        const live = $("#qLive");
+        if (live) live.innerHTML = liveLine(q);
       });
     });
 
@@ -1007,6 +997,39 @@
     const pct = (qIndex / QS.length) * 100;
     $("#progressBar").style.width = pct + "%";
     $(".progress").setAttribute("aria-valuenow", String(Math.round(pct)));
+  }
+
+  /* The live line under a question: what the answers so far already mean,
+     counted from the index each time, so it is never a canned compliment.
+     The three core questions point at fields; the practical ones narrow or
+     reorder the list, and the line says how. */
+  function liveLine(q) {
+    const p = buildProfile();
+    if (q.id === "skills" || q.id === "anger" || q.id === "flow") {
+      const top = p.topFields.slice(0, 2).map(function (f) { return esc(FIELDS[f].toLowerCase()); });
+      return top.length ? "So far your answers point at <b>" + top.join("</b> and <b>") + "</b>." : "";
+    }
+    const a = answers[q.id];
+    if (a == null || (Array.isArray(a) && !a.length)) return "";
+    const ranked = rank(p);
+    const top = ranked[0];
+    const topLine = top ? "Your top pick right now: <b>" + esc(top.item.name) + "</b>." : "";
+    if (q.id === "stage") return "<b>" + fmtNum(ranked.length) + "</b> programmes here are open to someone at your stage.";
+    if (q.id === "money" && a === "none")
+      return "<b>" + fmtNum(ranked.filter((r) => r.item.zeroCost).length) + "</b> of the routes open to you cost nothing at all.";
+    if (q.id === "abroad" && a === "india")
+      return "<b>" + fmtNum(ranked.filter((r) => r.item.country === "India").length) + "</b> of the routes open to you are inside India.";
+    if (q.id === "category" && (a === "sc" || a === "st")) {
+      const nos = a === "sc" ? "nos-sc" : "nos-st";
+      return top && top.item.id === nos
+        ? "The National Overseas Scholarship has moved to the top of your list."
+        : "The National Overseas Scholarship is now on your list. " + topLine;
+    }
+    if (q.id === "living") {
+      const c = rankCountries(p)[0];
+      return c ? "So far <b>" + esc(c.c.name) + "</b> fits how you want to live best." : "";
+    }
+    return topLine;
   }
 
   // Honest running feedback on a multi-choice question: how many are picked,
@@ -1048,11 +1071,12 @@
            "specialties and a starting list. What it cannot do is tell you what you can <em>reach</em>. " +
            "The ranking below is currently assuming you are in your first two years, that money is not the " +
            "binding constraint, and that you are open to anywhere, because you have not told me otherwise.</p>";
-      h += "<p>Thirteen more questions cover money, category, year of study, climate, health, language and the " +
-           "hours you actually have. They take about three minutes, they change the order of nearly everything " +
-           "below, and they unlock the category-specific funding that most people never find. " +
+      const more = QUESTIONS.length - CORE_COUNT;
+      h += "<p>Up to " + numberWord(more) + " more short questions cover your year, money, category, whether you " +
+           "want to leave India, and what you already have. They take about two minutes, they change the order of " +
+           "nearly everything below, and they unlock the category-specific funding that most people never find. " +
            "Your three answers are kept.</p>";
-      h += '<button type="button" class="btn btn-primary" id="continueFullBtn">Answer the other thirteen</button>';
+      h += '<button type="button" class="btn btn-primary" id="continueFullBtn">Answer the rest</button>';
       h += "</div>";
     }
     if (p.topFields.length) {
@@ -1072,15 +1096,21 @@
     const ENG_LABEL = { both: "Passport and test done", pass: "Passport only", test: "Test only", none: "Neither yet" };
 
     h += '<aside class="read-rail"><p class="mini-h">The profile this is built on</p>';
-    const rows = [
-      ["Stage", STAGE_LABEL[p.stage]],
-      ["Budget", MONEY_LABEL[p.money]],
-      ["Leaving India", ABROAD_LABEL[p.abroad]],
-      ["Climate", COLD_LABEL[p.cold]],
-      ["Time each week", TIME_LABEL[p.time]],
-      ["Timeline", HORIZON_LABEL[p.horizon]],
-      ["Paperwork", ENG_LABEL[p.english]]
-    ];
+    // Only what the reader actually told me is shown as theirs. Stage is
+    // always used for eligibility, so when it was never asked the row says
+    // the value is an assumption rather than passing it off as an answer.
+    const LIVING_LABEL = { cold: "cold winters", veg: "vegetarian food", halal: "halal food", breath: "breathing and allergies",
+      home: "distance from home", community: "an Indian community", support: "mental health support" };
+    const rows = [["Stage", (p.asked.stage ? "" : "Assumed: ") + STAGE_LABEL[p.stage]]];
+    if (p.asked.money) rows.push(["Budget", MONEY_LABEL[p.money]]);
+    if (p.asked.abroad) rows.push(["Leaving India", ABROAD_LABEL[p.abroad]]);
+    if (p.asked.living) {
+      const worries = (answers.living || []).filter((v) => LIVING_LABEL[v]).map((v) => LIVING_LABEL[v]);
+      rows.push(["Living abroad", worries.length ? "Weighs " + worries.join(", ") : "Would manage almost anywhere"]);
+    } else if (p.asked.cold) rows.push(["Climate", COLD_LABEL[p.cold]]);
+    if (p.asked.time) rows.push(["Time each week", TIME_LABEL[p.time]]);
+    if (p.asked.horizon) rows.push(["Timeline", HORIZON_LABEL[p.horizon]]);
+    if (p.asked.english) rows.push(["Paperwork", ENG_LABEL[p.english]]);
     if (p.category === "sc") rows.push(["Category schemes", "SC / DNT — NOS eligible"]);
     if (p.category === "st") rows.push(["Category schemes", "ST — NOS eligible"]);
     if (p.category === "obc") rows.push(["Category schemes", "OBC / EWS / minority"]);
@@ -1185,7 +1215,7 @@
       const toldLiveability = p.asked.money || p.asked.abroad;
       h += '<p class="sec-sub">' + (toldLiveability
         ? 'Ranked on climate, daylight, food, community and cost against what you told me you need — not on university league tables.'
-        : 'Ranked on climate, daylight, food, community and cost, because those decide whether you could actually live somewhere. These are general rankings: answer the full sixteen and they are re-ranked against your own limits instead.') + '</p>';
+        : 'Ranked on climate, daylight, food, community and cost, because those decide whether you could actually live somewhere. These are general rankings: answer the full set and they are re-ranked against your own limits instead.') + '</p>';
       h += '<div class="countries">';
       ctys.slice(0, 4).forEach(function (x, i) {
         const c = x.c;
@@ -1782,6 +1812,7 @@
     const obj = decodeAnswers(code);
     if (!obj) return false;
     Object.keys(obj).forEach((k) => { answers[k] = obj[k]; });
+    upgradeAnswers();
     return Object.keys(obj).length > 3;
   }
 
@@ -1874,7 +1905,7 @@
     {
       target: "#startBtn", view: "intro",
       title: "Two ways in",
-      body: "Three questions about who you are — skill, anger, flow. Or all sixteen, which add money, category and year, and sharpen the ranking. You can upgrade later without losing answers."
+      body: "Three questions about who you are: skill, anger and flow. Or the full set, which adds your year, money and category and sharpens the ranking. You can switch later without losing an answer."
     },
     {
       target: "#browseSearch", view: "browse",
@@ -2102,19 +2133,116 @@
   }
 
   /* ───────────────── wiring ───────────────── */
+  function gotoView(t) {
+    if (t === "browse") renderBrowse();
+    if (t === "calendar") renderCalendar();
+    if (t === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
+    if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
+    if (t === "shortlist") renderShortlist();
+    showView(t);
+    closeMobileNav();
+  }
   function bindGoto(root) {
     $$("[data-goto]", root || document).forEach(function (b) {
       if (b.dataset.bound) return;
       b.dataset.bound = "1";
-      b.addEventListener("click", function () {
-        const t = b.dataset.goto;
-        if (t === "browse") renderBrowse();
-        if (t === "calendar") renderCalendar();
-        if (t === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
-        if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
-        if (t === "shortlist") renderShortlist();
-        showView(t);
-        closeMobileNav();
+      b.addEventListener("click", function () { gotoView(b.dataset.goto); });
+    });
+  }
+
+  // Browse with one of its own filters already applied, as if the reader had
+  // pressed that filter button themselves.
+  function openBrowseWith(filter) {
+    countryFilter = ""; regionFilter = null; searchQuery = ""; activeFilter = filter || "all";
+    const box = $("#browseSearch");
+    if (box) box.value = "";
+    renderBrowse();
+    showView("browse");
+  }
+
+  // A category page's address, read from the footer's own link: build.js
+  // rewrites those for the single-file bundle, so this is right in both.
+  function pageHref(slug) {
+    const a = $$(".foot-map a").find((x) => (x.getAttribute("href") || "").replace(/\/$/, "").split("/").pop() === slug);
+    return a ? a.href : slug + "/";
+  }
+
+  const NUM_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+  function numberWord(n) { return NUM_WORDS[n] || String(n); }
+
+  /* ───────────────── "What do you want?" ─────────────────
+     Ooh's answers to the hero's question. A fixed script: one reply per
+     chip, every number counted from the index at the moment it is said, and
+     every reply ends in a real place to go. */
+  function initWant() {
+    const box = $("#want");
+    if (!box) return;
+    const bubble = $("#wantBubble"), fig = $(".want-ooh", box), go = $("#wantGo");
+    const items = function () { return allOpportunities(); };
+    const REPLIES = {
+      research: function () {
+        const n = items().filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length;
+        return { lines: [["ooh", fmtNum(n) + " programmes here take students who are still in MBBS."],
+                         ["think", "ICMR STS is the best known. Its card has the window and the stipend, so start there."]],
+                 go: [{ label: "Show me all " + fmtNum(n), run: function () { openBrowseWith("student"); } }] };
+      },
+      abroad: function () {
+        const n = items().filter((i) => i.funding === "full" && REGIONS.indexOf(i.country) === -1 && i.country !== "India").length;
+        return { lines: [["happy", fmtNum(n) + " routes in other countries describe themselves as fully funded."],
+                         ["think", "Read each money line: some cover flights and living costs, some only the fees."]],
+                 go: [{ label: "Open the fully funded page", href: pageHref("fully-funded") },
+                      { label: "Scholarships only", run: function () { openBrowseWith("scholarship"); } }] };
+      },
+      phd: function () {
+        const n = items().filter((i) => i.type === "phd" && ["full", "stipend", "paid"].indexOf(i.funding) !== -1).length;
+        return { lines: [["ooh", fmtNum(n) + " doctorates here pay you a stipend or a salary."],
+                         ["think", "In Germany, Switzerland and the Nordic countries a doctoral student is usually hired as staff."]],
+                 go: [{ label: "Show me the doctorates", run: function () { openBrowseWith("phd"); } }] };
+      },
+      india: function () {
+        // The same filter as the India page (tools/make-pages.js), so Ooh and
+        // the page it points to never disagree on the count.
+        const n = items().filter((i) => i.country === "India" || (i.country === "Online" && i.indiaSpecific)).length;
+        return { lines: [["happy", fmtNum(n) + " routes for exposure in India, from ICMR STS to a paid year in a rural hospital."],
+                         ["think", "The India page sorts them into research, rural medicine, policy and free courses."]],
+                 go: [{ label: "Open the India page", href: pageHref("india") },
+                      { label: "Browse them here", run: function () { openPlace("", { label: ATLAS.india.label, countries: ATLAS.india.countries }); } }] };
+      },
+      specialty: function () {
+        const n = (window.DB.specialties || []).length;
+        return { lines: [["think", "There are " + fmtNum(n) + " specialty maps here: the day's work, the NEET-PG route, where each leads."],
+                         ["hello", "The three questions match you to your closest three. That takes about a minute."]],
+                 go: [{ label: "Answer the three questions", run: function () { startSurvey("short", 0); } },
+                      { label: "See all " + fmtNum(n), run: function () { gotoView("routes"); } }] };
+      },
+      unsure: function () {
+        return { lines: [["hello", "That is a fine place to start. Nothing here needs you to know yet."],
+                         ["think", "Three questions about you, none about marks. About a minute, then I show you what fits."]],
+                 go: [{ label: "Start the three questions", run: function () { startSurvey("short", 0); } }] };
+      }
+    };
+    $$(".want-chip", box).forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        const reply = REPLIES[chip.dataset.want];
+        if (!reply) return;
+        $$(".want-chip", box).forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+        const r = reply();
+        go.innerHTML = "";
+        const showGo = function () {
+          go.innerHTML = r.go.map(function (g, i) {
+            return g.href
+              ? '<a class="btn btn-ghost" href="' + esc(g.href) + '">' + esc(g.label) + "</a>"
+              : '<button type="button" class="btn btn-ghost" data-want-go="' + i + '">' + esc(g.label) + "</button>";
+          }).join("");
+          $$("[data-want-go]", go).forEach(function (b) {
+            b.addEventListener("click", function () { r.go[Number(b.dataset.wantGo)].run(); });
+          });
+        };
+        if (window.Ooh) window.Ooh.say(bubble, fig, r.lines, showGo);
+        else {
+          $(".ooh-typed", bubble).textContent = r.lines.map((l) => l[1]).join(" ");
+          showGo();
+        }
       });
     });
   }
@@ -2601,6 +2729,7 @@
     initMobileNav();
     initHeroGlobe();
     initAtlas();
+    initWant();
     bindGoto(document);
     initTour();
     loadShortlist();

@@ -35,6 +35,10 @@ colors:
     "--nebula-a": "rgba(255, 79, 168, .16)"
     "--nebula-b": "rgba(124, 77, 255, .17)"
     "--starlight": "#FFF6FF"
+    "--ooh-paper": "#FFF8EE"
+    "--ooh-ink": "#2A1636"
+    "--ooh-gold": "#FFC857"
+    "--ooh-mouth": "#7A2748"
   daylight:   # :root[data-theme="light"]: lavender paper, for reading in sunlight
     "--paper": "#F4F0FF"
     "--paper-2": "#FAF8FF"
@@ -65,6 +69,10 @@ colors:
     "--nebula-a": "rgba(255, 79, 168, .10)"
     "--nebula-b": "rgba(124, 77, 255, .10)"
     "--starlight": "#6A45D9"
+    "--ooh-paper": "#FFF8EE"
+    "--ooh-ink": "#2A1636"
+    "--ooh-gold": "#FFC857"
+    "--ooh-mouth": "#7A2748"
 typography:
   display: "Cormorant Garamond (roman + italic, variable 300-700), font-display: swap"
   body: "IBM Plex Sans (variable 300-700), font-display: optional (LCP; cached by the worker)"
@@ -122,6 +130,10 @@ always means something.
 | `--nebula-a` | `rgba(255, 79, 168, .16)` | `rgba(255, 79, 168, .10)` | pink cloud behind the sky |
 | `--nebula-b` | `rgba(124, 77, 255, .17)` | `rgba(124, 77, 255, .10)` | violet cloud behind the sky |
 | `--starlight` | `#FFF6FF` | `#6A45D9` | the sky's stars |
+| `--ooh-paper` | `#FFF8EE` | `#FFF8EE` | every speech bubble (Ooh's paper, shared with Ronak and Arun) |
+| `--ooh-ink` | `#2A1636` | `#2A1636` | bubble text, border and hard shadow |
+| `--ooh-gold` | `#FFC857` | `#FFC857` | Ooh's name plate, focus ring on Ooh's controls |
+| `--ooh-mouth` | `#7A2748` | `#7A2748` | "Next", and emphasis inside a bubble |
 
 Every text pair is AA in both themes. The painted sky is checked too:
 `tools/test/sky.js` photographs it and fails if any text token on it drops
@@ -140,9 +152,19 @@ under 4.5:1.
 - **Top-bar controls** (speaker, theme, menu) are three matching circles; their
   tap areas grow to 44px under the drawn circle, never through it. The menu's
   bars fold into an X and the drawer's links arrive in a short stagger.
-- **Speech bubbles** carry the counsellor's voice: the survey question and its
-  note, the results read, and notices (sound on, removed from shortlist with
-  Undo). 18px radius, tail at the lower left, a small globe as the speaker.
+- **Ooh** is the guide Dream Counsellor shares with Ronak and Arun: a small
+  sunrise-gold creature drawn by `ooh.js` (their `ooh.mjs` as a plain script,
+  never edited here). Ooh answers "What do you want?" in the hero, asks the
+  survey questions, and says one or two lines at the top of each view, typed
+  out with a soft blip. It can be tucked into the corner or hidden from the
+  footer. A fixed script, never presented as an AI.
+- **Speech bubbles** are all Ooh's: cream paper, plum ink, a 3px border, a
+  4px hard offset shadow, a 20px radius with the tail corner at 6px, and the
+  name on a gold plate. The survey question and its note, the results read
+  and every notice use it.
+- **Sounds**: the CC0 uisfx "soft" pack, the same files as Ronak and Arun,
+  on taps; the synthesised galaxy effects keep the answer, Continue and save
+  moments. One speaker in the top bar silences both.
 - **Tier chips** are an ordinal scale: tier 1 is the only filled chip (gold),
   weight drops to a dashed outline at tier 5.
 - **Status** is a dot plus a word (open, opening soon, closed, no call), never

@@ -3,8 +3,9 @@
 
    - the tour auto-opens on a FIRST visit, runs to Done, and does not re-open
    - the survey has two lengths; #startBtn is the SHORT one (3 questions),
-     #startFullBtn is the long one (16). Testing only the first covers a third
-     of the flow.
+     #startFullBtn is the full set: 9 questions, or 8 for a reader who wants to
+     stay in India, because the living-abroad question is skipped for them.
+     Testing only the first covers a third of the flow.
    - short mode must not fabricate constraint claims. buildProfile fills every
      constraint with a default so ranking works; the PROSE is guarded on
      p.asked, and saying "you told me you cannot pay" to someone never asked
@@ -30,16 +31,18 @@ const FABRICATED = [
 
 /* Selecting an option does NOT advance — #nextBtn does. A loop that only
    clicks options runs forever on question one and reads exactly like a dead
-   survey. The cap is generous: the survey is 16 questions, not 14, and a loop
-   that stops early reports "never reached results", which is a harness limit
-   wearing the costume of a site bug. */
-async function runSurvey(page, startSel) {
+   survey. The cap is generous, and a loop that stops early reports "never
+   reached results", which is a harness limit wearing the costume of a site
+   bug. `choose` picks an option index from the question's title; by default
+   the first option, which keeps the living-abroad question in the run. */
+async function runSurvey(page, startSel, choose) {
   await page.click(startSel);
   await page.waitForSelector("#view-survey.is-active", { timeout: 8000 });
   let steps = 0;
   for (let i = 0; i < 40; i++) {
     if (await page.locator("#view-results.is-active").count()) break;
-    const opt = page.locator("#view-survey .opt").first();
+    const title = (await page.locator("#view-survey .q-title").textContent().catch(() => "")) || "";
+    const opt = page.locator("#view-survey .opt").nth(choose ? choose(title) : 0);
     if (await opt.count()) await opt.click().catch(() => {});
     const next = page.locator("#nextBtn");
     if (!(await next.count())) break;
@@ -79,13 +82,15 @@ async function runSurvey(page, startSel) {
   }
 
   /* ── survey: short, then full ── */
-  for (const [name, sel, expect] of [["SHORT", "#startBtn", 3], ["FULL", "#startFullBtn", 16]]) {
+  const stayInIndia = (title) => /leave India/.test(title) ? 3 : 0;   // "I want to build something here"
+  for (const [name, sel, expect, choose] of [["SHORT", "#startBtn", 3], ["FULL", "#startFullBtn", 9],
+                                             ["FULL, staying in India", "#startFullBtn", 8, stayInIndia]]) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
     await ctx.addInitScript(() => localStorage.setItem("dc-tour-seen", "1"));
     const page = await ctx.newPage();
     const errs = []; page.on("pageerror", (e) => errs.push(String(e)));
     await page.goto(URL, { waitUntil: "load" });
-    const r = await runSurvey(page, sel);
+    const r = await runSurvey(page, sel, choose);
     ok(r.reached, `${name}: reaches the results view`, `${r.steps} questions answered`);
     ok(r.steps === expect, `${name}: asks ${expect} questions`, `asked ${r.steps}`);
     const cards = await page.locator("#view-results .card").count();
