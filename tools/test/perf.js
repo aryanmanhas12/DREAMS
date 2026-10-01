@@ -33,6 +33,7 @@ const IDLE_RAF_MAX = 3;
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });
   await ctx.addInitScript(() => {
     localStorage.setItem("dc-tour-seen", "1");
+    sessionStorage.setItem("dc-intro", "1");   // the opening has played this visit
     localStorage.setItem("dc-sound-told", "1");
     window.__lt = []; window.__ev = []; window.__raf = 0;
     const orig = window.requestAnimationFrame.bind(window);

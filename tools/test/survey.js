@@ -86,7 +86,7 @@ async function runSurvey(page, startSel, choose) {
   for (const [name, sel, expect, choose] of [["SHORT", "#startBtn", 3], ["FULL", "#startFullBtn", 9],
                                              ["FULL, staying in India", "#startFullBtn", 8, stayInIndia]]) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
-    await ctx.addInitScript(() => localStorage.setItem("dc-tour-seen", "1"));
+    await ctx.addInitScript(() => { localStorage.setItem("dc-tour-seen", "1"); sessionStorage.setItem("dc-intro", "1"); });
     const page = await ctx.newPage();
     const errs = []; page.on("pageerror", (e) => errs.push(String(e)));
     await page.goto(URL, { waitUntil: "load" });
@@ -107,7 +107,7 @@ async function runSurvey(page, startSel, choose) {
   /* ── bundle: fully self-contained ── */
   {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });
-    await ctx.addInitScript(() => localStorage.setItem("dc-tour-seen", "1"));
+    await ctx.addInitScript(() => { localStorage.setItem("dc-tour-seen", "1"); sessionStorage.setItem("dc-intro", "1"); });
     const page = await ctx.newPage();
     const external = [], errs = [];
     page.on("request", (req) => { if (!/^(file|data|blob):/.test(req.url())) external.push(req.url()); });

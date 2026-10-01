@@ -1761,7 +1761,7 @@ html.ooh-off .want-ooh, html.ooh-off .want-bubble .ooh-name { display: none; }
     --shadow: none;
   }
   .topbar, .restart, .survey-nav, .progress, .foot-small, .sky, .fx, .bubble-dock, .foot-controls,
-  .ooh-slot, .ooh-guide, .want { display: none !important; }
+  .ooh-slot, .ooh-guide, .want, .intro { display: none !important; }
   .read-main > .say { box-shadow: none; border-width: 1px; }
   body { font-size: 11pt; background: #fff; }
   .wrap { max-width: none; padding-inline: 0; }
@@ -2288,3 +2288,146 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 @media (prefers-reduced-motion: reduce) {
 }
 .atlas.no-globe .atlas-stage { display: none; }
+
+/* ════════════════════ THE OPENING ════════════════════
+   assets/intro.js. The Earth turns in the real sky (this layer has no
+   background of its own), every country lights and is named on the canvas,
+   Ooh arrives and hops on the beat, and it lands on India. While it runs the
+   page underneath is visibility: hidden, which also takes it out of the tab
+   order and the accessibility tree, and scrolling is held. Everything that
+   moves here is the one canvas or a transform/opacity animation on an HTML
+   element, so the compositor carries it on a phone. */
+.intro { display: none; }
+html.intro-on .intro, .intro.is-leaving {
+  display: block; position: fixed; inset: 0; z-index: 92;
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  color: var(--ink);
+}
+html.intro-on, html.intro-on body { overflow: hidden; }
+html.intro-on body > :not(.intro):not(.sky):not(.fx) { visibility: hidden; }
+html.intro-out body > :not(.intro):not(.sky):not(.fx) { animation: intro-page-in .6s var(--ease-out) both; }
+@keyframes intro-page-in { from { opacity: 0; } }
+.intro.is-leaving { opacity: 0; transition: opacity .6s var(--ease-out); pointer-events: none; }
+.intro:focus { outline: none; }
+
+/* How long is left, because nothing here can be skipped. */
+.intro-progress { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--line-soft); }
+.intro-progress i { display: block; height: 100%; background: var(--fill); transform: scaleX(0); transform-origin: 0 50%; }
+.intro.is-running .intro-progress i { animation: intro-progress var(--intro-ms, 9574ms) linear forwards; }
+@keyframes intro-progress { to { transform: scaleX(1); } }
+
+/* The speaker, while the top bar is hidden: same control, same state. */
+.intro-sound {
+  position: absolute; z-index: 1; width: 40px; height: 40px;
+  top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px));
+  opacity: 0; visibility: hidden; transition: opacity .3s var(--ease-out);
+}
+.intro.is-playing .intro-sound { opacity: 1; visibility: visible; }
+
+/* Phone first: globe, then the count, then the gate or the cast, stacked in
+   one column and centred. --g is the globe's side. */
+.intro-stage {
+  --g: min(90vw, 48vh, 540px);
+  box-sizing: border-box; min-height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  padding: max(40px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px))
+           max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+@supports (height: 1svh) { .intro-stage { --g: min(90vw, 48svh, 540px); } }
+.intro-globe {
+  flex: none; width: var(--g); height: var(--g);
+  opacity: .5; transform: scale(.84);
+  transition: opacity 1.2s var(--ease-out), transform 1.6s var(--ease-spring);
+}
+.intro.is-running .intro-globe { opacity: 1; transform: none; }
+.intro-globe canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
+
+.intro-side { width: min(100%, 26rem); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.intro-count {
+  margin: 0; font-size: .95rem; color: var(--ink-2);
+  opacity: 0; transition: opacity .4s var(--ease-out);
+}
+.intro-count-n {
+  font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.intro.has-count .intro-count { opacity: 1; }
+
+/* The gate and the cast share one grid cell, so the swap moves nothing. */
+.intro-below { display: grid; width: 100%; }
+.intro-below > * { grid-area: 1 / 1; }
+
+.intro-gate {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+  transition: opacity .3s var(--ease-out), visibility 0s linear .3s;
+}
+html:not(.intro-wait) .intro-gate { opacity: 0; visibility: hidden; }
+.intro-gate-ooh { display: block; line-height: 0; }
+.intro-gate-line {
+  margin: 0; max-width: 22ch; text-wrap: balance;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1.3;
+}
+.intro-gate-go { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
+.intro:not(.is-ready) .intro-gate-go { opacity: .5; pointer-events: none; }
+.intro-gate-note { margin: 0; max-width: 32ch; font-size: .82rem; line-height: 1.45; color: var(--ink-3); }
+
+.intro-show { display: flex; flex-direction: column; align-items: center; gap: 14px; opacity: 0; visibility: hidden; }
+.intro.is-playing .intro-show { opacity: 1; visibility: visible; }
+.intro-cast { display: flex; align-items: flex-end; justify-content: center; gap: 10px; width: 100%; min-height: 104px; }
+
+/* Ooh: flies in, hops once a beat (the kick in sound.js is on the same
+   94 bpm), and spins for joy when the turn lands. */
+.intro-ooh-wrap { flex: none; line-height: 0; opacity: 0; }
+.intro.has-ooh .intro-ooh-wrap { animation: intro-ooh-in .7s var(--ease-spring) both; }
+@keyframes intro-ooh-in {
+  from { opacity: 0; transform: translateY(46px) scale(.5) rotate(-12deg); }
+  to   { opacity: 1; transform: none; }
+}
+.intro-ooh { display: block; transform-origin: 50% 100%; }
+.intro-ooh-wrap.is-hopping .intro-ooh { animation: intro-hop var(--beat, 638ms) ease-in-out infinite; }
+@keyframes intro-hop {
+  0%, 100% { transform: translateY(0) scale(1.05, .95); }
+  35%      { transform: translateY(-16px) scale(.96, 1.04); }
+  70%      { transform: translateY(0) scale(1.03, .97); }
+}
+.intro-ooh-wrap.is-twirl .intro-ooh { transform-origin: 50% 55%; animation: intro-twirl .95s var(--ease-spring) both; }
+@keyframes intro-twirl {
+  0%   { transform: none; }
+  40%  { transform: translateY(-34px) rotate(200deg) scale(1.1); }
+  100% { transform: rotate(360deg); }
+}
+
+/* A fixed width, so a longer second line changes the bubble's height (it
+   grows upwards, from the bottom) and never moves Ooh sideways. */
+.intro-says { display: grid; flex: 0 0 min(15rem, calc(100vw - 150px)); min-width: 0; margin-bottom: 26px; }
+.intro-says > * { grid-area: 1 / 1; align-self: end; }
+.intro-say .ooh-say { padding-right: 15px; font-size: 1rem; }
+
+.intro-name {
+  margin: 0; font-family: var(--font-display); font-weight: 600; line-height: 1.1;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .8s var(--ease-out), transform .9s var(--ease-spring);
+}
+.intro-name em {
+  font-family: var(--font-script); font-style: normal; font-weight: 400;
+  font-size: 1.18em; color: var(--accent); padding-left: .12em;
+}
+.intro.has-name .intro-name { opacity: 1; transform: none; }
+
+/* Shorter phones: a smaller globe and a smaller Ooh at the gate, so Begin
+   stays on the first screen of an iPhone SE. */
+@media (max-height: 700px) and (max-aspect-ratio: 5/4) {
+  .intro-stage { --g: min(84vw, 40vh); padding-top: 30px; }
+  .intro-gate-ooh svg { width: 62px; height: 62px; }
+  .intro-gate-line { font-size: 1.15rem; }
+}
+@media (max-height: 600px) and (max-aspect-ratio: 5/4) {
+  .intro-stage { --g: min(80vw, 34vh); padding-top: 22px; gap: 4px; }
+}
+
+/* Landscape and desktop: the globe on the left, everything else beside it. */
+@media (min-width: 700px) and (min-aspect-ratio: 5/4) {
+  .intro-stage { --g: min(80vh, 50vw, 600px); flex-direction: row; gap: clamp(24px, 4vw, 64px); }
+  @supports (height: 1svh) { .intro-stage { --g: min(80svh, 50vw, 600px); } }
+}

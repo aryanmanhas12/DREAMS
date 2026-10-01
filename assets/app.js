@@ -2117,10 +2117,14 @@
     if (tourReturnFocus && tourReturnFocus.focus) tourReturnFocus.focus();
   }
 
-  function initTour() {
+  function initTour(auto) {
     const btn = $("#tourBtn");
     if (btn) btn.addEventListener("click", tourStart);
-
+    if (auto !== false) autoTour();
+  }
+  // The tour offers itself once per device. After the opening, it waits for
+  // the opening to finish, so the two never stack.
+  function autoTour() {
     let seen = true;   // fail closed: if storage is unreadable, do NOT ambush
     try { seen = localStorage.getItem(TOUR_KEY) === "1"; } catch (e) { seen = true; }
 
@@ -2331,15 +2335,30 @@
 
   /* The first time the galaxy's sound starts on this device, say so and say
      how to stop it. Once only: after that the speaker button speaks for it. */
+  let soundNoticeWaiting = false;
   function initSoundNotice() {
     window.addEventListener("dcsound", function (e) {
       if (!e.detail || !e.detail.on || !e.detail.first) return;
-      let told = null;
-      try { told = localStorage.getItem("dc-sound-told"); } catch (err) { /* private mode */ }
-      if (told) return;
-      try { localStorage.setItem("dc-sound-told", "1"); } catch (err) { /* ignore */ }
-      toast("Galaxy sound is on. Turn it off with the speaker button at the top.");
+      // Started by the opening's Begin: say it once the page is back.
+      if (window.DCIntro && window.DCIntro.on()) { soundNoticeWaiting = true; return; }
+      soundNotice();
     });
+  }
+  function soundNotice() {
+    let told = null;
+    try { told = localStorage.getItem("dc-sound-told"); } catch (err) { /* private mode */ }
+    if (told) return;
+    try { localStorage.setItem("dc-sound-told", "1"); } catch (err) { /* ignore */ }
+    toast("Galaxy sound is on. Turn it off with the speaker button at the top.");
+  }
+
+  // The page is back after the opening: the hero globe starts (already on
+  // India, where the opening landed), the tour may offer itself, and the
+  // sound notice the opening's Begin earned is said now that it can be seen.
+  function afterOpening() {
+    initHeroGlobe(true);
+    autoTour();
+    if (soundNoticeWaiting) { soundNoticeWaiting = false; soundNotice(); }
   }
 
   /* The theme-color metas follow the SYSTEM scheme through their media
@@ -2367,13 +2386,15 @@
     showView("browse");
   }
 
-  function initHeroGlobe() {
+  function initHeroGlobe(afterOpening) {
     const canvas = $("#globeCanvas");
     if (!canvas || typeof window.initGlobe !== "function") return;
     // On html.lite phones the globe holds still until touched: no intro, no
     // idle spin, so a 2GB phone spends nothing on it while the reader reads.
+    // After the opening, which has just landed on India, it opens there too
+    // rather than turning round to it a second time.
     const lite = document.documentElement.classList.contains("lite");
-    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); }, { intro: !lite, autoSpin: !lite });
+    const globe = window.initGlobe(canvas, $("#globeLabel"), function (country) { openPlace(country, null); }, { intro: !lite && !afterOpening, autoSpin: !lite });
     // Theme switches change every colour the globe draws with.
     if (globe) {
       const btn = $("#themeToggle");
@@ -2727,11 +2748,14 @@
     initSoundNotice();
     initSpotlight();
     initMobileNav();
-    initHeroGlobe();
+    // A new visit opens on the opening (intro.js). The hero globe and the
+    // tour wait for it, so neither runs unseen underneath it.
+    const opening = !!(window.DCIntro && window.DCIntro.start({ exclude: REGIONS, done: afterOpening }));
+    if (!opening) initHeroGlobe(false);
     initAtlas();
     initWant();
     bindGoto(document);
-    initTour();
+    initTour(!opening);
     loadShortlist();
     updateShortlistCount();
 

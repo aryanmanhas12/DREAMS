@@ -60,8 +60,11 @@
      one thing that must happen before first paint is the reader's chosen
      theme, or a daylight reader sees a flash of the space theme first, so
      that runs here, inline and tiny, along with html.lite for phones with 2GB
-     of memory or less and for Data Saver (a static sky, no idle motion). -->
-<script>(function(d){try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")d.classList.add("sky-still")}catch(e){}var m=navigator.deviceMemory,c=navigator.connection;if((m&&m<=2)||(c&&c.saveData))d.classList.add("lite")})(document.documentElement)</script>
+     of memory or less and for Data Saver (a static sky, no idle motion), and
+     html.intro-on when this visit opens on the opening (assets/intro.js),
+     which hides the page before it can flash. If intro.js has not taken
+     over within 12 seconds (a very slow link), the page shows without it. -->
+<script>(function(d){try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")d.classList.add("sky-still")}catch(e){}var m=navigator.deviceMemory,c=navigator.connection;if((m&&m<=2)||(c&&c.saveData))d.classList.add("lite");try{if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)&&!d.classList.contains("sky-still")&&!/[#&]p=/.test(location.hash)&&!sessionStorage.getItem("dc-intro")){d.classList.add("intro-on");if(localStorage.getItem("dc-sound")!=="off")d.classList.add("intro-wait");setTimeout(function(){if(!d.classList.contains("intro-live"))d.classList.remove("intro-on","intro-wait")},12000)}}catch(e){}})(document.documentElement)</script>
 
 <!-- Installable to a phone home screen. Relative paths throughout so this
      works both at the GitHub Pages sub-path and from the filesystem.
@@ -119,6 +122,52 @@
 </script>
 </head>
 <body>
+
+<!-- ══════════════════ THE OPENING ══════════════════
+     The Earth turns once in the galaxy, every country in the index lights
+     and is named, Ooh arrives, and it lands on India: fifteen beats, about
+     9.6 seconds, the length of Ronak's overture. Once a visit, and only
+     when the inline script above set html.intro-on, so it never shows
+     without JavaScript, under reduced motion, after "Pause the moving sky",
+     or for a shared plan link. assets/intro.js runs it. -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introAlt" tabindex="-1">
+  <span class="intro-progress" aria-hidden="true"><i></i></span>
+  <p class="sr-only" id="introAlt">Dream Counsellor. The Earth turns, every country with programmes in this index lights up and is named, and it comes to rest on India.</p>
+  <button type="button" class="theme-toggle sound-toggle intro-sound" id="introSound" aria-label="Galaxy sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path class="spk" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
+      <path class="wave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.6a7.6 7.6 0 0 1 0 10.8"/>
+      <path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/>
+    </svg>
+  </button>
+  <div class="intro-stage">
+    <div class="intro-globe" aria-hidden="true"><canvas id="introCanvas"></canvas></div>
+    <div class="intro-side">
+      <p class="intro-count" aria-hidden="true"><span class="intro-count-n" id="introCount">0</span> countries</p>
+      <div class="intro-below">
+        <div class="intro-gate">
+          <span class="intro-gate-ooh" id="introGateOoh" aria-hidden="true"></span>
+          <p class="intro-gate-line">This site is free, and nothing you answer here leaves your device.</p>
+          <div class="intro-gate-go">
+            <button type="button" class="btn btn-primary btn-orbit" id="introBegin">Begin</button>
+            <button type="button" class="btn btn-ghost" id="introQuiet">Begin in silence</button>
+          </div>
+          <p class="intro-gate-note">Music plays with the opening. The speaker button turns it off at any time.</p>
+        </div>
+        <div class="intro-show">
+          <div class="intro-cast">
+            <span class="intro-ooh-wrap" id="introOohWrap" aria-hidden="true"><span class="intro-ooh" id="introOoh"></span></span>
+            <div class="intro-says" aria-live="polite">
+              <div class="ooh-bubble intro-say" id="introSay1" hidden><p class="ooh-say ooh-say-static"><span class="ooh-name" aria-hidden="true" translate="no">Ooh</span><span class="ooh-text"><span class="ooh-typed">Ooh! Look at them all.</span><span class="ooh-rest" aria-hidden="true"></span></span></p></div>
+              <div class="ooh-bubble intro-say" id="introSay2" hidden><p class="ooh-say ooh-say-static"><span class="ooh-name" aria-hidden="true" translate="no">Ooh</span><span class="ooh-text"><span class="ooh-typed"><span id="introLine2Count"></span> countries. Let's find yours.</span><span class="ooh-rest" aria-hidden="true"></span></span></p></div>
+            </div>
+          </div>
+          <p class="intro-name" aria-hidden="true" translate="no">Dream<em>Counsellor</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -691,6 +740,7 @@
 <script src="assets/sound.js" defer></script>
 <script src="assets/ooh.js" defer></script>
 <script src="assets/ooh-guide.js" defer></script>
+<script src="assets/intro.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>

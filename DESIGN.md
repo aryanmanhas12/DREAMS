@@ -169,6 +169,18 @@ under 4.5:1.
   weight drops to a dashed outline at tier 5.
 - **Status** is a dot plus a word (open, opening soon, closed, no call), never
   colour alone.
+- **The opening** (intro.js): once a visit, the Earth turns once in the real
+  sky, each country in the index lights as it crosses the middle and is named
+  on the canvas, Ooh flies in and hops on the beat, and the turn lands on
+  India with three pink rings; then the wordmark, then the page. Fifteen beats
+  at 94 bpm, 9.6 seconds, Ronak's length. A gate first ("Begin", "Begin in
+  silence") because sound needs a tap. No Skip, so it never plays under
+  reduced motion, after "Pause the moving sky", or for a plan link.
+- **Music** (sound.js): one piece in D major on a step sequencer. A calm bed
+  (drone, four chords through a soft reverb, a thin wind, rare chimes and
+  ticks) carries a forty-second flight: a felt-piano pulse that enters,
+  quickens, climbs and releases into the next D. The opening's cue is on the
+  same grid as its picture, and every country that lights is a note.
 - **The sky** (space.js): one Milky Way canvas painted once and turned by CSS,
   tiny CSS-twinkled stars, a spiral galaxy, shooting stars and comets. Nothing
   runs per frame. "Pause the moving sky" in the footer stops it (WCAG 2.2.2).

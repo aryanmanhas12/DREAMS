@@ -113,7 +113,7 @@
 
   /* Taps: the uisfx cue for whatever was pressed. Anything that already
      answers with a galaxy effect is skipped, so no tap makes two sounds. */
-  const OWN_SOUND = ".opt, #nextBtn, .star-btn, #soundToggle, .ooh-say, .ooh-x, .ooh-me";
+  const OWN_SOUND = ".opt, #nextBtn, .star-btn, #soundToggle, #intro, .ooh-say, .ooh-x, .ooh-me";
   document.addEventListener("click", function (e) {
     const t = e.target && e.target.closest && e.target.closest("button, a, summary, [role=button]");
     if (!t || t.closest(OWN_SOUND)) return;
@@ -310,7 +310,9 @@
     dockState();
   }
   // The tour locks the body while it runs; Ooh keeps quiet until it ends.
-  function busy() { return document.body.classList.contains("tour-locked"); }
+  // The tour has the screen, or the opening does (html.intro-on, set before
+  // the first paint): the corner Ooh and the per-view lines wait.
+  function busy() { return document.body.classList.contains("tour-locked") || root.classList.contains("intro-on"); }
   function dockState() {
     if (!dock) return;
     // No corner Ooh on the questions (Ooh is asking them) or on the first

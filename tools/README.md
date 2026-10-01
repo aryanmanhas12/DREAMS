@@ -121,7 +121,12 @@ does, the Pages source has been switched back to a branch.
 | `node tools/make-pages.js`, `make-og.js`, `make-icons.js`, `make-fonts.js` | the individual generators (`refresh.js` runs the first two) |
 
 The browser checks live in `tools/test/`: `seo`, `font`, `console`, `survey`,
-`tour`, `atlas`, `pages`, `sky`, `perf` and `audit`. `sky` photographs the
+`tour`, `intro`, `atlas`, `pages`, `sky`, `perf` and `audit`. `intro` is the
+opening: it plays it through at four sizes and fails if it overruns, if the
+count disagrees with the page, if it plays for reduced motion, a paused sky
+or a plan link, or if the gate does not fit a 320px phone. Every other
+browser check seeds sessionStorage `dc-intro` so the opening stays out of
+its way, the same way they seed `dc-tour-seen`. `sky` photographs the
 painted galaxy with the page hidden and fails if any text colour would drop
 under 4.5:1 on its brightest patch, which no CSS-based contrast check can
 see. `perf` runs a phone viewport at 4x CPU and fails if anything requests

@@ -44,6 +44,7 @@ const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
       const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h }, reducedMotion: "reduce" });
       await ctx.addInitScript((t) => {
         localStorage.setItem("dc-tour-seen", "1");
+        sessionStorage.setItem("dc-intro", "1");   // the opening has played this visit
         localStorage.setItem("dc-sound-told", "1");
         localStorage.setItem("dc-theme", t);
       }, theme);

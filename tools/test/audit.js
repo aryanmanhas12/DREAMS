@@ -12,6 +12,8 @@
    - zoom-on-focus checked only on input/select/textarea
    - tap targets probed with elementFromPoint, never getBoundingClientRect
    - dc-tour-seen seeded, or the tour scrim intercepts every click
+   - dc-intro seeded in sessionStorage, or the opening covers the page for
+     a visit's first 10 seconds (tools/test/intro.js tests the opening)
    - the install offer is hidden until the browser says it can install, so a
      synthetic beforeinstallprompt fires first or the control ships unmeasured
 */
@@ -238,6 +240,7 @@ async function goto(page, view) {
       // the controls this sweep probes.
       await ctx.addInitScript((t) => { try {
         localStorage.setItem("dc-tour-seen", "1");
+        sessionStorage.setItem("dc-intro", "1");   // the opening has played this visit
         localStorage.setItem("dc-theme", t);
         localStorage.setItem("dc-sound-told", "1");
       } catch (e) {} }, theme);

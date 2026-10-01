@@ -15,6 +15,7 @@ if (OUT) require("fs").mkdirSync(OUT, { recursive: true });
       // the system scheme says, so colorScheme alone would never reach daylight.
       await ctx.addInitScript((t) => {
         localStorage.setItem("dc-tour-seen", "1");
+        sessionStorage.setItem("dc-intro", "1");   // the opening has played this visit
         localStorage.setItem("dc-theme", t);
       }, theme);
       const pg = await ctx.newPage();

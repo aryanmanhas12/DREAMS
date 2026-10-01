@@ -106,6 +106,10 @@
     // appears as the turn reaches it, nearest to India first. Off under
     // reduced motion, where the globe simply opens on India.
     let intro = !!opts.intro;
+    // The opening (intro.js) names the countries on the canvas as they come
+    // round, and leaves room round the sphere for those names.
+    const labels = !!opts.labels;
+    const margin = opts.margin || 14;
 
     // Count programmes per country straight from the database.
     const counts = {};
@@ -225,15 +229,56 @@
     if (intro) { spin = -homeLon + 150; tilt = -6; target = { spin: -homeLon, tilt: 12 }; }
 
     function resize() {
-      const rect = canvas.getBoundingClientRect();
-      if (!rect.width) return;
+      // The layout size, not getBoundingClientRect: the opening's globe is
+      // measured while its wrapper is still scaled down for the gate, and
+      // the transformed box drew it at 84% resolution, stretched.
+      const cw = canvas.clientWidth, ch = canvas.clientHeight;
+      if (!cw) return;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = rect.width; H = rect.height;
+      W = cw; H = ch;
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      R = Math.min(W, H) / 2 - 14;
+      R = Math.min(W, H) / 2 - margin;
       cx = W / 2; cy = H / 2;
+      labelPx = Math.max(10.5, Math.min(14, R / 12));
+      widths = {};
+    }
+
+    /* ───── the opening's turn ─────
+       intro.js asks for one scripted revolution that ends on India. Each
+       country lights as it crosses the middle of the globe, so the lights
+       arrive in the order the world turns, and the times are worked out in
+       advance (plan) so the music can put a note on each one exactly. */
+    let show = null, labelPx = 12, widths = {};
+    function easeIO(k) { return (1 - Math.cos(Math.PI * k)) / 2; }
+    function showPlan(o) {
+      const s0 = o.from, turn = o.turn;
+      return places.map(function (pl) {
+        // the first spin at or after the start where lon + spin is a whole turn
+        const sc = -pl.lon + 360 * Math.ceil((s0 + pl.lon) / 360);
+        const f = Math.max(0, Math.min(1, (sc - s0) / turn));
+        return { name: pl.name, t: o.delay + o.dur * Math.acos(1 - 2 * f) / Math.PI };
+      }).sort(function (a, b) { return a.t - b.t; });
+    }
+    function showActive(now) {
+      return !!(show && show.t0 && (!show.landedAt || now - show.landedAt < 2600));
+    }
+    function showStep(now) {
+      const o = show.o, t = now - show.t0;
+      const k = Math.max(0, Math.min(1, (t - o.delay) / o.dur));
+      const e = easeIO(k);
+      spin = o.from + o.turn * e;
+      tilt = o.tilt[0] + (o.tilt[1] - o.tilt[0]) * e;
+      places.forEach(function (pl) {
+        if (pl.litAt || pl.lightT == null || t < pl.lightT) return;
+        pl.litAt = now;
+        if (show.hooks.light) show.hooks.light(pl);
+      });
+      if (k >= 1 && !show.landedAt) {
+        show.landedAt = now;
+        if (show.hooks.land) show.hooks.land();
+      }
     }
 
     function draw() {
@@ -310,13 +355,37 @@
         return { pl: pl, p: p };
       }).filter((d) => d.p.z > -0.05).sort((a, b) => a.p.z - b.p.z);
 
+      const nowMs = performance.now();
       drawn.forEach(function (d) {
         const isHome = d.pl.name === HOME;
         const isHover = hovered && hovered.name === d.pl.name;
         const outside = focusSet && !focusSet.has(d.pl.name);
         // Radius carries the count; depth only fades opacity.
-        const r = 2.2 + (d.pl.n / maxN) * 4.6;
+        let r = 2.2 + (d.pl.n / maxN) * 4.6;
         const depth = Math.max(0, Math.min(1, d.p.z));
+        // The opening: a country not yet reached is a faint point, and one
+        // that has just been reached pops, with a ring that spreads and fades.
+        if (show) {
+          if (!d.pl.litAt) {
+            ctx.globalAlpha = 0.18 + depth * 0.22;
+            ctx.beginPath();
+            ctx.arc(d.p.x, d.p.y, 1.6, 0, Math.PI * 2);
+            ctx.fillStyle = starC;
+            ctx.fill();
+            return;
+          }
+          const age = nowMs - d.pl.litAt;
+          if (age < 520) {
+            const k = age / 520;
+            r *= 1 + 1.4 * (1 - k) * (1 - k);
+            ctx.globalAlpha = (1 - k) * 0.7 * (0.4 + depth * 0.6);
+            ctx.beginPath();
+            ctx.arc(d.p.x, d.p.y, r + 3 + k * 16, 0, Math.PI * 2);
+            ctx.strokeStyle = isHome ? home : starC;
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+          }
+        }
         let arrive = 1;
         if (intro) {
           const t = (performance.now() - introStart) / 1100 - d.pl.delay * 0.7;
@@ -352,6 +421,84 @@
         }
       });
       ctx.globalAlpha = 1;
+
+      if (show && show.landedAt) drawPulse(nowMs, P);
+      if (labels) drawLabels(drawn, P);
+    }
+
+    // India answering the landing: three rings, in the pink that marks it.
+    function drawPulse(nowMs, P) {
+      const pl = places.find(function (x) { return x.name === HOME; });
+      if (!pl) return;
+      const p = project(pl.lat, pl.lon, spin, tilt, R, cx, cy);
+      for (let i = 0; i < 3; i++) {
+        const k = (nowMs - show.landedAt - i * 320) / 1200;
+        if (k <= 0 || k >= 1) continue;
+        ctx.globalAlpha = (1 - k) * 0.85;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 8 + k * R * 0.42, 0, Math.PI * 2);
+        ctx.strokeStyle = P.home;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    /* Names beside the lit countries on the near side. Europe alone puts
+       eighteen within a thumb's width of each other, so names are placed
+       greedily, India first and then by how many programmes each country
+       has, on the right of the dot or else the left, and a name with no room
+       fades out rather than landing on another. Each name eases towards
+       shown or hidden, so one that loses its place does not flicker. */
+    function textWidth(s) {
+      if (widths[s] == null) widths[s] = ctx.measureText(s).width;
+      return widths[s];
+    }
+    function drawLabels(drawn, P) {
+      const boxes = [];
+      const font = '600 ' + labelPx.toFixed(1) + 'px "IBM Plex Sans", system-ui, sans-serif';
+      ctx.font = font;
+      ctx.textBaseline = "middle";
+      const h = labelPx * 1.25;
+      const order = drawn.filter(function (d) { return d.pl.litAt || !show; })
+        .sort(function (a, b) {
+          if (a.pl.name === HOME) return -1;
+          if (b.pl.name === HOME) return 1;
+          return b.pl.n - a.pl.n;
+        });
+      order.forEach(function (d) {
+        const pl = d.pl, z = d.p.z;
+        const r = 2.2 + (pl.n / maxN) * 4.6;
+        const w = textWidth(pl.name);
+        let want = 0;
+        if (z > 0.22) {
+          const tries = [d.p.x + r + 5, d.p.x - r - 5 - w];
+          for (let i = 0; i < 2; i++) {
+            const x = tries[i];
+            if (x < 2 || x + w > W - 2) continue;
+            const box = [x - 2, d.p.y - h / 2, x + w + 2, d.p.y + h / 2];
+            if (boxes.some(function (b) { return box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1]; })) continue;
+            boxes.push(box);
+            pl.side = i;
+            want = 1;
+            break;
+          }
+        }
+        pl.la = (pl.la || 0) + (want - (pl.la || 0)) * 0.22;
+        if (pl.la < 0.03) return;
+        const x = pl.side ? d.p.x - r - 5 - w : d.p.x + r + 5;
+        // A name still fading out keeps its room until it has gone, or the
+        // next name down the list is printed straight over it.
+        if (!want) boxes.push([x - 2, d.p.y - h / 2, x + w + 2, d.p.y + h / 2]);
+        ctx.globalAlpha = pl.la * Math.max(0, Math.min(1, (z - 0.12) / 0.3));
+        ctx.lineJoin = "round";
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = P.paper;
+        ctx.strokeText(pl.name, x, d.p.y);
+        ctx.fillStyle = P.ink;
+        ctx.fillText(pl.name, x, d.p.y);
+      });
+      ctx.globalAlpha = 1;
     }
 
     // Shortest way round, so a turn from Australia to the UK goes west rather
@@ -369,7 +516,11 @@
       lastTick = now;
       if (intro && !introStart) introStart = performance.now();
       if (intro && performance.now() - introStart > 2000) intro = false;
-      if (target && !dragging) {
+      const showing = showActive(now);
+      if (show && show.t0) showStep(now);
+      if (showing) {
+        // the opening steers the globe itself; nothing else moves it
+      } else if (target && !dragging) {
         const ds = angleDelta(spin, target.spin), dt = target.tilt - tilt;
         spin += ds * 0.075;
         tilt += dt * 0.075;
@@ -384,14 +535,14 @@
       // While the ONLY motion is the slow idle spin, 30 frames a second looks
       // identical and halves the cost. Easing, dragging and the intro draw
       // every frame, because those answer the reader.
-      const idleOnly = !target && !dragging && !intro;
+      const idleOnly = !target && !dragging && !intro && !showing;
       // And while the page is scrolling (space.js sets html.is-scrolling),
       // the idle spin holds still, so the frame goes to the scroll.
       const scrolling = document.documentElement.classList.contains("is-scrolling");
       if (!idleOnly || !scrolling) draw();
       // A globe without auto-spin draws only while it has somewhere to go,
       // so the atlas costs nothing once it has arrived.
-      if (!(autoSpin || target || dragging || intro)) return;
+      if (!(autoSpin || target || dragging || intro || showing)) return;
       // The 30fps idle spin waits on a timer, not on every animation frame.
       // Asking for a frame and then skipping the draw still costs a full
       // main-thread frame (style, animations, lifecycle): measured at 4x CPU
@@ -519,6 +670,38 @@
     return {
       redraw: function () { resize(); draw(); },
       countries: places.length,
+      /* The opening. plan(o) says when each country will light for a turn
+         of o.turn degrees from spin o.from over o.dur ms (after o.delay),
+         and poses the globe at its first frame, every country faint.
+         play(times, hooks) starts it: times maps a name to the ms it lights
+         (the plan, as intro.js quantised it to the music's grid). */
+      plan: function (o) {
+        show = { o: o, hooks: {} };
+        spin = o.from; tilt = o.tilt[0]; target = null;
+        draw();
+        return showPlan(o);
+      },
+      play: function (times, hooks) {
+        if (!show) return;
+        places.forEach(function (pl) { pl.lightT = times[pl.name]; pl.litAt = 0; });
+        show.hooks = hooks || {};
+        show.t0 = performance.now();
+        running = true;
+        kick();
+      },
+      // Where a country is on the canvas right now, for effects drawn over it.
+      where: function (name) {
+        const pl = places.find(function (x) { return x.name === name; });
+        if (!pl) return null;
+        const p = project(pl.lat, pl.lon, spin, tilt, R, cx, cy);
+        return { x: p.x, y: p.y, front: p.z > 0 };
+      },
+      stop: function () {
+        running = false;
+        if (raf) cancelAnimationFrame(raf);
+        if (wait) clearTimeout(wait);
+        raf = wait = null;
+      },
       /* Turn to a point and pick out the countries a passage is about. Under
          reduced motion it cuts straight there: the information is the same,
          only the journey is dropped. */

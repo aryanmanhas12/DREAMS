@@ -3,8 +3,8 @@
    network requests fixed", and neither is visible to a text check. Serve the
    real directory over HTTP (file:// would make every absolute /DREAMS/ link
    a false 404) and load each page with a listener on console and on
-   requestfailed. Seed dc-tour-seen, or the tour scrim opens on every fresh
-   context — that is the documented trap, and it would also fire its own
+   requestfailed. Seed dc-tour-seen (and dc-intro, the opening), or the tour
+   scrim opens on every fresh context — that is the documented trap, and it would also fire its own
    timers during the measurement. */
 const { launch, serve } = require("../lib/browser");
 const fs = require("fs"), path = require("path");
@@ -15,7 +15,7 @@ const ROOT = path.join(__dirname, "..", "..");
   const site = await serve({ gzip: false });
   const browser = await launch();
   const ctx = await browser.newContext({ reducedMotion: "reduce" });
-  await ctx.addInitScript(() => localStorage.setItem("dc-tour-seen", "1"));
+  await ctx.addInitScript(() => { localStorage.setItem("dc-tour-seen", "1"); sessionStorage.setItem("dc-intro", "1"); });
 
   const paths = ["/", "/privacy.html", "/terms.html", "/404.html",
     ...fs.readdirSync(ROOT, { withFileTypes: true })

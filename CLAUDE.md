@@ -34,8 +34,9 @@ Playwright and Chromium; serves the repo like Pages does).
   exists only to produce the single-file artifact bundle in `dist/` (gitignored).
 - **Script load order in `index.html` matters.** All `data-*.js` files push into `window.DB.*`;
   `app.js` must load last, `data-coast.js` before `globe.js`, and `space.js`, `sound.js`,
-  `ooh.js` and then `ooh-guide.js` before `app.js` (the guide draws with `ooh.js`, and
-  `app.js` calls the guide). Every tag is `defer` (see "Known traps"), which preserves this order.
+  `ooh.js`, then `ooh-guide.js`, then `intro.js` before `app.js` (the guide draws with `ooh.js`,
+  the opening uses the globe, the guide and the sound, and `app.js` starts the opening). Every
+  tag is `defer` (see "Known traps"), which preserves this order.
 - **Facts and judgements live in separate files.** `data-impact.js` holds tiers, odds and
   verdicts; the programme data files hold facts. Anyone forking should be able to disagree
   with a tier without touching data. Keep them separate.
@@ -169,6 +170,7 @@ Playwright and Chromium; serves the repo like Pages does).
 - **Wait for `load`, not `domcontentloaded`, on the generated category pages.** They carry **no JavaScript at all**, and `DOMContentLoaded` does not wait for a stylesheet unless a script follows it — with no script, nothing holds it, so the probe can run against a completely unstyled page. That reported **175 contrast failures at 1.00:1** with links at `rgb(0, 0, 238)`, the browser default blue, which reads exactly like the stylesheet having been deleted. It had not been. `pagecheck.js` now waits for `load` AND re-checks that `document.styleSheets[0].cssRules` is populated and `body` has a real background, so a stylesheet that genuinely 404s still fails instead of quietly passing on the same condition. Verified by hiding `styles.css` and watching it fail, then restoring it.
 - **Tap-target checks must probe `elementFromPoint`, not `getBoundingClientRect`.** The rect is the *visual* box and cannot see the `::after` that takes the topbar controls to 44px. Measuring the rect reports `36×36` on a button that is genuinely fine — a seventh false failure of the same family. Probe ±21px in all four directions and only report if a probe misses.
 - **Seed `dc-tour-seen` before every Playwright load, or every click times out.** The tour auto-opens on a first visit, and *every fresh browser context is a first visit* — so it drops a modal scrim over the page and each click fails with "subtree intercepts pointer events", which reads exactly like a broken button and is not one. Use `ctx.addInitScript(() => localStorage.setItem("dc-tour-seen","1"))` so the run tests the returning-visitor page. The tour has its own harness (`tour.js`); do not exercise it by accident anywhere else.
+- **Seed `sessionStorage` `dc-intro` too, for the same reason.** Since October 2026 every new visit opens on the opening (`intro.js`), which hides the whole page for about ten seconds behind a gate that waits for a tap. A harness that forgets the key measures an invisible page: contrast, tap targets and clicks all fail at once and look like a broken site. The opening has its own harness (`tools/test/intro.js`), which seeds nothing. Harnesses that run with `reducedMotion: "reduce"` (tour.js, the survey's tour pass) never see it, because the opening never plays under reduced motion.
 - **The survey has two lengths, and `#startBtn` is now the SHORT one.** Three questions (skill/anger/flow) or the full set; `#startFullBtn` starts the long run and `#continueFullBtn` on the results page upgrades a short run in place, resuming at question 4. A harness that only clicks `#startBtn` therefore tests three questions and 44 result cards, not the full set and 50, which is correct behaviour, not a regression. Test all the paths (short, upgrade, full, and full while staying in India) or you are covering a fraction of the flow.
 - **Rank on the defaults, speak only from `p.asked`.** `buildProfile` fills every constraint with a default so ranking still works on a three-question run. The prose must not. Saying "You told me you cannot pay" to someone never asked about money is a fabrication, and it is the precise failure this site exists to avoid — so every attributed sentence in `counsellorRead` is guarded on `p.asked.<id>`. The guards belong in `counsellorRead` ONLY; adding them to `score()` or `rankCountries()` breaks short-mode ranking entirely.
 - **Since October 2026 the full survey is 9 questions, or 8.** `living` carries a `when` that skips it for a reader who answered "I want to build something here", so the count depends on an earlier answer: `survey.js` runs both and expects 9 and 8. A completion loop that stops early reports "never reached results", a harness limit that looks exactly like a dead end in the flow, so give it headroom and assert on `#view-results.is-active`. `check.js` counts the questions from `app.js` itself, so prose like "sixteen questions" fails the build the moment it is stale.
@@ -298,10 +300,18 @@ Playwright and Chromium; serves the repo like Pages does).
   pass through it: alpha tracks on choosing an answer, beta curls on Continue, a gamma ring on
   saving, a decay chain when results arrive. None under reduced motion or a paused sky.
 - **`assets/sound.js` synthesises everything with Web Audio** (no files, works offline and in
-  the bundle): a drone, a four-chord A-minor pad that changes every 12s, filtered-noise wind,
-  pentatonic chimes through an echo, Poisson-timed cosmic-ray clicks; effects `decay`,
-  `alpha`, `gamma`, `fade`, `orbit`, `chain`. Measured from a real page run: peak 0.245,
-  RMS -26.7 dBFS, so no clipping and a background level.
+  the bundle). Since October 2026 ("more calming and more exciting") it is one piece in D major
+  at 94 bpm on a step sequencer that schedules 0.9s ahead: a drone, four chords of sixteen beats
+  (Dmaj9, Bm11, Gmaj7#11, A6sus) through a generated convolution reverb (shorter under
+  `html.lite`), half the old wind, rarer star chimes, and cosmic-ray ticks about one in six
+  seconds instead of one in 2.5. The excitement is a forty-second flight in the same cycle: a
+  felt-piano pulse that rests on the D, enters under the B minor, runs eighths under the G,
+  climbs in sixteenths under the A with a riser, and releases into the next D. Effects `decay`,
+  `alpha`, `gamma`, `fade`, `orbit`, `chain` are kept, softer, and retuned to D. Measured by
+  rendering the opening and the minute after it offline (`DCSound._render`, the method Ronak's
+  music uses): **peak 0.323, overall -25.8 dBFS RMS**; the opening runs at about -22 (it is
+  meant to be the loudest moment) and the bed settles at -26 to -29, where the old bed measured
+  -26.7. Keep the peak under 0.5.
 - **Browsers block sound until a gesture, so it starts on the first tap anywhere**, as the user
   asked ("constantly"), unless muted. WCAG 1.4.2 needs an on-page stop: the speaker button is
   first among the top-bar controls, and a one-time bubble says where it is. **A first gesture
@@ -545,6 +555,56 @@ exposure inside India plus the abroad fully funded one.
   0.2s in both, so the gap is the simulation's model charging the three new deferred
   scripts (22 KB), and the LCP element is now `.hero-choice-note`, the largest text block
   on the first screen since the lede moved below the buttons.
+
+## The opening: the Earth, every country, Ooh, 9.6 seconds (1 October 2026)
+
+The user asked for an unskippable intro like Ronak's and Arun's, made the planet: the Earth seen,
+every country seen, revolving, Ooh there and excited, the same length as Ronak's, workable on a
+phone, and the music made calmer and more exciting.
+
+- **Length is Ronak's, measured from its source:** Ronak's `otPlay` ends at 9,600ms. Arun's has
+  no fixed end (it waits for "Come in"), so Ronak's is the one to match. Here it is fifteen beats
+  at 94 bpm, 9,574ms, so every picture beat sits on the music's grid. `tools/test/intro.js`
+  measures 10.5-10.8s from the tap to the page being back, which is the 9.6s plus the
+  scheduling lead and the 0.6s fade.
+- **Unskippable, so the exits are the safety.** No Skip and no Escape, by the owner's choice. It
+  therefore never plays under `prefers-reduced-motion`, after "Pause the moving sky", or for a
+  shared plan link (`#p=`), and storage that throws counts as "seen" so it fails open onto the
+  page. Once per visit (sessionStorage `dc-intro`), Ronak's rule: a reload inside a tab does
+  not replay it. The inline `<head>` script decides before first paint and sets
+  `html.intro-on` (and `html.intro-wait` when the gate is needed); if `intro.js` has not taken
+  over within 12 seconds (`html.intro-live`), the page shows without it.
+- **The gate exists because sound needs a tap.** "Begin" starts the music and the turn in the
+  same instant: `DCSound.begin()` resolves once the context is really running, with the
+  scheduling lead plus the device's output latency, and the picture waits that long, so the
+  heard and the seen start together (Arun's rule). "Begin in silence" is this visit only and
+  does not touch the stored choice. With sound already off there is no gate; it simply plays.
+- **Countries light as they cross the middle, and the timing is computed, not observed.**
+  `globe.plan()` solves the eased turn for when each country's longitude crosses the central
+  meridian; `intro.js` snaps those times to the 32nd-note grid and hands the same list to the
+  globe and to the music, so each light is a note on the exact frame it appears (two at most
+  per slot, as a chord). The first version gave each light its own slot and pushed Europe's
+  eighteen a full second late, when they were already at the limb and could not be labelled.
+- **The count is the page's count.** Lights for `REGIONS` entries (Gulf, Baltics) are plotted
+  but not counted, so the counter and Ooh's "33 countries" equal `#claimCountries`; the harness
+  asserts it.
+- **Two bugs this round, both found by looking before any test was written.** (1) The globe
+  measured its canvas with `getBoundingClientRect` while the opening's wrapper was still at
+  `scale(.84)`, so it drew at 84% resolution, stretched, and the India burst landed off-centre.
+  `resize()` now uses `clientWidth`, the layout size. (2) The html state class was first called
+  `intro-gate`, the same name as the gate panel's own class, so `html` matched
+  `.intro-gate { display: flex; flex-direction: column }` and the hidden page laid out 736px
+  wide on a 390px phone. Never reuse a component's class name as a state on `html`.
+- **Names on the canvas are placed greedily** (India first, then by programme count, right of
+  the dot or else left) and ease in and out; a name still fading keeps its box until it has
+  gone, or the next one prints straight over it ("Indiangladesh" shipped in a screenshot).
+- **Cost, at 4x CPU on a 390px phone at 3x density:** about 0.7s of script and 0.8s of style
+  across the 10.8s, no long task over 230ms, about 19 frames a second here. Nearly all the rest
+  of the busy time is this container's software GPU uploading the canvas (stubbing all canvas
+  text changed nothing measurable; removing the sky saved ~0.35s of style). The page underneath
+  is `visibility: hidden`, so it is not painted, not focusable and not read out; the hero globe
+  and the tour start only when the opening has finished, and the hero globe then opens on
+  India rather than turning to it a second time.
 
 ## Pre-launch checklist — run this before any release, every time
 

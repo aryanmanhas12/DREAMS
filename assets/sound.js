@@ -2,35 +2,45 @@
    no audio files, so nothing to download, nothing fetched from anywhere, and
    it works from file:// and inside the single-file bundle.
 
-   Two layers:
-     ambient   a slow space drone (detuned low voices through a breathing
-               filter), a pad of four A-minor chords that swell into one
-               another every twelve seconds, a thin "solar wind" of noise,
-               pentatonic star chimes with an echo, and sparse cosmic-ray
-               clicks on a Poisson clock, the way a Geiger counter
-               actually sounds in open air.
-     effects   answering the reader's actions:
-                 decay   a Geiger click when an answer is chosen
-                 alpha   a heavy, short zip when you move to the next question
-                         (alpha particles are heavy and stop in centimetres)
-                 gamma   a bright, clean ping when a programme is saved
-                 fade    the same ping falling, when it is removed
-                 chain   a decay chain of clicks and a rising chord as your
-                         results arrive
-                 orbit   a soft whoosh when the view changes or a country is
-                         picked on the globe
+   WHAT IT IS (October 2026, asked for "more calming and more exciting")
+   One piece in D major at 94 beats a minute, on a step sequencer that looks
+   a second ahead, so every note lands on the beat however busy the page is.
+
+     calm      a low drone on D and A through a slowly breathing filter; four
+               chords, sixteen beats each (Dmaj9, Bm11, Gmaj7#11, A6sus),
+               swelling into one another through a soft generated reverb;
+               a thin solar wind; a star chime now and then; and cosmic-ray
+               ticks on a Poisson clock, far rarer and softer than before.
+     exciting  the same forty-second cycle carries a flight: the D chord
+               rests, a felt-piano pulse enters under the B minor, runs in
+               eighths under the G, quickens to sixteenths and climbs under
+               the A while a riser lifts into the next D, which lands with a
+               rising chime. Calm, build, lift, release, over and over.
+     opening   begin(lights) plays the cue for the opening (intro.js), on the
+               same grid as its picture: B minor in the dark, a heartbeat kick
+               from beat 2, G at beat 4, hi-hats and a riser from beat 6, A at
+               beat 8, and on beat 10, as India lands, the D chord with a
+               chime cascade. Every country that lights is one note of a
+               rising run, at the exact moment it lights.
+   Effects answer the reader's actions: decay (a Geiger click on an answer),
+   alpha (a short zip to the next question), gamma (a ping on saving),
+   fade (the ping falling, on removing), chain (results arriving), orbit (a
+   whoosh for a change of view).
 
    Rules it keeps:
-     - Browsers refuse to start audio before the reader interacts, so nothing
-       plays until the first tap, click or key press. After that the ambient
-       plays continuously, as the user asked, unless it has been muted.
-     - WCAG 1.4.2: sound that plays by itself must be stoppable from the page.
-       The speaker button in the top bar does that, it is keyboard operable,
-       and the choice is remembered on this device.
-     - It suspends while the tab is hidden, so it never plays to an empty room
-       or drains a phone in a pocket.
-   Public surface: window.DCSound.play(name), .isOn(), and a "dcsound" event on
-   window whose detail is { on, first } when the sound starts or stops. */
+     - Browsers refuse audio before the reader interacts, so nothing plays
+       until the first tap, click or key press, or the opening's Begin. After
+       that it plays continuously, as the user asked, unless muted.
+     - WCAG 1.4.2: the speaker button in the top bar stops it, it is keyboard
+       operable, and the choice is remembered. "Begin in silence" silences
+       this visit only.
+     - It suspends while the tab is hidden.
+     - Loudness was measured by rendering the opening and two minutes after
+       it offline (_render): keep the peak under 0.5 and the level near the
+       old bed's -27 dBFS RMS.
+   Public surface: window.DCSound.play(name), .isOn(), .begin(lights),
+   .quiet(), .toggle(), and a "dcsound" event on window whose detail is
+   { on, first } when the sound starts or stops. */
 (function () {
   "use strict";
 
@@ -38,34 +48,98 @@
   const AC = window.AudioContext || window.webkitAudioContext;
   let pref = "on";
   try { pref = localStorage.getItem(KEY) || "on"; } catch (e) { /* private mode */ }
+  let quietVisit = false;      // "Begin in silence": off for this visit only
 
-  let ac = null, master = null, ambBus = null, fxBus = null, echo = null;
-  let ambient = null, chimeTimer = null, rayTimer = null, padTimer = null, unlocked = false;
-  let audible = false;   // what the button shows: is the galaxy actually playing
+  const BPM = 94, BEAT = 60 / BPM;
+  const mtof = function (m) { return 440 * Math.pow(2, (m - 69) / 12); };
+  const lite = function () { return document.documentElement.classList.contains("lite"); };
+
+  /* The harmony, as MIDI notes. */
+  const LOOP = [
+    [50, 57, 61, 64, 66],        // Dmaj9      D3 A3 C#4 E4 F#4
+    [47, 54, 57, 62, 64],        // Bm11       B2 F#3 A3 D4 E4
+    [43, 50, 54, 59, 61],        // Gmaj7#11   G2 D3 F#3 B3 C#4
+    [45, 52, 54, 59, 62]         // A6sus      A2 E3 F#3 B3 D4
+  ];
+  const NIGHT = [47, 54, 61, 62, 66];          // Bm(add9), the dark before the turn
+  const WONDER = LOOP[2];
+  const LIFT = [45, 52, 57, 59, 64];           // Asus2, open and leaning
+  const HOME = [38, 50, 57, 61, 64, 66, 69];   // Dmaj9, wide, for the landing
+  const PENT = [62, 64, 66, 69, 71, 74, 76, 78, 81, 83, 86];  // D major pentatonic, D4 to D6
+  const OPENING_BEATS = 26;                    // the cue hands over to the loop's B minor here
+
+  let ac = null, out = null;   // out: the buses for whichever context is playing
+  let song = null, stepT = null, chimeT = null, rayT = null, unlocked = false;
+  let drone = null;            // the continuous nodes, stopped together
+  let audible = false;         // what the button shows: is the galaxy actually playing
 
   function now() { return ac.currentTime; }
 
+  /* A generated room: decaying noise, two channels with different seeds so
+     the tail is wide. No file, so nothing to fetch. */
+  function room(seconds, decay) {
+    const rate = ac.sampleRate, len = Math.floor(rate * seconds);
+    const buf = ac.createBuffer(2, len, rate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      let seed = c ? 48271 : 16807;
+      for (let i = 0; i < len; i++) {
+        seed = (seed * 16807) % 2147483647;
+        d[i] = ((seed / 2147483647) * 2 - 1) * Math.pow(1 - i / len, decay);
+      }
+    }
+    return buf;
+  }
+
+  function build() {
+    const limiter = ac.createDynamicsCompressor();
+    limiter.threshold.value = -14; limiter.knee.value = 10; limiter.ratio.value = 5;
+    limiter.attack.value = 0.01; limiter.release.value = 0.4;
+    const master = ac.createGain(); master.gain.value = 0.9;
+    master.connect(limiter); limiter.connect(ac.destination);
+
+    // The reverb is what makes it calm: everything sits in a large soft room.
+    // Shorter on 2GB phones, where a long convolution costs real CPU.
+    const verb = ac.createConvolver(); verb.buffer = room(lite() ? 1.8 : 3.4, 2.4);
+    const wet = ac.createGain(); wet.gain.value = 0.55;
+    verb.connect(wet); wet.connect(master);
+
+    const bed = ac.createGain(); bed.gain.value = 0;          // faded in, never started
+    const bedSend = ac.createGain(); bedSend.gain.value = 0.7;
+    bed.connect(master); bed.connect(bedSend); bedSend.connect(verb);
+
+    // The pad's light: a lowpass the opening opens.
+    const tone = ac.createBiquadFilter(); tone.type = "lowpass"; tone.frequency.value = 1300; tone.Q.value = 0.5;
+    tone.connect(bed);
+
+    // The pulse runs through a dotted-eighth echo, so a few notes sound like many.
+    const pulse = ac.createGain(); pulse.gain.value = 1;
+    const echo = ac.createDelay(1.5); echo.delayTime.value = BEAT * 0.75;
+    const fb = ac.createGain(); fb.gain.value = 0.32;
+    const etone = ac.createBiquadFilter(); etone.type = "lowpass"; etone.frequency.value = 2600;
+    pulse.connect(bed); pulse.connect(echo);
+    echo.connect(etone); etone.connect(fb); fb.connect(echo); etone.connect(bed);
+
+    // The beat: kick and hats for the opening, dry and close.
+    const beat = ac.createGain(); beat.gain.value = 1; beat.connect(bed);
+
+    const fx = ac.createGain(); fx.gain.value = 0.5;
+    const fxSend = ac.createGain(); fxSend.gain.value = 0.25;
+    fx.connect(master); fx.connect(fxSend); fxSend.connect(verb);
+    return { master: master, verb: verb, bed: bed, tone: tone, pulse: pulse, echo: echo, beat: beat, fx: fx };
+  }
+
   function ensure() {
     if (ac || !AC) return ac;
-    try { ac = new AC(); } catch (e) { ac = null; return null; }
-    const limiter = ac.createDynamicsCompressor();
-    limiter.threshold.value = -12; limiter.ratio.value = 6;
-    master = ac.createGain(); master.gain.value = 0.9;
-    master.connect(limiter); limiter.connect(ac.destination);
-    ambBus = ac.createGain(); ambBus.gain.value = 0; ambBus.connect(master);
-    fxBus = ac.createGain(); fxBus.gain.value = 0.55; fxBus.connect(master);
-
-    // A long, soft echo for the chimes: the "size" of the room is space.
-    echo = ac.createDelay(1.5); echo.delayTime.value = 0.46;
-    const fb = ac.createGain(); fb.gain.value = 0.38;
-    const tone = ac.createBiquadFilter(); tone.type = "lowpass"; tone.frequency.value = 2600;
-    echo.connect(tone); tone.connect(fb); fb.connect(echo); tone.connect(ambBus);
+    try { ac = new AC({ latencyHint: "playback" }); } catch (e) { try { ac = new AC(); } catch (e2) { ac = null; return null; } }
+    try { if (navigator.audioSession) navigator.audioSession.type = "ambient"; } catch (e) { /* older Safari */ }
+    out = build();
     return ac;
   }
 
   let noiseBuf = null;
   function noise() {
-    if (noiseBuf) return noiseBuf;
+    if (noiseBuf && noiseBuf.sampleRate === ac.sampleRate) return noiseBuf;
     const len = ac.sampleRate * 2;
     noiseBuf = ac.createBuffer(1, len, ac.sampleRate);
     const d = noiseBuf.getChannelData(0);
@@ -78,153 +152,291 @@
     return noiseBuf;
   }
 
-  /* ───────── ambient ───────── */
-  function startAmbient() {
-    if (!ensure() || ambient) return;
-    const t = now();
-    const nodes = [];
+  function pan(v) {
+    if (!ac.createStereoPanner) return null;
+    const p = ac.createStereoPanner(); p.pan.value = v; return p;
+  }
+  function route(node, dest, p) {
+    const pn = p == null ? null : pan(p);
+    if (pn) { node.connect(pn); pn.connect(dest); } else node.connect(dest);
+  }
 
-    // The drone: A1, E2 and A2, each slightly detuned so they beat slowly.
-    const filt = ac.createBiquadFilter();
-    filt.type = "lowpass"; filt.frequency.value = 380; filt.Q.value = 0.8;
-    const lfo = ac.createOscillator(); lfo.frequency.value = 0.045;
-    const lfoAmt = ac.createGain(); lfoAmt.gain.value = 170;
-    lfo.connect(lfoAmt); lfoAmt.connect(filt.frequency); lfo.start(t);
-    const droneGain = ac.createGain(); droneGain.gain.value = 0.11;
-    filt.connect(droneGain); droneGain.connect(ambBus);
-    [[55, "sine", 0], [82.41, "triangle", 4], [110, "sine", -5], [164.8, "sine", 7]].forEach(function (v, i) {
-      const o = ac.createOscillator(); o.type = v[1]; o.frequency.value = v[0]; o.detune.value = v[2];
-      const g = ac.createGain(); g.gain.value = i === 3 ? 0.25 : 0.6;
-      o.connect(g); g.connect(filt); o.start(t);
-      nodes.push(o);
+  /* ───────── instruments ───────── */
+
+  // A pad voice: a sine and a quieter detuned triangle that swell in on a
+  // time constant and let go slowly, so chords overlap instead of switching.
+  function voice(t, midi, dur, level, spread) {
+    const v = ac.createGain();
+    v.gain.setValueAtTime(0, t);
+    v.gain.setTargetAtTime(level, t, 1.3);
+    v.gain.setTargetAtTime(0, t + dur, 1.9);
+    route(v, out.tone, spread);
+    const end = t + dur + 9;
+    [["sine", -5, 1], ["triangle", 6, 0.26]].forEach(function (s) {
+      const o = ac.createOscillator(); o.type = s[0];
+      o.frequency.value = mtof(midi); o.detune.value = s[1];
+      const a = ac.createGain(); a.gain.value = s[2];
+      o.connect(a); a.connect(v); o.start(t); o.stop(end);
     });
-
-    // Solar wind: noise through a narrow band that wanders slowly.
-    const wind = ac.createBufferSource(); wind.buffer = noise(); wind.loop = true;
-    const band = ac.createBiquadFilter(); band.type = "bandpass"; band.frequency.value = 1400; band.Q.value = 6;
-    const wLfo = ac.createOscillator(); wLfo.frequency.value = 0.027;
-    const wAmt = ac.createGain(); wAmt.gain.value = 900;
-    wLfo.connect(wAmt); wAmt.connect(band.frequency); wLfo.start(t);
-    const wGain = ac.createGain(); wGain.gain.value = 0.05;
-    wind.connect(band); band.connect(wGain); wGain.connect(ambBus); wind.start(t);
-
-    nodes.push(lfo, wLfo, wind);
-    ambient = nodes;
-
-    // Fade the whole bed in over three seconds so it arrives, never starts.
-    ambBus.gain.cancelScheduledValues(t);
-    ambBus.gain.setValueAtTime(ambBus.gain.value, t);
-    ambBus.gain.linearRampToValueAtTime(0.5, t + 3);
-
-    scheduleChime();
-    scheduleRay();
-    padIndex = 0;
-    schedulePad(0.5);
+  }
+  function chord(t, notes, dur, lvl) {
+    notes.forEach(function (m, i) {
+      voice(t + i * 0.12, m, dur, (i === 0 ? 0.052 : 0.032) * (lvl || 1), (i % 2 ? 1 : -1) * (0.1 + i * 0.07));
+    });
   }
 
-  function stopAmbient() {
-    if (!ac || !ambient) return;
-    const t = now();
-    ambBus.gain.cancelScheduledValues(t);
-    ambBus.gain.setValueAtTime(ambBus.gain.value, t);
-    ambBus.gain.linearRampToValueAtTime(0, t + 0.6);
-    const nodes = ambient; ambient = null;
-    setTimeout(function () { nodes.forEach(function (n) { try { n.stop(); } catch (e) { /* already stopped */ } }); }, 700);
-    clearTimeout(chimeTimer); clearTimeout(rayTimer); clearTimeout(padTimer);
+  // The felt-piano pluck: a sine and two upper partials that fade faster.
+  function pluck(t, midi, level, dest) {
+    const bus = ac.createGain();
+    route(bus, dest || out.pulse, ((midi % 7) / 7) - 0.45);
+    [[1, 1, 1.9], [2, 0.2, 0.7], [3, 0.07, 0.35]].forEach(function (p) {
+      const o = ac.createOscillator(); o.frequency.value = mtof(midi) * p[0];
+      const e = ac.createGain();
+      e.gain.setValueAtTime(0, t);
+      e.gain.linearRampToValueAtTime(level * p[1], t + 0.008);
+      e.gain.exponentialRampToValueAtTime(0.00001, t + p[2]);
+      o.connect(e); e.connect(bus); o.start(t); o.stop(t + p[2] + 0.05);
+    });
   }
 
-  /* The pad: four chords in A minor that swell and fade into one another
-     every twelve seconds over the drone, so the sound drifts the way the sky
-     does instead of holding one note. Each chord lives about twenty seconds:
-     a five-second rise, a hold, a seven-second fall that overlaps the next. */
-  const CHORDS = [
-    [110, 164.81, 246.94, 261.63],     // A minor, added ninth
-    [87.31, 130.81, 164.81, 220],      // F major seventh
-    [98, 146.83, 196, 246.94],         // G, open
-    [82.41, 123.47, 146.83, 196]       // E minor seventh
-  ];
-  let padIndex = 0;
-  function schedulePad(delay) {
-    padTimer = setTimeout(function () {
-      if (!ambient) return;
-      pad(CHORDS[padIndex % CHORDS.length]);
-      padIndex++;
-      schedulePad(12);
-    }, delay * 1000);
-  }
-  function pad(freqs) {
-    const t = now();
-    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.Q.value = 0.5;
+  // A heartbeat: a sine that drops in pitch. On a phone speaker the low end
+  // vanishes and what is left is the soft thump of its first few cycles.
+  function kick(t, level) {
+    const o = ac.createOscillator(); o.type = "sine";
+    o.frequency.setValueAtTime(150, t);
+    o.frequency.exponentialRampToValueAtTime(47, t + 0.14);
     const g = ac.createGain();
     g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.06, t + 5);
-    g.gain.setValueAtTime(0.06, t + 12);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 19);
-    lp.connect(g); g.connect(ambBus); g.connect(echo);
-    freqs.forEach(function (f, i) {
-      [["sine", 0], ["triangle", i % 2 ? 6 : -6]].forEach(function (v) {
-        const o = ac.createOscillator(); o.type = v[0]; o.frequency.value = f; o.detune.value = v[1];
-        const vg = ac.createGain(); vg.gain.value = v[0] === "sine" ? 0.5 : 0.18;
-        o.connect(vg); vg.connect(lp);
-        o.start(t); o.stop(t + 19.5);
-      });
-    });
+    g.gain.exponentialRampToValueAtTime(level, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.38);
+    o.connect(g); g.connect(out.beat); o.start(t); o.stop(t + 0.42);
   }
-
-  // A star chime every few seconds: one note of A minor pentatonic, soft
-  // attack, long ring, into the echo.
-  const PENT = [440, 523.25, 587.33, 659.25, 783.99, 880, 1046.5];
-  function scheduleChime() {
-    chimeTimer = setTimeout(function () {
-      if (!ambient) return;
-      chime(PENT[Math.floor(Math.random() * PENT.length)], 0.05 + Math.random() * 0.03, echo);
-      scheduleChime();
-    }, 2500 + Math.random() * 6000);
+  function hat(t, level) {
+    const src = ac.createBufferSource(); src.buffer = noise();
+    const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 7200;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(level, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+    route(src, hp, null); hp.connect(g); route(g, out.beat, 0.3);
+    src.start(t, Math.random() * 1.5, 0.07);
   }
-  function chime(freq, level, dest) {
-    const t = now();
+  // A riser: noise through a band that climbs, swelling, into the reverb.
+  function riser(t, dur, peak) {
+    const src = ac.createBufferSource(); src.buffer = noise(); src.loop = true;
+    const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 2.2;
+    bp.frequency.setValueAtTime(420, t); bp.frequency.exponentialRampToValueAtTime(5200, t + dur);
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + dur * 0.92);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.25);
+    src.connect(bp); bp.connect(g); g.connect(out.bed); g.connect(out.verb);
+    src.start(t); src.stop(t + dur + 0.3);
+  }
+  function chime(t, freq, level, dest) {
     const o = ac.createOscillator(); o.type = "sine"; o.frequency.value = freq;
     const o2 = ac.createOscillator(); o2.type = "sine"; o2.frequency.value = freq * 2.01;
     const g = ac.createGain();
     g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(level, t + 0.03);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 3.2);
-    const g2 = ac.createGain(); g2.gain.value = 0.18;
+    g.gain.exponentialRampToValueAtTime(level, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 3);
+    const g2 = ac.createGain(); g2.gain.value = 0.16;
     o.connect(g); o2.connect(g2); g2.connect(g);
-    g.connect(dest || ambBus);
-    o.start(t); o2.start(t); o.stop(t + 3.3); o2.stop(t + 3.3);
+    g.connect(dest || out.echo); g.connect(out.verb);
+    o.start(t); o2.start(t); o.stop(t + 3.1); o2.stop(t + 3.1);
   }
 
-  // Cosmic rays: a Poisson process, so the gaps are random the way real
-  // decays are, averaging one every ~2.5 seconds, very quiet.
+  /* ───────── the bed ───────── */
+  function startDrone(t) {
+    const nodes = [];
+    const filt = ac.createBiquadFilter(); filt.type = "lowpass"; filt.frequency.value = 300; filt.Q.value = 0.7;
+    const lfo = ac.createOscillator(); lfo.frequency.value = 1 / 22;
+    const lfoAmt = ac.createGain(); lfoAmt.gain.value = 110;
+    lfo.connect(lfoAmt); lfoAmt.connect(filt.frequency); lfo.start(t);
+    const g = ac.createGain(); g.gain.value = 0.085;
+    filt.connect(g); g.connect(out.bed);
+    [[38, "sine", 0, 0.6], [45, "triangle", 4, 0.45], [50, "sine", -5, 0.5], [57, "sine", 6, 0.16]].forEach(function (v) {
+      const o = ac.createOscillator(); o.type = v[1]; o.frequency.value = mtof(v[0]); o.detune.value = v[2];
+      const vg = ac.createGain(); vg.gain.value = v[3];
+      o.connect(vg); vg.connect(filt); o.start(t);
+      nodes.push(o);
+    });
+    // Solar wind, half as loud as it was: a narrow band of noise that wanders.
+    const wind = ac.createBufferSource(); wind.buffer = noise(); wind.loop = true;
+    const band = ac.createBiquadFilter(); band.type = "bandpass"; band.frequency.value = 1500; band.Q.value = 5;
+    const wl = ac.createOscillator(); wl.frequency.value = 0.023;
+    const wa = ac.createGain(); wa.gain.value = 800;
+    wl.connect(wa); wa.connect(band.frequency); wl.start(t);
+    const wg = ac.createGain(); wg.gain.value = 0.026;
+    wind.connect(band); band.connect(wg); wg.connect(out.bed); wind.start(t);
+    nodes.push(lfo, wl, wind);
+    return nodes;
+  }
+
+  /* One beat of the loop. lb is the loop's own beat count: sixteen to a
+     chord, four chords to the cycle. */
+  function loopBeat(lb, t) {
+    const ci = Math.floor(lb / 16) % 4, pos = lb % 16, notes = LOOP[ci];
+    if (pos === 0) chord(t, notes, 16 * BEAT);
+    const up = notes.slice(1).map(function (m) { return m + 12; });
+    const arp = [0, 1, 2, 3, 2, 1, 3, 2];
+    const light = lite();
+    if (ci === 0) {
+      // rest: the release lands here, then one small figure that climbs
+      if (pos === 0 && song.flown) {
+        PENT.slice(3, 9).forEach(function (m, i) { pluck(t + i * BEAT / 4, m + 12, 0.03 - i * 0.003); });
+      }
+      if (pos === 6 && Math.random() < 0.7) [0, 1, 2].forEach(function (k) { pluck(t + k * BEAT / 2, up[k], 0.026); });
+    } else if (ci === 1) {
+      // the pulse enters: quarter notes, then eighths, growing
+      const lvl = 0.012 + 0.016 * pos / 15;
+      pluck(t, up[arp[pos % 8]], lvl);
+      if (pos >= 8 && !light) pluck(t + BEAT / 2, up[arp[(pos + 3) % 8]], lvl * 0.8);
+    } else if (ci === 2) {
+      // eighths, with a sixteenth pickup into every bar
+      for (let k = 0; k < 2; k++) pluck(t + k * BEAT / 2, up[arp[(pos * 2 + k) % 8]], 0.028);
+      if (pos % 4 === 3 && !light) pluck(t + BEAT * 0.75, up[3] + 2, 0.02);
+    } else {
+      // the lift: sixteenths that climb an octave, and a riser into the D
+      const n = pos < 8 || light ? 2 : 4;
+      for (let k = 0; k < n; k++) {
+        const step = pos * n + k, oct = pos >= 12 ? 12 : 0;
+        pluck(t + k * BEAT / n, up[arp[step % 8]] + oct, 0.024 + 0.008 * pos / 15);
+      }
+      if (pos === 8) riser(t, 8 * BEAT, 0.05);
+      song.flown = true;
+    }
+  }
+
+  /* One beat of the opening cue. */
+  function openingBeat(b, t) {
+    if (b === 0) chord(t, NIGHT, 4 * BEAT, 0.9);
+    if (b === 4) chord(t, WONDER, 4 * BEAT, 1);
+    if (b === 8) chord(t, LIFT, 2 * BEAT, 1.05);
+    if (b >= 2 && b < 10) kick(t, 0.07 + 0.018 * (b - 2));
+    if (b >= 6 && b < 10) { hat(t + BEAT / 2, 0.02 + 0.006 * (b - 6)); if (!lite()) hat(t + BEAT * 0.75, 0.012); }
+    if (b === 4) riser(t, 6 * BEAT, 0.055);
+    if (b === 10) {
+      // India lands
+      kick(t, 0.2);
+      chord(t, HOME, 16 * BEAT, 1.15);
+      PENT.forEach(function (m, i) { pluck(t + i * BEAT / 4, m + 12, 0.034 - i * 0.002); });
+      chime(t + 0.02, mtof(86), 0.05);
+    }
+    if (b === 12) {
+      // the name: the home note and its fifth, once
+      chime(t + BEAT / 2, mtof(74), 0.06);
+      chime(t + BEAT / 2 + 0.09, mtof(81), 0.035);
+    }
+  }
+
+  // The step sequencer: every 300ms, schedule whatever falls in the next 0.9s.
+  function stepper() {
+    clearTimeout(stepT);
+    if (!song || !ac) return;
+    const ahead = now() + 0.9;
+    while (song.t0 + song.beat * BEAT < ahead) {
+      const b = song.beat, t = song.t0 + b * BEAT;
+      if (t >= now() - 0.05) {
+        if (song.opening && b < OPENING_BEATS) openingBeat(b, t);
+        else loopBeat(song.opening ? b - OPENING_BEATS + 16 : b, t);
+      }
+      song.beat++;
+    }
+    stepT = setTimeout(stepper, 300);
+  }
+
+  /* Random, sparse things on top: a star chime every few seconds and a
+     cosmic-ray tick on a Poisson clock (gaps random the way real decays
+     are), now about one in six seconds and soft. */
+  const STARS = [74, 76, 78, 81, 83, 86];
+  function scheduleChime() {
+    chimeT = setTimeout(function () {
+      if (!song) return;
+      chime(now() + 0.02, mtof(STARS[Math.floor(Math.random() * STARS.length)]), 0.032 + Math.random() * 0.02);
+      scheduleChime();
+    }, 4000 + Math.random() * 7000);
+  }
   function scheduleRay() {
-    const gap = -Math.log(1 - Math.random()) * 2500;
-    rayTimer = setTimeout(function () {
-      if (!ambient) return;
-      click(0.06, ambBus);
+    rayT = setTimeout(function () {
+      if (!song) return;
+      tick(now() + 0.01, 0.028, out.bed);
       scheduleRay();
-    }, gap);
+    }, -Math.log(1 - Math.random()) * 6000);
+  }
+
+  function startSong(opening, lights) {
+    if (!ensure() || song) return;
+    const t = now() + 0.06;
+    song = { t0: t, beat: 0, opening: !!opening, flown: false };
+    drone = startDrone(t);
+    const bed = out.bed.gain;
+    bed.cancelScheduledValues(t);
+    bed.setValueAtTime(Math.max(0.0001, bed.value), t);
+    if (opening) {
+      // The opening swells in over two beats and the pad's filter opens with
+      // the turn, wide at the landing, then settles.
+      bed.linearRampToValueAtTime(0.62, t + 2 * BEAT);
+      bed.setTargetAtTime(0.44, t + 16 * BEAT, 3);
+      const f = out.tone.frequency;
+      f.cancelScheduledValues(t);
+      f.setValueAtTime(420, t);
+      f.exponentialRampToValueAtTime(1100, t + 8 * BEAT);
+      f.exponentialRampToValueAtTime(2600, t + 10 * BEAT);
+      f.setTargetAtTime(1300, t + 13 * BEAT, 3);
+      // Every country that lights is a note, rising from D4 to D6 as the
+      // count rises, on the moment it lights.
+      // Lights that share a grid slot sound as a chord of two at most.
+      const inSlot = {};
+      (lights || []).forEach(function (l) {
+        const slot = Math.round(l.t);
+        inSlot[slot] = (inSlot[slot] || 0) + 1;
+        if (inSlot[slot] > 2) return;
+        const k = Math.floor((l.i / Math.max(1, l.n)) * (PENT.length - 1)) + (inSlot[slot] === 2 ? 2 : 0);
+        pluck(t + l.t / 1000, PENT[Math.min(PENT.length - 1, k)], inSlot[slot] === 1 ? 0.036 : 0.022);
+      });
+    } else {
+      bed.linearRampToValueAtTime(0.44, t + 3);
+    }
+    stepper();
+    scheduleChime();
+    scheduleRay();
+  }
+
+  function stopSong() {
+    if (!ac || !song) return;
+    const t = now();
+    out.bed.gain.cancelScheduledValues(t);
+    out.bed.gain.setValueAtTime(out.bed.gain.value, t);
+    out.bed.gain.linearRampToValueAtTime(0, t + 0.6);
+    const nodes = drone || [];
+    drone = null; song = null;
+    clearTimeout(stepT); clearTimeout(chimeT); clearTimeout(rayT);
+    setTimeout(function () { nodes.forEach(function (n) { try { n.stop(); } catch (e) { /* already stopped */ } }); }, 700);
+    // Notes already scheduled ahead play out under the fade; a fresh graph
+    // next time means none of them can leak into the next start.
+    const old = out;
+    setTimeout(function () { try { old.master.disconnect(); } catch (e) { /* gone */ } }, 900);
+    out = build();
   }
 
   /* ───────── effects ───────── */
-  function click(level, dest, when) {
-    const t = when || now();
+  // A Geiger tick, softer than it was: filtered noise and a short sine knock.
+  function tick(t, level, dest) {
     const src = ac.createBufferSource(); src.buffer = noise();
-    const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 2600;
+    const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 2400;
     const g = ac.createGain();
     g.gain.setValueAtTime(level, t);
     g.gain.exponentialRampToValueAtTime(0.0001, t + 0.012);
-    src.connect(hp); hp.connect(g); g.connect(dest || fxBus);
+    src.connect(hp); hp.connect(g); g.connect(dest || out.fx);
     src.start(t, Math.random() * 1.5, 0.02);
-    // The body of a Geiger click: a very short, pitched knock.
-    const o = ac.createOscillator(); o.type = "square"; o.frequency.value = 1900 + Math.random() * 300;
+    const o = ac.createOscillator(); o.type = "sine"; o.frequency.value = 1700 + Math.random() * 300;
     const og = ac.createGain();
-    og.gain.setValueAtTime(level * 0.35, t);
-    og.gain.exponentialRampToValueAtTime(0.0001, t + 0.006);
-    o.connect(og); og.connect(dest || fxBus); o.start(t); o.stop(t + 0.01);
+    og.gain.setValueAtTime(level * 0.4, t);
+    og.gain.exponentialRampToValueAtTime(0.0001, t + 0.008);
+    o.connect(og); og.connect(dest || out.fx); o.start(t); o.stop(t + 0.012);
   }
 
-  function sweep(from, to, dur, type, level, dest) {
+  function sweep(from, to, dur, type, level) {
     const t = now();
     const o = ac.createOscillator(); o.type = type; o.frequency.setValueAtTime(from, t);
     o.frequency.exponentialRampToValueAtTime(to, t + dur);
@@ -232,7 +444,7 @@
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(level, t + 0.015);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    o.connect(g); g.connect(dest || fxBus); o.start(t); o.stop(t + dur + 0.02);
+    o.connect(g); g.connect(out.fx); o.start(t); o.stop(t + dur + 0.02);
   }
 
   function hiss(fFrom, fTo, dur, level) {
@@ -244,33 +456,31 @@
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(level, t + dur * 0.3);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    src.connect(bp); bp.connect(g); g.connect(fxBus);
+    src.connect(bp); bp.connect(g); g.connect(out.fx);
     src.start(t, Math.random(), dur + 0.05);
   }
 
   const FX = {
-    decay: function () { click(0.5); if (Math.random() < 0.35) click(0.35, fxBus, now() + 0.045); },
-    alpha: function () { sweep(900, 130, 0.2, "triangle", 0.35); hiss(3200, 500, 0.22, 0.25); },
-    gamma: function () { chime(1567.98, 0.22, fxBus); chime(2349.3, 0.08, fxBus); },
-    fade: function () { sweep(1400, 520, 0.35, "sine", 0.18); },
-    orbit: function () { hiss(380, 1800, 0.42, 0.18); sweep(196, 294, 0.4, "sine", 0.08); },
+    decay: function () { tick(now(), 0.34); if (Math.random() < 0.35) tick(now() + 0.045, 0.24); },
+    alpha: function () { sweep(900, 130, 0.2, "triangle", 0.3); hiss(3200, 500, 0.22, 0.2); },
+    gamma: function () { chime(now(), mtof(86), 0.2, out.fx); chime(now(), mtof(93), 0.07, out.fx); },
+    fade: function () { sweep(1400, 520, 0.35, "sine", 0.16); },
+    orbit: function () { hiss(380, 1800, 0.42, 0.15); sweep(196, 294, 0.4, "sine", 0.07); },
     chain: function () {
-      // A decay chain: clicks that start sparse, crowd together, then thin
-      // out, while a pentatonic chord swells under them.
+      // A decay chain: ticks that start sparse, crowd together, then thin
+      // out, while D major rises under them.
       let t = now() + 0.02;
       for (let i = 0; i < 16; i++) {
         const k = i / 15;
         t += 0.02 + 0.11 * Math.pow(Math.abs(k - 0.55) * 1.8, 1.5) * Math.random();
-        click(0.3 + 0.2 * Math.random(), fxBus, t);
+        tick(t, 0.2 + 0.15 * Math.random());
       }
-      [440, 554.37, 659.25, 880].forEach(function (f, i) {
-        setTimeout(function () { if (isOn()) chime(f, 0.09, echo); }, 180 + i * 110);
-      });
+      [74, 78, 81, 86].forEach(function (m, i) { chime(now() + 0.18 + i * 0.11, mtof(m), 0.08); });
     }
   };
 
   /* ───────── control ───────── */
-  function isOn() { return pref === "on"; }
+  function isOn() { return pref === "on" && !quietVisit; }
   function running() { return ac && ac.state === "running"; }
 
   function play(name) {
@@ -285,19 +495,20 @@
 
   function turnOn(first) {
     if (!ensure()) return;
-    const go = function () { startAmbient(); audible = true; paint(); announce(first); };
+    const go = function () { startSong(false); audible = true; paint(); announce(first); };
     if (ac.state !== "running") ac.resume().then(go, function () { /* still blocked */ });
     else go();
   }
   function turnOff() {
-    stopAmbient();
+    stopSong();
     audible = false; paint();
-    if (ac) setTimeout(function () { if (!isOn() && ac.state === "running") ac.suspend(); }, 700);
+    if (ac) setTimeout(function () { if (!audible && ac.state === "running") ac.suspend(); }, 700);
     announce(false);
   }
 
   function setPref(v) {
     pref = v;
+    quietVisit = false;
     try { localStorage.setItem(KEY, v); } catch (e) { /* ignore */ }
     paint();
   }
@@ -312,6 +523,9 @@
   }
   function unlock(e) {
     if (unlocked) return;
+    // The opening's gate decides for itself: Begin starts the music with the
+    // turn, and Begin in silence does not start it at all.
+    if (e && e.target && e.target.closest && e.target.closest("#intro")) return;
     unlocked = true;
     listen(false);
     if (retrySync) { unlockSync(e); return; }
@@ -342,34 +556,96 @@
     if (isOn()) turnOn(true);
   }
 
-  let btn = null;
+  /* The opening's Begin. Called inside the tap, so the context may start
+     here even where a browser wants that; resolves with how many ms the
+     picture should wait so that what is heard and what is seen start
+     together (the scheduling lead plus the device's output latency). If the
+     context will not run, the picture goes anyway after a moment. */
+  function begin(lights) {
+    unlocked = true;
+    listen(false);
+    if (!isOn() || !ensure()) return Promise.resolve(0);
+    return new Promise(function (resolve) {
+      let settled = false;
+      const settle = function (ms) { if (!settled) { settled = true; resolve(ms); } };
+      ac.resume().then(function () {
+        if (!song) {
+          // Late (the picture already went without it): the plain bed, not
+          // a cue that would now be out of step with what is on screen.
+          startSong(!settled, lights);
+          audible = true; paint(); announce(true);
+        }
+        const lat = (ac.outputLatency || ac.baseLatency || 0);
+        settle(Math.round((0.06 + Math.min(0.25, lat)) * 1000));
+      }, function () { settle(0); });
+      setTimeout(function () { settle(0); }, 450);
+    });
+  }
+
+  let btn = null, introBtn = null;
   function paint() {
-    if (!btn) return;
-    // The button shows what is actually happening, not the stored wish:
-    // before the first tap nothing can play, so it reads as off until then.
-    btn.setAttribute("aria-pressed", String(audible));
-    btn.classList.toggle("is-on", audible);
-    btn.title = audible ? "Mute the galaxy sound" : "Play the galaxy sound";
+    // The buttons show what is actually happening, not the stored wish:
+    // before the first tap nothing can play, so they read as off until then.
+    [btn, introBtn].forEach(function (b) {
+      if (!b) return;
+      b.setAttribute("aria-pressed", String(audible));
+      b.classList.toggle("is-on", audible);
+      b.title = audible ? "Mute the galaxy sound" : "Play the galaxy sound";
+    });
+  }
+  function toggle() {
+    unlocked = true;
+    listen(false);
+    if (audible) { setPref("off"); turnOff(); }
+    else { setPref("on"); turnOn(false); setTimeout(function () { play("gamma"); }, 60); }
   }
 
   function init() {
     btn = document.getElementById("soundToggle");
-    if (!AC) { if (btn) btn.hidden = true; return; }
+    introBtn = document.getElementById("introSound");
+    if (!AC) { if (btn) btn.hidden = true; if (introBtn) introBtn.hidden = true; return; }
     paint();
-    if (btn) btn.addEventListener("click", function () {
-      unlocked = true;
-      if (audible) { setPref("off"); turnOff(); }
-      else { setPref("on"); turnOn(false); setTimeout(function () { play("gamma"); }, 60); }
-    });
+    if (btn) btn.addEventListener("click", toggle);
+    if (introBtn) introBtn.addEventListener("click", toggle);
     listen(true);
     document.addEventListener("visibilitychange", function () {
       if (!ac) return;
       if (document.hidden) ac.suspend();
-      else if (isOn() && unlocked) ac.resume();
+      else if (audible) ac.resume();
     });
   }
 
-  window.DCSound = { play: play, isOn: isOn };
+  /* For the loudness check only: render the opening and what follows offline
+     through the same graph and return the samples' promise. Never used by
+     the page itself. */
+  function render(seconds) {
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const saved = [ac, out, song, noiseBuf, drone];
+    ac = new OAC(2, Math.ceil(44100 * seconds), 44100);
+    noiseBuf = null;
+    out = build();
+    const lights = [];
+    for (let i = 0; i < 34; i++) lights.push({ t: 300 + i * 175, i: i, n: 34 });
+    song = null;
+    startSong(true, lights);
+    clearTimeout(stepT); clearTimeout(chimeT); clearTimeout(rayT);
+    while (song.t0 + song.beat * BEAT < seconds) {
+      const b = song.beat, t = song.t0 + b * BEAT;
+      if (song.opening && b < OPENING_BEATS) openingBeat(b, t); else loopBeat(b - OPENING_BEATS + 16, t);
+      if (b % 6 === 3) chime(t, mtof(STARS[b % STARS.length]), 0.045);
+      if (b % 9 === 5) tick(t, 0.028, out.bed);
+      song.beat++;
+    }
+    const off = ac;
+    ac = saved[0]; out = saved[1]; song = saved[2]; noiseBuf = saved[3]; drone = saved[4];
+    return off.startRendering();
+  }
+
+  window.DCSound = {
+    play: play, isOn: isOn, begin: begin, toggle: toggle,
+    quiet: function () { quietVisit = true; unlocked = true; listen(false); paint(); },
+    _render: render
+  };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
