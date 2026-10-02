@@ -1,4 +1,4 @@
-/* Dream Counsellor — service worker.
+/* Dreams Counselor — service worker.
 
    This exists so the site installs to a phone home screen and still opens on
    a train with no signal. It is deliberately NOT a normal offline-first

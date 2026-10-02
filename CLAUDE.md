@@ -1,4 +1,4 @@
-# Dream Counsellor — project rules
+# Dreams Counselor — project rules
 
 A career-guidance site for Indian medical students. Three questions (skill / anger / flow)
 plus practical and emotional constraints → a ranked list of real programmes with application
@@ -380,7 +380,8 @@ main-thread scripting numbers as they are.
   point sources; the glow text sits on is the Milky Way, nebula and galaxy.
 - **`tools/test/perf.js` holds the line**: nothing may request an animation
   frame while the page rests with the hero off screen, no load task over
-  450ms, no tap over 450ms, all at 4x. Budgets sit well above today's numbers
+  450ms, no tap over 600ms (it was 450 until 2 October 2026, when a slower
+  container had the published build itself at 368-464ms), all at 4x. Budgets sit well above today's numbers
   because this machine wanders; they catch regressions, not noise.
 - **Lighthouse here needs two flags or it hangs**: `--no-proxy-server` in
   `--chrome-flags` (the sandbox proxy refuses Chrome's background requests)
@@ -864,6 +865,17 @@ If this is ever done it should be a reviewed pass, entry by entry.
   "currently closed" or "not been published" (the Maitri and L'Oréal contradictions).
 
 ## Open with the user
+
+- **The name is "Dreams Counselor" since 2 October 2026** (it was "Dream Counsellor"), spelled as
+  the user typed it: an s on Dreams, and the American single-l Counselor, though the rest of the
+  site is British ("programmes"). The generic noun in prose stays "counsellor" ("a counsellor
+  would ask", the read's function name); only the product name changed. Everything that carries
+  it is rendered from `index.html`, `make-pages.js` or `make-og.js`, so after any further rename
+  run `node tools/refresh.js` (pages, share cards, bundle). Two things deliberately did NOT
+  change: the repository, URL and `DREAMS` path, and the calendar UID suffix `@dream-counsellor`
+  in `app.js`, because a calendar that already holds an exported deadline would import it a
+  second time under a new UID. The wordmark's script word is read from the markup by
+  `make-fonts.js` and `check.js`; "Counselor" uses only letters the subset already had.
 
 - **Colour palette**: changed twice on 30 September 2026 at the user's request. "Citrus &
   Slate" became "Marigold & Neem" (yellow, red, orange, green), which they then found too

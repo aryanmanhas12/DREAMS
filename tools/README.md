@@ -1,4 +1,4 @@
-# Keeping Dream Counsellor current
+# Keeping Dreams Counselor current
 
 Three jobs come round again and again: the monthly recheck, editing an entry,
 and shipping. Each is a handful of commands. Everything here runs from the repo

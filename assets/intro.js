@@ -1,4 +1,4 @@
-/* Dream Counsellor — the opening.
+/* Dreams Counselor — the opening.
 
    The Earth turns once in the galaxy, every country in the index lights as
    it crosses the middle and is named, Ooh arrives and cannot keep still,

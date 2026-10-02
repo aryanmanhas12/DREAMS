@@ -58,7 +58,7 @@ function freshPages() {
 }
 
 function bundleFresh() {
-  const out = path.join(ROOT, "dist/dream-counsellor.html");
+  const out = path.join(ROOT, "dist/dreams-counselor.html");
   if (!fs.existsSync(out)) return false;
   const t = fs.statSync(out).mtimeMs;
   const srcs = ["index.html", "build.js", ...fs.readdirSync(path.join(ROOT, "assets"))

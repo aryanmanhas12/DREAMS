@@ -1,4 +1,4 @@
-/* Dream Counsellor — Country profiles.
+/* Dreams Counselor — Country profiles.
    The things prospectuses never tell you: how cold it actually gets, whether you can
    find food you'll eat, whether there is anyone to talk to when it gets hard,
    and whether you are allowed to stay afterwards. Written for an Indian student. */

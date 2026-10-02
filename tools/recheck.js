@@ -120,7 +120,7 @@ const section = (title, why, arr, doneCount, limit) => {
   if (limit && arr.length > limit) say(`  …and ${arr.length - limit} more (run with --all, or --md to get the full list)`);
 };
 
-say(`Dream Counsellor recheck for ${thisMonth}   (${items.length} programmes; data-meta says last reviewed ${meta.reviewed || "never"})`);
+say(`Dreams Counselor recheck for ${thisMonth}   (${items.length} programmes; data-meta says last reviewed ${meta.reviewed || "never"})`);
 section("1. ACT NOW", "Tier 1–2 and the badge says open or opening soon. Re-read the date, the money and who may apply.",
   actNow, actNowAll.filter(done).length);
 section("2. STALE TEXT", "The window describes a round that is over. Rewrite it to the next round, or set noOpenCall.",

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   Dream Counsellor — survey, matching engine, rendering.
+   Dreams Counselor — survey, matching engine, rendering.
    No build step, no dependencies. Open index.html and it runs.
    ════════════════════════════════════════════════════════ */
 (function () {
@@ -1710,7 +1710,7 @@
   function downloadICS(items) {
     const pad = (n) => String(n).padStart(2, "0");
     const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Dream Counsellor//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Dreams Counselor//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
 
     items.filter(hasFixedWindow).forEach(function (item) {
       const earliest = item.deadlineMonths.slice().sort(function (a, b) {
@@ -1736,6 +1736,9 @@
       ].filter(Boolean).join("\n");
 
       L.push("BEGIN:VEVENT");
+      // The UID suffix keeps the product's old name on purpose: it is an identifier,
+      // not text anyone reads, and changing it would make a calendar that already
+      // holds these deadlines import every one of them a second time.
       L.push("UID:" + item.id + "-" + d.y + "@dream-counsellor");
       L.push("DTSTAMP:" + stamp);
       L.push("DTSTART;VALUE=DATE:" + start);
@@ -1754,7 +1757,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "dream-counsellor-deadlines.ics";
+    a.download = "dreams-counselor-deadlines.ics";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1819,7 +1822,7 @@
   /* A plan you can paste into a notes app, a document, or an email to a mentor. */
   function planAsText(p, ranked, plan, specs) {
     const L = [];
-    L.push("DREAM COUNSELLOR — MY PLAN");
+    L.push("DREAMS COUNSELOR — MY PLAN");
     L.push("Generated " + new Date().toDateString());
     L.push("");
     L.push("MY PROFILE");

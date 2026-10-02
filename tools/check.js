@@ -1,4 +1,4 @@
-/* Dream Counsellor — data integrity check.   Run: node tools/check.js
+/* Dreams Counselor — data integrity check.   Run: node tools/check.js
 
    Asserts: unique ids, impact keys resolve, taxonomy tags valid, https urls,
    every counted country plottable, profiled and inside one scroll-atlas

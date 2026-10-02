@@ -1,4 +1,4 @@
-/* Dream Counsellor — SEO, structured-data and crawlability audit.
+/* Dreams Counselor — SEO, structured-data and crawlability audit.
    Covers the checklist in the brief, for a site that is static HTML with no
    bundler, no dependencies and no server.
 

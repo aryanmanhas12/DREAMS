@@ -1,4 +1,4 @@
-/* Dream Counsellor — research programmes, conferences and skill-building.
+/* Dreams Counselor — research programmes, conferences and skill-building.
    `zeroCost: true` means it costs you nothing to take part AND travel/living is covered
    or unnecessary. That flag drives the Zero-Rupee Path for students who cannot pay. */
 

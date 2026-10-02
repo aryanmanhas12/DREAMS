@@ -186,10 +186,10 @@ function head(p, url, count) {
      question than a share of the homepage, and repeating the homepage card
      wastes the one impression most readers ever get. */
   const ogImg = `${BASE}/assets/og/${p.slug}.png`;
-  const ogAlt = `${p.h1} — ${count} of ${TOTAL} entries in the Dream Counsellor index, beside a globe marking the countries they lead to.`;
+  const ogAlt = `${p.h1} — ${count} of ${TOTAL} entries in the Dreams Counselor index, beside a globe marking the countries they lead to.`;
   return `<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${esc(p.title)} — Dream Counsellor</title>
+<title>${esc(p.title)} — Dreams Counselor</title>
 <meta name="description" content="${esc(p.desc)}" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="${url}" />
@@ -197,7 +197,7 @@ function head(p, url, count) {
 <meta name="theme-color" content="#0F0A26" media="(prefers-color-scheme: dark)" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Dream Counsellor" />
+<meta property="og:site_name" content="Dreams Counselor" />
 <meta property="og:title" content="${esc(p.title)}" />
 <meta property="og:description" content="${esc(p.desc)}" />
 <meta property="og:url" content="${url}" />
@@ -225,7 +225,7 @@ function jsonld(p, url, list) {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Dream Counsellor", item: BASE + "/" },
+        { "@type": "ListItem", position: 1, name: "Dreams Counselor", item: BASE + "/" },
         { "@type": "ListItem", position: 2, name: p.h1, item: url }
       ]
     },
@@ -236,7 +236,7 @@ function jsonld(p, url, list) {
       name: p.title,
       description: p.desc,
       inLanguage: "en",
-      isPartOf: { "@type": "WebSite", name: "Dream Counsellor", url: BASE + "/" },
+      isPartOf: { "@type": "WebSite", name: "Dreams Counselor", url: BASE + "/" },
       mainEntity: {
         "@type": "ItemList",
         numberOfItems: list.length,
@@ -396,7 +396,7 @@ ${jsonld(p, url, list)}
 
   <nav class="crumbs" aria-label="Breadcrumb">
     <ol>
-      <li><a href="../">Dream Counsellor</a></li>
+      <li><a href="../">Dreams Counselor</a></li>
       <li aria-current="page">${esc(p.h1)}</li>
     </ol>
   </nav>
@@ -420,7 +420,7 @@ ${body}
     </ul>
   </section>
 
-  <p class="doc-back"><a href="../">← Dream Counsellor</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms of use</a></p>
+  <p class="doc-back"><a href="../">← Dreams Counselor</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms of use</a></p>
 </main>
 </body>
 </html>

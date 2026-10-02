@@ -1,4 +1,4 @@
-/* Dream Counsellor — frontier fields and specialty routes added August 2026.
+/* Dreams Counselor — frontier fields and specialty routes added August 2026.
 
    The frontier list had a bias worth naming: it leaned heavily on the
    brain — psychiatric genomics, computational psychiatry, neuroethics,

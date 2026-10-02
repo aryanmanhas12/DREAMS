@@ -1,4 +1,4 @@
-# Dream Counsellor — a free index of funded programmes for Indian medical
+# Dreams Counselor — a free index of funded programmes for Indian medical
 # students. Everything here is public and meant to be found, so nothing that
 # carries content is disallowed.
 User-agent: *

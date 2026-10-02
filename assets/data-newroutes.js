@@ -1,4 +1,4 @@
-/* Dream Counsellor — six routes that did not exist anywhere else in this
+/* Dreams Counselor — six routes that did not exist anywhere else in this
    index: a US-government-funded research year that is based in India, two
    of the world's most famous leadership fellowships (both genuinely open to
    an Indian MBBS holder, neither requiring a US or UK undergraduate degree),

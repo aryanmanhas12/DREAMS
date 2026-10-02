@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════
-   Dream Counsellor
+   Dreams Counselor
 
    Type — three faces, self-hosted so nothing depends on a CDN:
      Cormorant Garamond  calligraphic old-style serif. Asks the human
@@ -414,7 +414,7 @@ body {
 .brand-mark { width: 20px; height: 20px; flex: none; color: var(--accent); }
 .brand-mark .bm-dot { fill: var(--fill); stroke: var(--paper); stroke-width: 2.2; paint-order: stroke; }
 .brand-text { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; letter-spacing: 0; }
-/* "Dream" is set upright in the display serif and "Counsellor" in the script —
+/* "Dreams" is set upright in the display serif and "Counselor" in the script —
    the name is two different voices because the site is two things: a catalogue,
    and someone talking to you. The script runs 1.18× because its cap-height is
    smaller than Cormorant's at the same nominal size. */

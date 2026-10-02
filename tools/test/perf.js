@@ -24,7 +24,12 @@
 const { launch, serve } = require("../lib/browser");
 
 const LONG_TASK_MS = 450;
-const TAP_MS = 450;
+// Was 450. After a container restart on 2 October 2026 the PUBLISHED build
+// measured worst taps of 368-464ms here (one run in four over 450) and the
+// same code a day earlier measured ~250, so the machine had slowed by about
+// half. 600 still catches a real regression, which shows up as a jump of
+// hundreds of milliseconds, rather than the machine's own spread.
+const TAP_MS = 600;
 const IDLE_RAF_MAX = 3;
 
 (async () => {

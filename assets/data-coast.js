@@ -1,4 +1,4 @@
-/* Dream Counsellor — simplified world coastlines for the hero globe.
+/* Dreams Counselor — simplified world coastlines for the hero globe.
    Derived from public-domain Natural Earth country outlines, reduced with
    Douglas-Peucker at ~0.9° and rounded to 0.1° (≈11 km) — far finer than a
    380px sphere can show, and small enough to ship inline. Outer rings only;

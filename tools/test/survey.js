@@ -1,4 +1,4 @@
-/* Dream Counsellor — tour, survey and bundle smoke test. Covers the three
+/* Dreams Counselor — tour, survey and bundle smoke test. Covers the three
    flows at the level that catches a regression:
 
    - the tour auto-opens on a FIRST visit, runs to Done, and does not re-open
@@ -17,7 +17,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..", "..");
 const URL = "file://" + path.join(ROOT, "index.html");
-const BUNDLE = "file://" + path.join(ROOT, "dist/dream-counsellor.html");
+const BUNDLE = "file://" + path.join(ROOT, "dist/dreams-counselor.html");
 
 let fails = 0;
 const ok = (c, m, d) => { if (!c) fails++; console.log(`  ${c ? "✓" : "✗"} ${m}${d ? "  — " + d : ""}`); };

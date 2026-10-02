@@ -1,11 +1,11 @@
-# Dream Counsellor
+# Dreams Counselor
 
 > An independent, free index of 228 funded programmes, scholarships, research
 > placements and career routes open to Indian medical students and graduates.
 > It is a static site with no account, no server and no tracking. Answering three
 > questions produces a ranked plan; nothing is uploaded to produce it.
 
-Dream Counsellor exists because most Indian medical students are handed one map
+Dreams Counselor exists because most Indian medical students are handed one map
 with two roads on it: clear NEET-PG, or leave for the USMLE. Both are real.
 Neither is the whole territory. This index lists the funded research, the
 doctorates that pay a salary, the scholarships that cover the flight, and the
@@ -36,7 +36,7 @@ the site says so.
 
 ## Important pages
 
-- [Dream Counsellor](https://aryanmanhas12.github.io/DREAMS/): the index itself, with the three-question survey, the globe, browse, deadlines and shortlist
+- [Dreams Counselor](https://aryanmanhas12.github.io/DREAMS/): the index itself, with the three-question survey, the globe, browse, deadlines and shortlist
 - [Open during MBBS](https://aryanmanhas12.github.io/DREAMS/during-mbbs/): what a student can apply for before graduating
 - [Studying abroad](https://aryanmanhas12.github.io/DREAMS/study-abroad/): routes that accept an Indian medical degree
 - [Scholarships](https://aryanmanhas12.github.io/DREAMS/scholarships/): funded awards open to Indian applicants
