@@ -174,8 +174,10 @@ under 4.5:1.
   on the canvas, Ooh flies in and hops on the beat, and the turn lands on
   India with three pink rings; then the wordmark, then the page. Fifteen beats
   at 94 bpm, 9.6 seconds, Ronak's length. A gate first ("Begin", "Begin in
-  silence") because sound needs a tap. No Skip, so it never plays under
-  reduced motion, after "Pause the moving sky", or for a plan link.
+  silence") because sound needs a tap. Skip (top right, from the first
+  frame) and Escape leave it at any moment, straight to the page with no tour
+  on top. It never plays under reduced motion, after "Pause the moving sky",
+  or for a plan link.
 - **Music** (sound.js): one piece in D major on a step sequencer. A calm bed
   (drone, four chords through a soft reverb, a thin wind, rare chimes and
   ticks) carries a forty-second flight: a felt-piano pulse that enters,

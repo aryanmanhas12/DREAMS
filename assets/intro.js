@@ -11,10 +11,14 @@
        reloading inside a visit does not replay it, closing the tab and
        coming back does. The inline script in <head> decides before the first
        paint and sets html.intro-on, so the page never flashes first.
-     - It has no Skip, by the owner's choice, so it never plays for anyone
-       who has said no to motion: not under prefers-reduced-motion, not after
-       "Pause the moving sky", and not for a shared plan link (#p=), where
-       someone has come for their results.
+     - Skip (and Escape) leave it at any moment, from the gate onwards; it
+       was unskippable for its first day, and the owner asked for a way out.
+       A skip goes straight to the page: no tour on top of it (Ronak's rule:
+       answering Skip with a second guided thing defeats the Skip), and music
+       already playing crossfades to the calm bed instead of finishing the
+       opening's cue over the page. It still never plays for anyone who has
+       said no to motion (prefers-reduced-motion, "Pause the moving sky") or
+       who came by a shared plan link (#p=) for their results.
      - Browsers refuse sound before a tap, so with music on it opens on a
        gate: "Begin" starts the music and the turn in the same instant, and
        the music is scheduled on the same beat grid as every light and hop.
@@ -26,7 +30,8 @@
      - Storage that throws counts as "seen": an opening nobody can get past
        must fail open onto the page, never closed onto the opening.
    Public surface: window.DCIntro.start(info) from app.js; it returns true
-   when the opening is showing and calls info.done when the page is back. */
+   when the opening is showing and calls info.done(skipped) when the page is
+   back. */
 (function () {
   "use strict";
 
@@ -41,6 +46,7 @@
   const HOME_LON = 78;                               // India, as globe.js places it
 
   let el = null, globe = null, info = null, timers = [], plan = null, lit = 0;
+  let over = false, typing = null;   // over: finished or skipped, so nothing late may run
   const $ = function (s) { return document.getElementById(s); };
   function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
 
@@ -92,6 +98,9 @@
     el.style.setProperty("--intro-ms", T.end + "ms");
     el.style.setProperty("--beat", (BEAT * 1000).toFixed(1) + "ms");
 
+    $("introSkip").addEventListener("click", skip);
+    document.addEventListener("keydown", onKey);
+
     $("introGateOoh").innerHTML = figure("hello", 84);
     $("introOoh").innerHTML = figure("ooh", 92);
     $("introLine2Count").textContent = String(total);
@@ -118,8 +127,11 @@
     el.focus({ preventScroll: true });
     const sound = window.DCSound;
     const lights = plan.map(function (p, i) { return { t: p.t, i: i, n: plan.length }; });
-    const go = function (lead) { setTimeout(function () { run(total); }, lead || 0); };
-    if (withMusic && sound && sound.begin) sound.begin(lights).then(go, function () { go(0); });
+    const go = function (lead) { setTimeout(function () { if (!over) run(total); }, lead || 0); };
+    // A skip can land in the moment between Begin and the music starting;
+    // the music then starts as the calm bed, not as the opening's cue.
+    const started = function (lead) { if (over) { if (sound.settle) sound.settle(); } else go(lead); };
+    if (withMusic && sound && sound.begin) sound.begin(lights).then(started, function () { go(0); });
     else { if (sound && sound.quiet) sound.quiet(); go(0); }
   }
 
@@ -162,7 +174,7 @@
       say($("introSay2"), "happy");
     });
     at(T.name, function () { el.classList.add("has-name"); });
-    at(T.end, finish);
+    at(T.end, function () { finish(false); });
   }
 
   // Ooh's line, typed with the sister apps' blip when the guide is loaded,
@@ -171,23 +183,43 @@
     box.hidden = false;
     const typed = box.querySelector(".ooh-typed"), rest = box.querySelector(".ooh-rest");
     const text = typed.textContent + rest.textContent;
-    if (window.Ooh && window.Ooh.type) window.Ooh.type(typed, rest, text, mood, $("introOoh"), null, true);
+    if (window.Ooh && window.Ooh.type) typing = window.Ooh.type(typed, rest, text, mood, $("introOoh"), null, true);
   }
 
-  function finish() {
+  function onKey(e) {
+    if (e.key === "Escape" && root.classList.contains("intro-on")) { e.preventDefault(); skip(); }
+  }
+
+  // Skip, from the gate or mid-turn. The visit counts as opened either way,
+  // so a reload does not bring the opening straight back.
+  function skip() {
+    if (over) return;
+    markVisit();
+    if (window.DCSound && window.DCSound.settle) window.DCSound.settle();
+    finish(true);
+  }
+
+  function finish(skipped) {
+    if (over) return;
+    over = true;
     timers.forEach(clearTimeout); timers = [];
+    if (typing && !typing.finished) typing.finish();
+    document.removeEventListener("keydown", onKey);
     if (document.activeElement && el.contains(document.activeElement)) document.activeElement.blur();
     root.classList.remove("intro-on", "intro-wait");
     globe.stop();
     // The opening fades out as the page fades in; both are opacity only.
+    // A skip is the reader in a hurry, so it fades in half the time.
+    const ms = skipped ? 300 : 620;
+    root.classList.toggle("intro-fast", !!skipped);
     root.classList.add("intro-out");
     el.classList.add("is-leaving");
     setTimeout(function () {
       el.hidden = true;
-      root.classList.remove("intro-out");
+      root.classList.remove("intro-out", "intro-fast");
       if (window.Ooh && window.Ooh.refresh) window.Ooh.refresh();
-      if (info && info.done) info.done();
-    }, 620);
+      if (info && info.done) info.done(!!skipped);
+    }, ms);
   }
 
   window.DCIntro = { start: start, on: function () { return root.classList.contains("intro-on"); } };

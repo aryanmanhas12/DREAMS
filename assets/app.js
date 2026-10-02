@@ -2355,9 +2355,14 @@
   // The page is back after the opening: the hero globe starts (already on
   // India, where the opening landed), the tour may offer itself, and the
   // sound notice the opening's Begin earned is said now that it can be seen.
-  function afterOpening() {
-    initHeroGlobe(true);
-    autoTour();
+  // After a Skip the reader never saw the landing, so the hero globe makes
+  // its own small turn to India, and the tour waits for a visit where the
+  // opening was watched: a Skip answered by a second guided thing is the
+  // opposite of what Skip was for (Ronak's rule). "Take the tour" stays in
+  // the hero.
+  function afterOpening(skipped) {
+    initHeroGlobe(!skipped);
+    if (!skipped) autoTour();
     if (soundNoticeWaiting) { soundNoticeWaiting = false; soundNotice(); }
   }
 

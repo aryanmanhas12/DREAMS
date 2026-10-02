@@ -129,17 +129,21 @@
      9.6 seconds, the length of Ronak's overture. Once a visit, and only
      when the inline script above set html.intro-on, so it never shows
      without JavaScript, under reduced motion, after "Pause the moving sky",
-     or for a shared plan link. assets/intro.js runs it. -->
+     or for a shared plan link. Skip (and Escape) leave it at any moment,
+     from the first frame. assets/intro.js runs it. -->
 <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introAlt" tabindex="-1">
   <span class="intro-progress" aria-hidden="true"><i></i></span>
   <p class="sr-only" id="introAlt">Dream Counsellor. The Earth turns, every country with programmes in this index lights up and is named, and it comes to rest on India.</p>
-  <button type="button" class="theme-toggle sound-toggle intro-sound" id="introSound" aria-label="Galaxy sound" aria-pressed="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path class="spk" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
-      <path class="wave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.6a7.6 7.6 0 0 1 0 10.8"/>
-      <path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/>
-    </svg>
-  </button>
+  <div class="intro-top">
+    <button type="button" class="theme-toggle sound-toggle intro-sound" id="introSound" aria-label="Galaxy sound" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path class="spk" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
+        <path class="wave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.6a7.6 7.6 0 0 1 0 10.8"/>
+        <path class="mute" d="M16 9.5l5 5M21 9.5l-5 5"/>
+      </svg>
+    </button>
+    <button type="button" class="btn btn-ghost btn-sm intro-skip" id="introSkip">Skip</button>
+  </div>
   <div class="intro-stage">
     <div class="intro-globe" aria-hidden="true"><canvas id="introCanvas"></canvas></div>
     <div class="intro-side">

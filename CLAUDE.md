@@ -567,9 +567,26 @@ phone, and the music made calmer and more exciting.
   at 94 bpm, 9,574ms, so every picture beat sits on the music's grid. `tools/test/intro.js`
   measures 10.5-10.8s from the tap to the page being back, which is the 9.6s plus the
   scheduling lead and the 0.6s fade.
-- **Unskippable, so the exits are the safety.** No Skip and no Escape, by the owner's choice. It
-  therefore never plays under `prefers-reduced-motion`, after "Pause the moving sky", or for a
-  shared plan link (`#p=`), and storage that throws counts as "seen" so it fails open onto the
+- **Skip and Escape, since 2 October 2026.** It shipped unskippable on 1 October at the owner's
+  request; a day later they asked for a skip. Skip sits top right from the gate onwards
+  (outermost, beside the speaker, 12px apart like the top bar's controls so the 44px tap areas
+  never meet), and Escape does the same. A skip marks the visit, fades in 0.3s instead of
+  0.6s, lets the hero globe make its own short turn to India (the reader never saw the
+  landing), and does **not** start the tour: Ronak's rule, a Skip answered by a second guided
+  thing defeats the Skip. The tour waits for a visit where the opening is watched, and "Take
+  the tour" stays in the hero. Music already playing crossfades to the calm bed through
+  `DCSound.settle()`, because the opening's cue (the landing chord, the lights' run, the riser)
+  is scheduled up to ten seconds ahead and would otherwise finish over the page. A skip that
+  lands between Begin and the music starting is honoured: the music then starts as the bed.
+  Two things this exposed: `stopSong()` faded only the bed bus, but chimes and the riser feed
+  the reverb directly and were cut hard at the disconnect, so it now fades the old graph's
+  master; and the motion now has the on-page stop WCAG 2.2.2 asks for. The harness's two
+  canvas-bound budgets (worst long task, frames a second) were widened to 600ms and 8 frames:
+  after a container restart the PUBLISHED opening measured 317-357ms and 11-12 frames/s on the
+  same check that gave 227ms and 19 the day before, an A/B on one machine with Skip measuring
+  the same. Script, the part a phone pays, held at ~0.75s throughout.
+- **It still never plays under `prefers-reduced-motion`, after "Pause the moving sky", or for a
+  shared plan link (`#p=`)**, and storage that throws counts as "seen" so it fails open onto the
   page. Once per visit (sessionStorage `dc-intro`), Ronak's rule: a reload inside a tab does
   not replay it. The inline `<head>` script decides before first paint and sets
   `html.intro-on` (and `html.intro-wait` when the gate is needed); if `intro.js` has not taken

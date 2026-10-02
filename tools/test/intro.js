@@ -2,12 +2,14 @@
    sessionStorage "dc-intro" so the opening stays out of its way; this one
    is the opening, so it seeds nothing, the way tour.js seeds nothing.
 
-   Because the opening has no Skip, the things that would make it a trap are
-   the things asserted here: it ends by itself in the time it claims, the
-   page comes back whole and the tour follows, it never plays for anyone who
-   has said no to motion (reduced motion, a paused sky) or who came by a plan
-   link, it fails open when storage throws, it fits the first screen of a
-   320px phone, and a phone can afford it (frames and long tasks at 4x CPU). */
+   What is asserted: it ends by itself in the time it claims and the page
+   comes back whole with the tour after it; Skip is on the first screen from
+   the gate onwards, answers a 44px tap, and works from the gate, mid-turn
+   and by Escape, going straight to the page with no tour on top; it never
+   plays for anyone who has said no to motion (reduced motion, a paused sky)
+   or who came by a plan link; it fails open when storage throws; it fits
+   the first screen of a 320px phone; and a phone can afford it (script,
+   frames and long tasks at 4x CPU). */
 const { launch, serve } = require("../lib/browser");
 
 let fails = 0;
@@ -54,7 +56,8 @@ const ok = (c, m, d) => { if (!c) fails++; console.log(`  ${c ? "✓" : "✗"} $
     ok(s.main === "hidden", "the page underneath is hidden, so it cannot flash or take focus");
     const fit = await page.evaluate(() => {
       const r = (id) => document.getElementById(id).getBoundingClientRect();
-      const a = r("introBegin"), q = r("introQuiet"), line = document.querySelector(".intro-gate-line").getBoundingClientRect();
+      const a = r("introBegin"), q = r("introQuiet"), k = r("introSkip"), line = document.querySelector(".intro-gate-line").getBoundingClientRect();
+      const apart = (x, y) => x.right <= y.left || y.right <= x.left || x.bottom <= y.top || y.bottom <= x.top;
       const probe = (el) => {
         const rc = el.getBoundingClientRect(), cx = rc.left + rc.width / 2, cy = rc.top + rc.height / 2;
         return [[0, -21], [0, 21], [-21, 0], [21, 0]].every(([dx, dy]) => {
@@ -63,15 +66,17 @@ const ok = (c, m, d) => { if (!c) fails++; console.log(`  ${c ? "✓" : "✗"} $
         });
       };
       return {
-        inView: [a, q, line].every((x) => x.top >= 0 && x.bottom <= innerHeight && x.left >= 0 && x.right <= innerWidth),
+        inView: [a, q, k, line].every((x) => x.top >= 0 && x.bottom <= innerHeight && x.left >= 0 && x.right <= innerWidth),
+        skipClear: [a, q, line].every((x) => apart(k, x)),
         noSideScroll: document.getElementById("intro").scrollWidth <= innerWidth && document.documentElement.scrollWidth <= innerWidth,
-        taps: probe(document.getElementById("introBegin")) && probe(document.getElementById("introQuiet")),
+        taps: ["introBegin", "introQuiet", "introSkip"].every((id) => probe(document.getElementById(id))),
         focus: document.activeElement && document.activeElement.id
       };
     });
-    ok(fit.inView, "Begin, Begin in silence and the line all sit on the first screen, no scrolling");
+    ok(fit.inView, "Begin, Begin in silence, Skip and the line all sit on the first screen, no scrolling");
+    ok(fit.skipClear, "Skip overlaps none of the gate's buttons or its line");
     ok(fit.noSideScroll, "no horizontal scroll");
-    ok(fit.taps, "both gate buttons answer a 44px tap");
+    ok(fit.taps, "Begin, Begin in silence and Skip each answer a 44px tap");
     ok(fit.focus === "introBegin", "focus starts on Begin", fit.focus);
 
     const t0 = Date.now();
@@ -113,6 +118,45 @@ const ok = (c, m, d) => { if (!c) fails++; console.log(`  ${c ? "✓" : "✗"} $
 
   /* ── 2. the ways it stays out of the way ── */
   console.log("\nexits");
+  // Skip, three ways. No dc-tour-seen here, so a tour that wrongly follows
+  // a skip would show.
+  const skipRuns = [
+    ["Skip at the gate", { w: 390, h: 844 }, async (page) => { await page.click("#introSkip"); }, false],
+    ["Skip mid-turn, with the music on", { w: 390, h: 844 }, async (page) => {
+      await page.click("#introBegin"); await page.waitForTimeout(3000); await page.click("#introSkip");
+    }, true],
+    ["Escape mid-turn", { w: 1280, h: 800 }, async (page) => {
+      await page.click("#introQuiet"); await page.waitForTimeout(2000); await page.keyboard.press("Escape");
+    }, false]
+  ];
+  for (const [name, vp, act, music] of skipRuns) {
+    const { ctx, page, errs } = await fresh(vp);
+    await page.goto(URL, { waitUntil: "load" });
+    await page.waitForSelector("#intro.is-ready");
+    const t0 = Date.now();
+    await act(page);
+    const t1 = Date.now();
+    await page.waitForFunction(() => document.getElementById("intro").hidden, null, { timeout: 3000 }).catch(() => {});
+    const took = Date.now() - t1;
+    let s = await state(page);
+    ok(s.hidden && !s.on && s.main === "visible" && took < 900, `${name}: the page is back at once`, `${took}ms after the skip, ${((Date.now() - t0) / 1000).toFixed(1)}s in all`);
+    ok(s.seen === "1", `${name}: the visit counts as opened, so a reload does not bring it back`);
+    await page.waitForTimeout(1600);
+    s = await state(page);
+    ok(!s.tour, `${name}: no tour straight on top of a skip`);
+    const pressed = await page.evaluate(() => document.getElementById("soundToggle").getAttribute("aria-pressed"));
+    ok(pressed === String(music), `${name}: ${music ? "the music carries on" : "no sound starts"}`, `speaker reads ${pressed}`);
+    const globe = await page.evaluate(() => {
+      const c = document.getElementById("globeCanvas"), g = c.getContext("2d");
+      const d = g.getImageData(0, 0, c.width, c.height).data;
+      let n = 0;
+      for (let i = 3; i < d.length; i += 4 * 97) if (d[i] > 0) n++;
+      return n;
+    });
+    ok(globe > 50, `${name}: the hero globe is drawn`, `${globe} sampled pixels`);
+    ok(errs.length === 0, `${name}: no errors`, errs.slice(0, 2).join(" | "));
+    await ctx.close();
+  }
   {
     const { ctx, page, errs } = await fresh({ w: 390, h: 844 }, () => localStorage.setItem("dc-tour-seen", "1"));
     await page.goto(URL, { waitUntil: "load" });
@@ -188,8 +232,12 @@ const ok = (c, m, d) => { if (!c) fails++; console.log(`  ${c ? "✓" : "✗"} $
     // Most of this container's busy time is its software GPU uploading the
     // canvas (no GPU here; see CLAUDE.md). Script is the part a phone pays.
     ok(script < 1500, "script for the whole opening stays small", `${script}ms of script in ${secs.toFixed(1)}s`);
-    ok(worst < 300, "no long task over 300ms while it plays", `${r.lt.length} long tasks, worst ${worst}ms`);
-    ok(fps >= 12, "keeps turning at a watchable frame rate even here (no GPU in this container)", `${fps.toFixed(1)} frames/s`);
+    // These two are bound by this container's software GPU, not by script.
+    // A restarted container measured the PUBLISHED opening at worst 317-357ms
+    // and 11-12 frames/s where the first one measured 227ms and 19, so the
+    // budgets sit above both: they catch a regression, not a slower machine.
+    ok(worst < 600, "no long task over 600ms while it plays", `${r.lt.length} long tasks, worst ${worst}ms`);
+    ok(fps >= 8, "keeps turning at a watchable frame rate even here (no GPU in this container)", `${fps.toFixed(1)} frames/s`);
     await ctx.close();
   }
 

@@ -2308,6 +2308,9 @@ html.intro-on body > :not(.intro):not(.sky):not(.fx) { visibility: hidden; }
 html.intro-out body > :not(.intro):not(.sky):not(.fx) { animation: intro-page-in .6s var(--ease-out) both; }
 @keyframes intro-page-in { from { opacity: 0; } }
 .intro.is-leaving { opacity: 0; transition: opacity .6s var(--ease-out); pointer-events: none; }
+/* A skip is the reader in a hurry: the same crossfade in half the time. */
+html.intro-fast body > :not(.intro):not(.sky):not(.fx) { animation-duration: .3s; }
+html.intro-fast .intro.is-leaving { transition-duration: .3s; }
 .intro:focus { outline: none; }
 
 /* How long is left, because nothing here can be skipped. */
@@ -2316,13 +2319,20 @@ html.intro-out body > :not(.intro):not(.sky):not(.fx) { animation: intro-page-in
 .intro.is-running .intro-progress i { animation: intro-progress var(--intro-ms, 9574ms) linear forwards; }
 @keyframes intro-progress { to { transform: scaleX(1); } }
 
-/* The speaker, while the top bar is hidden: same control, same state. */
+/* Top right, while the top bar is hidden: the speaker (same control, same
+   state as the top bar's) and Skip, which is there from the first frame.
+   Skip is in the corner where a reader looks for it, outermost; the gap is
+   the top bar's 12px, so the two 44px tap areas never overlap. */
+.intro-top {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: 12px;
+  top: max(10px, env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px));
+}
 .intro-sound {
-  position: absolute; z-index: 1; width: 40px; height: 40px;
-  top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px));
+  width: 40px; height: 40px;
   opacity: 0; visibility: hidden; transition: opacity .3s var(--ease-out);
 }
 .intro.is-playing .intro-sound { opacity: 1; visibility: visible; }
+.intro-skip { min-width: 72px; }
 
 /* Phone first: globe, then the count, then the gate or the cast, stacked in
    one column and centred. --g is the globe's side. */

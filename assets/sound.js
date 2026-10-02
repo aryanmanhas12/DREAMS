@@ -39,7 +39,7 @@
        it offline (_render): keep the peak under 0.5 and the level near the
        old bed's -27 dBFS RMS.
    Public surface: window.DCSound.play(name), .isOn(), .begin(lights),
-   .quiet(), .toggle(), and a "dcsound" event on window whose detail is
+   .quiet(), .settle(), .toggle(), and a "dcsound" event on window whose detail is
    { on, first } when the sound starts or stops. */
 (function () {
   "use strict";
@@ -405,9 +405,12 @@
   function stopSong() {
     if (!ac || !song) return;
     const t = now();
-    out.bed.gain.cancelScheduledValues(t);
-    out.bed.gain.setValueAtTime(out.bed.gain.value, t);
-    out.bed.gain.linearRampToValueAtTime(0, t + 0.6);
+    // Fade the whole old graph, not just the bed: chimes and the riser also
+    // feed the reverb directly, and would be cut off hard at the disconnect.
+    const mg = out.master.gain;
+    mg.cancelScheduledValues(t);
+    mg.setValueAtTime(mg.value, t);
+    mg.linearRampToValueAtTime(0.0001, t + 0.6);
     const nodes = drone || [];
     drone = null; song = null;
     clearTimeout(stepT); clearTimeout(chimeT); clearTimeout(rayT);
@@ -644,6 +647,11 @@
   window.DCSound = {
     play: play, isOn: isOn, begin: begin, toggle: toggle,
     quiet: function () { quietVisit = true; unlocked = true; listen(false); paint(); },
+    // The opening was skipped. Its cue (the landing chord, the lights' run,
+    // the riser) is already scheduled up to ten seconds ahead, so let that
+    // graph fade out and start the calm bed on a fresh one, rather than have
+    // the opening finish playing over the page.
+    settle: function () { if (song && song.opening) { stopSong(); startSong(false); } },
     _render: render
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

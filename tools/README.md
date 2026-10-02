@@ -124,7 +124,9 @@ The browser checks live in `tools/test/`: `seo`, `font`, `console`, `survey`,
 `tour`, `intro`, `atlas`, `pages`, `sky`, `perf` and `audit`. `intro` is the
 opening: it plays it through at four sizes and fails if it overruns, if the
 count disagrees with the page, if it plays for reduced motion, a paused sky
-or a plan link, or if the gate does not fit a 320px phone. Every other
+or a plan link, if Skip (from the gate, mid-turn, or by Escape) does not
+bring the page straight back without a tour on top, or if the gate does not
+fit a 320px phone. Every other
 browser check seeds sessionStorage `dc-intro` so the opening stays out of
 its way, the same way they seed `dc-tour-seen`. `sky` photographs the
 painted galaxy with the page hidden and fails if any text colour would drop
