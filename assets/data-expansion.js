@@ -1,4 +1,4 @@
-/* Dreams Counselor — expansion set.
+/* Dreams Counsellor — expansion set.
    Physician-scientist routes, biochemistry and molecular medicine, dual degrees,
    and the specialist training courses that are hard to find because nobody
    advertises them to medical students. Appended to the core arrays. */

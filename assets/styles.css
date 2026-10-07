@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════
-   Dreams Counselor
+   Dreams Counsellor
 
    Type — three faces, self-hosted so nothing depends on a CDN:
      Cormorant Garamond  calligraphic old-style serif. Asks the human
@@ -414,7 +414,7 @@ body {
 .brand-mark { width: 20px; height: 20px; flex: none; color: var(--accent); }
 .brand-mark .bm-dot { fill: var(--fill); stroke: var(--paper); stroke-width: 2.2; paint-order: stroke; }
 .brand-text { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; letter-spacing: 0; }
-/* "Dreams" is set upright in the display serif and "Counselor" in the script —
+/* "Dreams" is set upright in the display serif and "Counsellor" in the script —
    the name is two different voices because the site is two things: a catalogue,
    and someone talking to you. The script runs 1.18× because its cap-height is
    smaller than Cormorant's at the same nominal size. */
@@ -433,7 +433,9 @@ body {
 @media (max-width: 400px) {
   .topbar-in { gap: 10px; }
   .brand { min-width: 0; gap: 8px; }
-  .brand-text { font-size: .98rem; }
+  /* .94 since "Dreams Counsellor" (October 2026): at .98 the extra letters
+     ran the wordmark to 1px short of the controls on a 375px phone. */
+  .brand-text { font-size: .94rem; }
 }
 
 .topnav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }

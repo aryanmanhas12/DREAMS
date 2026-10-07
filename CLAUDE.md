@@ -1,4 +1,4 @@
-# Dreams Counselor — project rules
+# Dreams Counsellor — project rules
 
 A career-guidance site for Indian medical students. Three questions (skill / anger / flow)
 plus practical and emotional constraints → a ranked list of real programmes with application
@@ -866,16 +866,16 @@ If this is ever done it should be a reviewed pass, entry by entry.
 
 ## Open with the user
 
-- **The name is "Dreams Counselor" since 2 October 2026** (it was "Dream Counsellor"), spelled as
-  the user typed it: an s on Dreams, and the American single-l Counselor, though the rest of the
-  site is British ("programmes"). The generic noun in prose stays "counsellor" ("a counsellor
-  would ask", the read's function name); only the product name changed. Everything that carries
-  it is rendered from `index.html`, `make-pages.js` or `make-og.js`, so after any further rename
-  run `node tools/refresh.js` (pages, share cards, bundle). Two things deliberately did NOT
-  change: the repository, URL and `DREAMS` path, and the calendar UID suffix `@dream-counsellor`
-  in `app.js`, because a calendar that already holds an exported deadline would import it a
-  second time under a new UID. The wordmark's script word is read from the markup by
-  `make-fonts.js` and `check.js`; "Counselor" uses only letters the subset already had.
+- **The name is "Dreams Counsellor"** (since 7 October 2026). It was "Dream Counsellor" until
+  2 October, then "Dreams Counselor" for five days, spelled as the user first typed it; they
+  then asked for the double l, which also matches the site's British spelling ("programmes").
+  The generic noun "counsellor" in prose is unchanged. Everything that carries the name is
+  rendered from `index.html`, `make-pages.js` or `make-og.js`, so after any rename run
+  `node tools/refresh.js` (pages, share cards, bundle). Two things deliberately never change
+  with the name: the repository, URL and `DREAMS` path, and the calendar UID suffix
+  `@dream-counsellor` in `app.js`, because a calendar that already holds an exported deadline
+  would import it a second time under a new UID. The wordmark's script word is read from the
+  markup by `make-fonts.js` and `check.js`.
 
 - **Colour palette**: changed twice on 30 September 2026 at the user's request. "Citrus &
   Slate" became "Marigold & Neem" (yellow, red, orange, green), which they then found too

@@ -77,8 +77,8 @@ out = out.replace("</body>", () => "<script>\n" + js + "\n</script>\n</body>");
 
 const dest = path.join(root, "dist");
 fs.mkdirSync(dest, { recursive: true });
-fs.writeFileSync(path.join(dest, "dreams-counselor.html"), out);
+fs.writeFileSync(path.join(dest, "dreams-counsellor.html"), out);
 
 const kb = (Buffer.byteLength(out) / 1024).toFixed(0);
 console.log("Bundled " + scripts.length + " scripts + stylesheet + " + fontsInlined +
-            " fonts -> dist/dreams-counselor.html (" + kb + " KB)");
+            " fonts -> dist/dreams-counsellor.html (" + kb + " KB)");

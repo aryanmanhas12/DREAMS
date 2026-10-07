@@ -1,4 +1,4 @@
-/* Dreams Counselor — exposure inside India.
+/* Dreams Counsellor — exposure inside India.
 
    The research ladder in data-india-events.js covers labs and conferences.
    This file covers the other half of seeing India as a doctor: a year in a

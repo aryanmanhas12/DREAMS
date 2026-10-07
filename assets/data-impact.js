@@ -1,4 +1,4 @@
-/* Dreams Counselor — impact tiers.
+/* Dreams Counsellor — impact tiers.
    Kept separate from the programme data on purpose: this is a judgement layer,
    and judgements should be visibly separable from facts.
 

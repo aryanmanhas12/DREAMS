@@ -1,8 +1,8 @@
 ---
-# DESIGN.md: how Dreams Counselor looks. Read this before any visual work.
+# DESIGN.md: how Dreams Counsellor looks. Read this before any visual work.
 # It wins over a skill's generic taste rules. Colour values here MUST match
 # assets/styles.css: tools/check.js fails the build on any drift.
-name: Dreams Counselor
+name: Dreams Counsellor
 system: Nebula (galaxy), 30 September 2026
 colors:
   space:      # :root and :root[data-theme="dark"]: the default, whatever the system says
@@ -91,7 +91,7 @@ motion:
   rule: "transform and opacity only, as transform keyframes on HTML elements; everything stops under prefers-reduced-motion and html.sky-still, and html.lite (2GB phones, Data Saver) gets the still version from the first paint"
 ---
 
-# Dreams Counselor: design
+# Dreams Counsellor: design
 
 A career compass for Indian medical students, drawn as a night sky. The page
 is deep space; the three galaxy colours each do exactly one job, so colour
@@ -152,7 +152,7 @@ under 4.5:1.
 - **Top-bar controls** (speaker, theme, menu) are three matching circles; their
   tap areas grow to 44px under the drawn circle, never through it. The menu's
   bars fold into an X and the drawer's links arrive in a short stagger.
-- **Ooh** is the guide Dreams Counselor shares with Ronak and Arun: a small
+- **Ooh** is the guide Dreams Counsellor shares with Ronak and Arun: a small
   sunrise-gold creature drawn by `ooh.js` (their `ooh.mjs` as a plain script,
   never edited here). Ooh answers "What do you want?" in the hero, asks the
   survey questions, and says one or two lines at the top of each view, typed

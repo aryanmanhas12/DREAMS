@@ -1,4 +1,4 @@
-/* Dreams Counselor — Frontier fields.
+/* Dreams Counsellor — Frontier fields.
    Disciplines that exist, are hiring, and are almost never mentioned in an Indian
    medical college. Each one is a real answer to "what else could I be?" */
 

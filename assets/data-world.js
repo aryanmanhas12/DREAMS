@@ -1,4 +1,4 @@
-/* Dreams Counselor — the second ring of the world.
+/* Dreams Counsellor — the second ring of the world.
 
    Everything in this file exists because the first version of the index had a
    gravity problem: UK, US, Australia, Germany. Those four absorb almost every

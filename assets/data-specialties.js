@@ -1,4 +1,4 @@
-/* Dreams Counselor — specialty route maps.
+/* Dreams Counsellor — specialty route maps.
    For each specialty: what it is day to day, how you enter it in India, how you enter
    it abroad, where it leads afterwards, and the thing nobody tells you before you commit
    three years to it. Non-clinical exits included, because they are real careers and

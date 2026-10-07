@@ -1,4 +1,4 @@
-/* Dreams Counselor — routes added in the August 2026 pass.
+/* Dreams Counsellor — routes added in the August 2026 pass.
 
    Every entry here was found and checked in this cycle, against the
    programme's own page rather than an aggregator. The theme of the batch is

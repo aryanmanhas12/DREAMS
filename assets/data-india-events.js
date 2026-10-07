@@ -1,4 +1,4 @@
-/* Dreams Counselor — what you can do without leaving the country.
+/* Dreams Counsellor — what you can do without leaving the country.
 
    The rest of this index points outward. This file exists because the outward
    routes all quietly assume something you may not have yet: that you have stood

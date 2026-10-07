@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   Ooh, the guide Dreams Counselor shares with Ronak and Arun
+   Ooh, the guide Dreams Counsellor shares with Ronak and Arun
    ──────────────────────────────────────────────────────────────
    Ooh is drawn by ooh.js (the sister apps' ooh.mjs as a plain script),
    speaks in the same bubble, and makes the same sounds: the CC0 "soft"

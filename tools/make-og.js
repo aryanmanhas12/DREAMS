@@ -73,7 +73,7 @@ const FACES = `
 @font-face{font-family:"IBM Plex Sans";src:url("assets/fonts/ibm-plex-sans.woff2")format("woff2");font-weight:100 700;font-display:block}
 @font-face{font-family:"Petit Formal Script";src:url("assets/fonts/petit-formal-script.woff2")format("woff2");font-weight:400;font-display:block}`;
 
-/* The wordmark is the page's own: "Dreams" in the display serif, "Counselor"
+/* The wordmark is the page's own: "Dreams" in the display serif, "Counsellor"
    in the script. It replaced an all-caps monospace eyebrow, which is one of
    the commonest tells of a generated page and said nothing the wordmark
    does not. */
@@ -103,7 +103,7 @@ p{font-size:17px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;max-width:5
 </style></head><body>
 <div id="card">
   <div>
-    <p class="mark">Dreams<em>Counselor</em></p>
+    <p class="mark">Dreams<em>Counsellor</em></p>
     <h1>The world is full of opportunities.<span>What do you want?</span></h1>
     <p>Almost every Indian medical student is handed the same map: clear NEET-PG, or leave for the USMLE. Both are real. Neither is the whole territory. There are funded research programmes you can hold in second year, doctorates that pay you a salary, and whole fields nobody mentioned once in five years of lectures.</p>
     <p class="last">${TOTAL} of them in one index. Three questions that have nothing to do with marks, then a ranked plan.</p>
@@ -157,7 +157,7 @@ p.desc{font-size:18px;line-height:1.55;color:var(--ink-2);margin:0;max-width:52c
 </style></head><body>
 <div id="card">
   <div id="copy">
-    <p class="mark">Dreams<em>Counselor</em></p>
+    <p class="mark">Dreams<em>Counsellor</em></p>
     <h1>${c.h1.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</h1>
     <p class="count">${c.count} of ${TOTAL} entries, every one linked to its official page</p>
     <p class="desc">${c.desc.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</p>

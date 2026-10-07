@@ -1,4 +1,4 @@
-/* Dreams Counselor — funding routes tied to who you are rather than only what
+/* Dreams Counsellor — funding routes tied to who you are rather than only what
    you study, plus the emerging-field programmes that did not exist five years
    ago. Both categories are systematically under-applied by Indian medical
    students: the first because nobody tells you the schemes exist, the second

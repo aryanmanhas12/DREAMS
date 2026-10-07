@@ -1,4 +1,4 @@
-/* Dreams Counselor — browser audit of the app itself (index.html).
+/* Dreams Counsellor — browser audit of the app itself (index.html).
    Drives the real page across viewports and both themes, looking for the
    failure classes this project has actually shipped: horizontal scroll,
    sub-16px text-entry controls, AA contrast, stranded reveals, off-screen

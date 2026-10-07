@@ -1,4 +1,4 @@
-# Dreams Counselor
+# Dreams Counsellor
 
 A career compass for Indian medical students — the ones who have been handed a map with
 two roads on it (NEET-PG, or the USMLE) and told that is the whole territory.

@@ -1,4 +1,4 @@
-/* Dreams Counselor — when this index was last checked against the world.
+/* Dreams Counsellor — when this index was last checked against the world.
 
    The standing risk on this whole project is staleness. Every deadline and
    amount here was correct when it was written and drifts every cycle, and a

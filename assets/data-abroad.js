@@ -1,4 +1,4 @@
-/* Dreams Counselor — the routes that put an Indian medical student abroad,
+/* Dreams Counsellor — the routes that put an Indian medical student abroad,
    funded, before they graduate.
 
    Two things sit in this file. First, the two summer/semester research

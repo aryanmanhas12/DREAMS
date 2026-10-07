@@ -1,4 +1,4 @@
-/* Dreams Counselor — hero globe.
+/* Dreams Counsellor — hero globe.
    A wireframe graticule, not a textured earth: the rest of this design speaks in
    hairlines, mono labels and instrument dials, and a glossy 3D planet would be a
    different language. Point size is the real number of programmes indexed in that

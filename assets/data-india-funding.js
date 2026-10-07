@@ -1,4 +1,4 @@
-/* Dreams Counselor — the funded routes inside India, and the ones in regions
+/* Dreams Counsellor — the funded routes inside India, and the ones in regions
    Indian medical students rarely look at. Appended to the core arrays.
 
    A recurring assumption worth dismantling: that a doctorate in India means

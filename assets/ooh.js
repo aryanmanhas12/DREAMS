@@ -4,7 +4,7 @@
    byte into Ronak), with exactly two mechanical changes so it runs the way
    every other file here does: the `export` keywords are gone, and the whole
    file is wrapped so it attaches window.OohArt (and module.exports, for the
-   build tools). Dreams Counselor must work from file://, where a browser
+   build tools). Dreams Counsellor must work from file://, where a browser
    refuses ES module imports, which is the only reason this is not the .mjs.
    Do not edit the drawing here: change it in Arun, copy it to Ronak, then
    regenerate this file. Source sha256 prefix: 5b13d7f028cb36e0. */
