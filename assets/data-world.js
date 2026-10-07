@@ -463,8 +463,8 @@ window.DB.research.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Full stipend, no tuition, plus a first year of rotations before you commit to a laboratory",
     duration: "4–5 years",
-    window: "Applications typically open ~November and close ~February",
-    deadlineMonths: [11, 12, 1, 2],
+    window: "One call a year: the last one opened on 2 December 2025 and closed on 31 January 2026. Expect the same weeks for 2027 entry",
+    deadlineMonths: [12, 1],
     url: "https://fchampalimaud.org/champalimaud-research/education",
     why: "One of the best-funded neuroscience institutes in Europe, built deliberately as an international programme, teaching in English, on the Lisbon waterfront. The structure is the thing worth noticing: a year of rotations before you choose a laboratory, which means you are not gambling five years on a supervisor you met once over a video call. A medical degree is a real advantage in this pool rather than an oddity.",
     reqs: [
@@ -490,8 +490,8 @@ window.DB.research.push(
     stages: ["grad", "pg"], funding: "full",
     money: "A full employment contract — roughly €31,000–39,000 a year gross, with social insurance — and no tuition at all",
     duration: "4–5 years, with rotations in the first year",
-    window: "Main deadline in early January; a second smaller call sometimes in May",
-    deadlineMonths: [11, 12, 1, 5],
+    window: "The portal for the 2027 intake opens in late October 2026 and closes on 8 January 2027 at 15:00 CET; referees by 12 January. Every PhD starts on 15 September",
+    deadlineMonths: [10, 11, 12, 1],
     url: "https://ista.ac.at/en/education/graduate-school/",
     why: "Doctoral students here are employees with a salary and a pension contribution, not students paying for the privilege. Entry is open directly after a bachelor's degree, which an MBBS satisfies, and the first year is rotations across laboratories. It is small, exceptionally well funded, entirely English-speaking, and almost invisible to Indian medical students because it does not present itself as a medical institution.",
     reqs: [
@@ -517,8 +517,8 @@ window.DB.research.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Full fellowship of about NT$34,000 a month for the first year, continued by the laboratory afterwards, plus tuition waiver",
     duration: "4–6 years",
-    window: "Applications usually close ~March for a September start",
-    deadlineMonths: [12, 1, 2, 3],
+    window: "One main round for each autumn intake: the 2026 round closed on 1 February 2026, so expect the 2027 round to close around 1 February 2027",
+    deadlineMonths: [11, 12, 1],
     url: "https://tigp.sinica.edu.tw/",
     why: "A fully funded, entirely English-language doctorate at Taiwan's national academy, across molecular medicine, bioinformatics and infectious disease. Living costs in Taipei are low enough that the stipend is genuinely comfortable rather than survivable, the country is one of the easiest in Asia for a vegetarian, and the applicant pool from India is tiny relative to the quality of the science.",
     reqs: [

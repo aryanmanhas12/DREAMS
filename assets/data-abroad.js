@@ -264,8 +264,8 @@ window.DB.research.push(
     stages: ["pg"], funding: "paid",
     money: "Funded research year · fellows secure or are awarded support per cohort",
     duration: "One academic year",
-    window: "Applications open in the autumn for the following academic year",
-    deadlineMonths: [11, 12, 1],
+    window: "Applications for 2027–28 close on 31 December 2026 at midnight US Eastern time; decisions are made in mid-February and candidates hear by March",
+    deadlineMonths: [10, 11, 12],
     url: "https://www.hsph.harvard.edu/takemi-program/",
     why: "A year at Harvard to work on health systems, aimed squarely at people who will go back and run them. Worth knowing about early even though you cannot apply yet, because it changes what a mid-career plan looks like: the people who get this spent their twenties building a health-systems record, not only a clinical one.",
     reqs: [
