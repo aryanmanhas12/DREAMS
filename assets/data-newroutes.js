@@ -23,8 +23,8 @@ window.DB.funding.push(
     stages: ["pg"], funding: "full",
     money: "A living stipend sized to local cost of living, plus research and travel support — paid whether you are based in India or briefly at the US site",
     duration: "12 months",
-    window: "Cycle typically opens in autumn and closes in winter for a start the following July",
-    deadlineMonths: [10, 11, 12, 1],
+    window: "Once a year, due mid-September (15 September 2026 for the 2027–28 year, now closed). The next call is expected around mid-2027 for a July 2028 start",
+    deadlineMonths: [7, 8, 9],
     url: "https://fogartyfellows.org/apply/",
     why: "A full year of US-government-funded mentored research, done mostly in India with a paired US mentor and a short spell at their university. The University of Washington, Indiana, Michigan and Minnesota consortium all take Indian trainees. This is not a relocation programme; it is US-calibre funding and mentorship landing on Indian soil, which is the opposite of every other route in this section.",
     reqs: [
@@ -36,7 +36,7 @@ window.DB.funding.push(
     steps: [
       "Read the NPGH LEADERs consortium's current partner list on fogartyfellows.org. The US-side mentor you approach should already have India ties or an active collaborator here.",
       "Draft a one-year research plan with your India-based mentor before you touch the application; the US partnership is easier to arrange once the local half exists.",
-      "Apply through the portal in the autumn cycle for a July start. This is a once-a-year window, not rolling.",
+      "Apply through the portal by the mid-September deadline for a July start the following year. This is a once-a-year window, not rolling.",
       "Budget the 1–3 month US stint separately: visa timing (a J-1 exchange visa, typically) needs its own runway alongside the fellowship paperwork."
     ],
     indiaSpecific: true, competitiveness: "high", workExp: 0

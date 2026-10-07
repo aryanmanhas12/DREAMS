@@ -60,13 +60,13 @@ window.DB.study = [
     stages: ["grad", "pg"], funding: "partial",
     money: "≈ £34,000 · Clarendon, Rhodes and Weidenfeld all fund it",
     duration: "1 year full-time",
-    window: "Two gathered fields: early Nov and early Jan",
-    deadlineMonths: [10, 11, 12, 1],
-    url: "https://www.ndph.ox.ac.uk/study-with-us",
+    window: "One deadline for 2027–28 entry: 12:00 midday UK time on 1 December 2026. About 28 places",
+    deadlineMonths: [9, 10, 11],
+    url: "https://www.ox.ac.uk/admissions/graduate/courses/msc-global-health-science-and-epidemiology",
     why: "Heavy quantitative training. You leave able to run a real epidemiological analysis, not just describe one. Sits inside the Nuffield Department of Population Health, which runs some of the largest cohort studies on earth.",
     reqs: ["Strong first degree; MBBS accepted", "Comfort with numbers. They test this", "IELTS 7.5 overall"],
     steps: [
-      "Apply in the NOVEMBER gathered field, not January. Scholarship consideration at Oxford is tied to the earlier deadline.",
+      "Apply by 1 December 2026, 12:00 UK time. There is one deadline for this course, and meeting it is also what puts you in front of the Clarendon, Felix and other Oxford scholarship panels.",
       "One tick-box on the Oxford form puts you in the Clarendon pool automatically — do not miss it.",
       "Rhodes India is a separate application with an earlier deadline (usually July–Aug). If you want it, you are applying a year ahead.",
       "Submit a written work sample if requested. A research proposal you actually wrote counts."
@@ -82,14 +82,14 @@ window.DB.study = [
     stages: ["grad", "pg"], funding: "partial",
     money: "≈ £36,000 · Clarendon eligible",
     duration: "1 year full-time",
-    window: "Gathered field deadlines Nov and Jan",
-    deadlineMonths: [10, 11, 12, 1],
-    url: "https://www.ox.ac.uk/admissions/graduate/courses",
+    window: "One deadline for 2027–28 entry: 12:00 midday UK time on 1 December 2026. About 16 places",
+    deadlineMonths: [9, 10, 11],
+    url: "https://www.ox.ac.uk/admissions/graduate/courses/msc-neuroscience",
     why: "A laboratory-based conversion year that turns a clinically trained doctor into someone a neuroscience PhD programme will take seriously. Two research projects, both examinable.",
     reqs: ["MBBS or science degree", "Prior lab or computational experience helps a great deal", "IELTS 7.5"],
     steps: [
       "Identify two Oxford labs you would want your rotations in and say so in the statement.",
-      "Apply in the November gathered field for scholarship consideration.",
+      "Apply by 1 December 2026, 12:00 UK time. There is one deadline, and it is also the one that puts you in front of the scholarship panels.",
       "If your quantitative background is thin, finish an online neuroscience or Python course BEFORE applying and name it. It converts intent into evidence."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
