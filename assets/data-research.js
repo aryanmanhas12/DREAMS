@@ -103,11 +103,11 @@ window.DB.research = [
     stages: ["clin", "intern", "grad"], funding: "stipend",
     money: "≈ ₹10,000/month · free to apply",
     duration: "2–6 months",
-    window: "Main call Oct–Nov; some labs take rolling applications",
+    window: "The winter internship call runs to mid-November (15 November in the last cycle) for a two-month stay from early January, with ₹10,000 a month and housing; some labs take rolling requests",
     deadlineMonths: [10, 11],
     url: "https://www.ncbs.res.in/",
     why: "One of the best basic-science institutes in Asia, and its neuroscience groups publish in the journals you actually want to be in. Direct emails to individual PIs work here more often than at most Indian institutions.",
-    reqs: ["Final-year MBBS or graduate for the formal programme", "Earlier years can approach individual labs directly", "Free to apply"],
+    reqs: ["Final-year bachelor’s or master’s student in a STEM field for the winter programme; MBBS is not named, so ask the office before applying", "Earlier years can approach individual labs directly", "Free to apply"],
     steps: [
       "Apply through the formal call in October–November if you are eligible.",
       "If you are too junior for the formal route, email a PI directly with a specific technical question about their paper. This works more often than people expect.",

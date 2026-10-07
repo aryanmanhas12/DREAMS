@@ -73,14 +73,14 @@ window.DB.study.push(
     stages: ["grad", "pg"], funding: "paid",
     money: "Full NHS training salary with 25 % of your time protected for research",
     duration: "3–4 years alongside specialty training",
-    window: "Applications open around November for the following August",
-    deadlineMonths: [10, 11, 12],
+    window: "One national round on Oriel: 1 to 29 October 2026 for posts starting in August 2027. Interviews run from 9 November to 15 January and first offers go out from 19 January",
+    deadlineMonths: [9, 10],
     url: "https://www.nihr.ac.uk/career-development/",
     why: "The answer to the question every clinically-minded researcher eventually asks: do I have to choose? An ACF gives you a quarter of your working week for research while you train as a psychiatrist, on a full salary. UK psychiatry is understaffed and recruits internationally, which makes this unusually reachable.",
     reqs: ["GMC registration (via UKMLA/PLAB for Indian graduates)", "Eligibility for UK specialty training", "A research track record helps enormously at interview"],
     steps: [
       "Get GMC registration first. The ACF sits on top of the normal training application, it is not a separate entry route.",
-      "Apply through Oriel in the November round alongside standard specialty applications.",
+      "Apply through Oriel between 1 and 29 October. The academic round runs earlier than standard specialty recruitment, so do not wait for November.",
       "Name the research group you want to work with in your application. ACFs are attached to specific academic departments.",
       "This route ends in a clinical lectureship and often a funded PhD, which is the classic UK physician-scientist ladder."
     ],

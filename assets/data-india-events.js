@@ -57,9 +57,9 @@ window.DB.research.push(
     stages: ["pre", "clin", "intern", "grad"], funding: "full",
     money: "Stipend of roughly ₹6,000–10,000 a month plus hostel accommodation; several also reimburse second-class rail fare",
     duration: "6–8 weeks, usually May to July",
-    window: "Applications open around December and close February–March",
-    deadlineMonths: [12, 1, 2, 3],
-    url: "https://www.iiserpune.ac.in/research/summer-research-programme",
+    window: "Each IISER sets its own dates. IISER Pune’s summer programme took applications from 2 to 20 February in 2026; watch each institute’s announcements page from January",
+    deadlineMonths: [1, 2, 3],
+    url: "https://www.iiserpune.ac.in/announcements",
     why: "The IISERs were built to do basic science properly and they run summer programmes that pay you, house you and put you in a working laboratory for two months. IISER Pune's biology and neuroscience groups in particular publish at an international level. The reason to care as a medical student is that this is the cheapest way in the country to find out whether you actually like bench research before you commit a doctorate to it, and a supervisor here writes the reference that makes a foreign application credible.",
     reqs: [
       "Current enrolment in a science or medical degree; MBBS students are eligible and are a smaller part of the pool than you would think",
