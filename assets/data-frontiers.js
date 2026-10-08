@@ -210,7 +210,7 @@ window.DB.residency = [
     stages: ["clin", "intern", "grad"], funding: "paid",
     money: "Residency salary $60,000–75,000/year · exam costs ≈ ₹4–6 lakh total including travel",
     duration: "Step 1 → Step 2 CK → OET/Pathway → Match → 3–7 years residency",
-    window: "ERAS opens Sept · Match results in March",
+    window: "For the 2027 Match: ERAS applications go to programmes from 2 September 2026 and are reviewed from 23 September; interviews run October to January; rank lists are due 3 March 2027 and Match Day is 19 March 2027. Check the AAMC and NRMP calendars",
     deadlineMonths: [9, 10, 11, 12, 1, 2, 3],
     url: "https://www.ecfmg.org/",
     why: "The best-paid and most research-integrated clinical route out of India. Psychiatry is one of the most IMG-friendly specialties in the American Match, and US psychiatry residency includes protected research time, which makes it a genuine physician-scientist pathway, not just an emigration route.",

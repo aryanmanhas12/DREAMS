@@ -22,48 +22,38 @@ window.DB = window.DB || {};
 
 window.DB.meta = {
   /* ISO year-month of the last verification pass. */
-  reviewed: "2026-09",
-  reviewedLabel: "September 2026",
+  reviewed: "2026-10",
+  reviewedLabel: "October 2026",
   /* What that pass actually covered, so the stamp does not over-claim. Spot
      checks are not a full audit and the interface should not imply one.
 
-     This is the second September pass. It re-read three groups of entries
-     against their official pages: the UN, Germany and Australia routes; every
-     tier-1 programme the index marked open this month, plus each programme
-     the scroll atlas names as a region's highest-graded; and the tier-2
-     entries whose own window text contradicted an "open" badge.
+     The October pass worked down tools/recheck.js's "act now" list: tier-1
+     and tier-2 entries whose badge says open or opening soon. Thirty-two
+     entries changed. Eighteen were read on the programme's own page and
+     carry checked: "2026-10"; the rest were brought to this cycle's dates
+     from the programmes' published calendars and are not stamped.
 
-     It found more wrong than right in that last group, and the errors were
-     the dangerous kind: an open badge on something that cannot be entered.
+     What it found, beyond dates that had simply rolled over:
 
-       EMERALD, the European PhD for medical doctors, was listed as recruiting.
-       Its last call closed on 28 August 2022 and its grant ends in June 2027;
-       only its search description still says the call is open. Now skipList.
-       Amgen Scholars told Indian students to apply to the Europe programme,
-       which takes only students enrolled in a Bologna-process country. Only
-       the Asia hosts are open from India, and they close 1 February.
-       ICGEB's Falaschi PhD fellowships were said to accept MBBS. They name a
-       BSc (Honours) or an MSc. The door that names MBBS is the ICGEB-JNU PhD
-       in New Delhi, which also needs a JRF-level fellowship in hand.
-       Harvard's MPH-45 was described as requiring a doctoral degree that MBBS
-       satisfies; it takes a master's or doctoral degree, or in some fields a
-       bachelor's plus five years, as read through WES. One deadline, 1 Dec.
-       Auckland's PhD asks for a thesis-bearing honours or master's degree, so
-       the New Zealand domestic-fee doctorate opens after an MD or MS.
-       The Duke policy fellowship wants a master's and five years' work, and
-       its call is closed. Schwarzman closed on 9 September. Gates Cambridge
-       moved to 8 December or 6 January. BIRAC BIG has not run a call since
-       November 2025. FMI Basel's MD-PhD needs an approved experimental thesis.
+       ITM Antwerp's scholarship was described as VLIR-UOS seats ring-fenced
+       for Indian doctors, covering travel. It is Belgium's DGD scholarship:
+       India is eligible as a low- or middle-income country but is not one of
+       the 27 priority countries that receive most awards, and travel is never
+       covered. Graded down from tier 1 to tier 2.
+       Charpak's Summer Training (Charpak Lab until 2025) pays EUR 700 a month
+       for up to two months with no travel, insurance or housing; the entry
+       said EUR 860 with housing help and free health cover. Its eligibility
+       list does not name MBBS, so the entry now says to confirm.
+       KAUST's visiting programme was said to take MBBS students. Its page
+       names 3rd- and 4th-year STEM bachelor's and master's students only, runs
+       2 to 6 months all year, and pays USD 1,000 a month plus flights.
+       The UK Academic Clinical Fellowship round is open on Oriel from 1 to 29
+       October 2026; the entry said "around November".
+       Clarendon's window had been garbled by an earlier cleanup pass, and the
+       J.N. Tata entry called a loan "interest-free" on no source.
 
-     The first run of the new tools/recheck.js worklist then found three
-     windows still describing finished rounds (Eiffel's 2026 session, the JHU
-     Summer Institute's 2026 dates, and the WHO Youth Council call that closed
-     in June and will not recur before 2028). All three were re-read and
-     rewritten, and every entry verified this month carries checked: "2026-09".
-
-     What this pass did NOT do: re-verify the generic cycles (US PhD
-     admissions, most US MPH programmes, conference abstract windows) or the
-     145 entries not marked open this month. Those carry the dates
-     confirmed in the August pass. */
-  scope: "The UN, Germany and Australia routes, and every tier-1 programme marked open in September 2026, re-read against official pages. That found an EU doctorate for doctors whose last call closed in 2022, two programmes whose stated degree rules exclude a bare MBBS (ICGEB's Falaschi fellowships and Auckland's PhD), Amgen's Europe programme wrongly listed as open to students in India, and stale dates for Gates Cambridge, Schwarzman and Harvard's MPH-45, all corrected."
+     What this pass did NOT do: re-read the 85 entries longest unchecked, or
+     the generic cycles (conference abstract windows, UK rolling masters).
+     Those carry the September and August checks. */
+  scope: "The October 2026 pass re-read the programmes marked open or opening soon. It found ITM Antwerp's scholarship favours 27 other countries and never pays the flight, Charpak's summer track pays EUR 700 a month with no housing or insurance, KAUST's visiting programme names STEM students rather than MBBS, and the UK Academic Clinical Fellowship round open on Oriel until 29 October 2026, all corrected. Entries outside that list carry their earlier checks."
 };

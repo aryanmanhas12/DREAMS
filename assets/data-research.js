@@ -42,6 +42,7 @@ window.DB.research = [
     window: "Open now for 2027: the last date is 30 November 2026. Selections, with the guide’s agreement, go out around March–April 2027",
     deadlineMonths: [9, 10, 11],
     url: "https://web-japps.ias.ac.in/srfp/",
+    checked: "2026-10",
     why: "You pick actual scientists from a published list and they pick you back. Train fare is reimbursed, so a student with no money can spend a summer in a real laboratory at IISc, TIFR or NCBS at effectively zero personal cost. MBBS students are eligible and rarely apply.",
     reqs: ["Enrolled in MBBS or a science degree", "Good academic record", "Free to apply", "You name up to 7 preferred guides from the directory"],
     steps: [
@@ -64,6 +65,7 @@ window.DB.research = [
     window: "The 2026 round closed on 31 January 2026 and the 2027 call is expected around December. The page also lists GRIP, a longer internship open to final-year MBBS students",
     deadlineMonths: [12, 1],
     url: "https://www.jncasr.ac.in/academics",
+    checked: "2026-10",
     why: "A genuine molecular neuroscience laboratory, open to MBBS years 1–3, with travel paid. For a medical student who wants to find out whether bench science is actually for them, this is a two-month, zero-risk experiment.",
     reqs: ["MBBS year 1–3", "Strong academic record", "Free to apply"],
     steps: [
@@ -200,6 +202,7 @@ window.DB.research = [
     window: "Applications open around 1 January and close in early February (2 February in 2026) for an eight-week programme from mid-June. The list of host labs for the next round goes up on 29 December 2026",
     deadlineMonths: [1, 2],
     url: "https://info.weizmann.ac.il/kupcinet-getz-international-summer-program/",
+    checked: "2026-10",
     why: "One of the world's great research institutes, paying undergraduates from anywhere on earth to spend a summer in its laboratories. Small cohort, genuinely international, and Weizmann's neuroscience and immunology departments are exceptional.",
     reqs: [
       "A bachelor's or master's student past the first year, or a recent graduate, in the physical, chemical or life sciences, mathematics or computer science. Medicine is not named on the page, so confirm with the programme that MBBS counts before you apply",

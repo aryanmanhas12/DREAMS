@@ -63,6 +63,7 @@ window.DB.study = [
     window: "One deadline for 2027–28 entry: 12:00 midday UK time on 1 December 2026. About 28 places",
     deadlineMonths: [9, 10, 11],
     url: "https://www.ox.ac.uk/admissions/graduate/courses/msc-global-health-science-and-epidemiology",
+    checked: "2026-10",
     why: "Heavy quantitative training. You leave able to run a real epidemiological analysis, not just describe one. Sits inside the Nuffield Department of Population Health, which runs some of the largest cohort studies on earth.",
     reqs: ["Strong first degree; MBBS accepted", "Comfort with numbers. They test this", "IELTS 7.5 overall"],
     steps: [
@@ -85,6 +86,7 @@ window.DB.study = [
     window: "One deadline for 2027–28 entry: 12:00 midday UK time on 1 December 2026. About 16 places",
     deadlineMonths: [9, 10, 11],
     url: "https://www.ox.ac.uk/admissions/graduate/courses/msc-neuroscience",
+    checked: "2026-10",
     why: "A laboratory-based conversion year that turns a clinically trained doctor into someone a neuroscience PhD programme will take seriously. Two research projects, both examinable.",
     reqs: ["MBBS or science degree", "Prior lab or computational experience helps a great deal", "IELTS 7.5"],
     steps: [
@@ -169,6 +171,7 @@ window.DB.study = [
     window: "Open since 9 September 2026. For Gates Cambridge and every other Cambridge award, both courses share one funding deadline: 8 December 2026. The later admission deadlines (25 March 2027 for Population Health Sciences, 14 April 2027 for Neuroscience) bring no funding",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://www.postgraduate.study.cam.ac.uk/courses",
+    checked: "2026-10",
     why: "The MPhil is the standard Cambridge on-ramp to a PhD. Gates Cambridge funds roughly 25 international scholars a year at full cost and explicitly looks for people committed to improving the lives of others, which is exactly the framing a public-health medic already has.",
     reqs: ["High 2:1 / first equivalent", "IELTS 7.5", "Research proposal for research-track MPhils"],
     steps: [
@@ -305,6 +308,7 @@ window.DB.study = [
     window: "Opens in September; the priority deadline for master’s programmes, which is also the scholarship deadline, is 5 January",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://sph.emory.edu/admissions/",
+    checked: "2026-10",
     why: "Next door to the US CDC, with a formal pipeline into it. Emory is meaningfully cheaper than the Ivy-adjacent schools and hands out more merit money to international applicants, which makes it the best value-per-prestige MPH in America.",
     reqs: ["Bachelor's or MBBS", "TOEFL 100", "Some global health experience preferred"],
     steps: [
@@ -326,6 +330,7 @@ window.DB.study = [
     window: "Opens Sept · deadlines 1–15 Dec almost universally",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://biosciences.stanford.edu/admissions/",
+    checked: "2026-10",
     why: "The most important thing Indian medical students get wrong: US PhDs are PAID. You do not need a masters first, you do not need to self-fund, and MBBS is accepted as the prior degree. A funded PhD is a job with a salary, not a fee you have to raise.",
     reqs: ["MBBS accepted as the qualifying degree", "Research experience is the single deciding factor — publications help but a real project matters more", "TOEFL 100; GRE now optional at most programmes", "Three strong letters, at least two from researchers", "The money comes from the department, not from a fellowship you win first — which matters, because the NSF GRFP that dominates the search results is closed to you"],
     steps: [

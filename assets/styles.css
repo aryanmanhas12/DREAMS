@@ -2143,9 +2143,14 @@ button:active, .btn:active, .chip:active, .opt:active { transform: scale(.972); 
 .crumbs a { color: var(--accent); }
 .crumbs [aria-current="page"] { color: var(--ink-3); }
 
+/* `anywhere`, for the reason given at .listing-facts below: an email address
+   in a step ("scholarship.france@institutfrancaisindia.in", October 2026) is
+   one unbreakable token wider than a 320px phone, and it put 45px of
+   horizontal scroll on six category pages at once. */
 .listing {
   margin: 0 0 8px; padding: 22px 0 4px;
   border-top: 1px solid var(--line-soft);
+  overflow-wrap: anywhere;
 }
 .listing h2 {
   font-family: var(--font-display); font-size: 1.45rem; line-height: 1.16;

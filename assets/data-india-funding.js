@@ -145,16 +145,16 @@ window.DB.research.push(
     type: "research", country: "Gulf", city: "Thuwal, Doha, Abu Dhabi",
     fields: ["genomics", "biochem", "compbio", "onco", "neuro"],
     stages: ["clin", "intern", "grad", "pg"], funding: "full",
-    money: "KAUST fully funds masters and doctoral students: tuition, housing, health cover and a stipend of roughly $20,000–30,000/year. Its Visiting Student Research Programme covers travel too.",
-    duration: "10 weeks (visiting programme) to 4 years (doctorate)",
-    window: "KAUST VSRP applications typically close in the first quarter; degree admissions are rolling with January and August intakes",
-    deadlineMonths: [1, 2, 3, 4, 11, 12],
+    money: "KAUST fully funds masters and doctoral students: tuition, housing, health cover and a stipend. Its Visiting Student Research Programme pays tuition, housing, return flights and USD 1,000 a month",
+    duration: "2 to 6 months (visiting programme) to 4 years (doctorate)",
+    window: "KAUST's visiting programme takes applications all year: you apply to one of its 100-odd listed projects and choose your own start and end dates. Degree admissions run on their own calendar",
+    deadlineMonths: [],
     url: "https://www.kaust.edu.sa/en/study",
     why: "Four hours from India, extremely well funded, English-speaking, and almost entirely absent from Indian medical students' mental map. KAUST's stipends are generous by any standard and its bioscience and computational groups are genuinely strong. Sidra Medicine in Qatar runs serious genomics work on Middle Eastern and South Asian populations, which is directly relevant if consanguinity genetics interests you.",
-    reqs: ["Strong academic record", "English only — no Arabic required", "KAUST's visiting programme is open to enrolled undergraduates including MBBS students"],
+    reqs: ["Strong academic record; the visiting programme asks for a GPA of 3.5 out of 4 or equivalent", "English only. No Arabic required", "KAUST's visiting programme is for 3rd- and 4th-year bachelor's and master's students in STEM. MBBS is not named, so ask the programme before you build a plan on it; a bioscience project is the plausible fit"],
     steps: [
-      "The KAUST Visiting Student Research Programme is the low-risk entry point: ten weeks, fully funded including flights, and it frequently converts into a doctoral offer.",
-      "Apply in the first quarter for a summer placement.",
+      "The KAUST Visiting Student Research Programme is the low-risk entry point: two to six months, funded including flights, and a common route into its doctoral programme.",
+      "Apply to a specific project on the programme's project page; there is no single deadline, so allow time for review before the start date you want.",
       "Consider carefully whether the social and legal environment suits you. That is a personal judgement and worth making deliberately rather than by default."
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0

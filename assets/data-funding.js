@@ -214,6 +214,7 @@ window.DB.funding = [
     window: "Considered automatically when you apply for your Oxford course by its December or January deadline (1 December 2026 for many science courses); there is no separate form",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.ox.ac.uk/clarendon",
+    checked: "2026-10",
     why: "About 200 awards a year across every Oxford department, and there is no separate application. You are automatically considered when you apply to Oxford by the relevant deadline. It is the single least-effort major scholarship in existence, and people still miss it by applying late.",
     reqs: [
       "Applying for a new full-time or part-time Oxford master's or DPhil; no restriction on nationality, residence or subject",
@@ -239,6 +240,7 @@ window.DB.funding = [
     window: "Considered with your course application: apply by your course's December or January deadline (1 December 2026 for many Oxford science courses). Decisions by the end of May",
     deadlineMonths: [11, 12, 1],
     url: "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/felix-scholarships",
+    checked: "2026-10",
     why: "Reserved for Indian nationals specifically, with a stated preference for candidates from financially disadvantaged backgrounds who intend to return to India. Far fewer applicants than Chevening, comparable money.",
     reqs: [
       "Indian citizen, resident in India, first degree from an Indian university",
@@ -262,21 +264,21 @@ window.DB.funding = [
     type: "scholarship", country: "Any", city: "Any",
     fields: ["pubhealth", "neuro", "biochem", "genomics", "compbio", "global"],
     stages: ["grad", "pg"], funding: "partial",
-    money: "Interest-free loan scholarship of ₹1–10 lakh, plus travel and gift awards for top scorers",
-    duration: "One-time award for a postgraduate degree abroad",
-    window: "Opens ~Dec · closes mid-March",
+    money: "A repayable loan scholarship for study abroad, plus a criteria-based travel grant and gift award from the Tata Trusts for selected scholars. Check the amount and repayment terms in the current call",
+    duration: "One-time award for a postgraduate degree, PhD or postdoc abroad",
+    window: "The last round closed on 15 March 2026. The next usually opens in December or January and closes in mid-March; dates are posted on the endowment's site",
     deadlineMonths: [12, 1, 2, 3],
     url: "https://jntataendowment.org/loan-scholarship-process/",
-    why: "Over a century old, open to every field including medicine, and it does not require an admission offer in hand when you apply. The interest-free structure means you repay only what you borrowed — in practice one of the cheapest ways to bridge a funding gap.",
+    why: "Over a century old, open to every discipline including medicine, and merit-based. A loan scholarship is still a loan, but as a way to bridge a funding gap for a degree abroad it is among the cheapest and most respected in India.",
     reqs: [
       "Indian citizen with a first degree",
-      "Applying for postgraduate study abroad in any discipline",
+      "Applying for full-time postgraduate, PhD or postdoctoral study abroad, in any discipline",
       "Selection by interview in Mumbai or by video"
     ],
     steps: [
       "Apply between December and mid-March; the online form is straightforward but the interview is substantive.",
-      "You do NOT need a confirmed offer to apply. This makes it a useful early-cycle safety net.",
-      "Top-ranked candidates also receive outright travel grants and gift awards on top of the loan."
+      "Guides disagree on whether you need an admission offer when you apply. Read the current call; if an offer is not required, apply early as a safety net.",
+      "Selected scholars who accept the loan can also receive a travel grant and gift award from the Tata Trusts."
     ],
     indiaSpecific: true, competitiveness: "medium", workExp: 0
   },
@@ -406,6 +408,7 @@ window.DB.funding = [
     window: "The 2026 Summer Training call is over; earlier calls ran from about November to late January or February. Watch the page from November for summer 2027",
     deadlineMonths: [11, 12, 1],
     url: "https://www.inde.campusfrance.org/france-excellence-charpak-scholarship-program",
+    checked: "2026-10",
     why: "Summer Training (Charpak Lab until 2025) is one of the few funded research internships open to a student still enrolled in India. One or two months in a French laboratory, paid, during a summer break, is one of the most efficient credential-builders available to an Indian medico, provided you secure the host lab yourself.",
     reqs: [
       "Summer Training: an Indian national living in India, 30 or under, enrolled at bachelor's or master's level in an Indian institution. The eligibility list sets no subject rule, but the overview names engineering, science, management and humanities, so confirm MBBS with scholarship.france@institutfrancaisindia.in before you chase a lab",

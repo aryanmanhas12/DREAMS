@@ -26,6 +26,7 @@ window.DB.funding.push(
     window: "Once a year, due mid-September (15 September 2026 for the 2027–28 year, now closed). The next call is expected around mid-2027 for a July 2028 start",
     deadlineMonths: [7, 8, 9],
     url: "https://fogartyfellows.org/apply/",
+    checked: "2026-10",
     why: "A full year of US-government-funded mentored research, done mostly in India with a paired US mentor and a short spell at their university. The University of Washington, Indiana, Michigan and Minnesota consortium all take Indian trainees. This is not a relocation programme; it is US-calibre funding and mentorship landing on Indian soil, which is the opposite of every other route in this section.",
     reqs: [
       "Doctoral-level trainee in a health profession — MD, MBBS-with-research-registration, or enrolled in a relevant doctoral programme",

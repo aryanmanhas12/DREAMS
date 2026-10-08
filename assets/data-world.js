@@ -334,6 +334,7 @@ window.DB.study.push(
     window: "Open now for 2027–28: apply by 15 January 2027, 23:59 CET. The DGD scholarship form comes with the online application",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.itg.be/en/study/courses/master-of-science-in-tropical-medicine/2027-2028",
+    checked: "2026-10",
     why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds scholarships for doctors from low- and middle-income countries, India included. A funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices, and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
     reqs: [
       "A medical degree (MBBS qualifies) or an equivalent health-sciences degree",
