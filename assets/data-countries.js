@@ -160,6 +160,22 @@ window.DB.countries = {
     allergy: "Year-round humidity means dust mites; low pollen. Air quality drops during regional haze episodes.",
     honest: "If distance from family, cold weather or food are genuine constraints, Singapore removes all three without reducing academic quality — NUS is a top-tier global university three and a half hours from Delhi. It is expensive, and it is small in a way that some people find claustrophobic after a year."
   },
+  /* Added October 2026 with the Hong Kong PhD Fellowship Scheme, whose
+     official page was read on 8 October 2026. */
+  "Hong Kong": {
+    name: "Hong Kong",
+    climate: "warm", winter: "14–20 °C, mild and dry", summer: "28–33 °C, very humid, with typhoons from July to September",
+    daylight: "About 11 hours in December",
+    cost: "₹1.3–2 lakh/month, most of it rent",
+    diaspora: "moderate", vegFood: "moderate",
+    food: "Indian restaurants and grocers cluster in Tsim Sha Tsui, and Buddhist vegetarian restaurants are common. Everyday Cantonese cooking uses meat and fish stock freely, so ask.",
+    mentalHealth: "Universities run counselling services in English. Public psychiatric waiting lists are long, and stigma is still significant.",
+    people: "Cantonese is the language of the street; English is an official language and the working language of universities, hospitals and government.",
+    visa: "Student visa sponsored by your university. The IANG scheme lets non-local graduates stay in Hong Kong after graduating to look for work or to work.",
+    work: "Student visa conditions limit outside work; check them with your university. A PhD Fellowship stipend is set so that you should not need it.",
+    allergy: "Humid all year, with mould and dust mites in older flats. Air quality dips in winter when the wind comes from the north.",
+    honest: "The PhD Fellowship pays more than almost any doctorate in Asia and the universities are strong in public health and infectious disease. The catch is housing: rent takes a large share of the stipend and flats are very small. Choose it for the supervisor and the laboratory."
+  },
   Japan: {
     name: "Japan",
     climate: "temperate", winter: "0–10 °C in Tokyo; harsh in the north", summer: "25–35 °C, very humid",

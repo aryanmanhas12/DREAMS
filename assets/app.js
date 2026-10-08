@@ -2431,7 +2431,7 @@
     // sits over the Arabian Sea so Japan, Israel and South Africa all stay on
     // the visible hemisphere.
     asia:     { label: "Asia beyond India, and Africa", focus: [10, 75], countries: [
-                "Japan", "China", "South Korea", "Taiwan", "Singapore", "Thailand", "Asia", "Bangladesh",
+                "Japan", "China", "Hong Kong", "South Korea", "Taiwan", "Singapore", "Thailand", "Asia", "Bangladesh",
                 "Israel", "Turkey", "Gulf", "South Africa"] },
     global:   { label: "no single country", countries: ["Global", "Any", "Online"], focus: [46.2, 6.1], highlight: false }
   };

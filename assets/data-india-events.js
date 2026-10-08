@@ -162,6 +162,37 @@ window.DB.study.push(
       "Ask your own department to let you run a scientific day if there is not one. Organising the event teaches you more than presenting at it."
     ],
     indiaSpecific: true, competitiveness: "accessible", workExp: 0
+  },
+  /* October 2026, from the owner's own notes. Both read on the official pages
+     on 8 October 2026: CAMP's home page and IISc BCL's FAQ. The Bangalore
+     Cognition Workshop, from the same notes, names only engineering and
+     science students and sits in skipList instead. */
+  {
+    id: "india-neuro-schools",
+    name: "Computational neuroscience schools in India that take medics: CAMP@Pune and IISc's Brain, Computation and Learning",
+    org: "IISER Pune (CAMP) · Indian Institute of Science, Bengaluru (BCL)",
+    type: "skill", country: "India", city: "Pune and Bengaluru",
+    fields: ["neuro", "compbio"],
+    stages: ["clin", "intern", "grad", "pg"], funding: "partial",
+    money: "CAMP covers accommodation and meals for its 15 days; its FAQ covers travel grants. BCL charges no fee, houses participants and repays students' train fare up to 3AC",
+    duration: "CAMP: 15 days in July · BCL: 5 days",
+    window: "CAMP@Pune runs each July. Its 2026 school (2 to 16 July) took applications until 7 May after an extension, so expect the 2027 call around March or April. IISc's BCL ran in 2019, 2023 and 2025 and has not announced its next edition",
+    deadlineMonths: [3, 4, 5],
+    url: "https://camp.iiserpune.ac.in/",
+    checked: "2026-10",
+    why: "Psychiatry and neurology are moving towards models of how circuits compute, and these are the two Indian schools where the people building those models teach for a fortnight. CAMP, which ran at NCBS as CAMP@Bangalore until 2022, invites final-year undergraduates from all backgrounds alongside PhD students and postdocs. BCL asks for master's students and above, but says clinicians in related areas are encouraged to apply, which makes it one of the few Indian computational meetings that names doctors at all.",
+    reqs: [
+      "CAMP: a PhD student, master's student, final-year undergraduate or postdoc, from any background; a final-year MBBS student fits the wording",
+      "BCL: master's and PhD students, postdocs and faculty in neuroscience, engineering, computer science or AI; exceptionally motivated undergraduates are considered, and clinicians in related areas are encouraged",
+      "A statement of why you want the course. CAMP's FAQ answers whether you can apply without a programming or maths background"
+    ],
+    steps: [
+      "Watch camp.iiserpune.ac.in from February. The 2026 call closed on 7 May, after an extension.",
+      "Learn enough Python to run a notebook before you apply. Neuromatch Academy's free material is the fastest route, and it is what the other applicants will have done.",
+      "Write about a clinical question you want a model to answer. That is the angle no engineering applicant has.",
+      "For BCL, check bcl.iisc.ac.in each spring. When an edition is announced, applications close about a month before it starts (1 June for the July 2025 edition)."
+    ],
+    zeroCost: false, indiaSpecific: true, competitiveness: "medium", workExp: 0
   }
 );
 
@@ -173,6 +204,7 @@ Object.assign(window.DB.impact, {
   "present-first-paper":     { t: 1, odds: "Entirely within your control", effort: "One academic year, spread thin", note: "Rated top tier because everything else in this index eventually asks you to defend your own work in a hostile room, and this is the only entry that builds that. The order matters — students who skip to a national podium get taken apart and quietly stop trying." },
   "iiser-summer":            { t: 2, odds: "Competitive, and MBBS students are a small part of the pool", effort: "12 hrs to apply properly", note: "Paid, housed, two months in a real laboratory, and the cheapest way in India to find out whether you like bench work before committing a doctorate to it. Name a specific group and a specific paper or the application goes nowhere." },
   "society-conferences-india":{ t: 2, odds: "Student paper sessions are under-subscribed", effort: "20 hrs including the abstract", note: "The cheapest place on earth to learn to answer a question you did not expect, and the chair of your session is often your future supervisor. Track the abstract deadline, not the conference date. It is months earlier and it is the one that matters." },
+  "india-neuro-schools":     { t: 2, odds: "Selective, and medics are rare in the pool", effort: "10 hrs, plus some Python first", note: "Two weeks taught by the people who build models of memory and decision, free once you are in. For a medic heading into psychiatry or neurology research, this is where the computational side starts." },
   "campus-research-culture": { t: 3, odds: "Open to anyone who turns up", effort: "An evening at a time", note: "IISc and NCBS publish their seminar calendars openly and medical students assume the rooms are closed. They are not. Starting a research society at your own college, if none exists, returns more than attending any of it." }
 });
 

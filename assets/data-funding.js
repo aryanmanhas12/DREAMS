@@ -75,8 +75,8 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + airfare + living stipend + health cover, for up to 2 years",
     duration: "1–2 year US masters",
-    window: "Opens Feb · closes mid-May, roughly 16 months before you would start",
-    deadlineMonths: [2, 3, 4, 5],
+    window: "Announced each February on usief.org.in. Recent master's rounds have closed between mid-May and 1 July, roughly 15 months before you would start",
+    deadlineMonths: [2, 3, 4, 5, 6],
     url: "https://www.usief.org.in/fulbright-fellowships/",
     why: "The most prestigious India-to-US route there is, and USIEF does the university placement work for you. Public health is an explicitly eligible field. The three-year experience requirement means this is something you plan for during internship and junior residency, not something you apply to as a student.",
     reqs: [
@@ -86,7 +86,7 @@ window.DB.funding = [
       "Cannot hold or be studying for a US degree already"
     ],
     steps: [
-      "Start counting the three years now. Internship plus two years of clinical or research work gets you there, which means applying in your third post-MBBS year.",
+      "Start counting the three years now, and ask USIEF whether your internship year counts. If it does, internship plus two years of clinical or research work gets you there, which means applying in your third post-MBBS year.",
       "The application closes in May for a course starting 16 months later. This is the longest lead time of any scholarship here.",
       "USIEF places you; you list preferences but do not need an offer in hand first. That removes the usual chicken-and-egg problem.",
       "Fulbright-Nehru Doctoral Research Fellowships are a separate scheme for people already registered for a PhD in India who want a year in a US lab."

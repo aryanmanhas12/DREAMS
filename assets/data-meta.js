@@ -52,8 +52,15 @@ window.DB.meta = {
        Clarendon's window had been garbled by an earlier cleanup pass, and the
        J.N. Tata entry called a loan "interest-free" on no source.
 
+     Added in the same pass, each read on its own official page first: the
+     Hong Kong PhD Fellowship Scheme (Hong Kong is the index's 34th country;
+     CUHK names MBChB "or equivalent" as a PhD entry degree for its medical
+     faculty), and CAMP@Pune with IISc's Brain, Computation and Learning
+     workshop. The Bangalore Cognition Workshop names only engineering and
+     science students, so it went to skipList.
+
      What this pass did NOT do: re-read the 85 entries longest unchecked, or
      the generic cycles (conference abstract windows, UK rolling masters).
      Those carry the September and August checks. */
-  scope: "The October 2026 pass re-read the programmes marked open or opening soon. It found ITM Antwerp's scholarship favours 27 other countries and never pays the flight, Charpak's summer track pays EUR 700 a month with no housing or insurance, KAUST's visiting programme names STEM students rather than MBBS, and the UK Academic Clinical Fellowship round open on Oriel until 29 October 2026, all corrected. Entries outside that list carry their earlier checks."
+  scope: "The October 2026 pass re-read the programmes marked open or opening soon. It found ITM Antwerp's scholarship favours 27 other countries and never pays the flight, Charpak's summer track pays EUR 700 a month with no housing or insurance, KAUST's visiting programme names STEM students rather than MBBS, and the UK Academic Clinical Fellowship round open on Oriel until 29 October 2026, all corrected. It also added Hong Kong's PhD Fellowship, open until 1 December 2026. Entries outside that list carry their earlier checks."
 };

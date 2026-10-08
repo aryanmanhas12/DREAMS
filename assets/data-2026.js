@@ -30,8 +30,8 @@ window.DB.funding.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Tuition, accommodation, monthly stipend, health insurance, return airfare and a year of Turkish language teaching — all of it, not a contribution towards it",
     duration: "2 years (masters) · 4 years (doctorate), plus the language year",
-    window: "One annual round, opening early in the year and closing around February",
-    deadlineMonths: [1, 2, 3],
+    window: "One annual round on tbbs.turkiyeburslari.gov.tr. The 2026 round ran from 10 January to 20 February; expect similar dates in 2027",
+    deadlineMonths: [1, 2],
     url: "https://turkiyeburslari.gov.tr/",
     why: "One of the few genuinely full scholarships anywhere that names medical sciences as an eligible field and does not require a language test to apply. Turkish medical faculties are strong in transplant surgery, cardiology and emergency medicine, and Türkiye's own health system reform is one of the most studied in the world, which makes it a real subject to work on rather than just a place to hold a degree. It is also the rare fully funded route where placement is done for you: you rank up to twelve programmes and the committee assigns one.",
     reqs: [

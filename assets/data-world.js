@@ -536,6 +536,36 @@ window.DB.research.push(
     ],
     zeroCost: true, indiaSpecific: false, competitiveness: "medium", workExp: 0
   },
+  /* October 2026. The RGC's call page and CUHK's admission rules were both
+     read on 8 October 2026. */
+  {
+    id: "hkpfs",
+    name: "Hong Kong PhD Fellowship Scheme",
+    org: "Research Grants Council of Hong Kong, at eight Hong Kong universities",
+    type: "phd", country: "Hong Kong", city: "Hong Kong",
+    fields: ["infect", "pubhealth", "neuro", "genomics", "compbio", "clinical"],
+    stages: ["grad", "pg"], funding: "full",
+    money: "HK$344,400 a year (about US$44,150) and HK$14,400 a year for conference and research travel, for up to three years (2026/27 rates)",
+    duration: "Up to three years of fellowship; the university may fund a fourth",
+    window: "Open now for 2027/28: 1 September to 1 December 2026, 12:00 noon Hong Kong time. You also apply to each university's PhD programme directly",
+    deadlineMonths: [9, 10, 11],
+    url: "https://www.ugc.edu.hk/eng/rgc/funding_opport/hkpfs/",
+    checked: "2026-10",
+    why: "Four hundred fully funded PhD fellowships a year, open to every nationality, at a stipend among the highest anywhere for a doctorate. CUHK writes an MBChB \"or equivalent\" into its PhD admission rules for the Faculty of Medicine, so an Indian MBBS is a direct entry qualification there rather than something to argue for. Hong Kong is about five hours from Delhi, research runs in English, and its two medical faculties are among Asia's strongest in public health and infectious disease.",
+    reqs: [
+      "Admission as a new full-time PhD student at one of the eight UGC-funded universities. The fellowship sets no nationality, work-experience or ethnicity rule",
+      "The university's own entry rules: CUHK admits holders of an MBChB or equivalent to its Faculty of Medicine PhD programmes; check the programme you choose",
+      "In the RGC's words, outstanding academic performance, research ability, communication skills and leadership",
+      "English proficiency as each university sets it"
+    ],
+    steps: [
+      "Choose at most two PhD programmes, in one or two universities. That is the scheme's limit.",
+      "Follow the RGC's procedure for the fellowship and apply to each university's PhD programme directly. Both must be in by 1 December 2026, noon Hong Kong time.",
+      "Write to a prospective supervisor in October with a specific question about their work. A supervisor who wants you is what carries an application through the university's shortlist.",
+      "Research output counts for more than marks here. A first-author paper or a documented research elective is what lifts an MBBS application."
+    ],
+    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
+  },
   {
     id: "wits-uct-global",
     name: "HIV, tuberculosis and health-systems research",
@@ -684,6 +714,7 @@ Object.assign(window.DB.impact, {
   "champalimaud-indp":    { t: 1, odds: "Very competitive; a medical degree is an advantage here", effort: "30 hrs", note: "A rotation year before you commit to a laboratory is worth more than it sounds: it is the difference between choosing a supervisor on evidence and choosing one on a video call. Full stipend, no fees, English, Lisbon." },
   "ista-phd":             { t: 1, odds: "Competitive, and open directly after MBBS", effort: "25 hrs", note: "A salary and a pension contribution rather than a stipend, no tuition, rotations in year one, and direct entry on a bachelor's degree. Invisible to Indian medical students only because it does not look like a medical school." },
   "gks-korea":            { t: 1, odds: "Genuinely under-applied from India for what it pays", effort: "45 hrs, mostly document chasing", note: "Flight, fees, living, insurance and a paid language year. The documents defeat more applicants than the essays do — apostilles take weeks, so the real deadline is December." },
+  "hkpfs": { t: 1, odds: "400 awards a year worldwide; strong research output needed", effort: "40 hrs, most of it finding a supervisor", note: "The best-paid open PhD fellowship in Asia, with an MBBS named as an entry degree for CUHK's medical faculty. Rated top tier because the money removes every financial reason not to do a doctorate." },
   "tigp-academia-sinica": { t: 2, odds: "Tiny Indian applicant pool for the quality of the science", effort: "20 hrs", note: "Fully funded English-language doctorate at a national academy, in a country that is unusually easy for a vegetarian. The weakness is name recognition, not research quality — weigh that honestly against where you want to work afterwards." },
   "wits-uct-global":      { t: 2, odds: "Reachable, especially with prior research", effort: "20 hrs", note: "For HIV, TB and health systems this is ahead of Europe, because the epidemiology and the trial infrastructure are on the doorstep. Security is a real constraint on daily life and should be researched from students, not from the prospectus." },
   "isglobal-msc":         { t: 2, odds: "Moderately competitive", effort: "15 hrs", note: "A third of the price of the London equivalent with genuine African and South Asian field programmes. Ask about field placement access before accepting. That is the part that distinguishes it." },

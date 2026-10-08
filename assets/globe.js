@@ -26,6 +26,7 @@
     France:      [46.5,    2.3],
     Ireland:     [53.2,   -8.0],
     Singapore:   [1.35,  103.8],
+    "Hong Kong": [22.3,  114.2],
     Japan:       [36.0,  138.0],
     Israel:      [31.0,   35.0],
     Hungary:     [47.2,   19.5],

@@ -624,6 +624,35 @@ phone, and the music made calmer and more exciting.
   and the tour start only when the opening has finished, and the hero globe then opens on
   India rather than turning to it a second time.
 
+## The October 2026 recheck, and Hong Kong (7–8 October 2026)
+
+The user asked for every deadline and course re-checked, more countries that suit an Indian
+MBBS, and every opportunity they had asked to be remembered, each judged for feasibility.
+
+- **The worst errors were eligibility and money, not dates.** ITM Antwerp's scholarship was
+  written up as VLIR-UOS seats "ring-fenced" for Indian doctors with travel paid; it is Belgium's
+  DGD scholarship, which favours 27 priority countries (India is not one) and never pays the
+  flight, so it dropped from tier 1 to tier 2. Charpak's summer track pays €700 a month with no
+  housing or insurance (the entry said €860 with both). KAUST's visiting programme names STEM
+  bachelor's and master's students, not MBBS. J.N. Tata was called "interest-free" on no source.
+  Each entry now says what its own page says, and to confirm MBBS where the page does not name it.
+- **Hong Kong is the 34th country.** The RGC's PhD Fellowship (HK$344,400 a year, 400 awards,
+  closing 1 December 2026) has no nationality rule, and CUHK names "MBChB or equivalent" as a
+  PhD entry degree for its Faculty of Medicine. Adding a country took four edits: the profile in
+  `data-countries.js`, `COORDS` in `globe.js`, the `asia` row of `ATLAS` in `app.js`, and the
+  entry. `check.js` enforces the first three; the counts and cards regenerate from data.
+- **Researched and not added, because the deciding page could not be read:** the UAE licence
+  route (Abu Dhabi's PQR renders with JavaScript, so the GP experience rule went unread), HBKU's
+  PhD in Qatar (same), NBRC's imaging courses (the site answered empty). A rule you cannot read
+  does not go into an eligibility line.
+- **From the owner's notes:** CAMP@Pune (moved from NCBS; takes final-year undergraduates "from
+  all backgrounds") and IISc's Brain, Computation and Learning workshop (free, encourages
+  clinicians) are one new entry. The Bangalore Cognition Workshop names only BE/BTech and
+  science master's students and went to `skipList`. The fee-charging "government internship"
+  is already covered by the skipList entry on paying for internships.
+- **Client-rendered pages read as empty to curl** (USIEF, HBKU, DOH's PQR, CAMP's FAQ answers).
+  An empty read is not evidence of anything; say the page could not be read and move on.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this
