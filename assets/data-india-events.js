@@ -116,7 +116,7 @@ window.DB.study.push(
     stages: ["clin", "intern", "grad", "pg"], funding: "partial",
     money: "Student registration typically ₹2,000–6,000 · many societies waive it for presenting authors and several state chapters fund travel for award-paper finalists",
     duration: "2–4 days",
-    window: "Abstract deadlines usually fall 3–5 months before the meeting; most national meetings sit between November and March",
+    window: "Abstract deadlines usually fall 3–5 months before the meeting; most national meetings sit between November and March. ANCIPS 2027 meets in Madurai, 7–10 January 2027",
     deadlineMonths: [7, 8, 9, 10, 11, 12],
     url: "https://www.indianpsychiatricsociety.org/",
     why: "Every major Indian specialty society runs an annual meeting with a paper session judged separately for students and postgraduates, and those sessions are chronically under-subscribed relative to the number of eligible students. This is where a network gets built. The person who chairs your session is often the person who later supervises your thesis or signs your reference. It is also the cheapest place in the world to learn how to answer a question you did not expect.",

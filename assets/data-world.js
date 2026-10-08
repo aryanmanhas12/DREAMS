@@ -324,26 +324,26 @@ Object.assign(window.DB.countries, {
 window.DB.study.push(
   {
     id: "itm-antwerp-tropmed",
-    name: "Master of Science in Tropical Medicine & International Health",
+    name: "Master of Science in Tropical Medicine",
     org: "Institute of Tropical Medicine, Antwerp",
     type: "masters", country: "Belgium", city: "Antwerp",
     fields: ["global", "infect", "pubhealth", "systems"],
-    stages: ["grad", "pg"], funding: "full",
-    money: "VLIR-UOS scholarships cover tuition, travel, insurance and a full monthly living allowance for candidates from India and other partner countries",
-    duration: "1 year, plus an optional preceding diploma year",
-    window: "Scholarship applications typically close ~January–February for the following September",
-    deadlineMonths: [11, 12, 1, 2],
-    url: "https://www.itg.be/en/study/studying-at-itm",
-    why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds seats specifically for doctors from countries like India. A fully funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices, and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
+    stages: ["grad", "pg"], funding: "partial",
+    money: "Belgian DGD scholarships can cover fees, insurance, housing and a living allowance, in full or in part. Travel to Belgium is NOT covered. India is eligible as a low- or middle-income country but is not on DGD's priority list, which receives most awards",
+    duration: "1 year (60 credits)",
+    window: "Open now for 2027–28: apply by 15 January 2027, 23:59 CET. The DGD scholarship form comes with the online application",
+    deadlineMonths: [10, 11, 12, 1],
+    url: "https://www.itg.be/en/study/courses/master-of-science-in-tropical-medicine/2027-2028",
+    why: "This is where a large part of the world's tropical-medicine and outbreak-response workforce is actually trained, and the Belgian government funds scholarships for doctors from low- and middle-income countries, India included. A funded European masters in the field that matters most to Indian public health, at an institute whose alumni run WHO country offices, and the applicant pool from India is a fraction of what it should be, because almost nobody here knows the place exists.",
     reqs: [
       "A medical degree (MBBS qualifies) or an equivalent health-sciences degree",
       "Clinical or public-health work experience strengthens the application considerably",
       "English proficiency; ITM accepts several routes to proving it",
-      "For the VLIR-UOS scholarship: nationality of a partner country, and a demonstrated intention to work in your own country's health system afterwards"
+      "For the DGD scholarship: citizenship of and residence in a low- or middle-income country, no second citizenship or job in a high-income country, early or mid career; employer support and a clear return to your own health system weigh in selection, and women are preferred at equal merit"
     ],
     steps: [
-      "Read the VLIR-UOS eligibility page before the course page. The scholarship, not the seat, is the hard part, and it has its own nationality and age criteria.",
-      "Apply to ITM and to the scholarship in the same cycle. The scholarship deadline is the earlier of the two and missing it means self-funding a European masters.",
+      "Read ITM's DGD scholarship page before the course page. The scholarship, not the seat, is the hard part: academic selection comes first, and only the highest-ranked admitted candidates are funded.",
+      "Budget for the flight yourself. ITM considers travel support only in exceptional cases, by letter to itmedu@itg.be before the deadline.",
       "The motivation letter is assessed on whether you will use the training in your own health system. Write about a specific Indian problem you have seen, not about a general interest in global health.",
       "An internship year or district-hospital posting is genuinely useful evidence here in a way it is not for most Western masters.",
       "Confirm current fees, deadlines and scholarship rules on the ITM site. This programme's funding rules change with Belgian development-aid cycles."
@@ -679,7 +679,7 @@ window.DB.funding.push(
 
 window.DB.impact = window.DB.impact || {};
 Object.assign(window.DB.impact, {
-  "itm-antwerp-tropmed": { t: 1, odds: "Competitive, but the Indian applicant pool is small", effort: "40 hrs including the scholarship file", note: "A fully funded European masters in the field that matters most to Indian public health, at the institute that trains WHO country staff. The reason to rate it top tier is not the degree. It is that Belgian development funding ring-fences seats for exactly this candidate and almost nobody in India applies." },
+  "itm-antwerp-tropmed": { t: 2, odds: "Competitive; India is eligible for DGD funding but outside its priority list", effort: "40 hrs including the scholarship file", note: "A European masters in the field that matters most to Indian public health, at the institute that trains WHO country staff. Graded down from tier 1 in October 2026: the Belgian scholarship favours 27 priority countries, India is not one of them, and it never pays the flight." },
   "champalimaud-indp":    { t: 1, odds: "Very competitive; a medical degree is an advantage here", effort: "30 hrs", note: "A rotation year before you commit to a laboratory is worth more than it sounds: it is the difference between choosing a supervisor on evidence and choosing one on a video call. Full stipend, no fees, English, Lisbon." },
   "ista-phd":             { t: 1, odds: "Competitive, and open directly after MBBS", effort: "25 hrs", note: "A salary and a pension contribution rather than a stipend, no tuition, rotations in year one, and direct entry on a bachelor's degree. Invisible to Indian medical students only because it does not look like a medical school." },
   "gks-korea":            { t: 1, odds: "Genuinely under-applied from India for what it pays", effort: "45 hrs, mostly document chasing", note: "Flight, fees, living, insurance and a paid language year. The documents defeat more applicants than the essays do — apostilles take weeks, so the real deadline is December." },

@@ -69,7 +69,7 @@ window.DB.impact = {
   "ias-srfp":          { t: 2, odds: "~15 %", effort: "10 hrs, free to apply", note: "Train fare reimbursed, so the real cost is close to zero. MBBS students are eligible and rarely apply." },
   "neuromatch":        { t: 2, odds: "Accepts most prepared applicants", effort: "3 weeks full-time", note: "The cheapest credential that makes a cold email to a computational lab actually land. Tuition waivers available on request." },
   "ictp":              { t: 2, odds: "Moderate — designed for developing-country scientists", effort: "10 hrs", note: "Exists specifically to fund people from countries like yours. Almost no Indian medical students know it exists." },
-  "charpak":           { t: 2, odds: "~20 %, Indians only", effort: "20 hrs plus finding a French lab", note: "Charpak Lab is the rare funded research internship a current MBBS student can take." },
+  "charpak":           { t: 2, odds: "~20 %, Indians only", effort: "20 hrs plus finding a French lab", note: "Summer Training (Charpak Lab until 2025) is a rare funded research internship for a student still enrolled in India. Confirm MBBS with the programme office before you chase a lab." },
   "lshtm-mph":         { t: 2, odds: "~30 % admission; funding much harder", effort: "25 hrs", note: "The most recognised public health masters in the world. The distance-learning route is the cheapest credible way to hold the degree." },
   "lshtm-gmh":         { t: 2, odds: "~25 %", effort: "25 hrs", note: "Joint with the IoPPN. The department that built the evidence base for task-shifted mental health care." },
   "ox-msc-gh":         { t: 2, odds: "~15 %", effort: "30 hrs", note: "You leave able to run a real epidemiological analysis, not just describe one." },

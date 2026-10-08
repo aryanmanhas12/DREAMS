@@ -211,17 +211,17 @@ window.DB.funding = [
     stages: ["grad", "pg"], funding: "full",
     money: "Full tuition + £20,000+ annual living stipend",
     duration: "Full length of the course",
-    window: "Tied to your Oxford course deadline. The early-January gathered field",
+    window: "Considered automatically when you apply for your Oxford course by its December or January deadline (1 December 2026 for many science courses); there is no separate form",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://www.ox.ac.uk/clarendon",
     why: "About 200 awards a year across every Oxford department, and there is no separate application. You are automatically considered when you apply to Oxford by the relevant deadline. It is the single least-effort major scholarship in existence, and people still miss it by applying late.",
     reqs: [
-      "Applying to any full-time Oxford graduate course",
+      "Applying for a new full-time or part-time Oxford master's or DPhil; no restriction on nationality, residence or subject",
       "Awarded purely on academic merit and potential",
-      "No separate form, but you MUST meet the earlier gathered-field deadline"
+      "No separate form, but you MUST apply by your course's December or January deadline; a later deadline is not considered"
     ],
     steps: [
-      "Apply in the earliest gathered field for your course, usually November or early January.",
+      "Apply by your course's December or January deadline, whichever applies to it.",
       "That is genuinely the whole mechanism. There is no Clarendon essay.",
       "Combine with the Oxford-India (Reliance / Weidenfeld-Hoffmann) schemes, which do have their own forms."
     ],
@@ -396,25 +396,25 @@ window.DB.funding = [
   },
   {
     id: "charpak",
-    name: "France Excellence Charpak Scholarship — Master, Exchange and Lab tracks",
+    name: "France Excellence Charpak Scholarship: Summer Training (once Charpak Lab), Exchange and Master",
     org: "French Embassy in India / Campus France",
     type: "scholarship", country: "France", city: "Various",
     fields: ["biochem", "neuro", "genomics", "pubhealth", "compbio"],
     stages: ["pre", "clin", "intern", "grad"], funding: "partial",
-    money: "≈ €860/month, visa fee waived, housing help, free health cover",
-    duration: "Lab: 2–4 months · Exchange: 1 semester · Master: 1–2 years",
-    window: "Lab and Summer tracks open Nov–Jan · Exchange autumn track opens ~Mar",
-    deadlineMonths: [11, 12, 1, 2, 3],
+    money: "Summer Training: €700 a month for up to two months, the student visa fee and the Campus France fee waived. Travel, insurance and housing are not covered",
+    duration: "Summer Training: 1 to 2 months between May and August · Exchange: 1 semester · Master: 1 to 2 years",
+    window: "The 2026 Summer Training call is over; earlier calls ran from about November to late January or February. Watch the page from November for summer 2027",
+    deadlineMonths: [11, 12, 1],
     url: "https://www.inde.campusfrance.org/france-excellence-charpak-scholarship-program",
-    why: "Charpak Lab is the rare funded research internship that a CURRENT medical student can take. You do not need to have graduated. A two to four month stint in a French laboratory, paid, while still in MBBS, is one of the most efficient credential-builders available to an Indian medico.",
+    why: "Summer Training (Charpak Lab until 2025) is one of the few funded research internships open to a student still enrolled in India. One or two months in a French laboratory, paid, during a summer break, is one of the most efficient credential-builders available to an Indian medico, provided you secure the host lab yourself.",
     reqs: [
-      "Indian citizen enrolled in an Indian institution (Lab and Exchange tracks) — current MBBS students qualify",
-      "Lab track requires an invitation letter from a French laboratory",
-      "No French language requirement for lab work in most research groups"
+      "Summer Training: an Indian national living in India, 30 or under, enrolled at bachelor's or master's level in an Indian institution. The eligibility list sets no subject rule, but the overview names engineering, science, management and humanities, so confirm MBBS with scholarship.france@institutfrancaisindia.in before you chase a lab",
+      "An invitation letter from a French laboratory or institution, which you arrange yourself, and a no-objection certificate from your Indian college",
+      "No CGPA cut-off and no French requirement; French is an asset"
     ],
     steps: [
-      "For Charpak Lab, the invitation letter is the whole game. Email French PIs from October, with a specific question about their work.",
-      "Campus France India runs webinars each cycle — attend one, they tell you exactly what the reviewers want.",
+      "For Summer Training, the invitation letter is the whole game. Email French PIs from October, with a specific question about their work; it must state the exact dates.",
+      "Ask your college for the no-objection certificate early, in the Institut Français format, because colleges are slow to sign.",
       "Apply through the Institut Français en Inde scholarship portal, not the general Campus France site.",
       "The Master track is for full degrees and has a separate, later cycle."
     ],

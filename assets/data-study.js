@@ -166,14 +166,14 @@ window.DB.study = [
     stages: ["grad", "pg"], funding: "full",
     money: "≈ £40,000 · Gates Cambridge covers it entirely",
     duration: "9–12 months",
-    window: "Opens Sept · for Gates Cambridge funding the deadline is the course funding deadline: 8 December 2026 or 6 January 2027, depending on course",
+    window: "Open since 9 September 2026. For Gates Cambridge and every other Cambridge award, both courses share one funding deadline: 8 December 2026. The later admission deadlines (25 March 2027 for Population Health Sciences, 14 April 2027 for Neuroscience) bring no funding",
     deadlineMonths: [9, 10, 11, 12],
     url: "https://www.postgraduate.study.cam.ac.uk/courses",
     why: "The MPhil is the standard Cambridge on-ramp to a PhD. Gates Cambridge funds roughly 25 international scholars a year at full cost and explicitly looks for people committed to improving the lives of others, which is exactly the framing a public-health medic already has.",
     reqs: ["High 2:1 / first equivalent", "IELTS 7.5", "Research proposal for research-track MPhils"],
     steps: [
       "One Cambridge application form covers both course admission and Gates Cambridge — tick the funding box.",
-      "For funding, the date that matters is the Course Funding Deadline on the course page (8 December 2026 or 6 January 2027), not the later admission deadline. Gates Cambridge applications must be in by that date.",
+      "For funding, the date that matters is the Course Funding Deadline on the course page (8 December 2026 for both of these courses), not the later admission deadline. Gates Cambridge applications must be in by that date.",
       "Gates wants a clear answer to 'why you, why this, why now' — write the leadership and service parts honestly, they are assessed."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
