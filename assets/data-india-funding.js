@@ -241,9 +241,10 @@ window.DB.residency.push(
     stages: ["intern", "grad"], funding: "paid",
     money: "House officer ≈ NZ$80,000–95,000/year once registered",
     duration: "Qualifying exam → NZREX Clinical → PGY1 post → registration",
-    window: "NZREX sittings run a few times a year and fill early",
+    window: "Two sittings a year. The next is 6 March 2027: applications opened on 1 July 2026 and are taken in the order received, and anyone not placed moves to 4 September 2027, which opens once March is full",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.mcnz.org.nz/registration/getting-registered/registration-exam-nzrex/",
+    checked: "2026-10",
     why: "The parallel route to Australia's AMC, with a smaller applicant pool and a country that is substantially cheaper to sit the process in. Worth knowing before you commit to the USMLE by default.",
     reqs: [
       "MBBS from a school listed in the World Directory of Medical Schools",
@@ -284,7 +285,7 @@ window.DB.research.push(
     deadlineMonths: [],
     noOpenCall: true,
     url: "https://birac.nic.in/big.php",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "The largest sum in this index that an individual student can hold, and almost no medical student applies. BIRAC's own eligibility names medical degree holders alongside PhDs and biomedical engineers, so a clinician with a diagnostic or device idea is inside the intended audience rather than at its edge. Doctors see the unmet need every day in outpatients; the people who usually win these grants have to go looking for it.",
     reqs: [
       "An idea at nascent or planning stage. A prototype is not required to apply",

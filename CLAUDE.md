@@ -652,6 +652,26 @@ MBBS, and every opportunity they had asked to be remembered, each judged for fea
   is already covered by the skipList entry on paying for internships.
 - **Client-rendered pages read as empty to curl** (USIEF, HBKU, DOH's PQR, CAMP's FAQ answers).
   An empty read is not evidence of anything; say the page could not be read and move on.
+- **The whole index can be fetched in one go (9 October 2026).** All 190 official pages were
+  pulled in parallel on Composio's remote host by a background script (16 threads, curl first,
+  r.jina.ai when the HTML was empty or a bot wall), then compared with each entry. It took about
+  a minute; reading the results took the time. Two cautions: r.jina.ai rate-limits per IP, so
+  about 20 pages came back as a 429 JSON body and needed a slow second pass, and a remote call
+  that runs past 60 seconds is cut off, so launch with `nohup … &` and poll. No link was dead.
+  57 entries were stamped; pages behind Cloudflare and Indian government portals were not.
+- **A month-level badge says "open" until the month ends.** Chevening and Knight-Hennessy closed
+  on 6 October 2026 and still read "open now" three days later, because October was in their
+  `deadlineMonths`. Chevening's window said "closes 6 October" with no year, which the stale-text
+  check cannot judge; Knight-Hennessy's named a later December date, so not every date had
+  passed. `recheck.js` now lists any open entry whose window names a closing date earlier in the
+  current month (verified on the pre-fix data: it flags exactly those two). When a round closes
+  early in a month, take that month out of `deadlineMonths` and say the next date in words.
+- **Found by that sweep:** Open Doors registration closes 1 November (the entry said November
+  to December), Pasteur's PPU interviews are in March after a joint lab application by 14
+  December (its old page answers 502; the entry links the call PDF), K.C. Mahindra's loans are
+  up to ₹10 lakh for the top three and ₹5 lakh otherwise, Aga Khan's programme moved to
+  `the.akdn/en/international-scholarships` and its loan half carries a service charge, and
+  INYAS closed on 31 August.
 
 ## Pre-launch checklist — run this before any release, every time
 

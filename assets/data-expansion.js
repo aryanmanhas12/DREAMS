@@ -21,7 +21,7 @@ window.DB.study.push(
     window: "Two rounds a year. Autumn: opens 1 September, closes 15 November 2026, interviews January 2027. Spring: closes in May for June selection",
     deadlineMonths: [3, 4, 5, 9, 10, 11],
     url: "https://www.fmi.ch/education-careers/programs/",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "Launched in 2016 for people who have studied medicine and want a real PhD in fundamental biology, with the Basel medical faculty behind the degree and Novartis research next door. The entry rule is a degree that would qualify you for residency, which an MBBS does, so this is one of the few MD-PhD programmes outside your own country that is written for someone exactly like you.",
     reqs: [
       "A medical degree that qualifies you for clinical training or residency, held or expected before enrolment",
@@ -45,10 +45,10 @@ window.DB.study.push(
     stages: ["grad", "pg"], funding: "full",
     money: "A three-year salaried contract from Institut Pasteur, with health insurance, unemployment insurance and a pension",
     duration: "3 years",
-    window: "The call for October 2027 entry runs 1 October to 16 November 2026. Shortlisted candidates interview in early February; results by mid-February",
+    window: "Open now for October 2027 entry. Apply to host labs listed on the site between 1 October and 16 November 2026; you and the lab then submit a joint application by 14 December 2026, and shortlisted candidates interview at the Institut Pasteur in early March 2027",
     deadlineMonths: [10, 11],
-    url: "https://www.pasteur.fr/en/about-us/our-missions/education/training-programs/doctoral-programs/pasteur-paris-university-international-doctoral-program-ppu",
-    checked: "2026-09",
+    url: "https://www.pasteur.fr/sites/default/files/enseignement/call_ppu_students.pdf",
+    checked: "2026-10",
     why: "Institut Pasteur runs an MD-PhD track inside its international doctoral programme and says in writing that it wants international MDs and medical students, not only French ones. Infectious disease and epidemiology here are world-leading and map directly onto the disease burden you already treat, and the PhD comes as a salaried job with benefits rather than a stipend.",
     reqs: [
       "A master's degree or the equivalent in life or medical sciences. The MD-PhD track names international MDs and medical students; confirm with phd@pasteur.fr that your MBBS is read as the equivalent.",
@@ -60,7 +60,7 @@ window.DB.study.push(
       "Read the projects posted on the call page from 1 October and pick up to four whose published work you can discuss in detail.",
       "Contact those laboratories early. The first cut is theirs: a lab presents one candidate per project, so the conversation with the group leader is the real selection.",
       "Submit through the application platform only (email applications are refused) with a CV and a motivation letter, by 16 November 2026.",
-      "If shortlisted, prepare to present past and future work at the February interview."
+      "If shortlisted, prepare to present past and future work at the interview in Paris in early March 2027."
     ],
     zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -139,9 +139,10 @@ window.DB.study.push(
     stages: ["grad", "pg"], funding: "partial",
     money: "≈ £30,000–70,000 · many US biostatistics programmes fund students as teaching assistants",
     duration: "1–2 years",
-    window: "Opens Sept–Oct · US deadlines Dec, UK rolling to June",
-    deadlineMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
+    window: "US programmes mostly close in December. LSHTM's MSc opens for 2027/28 in early November and takes applications until 25 July 2027 from anyone needing a Student visa, but funding deadlines come months earlier",
+    deadlineMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7],
     url: "https://www.lshtm.ac.uk/study/courses/masters-degrees/health-data-science",
+    checked: "2026-10",
     why: "The highest-employability degree on this entire site, and the one that keeps every door open — clinical research, industry, global health and academia all need people who can genuinely analyse data and also understand what a patient is. US biostatistics departments frequently fund masters students through teaching assistantships, which almost nobody realises.",
     reqs: ["Quantitative comfort. This is genuinely required", "MBBS accepted; some programmes ask for evidence of mathematics", "Prior Python or R helps a great deal"],
     steps: [
@@ -234,6 +235,7 @@ window.DB.research.push(
     window: "Registration typically opens in spring",
     deadlineMonths: [3, 4, 5, 6],
     url: "https://translationalneuromodeling.org/cpcourse/",
+    checked: "2026-10",
     why: "The definitive training course in the field. The one where the people who invented computational psychiatry teach it. It runs in a hybrid format, which means you can attend the whole thing from India for a fraction of the cost. For anyone whose interests sit between psychiatry, modelling and code, this is the single most targeted week available anywhere.",
     reqs: ["Basic programming and statistics", "Open to students, clinicians and researchers", "No degree requirement"],
     steps: [

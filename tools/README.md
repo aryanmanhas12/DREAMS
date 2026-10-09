@@ -26,7 +26,11 @@ January will not look again in May.
    It lists, in order:
 
    - **Act now**: tier 1–2 programmes whose badge says open or opening soon.
-     These are what a student acts on this week.
+     These are what a student acts on this week. An entry whose window names a
+     closing date earlier this month ("closes 6 October") is listed here even
+     if it was checked this month, with a `!` note: the badge works by month,
+     so it keeps saying "open now" until the month ends. If the date was the
+     close, take this month out of `deadlineMonths`.
    - **Stale text**: windows where every date named has already passed.
    - **No call open**: entries marked `noOpenCall`. Check whether a call has
      reopened.

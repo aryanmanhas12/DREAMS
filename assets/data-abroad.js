@@ -63,10 +63,10 @@ window.DB.research.push(
     stages: ["clin", "intern"], funding: "full",
     money: "Salary, travel and accommodation covered for the eight weeks",
     duration: "8 weeks, July to August",
-    window: "Annual deadline 15 November, for the following July–August",
+    window: "Open now for 2027: apply by 15 November 2026. The programme runs from 5 July to 27 August 2027",
     deadlineMonths: [9, 10, 11],
     url: "https://www.epfl.ch/schools/sv/education/summer-research-program/",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "Eight paid weeks inside one of Europe's strongest life-science schools — the Brain Mind Institute, the Global Health Institute, ISREC for cancer research — with travel and housing covered. Eight weeks fits an Indian summer vacation without needing leave from your college, which is what makes it far more practical mid-MBBS than a four-month placement. The bar is academic standing: a GPA of 3.75 out of 4 or the top 5 per cent of your class.",
     reqs: [
       "At least two years of undergraduate study completed — 1st and 2nd professional MBBS satisfies this",
@@ -428,7 +428,7 @@ window.DB.research.push(
     window: "Health partner streams run in spring (Sandoz 2026: 23 March to 27 April). The Leading Scholarship for the 2026 summit is open until 31 October 2026",
     deadlineMonths: [3, 4, 6, 7, 8, 9, 10],
     url: "https://www.oneyoungworld.com/scholarships",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "Fully funded routes for young people already doing health work, covering flights and a hotel rather than just the ticket. It is the closest thing in this index to a shortcut into a global health network, and unlike most of what is here it rewards what you have already built rather than what you have studied. It is also crowded: One Young World reports 74,847 applications for 554 scholarships in 2024.",
     reqs: [
       "Sandoz health scholarship: aged 18 to 30. Leading Scholarship: aged 18 to 35",
@@ -548,7 +548,7 @@ window.DB.research.push(
     duration: "One video of up to 90 seconds; winners announced in October",
     window: "The 2026 round ran 3 August to 13 September 2026 (23:45 CEST) and has closed; WHO has not announced a next round",
     url: "https://www.who.int/news-room/events/detail/2026/08/03/default-calendar/global-youth-competition-advocating-for-influenza-and-covid-19-prevention-and-control",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "One of the few WHO opportunities a first-year medical student can win outright, with no degree, fee or travel. The 2026 brief asked how you shield your circle from respiratory infections, and wanted videos that tackle myths directly. The prize is small in money and large in signal: a WHO certificate with your name on it and a slot on a global webinar, the kind of line that makes a later WHO internship application read as continuous rather than cold.",
     reqs: [
       "Students or young professionals aged 18 to 35",

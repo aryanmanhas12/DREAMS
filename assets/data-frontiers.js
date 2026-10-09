@@ -263,7 +263,7 @@ window.DB.residency = [
     window: "Rolling, with no annual cycle. A new federal law changes the recognition route from 1 November 2026",
     deadlineMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     url: "https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/berufsanerkennung-heilberufe-bundestag-26-03-26",
-    checked: "2026-09",
+    checked: "2026-10",
     why: "No entrance exam lottery, no match, no application season. You learn the language, pass a licensing exam, and get a salaried training post. The rules just got simpler for Indian doctors: from 1 November 2026 a federal law makes the knowledge exam (Kenntnisprüfung) the standard route for degrees from outside the EU, so you no longer wait months for a state office to compare your MBBS syllabus with the German one, which was the slowest and least predictable step.",
     reqs: [
       "MBBS + internship",

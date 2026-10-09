@@ -169,7 +169,7 @@ window.DB.skipList = [
   },
   {
     name: "Faculty for the Future (Schlumberger Foundation), for Indian women",
-    why: "It pays up to USD 50,000 a year for a PhD abroad and is routinely listed for women from India. Its eligible-country list for 2026-27 names Nepal, Bangladesh, Bhutan and Myanmar and does not include India, and in the biological sciences it funds only work that crosses into the physical sciences. This index said India qualified until September 2026. Women doctors looking for funded PhDs should look instead at the Nordic and Max Planck doctoral posts, which are salaried jobs, and at L'Oréal India for earlier stages."
+    why: "It pays up to USD 50,000 a year for a PhD abroad and is routinely listed for women from India. Its eligible-country list for 2026-27 names Nepal, Bangladesh, Bhutan and Myanmar and does not include India, and the application page for the 2027-28 round (open until 7 November 2026) still shows that list, and in the biological sciences it funds only work that crosses into the physical sciences. This index said India qualified until September 2026. Women doctors looking for funded PhDs should look instead at the Nordic and Max Planck doctoral posts, which are salaried jobs, and at L'Oréal India for earlier stages."
   },
   {
     name: "The UN Young Professionals Programme exam",

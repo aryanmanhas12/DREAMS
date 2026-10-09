@@ -58,9 +58,10 @@ window.DB.funding.push(
     stages: ["grad", "pg"], funding: "full",
     money: "Tuition and fees, room and board, return airfare, and all field-study and internship costs. Up to 50 masters fellowships a year.",
     duration: "15–24 months (masters) · 11 weeks (professional development certificate)",
-    window: "One annual round, closing 15 May; Peace Centre assignments announced the following November",
-    deadlineMonths: [3, 4, 5],
+    window: "The 2027-28 round has closed. The 2028-29 application opens online in February 2027 and recent rounds have closed on 15 May; Peace Centre assignments are announced the following November",
+    deadlineMonths: [2, 3, 4, 5],
     url: "https://www.rotary.org/get-involved/our-programs/peace-fellowships",
+    checked: "2026-10",
     why: "The most under-applied full scholarship open to a doctor whose anger is about conflict, displacement or health in emergencies. Because it is framed as peacebuilding rather than health, medics rarely look at it, and yet the fellows who work on health in conflict zones are exactly who the programme wants. The certificate route at Chulalongkorn or Makerere is the unusual part: eleven weeks, fully funded, and designed for people already working, so it does not require you to abandon a job for two years.",
     reqs: [
       "Proficiency in English, and a bachelor's degree — MBBS qualifies",

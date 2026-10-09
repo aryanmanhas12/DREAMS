@@ -79,13 +79,32 @@ function staleReason(i) {
   return null;
 }
 
+/* A day earlier in THIS month, with or without a year, is the one yearless
+   date that can be judged, and it is the failure the month-level badge cannot
+   see: Chevening and Knight-Hennessy closed on 6 October 2026 and both still
+   read "open now" for the rest of October, because October was in their
+   deadlineMonths. Such an entry is listed under ACT NOW even when it was
+   stamped this month, since the stamp may predate the deadline. */
+function passedThisMonth(i) {
+  const re = new RegExp(`\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+${MRE}\\b(?:\\.?,?\\s+(\\d{4}))?|\\b${MRE}\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?\\b(?:,?\\s+(\\d{4}))?`, "gi");
+  for (const m of String(i.window || "").matchAll(re)) {
+    const day = +(m[1] || m[5]), month = mon(m[2] || m[4]), year = m[3] || m[6];
+    if (month !== when.getMonth() || (year && +year !== when.getFullYear()) || day >= when.getDate()) continue;
+    // Only a closing date counts: "closes 6 October" yes, "between 1 October and 16 November" no.
+    const before = String(i.window).slice(Math.max(0, m.index - 28), m.index);
+    if (/\b(between|from|opened|opens|open on|starting|started|runs)\s+$/i.test(before)) continue;
+    if (/\b(close[sd]?|closing|deadline|due|until|by|ends?|last date|before)\b[^.;·]*$/i.test(before)) return m[0].trim();
+  }
+  return null;
+}
+
 /* ── the four lists ── */
 const byTierThenAge = (a, b) => tier(a) - tier(b) || String(a.checked || "").localeCompare(String(b.checked || "")) || a.id.localeCompare(b.id);
 const listed = new Set();
 const pick = (arr) => arr.filter((i) => !listed.has(i.id)).map((i) => (listed.add(i.id), i));
 
 const actNowAll = items.filter((i) => tier(i) <= 2 && ["open", "soon"].includes(urgency(i)));
-const actNow = pick(actNowAll.filter((i) => !done(i))
+const actNow = pick(actNowAll.filter((i) => !done(i) || (urgency(i) === "open" && passedThisMonth(i)))
   .sort((a, b) => (urgency(a) === "open" ? 0 : 1) - (urgency(b) === "open" ? 0 : 1) || byTierThenAge(a, b)));
 
 const staleAll = items.filter((i) => !i.noOpenCall && staleReason(i));
@@ -116,7 +135,11 @@ const section = (title, why, arr, doneCount, limit) => {
   say(`${title} — ${arr.length} to check${doneCount ? `, ${doneCount} checked since ${lastMonth}` : ""}`);
   say(`  ${why}`);
   if (!arr.length) { say("  nothing left here"); return; }
-  arr.slice(0, limit || arr.length).forEach((i) => row(i, title.startsWith("2") ? staleReason(i) : null));
+  const note = (i) => title.startsWith("2") ? staleReason(i)
+    : title.startsWith("1") && urgency(i) === "open" && passedThisMonth(i)
+      ? `"${passedThisMonth(i)}" has already passed this month; if it was the close, drop this month from deadlineMonths`
+      : null;
+  arr.slice(0, limit || arr.length).forEach((i) => row(i, note(i)));
   if (limit && arr.length > limit) say(`  …and ${arr.length - limit} more (run with --all, or --md to get the full list)`);
 };
 

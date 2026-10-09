@@ -59,8 +59,29 @@ window.DB.meta = {
      workshop. The Bangalore Cognition Workshop names only engineering and
      science students, so it went to skipList.
 
-     What this pass did NOT do: re-read the 85 entries longest unchecked, or
-     the generic cycles (conference abstract windows, UK rolling masters).
-     Those carry the September and August checks. */
-  scope: "The October 2026 pass re-read the programmes marked open or opening soon. It found ITM Antwerp's scholarship favours 27 other countries and never pays the flight, Charpak's summer track pays EUR 700 a month with no housing or insurance, KAUST's visiting programme names STEM students rather than MBBS, and the UK Academic Clinical Fellowship round open on Oriel until 29 October 2026, all corrected. It also added Hong Kong's PhD Fellowship, open until 1 December 2026. Entries outside that list carry their earlier checks."
+     Then, on 9 October 2026, the official page of every one of the 190
+     programmes was fetched from an unrestricted host and compared with its
+     entry. No link was dead. 57 entries now carry checked: "2026-10". What
+     that sweep corrected:
+
+       Chevening and Knight-Hennessy both closed on 6 October and still showed
+       as open. Open Doors (Russia) said registration ran November to
+       December; it closes on 1 November 2026. Pasteur's PPU interviews are in
+       early March, not February, after a joint application with the host lab
+       by 14 December; its old page answers 502, so the entry now links the
+       official call PDF. K.C. Mahindra's loans are up to ₹10 lakh for the top
+       three and ₹5 lakh otherwise (the entry said ₹8 lakh plus outright
+       grants). Aga Khan's programme moved to a new page, and its loan half
+       carries a service charge, so it is not interest-free. INYAS closed on
+       31 August, not "in the first half of the year". Dates were filled in
+       for LSHTM (25 July 2027 for Student-visa applicants), NZREX (6 March
+       2027), EPFL (15 November 2026), the IJMS conference (abstracts 15 March
+       to 10 May 2027), Neuromatch (5 to 23 July 2027), Rotary (opens February
+       2027), the NL Scholarship (opens 1 November) and Melbourne's 2027 PhD
+       stipend (AUD 41,100).
+
+     What this pass did NOT do: read the pages that block every non-browser
+     fetch (LSHTM, JHU, the GMC, NBEMS) or refuse foreign connections (most
+     Indian government portals). Those entries were not stamped. */
+  scope: "The October 2026 pass fetched the official page of all 190 programmes and found no dead links. It corrected Chevening and Knight-Hennessy (both closed on 6 October), Open Doors (registration closes 1 November 2026, not in November and December), Pasteur's PhD timetable, the amounts for K.C. Mahindra and the terms for Aga Khan, and re-read ITM Antwerp, Charpak, KAUST and the UK clinical fellowship round, open on Oriel until 29 October 2026. It also added Hong Kong's PhD Fellowship, open until 1 December 2026. Pages that block automated reading were not re-checked and carry their earlier dates."
 };
