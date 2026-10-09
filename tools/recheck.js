@@ -58,7 +58,10 @@ const fresh = sweep && sweepAge <= 45;
 const snaps = loadSnapshots();
 const pageState = makeState(fresh ? sweep : null, snaps);
 const st = (i) => pageState(i).state;
-const unchangedVerified = (i) => st(i) === "same" && !!(snaps[i.id] || {}).verified;
+// A page with no deadline, money or eligibility lines (usually a homepage)
+// proves nothing by staying the same, so it never counts as verified.
+const informative = (i) => ((snaps[i.id] || {}).lines || []).length > 0;
+const unchangedVerified = (i) => st(i) === "same" && !!(snaps[i.id] || {}).verified && informative(i);
 const done = (i) => (!!i.checked && i.checked >= lastMonth) || unchangedVerified(i);
 
 /* ── dates written in window text ──
@@ -173,7 +176,7 @@ const count = (s) => items.filter((i) => st(i) === s).length;
 say(`Dreams Counsellor recheck for ${thisMonth}   (${items.length} programmes; data-meta says last reviewed ${meta.reviewed || "never"})`);
 if (!sweep) say("No sweep found: run `node tools/sweep.js --trigger` (about 4 minutes) so unchanged pages can drop out of this list.");
 else if (!fresh) say(`The latest sweep is ${sweepAge} days old, too old to trust: run \`node tools/sweep.js --trigger\` for a fresh one.`);
-else say(`Sweep of ${sweep.when.slice(0, 10)}: ${items.length - count("unreadable") - count("none")} pages read · ${items.filter(unchangedVerified).length} unchanged since verified, nothing to do · ${count("changed")} changed · ${count("dead")} dead · ${count("unreadable")} unreadable · ${count("new")} not yet baselined`);
+else say(`Sweep of ${sweep.when.slice(0, 10)}: ${items.length - count("unreadable") - count("none")} pages read · ${items.filter(unchangedVerified).length} unchanged since verified, nothing to do · ${count("changed")} changed · ${count("dead")} dead · ${count("unreadable")} unreadable · ${count("new")} not yet baselined · ${items.filter((i) => ["same", "new", "changed"].includes(st(i)) && !(pageState(i).page.lines || []).length).length} with nothing to track (--all lists them)`);
 
 section("LINKS", "The official URL answers 404 or 410. Find the programme's new page and set url= with tools/set.js.", dead);
 section("CHANGED", "The page's dates, money or eligibility lines moved since the entry was verified. Read the diff; fix the entry if it matters, then stamp it (or stamp --accept if the change is irrelevant).", changed);
@@ -181,7 +184,10 @@ section("ACT NOW", "Tier 1–2, the badge says open or opening soon, and nobody 
 section("STALE", "The window describes a round that is over. Rewrite it to the next round, or set nocall=true.", stale, staleAll.filter(done).length + " done");
 section("NO CALL", "Marked noOpenCall. If a call has reopened, set real months and nocall=false.", noCall, noCallAll.filter(done).length + " done");
 section("OLDEST", `Not verified since ${sixAgo} or never, and the page has not confirmed it. Highest tier first; work down as time allows.`, old);
+const vague = fresh ? items.filter((i) => ["same", "new", "changed"].includes(st(i)) && !(pageState(i).page.lines || []).length) : [];
 if (fresh && showAll) {
+  say(""); say(`LINKS WITH NOTHING TO TRACK — ${vague.length}  (the page states no date, amount or eligibility: point url= at the page that does)`);
+  vague.sort(byTierThenAge).forEach((i) => say(`  T${tier(i)} ${i.id.padEnd(28)} ${i.url}`));
   const unread = items.filter((i) => st(i) === "unreadable" && !listed.has(i.id));
   say(""); say(`UNREADABLE BY THE SWEEP — ${unread.length}  (bot walls and geo-blocks: these need a browser when they come up)`);
   unread.sort(byTierThenAge).forEach((i) => say(`  T${tier(i)} ${i.id.padEnd(28)} ${i.url}`));

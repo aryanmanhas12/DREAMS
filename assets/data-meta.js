@@ -14,10 +14,10 @@ window.DB = window.DB || {};
 window.DB.meta = {
   "reviewed": "2026-10",
   "reviewedLabel": "October 2026",
-  "read": 56,
+  "read": 57,
   "unchanged": 0,
   "total": 190,
-  "scope": "In October 2026, 56 of 190 programmes were re-read on their official pages. The other 134 carry the date of their last check. This pass found Chevening and Knight-Hennessy still showing as open after closing on 6 October, Open Doors registration closing on 1 November rather than in November and December, and new timetables for Pasteur's PhD programme and the K.C. Mahindra and Aga Khan scholarships, all corrected. Hong Kong's PhD Fellowship, open until 1 December 2026, was added.",
+  "scope": "In October 2026, 57 of 190 programmes were re-read on their official pages. The other 133 carry the date of their last check. This pass found Chevening and Knight-Hennessy still showing as open after closing on 6 October, Open Doors registration closing on 1 November rather than in November and December, and new timetables for Pasteur's PhD programme and the K.C. Mahindra and Aga Khan scholarships, all corrected. Hong Kong's PhD Fellowship, open until 1 December 2026, was added.",
   "note": "This pass found Chevening and Knight-Hennessy still showing as open after closing on 6 October, Open Doors registration closing on 1 November rather than in November and December, and new timetables for Pasteur's PhD programme and the K.C. Mahindra and Aga Khan scholarships, all corrected. Hong Kong's PhD Fellowship, open until 1 December 2026, was added.",
   "noteMonth": "2026-10"
 };

@@ -41,7 +41,7 @@ const sweep = latestSweep();
 const fresh = sweep && sweep.when.slice(0, 7) === month;
 const state = makeState(fresh ? sweep : null, loadSnapshots());
 const snaps = loadSnapshots();
-const unchanged = items.filter((i) => i.checked !== month && state(i).state === "same" && (snaps[i.id] || {}).verified);
+const unchanged = items.filter((i) => i.checked !== month && state(i).state === "same" && (snaps[i.id] || {}).verified && ((snaps[i.id] || {}).lines || []).length);
 
 if (!read.length && !unchanged.length && newNote === null) {
   console.log(`· nothing verified in ${label} yet; data-meta.js keeps "${old.reviewedLabel || "unstamped"}"`);

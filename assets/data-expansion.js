@@ -346,6 +346,7 @@ window.DB.research.push(
     window: "OHBM 2027 meets in Toronto, 26–30 June 2027, with abstracts due in December 2026. ASHG and ESHG abstracts are usually due 4 to 6 months before their meetings",
     deadlineMonths: [1, 2, 3, 10, 11, 12],
     url: "https://humanbrainmapping.org/ohbm-2027/",
+    checked: "2026-10",
     why: "These are where psychiatric imaging and genetics are actually argued out. OHBM has an active and welcoming trainee community, runs an educational course alongside the main meeting, and its abstract acceptance rate is high, which makes it a realistic first international presentation.",
     reqs: ["An abstract", "Trainee membership, which is cheap", "Travel award applications are separate and earlier"],
     steps: [
