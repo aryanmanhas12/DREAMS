@@ -13,66 +13,60 @@ branch", GitHub would publish the whole branch again, `tools/` included.
 
 ## The monthly recheck
 
-Do this in the first week of each month. Deadlines move every cycle, and a
-wrong date is worse than none: a student who believes something closes in
-January will not look again in May.
+Deadlines move every cycle, and a wrong date is worse than none: a student who
+believes something closes in January will not look again in May. The reading
+is done by machine; you only look at what moved.
 
-1. **Get the worklist.**
+```
+node tools/recheck.js                    the worklist (fetches the latest sweep itself)
+node tools/find.js <id>                  the entry beside what its page says today
+node tools/set.js <id> window="…" months=1,2 --stamp      fix and verify in one line
+node tools/stamp.js <ids>                verified as it stands (--accept: change was irrelevant)
+node tools/refresh.js && node tools/verify.js && tools/ship.sh
+```
 
-   ```
-   node tools/recheck.js
-   ```
+**How it works.** `.github/workflows/recheck.yml` reads every programme's
+official page on GitHub's runners (this sandbox cannot reach most sites) after
+every publish that touches the data or tools, and on the 1st and 15th of the
+month once the workflow is on the repository's default branch. It keeps only
+the lines that state a deadline, an amount or who may apply, and pushes them to
+the `recheck` branch. `tools/snapshots.json` holds the same lines as they were
+when each entry was last verified. `recheck.js` compares the two, so:
 
-   It lists, in order:
+- **unchanged pages drop out.** An entry verified once and whose page has not
+  moved needs nothing this month;
+- **changed pages come with the diff**, so most can be judged without opening
+  the page (`- old line`, `+ new line`);
+- **LINKS** lists official URLs that answer 404 or 410;
+- **ACT NOW**, **STALE**, **NO CALL** and **OLDEST** work as before, minus
+  everything already verified or unchanged. An open entry whose window names a
+  closing date earlier this month is always listed, because the badge works by
+  month and keeps saying "open now" until the month ends;
+- pages the sweep cannot read (bot walls, Indian government portals that refuse
+  foreign connections) are listed with `--all` and need a browser.
 
-   - **Act now**: tier 1–2 programmes whose badge says open or opening soon.
-     These are what a student acts on this week. An entry whose window names a
-     closing date earlier this month ("closes 6 October") is listed here even
-     if it was checked this month, with a `!` note: the badge works by month,
-     so it keeps saying "open now" until the month ends. If the date was the
-     close, take this month out of `deadlineMonths`.
-   - **Stale text**: windows where every date named has already passed.
-   - **No call open**: entries marked `noOpenCall`. Check whether a call has
-     reopened.
-   - **Oldest**: entries not checked for six months or more.
+`node tools/sweep.js --trigger` gets a fresh sweep in about four minutes.
 
-   Anything checked this month or last is left out, so the list shrinks as you
-   go. Add `--md worklist.md` for a tickable checklist, or `--month 2026-11` to
-   see what readers will see in a later month.
+**Reading an entry.** Check the date, the money and above all **who may
+apply**. If the eligibility text does not name MBBS, treat MBBS as excluded
+until the programme office says otherwise. Read the page itself, never a search
+snippet: EMERALD's search description said "applications open" four years after
+its last call.
 
-2. **Check each entry against its official page.** Read the page itself, not a
-   search snippet or an aggregator: EMERALD's search description still said
-   "applications open" four years after its last call. Check the date, the
-   money, and above all **who may apply**. If the eligibility text does not name
-   MBBS, treat MBBS as excluded until the programme office says otherwise.
+**Fixing an entry.** `tools/set.js` changes `window`, `months`, `money`,
+`duration`, `url` and `nocall` in one line, checks the result through the real
+loader, restores the file if anything is off, and prints the badge readers will
+see. It refuses an empty month list without `nocall=true`, which would read as
+"Rolling / always open". `--stamp` records the entry as verified and saves its
+page as the new baseline. Anything else (requirements, steps, a new entry, an
+entry MBBS students cannot enter, which moves to `skipList` in
+`data-impact.js`) is a hand edit; the section below covers it.
 
-3. **Fix the entry.** The worklist gives the file and line. Common fixes:
-
-   | What you found | What to change |
-   |---|---|
-   | New dates | `window` text and `deadlineMonths` (the months a reader can act in) |
-   | Call closed, no next date | `noOpenCall: true` and `deadlineMonths: []` |
-   | Call has reopened | remove `noOpenCall`, set real `deadlineMonths` |
-   | MBBS cannot enter | delete the entry and its impact line, add a `skipList` item in `data-impact.js` saying why |
-   | Programme ended | same as above |
-
-   Never set `deadlineMonths: []` on its own. An empty list shows as "Rolling /
-   always open", which is the opposite of closed.
-
-4. **Record what you verified.**
-
-   ```
-   node tools/stamp.js chevening gates-cambridge
-   ```
-
-   Only stamp entries whose page you actually read. The stamp is how next
-   month's worklist knows what is done.
-
-5. **Say what the pass covered.** Edit `assets/data-meta.js`: `reviewed`,
-   `reviewedLabel`, and a `scope` that names what was checked. Do not claim
-   more than you checked.
-
-6. **Regenerate, verify, ship** (below).
+**The review stamp writes itself.** `refresh.js` runs `tools/meta.js`, which
+sets the month and the sentence readers see from the `checked` stamps and the
+sweep ("In October 2026, 56 of 190 programmes were re-read…"). To add what the
+pass found: `node tools/meta.js --note "Chevening closed on 6 October."` The note
+lapses at the end of the month.
 
 ## Editing or adding one entry
 
@@ -114,9 +108,12 @@ does, the Pages source has been switched back to a branch.
 
 | Command | Does |
 |---|---|
-| `node tools/recheck.js` | the monthly worklist |
-| `node tools/find.js <q>` | find an entry: file:line, badge, window, link |
-| `node tools/stamp.js <ids>` | mark entries as checked this month |
+| `node tools/recheck.js` | the monthly worklist: only what changed or needs a first read |
+| `node tools/sweep.js --trigger` | a fresh read of every official page, on GitHub (≈4 min) |
+| `node tools/find.js <q>` | find an entry: file:line, badge, window, link, and what its page says today |
+| `node tools/set.js <id> k=v… [--stamp]` | change window, months, money, duration, url or nocall |
+| `node tools/stamp.js <ids>` | mark entries as verified this month and save their page baselines |
+| `node tools/meta.js [--note "…"]` | the review stamp readers see (`refresh.js` runs it) |
 | `node tools/refresh.js` | regenerate everything derived from the data |
 | `node tools/verify.js [--quick] [suite…]` | run the checks, with a summary |
 | `tools/ship.sh` | publish |

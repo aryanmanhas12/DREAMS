@@ -88,13 +88,24 @@ async function trigger() {
   if (!m) { console.error(`✗ cannot read owner/repo from ${remote}`); process.exit(1); }
   const repo = `${m[1]}/${m[2]}`;
   const gh = (a) => execFileSync("gh", a, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
-  const started = Date.now() - 5000;
-  gh(["api", "-X", "POST", `repos/${repo}/actions/workflows/recheck.yml/dispatches`, "-f", "ref=main"]);
-  console.log(`… started the recheck workflow on ${repo}; waiting for it (usually 3 to 6 minutes)`);
+  let started = Date.now() - 5000, sha = null;
+  try {
+    gh(["api", "-X", "POST", `repos/${repo}/actions/workflows/recheck.yml/dispatches`, "-f", "ref=main"]);
+    console.log(`… started the recheck workflow on ${repo}; waiting for it (usually 3 to 6 minutes)`);
+  } catch (e) {
+    // Not registered: the file is not on the default branch. Fall back to the
+    // run that the last publish to main started, if there is one.
+    sha = execFileSync("git", ["rev-parse", "origin/main"], { encoding: "utf8" }).trim();
+    started = 0;
+    console.log("… GitHub will not start this workflow by hand until it is on the repository's default branch");
+    console.log(`  (Settings → General → Default branch → main). Waiting instead for the sweep that publishing ${sha.slice(0, 7)} started.`);
+  }
+  const runsUrl = sha ? `repos/${repo}/actions/runs?head_sha=${sha}&per_page=20` : `repos/${repo}/actions/workflows/recheck.yml/runs?per_page=5`;
   for (let n = 0; n < 80; n++) {
     await sleep(15000);
     let run;
-    try { run = JSON.parse(gh(["api", `repos/${repo}/actions/workflows/recheck.yml/runs?per_page=5`])).workflow_runs.find((r) => Date.parse(r.created_at) >= started); } catch (e) { continue; }
+    try { run = JSON.parse(gh(["api", runsUrl])).workflow_runs.find((r) => r.path.endsWith("recheck.yml") && Date.parse(r.created_at) >= started); } catch (e) { continue; }
+    if (!run && sha && n > 3) { console.error("✗ publishing that commit did not start a sweep (it changed no data or tools). Push a data change to main, or make main the default branch."); process.exit(1); }
     if (run && run.status === "completed") {
       if (run.conclusion !== "success") { console.error(`✗ the run ended "${run.conclusion}": ${run.html_url}`); process.exit(1); }
       console.log(`✓ sweep finished (${run.html_url}). Next: node tools/recheck.js`);

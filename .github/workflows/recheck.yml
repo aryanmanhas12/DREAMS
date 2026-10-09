@@ -5,9 +5,21 @@ name: Recheck official pages
 # records what changed since each entry was last verified. It deploys
 # nothing and never touches main: the results go to the `recheck` branch,
 # which `node tools/recheck.js` fetches by itself, and the worklist is shown
-# on the run's summary page. Start one by hand with
-# `node tools/sweep.js --trigger`, or from the Actions tab.
+# on the run's summary page.
+#
+# It also runs after every publish that touches the data or the tools, so a
+# session always finds a sweep of what is live. The schedule and the manual
+# button (`node tools/sweep.js --trigger`) only work once this file is on the
+# repository's DEFAULT branch: GitHub registers scheduled and dispatched
+# workflows from there alone, and in October 2026 the default branch was
+# still an old session branch rather than main.
 on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/data-*.js"
+      - "tools/**"
+      - ".github/workflows/recheck.yml"
   schedule:
     - cron: "17 3 1,15 * *"
   workflow_dispatch:
@@ -25,6 +37,8 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
