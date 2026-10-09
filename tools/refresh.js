@@ -3,10 +3,12 @@
 
      node tools/refresh.js
 
-   1. make-pages.js  the eleven category pages, sitemap.xml, and the counts
+   1. meta.js        the review stamp the page shows, from the checked stamps
+                     and the latest sweep (tools/meta.js)
+   2. make-pages.js  the eleven category pages, sitemap.xml, and the counts
                      in index.html's share-card tags and llms.txt
-   2. make-og.js     the twelve share cards (numbers painted into PNGs)
-   3. build.js       the single-file bundle in dist/ (gitignored)
+   3. make-og.js     the twelve share cards (numbers painted into PNGs)
+   4. build.js       the single-file bundle in dist/ (gitignored)
 
    Run it after ANY data edit. Each of these used to be a separate command
    that had to be remembered, and forgetting make-og is how a card once
@@ -18,6 +20,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 
 const STEPS = [
+  ["review stamp", "tools/meta.js"],
   ["category pages, sitemap, counts", "tools/make-pages.js"],
   ["share cards", "tools/make-og.js"],
   ["single-file bundle", "build.js"]

@@ -1,0 +1,49 @@
+name: Recheck official pages
+
+# Reads every programme's official page on the 1st and 15th of each month,
+# on GitHub's runners (the Claude sandbox cannot reach most sites), and
+# records what changed since each entry was last verified. It deploys
+# nothing and never touches main: the results go to the `recheck` branch,
+# which `node tools/recheck.js` fetches by itself, and the worklist is shown
+# on the run's summary page. Start one by hand with
+# `node tools/sweep.js --trigger`, or from the Actions tab.
+on:
+  schedule:
+    - cron: "17 3 1,15 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recheck
+  cancel-in-progress: true
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Read every official page
+        run: node tools/sweep.js --out sweep
+
+      - name: Write the worklist
+        run: |
+          node tools/recheck.js --sweep sweep/latest.json --all --md sweep/worklist.md > sweep/worklist.txt
+          cat sweep/worklist.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish to the recheck branch
+        run: |
+          cd sweep
+          git init -q -b recheck
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Sweep of $(date -u +%F)"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" recheck

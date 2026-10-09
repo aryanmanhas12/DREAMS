@@ -1,29 +1,34 @@
 #!/usr/bin/env node
-/* The monthly recheck worklist.
+/* The recheck worklist: what needs a human this month, and nothing else.
 
-     node tools/recheck.js                   this month
-     node tools/recheck.js --month 2026-11   what a reader will see in November
+     node tools/recheck.js                   this month's worklist
+     node tools/recheck.js --all             no limits on any list
      node tools/recheck.js --md worklist.md  also write it as a checklist
-     node tools/recheck.js --all             list every stale entry, not the top 15
+     node tools/recheck.js --month 2026-11   what a reader will see in November
+     node tools/recheck.js --sweep file      use a sweep file instead of the branch
 
-   Why it is ordered this way. An "open now" badge is the claim a student acts
-   on this week, and in September 2026 six of the seven programmes the atlas
-   named as open had something wrong with them. So the list starts there and
-   works outwards:
+   It reads the latest sweep of official pages (made on GitHub by
+   .github/workflows/recheck.yml, see tools/sweep.js) and compares each page
+   with what it said when the entry was last verified (tools/snapshots.json).
+   A page that has not moved needs no work, so the list is only:
 
-     1. ACT NOW       tier 1-2, badge says open or opening within two months
-     2. STALE TEXT    every date the window names has already passed
-     3. NO CALL OPEN  marked noOpenCall: has a call reopened?
-     4. OLDEST        not checked for six months or more, highest tier first
+     LINKS       the official URL is dead (404 or 410)
+     CHANGED     the page's dates, money or eligibility lines moved: the diff
+                 is printed, so most can be judged without opening the page
+     ACT NOW     tier 1-2, badge open or opening soon, and not verified
+                 recently or a closing date earlier this month has passed
+     STALE       every date the window names has already passed
+     NO CALL     marked noOpenCall: has a call reopened?
+     OLDEST      not verified for six months, highest tier first
 
-   Entries stamped this month or last (tools/stamp.js) count as done and drop
-   out, so running it again mid-pass shows only what is left, and a programme
-   verified in September does not come back until November. It reads nothing from
-   the network; the verifying is still done by reading each official page. */
+   Fix with tools/set.js, then tools/stamp.js the entries you verified. Stamped
+   entries (this month or last) and entries whose page is unchanged since they
+   were verified drop out, so a second run shows only what is left. */
 
 const fs = require("fs");
 const path = require("path");
 const { load, urgencyFor, tierOf, locate, ROOT } = require("./lib/data");
+const { latestSweep, loadSnapshots, makeState } = require("./lib/sweep");
 
 /* ── arguments ── */
 const args = process.argv.slice(2);
@@ -45,7 +50,16 @@ const { DB, items } = load();
 const urgency = urgencyFor(when);
 const where = locate();
 const tier = (i) => tierOf(DB, i.id);
-const done = (i) => !!i.checked && i.checked >= lastMonth;
+
+/* ── the sweep ── */
+const sweep = args.includes("--no-sweep") ? null : latestSweep(opt("--sweep"));
+const sweepAge = sweep ? Math.round((when - Date.parse(sweep.when)) / 864e5) : null;
+const fresh = sweep && sweepAge <= 45;
+const snaps = loadSnapshots();
+const pageState = makeState(fresh ? sweep : null, snaps);
+const st = (i) => pageState(i).state;
+const unchangedVerified = (i) => st(i) === "same" && !!(snaps[i.id] || {}).verified;
+const done = (i) => (!!i.checked && i.checked >= lastMonth) || unchangedVerified(i);
 
 /* ── dates written in window text ──
    Only dates that carry a year can be judged; "closes 6 October" could be
@@ -98,83 +112,106 @@ function passedThisMonth(i) {
   return null;
 }
 
-/* ── the four lists ── */
+/* ── the lists ── */
 const byTierThenAge = (a, b) => tier(a) - tier(b) || String(a.checked || "").localeCompare(String(b.checked || "")) || a.id.localeCompare(b.id);
 const listed = new Set();
 const pick = (arr) => arr.filter((i) => !listed.has(i.id)).map((i) => (listed.add(i.id), i));
+const LIMIT = showAll ? 0 : 15;
 
+const dead = pick(items.filter((i) => st(i) === "dead").sort(byTierThenAge));
+const changed = pick(items.filter((i) => st(i) === "changed").sort(byTierThenAge));
 const actNowAll = items.filter((i) => tier(i) <= 2 && ["open", "soon"].includes(urgency(i)));
 const actNow = pick(actNowAll.filter((i) => !done(i) || (urgency(i) === "open" && passedThisMonth(i)))
   .sort((a, b) => (urgency(a) === "open" ? 0 : 1) - (urgency(b) === "open" ? 0 : 1) || byTierThenAge(a, b)));
-
 const staleAll = items.filter((i) => !i.noOpenCall && staleReason(i));
 const stale = pick(staleAll.filter((i) => !done(i)).sort(byTierThenAge));
-
 const noCallAll = items.filter((i) => i.noOpenCall);
 const noCall = pick(noCallAll.filter((i) => !done(i)).sort(byTierThenAge));
-
 const oldAll = items.filter((i) => !i.checked || i.checked <= sixAgo);
 const old = pick(oldAll.filter((i) => !done(i)).sort(byTierThenAge));
-const LIMIT = 15;
 
 /* ── print ── */
 const LABEL = { open: "open now", soon: "opens soon", closed: "next cycle", always: "rolling", none: "no call" };
+const PAGE = { dead: "LINK DEAD", unreadable: "page unreadable", changed: "PAGE CHANGED", same: "page unchanged", new: "page not yet baselined", none: "" };
 const meta = DB.meta || {};
 const lines = [];
 const say = (s = "") => lines.push(s);
+const cut = (s, n) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
+const pageNote = (i) => {
+  const p = pageState(i);
+  if (p.state === "dead") return `${p.page.status} at ${p.page.url}`;
+  if (p.state === "unreadable") return `page unreadable (${p.page.status || p.page.error || "?"}): check it in a browser`;
+  return null;
+};
+const diffLines = (i, n = 8) => {
+  const p = pageState(i);
+  if (p.state !== "changed") return [];
+  return [...p.diff.removed.map((l) => `- ${cut(l, 150)}`), ...p.diff.added.map((l) => `+ ${cut(l, 150)}`)].slice(0, n);
+};
 const row = (i, note) => {
   const at = where.get(i.id) || {};
-  const w = String(i.window || "-");
-  say(`  T${tier(i)} ${i.id.padEnd(30)} ${i.name.slice(0, 52).padEnd(52)} ${LABEL[urgency(i)].padEnd(10)} ${i.checked ? "checked " + i.checked : "never checked"}`);
+  const ps = st(i);
+  say(`  T${tier(i)} ${i.id.padEnd(28)} ${cut(i.name, 46).padEnd(46)} ${LABEL[urgency(i)].padEnd(10)} ${i.checked ? "checked " + i.checked : "never checked"}${ps !== "none" && ps !== "same" ? "  · " + PAGE[ps] : ""}`);
   if (note) say(`       ! ${note}`);
-  say(`       ${w.length > 150 ? w.slice(0, 147) + "…" : w}`);
+  say(`       ${cut(String(i.window || "-"), 150)}`);
+  diffLines(i).forEach((l) => say(`         ${l}`));
   say(`       ${i.url}   ${at.file}:${at.line}`);
 };
-const section = (title, why, arr, doneCount, limit) => {
+const section = (title, why, arr, extra) => {
   say("");
-  say(`${title} — ${arr.length} to check${doneCount ? `, ${doneCount} checked since ${lastMonth}` : ""}`);
+  say(`${title} — ${arr.length}${extra ? "  (" + extra + ")" : ""}`);
   say(`  ${why}`);
-  if (!arr.length) { say("  nothing left here"); return; }
-  const note = (i) => title.startsWith("2") ? staleReason(i)
-    : title.startsWith("1") && urgency(i) === "open" && passedThisMonth(i)
+  if (!arr.length) { say("  nothing here"); return; }
+  arr.slice(0, LIMIT || arr.length).forEach((i) => row(i, title.startsWith("STALE") ? staleReason(i)
+    : title.startsWith("ACT") && urgency(i) === "open" && passedThisMonth(i)
       ? `"${passedThisMonth(i)}" has already passed this month; if it was the close, drop this month from deadlineMonths`
-      : null;
-  arr.slice(0, limit || arr.length).forEach((i) => row(i, note(i)));
-  if (limit && arr.length > limit) say(`  …and ${arr.length - limit} more (run with --all, or --md to get the full list)`);
+      : pageNote(i)));
+  if (LIMIT && arr.length > LIMIT) say(`  …and ${arr.length - LIMIT} more (--all shows them)`);
 };
 
+const count = (s) => items.filter((i) => st(i) === s).length;
 say(`Dreams Counsellor recheck for ${thisMonth}   (${items.length} programmes; data-meta says last reviewed ${meta.reviewed || "never"})`);
-section("1. ACT NOW", "Tier 1–2 and the badge says open or opening soon. Re-read the date, the money and who may apply.",
-  actNow, actNowAll.filter(done).length);
-section("2. STALE TEXT", "The window describes a round that is over. Rewrite it to the next round, or set noOpenCall.",
-  stale, staleAll.filter(done).length);
-section("3. NO CALL OPEN", "Marked noOpenCall. If a call has reopened, remove the flag and give real months.",
-  noCall, noCallAll.filter(done).length);
-section("4. OLDEST", `Not checked since ${sixAgo} or never. Highest tier first; work down as time allows.`,
-  old, oldAll.filter(done).length, showAll ? 0 : LIMIT);
+if (!sweep) say("No sweep found: run `node tools/sweep.js --trigger` (about 4 minutes) so unchanged pages can drop out of this list.");
+else if (!fresh) say(`The latest sweep is ${sweepAge} days old, too old to trust: run \`node tools/sweep.js --trigger\` for a fresh one.`);
+else say(`Sweep of ${sweep.when.slice(0, 10)}: ${items.length - count("unreadable") - count("none")} pages read · ${items.filter(unchangedVerified).length} unchanged since verified, nothing to do · ${count("changed")} changed · ${count("dead")} dead · ${count("unreadable")} unreadable · ${count("new")} not yet baselined`);
 
-const todo = [...actNow, ...stale, ...noCall];
+section("LINKS", "The official URL answers 404 or 410. Find the programme's new page and set url= with tools/set.js.", dead);
+section("CHANGED", "The page's dates, money or eligibility lines moved since the entry was verified. Read the diff; fix the entry if it matters, then stamp it (or stamp --accept if the change is irrelevant).", changed);
+section("ACT NOW", "Tier 1–2, the badge says open or opening soon, and nobody has verified it recently. Read the official page.", actNow, actNowAll.filter(done).length + " done");
+section("STALE", "The window describes a round that is over. Rewrite it to the next round, or set nocall=true.", stale, staleAll.filter(done).length + " done");
+section("NO CALL", "Marked noOpenCall. If a call has reopened, set real months and nocall=false.", noCall, noCallAll.filter(done).length + " done");
+section("OLDEST", `Not verified since ${sixAgo} or never, and the page has not confirmed it. Highest tier first; work down as time allows.`, old);
+if (fresh && showAll) {
+  const unread = items.filter((i) => st(i) === "unreadable" && !listed.has(i.id));
+  say(""); say(`UNREADABLE BY THE SWEEP — ${unread.length}  (bot walls and geo-blocks: these need a browser when they come up)`);
+  unread.sort(byTierThenAge).forEach((i) => say(`  T${tier(i)} ${i.id.padEnd(28)} ${i.url}`));
+}
+
+const todo = [...dead, ...changed, ...actNow, ...stale, ...noCall];
 say("");
-say("When an entry is verified (or corrected) against its official page:");
-say(`  node tools/stamp.js ${todo.slice(0, 6).map((i) => i.id).join(" ")}${todo.length > 6 ? " …" : ""}`);
-say("Then: node tools/refresh.js && node tools/verify.js, and update data-meta.js to say what the pass covered.");
+say("Fix:     node tools/set.js <id> window=\"…\" months=1,2 [url=… money=… nocall=true] --stamp");
+say(`Verified: node tools/stamp.js ${todo.slice(0, 5).map((i) => i.id).join(" ") || "<ids>"}${todo.length > 5 ? " …" : ""}    (irrelevant page change: --accept)`);
+say("Then:    node tools/refresh.js && node tools/verify.js && tools/ship.sh");
 console.log(lines.join("\n"));
 
 /* ── optional markdown checklist ── */
 if (mdPath) {
-  const md = [`# Recheck for ${thisMonth}`, "", `Generated by \`node tools/recheck.js\`. Tick an item once its official page has been read and the entry fixed, then \`node tools/stamp.js <id>\`.`, ""];
+  const md = [`# Recheck for ${thisMonth}`, "", lines[1] ? lines[1].replace(/`/g, "") : "", "",
+    "Tick an item once the entry is fixed or confirmed, then `node tools/stamp.js <id>`.", ""];
   const block = (title, arr) => {
     md.push(`## ${title} (${arr.length})`, "");
     arr.forEach((i) => {
       const at = where.get(i.id) || {};
-      const note = title.startsWith("2") ? ` · **${staleReason(i)}**` : "";
+      const note = title === "Stale" ? ` · **${staleReason(i)}**` : pageNote(i) ? ` · ${pageNote(i)}` : "";
       md.push(`- [ ] **T${tier(i)} · ${i.name}** (\`${i.id}\`), ${LABEL[urgency(i)]}, ${i.checked ? "checked " + i.checked : "never checked"}${note}  `);
       md.push(`  ${String(i.window || "-").replace(/\n/g, " ")}  `);
+      const d = diffLines(i, 12);
+      if (d.length) md.push("", "  ```diff", ...d.map((l) => "  " + l), "  ```", "");
       md.push(`  [Official page](${i.url}) · \`${at.file}:${at.line}\``);
     });
     md.push("");
   };
-  block("1. Act now", actNow); block("2. Stale text", stale); block("3. No call open", noCall); block("4. Oldest", old);
+  block("Links", dead); block("Changed", changed); block("Act now", actNow); block("Stale", stale); block("No call", noCall); block("Oldest", old);
   fs.writeFileSync(path.resolve(mdPath), md.join("\n"));
   console.log(`\nchecklist written to ${path.relative(ROOT, path.resolve(mdPath)) || mdPath}`);
 }
