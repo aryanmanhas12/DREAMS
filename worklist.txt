@@ -1,0 +1,463 @@
+Dreams Counsellor recheck for 2026-10   (190 programmes; data-meta says last reviewed 2026-10)
+Sweep of 2026-10-09: 177 pages read · 48 unchanged since verified, nothing to do · 4 changed · 0 dead · 13 unreadable · 2 not yet baselined · 55 with nothing to track (--all lists them)
+
+LINKS — 0
+  The official URL answers 404 or 410. Find the programme's new page and set url= with tools/set.js.
+  nothing here
+
+CHANGED — 4
+  The page's dates, money or eligibility lines moved since the entry was verified. Read the diff; fix the entry if it matters, then stamp it (or stamp --accept if the change is irrelevant).
+  T1 icgeb-falaschi               ICGEB PhD: the New Delhi programme and the Ar… next cycle checked 2026-09  · PAGE CHANGED
+       New Delhi PhD: yearly call, the 2026 one closed 30 May with interviews 22–24 June. Falaschi: the next round opens January 2027 and closes 31 March 20…
+         - Application deadline: 20 October 2026
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application For scientists from Central Asia (Kazakhsta…
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application For scientists from Africa to receive hands…
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application Pre-doctoral studies in ICGEB labs to fund …
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application Postdoctoral Fellowships in Life Sciences t…
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application Postdoctoral studies in ICGEB labs to fund …
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application The ICGEB SMART Fellowship programme promot…
+         - Application Deadlines: 14 AUGUST 2026 for Expression of Interest – 30 SEPTEMBER 2026 for Full Application Biotechnet Short-term Advanced Fellowships …
+       https://www.icgeb.org/fellowship/   assets/data-2026.js:142
+  T1 fmi-basel                    FMI MD-PhD Program                             open now   checked 2026-10  · PAGE CHANGED
+       Two rounds a year. Autumn: opens 1 September, closes 15 November 2026, interviews January 2027. Spring: closes in May for June selection
+         - Admission is competitive, involving a selection procedure that takes place twice a year (in January and June). The deadline for applications is 1.5-2…
+         - The FMI MD-PhD Program was launched in summer 2016 to provide the opportunity to research-oriented medical students and physicians to carry out cutti…
+         - There are two rounds of applications per year, with application deadlines in May and November. All applications are reviewed by group leaders who hav…
+         - The application period for the spring/autumn round normally starts on February 15/September 1 respectively.
+         - Applications are open for a period of 2.5 months, with closing dates on May 1/November 15 respectively.
+         - The interviews take place approximately 7 to 8 weeks after each deadline, in person at the FMI in Basel.
+         - Q: What are the required degrees / pre-requisites to be eligible to the FMI PhD Program and the FMI MD-PhD Programs, respectively?
+         - Q: Is there an age limit to apply to the programs?
+       https://www.fmi.ch/education-careers/programs/   assets/data-expansion.js:13
+  T2 inyas                        INYAS — Indian National Young Academy of Scie… next cycle checked 2026-10  · PAGE CHANGED
+       The membership drive for 2027 closed on 31 August 2026. Expect the next call in mid-2027, with a similar end-of-August close
+         - All Activities Meetings & GBM SciPADReC Sci-Art Competition Saransh NCRE Remote Area Lectures Science Camps Conferences Webinars Membership Eligibili…
+         - All Activities Meetings & GBM SciPADReC Sci-Art Competition Saransh NCRE Remote Area Lectures Science Camps Conferences Webinars Membership Eligibili…
+         - Home / Membership Application INYAS Membership 2027
+         - Eligibility criteria Closed · last date 31 Aug 2026
+         - Want to review eligibility? The 2027 application window has closed. You can still read the qualifications and key dates.
+         - Check eligibility criteria →
+         - The last date to submit the INYAS Membership Application Form was 31 August 2026 . The online form is no longer available.
+         - Stuck with the form or eligibility? Email the membership desk and we'll get back to you. inyas@insa.nic.in
+       https://inyas.in/become-a-member   assets/data-india-events.js:246
+  T3 baltics                      Baltic state scholarships — Lithuania, Estoni… next cycle never checked  · PAGE CHANGED
+       Applications typically Feb–May
+         - For foreigners (except (a) citizens of Russia and Belarus and (b) citizens of other countries if they are students, lecturers or researchers at the R…
+         - Eligibility: Best international students applying to the first year of Bachelor’s degree studies at VILNIUS TECH.
+         - Application Deadline: 20th of April, 2026.
+         - Eligibility: International students applying to the first year of Bachelor’s degree studies at VILNIUS TECH.
+         - Eligibility: Outstanding international students applying for the first year of Master’s degree studies at VILNIUS TECH.
+         - Eligibility: International students applying for the first year of Master’s degree studies at VILNIUS TECH.
+         - Important Note: Incomplete applications or those without an application fee payment will not be considered for a scholarship. Applications submitted …
+         - Type of scholarship: tuition fee discount for Ukrainian citizens not eligible for a state-funded place at the Vilnius Academy of Arts (a 50% discount…
+       https://studyin.lt/scholarships/   assets/data-expansion.js:198
+
+ACT NOW — 31  (34 done)
+  Tier 1–2, the badge says open or opening soon, and nobody has verified it recently. Read the official page.
+  T1 erasmus-mundus               Erasmus Mundus Joint Masters Scholarship       open now   never checked
+       Most consortia open Oct–Nov and close Dec–Jan
+       https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en   assets/data-funding.js:125
+  T1 ista-phd                     PhD Programme — a salary, no fees, direct ent… open now   never checked
+       The portal for the 2027 intake opens in late October 2026 and closes on 8 January 2027 at 15:00 CET; referees by 12 January. Every PhD starts on 15 S…
+       https://ista.ac.at/en/education/graduate-school/   assets/data-world.js:486
+  T1 jhu-mph                      Master of Public Health                        open now   never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       Applications opened on 1 September 2026; apply by 1 December 2026 for the 2027 cohort and for funding, including the Bloomberg Fellows route
+       https://publichealth.jhu.edu/academics   assets/data-study.js:236
+  T1 swiss-neuro                  MSc / PhD Neuroscience — Neuroscience Center … open now   never checked
+       Two calls a year through the Life Science Zurich Graduate School, deadlines 1 May and 1 November; or write to a ZNZ group leader directly at any time
+       https://www.neuroscience.uzh.ch/en.html   assets/data-study.js:609
+  T1 uk-acf                       Academic Clinical Fellowship (ACF) & Academic… open now   never checked  · page unreadable
+       ! page unreadable (405): check it in a browser
+       One national round on Oriel: 1 to 29 October 2026 for posts starting in August 2027. Interviews run from 9 November to 15 January and first offers go…
+       https://www.nihr.ac.uk/career-development/   assets/data-expansion.js:68
+  T2 ai-health-programmes         AI and digital health research programmes      open now   never checked
+       Rolling; internship calls mostly Sept–Jan for the following summer
+       https://wellcome.org/research-funding   assets/data-equity-plus.js:68
+  T2 biochem-msc-uk               MSc Biochemistry / Molecular & Cellular Bioch… open now   never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       Opens Oct · rolling through to June
+       https://www.findamasters.com/masters-degrees/biochemistry/   assets/data-expansion.js:92
+  T2 cajal                        Cajal Advanced Neuroscience Training Programme open now   never checked
+       Applications 4–6 months before each course
+       https://cajal-training.org/   assets/data-expansion.js:270
+  T2 columbia-mailman             MPH — Sociomedical Sciences / Epidemiology     open now   never checked
+       Preferred deadline 1 December; MPH applications are then taken on a rolling basis to 15 January (the 2026 cycle’s dates)
+       https://www.publichealth.columbia.edu/academics   assets/data-study.js:279
+  T2 conf-neuro                   Neuroscience conferences with trainee travel … open now   never checked
+       Abstract deadlines usually 5–7 months before the meeting
+       https://ibro.org/grants/   assets/data-research.js:392
+  T2 dual-degrees                 Dual and combined degrees: MD-MPH, MPH-MBA, M… open now   never checked
+       Follows the host institution's main cycle
+       https://publichealth.jhu.edu/academics/dual-degree-programs   assets/data-expansion.js:156
+  T2 genomic-medicine-msc         MSc Genomic Medicine                           open now   never checked
+       Opens Oct · closes Mar–Jul
+       https://www.genomicseducation.hee.nhs.uk/   assets/data-expansion.js:113
+  T2 karolinska-msc               MSc Global Health / Public Health Sciences / … open now   never checked
+       One national round for autumn 2027: 16 October 2026 to 15 January 2027 on universityadmissions.se; documents by 1 February, results 1 April
+       https://education.ki.se/   assets/data-study.js:544
+  T2 kcl-ioppn                    MSc Mental Health Studies / Neuroscience / Ps… open now   never checked
+       Opens Oct · rolling admissions, apply by Mar
+       https://www.kcl.ac.uk/ioppn   assets/data-study.js:100
+  T2 lshtm-gmh                    MSc Global Mental Health                       open now   never checked
+       Rolling until the course fills. LSHTM's last date for 2027/28 is 25 July 2027 for anyone needing a Student visa; apply by January to line up with sch…
+       https://www.lshtm.ac.uk/study/courses/masters-degrees/global-mental-health   assets/data-study.js:33
+  T2 lshtm-mph                    MSc Public Health                              open now   never checked
+       Rolling until courses fill. LSHTM's last date for 2027/28 is 25 July 2027 for anyone needing a Student visa, but scholarship deadlines fall far earli…
+       https://www.lshtm.ac.uk/study/courses/masters-degrees   assets/data-study.js:10
+  T2 ncbs-inStem                  NCBS / inStem Research Internships             open now   never checked
+       The winter internship call runs to mid-November (15 November in the last cycle) for a two-month stay from early January, with ₹10,000 a month and hou…
+       https://www.ncbs.res.in/   assets/data-research.js:100
+  T2 society-conferences-india    National society conferences that run student… open now   never checked
+       Abstract deadlines usually fall 3–5 months before the meeting; most national meetings sit between November and March. ANCIPS 2027 meets in Madurai, 7…
+       https://www.indianpsychiatricsociety.org/   assets/data-india-events.js:111
+  T2 takemi-harvard               Takemi Program in International Health         open now   never checked
+       Applications for 2027–28 close on 31 December 2026 at midnight US Eastern time; decisions are made in mid-February and candidates hear by March
+       https://www.hsph.harvard.edu/takemi-program/   assets/data-abroad.js:259
+  T2 usmle                        USMLE → US Residency (Match)                   open now   never checked
+       For the 2027 Match: ERAS applications go to programmes from 2 September 2026 and are reviewed from 23 September; interviews run October to January; r…
+       https://www.ecfmg.org/   assets/data-frontiers.js:205
+  T2 wits-uct-global              HIV, tuberculosis and health-systems research  open now   never checked
+       Rolling, with most funded posts advertised January–April
+       https://www.wits.ac.za/health/   assets/data-world.js:570
+  T2 yale-mph                     MPH — Social & Behavioral Sciences / Chronic … open now   never checked
+       Opens in September; the deadline for fall 2027 entry is 15 December 2026
+       https://ysph.yale.edu/admissions-financial-aid/   assets/data-study.js:258
+  T1 champalimaud-indp            International Neuroscience Doctoral Programme  opens soon never checked
+       One call a year: the last one opened on 2 December 2025 and closed on 31 January 2026. Expect the same weeks for 2027 entry
+       https://fchampalimaud.org/champalimaud-research/education   assets/data-world.js:459
+  T1 cshl-urp                     Undergraduate Research Program (URP)           opens soon never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       Applications close 15 January, 11:59 pm Pacific time, with letters of recommendation in by then. The 2027 programme runs 7 June to 7 August
+       https://www.cshl.edu/education/undergraduate-research-program/   assets/data-research.js:222
+  T2 actrec-tmc                   ACTREC / Tata Memorial Centre — short-term tr… opens soon never checked
+       Training requests accepted through the year · JRF and PhD calls advertised on the site
+       https://actrec.gov.in/life-sciences   assets/data-india-funding.js:306
+  T2 iisc-programs                IISc Summer Research & PHCCO Computational On… opens soon never checked
+       PHCCO applications Jan–Feb · summer fellowship Dec–Feb
+       https://iisc.ac.in/   assets/data-research.js:121
+  T2 india-phd                    PhD in Biomedical Sciences — funded Indian ro… opens soon never checked
+       Entrance rounds in Dec–Feb and May–Jul; DBT-BET and CSIR-NET are the gateways
+       https://nimhans.ac.in/   assets/data-study.js:772
+  T2 jn-tata                      J.N. Tata Endowment for Higher Education       opens soon never checked
+       The last round closed on 15 March 2026. The next usually opens in December or January and closes in mid-March; dates are posted on the endowment's si…
+       https://jntataendowment.org/loan-scholarship-process/   assets/data-funding.js:261
+  T2 nordic-global-health         Nordic global health and epidemiology routes   opens soon never checked
+       Doctoral vacancies advertised year-round; masters close ~December–March
+       https://www.uib.no/en/cih   assets/data-world.js:680
+  T2 stipendium-hungaricum        Stipendium Hungaricum                          opens soon never checked
+       Applications for 2027/28 open around November 2026 and close on 15 January 2027 on the Stipendium Hungaricum portal. Apply through your nominating pa…
+       https://stipendiumhungaricum.hu/   assets/data-funding.js:539
+  T2 tigp-academia-sinica         Taiwan International Graduate Program          opens soon never checked
+       One main round for each autumn intake: the 2026 round closed on 1 February 2026, so expect the 2027 round to close around 1 February 2027
+       https://tigp.sinica.edu.tw/   assets/data-world.js:513
+
+STALE — 0  (8 done)
+  The window describes a round that is over. Rewrite it to the next round, or set nocall=true.
+  nothing here
+
+NO CALL — 0  (11 done)
+  Marked noOpenCall. If a call has reopened, set real months and nocall=false.
+  nothing here
+
+OLDEST — 75
+  Not verified since 2026-04 or never, and the page has not confirmed it. Highest tier first; work down as time allows.
+  T1 dhr-fellowship-abroad        DHR Short-Term and Long-Term Fellowship Abroad next cycle never checked
+       Annual call, opened 22 April with a 30 June close in the 2026-27 cycle, then extended
+       https://schemes.dhr.gov.in/hrd   assets/data-fields-2026.js:235
+  T1 fulbright                    Fulbright-Nehru Master's Fellowship            next cycle never checked
+       Announced each February on usief.org.in. Recent master's rounds have closed between mid-May and 1 July, roughly 15 months before you would start
+       https://www.usief.org.in/fulbright-fellowships/   assets/data-funding.js:70
+  T1 gks-korea                    Global Korea Scholarship                       next cycle never checked
+       Embassy track applications open ~February; university track ~March
+       https://www.studyinkorea.go.kr/   assets/data-world.js:625
+  T1 gsoc                         Google Summer of Code with INCF and neuroscie… next cycle never checked
+       Organisations announced Feb · student applications late Mar–Apr
+       https://summerofcode.withgoogle.com/   assets/data-expansion.js:312
+  T1 guarantee-abroad             How to guarantee one funded trip abroad befor… rolling    never checked
+       Begin any time — the sequence is what matters, not the month
+       https://schemes.dhr.gov.in/   assets/data-abroad.js:126
+  T1 icmr-intl-fellowship         ICMR International Fellowship for Indian Biom… next cycle never checked
+       Annual call through the DHR portal, alongside the other HRD schemes
+       https://www.icmr.gov.in/icmr-international-fellowship-programme-for-indian-biomedical-scientists   assets/data-india-events.js:219
+  T1 india-alliance               DBT/Wellcome Trust India Alliance Fellowships  next cycle never checked
+       Two calls a year, typically Jan and Jul
+       https://www.indiaalliance.org/apply   assets/data-funding.js:663
+  T1 nimhans-training             NIMHANS — short courses, observerships and th… rolling    never checked
+       Digital Academy runs continuously · observership and short course applications are reviewed through the year
+       https://nimhans.ac.in/   assets/data-india-events.js:24
+  T1 nos-st                       National Overseas Scholarship for Scheduled T… next cycle never checked
+       Typically opens Mar–Jun
+       https://tribal.nic.in/   assets/data-frontiers.js:395
+  T1 open-data                    Public datasets you can analyse from anywhere… rolling    never checked  · page not yet baselined
+       Always open
+       https://www.ukbiobank.ac.uk/enable-your-research   assets/data-expansion.js:381
+  T1 present-first-paper          Your first presentation. The ladder from jour… rolling    never checked
+       Rolling — your own department's sessions run every month
+       https://www.icmr.gov.in/   assets/data-india-events.js:82
+  T1 rhodes-india                 Rhodes Scholarship — India                     next cycle never checked
+       India round opened 1 June and closed 23 July, 23:59 IST — 53 days, and the earliest major deadline of the year
+       https://www.rhodeshouse.ox.ac.uk/scholarships/   assets/data-funding.js:180
+  T1 travel-grants-gov            Government travel grants — ICMR, CSIR and ANR… rolling    never checked
+       File 60–90 days before the conference. ANRF/SERB will not accept it outside that window at all
+       https://www.icmr.gov.in/international-travel-by-non-icmr-scientists   assets/data-abroad.js:92
+  T1 turkiye-burslari             Türkiye Bursları (Türkiye Scholarships)        next cycle never checked
+       One annual round on tbbs.turkiyeburslari.gov.tr. The 2026 round ran from 10 January to 20 February; expect similar dates in 2027
+       https://turkiyeburslari.gov.tr/   assets/data-2026.js:25
+  T1 wellcome-connecting          Wellcome Connecting Science courses & Advance… rolling    never checked
+       Rolling calls throughout the year, usually 4–6 months ahead
+       https://coursesandconferences.wellcomeconnectingscience.org/our-events/   assets/data-expansion.js:249
+  T1 wellcome-emcr                Wellcome Early-Career and Career Development … rolling    never checked
+       Distinct calls with fixed closing dates; check the scheme page each quarter
+       https://wellcome.org/research-funding   assets/data-funding.js:689
+  T2 cshl-courses                 Cold Spring Harbor Advanced Courses & Meetings rolling    never checked
+       Applications 3–5 months ahead of each course
+       https://meetings.cshl.edu/courseshome.aspx   assets/data-expansion.js:291
+  T2 dbt-jrf                      DBT-JRF (Biotechnology Eligibility Test) & IC… next cycle never checked  · page unreadable
+       ! page unreadable (ENOTFOUND): check it in a browser
+       DBT-BET around Feb–Apr · ICMR-JRF around Mar–Jul
+       https://dbtindia.gov.in/   assets/data-india-funding.js:42
+  T2 dth-lab                      DTH-Lab Fellowship — digital health governance next cycle never checked
+       Applications have opened in the spring, with an April close in the last cycle
+       https://www.dthlab.org/research-fellows   assets/data-abroad.js:233
+  T2 embl-embo                    EMBL & EMBO Courses, Workshops and Fellowships rolling    never checked
+       Rolling, per course
+       https://www.embl.org/about/info/course-and-conference-office/   assets/data-research.js:343
+  T2 ev4gh                        Emerging Voices for Global Health (EV4GH)      next cycle never checked
+       Runs with the Global Symposium on Health Systems Research; the 2026 round closed 20 March
+       https://www.ev4gh.net/   assets/data-2026.js:198
+  T2 gulf-research                Gulf research institutions — KAUST, Weill Cor… rolling    never checked
+       KAUST's visiting programme takes applications all year: you apply to one of its 100-odd listed projects and choose your own start and end dates. Degr…
+       https://www.kaust.edu.sa/en/study   assets/data-india-funding.js:142
+  T2 icddrb                       icddr,b research fellowships, internships and… rolling    never checked
+       Courses run through the year; fellowship and internship calls are posted as they open
+       https://www.icddrb.org/knowledge-sharing/education-and-training/internship   assets/data-2026.js:172
+  T2 icmr-sts                     ICMR Short Term Studentship (STS)              next cycle never checked
+       Opens in spring · advertised close 30 May, extended to 10 June (5 pm) in the 2026 cycle
+       https://www.icmr.gov.in/short-term-studentship-sts   assets/data-research.js:10
+  T2 ictp                         ICTP Programmes, Schools and Diploma           rolling    never checked
+       Rolling calls throughout the year
+       https://www.ictp.it/   assets/data-research.js:272
+  T2 iiser-summer                 IISER summer research programmes and winter s… next cycle never checked
+       Each IISER sets its own dates. IISER Pune’s summer programme took applications from 2 to 20 February in 2026; watch each institute’s announcements pa…
+       https://www.iiserpune.ac.in/announcements   assets/data-india-events.js:52
+  T2 inlaks                       Inlaks Shivdasani Foundation Scholarship       next cycle never checked
+       Opens ~Jan · closes end-March
+       https://inlaksfoundation.org/opportunities/scholarship/   assets/data-funding.js:308
+  T2 inspire                      INSPIRE Fellowship & Faculty Scheme            next cycle never checked
+       Doctoral calls usually mid-year; faculty calls announced periodically
+       https://online-inspire.gov.in/   assets/data-india-funding.js:67
+  T2 isglobal-msc                 MSc Global Health                              next cycle never checked
+       Applications open ~January, close ~June
+       https://www.isglobal.org/en/education   assets/data-world.js:355
+  T2 japan-mext                   MEXT-funded Masters / PhD in Medical Sciences  next cycle never checked
+       Embassy recommendation opens ~Apr–May each year
+       https://www.studyinjapan.go.jp/en/   assets/data-study.js:727
+  T2 lmic-partnerships            Global health field research in low- and midd… rolling    never checked
+       Rolling recruitment
+       https://www.msf.org/   assets/data-india-funding.js:163
+  T2 mahidol-tropmed              Diploma and MSc in Tropical Medicine           next cycle never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       Main intake applications close around March–May
+       https://www.tm.mahidol.ac.th/eng/   assets/data-world.js:380
+  T2 mext                         MEXT Japanese Government Scholarship           next cycle never checked
+       Embassy recommendation opens Apr–May
+       https://www.studyinjapan.go.jp/en/planning/scholarship/   assets/data-funding.js:517
+  T2 msf-india-internship         MSF India Internship Programme                 rolling    never checked
+       Rolling applications, no fixed cycle
+       https://msfsouthasia.org/msf-internship-programme/   assets/data-newroutes.js:134
+  T2 narotam                      Narotam Sekhsaria Scholarship                  next cycle never checked
+       Opens Jan · closes late March/April
+       https://www.nsfoundation.co.in/   assets/data-funding.js:334
+  T2 sib-biodesign                School of International Biodesign — iFellowsh… next cycle never checked
+       Applications accepted twice a year
+       https://schoolofbiodesign.in/index.php/fellowship/   assets/data-fields-2026.js:263
+  T2 un-mgcy                      UN Major Group for Children and Youth — indiv… rolling    never checked
+       Open continuously · register whenever you are ready
+       https://www.unmgcy.org/get-involved   assets/data-abroad.js:364
+  T2 us-electives                 US clinical electives, observerships and exte… rolling    never checked
+       Apply 6–12 months ahead; VSLO opens in the spring
+       https://students-residents.aamc.org/visiting-student-learning-opportunities/visiting-student-learning-opportunities   assets/data-india-funding.js:116
+  T3 campus-research-culture      Research societies, scientific days and campu… open now   never checked
+       Through the academic year, concentrated between August and March
+       https://www.iisc.ac.in/events/   assets/data-india-events.js:140
+  T3 ccmb-medsrt                  CSIR-CCMB Medical Student Research Training (… open now   never checked  · page not yet baselined
+       Applications Oct–Nov
+       https://www.ccmb.res.in/   assets/data-research.js:79
+  T3 conf-india                   Indian research conferences worth presenting … rolling    never checked
+       Abstract deadlines 2–4 months ahead
+       https://www.aiims.edu/   assets/data-research.js:435
+  T3 csc-china                    Chinese Government Scholarship                 opens soon never checked
+       Applications generally close between January and April depending on the route
+       https://www.campuschina.org/   assets/data-world.js:653
+  T3 csc-gks-taiwan               China CSC · Korea GKS · Taiwan MOE Scholarshi… opens soon never checked
+       CSC Dec–Apr · GKS Feb–Mar (embassy track) · Taiwan MOE Feb–Mar
+       https://www.campuschina.org/   assets/data-funding.js:583
+  T3 czech-charles                Charles University — Václav Havel Scholarship… opens soon never checked
+       Applications typically Dec–Apr
+       https://cuni.cz/UKEN-1.html   assets/data-expansion.js:177
+  T3 disability-support           Disability, first-generation and single-paren… next cycle never checked
+       Mostly aligned to the main admissions cycle
+       https://scholarships.gov.in/   assets/data-equity-plus.js:40
+  T3 edin-msc                     MSc Global Health / Epidemiology (on-campus &… open now   never checked
+       Opens Sept · rolling to Jun
+       https://study.ed.ac.uk/postgraduate   assets/data-study.js:142
+  T3 erasmus-traineeship          Erasmus+ Traineeships & short-term research m… rolling    never checked
+       Rolling — depends entirely on the host institution
+       https://erasmus-plus.ec.europa.eu/opportunities/individuals/students   assets/data-expansion.js:360
+  T3 free-stack                   The free skill stack: Python, statistics, epi… rolling    never checked
+       Always open
+       https://www.ebi.ac.uk/training/   assets/data-research.js:481
+  T3 health-hackathons            Health-tech hackathons — MIT Hacking Medicine… rolling    never checked
+       Regional hackathons run through the year; GrandHack in Boston is usually March
+       https://hackingmedicine.mit.edu/   assets/data-newroutes.js:160
+  T3 imperial-msc                 MSc Public Health / Epidemiology / Human Mole… open now   never checked
+       Opens Oct · closes Mar–Jul
+       https://www.imperial.ac.uk/study/courses   assets/data-study.js:185
+  T3 india-mph                    MPH / MSc — domestic routes worth taking seri… next cycle never checked
+       Entrance exams Feb–Jun
+       https://phfi.org/   assets/data-study.js:751
+  T3 india-pg                     NEET-PG / INI-CET → MD Psychiatry at a resear… open now   never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       NEET-PG usually mid-year · INI-CET twice yearly
+       https://natboard.edu.in/   assets/data-frontiers.js:340
+  T3 ireland-msc                  MSc Global Health / Public Health              opens soon never checked
+       Rolling from Nov to Jun
+       https://www.tcd.ie/courses/postgraduate/   assets/data-study.js:630
+  T3 maastricht-euro              Europubhealth+ — Erasmus Mundus European Publ… open now   never checked
+       Opens Oct–Nov · scholarship deadline usually Jan
+       https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en   assets/data-study.js:587
+  T3 medengage                    MedEngage Research Grant & IAP Research Grant  opens soon never checked
+       MedEngage Nov–Dec · IAP around August
+       https://med-engage.com/   assets/data-research.js:142
+  T3 minority-schemes             Minority, OBC and EWS overseas and research s… next cycle never checked
+       Varies by scheme; most run Feb–Jun
+       https://scholarships.gov.in/   assets/data-frontiers.js:416
+  T3 nihes-msc                    MSc Clinical Epidemiology / Health Sciences (… next cycle never checked
+       Rolling with intake rounds; summer programme each August
+       https://www.erasmusmc.nl/en/graduate-school/nihes   assets/data-study.js:566
+  T3 nus-sph                      MPH / MSc — Saw Swee Hock School of Public He… open now   never checked
+       Opens Oct · deadline typically Jan–Feb
+       https://sph.nus.edu.sg/   assets/data-study.js:706
+  T3 openwho                      OpenWHO and the WHO Academy — free courses wi… rolling    never checked
+       Open permanently · no deadline and no cohort to miss
+       https://openwho.org/   assets/data-abroad.js:179
+  T3 otago-nz-pubhealth           Postgraduate public health and preventive med… open now   never checked
+       Two intakes, February and July; scholarship rounds close earlier
+       https://www.otago.ac.nz/courses/   assets/data-world.js:596
+  T3 research-method              Research methods: systematic reviews, GCP, st… rolling    never checked
+       Always open
+       https://www.cochrane.org/learn   assets/data-research.js:504
+  T3 smart-india-hackathon        Smart India Hackathon. The healthcare problem… next cycle never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       College SPOC registration closes around end-July; internal hackathons follow, finale later in the year
+       https://www.sih.gov.in/   assets/data-india-events.js:274
+  T3 state-schemes                State government overseas scholarships         next cycle never checked
+       State-specific, mostly Feb–Aug
+       https://scholarships.gov.in/   assets/data-india-funding.js:88
+  T3 summer-schools-global        University summer schools with full scholarsh… opens soon never checked
+       Applications open Nov–Feb; scholarship deadlines are earlier than general ones
+       https://www.utrechtsummerschool.nl/   assets/data-equity-plus.js:94
+  T3 toronto-mph                  MPH / MSc — Dalla Lana School of Public Health open now   never checked
+       Opens Sept · deadline Dec–Jan
+       https://www.dlsph.utoronto.ca/   assets/data-study.js:685
+  T3 ucl-msc                      MSc Global Health & Development / Clinical Ne… open now   never checked
+       Opens Oct · closes Mar–Jun by programme
+       https://www.ucl.ac.uk/study/prospective-students/graduate   assets/data-study.js:121
+  T3 ukmla                        UKMLA / PLAB → UK Training                     rolling    never checked
+       Rolling; specialty training applications open Nov
+       https://www.gmc-uk.org/registration-and-licensing   assets/data-frontiers.js:233
+  T3 un-online-volunteer          UN Online Volunteering                         rolling    never checked
+       Assignments are posted continuously on the volunteering platform
+       https://app.unv.org/   assets/data-abroad.js:325
+  T4 ifmsa-score                  IFMSA Research (SCORE) & Clinical (SCOPE) Exc… next cycle never checked
+       Exchange application rounds mostly Jan–Apr for summer placements
+       https://ifmsa.org/student-exchange-program/   assets/data-research.js:320
+  T4 india-science-festival       India Science Festival and the IISF science-c… open now   never checked
+       India Science Festival runs in January at IISER Pune · IISF has run in October most years since 2015
+       https://www.indiasciencefest.org/   assets/data-india-events.js:326
+  T4 language                     Language preparation: German, French, Japanese rolling    never checked  · page unreadable
+       ! page unreadable (403): check it in a browser
+       Rolling intakes
+       https://www.goethe.de/ins/in/en/index.html   assets/data-research.js:527
+  T4 loan-route                   The education loan route, honestly assessed    rolling    never checked
+       Apply once you hold an admission offer
+       https://sbi.bank.in/web/personal-banking/loans/education-loans   assets/data-frontiers.js:437
+  T4 lsmu-lithuania               English-taught masters and doctoral programmes next cycle never checked
+       Main intake closes around May–July for September
+       https://lsmu.lt/en/   assets/data-world.js:405
+  T4 networks                     Student research networks and societies        rolling    never checked
+       Open year-round
+       https://ifmsa.org/   assets/data-research.js:549
+  T4 poland-english-med           English-taught postgraduate programmes         next cycle never checked
+       Rolling through spring and summer for a September start
+       https://en.uj.edu.pl/en_GB/admissions   assets/data-world.js:431
+
+LINKS WITH NOTHING TO TRACK — 55  (the page states no date, amount or eligibility: point url= at the page that does)
+  T1 dhr-fellowship-abroad        https://schemes.dhr.gov.in/hrd
+  T1 erasmus-mundus               https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en
+  T1 fulbright                    https://www.usief.org.in/fulbright-fellowships/
+  T1 gsoc                         https://summerofcode.withgoogle.com/
+  T1 india-alliance               https://www.indiaalliance.org/apply
+  T1 nimhans-training             https://nimhans.ac.in/
+  T1 open-data                    https://www.ukbiobank.ac.uk/enable-your-research
+  T1 swiss-neuro                  https://www.neuroscience.uzh.ch/en.html
+  T1 wellcome-connecting          https://coursesandconferences.wellcomeconnectingscience.org/our-events/
+  T1 tdr-clinical-leadership      https://tdr.who.int/home/our-work/strengthening-research-capacity
+  T2 columbia-mailman             https://www.publichealth.columbia.edu/academics
+  T2 conf-neuro                   https://ibro.org/grants/
+  T2 cshl-courses                 https://meetings.cshl.edu/courseshome.aspx
+  T2 dual-degrees                 https://publichealth.jhu.edu/academics/dual-degree-programs
+  T2 embl-embo                    https://www.embl.org/about/info/course-and-conference-office/
+  T2 gulf-research                https://www.kaust.edu.sa/en/study
+  T2 icddrb                       https://www.icddrb.org/knowledge-sharing/education-and-training/internship
+  T2 iisc-programs                https://iisc.ac.in/
+  T2 iiser-summer                 https://www.iiserpune.ac.in/announcements
+  T2 india-phd                    https://nimhans.ac.in/
+  T2 inspire                      https://online-inspire.gov.in/
+  T2 kcl-ioppn                    https://www.kcl.ac.uk/ioppn
+  T2 lmic-partnerships            https://www.msf.org/
+  T2 lshtm-mph                    https://www.lshtm.ac.uk/study/courses/masters-degrees
+  T2 mext                         https://www.studyinjapan.go.jp/en/planning/scholarship/
+  T2 narotam                      https://www.nsfoundation.co.in/
+  T2 nordic-global-health         https://www.uib.no/en/cih
+  T2 sib-biodesign                https://schoolofbiodesign.in/index.php/fellowship/
+  T2 tigp-academia-sinica         https://tigp.sinica.edu.tw/
+  T2 us-electives                 https://students-residents.aamc.org/visiting-student-learning-opportunities/visiting-student-learning-opportunities
+  T2 cpigh-policy                 https://centerforpolicyimpact.org/about/fellows-program/
+  T2 oist-internship              https://www.oist.jp/research-internship-program
+  T2 unv-international            https://app.unv.org/
+  T2 charpak                      https://www.inde.campusfrance.org/france-excellence-charpak-scholarship-program
+  T2 jncasr-srfp                  https://www.jncasr.ac.in/academics
+  T2 prs-lamp                     https://prsindia.org/lamp
+  T3 ccmb-medsrt                  https://www.ccmb.res.in/
+  T3 edin-msc                     https://study.ed.ac.uk/postgraduate
+  T3 erasmus-traineeship          https://erasmus-plus.ec.europa.eu/opportunities/individuals/students
+  T3 health-hackathons            https://hackingmedicine.mit.edu/
+  T3 ireland-msc                  https://www.tcd.ie/courses/postgraduate/
+  T3 maastricht-euro              https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en
+  T3 otago-nz-pubhealth           https://www.otago.ac.nz/courses/
+  T3 research-method              https://www.cochrane.org/learn
+  T3 summer-schools-global        https://www.utrechtsummerschool.nl/
+  T3 ukmla                        https://www.gmc-uk.org/registration-and-licensing
+  T3 un-online-volunteer          https://app.unv.org/
+  T3 germany-drmed                https://promotion.charite.de/en/doctoral_procedure/regulations_2017/requirements/
+  T3 iarc-summer-school           https://learning.iarc.fr/
+  T3 germany-approbation          https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/berufsanerkennung-heilberufe-bundestag-26-03-26
+  T4 loan-route                   https://sbi.bank.in/web/personal-banking/loans/education-loans
+  T4 lsmu-lithuania               https://lsmu.lt/en/
+  T4 poland-english-med           https://en.uj.edu.pl/en_GB/admissions
+  T4 australia-awards             https://australiaawardsindia.org/opportunities/
+  T4 rural-hospital-electives     https://sewarural.org/volunteering-opportunities/
+
+UNREADABLE BY THE SWEEP — 4  (bot walls and geo-blocks: these need a browser when they come up)
+  T1 nos-sc                       https://nosmsje.gov.in/
+  T2 aus-short-term-training      https://www.medicalboard.gov.au/registration/international-medical-graduates/short-term-training
+  T2 ias-srfp                     https://web-japps.ias.ac.in/srfp/
+  T3 jhu-summer-institute         https://publichealth.jhu.edu/academics/graduate-summer-institute-of-epidemiology-and-biostatistics
+
+Fix:     node tools/set.js <id> window="…" months=1,2 [url=… money=… nocall=true] --stamp
+Verified: node tools/stamp.js icgeb-falaschi fmi-basel inyas baltics erasmus-mundus …    (irrelevant page change: --accept)
+Then:    node tools/refresh.js && node tools/verify.js && tools/ship.sh
+
+checklist written to sweep/worklist.md
