@@ -198,9 +198,14 @@ under 4.5:1.
   say "Closes this month" in the signal colour. Tiles and rows are rounder
   (14-18px) because they are things you handle, like the cards. Each list
   deals in once (22ms apart) and is still afterwards.
-- **Search** suggests as you type (countries, fields, kinds and programmes,
-  each with its count) in a listbox under the box, offers fixed "Try" terms
-  with live counts, and keeps "Your searches" in this browser only.
+- **Search** suggests as you type (countries, filters, fields, kinds and
+  programmes, each with its count, including the nicknames people type) in a
+  listbox under the box, and offers fixed "Try" terms with live counts. It
+  remembers nothing.
+- **The Countries globe** sits in a 24px-rounded window and zooms into the
+  chosen place (the sphere scales about the centre, after turning there),
+  with round + and − buttons and a "Whole world" pill under it; it is pinned
+  beside the list from 920px. **Back to top** is a 46px circle, bottom left.
 - **The opening** (intro.js): once a visit, the Earth turns once in the real
   sky, each country in the index lights as it crosses the middle and is named
   on the canvas, Ooh flies in and hops on the beat, and the turn lands on

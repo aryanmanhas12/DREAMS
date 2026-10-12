@@ -109,10 +109,10 @@ async function contrastCheck(page, label) {
       // Finding your way (October 2026): the home doors and search, the try
       // chips, the suggestions, the country tiles and a country's page, and
       // the year panel on Deadlines. Each sets its own text on its own fill.
-      ".door-t", ".door-d", ".door-search-l", ".try-l", ".try-chip", ".try-n", ".try-clear", ".fbtn",
+      ".door-t", ".door-d", ".door-search-l", ".try-l", ".try-chip", ".try-n", ".fbtn",
       ".sg-label", ".sg-tag", ".cx-name", ".cx-n", ".cx-n-l", ".cx-meta", ".cx-d-region", ".cx-d-stats dt",
       ".cx-d-stats dd", ".cx-facts dt", ".cx-facts dd", ".cx-honest", ".cx-honest b", ".cx-list-l",
-      ".dl-h", ".dl-when", ".dl-when .urg", ".dl-name", ".dl-org", ".dl-window", ".dl-sub", ".dl-bar-n", ".dl-bar-m"];
+      ".dl-h", ".dl-when", ".dl-when .urg", ".dl-name", ".dl-org", ".dl-window", ".dl-sub", ".dl-bar-n", ".dl-bar-m", ".cx-zworld", ".globe-label"];
     const out = [], seen = new Set();
     sels.forEach((sel) => document.querySelectorAll(sel).forEach((el) => {
       const r = el.getBoundingClientRect();

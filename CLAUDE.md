@@ -724,14 +724,31 @@ smooth.
   a sort yourself). No full match falls back to most-words-matched and the count says so;
   "did you mean" appears only when nothing matched, and only if the corrected query finds
   something.
-- **"Frequently searched" cannot be anyone else's searches here.** There is no analytics, by
-  promise. So the box shows fixed "Try" terms with their live counts, and "You often search" /
-  "Your recent searches" from `dc-searches` in this browser, with Clear (and Undo). Recorded on
-  Enter, a chip, a picked suggestion or leaving the box, never per keystroke, and a prefix
-  typed a moment earlier is replaced rather than kept beside the full word.
+- **Searches are never remembered, by the owner's decision (12 October 2026).** The first
+  version kept "Your recent searches" in `dc-searches`; asked directly, the owner chose "no,
+  never remember", and wanted suggestions instead. So the box shows fixed "Try" terms with their
+  live counts (there is no analytics, so nothing can honestly be called "frequently searched"),
+  and `init()` deletes any `dc-searches` an earlier visit left behind. `navigate.js` asserts the
+  key stays absent after a search.
+- **Suggestions answer first letters and nicknames.** "U" offers the UK and the USA (a single
+  letter matches place names and nicknames of three letters or fewer, never programmes), "ger"
+  Germany, and `PLACE_NICK` maps what people type ("america", "london", "dubai", "bangalore")
+  to the index's own `country` value. `FIELD_NICK` ("brain", "cancer", "ai"), `KIND_NICK`
+  ("internship", "usmle") and `FILTER_NICK` ("free", "open", "tier") do the same for fields,
+  kinds and Browse's own filters, each suggestion carrying its live count.
 - **Suggestions are an ARIA combobox**: the input carries `role="combobox"`,
   `aria-expanded` and `aria-activedescendant`; options take `mousedown` with
   `preventDefault`, because a `click` arrives after the input has blurred and closed the list.
+- **The Countries globe zooms** (the owner asked to "zoom in and then see everything available
+  in the country"). `globe.js` gained a zoom that scales the sphere about the canvas centre,
+  where `focus()` has just turned the place, so it grows in place: `focus(lat, lon, names, z)`,
+  `focusPlace(name, z)` and `zoomBy(f)`, eased a little slower than the turn and cut straight
+  there under reduced motion; dragging slows by the zoom so a zoomed globe does not fling. The
+  Countries globe is built only once its view is on screen (a hidden canvas measures zero),
+  never auto-spins, and draws names with the opening's greedy labeller. A tile, a globe tap,
+  "Every route in X" on the results page and "Living in X" in Browse all open the place the same
+  way: globe turned and zoomed to 3.2, the place's page beneath (phone) or beside it (pinned
+  from 920px). + and − zoom, "Whole world" returns. Tiles remain the accessible route.
 - **Countries** (`renderCountries`): one tile per `item.country` value, grouped by `ATLAS`,
   so a region chip's count is the same number its atlas step shows and the tiles sum to every
   programme (`navigate.js` asserts both). A tile opens the place in the same view: counts, the
@@ -739,7 +756,9 @@ smooth.
   region chips step aside while it is open and "All countries" returns focus to the tile. A
   profiled country filtered in Browse gets a "Living in …" button across.
 - **Deadlines open on your year** (`renderYear`): the year is the one picked here
-  (`dc-year`), else the survey's answer. "Closing soon" is open now or opening in the next two
+  (`dc-year`, where "Any year" is stored as `any`), else the survey's answer, else 1st-2nd
+  professional, the default the owner chose. "Deadlines for your year" on the results page
+  sets the answered stage, never an assumed one. "Closing soon" is open now or opening in the next two
   months for that stage, nearest first, with "Closes this month" in `--signal` when the next
   month is not in `deadlineMonths`. "Last chance at your stage" is every entry whose stages
   end at yours; while you are in MBBS that is everything that takes only students, because it
@@ -749,6 +768,15 @@ smooth.
 - **Region hues `--rg-*` name a part of the world and nothing else**: a tile's tint and edge,
   a dot. Never text, never a status (status keeps `--ok`, `--warn`, `--signal` and words).
   Added to DESIGN.md in the same change; `check.js` would have failed otherwise.
+- **Back to top** (`#toTop`) appears past 1.4 screens, bottom left so it never sits on Ooh's
+  corner button, and is checked at most once a frame while scrolling, never at rest. Every
+  card's place line now carries its region's dot, the same hue as its tile.
+- **Opportunity sources, second pass.** The owner asked for their saved memories to be used.
+  NEOsapien and the Notion "Follow Ups" database (Kind = Opportunity) held one programme lead
+  not yet in the index, NBRC's neuroimaging training; nbrc.ac.in still answers an empty page, so
+  it stays out. Everything else there is personal (contacts, drafts, campaigns) and is not site
+  content. Web research added **Göttingen's MSc/PhD Neurosciences** (an IMPRS whose entry rule
+  names medicine; open 20 September to 15 January; the MSc year is unfunded, so tier 2).
 - **A `padding` shorthand on an element that is also `.wrap` zeroes the side gutters.** The
   new doors heading sat at x=0 on a phone, and checking every `.wrap` found `.claims` had done
   the same from 641px up since it was written. Use `padding-block` on a `.wrap` section.

@@ -209,6 +209,11 @@
     let spin = -COORDS[HOME][1], tilt = 12;
     let dragging = false, lastX = 0, lastY = 0, idleAt = 0, hovered = null;
     let W = 0, H = 0, R = 0, cx = 0, cy = 0, dpr = 1;
+    // Zoom scales the sphere about the canvas centre, which is where focus()
+    // has just turned the chosen place, so a country grows in place rather
+    // than sliding off. baseR is the radius at zoom 1; R is what is drawn.
+    let zoom = 1, baseR = 0;
+    const ZMIN = 1, ZMAX = 6;
     // raf is the next animation frame; wait is the timer that paces the idle
     // spin. At most one of them is pending at a time.
     let raf = null, wait = null, running = false;
@@ -240,9 +245,10 @@
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      R = Math.min(W, H) / 2 - margin;
+      baseR = Math.min(W, H) / 2 - margin;
+      R = baseR * zoom;
       cx = W / 2; cy = H / 2;
-      labelPx = Math.max(10.5, Math.min(14, R / 12));
+      labelPx = Math.max(10.5, Math.min(14, baseR / 12));
       widths = {};
     }
 
@@ -362,7 +368,7 @@
         const isHover = hovered && hovered.name === d.pl.name;
         const outside = focusSet && !focusSet.has(d.pl.name);
         // Radius carries the count; depth only fades opacity.
-        let r = 2.2 + (d.pl.n / maxN) * 4.6;
+        let r = (2.2 + (d.pl.n / maxN) * 4.6) * (1 + (zoom - 1) * 0.22);
         const depth = Math.max(0, Math.min(1, d.p.z));
         // The opening: a country not yet reached is a faint point, and one
         // that has just been reached pops, with a ring that spreads and fades.
@@ -469,7 +475,7 @@
         });
       order.forEach(function (d) {
         const pl = d.pl, z = d.p.z;
-        const r = 2.2 + (pl.n / maxN) * 4.6;
+        const r = (2.2 + (pl.n / maxN) * 4.6) * (1 + (zoom - 1) * 0.22);
         const w = textWidth(pl.name);
         let want = 0;
         if (z > 0.22) {
@@ -523,9 +529,17 @@
         // the opening steers the globe itself; nothing else moves it
       } else if (target && !dragging) {
         const ds = angleDelta(spin, target.spin), dt = target.tilt - tilt;
+        const dz = target.zoom == null ? 0 : target.zoom - zoom;
         spin += ds * 0.075;
         tilt += dt * 0.075;
-        if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05) { spin = target.spin; tilt = target.tilt; target = null; idleAt = Date.now(); }
+        // The zoom eases a little slower than the turn, so the place arrives
+        // in the middle first and then grows.
+        if (dz) { zoom += dz * 0.06; R = baseR * zoom; }
+        if (Math.abs(ds) < 0.05 && Math.abs(dt) < 0.05 && Math.abs(dz) < 0.004) {
+          spin = target.spin; tilt = target.tilt;
+          if (target.zoom != null) { zoom = target.zoom; R = baseR * zoom; }
+          target = null; idleAt = Date.now();
+        }
       } else if (autoSpin && !dragging && !reduced && Date.now() - idleAt > 1800 &&
                  !document.documentElement.classList.contains("is-scrolling")) {
         // The world keeps turning when nobody is holding it — but stays where
@@ -595,8 +609,8 @@
     canvas.addEventListener("pointermove", function (e) {
       const pt = localPoint(e);
       if (dragging) {
-        spin += (e.clientX - lastX) * 0.45;
-        tilt = Math.max(-70, Math.min(70, tilt + (e.clientY - lastY) * -0.3));
+        spin += (e.clientX - lastX) * 0.45 / zoom;
+        tilt = Math.max(-70, Math.min(70, tilt + (e.clientY - lastY) * -0.3 / zoom));
         lastX = e.clientX; lastY = e.clientY;
         idleAt = Date.now();
         if (!raf && !wait) draw();
@@ -706,13 +720,36 @@
       /* Turn to a point and pick out the countries a passage is about. Under
          reduced motion it cuts straight there: the information is the same,
          only the journey is dropped. */
-      focus: function (lat, lon, names) {
+      focus: function (lat, lon, names, z) {
         focusSet = names && names.length ? new Set(names) : null;
         const t = { spin: -lon, tilt: Math.max(-55, Math.min(55, lat * 0.85)) };
-        if (reduced || !running) { spin = t.spin; tilt = t.tilt; target = null; draw(); return; }
+        if (z != null) t.zoom = Math.max(ZMIN, Math.min(ZMAX, z));
+        if (reduced || !running) {
+          spin = t.spin; tilt = t.tilt;
+          if (t.zoom != null) { zoom = t.zoom; R = baseR * zoom; }
+          target = null; draw(); return;
+        }
         target = t;
         kick();
-      }
+      },
+      /* Turn to one place by name and zoom in on it: the Countries view's
+         "go there". A name with no coordinates (Global, Online) returns
+         false and the caller zooms back out instead. */
+      focusPlace: function (name, z) {
+        const c = COORDS[name];
+        if (!c) return false;
+        this.focus(c[0], c[1], [name], z == null ? 3 : z);
+        return true;
+      },
+      // Zoom without turning, for the + and − buttons.
+      zoomBy: function (f) {
+        const z = Math.max(ZMIN, Math.min(ZMAX, (target && target.zoom != null ? target.zoom : zoom) * f));
+        if (reduced || !running) { zoom = z; R = baseR * zoom; draw(); return z; }
+        target = { spin: target ? target.spin : spin, tilt: target ? target.tilt : tilt, zoom: z };
+        kick();
+        return z;
+      },
+      zoom: function () { return target && target.zoom != null ? target.zoom : zoom; }
     };
   };
 })();

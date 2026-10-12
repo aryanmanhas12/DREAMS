@@ -722,7 +722,9 @@
   function recordLine(item, urg) {
     const bits = [];
     bits.push('<span>' + esc(TYPE_LABEL[item.type] || item.type) + '</span>');
-    bits.push('<span>' + (item.city && item.city !== item.country ? esc(item.city) + ", " : "") + esc(item.country) + '</span>');
+    // The place carries its region's dot, the same hue as its tile on Countries.
+    bits.push('<span style="--rg: var(--rg-' + regionOf(item.country) + ')"><span class="cx-dot" aria-hidden="true"></span>' +
+      (item.city && item.city !== item.country ? esc(item.city) + ", " : "") + esc(item.country) + '</span>');
     if (item.duration) bits.push('<span>' + esc(item.duration) + '</span>');
     // A dot for scanning and words for meaning: the status used to be a
     // coloured stripe down the card's edge, which said nothing to anyone who
@@ -1267,6 +1269,9 @@
           h += "<div><b>Allergies and health</b>" + esc(c.allergy) + "</div>";
         h += "</div>";
         h += '<p class="cty-honest">' + esc(c.honest) + "</p>";
+        // From a fit to its programmes: the country's own page, globe zoomed in.
+        const here = allOpportunities().filter((it) => it.country === x.key).length;
+        if (here) h += '<p class="cty-go"><button type="button" class="btn btn-ghost btn-sm" data-open-country="' + esc(x.key) + '">Every route in ' + esc(c.name) + " (" + fmtNum(here) + ")</button></p>";
         h += "</article>";
       });
       h += "</div></section>";
@@ -1277,7 +1282,8 @@
     h += '<button type="button" class="btn btn-ghost" id="printBtn">Print or save as PDF</button>';
     h += '<button type="button" class="btn btn-ghost" id="redoBtn">Answer again</button>';
     h += '<button type="button" class="btn btn-ghost" data-goto="browse">Browse everything</button>';
-    h += '<button type="button" class="btn btn-ghost" data-goto="calendar">Deadline calendar</button>';
+    h += '<button type="button" class="btn btn-ghost" id="yearDeadlinesBtn">Deadlines for your year</button>';
+    h += '<button type="button" class="btn btn-ghost" data-goto="countries">Country by country</button>';
     h += '<p class="save-note" id="saveNote">Your answers are saved in this browser and written into the page address — bookmark it, or send yourself the link, and this plan comes back exactly as it is. Nothing is uploaded anywhere.</p>';
     h += "</div>";
 
@@ -1295,6 +1301,20 @@
 
     const printBtn = $("#printBtn");
     if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+    $$("[data-open-country]", slot).forEach(function (b) {
+      b.addEventListener("click", function () { openCountry(b.dataset.openCountry); });
+    });
+    // Deadlines open on the year the reader gave; an unasked stage is a
+    // default, so it is not imposed on them.
+    const yearBtn = $("#yearDeadlinesBtn");
+    if (yearBtn) yearBtn.addEventListener("click", function () {
+      if (p.asked.stage && STAGE_LABEL[p.stage]) {
+        dlStage = p.stage;
+        try { localStorage.setItem("dc-year", p.stage); } catch (e) { /* ignore */ }
+      }
+      gotoYear();
+    });
 
     const copyBtn = $("#copyPlanBtn");
     if (copyBtn) copyBtn.addEventListener("click", function () {
@@ -1691,85 +1711,86 @@
       ? list.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("")
       : empty;
     const dymBtn = $("#browseCards [data-dym]");
-    if (dymBtn) dymBtn.addEventListener("click", function () { setSearch(dymBtn.dataset.dym, true); $("#browseSearch").focus(); });
+    if (dymBtn) dymBtn.addEventListener("click", function () { setSearch(dymBtn.dataset.dym); $("#browseSearch").focus(); });
     renderTry();
   }
 
-  /* ───────────────── search box: suggestions and your searches ─────────────────
+  /* ───────────────── search box: suggestions ─────────────────
      The suggestions under the box are a listbox driven from the input
      (aria-activedescendant), so focus never leaves the field: arrows move,
-     Enter picks, Escape closes. Each suggestion carries its count from the
-     index. "Your searches" are kept in this browser only, like the
-     shortlist, and can be cleared; the "Try" terms are fixed starting
-     points, each with its live count, and never claim to be anyone else's
-     searches, because nothing here is measured. */
+     Enter picks, Escape closes. Each carries its count from the index.
+     They answer the first letters and the names people actually type:
+     "U" offers the USA and the UK, "ger" Germany, "america", "london" or
+     "dubai" the place they mean, "brain" or "cancer" the field. Nothing
+     typed is kept: the owner asked for searches never to be remembered, so
+     the "Try" terms are fixed starting points with their live counts. */
   const TRY_TERMS = ["ICMR", "Germany", "free", "fully funded", "neuroscience", "public health", "PhD", "summer", "first year", "USMLE"];
 
-  function loadSearches() {
-    try { const v = JSON.parse(localStorage.getItem("dc-searches") || "[]"); return Array.isArray(v) ? v : []; }
-    catch (e) { return []; }
-  }
-  function saveSearches(list) {
-    try { localStorage.setItem("dc-searches", JSON.stringify(list.slice(0, 20))); } catch (e) { /* private mode */ }
-  }
-  function recordSearch(q) {
-    q = String(q || "").trim();
-    if (q.length < 2 || !countFor(q)) return;
-    const list = loadSearches(), k = norm(q), now = Date.now();
-    const same = list.find((s) => norm(s.q) === k);
-    // "neur" saved on the way to "neuroscience" is the same search, not two.
-    const prefix = !same && list.find((s) => now - s.t < 30000 && s.n === 1 && k.indexOf(norm(s.q)) === 0);
-    if (same) { same.n++; same.t = now; same.q = q; }
-    else if (prefix) { prefix.q = q; prefix.t = now; }
-    else list.push({ q: q, n: 1, t: now });
-    list.sort((a, b) => b.t - a.t);
-    saveSearches(list);
-  }
+  // Names people type for a place, mapped to the index's own country value.
+  const PLACE_NICK = {
+    us: "USA", usa: "USA", america: "USA", american: "USA", states: "USA", boston: "USA", york: "USA", baltimore: "USA",
+    uk: "UK", britain: "UK", british: "UK", england: "UK", scotland: "UK", wales: "UK", london: "UK", oxford: "UK", cambridge: "UK", edinburgh: "UK",
+    holland: "Netherlands", dutch: "Netherlands", amsterdam: "Netherlands", rotterdam: "Netherlands",
+    deutschland: "Germany", german: "Germany", berlin: "Germany", munich: "Germany", heidelberg: "Germany", gottingen: "Germany",
+    swiss: "Switzerland", zurich: "Switzerland", basel: "Switzerland", lausanne: "Switzerland", french: "France", paris: "France",
+    aus: "Australia", aussie: "Australia", sydney: "Australia", melbourne: "Australia", nz: "New Zealand", kiwi: "New Zealand",
+    hk: "Hong Kong", korea: "South Korea", seoul: "South Korea", tokyo: "Japan", japanese: "Japan", okinawa: "Japan",
+    chinese: "China", beijing: "China", shanghai: "China", dubai: "Gulf", uae: "Gulf", emirates: "Gulf", qatar: "Gulf", saudi: "Gulf",
+    scandinavia: "Nordics", nordic: "Nordics", baltic: "Baltics", estonia: "Baltics", latvia: "Baltics",
+    africa: "South Africa", johannesburg: "South Africa", turkiye: "Turkey", istanbul: "Turkey", bangkok: "Thailand",
+    czech: "Czechia", prague: "Czechia", budapest: "Hungary", moscow: "Russia", warsaw: "Poland", vilnius: "Lithuania",
+    barcelona: "Spain", lisbon: "Portugal", rome: "Italy", vienna: "Austria", antwerp: "Belgium", dublin: "Ireland",
+    toronto: "Canada", dhaka: "Bangladesh", taipei: "Taiwan", delhi: "India", mumbai: "India", bengaluru: "India",
+    bangalore: "India", chennai: "India", hyderabad: "India", pune: "India", kolkata: "India", vellore: "India",
+    remote: "Online", virtual: "Online", worldwide: "Global", international: "Global", anywhere: "Any", eu: "Europe"
+  };
+  // Words for a field that are not in the field's own name.
+  const FIELD_NICK = {
+    brain: "neuro", neurology: "neuro", mental: "psych", psychology: "psych", depression: "psych", ai: "compbio",
+    ml: "compbio", machine: "compbio", coding: "compbio", python: "compbio", bioinformatics: "compbio", computational: "compbio",
+    cancer: "onco", oncology: "onco", tumour: "onco", dna: "genomics", genome: "genomics", genetic: "genomics",
+    epidemiology: "pubhealth", mph: "pubhealth", community: "pubhealth", policy: "global", who: "global",
+    hospital: "systems", management: "systems", diet: "nutrition", obesity: "nutrition", diabetes: "nutrition",
+    infection: "infect", tb: "infect", tuberculosis: "infect", hiv: "infect", malaria: "infect", tropical: "infect", vaccine: "infect",
+    climate: "env", environment: "env", pollution: "env", maternal: "repro", child: "repro", paediatrics: "repro",
+    pediatrics: "repro", obstetrics: "repro", women: "repro", surgery: "clinical", residency: "clinical",
+    lab: "biochem", cell: "biochem"
+  };
+  const KIND_NICK = {
+    doctorate: "phd", msc: "masters", degree: "masters", funding: "scholarship", internship: "research", summer: "research",
+    lab: "research", congress: "conference", poster: "conference", course: "skill", workshop: "skill", training: "skill",
+    usmle: "residency", plab: "residency", licence: "residency", license: "residency", exam: "residency"
+  };
+  // The four Browse filters, reachable by the word for them.
+  const FILTERS = {
+    free: { label: "Costs nothing", test: (i) => !!i.zeroCost },
+    open: { label: "Open right now", test: (i) => urgency(i) === "open" },
+    t1: { label: "Tier 1 only", test: (i) => impactOf(i).t === 1 },
+    student: { label: "Open to current MBBS students", test: (i) => !!(i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)) }
+  };
+  const FILTER_NICK = { free: "free", cost: "free", nothing: "free", open: "open", now: "open", apply: "open",
+    tier: "t1", best: "t1", top: "t1", student: "student", mbbs: "student", undergraduate: "student" };
 
-  function tryChip(q, n, cls) {
-    return '<button type="button" class="try-chip' + (cls ? " " + cls : "") + '" data-q="' + esc(q) + '">' + esc(q) +
+  function tryChip(q, n) {
+    return '<button type="button" class="try-chip" data-q="' + esc(q) + '">' + esc(q) +
       ' <span class="try-n">' + fmtNum(n) + '<span class="sr-only"> programmes</span></span></button>';
   }
   function renderTry() {
     const slot = $("#browseTry");
     if (!slot) return;
-    const mine = loadSearches().map((s) => ({ q: s.q, n: s.n, t: s.t, c: countFor(s.q) })).filter((s) => s.c)
-      .sort((a, b) => b.n - a.n || b.t - a.t).slice(0, 5);
-    let h = "";
-    if (mine.length) {
-      const often = mine.some((s) => s.n > 1);
-      h += '<div class="try-row"><span class="try-l">' + (often ? "You often search" : "Your recent searches") + "</span>" +
-        mine.map((s) => tryChip(s.q, s.c, "is-mine")).join("") +
-        '<button type="button" class="try-clear" id="trySearchesClear">Clear<span class="sr-only"> your searches</span></button></div>';
-    }
-    const mineKeys = new Set(mine.map((s) => norm(s.q)));
-    const terms = TRY_TERMS.filter((q) => !mineKeys.has(norm(q))).map((q) => ({ q: q, c: countFor(q) })).filter((t) => t.c);
-    h += '<div class="try-row"><span class="try-l">Try</span>' + terms.map((t) => tryChip(t.q, t.c)).join("") + "</div>";
-    slot.innerHTML = h;
+    const terms = TRY_TERMS.map((q) => ({ q: q, c: countFor(q) })).filter((t) => t.c);
+    slot.innerHTML = '<div class="try-row"><span class="try-l">Try</span>' + terms.map((t) => tryChip(t.q, t.c)).join("") + "</div>";
     $$(".try-chip", slot).forEach(function (b) {
-      b.addEventListener("click", function () { setSearch(b.dataset.q, true); });
-    });
-    const clr = $("#trySearchesClear");
-    if (clr) clr.addEventListener("click", function () {
-      const kept = loadSearches();
-      saveSearches([]);
-      renderTry();
-      const box = $("#browseSearch");
-      if (box) box.focus();
-      toast("Your searches are cleared from this browser.", {
-        label: "Undo", run: function () { saveSearches(kept); renderTry(); }
-      });
+      b.addEventListener("click", function () { setSearch(b.dataset.q); });
     });
   }
 
-  // Put a query in the box and run it, as if typed. `record` saves it to
-  // your searches (chips, Enter, a picked suggestion; never every keystroke).
-  function setSearch(q, record) {
+  // Put a query in the box and run it, as if typed.
+  function setSearch(q) {
     const box = $("#browseSearch");
     if (box) box.value = q;
     searchQuery = String(q || "").trim();
     syncSortToSearch();
-    if (record) recordSearch(searchQuery);
     renderBrowse();
   }
   function syncSortToSearch() {
@@ -1787,7 +1808,6 @@
     if (box) box.value = q || "";
     searchQuery = String(q || "").trim();
     syncSortToSearch();
-    if (searchQuery) recordSearch(searchQuery);
     renderBrowse();
     showView("browse");
   }
@@ -1795,24 +1815,45 @@
   function suggestionsFor(q) {
     const n = norm(q);
     if (!n) return [];
+    const one = n.length === 1;
     const starts = (label) => (" " + norm(label)).indexOf(" " + n) !== -1;
+    // A nickname matches when what is typed starts it ("americ"), or, once a
+    // whole word has been typed, when the query starts with it ("london uni").
+    const nickHits = (map) => Object.keys(map).filter((k) => (one ? k.length <= 3 && k[0] === n : k.indexOf(n) === 0 || (n + " ").indexOf(k + " ") === 0));
     const items = allOpportunities();
-    const out = [];
+    const out = [], seen = new Set();
+    const push = (s) => { const key = s.kind + ":" + s.value; if (seen.has(key)) return false; seen.add(key); out.push(s); return true; };
+
     const counts = {};
     items.forEach((i) => { counts[i.country] = (counts[i.country] || 0) + 1; });
-    Object.keys(counts).filter((c) => starts(placeName(c)) || starts(c))
-      .sort((a, b) => counts[b] - counts[a]).slice(0, 3)
-      .forEach((c) => out.push({ kind: "country", label: placeName(c), value: c, n: counts[c], tag: "Country" }));
-    Object.keys(FIELDS).filter((f) => starts(FIELDS[f])).slice(0, 2).forEach(function (f) {
-      out.push({ kind: "field", label: FIELDS[f], value: FIELDS[f], n: items.filter((i) => (i.fields || []).indexOf(f) !== -1).length, tag: "Field" });
+    const places = Object.keys(counts).filter((c) => starts(placeName(c)) || starts(c));
+    nickHits(PLACE_NICK).forEach((k) => { const c = PLACE_NICK[k]; if (counts[c] && places.indexOf(c) === -1) places.push(c); });
+    places.sort((a, b) => counts[b] - counts[a]).slice(0, 4)
+      .forEach((c) => push({ kind: "country", label: placeName(c), value: c, n: counts[c], tag: "Country" }));
+
+    nickHits(FILTER_NICK).slice(0, 1).forEach(function (k) {
+      const f = FILTER_NICK[k];
+      push({ kind: "filter", label: FILTERS[f].label, value: f, n: items.filter(FILTERS[f].test).length, tag: "Filter" });
     });
-    Object.keys(TYPE_LABEL).filter((t) => starts(TYPE_LABEL[t]) || t.indexOf(n) === 0).slice(0, 2).forEach(function (t) {
-      out.push({ kind: "kind", label: TYPE_LABEL[t], value: t, n: items.filter((i) => i.type === t).length, tag: "Kind" });
+
+    const fields = Object.keys(FIELDS).filter((f) => starts(FIELDS[f]));
+    if (!one) nickHits(FIELD_NICK).forEach((k) => { if (fields.indexOf(FIELD_NICK[k]) === -1) fields.push(FIELD_NICK[k]); });
+    fields.slice(0, 2).forEach(function (f) {
+      push({ kind: "field", label: FIELDS[f], value: FIELDS[f], n: items.filter((i) => (i.fields || []).indexOf(f) !== -1).length, tag: "Field" });
     });
-    const r = runSearch(items, q);
-    if (!r.partial && r.scores) {
-      r.list.slice().sort((a, b) => r.scores.get(b.id) - r.scores.get(a.id)).slice(0, 8 - Math.min(out.length, 4))
-        .forEach((i) => out.push({ kind: "programme", label: i.name, value: i.id, tag: placeName(i.country) }));
+
+    const kinds = Object.keys(TYPE_LABEL).filter((t) => starts(TYPE_LABEL[t]) || (!one && t.indexOf(n) === 0));
+    if (!one) nickHits(KIND_NICK).forEach((k) => { if (kinds.indexOf(KIND_NICK[k]) === -1) kinds.push(KIND_NICK[k]); });
+    kinds.slice(0, 2).forEach(function (t) {
+      push({ kind: "kind", label: TYPE_LABEL[t], value: t, n: items.filter((i) => i.type === t).length, tag: "Kind" });
+    });
+
+    if (!one) {
+      const r = runSearch(items, q);
+      if (!r.partial && r.scores) {
+        r.list.slice().sort((a, b) => r.scores.get(b.id) - r.scores.get(a.id)).slice(0, Math.max(2, 8 - out.length))
+          .forEach((i) => push({ kind: "programme", label: i.name, value: i.id, tag: placeName(i.country) }));
+      }
     }
     return out.slice(0, 8);
   }
@@ -1855,15 +1896,14 @@
       close();
       if (!s) return;
       if (s.kind === "country") {
-        recordSearch(s.label);
         countryFilter = s.value; regionFilter = null; activeFilter = "all";
         box.value = ""; searchQuery = ""; syncSortToSearch();
         renderBrowse();
-      } else if (s.kind === "kind") {
+      } else if (s.kind === "kind" || s.kind === "filter") {
         activeFilter = s.value;
         box.value = ""; searchQuery = ""; syncSortToSearch();
         renderBrowse();
-      } else setSearch(s.kind === "programme" ? s.label : s.value, true);
+      } else setSearch(s.kind === "programme" ? s.label : s.value);
       box.focus();
     }
 
@@ -1891,15 +1931,12 @@
         if (active >= 0) { pick(items[active]); return; }
         close();
         clearTimeout(debounce);
-        setSearch(box.value, true);
+        setSearch(box.value);
       } else if (e.key === "Escape") {
         if (!ul.hidden) { e.preventDefault(); close(); }
       } else if (e.key === "Tab") close();
     });
-    box.addEventListener("blur", function () {
-      setTimeout(close, 120);
-      if (box.value.trim().length >= 3) recordSearch(box.value);
-    });
+    box.addEventListener("blur", function () { setTimeout(close, 120); });
     $("#browseSort").addEventListener("change", function () {
       sortMode = this.value;
       sortAuto = false;
@@ -1952,9 +1989,50 @@
     return bits.join(", ");
   }
 
+  /* The Countries globe: built the first time the view is on screen (a
+     hidden canvas measures zero), never spins by itself, and only moves
+     when asked. Tapping a place on it does exactly what tapping its tile
+     does. The + and − buttons zoom about the middle, where the chosen
+     place has just been turned. */
+  let cxGlobe = null;
+  function ensureCxGlobe() {
+    if (cxGlobe || typeof window.initGlobe !== "function") return cxGlobe;
+    const c = $("#cxGlobe");
+    if (!c || !c.clientWidth) return null;
+    cxGlobe = window.initGlobe(c, $("#cxGlobeLabel"), function (country) { openCountry(country, true); },
+      { autoSpin: false, labels: true });
+    if (!cxGlobe) { const st = $(".cx-stage"); if (st) st.hidden = true; return null; }
+    const theme = $("#themeToggle");
+    if (theme) theme.addEventListener("click", function () { setTimeout(cxGlobe.redraw, 30); });
+    $("#cxZoomIn").addEventListener("click", function () { cxGlobe.zoomBy(1.6); });
+    $("#cxZoomOut").addEventListener("click", function () { cxGlobe.zoomBy(1 / 1.6); });
+    $("#cxZoomWorld").addEventListener("click", function () {
+      if (cxOpen) { cxOpen = ""; cxRegion = "all"; renderCountries(); }
+      else { cxRegion = "all"; renderCountries(); }
+    });
+    return cxGlobe;
+  }
+  // Point the globe at whatever the view is showing: one place zoomed in, a
+  // region at a middle distance, or the whole world from India.
+  function aimCxGlobe(tries) {
+    const g = ensureCxGlobe();
+    if (!g) { if ((tries || 0) < 8) setTimeout(function () { aimCxGlobe((tries || 0) + 1); }, 80); return; }
+    const reg = (k) => ATLAS[k];
+    if (cxOpen) {
+      if (!g.focusPlace(cxOpen, 3.2)) {
+        const r = reg(regionOf(cxOpen));
+        g.focus(r.focus[0], r.focus[1], r.highlight === false ? null : r.countries, 1.2);
+      }
+    } else if (cxRegion !== "all") {
+      const r = reg(cxRegion);
+      g.focus(r.focus[0], r.focus[1], r.highlight === false ? null : r.countries, cxRegion === "global" ? 1 : cxRegion === "europe" ? 2.2 : 1.6);
+    } else g.focus(21, 78, null, 1);
+  }
+
   function renderCountries() {
     const grid = $("#cxGrid"), detail = $("#cxDetail");
     if (!grid) return;
+    setTimeout(aimCxGlobe, 0);
     const places = {};
     allOpportunities().forEach((i) => { if (i.country) places[i.country] = 1; });
     const all = Object.keys(places).map((c) => ({ c: c, r: regionOf(c), s: placeStats(c) }));
@@ -2060,10 +2138,15 @@
     cxOpen = c;
     if (!fromTile) { cxRegion = "all"; renderCountries(); showView("countries"); }
     else renderCountries();
+    // On a phone the globe sits above the place's page, so the screen goes
+    // to the globe and the reader watches it zoom with the page beneath it;
+    // on a wide screen the globe is pinned beside the list, so the page itself
+    // comes to the top.
     const go = function () {
-      const d = $("#cxDetail"), h = $("#cxDetailH");
+      const d = $("#cxDetail"), h = $("#cxDetailH"), stage = $(".cx-stage");
       if (!d || !h) return;
-      d.scrollIntoView({ block: "start" });
+      const wide = window.matchMedia && window.matchMedia("(min-width: 920px)").matches;
+      (wide || !stage || stage.hidden ? d : stage).scrollIntoView({ block: "start" });
       h.focus({ preventScroll: true });
     };
     // From another view, wait for the view change (and its scroll to the
@@ -2085,9 +2168,12 @@
   function yearDefault() {
     let stored = null;
     try { stored = localStorage.getItem("dc-year"); } catch (e) { /* private mode */ }
+    if (stored === "any") return "";
     if (stored && STAGE_LABEL[stored]) return stored;
     if (answers.stage && STAGE_LABEL[answers.stage]) return answers.stage;
-    return null;
+    // Nothing chosen and nothing answered: open on the earliest years, the
+    // reader this site most often has, with "Any year" one tap away.
+    return "pre";
   }
   const forStage = (i, st) => !st || !i.stages || i.stages.indexOf(st) !== -1;
   const hasWindow = (i) => !i.noOpenCall && i.deadlineMonths && i.deadlineMonths.length && i.deadlineMonths.length < 12;
@@ -2155,7 +2241,7 @@
       b.addEventListener("click", function () {
         dlStage = b.dataset.st || "";
         dlShowAll = false;
-        try { if (dlStage) localStorage.setItem("dc-year", dlStage); else localStorage.removeItem("dc-year"); } catch (e) { /* ignore */ }
+        try { localStorage.setItem("dc-year", dlStage || "any"); } catch (e) { /* ignore */ }
         renderYear();
       });
     });
@@ -2239,6 +2325,38 @@
     $("#calendarGrid").innerHTML = h;
   }
 
+  // Deadlines, scrolled to the year panel, with focus on its heading.
+  function gotoYear() {
+    gotoView("calendar");
+    setTimeout(function () {
+      const y = $("#dlYearH");
+      if (y) { y.setAttribute("tabindex", "-1"); y.scrollIntoView({ block: "start" }); y.focus({ preventScroll: true }); }
+    }, 380);
+  }
+
+  /* Back to top: shown once a view runs well past one screen, checked at
+     most once a frame while scrolling and never at rest. */
+  function initToTop() {
+    const b = $("#toTop");
+    if (!b) return;
+    let queued = false;
+    const check = function () {
+      queued = false;
+      const show = window.scrollY > window.innerHeight * 1.4 && currentView !== "survey" &&
+        !document.documentElement.classList.contains("intro-on");
+      if (b.hidden === show) b.hidden = !show;
+    };
+    window.addEventListener("scroll", function () {
+      if (!queued) { queued = true; requestAnimationFrame(check); }
+    }, { passive: true });
+    b.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
+      const v = $(".view.is-active");
+      if (v) focusHeading(v);
+      b.hidden = true;
+    });
+  }
+
   /* ───────────────── home: the doors ───────────────── */
   function initDoors() {
     const items = allOpportunities();
@@ -2257,13 +2375,7 @@
       d.addEventListener("click", function () {
         const k = d.dataset.door;
         if (k === "countries") { cxOpen = ""; cxRegion = "all"; gotoView("countries"); }
-        else if (k === "year") {
-          gotoView("calendar");
-          setTimeout(function () {
-            const y = $("#dlYearH");
-            if (y) { y.setAttribute("tabindex", "-1"); y.scrollIntoView({ block: "start" }); y.focus({ preventScroll: true }); }
-          }, 80);
-        } else if (k === "free") openBrowseWith("free");
+        else if (k === "year") gotoYear(); else if (k === "free") openBrowseWith("free");
         else if (k === "routes") gotoView("routes");
       });
     });
@@ -3629,6 +3741,10 @@
     // the list on every keystroke never disturbs focus or cursor position.
     initSearchBox();
     initDoors();
+    initToTop();
+    // The previous build kept "your searches" in this browser; the owner
+    // asked for nothing to be remembered, so that list is removed outright.
+    try { localStorage.removeItem("dc-searches"); } catch (e) { /* private mode */ }
     const cxSel = $("#cxSort");
     if (cxSel) cxSel.addEventListener("change", function () { cxSort = this.value; renderCountries(); });
     window.addEventListener("popstate", routeFromHash);

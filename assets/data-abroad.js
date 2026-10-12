@@ -152,6 +152,34 @@ window.DB.study.push(
       "Keep every acceptance letter, certificate and abstract-book page. The second trip is much easier than the first, and this is the evidence that makes it so."
     ],
     indiaSpecific: true, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "goettingen-neuro",
+    name: "MSc/PhD Neurosciences, Göttingen (an International Max Planck Research School)",
+    org: "University of Göttingen with its Medical Center, two Max Planck Institutes, the European Neuroscience Institute and the German Primate Center",
+    type: "phd", country: "Germany", city: "Göttingen",
+    fields: ["neuro", "psych", "compbio", "biochem"],
+    stages: ["intern", "grad"], funding: "partial",
+    money: "No tuition, only a semester fee of about €485 that includes a Deutschlandticket. The programme cannot pay MSc students a stipend, so the first year needs a DAAD or other scholarship or your own money (living costs about €900 a month). PhD students are usually employed and paid by their host lab",
+    duration: "An intensive first year of courses and lab rotations, then an MSc thesis or the fast track straight into a PhD",
+    window: "Applications are open from 20 September 2026 to 15 January 2027 (midnight CET), with letters of recommendation due by 18 January. Online interviews follow on 1 to 5 February and 15 to 19 February 2027, and decisions come by early March. Courses start in October 2027",
+    deadlineMonths: [9, 10, 11, 12, 1],
+    url: "https://www.uni-goettingen.de/en/665828.html",
+    checked: "2026-10",
+    why: "One of the few neuroscience doctorates in Europe whose entry rule names medicine outright: a bachelor's or equivalent of 120 credits in biology, physics, medicine, psychology or a closely related subject. It is taught in English with no German needed, it is run jointly with the Max Planck Institutes for Multidisciplinary Sciences and for Dynamics and Self-Organization, and its first year is a structured course with rotations through labs before you commit to one. The honest catch is money: the MSc phase is not funded by the programme, which is why it sits below the salaried doctorates in this index.",
+    reqs: [
+      "A bachelor's degree or equivalent of 120 credits at the time of application, in biology, physics, medicine, psychology or a closely related discipline. Your degree must be conferred before courses start in October, so this suits interns and graduates",
+      "Very good English; a test score is recommended but not required if you were taught in English",
+      "A CV with photo, your transcript and two referees, who are emailed automatically when you submit",
+      "Basic knowledge of neurobiology, biochemistry and cell biology, cognitive science and molecular biology for the interviews"
+    ],
+    steps: [
+      "Read the faculty list and pick up to five research groups whose papers you can actually discuss.",
+      "Ask two referees now: their letters must arrive by 18 January, and the request only goes out once you submit.",
+      "Apply in parallel for a DAAD master's scholarship, since the programme cannot fund the first year.",
+      "Revise neurobiology, biochemistry and cell biology before the February interviews, which test background knowledge with short questions."
+    ],
+    zeroCost: false, indiaSpecific: false, competitiveness: "high", workExp: 0
   }
 );
 
@@ -162,6 +190,7 @@ Object.assign(window.DB.impact, {
   "travel-grants-gov": { t: 1, odds: "High, and badly under-applied", effort: "15 hrs once the abstract is accepted", note: "The Government of India will reimburse your flight to an international conference — up to ₹1.5 lakh under ICMR — and almost nobody claims it. The failure is never merit or money; it is that the application closes 60 days before the conference and students find the scheme three weeks out." },
   "guarantee-abroad":  { t: 1, odds: "Near-certain if all three inlets run at once", effort: "18 months, spread thin", note: "Going abroad is not a lottery entered once in final year. It is three independent pipelines, and one opening is enough. Rated top tier because it costs nothing and it is the entry that makes the rest of this index reachable." },
   "epfl-summer":       { t: 1, odds: "Competitive — roughly top 5–10% of your class", effort: "20 hrs", note: "Paid, housed, eight weeks inside one of Europe's best life-science schools — and it lands in July and August, so it fits the Indian summer break without needing leave from your college. That timing is what makes it more practical mid-MBBS than anything longer." },
+  "goettingen-neuro":  { t: 2, odds: "Selective: about a quarter of applicants reach the first interviews and about half of those the final stage", effort: "A form, two referees and two rounds of online interviews", note: "A Max Planck neuroscience doctorate that names medicine in its entry rule. Tier 2 rather than 1 because the first year is unfunded unless you win a scholarship." },
   "oist-internship":   { t: 2, odds: "Competitive, with two shots a year", effort: "25 hrs plus the permission letter", note: "Four to six funded months in Okinawa, and two intakes a year rather than one. The gate is not academic. It is getting your medical college to release you for four months, which has to be negotiated months before the deadline." }
 });
 

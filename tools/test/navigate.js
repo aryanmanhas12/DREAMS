@@ -88,26 +88,37 @@ const hscroll = (pg) => pg.evaluate(() => document.documentElement.scrollWidth -
   // A tile opens the place, with its programmes as full cards; Back to all.
   await pg.click('#cxGrid .cx-tile[data-cx="Germany"]');
   await pg.waitForTimeout(400);
+  // The globe zooms in on the place it was asked for (it eases there).
+  await pg.waitForTimeout(400);
   const de = await pg.evaluate(() => ({
     shown: !document.getElementById("cxDetail").hidden,
     h: (document.getElementById("cxDetailH") || {}).textContent,
     focus: document.activeElement && document.activeElement.id,
     cards: document.querySelectorAll("#cxDetail .card").length,
     toolsHidden: getComputedStyle(document.querySelector(".cx-tools")).display === "none",
-    inView: Math.round(document.getElementById("cxDetail").getBoundingClientRect().top)
+    inView: Math.round(document.getElementById("cxDetail").getBoundingClientRect().top),
+    stageTop: Math.round(document.querySelector(".cx-stage").getBoundingClientRect().top),
+    stageBottom: Math.round(document.getElementById("cxGlobe").getBoundingClientRect().bottom)
   }));
   const deN = cx.per.Germany;
   ok(de.shown && de.h === "Germany", "the Germany tile did not open Germany");
   ok(de.cards === deN, `Germany shows ${de.cards} cards, the data has ${deN}`);
   ok(de.focus === "cxDetailH", "focus did not move to the place's heading");
   ok(de.toolsHidden, "the region chips stayed on screen over an open place");
-  ok(de.inView >= 0 && de.inView < 300, `the open place starts ${de.inView}px down the screen`);
+  // On a phone the screen goes to the globe, with the place's page right under it.
+  // (Ooh's bubble above it can still be typing, and grows, so allow for it.)
+  ok(de.stageTop >= 0 && de.stageBottom <= 844, `the zooming globe is not wholly on screen (${de.stageTop} to ${de.stageBottom}px)`);
+  ok(de.inView > 0 && de.inView < 844, `the open place starts ${de.inView}px down the screen, off the first screen`);
   await pg.click("#cxBack");
   await pg.waitForTimeout(300);
   ok(await pg.evaluate(() => document.activeElement && document.activeElement.dataset.cx === "Germany"), "All countries did not return focus to the Germany tile");
 
-  // Deadlines for your year.
+  // Deadlines for your year: with nothing chosen it opens on 1st-2nd prof.
   await nav(pg, "calendar");
+  ok((await pg.getAttribute('#dlStages .fbtn[data-st="pre"]', "aria-pressed")) === "true", "with no year chosen, Deadlines did not open on 1st-2nd prof");
+  await pg.click('#dlStages .fbtn[data-st=""]');
+  await pg.waitForTimeout(150);
+  ok((await pg.evaluate(() => localStorage.getItem("dc-year"))) === "any", "choosing Any year was not kept");
   await pg.click('#dlStages .fbtn[data-st="pre"]');
   await pg.waitForTimeout(250);
   const dl = await pg.evaluate(() => {
@@ -182,16 +193,48 @@ const hscroll = (pg) => pg.evaluate(() => document.documentElement.scrollWidth -
     ok(!/^0 /.test(await pg.$eval("#browseCount", (e) => e.textContent)), "the did-you-mean search found nothing");
   }
 
-  // Your searches: kept on this device, shown back, clearable.
+  // Searches are never remembered (the owner's rule).
   await probe("ICMR");
-  const mine = await pg.evaluate(() => ({
-    stored: JSON.parse(localStorage.getItem("dc-searches") || "[]").map((s) => s.q.toLowerCase()),
-    row: [...document.querySelectorAll("#browseTry .try-chip.is-mine")].map((e) => e.dataset.q.toLowerCase())
-  }));
-  ok(mine.stored.indexOf("icmr") !== -1 && mine.row.indexOf("icmr") !== -1, "an Enter search was not kept and shown under Your searches");
-  await pg.click("#trySearchesClear");
-  await pg.waitForTimeout(150);
-  ok((await pg.$$("#browseTry .try-chip.is-mine")).length === 0, "Clear did not remove your searches");
+  ok(await pg.evaluate(() => localStorage.getItem("dc-searches") === null), "a search was stored in this browser");
+
+  // Suggestions answer first letters and the names people type.
+  const suggest = async (q) => {
+    await pg.fill("#browseSearch", "");
+    await pg.click("#browseSearch");
+    await pg.keyboard.type(q, { delay: 15 });
+    await pg.waitForTimeout(150);
+    return pg.$$eval("#searchSuggest .sg-opt .sg-label", (els) => els.map((e) => e.textContent));
+  };
+  const u = await suggest("u");
+  ok(u.indexOf("United States") !== -1 && u.indexOf("United Kingdom") !== -1, `typing "u" suggested ${JSON.stringify(u)}`);
+  ok((await suggest("ger"))[0] === "Germany", `typing "ger" did not put Germany first`);
+  ok((await suggest("americ")).indexOf("United States") !== -1, `typing "americ" did not suggest the USA`);
+  ok((await suggest("dubai")).indexOf("Gulf states") !== -1, `typing "dubai" did not suggest the Gulf`);
+  ok((await suggest("brain")).indexOf("Neuroscience") !== -1, `typing "brain" did not suggest Neuroscience`);
+  await pg.keyboard.press("Escape");
+
+  // Back to top: hidden at the top, shown well down a long list, and it works.
+  await pg.fill("#browseSearch", "");
+  await pg.press("#browseSearch", "Enter");
+  await pg.waitForTimeout(300);
+  ok(await pg.evaluate(() => document.getElementById("toTop").hidden), "Back to top shows at the top of the page");
+  await pg.evaluate(() => window.scrollTo(0, 4000));
+  await pg.waitForTimeout(250);
+  ok(!(await pg.evaluate(() => document.getElementById("toTop").hidden)), "Back to top did not appear far down the list");
+  await pg.click("#toTop");
+  await pg.waitForTimeout(400);
+  ok((await pg.evaluate(() => window.scrollY)) < 5, "Back to top did not return to the top");
+
+  // The Countries globe zooms with its buttons and answers a tap.
+  await nav(pg, "countries");
+  await pg.waitForTimeout(300);
+  const g0 = await pg.evaluate(() => document.getElementById("cxGlobe").toDataURL().length);
+  await pg.click("#cxZoomIn");
+  await pg.waitForTimeout(700);
+  const g1 = await pg.evaluate(() => document.getElementById("cxGlobe").toDataURL().length);
+  ok(g0 !== g1, "Zoom in did not change the Countries globe");
+  await pg.click("#cxZoomWorld");
+  await pg.waitForTimeout(300);
 
   // The / key, from the home page.
   await pg.click("#brandHome");

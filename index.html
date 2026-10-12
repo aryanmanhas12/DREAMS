@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Dreams Counsellor" />
 <meta property="og:locale" content="en_IN" />
 <meta property="og:title" content="Dreams Counsellor: the world is full of opportunities. What do you want?" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 231 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 232 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -32,7 +32,7 @@
 <meta property="og:image:alt" content="Dreams Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Dreams Counsellor: the world is full of opportunities. What do you want?" />
-<meta name="twitter:description" content="231 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:description" content="232 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -631,6 +631,21 @@
       what living there is honestly like for an Indian student. Pick one to see its programmes.</p>
     </header>
     <div class="ooh-slot" data-ooh="countries"></div>
+    <!-- The globe is an enhancement: every place it shows is also a tile
+         below it, and a tile does the same as tapping the globe (turns and
+         zooms the globe to the place, and opens its page). -->
+    <div class="cx-layout">
+    <figure class="cx-stage">
+      <canvas id="cxGlobe" role="img"
+              aria-label="A globe of every country in the index. Choosing a country, here or in the list, turns the globe to it and zooms in."></canvas>
+      <div class="cx-zoom" role="group" aria-label="Globe zoom">
+        <button type="button" class="cx-zbtn" id="cxZoomIn" aria-label="Zoom in"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button type="button" class="cx-zbtn" id="cxZoomOut" aria-label="Zoom out"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button type="button" class="cx-zbtn cx-zworld" id="cxZoomWorld">Whole world</button>
+      </div>
+      <figcaption class="globe-label" id="cxGlobeLabel">Drag to turn, tap a country to zoom in</figcaption>
+    </figure>
+    <div class="cx-main">
     <div class="cx-tools">
       <div class="cx-regions" id="cxRegions" role="group" aria-label="Region"></div>
       <div class="sort-wrap cx-sort">
@@ -646,6 +661,8 @@
     <p class="result-count" id="cxCount" role="status" aria-live="polite"></p>
     <div class="cx-grid" id="cxGrid"></div>
     <div class="cx-detail" id="cxDetail" hidden></div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -734,6 +751,12 @@
 </section>
 
 </main>
+
+<!-- Appears once you are well down a long view. Bottom left, so it never
+     sits on Ooh's corner button on the right. -->
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 15V5M5 9.5L10 4.5l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 
 <footer class="foot">
   <div class="wrap foot-in">
