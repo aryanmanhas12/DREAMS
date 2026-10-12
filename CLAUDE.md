@@ -771,6 +771,15 @@ smooth.
 - **Back to top** (`#toTop`) appears past 1.4 screens, bottom left so it never sits on Ooh's
   corner button, and is checked at most once a frame while scrolling, never at rest. Every
   card's place line now carries its region's dot, the same hue as its tile.
+- **The redesign skill's audit (12 October 2026)** found most of its list already done by
+  earlier passes. It applied: `text-wrap: pretty` on running text, shadows tinted with the
+  sky's indigo instead of black, two lines reserved for a tile's name so a row's counts and
+  bars align, frontier cards ending on one line (`margin-top: auto` on the places line), a
+  composed empty shortlist with three ways onward, and the footer's " · " separators (a listed
+  tell) replaced by spacing and a sentence. **Declined, because the owner chose otherwise:**
+  its swap to Geist or Satoshi, "one accent colour only" and "no purple AI gradient" (the galaxy
+  palette and its one-job colours are the owner's request), glassmorphism, and a global
+  `scroll-behavior: smooth`, which would animate every view change's jump to the top.
 - **Opportunity sources, second pass.** The owner asked for their saved memories to be used.
   NEOsapien and the Notion "Follow Ups" database (Kind = Opportunity) held one programme lead
   not yet in the index, NBRC's neuroimaging training; nbrc.ac.in still answers an empty page, so

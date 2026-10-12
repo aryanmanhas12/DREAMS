@@ -2319,7 +2319,7 @@
       h += "<ul>";
       inMonth.slice(0, 9).forEach((i) => { h += '<li title="' + esc(i.name) + '">' + esc(i.name) + "</li>"; });
       if (inMonth.length > 9) h += "<li>+ " + (inMonth.length - 9) + " more</li>";
-      if (!inMonth.length) h += '<li style="color:var(--ink-3)">Nothing closing</li>';
+      if (!inMonth.length) h += '<li class="m-none">Nothing closing</li>';
       h += "</ul></article>";
     }
     $("#calendarGrid").innerHTML = h;
@@ -2493,8 +2493,14 @@
     const slot = $("#shortlistSlot");
     const items = shortlistedItems();
     if (!items.length) {
-      slot.innerHTML = '<p class="empty">Nothing saved yet. Click the star on any programme, anywhere on the site, to keep it here — ' +
-        'useful while you are comparing options across several browsing sessions. Saved locally in this browser; nothing is uploaded.</p>';
+      slot.innerHTML = '<div class="empty"><p>Nothing saved yet. Tap the star on any programme, anywhere on the site, and it lands here, ' +
+        'so you can compare options across several visits. It stays in this browser; nothing is uploaded.</p>' +
+        '<p class="empty-go"><button type="button" class="btn btn-ghost btn-sm" data-goto="browse">Browse everything</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-goto="countries">Country by country</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" id="emptyStart">Answer the three questions</button></p></div>';
+      bindGoto(slot);
+      const st = $("#emptyStart");
+      if (st) st.addEventListener("click", function () { startSurvey("short", 0); });
       return;
     }
     const datedCount = items.filter(hasFixedWindow).length;
