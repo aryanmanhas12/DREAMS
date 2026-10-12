@@ -8,8 +8,9 @@
    course the National Medical Commission now requires of every postgraduate.
 
    Every entry was read on its own official page on 30 September and
-   1 October 2026, and its eligibility rule is quoted from that page, because
-   a route a medical student cannot enter is worse than one never listed.
+   1 October 2026 (the IISc internship on 12 October), and its eligibility
+   rule is quoted from that page, because a route a medical student cannot
+   enter is worse than one never listed.
 
    Facts here; grades at the bottom, as everywhere else. */
 
@@ -155,6 +156,35 @@ window.DB.research.push(
       "Afterwards, write a page on what you saw. It becomes your NIRMAN application, your SOP paragraph and your next interview answer."
     ],
     zeroCost: false, indiaSpecific: true, competitiveness: "accessible", workExp: 0
+  },
+  {
+    id: "iisc-mbbs-mph-internship",
+    name: "IISc MBBS/MPH Research Internship: a paid month or two in an IISc lab",
+    org: "Office of Research Grants, Indian Institute of Science, Bengaluru",
+    type: "research", country: "India", city: "Bengaluru",
+    fields: ["biochem", "neuro", "compbio", "pubhealth"],
+    stages: ["clin"], funding: "stipend",
+    money: "₹35,000 consolidated for the internship. IISc does not provide a hostel room, so budget for your own stay in Bengaluru",
+    duration: "4 to 8 weeks, taken once between mid-May and December, timed with your IISc supervisor",
+    window: "The 2026 round closed on 10 April 2026, with selections by mid-May. The 2027 dates are not out yet; if the cycle repeats, the call comes around March",
+    deadlineMonths: [3, 4],
+    url: "https://org.iisc.ac.in/mbbs-mph-internship_homepage/",
+    checked: "2026-10",
+    why: "One of very few research internships in India written for medical students by name. IISc runs it to help train future physician scientists: you work under one IISc faculty member on their campus for one to two months, and the faculty you name in the form are the people who read and select your application. It is also strictly a final-years door. The page says students already in the rotating internship are not eligible, so if you are in third or final year, this is the cycle to use it.",
+    reqs: [
+      "An MBBS student at an NMC-recognised college in Phase 3 Part 2, or finishing Phase 3 Part 1 before September of that year. Colleges without that structure qualify once the para-clinical subjects are done and you are in the clinical phase",
+      "Students already in the compulsory rotating internship cannot apply",
+      "MPH students qualify once they finish the first year of the MPH before June",
+      "A Statement of Intent of 200 words at most, and a support letter from your Registrar, Dean or Principal on official letterhead, in IISc's own template",
+      "One internship per student under this programme"
+    ],
+    steps: [
+      "Open the MBBS supervisors page in January and shortlist two or three IISc faculty whose papers you have actually read.",
+      "Ask your Principal's office for the support letter early, using IISc's template; it is the slowest part of the form.",
+      "Write the 200-word Statement of Intent around one question you want to work on, then name those faculty in the Google form.",
+      "If selected, fix your weeks with the supervisor and arrange your own room, since no hostel is given."
+    ],
+    zeroCost: false, indiaSpecific: true, competitiveness: "high", workExp: 0
   }
 );
 
@@ -163,5 +193,6 @@ Object.assign(window.DB.impact, {
   "prs-lamp": { t: 2, odds: "Not published; essays, a test and interviews", effort: "Two essays in December, a January test, interviews", note: "Rare for a doctor and remembered for it. Strong for public health, health policy and any later MPH application." },
   "nirman-search": { t: 3, odds: "About 500 selected a year", effort: "A written application, then a week per workshop", note: "Shows you how a community health programme is built, by the people who built one that became national policy." },
   "icmr-nie-research-methods": { t: 3, odds: "Open to all eligible learners", effort: "One module a week; a proctored exam for the BCBR", note: "Free method training that makes every research proposal after it better, and the BCBR is compulsory for postgraduates anyway." },
-  "rural-hospital-electives": { t: 4, odds: "Depends on the hospital's capacity", effort: "Two emails and a week of holidays", note: "Cheap, and worth it for what you see. Never a credential on its own, but the source of your best essay." }
+  "rural-hospital-electives": { t: 4, odds: "Depends on the hospital's capacity", effort: "Two emails and a week of holidays", note: "Cheap, and worth it for what you see. Never a credential on its own, but the source of your best essay." },
+  "iisc-mbbs-mph-internship": { t: 2, odds: "Not published; the faculty you name choose their own interns", effort: "A form, a 200-word statement and a letter from your Dean", note: "A paid stint in India's top-ranked research institute, open only in your last clinical years. Interns cannot apply, so a final-year student who waits loses it." }
 });

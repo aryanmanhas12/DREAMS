@@ -128,6 +128,18 @@
   --nebula-b:   rgba(124, 77, 255, .17);   /* violet cloud */
   --starlight:  #FFF6FF;
 
+  /* Region hues (October 2026): seven colours that NAME a part of the world
+     on the Countries page, the doors and the deadline rows. A name, never a
+     status (status keeps --ok, --warn and --signal, with words), and never
+     text, so they carry a graphic's 3:1 at most. */
+  --rg-india:    #FF6FB5;
+  --rg-uk:       #7FA8FF;
+  --rg-europe:   #B08CFF;
+  --rg-americas: #4FD8F0;
+  --rg-anz:      #A6E86B;
+  --rg-asia:     #F07CFF;
+  --rg-global:   #E2D8FF;
+
   /* Ooh's bubble, shared with Ronak and Arun: cream paper, plum ink, the
      name on a sun-gold plate. The same in both themes, because it is one
      character in three apps. */
@@ -167,6 +179,8 @@
   --globe: #B79BFF; --star: #FFE58A; --note: #1D1446; --note-line: #5B3FA8;
   --nebula-a: rgba(255, 79, 168, .16); --nebula-b: rgba(124, 77, 255, .17);
   --starlight: #FFF6FF;
+  --rg-india: #FF6FB5; --rg-uk: #7FA8FF; --rg-europe: #B08CFF; --rg-americas: #4FD8F0;
+  --rg-anz: #A6E86B; --rg-asia: #F07CFF; --rg-global: #E2D8FF;
   --ooh-paper: #FFF8EE; --ooh-ink: #2A1636; --ooh-gold: #FFC857; --ooh-mouth: #7A2748;
   --shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.8);
   color-scheme: dark;
@@ -184,6 +198,8 @@
   --globe: #6A45D9; --star: #C2187A; --note: #FBF0FF; --note-line: #D9B8F0;
   --nebula-a: rgba(255, 79, 168, .10); --nebula-b: rgba(124, 77, 255, .10);
   --starlight: #6A45D9;
+  --rg-india: #C2187A; --rg-uk: #2F5FD0; --rg-europe: #6A45D9; --rg-americas: #0A7FA0;
+  --rg-anz: #4C8A12; --rg-asia: #A324B8; --rg-global: #6B5F99;
   --ooh-paper: #FFF8EE; --ooh-ink: #2A1636; --ooh-gold: #FFC857; --ooh-mouth: #7A2748;
   --shadow: 0 1px 2px rgba(26,16,54,.07), 0 8px 24px -12px rgba(26,16,54,.2);
   color-scheme: light;
@@ -391,6 +407,9 @@ body {
 .skip:focus { left: 8px; top: 8px; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+/* A view's heading takes focus when the view changes (focusHeading), so a
+   screen reader starts there. It is not a control, so it draws no ring. */
+h2[tabindex="-1"]:focus-visible, h3[tabindex="-1"]:focus-visible { outline: none; }
 
 /* ─────────────── top bar ─────────────── */
 /* Opaque, not frosted. This carried `backdrop-filter: saturate(140%)
@@ -550,6 +569,7 @@ body {
   .topnav.is-open .navlink:nth-child(4) { animation-delay: .09s; }
   .topnav.is-open .navlink:nth-child(5) { animation-delay: .12s; }
   .topnav.is-open .navlink:nth-child(6) { animation-delay: .15s; }
+  .topnav.is-open .navlink:nth-child(7) { animation-delay: .18s; }
 }
 @keyframes link-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
@@ -1035,7 +1055,7 @@ html.ooh-off .want-ooh, html.ooh-off .want-bubble .ooh-name { display: none; }
    generated page at once. They are now three plain paragraphs in the display
    face, left-aligned, separated by a hairline, with the load-bearing phrase
    in bold and nothing else. The argument is the design. */
-.claims { padding: 12px 0 8px; }
+.claims { padding-block: 12px 8px; }   /* block only: a `padding` shorthand here zeroed .wrap's side gutters from 641px up */
 .claims .sec-h { margin-bottom: 22px; }
 
 .statement {
@@ -1686,11 +1706,11 @@ html.ooh-off .want-ooh, html.ooh-off .want-bubble .ooh-name { display: none; }
 .calendar { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(268px, 100%), 1fr)); gap: 16px; margin-bottom: 70px; }
 .month { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 18px 20px; }
 .month.is-now { border-color: var(--signal); }
-.month h3 {
+.month h4 {
   font-family: var(--font-ui); font-size: .78rem;
   letter-spacing: 0; margin: 0 0 4px; color: var(--ink-2); font-weight: 600;
 }
-.month.is-now h3 { color: var(--signal); }
+.month.is-now h4 { color: var(--signal); }
 .month .m-count { font-family: var(--font-display); font-weight: 600; font-size: 2.1rem; color: var(--accent); line-height: 1; margin: 0 0 12px; font-variant-numeric: lining-nums tabular-nums; }
 .month ul { list-style: none; margin: 0; padding: 0; }
 .month li {
@@ -2447,4 +2467,226 @@ html:not(.intro-wait) .intro-gate { opacity: 0; visibility: hidden; }
 @media (min-width: 700px) and (min-aspect-ratio: 5/4) {
   .intro-stage { --g: min(80vh, 50vw, 600px); flex-direction: row; gap: clamp(24px, 4vw, 64px); }
   @supports (height: 1svh) { .intro-stage { --g: min(80svh, 50vw, 600px); } }
+}
+
+/* ═════════════ finding your way (October 2026) ═════════════
+   The user asked for the site to be easier to move around without the
+   questions: a country-by-country view, deadlines for their own year,
+   and a search box that helps them decide. Everything below follows the
+   rest of this file: pills for what you press, 3px surfaces except the
+   things you handle (tiles and rows, rounder on purpose like the cards),
+   a region hue only as a NAME (a dot, a tint, an edge), and status always
+   in words with its own colour. Motion is transform and opacity, plays
+   once, and is off under reduced motion and html.lite. */
+
+/* ── home: search and four doors ── */
+.doors { padding-block: 40px 6px; }   /* block only: .wrap owns the side gutters */
+.doors .sec-h { margin-bottom: 14px; }
+.door-search { margin: 0 0 22px; max-width: 780px; }
+.door-search-l { display: block; font-family: var(--font-ui); font-size: .86rem; color: var(--ink-2); margin: 0 0 8px; }
+.door-search-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.door-search-row .search-input { flex: 1 1 240px; min-width: 0; }
+.door-search-row .btn { flex: none; }
+.door-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px; }
+.door {
+  font: inherit; text-align: left; cursor: pointer; color: var(--ink); min-width: 0;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; row-gap: 4px; align-items: start;
+  padding: 18px 18px 18px 16px; border-radius: 18px;
+  background-color: var(--surface);
+  background-image: linear-gradient(150deg, color-mix(in srgb, var(--door) 18%, transparent), transparent 62%);
+  border: 1px solid color-mix(in srgb, var(--door) 42%, var(--line));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent);
+  transition: border-color .2s var(--ease-out), transform .2s var(--ease-spring);
+}
+.door-ic { grid-row: 1 / span 2; width: 34px; height: 34px; color: var(--door); }
+.door-t { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; line-height: 1.15; text-wrap: balance; }
+.door-d { grid-column: 2; font-size: .88rem; color: var(--ink-2); line-height: 1.5; }
+.door:hover { border-color: var(--door); }
+.door:active { transform: scale(.97); }
+
+/* ── try chips: fixed starting points and your own searches ── */
+.try { display: grid; gap: 8px; margin: 10px 0 0; }
+#browseTry { margin: -6px 0 16px; }
+.try-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.try-l { font-family: var(--font-ui); font-size: .78rem; font-weight: 600; color: var(--ink-3); margin-right: 2px; }
+.try-chip {
+  font-family: var(--font-ui); font-size: .82rem; color: var(--ink); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 7px 14px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 100px;
+  transition: border-color .15s ease, transform .2s var(--ease-spring);
+}
+.try-chip:hover { border-color: var(--accent); }
+.try-chip.is-mine { background: var(--accent-wash); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.try-n { font-size: .74rem; color: var(--ink-2); font-variant-numeric: lining-nums tabular-nums; }
+.try-clear {
+  font: inherit; font-family: var(--font-ui); font-size: .8rem; color: var(--accent); cursor: pointer;
+  background: none; border: 0; min-height: 40px; min-width: 40px; padding: 0 8px;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* ── search suggestions (a listbox under the box) ── */
+.search-wrap { position: relative; }
+.suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30;
+  list-style: none; margin: 0; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px;
+  box-shadow: var(--shadow);
+  max-height: min(60vh, 420px); overflow-y: auto; overscroll-behavior: contain;
+}
+.suggest[hidden] { display: none; }
+.sg-opt {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 44px; padding: 9px 12px; border-radius: 10px; cursor: pointer; color: var(--ink);
+}
+.sg-opt[aria-selected="true"], .sg-opt:hover { background: var(--accent-wash); }
+.sg-label { min-width: 0; font-size: .95rem; overflow-wrap: anywhere; }
+.sg-tag { flex: none; font-family: var(--font-ui); font-size: .74rem; color: var(--ink-2); }
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lite) .suggest:not([hidden]) { animation: pop-down .22s var(--ease-spring) backwards; }
+}
+@keyframes pop-down { from { opacity: 0; transform: translateY(-4px); } }
+
+.chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 16px; }
+.chip-row .country-chip { margin: 0; }
+.empty p { margin: 0 0 10px; }
+.empty p:last-child { margin-bottom: 0; }
+.empty-small { font-size: .88rem; color: var(--ink-3); }
+
+/* ── countries ── */
+.cx-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin: 0 0 14px; }
+.cx-regions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cx-rbtn { display: inline-flex; align-items: center; gap: 7px; }
+.cx-sort { flex: 0 1 260px; }
+.cx-dot {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none;
+  background: var(--rg, var(--globe));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rg, var(--globe)) 24%, transparent);
+}
+.fbtn[aria-pressed="true"] .cx-dot { box-shadow: 0 0 0 2px var(--on-fill); }
+.fbtn[aria-pressed="true"] .try-n { color: var(--on-fill); }
+.cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr)); gap: 12px; margin: 0 0 60px; }
+.cx-grid[hidden] { display: none; }
+.cx-tile {
+  font: inherit; text-align: left; cursor: pointer; color: var(--ink); min-width: 0;
+  display: flex; flex-direction: column; gap: 9px; padding: 16px 16px 15px; border-radius: 16px;
+  background-color: var(--surface);
+  background-image: linear-gradient(160deg, color-mix(in srgb, var(--rg) 17%, transparent), transparent 58%);
+  border: 1px solid color-mix(in srgb, var(--rg) 34%, var(--line));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent);
+  transition: border-color .2s var(--ease-out), transform .2s var(--ease-spring);
+}
+.cx-tile:hover { border-color: var(--rg); }
+.cx-tile:active { transform: scale(.97); }
+.cx-top { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.cx-name { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1.15; overflow-wrap: anywhere; text-wrap: balance; }
+.cx-n {
+  font-family: var(--font-display); font-weight: 600; font-size: 2.1rem; line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums; color: var(--ink);
+}
+.cx-n-l { font-family: var(--font-ui); font-size: .8rem; font-weight: 400; color: var(--ink-2); }
+.cx-bar { display: flex; height: 6px; border-radius: 6px; overflow: hidden; background: var(--line-soft); transform-origin: left center; }
+.cx-bar i { display: block; height: 100%; }
+.cx-b-open { background: var(--ok); }
+.cx-b-soon { background: var(--warn); }
+.cx-meta { font-family: var(--font-ui); font-size: .78rem; color: var(--ink-2); line-height: 1.45; }
+
+.cx-detail[hidden] { display: none; }
+.cx-detail { scroll-margin-top: 78px; }
+.cx-is-detail .cx-tools, .cx-is-detail #cxCount { display: none; }
+.cx-back { margin: 0 0 16px; }
+.cx-d-head { margin: 0 0 16px; }
+.cx-d-region { display: flex; align-items: center; gap: 9px; margin: 0 0 6px; font-family: var(--font-ui); font-size: .82rem; font-weight: 600; color: var(--ink-2); }
+.cx-d-head h3 { text-wrap: balance; margin: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(2.1rem, 7vw, 3.2rem); line-height: 1.05; }
+.cx-d-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(130px, 100%), 1fr));
+  gap: 1px; margin: 0 0 20px; background: var(--line-soft); border: 1px solid var(--line-soft);
+}
+.cx-d-stats > div { background: var(--paper); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.cx-d-stats dt { font-family: var(--font-ui); font-size: .78rem; font-weight: 600; color: var(--ink-3); }
+.cx-d-stats dd {
+  margin: auto 0 0; font-family: var(--font-display); font-weight: 600; font-size: 1.9rem; line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums; color: var(--ink);
+}
+.cx-d-stats .is-open dd, .cx-d-stats .is-funded dd { color: var(--ok); }
+.cx-d-stats .is-soon dd { color: var(--warn); }
+.cx-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 14px 26px; margin: 0 0 18px; }
+.cx-facts dt { font-family: var(--font-ui); font-size: .78rem; font-weight: 600; color: var(--ink-3); margin: 0 0 4px; }
+.cx-facts dd { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--ink-2); }
+.cx-honest { margin: 0 0 20px; padding: 16px 18px; max-width: 88ch; border-radius: 14px; background: var(--paper-2); color: var(--ink); font-size: .95rem; line-height: 1.6; }
+.cx-honest b { display: block; margin: 0 0 4px; font-family: var(--font-ui); font-size: .78rem; color: var(--accent); }
+.cx-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+.cx-list-l { margin: 0 0 12px; font-family: var(--font-ui); font-size: .84rem; font-weight: 600; color: var(--ink-2); }
+
+/* ── deadlines for your year ── */
+.dl { margin: 0 0 46px; }
+.dl-h { font-family: var(--font-display); font-weight: 600; font-size: 1.55rem; margin: 0 0 12px; scroll-margin-top: 78px; text-wrap: balance; }
+.dl-h-year { margin-top: 6px; }
+.dl-stages { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.dl-stages .fbtn, .cx-regions .fbtn { min-height: 40px; }
+.dl-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; max-width: 560px; margin: 0 0 14px; }
+.dl-bar {
+  font: inherit; cursor: pointer; color: var(--ink); min-width: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  min-height: 124px; padding: 9px 4px 8px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line);
+  transition: border-color .15s ease, transform .2s var(--ease-spring);
+}
+.dl-bar:hover { border-color: var(--accent); }
+.dl-bar:active { transform: scale(.97); }
+.dl-bar[aria-pressed="true"] { border-color: var(--fill); background: var(--accent-wash); }
+.dl-bar-n { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.dl-bar-col { flex: 1; width: 14px; min-height: 46px; border-radius: 8px; overflow: hidden; background: var(--line-soft); display: flex; align-items: flex-end; }
+.dl-bar-col i {
+  display: block; width: 100%; height: 100%; border-radius: 8px; transform-origin: bottom center;
+  background: linear-gradient(to top, var(--globe), var(--fill));
+}
+.dl-bar.is-now .dl-bar-col i { background: linear-gradient(to top, var(--signal), var(--warn)); }
+.dl-bar-m { font-family: var(--font-ui); font-size: .76rem; font-weight: 600; color: var(--ink-2); }
+.dl-bar.is-now .dl-bar-m { color: var(--signal); }
+
+.dl-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; }
+.dl-row {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px 18px; min-width: 0;
+  padding: 14px 16px; border-radius: 14px;
+  background-color: var(--surface);
+  background-image: linear-gradient(100deg, color-mix(in srgb, var(--rg) 9%, transparent), transparent 40%);
+  border: 1px solid var(--line-soft);
+}
+@media (min-width: 760px) {
+  .dl-row { grid-template-columns: 172px minmax(0, 1fr) auto; align-items: start; }
+}
+.dl-when { margin: 0; font-family: var(--font-ui); font-size: .8rem; }
+.urg.dl-closing { color: var(--signal); }
+.dl-name { margin: 0 0 3px; font-size: 1rem; font-weight: 600; line-height: 1.35; color: var(--ink); }
+.dl-org { margin: 0 0 5px; font-family: var(--font-ui); font-size: .8rem; line-height: 1.45; color: var(--ink-2); }
+.dl-org .cx-dot { margin: 0 8px 1px 2px; vertical-align: middle; }
+.dl-window { margin: 0; font-size: .86rem; line-height: 1.5; color: var(--ink-2); }
+.dl-acts { display: flex; align-items: center; gap: 10px; }
+.dl-acts .card-link { margin: 0; padding: 11px 0; border-bottom: 0; text-decoration: underline; text-underline-offset: 3px; }
+.dl-more { list-style: none; }
+.dl-sub { margin: 0 0 14px; max-width: 72ch; font-size: .95rem; color: var(--ink-2); }
+.dl-last { margin-top: 30px; }
+.dl-last[hidden] { display: none; }
+
+/* One entrance each, then still: tiles, bars and rows settle in as a list
+   being dealt, 22ms apart, capped so the last tile is never late. backwards
+   (not both) so a pressed tile can still scale once the entrance is over. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lite) .cx-tile { animation: tile-in .46s var(--ease-spring) backwards; animation-delay: calc(var(--i, 0) * 22ms); }
+  html:not(.lite) .cx-bar { animation: bar-grow .7s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 22ms + 140ms); }
+  html:not(.lite) .dl-bar-col i { animation: bar-rise .6s var(--ease-spring) backwards; }
+  html:not(.lite) .dl-row, html:not(.lite) .door, html:not(.lite) .cx-detail { animation: tile-in .4s var(--ease-spring) backwards; }
+}
+@keyframes tile-in { from { opacity: 0; transform: translateY(10px) scale(.985); } }
+@keyframes bar-grow { from { transform: scaleX(0); } }
+@keyframes bar-rise { from { transform: scaleY(0); } }
+
+/* Where you are, on a wide screen: a short pink rule under the current
+   link. The drawer on a phone already marks it with the violet wash. */
+@media (min-width: 761px) {
+  .navlink { position: relative; }
+  .navlink[aria-current="true"]::after {
+    content: ""; position: absolute; left: 11px; right: 11px; bottom: 2px; height: 2px;
+    border-radius: 2px; background: var(--fill);
+  }
 }

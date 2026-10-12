@@ -105,7 +105,14 @@ async function contrastCheck(page, label) {
       // Ooh (October 2026): the paper bubble, its gold name plate and "Next",
       // the "What do you want?" chips, and the survey's live line. Each sets
       // its own text-on-background pair, so each is listed.
-      ".ooh-say", ".ooh-name", ".ooh-next", ".want-chip", ".q-live", ".q-live b", ".bubble-toast"];
+      ".ooh-say", ".ooh-name", ".ooh-next", ".want-chip", ".q-live", ".q-live b", ".bubble-toast",
+      // Finding your way (October 2026): the home doors and search, the try
+      // chips, the suggestions, the country tiles and a country's page, and
+      // the year panel on Deadlines. Each sets its own text on its own fill.
+      ".door-t", ".door-d", ".door-search-l", ".try-l", ".try-chip", ".try-n", ".try-clear", ".fbtn",
+      ".sg-label", ".sg-tag", ".cx-name", ".cx-n", ".cx-n-l", ".cx-meta", ".cx-d-region", ".cx-d-stats dt",
+      ".cx-d-stats dd", ".cx-facts dt", ".cx-facts dd", ".cx-honest", ".cx-honest b", ".cx-list-l",
+      ".dl-h", ".dl-when", ".dl-when .urg", ".dl-name", ".dl-org", ".dl-window", ".dl-sub", ".dl-bar-n", ".dl-bar-m"];
     const out = [], seen = new Set();
     sels.forEach((sel) => document.querySelectorAll(sel).forEach((el) => {
       const r = el.getBoundingClientRect();
@@ -282,7 +289,17 @@ async function goto(page, view) {
 
       await goto(page, "browse");
       await scrollWidthCheck(page, label + " browse");
-      if (vp.name === "390-iPhone") { await contrastCheck(page, label + " browse"); await fieldEdgeCheck(page, label + " browse"); }
+      if (vp.name === "390-iPhone") {
+        await contrastCheck(page, label + " browse"); await fieldEdgeCheck(page, label + " browse");
+        // The suggestions only exist while typing, so type before measuring.
+        await page.click("#browseSearch");
+        await page.keyboard.type("ger", { delay: 10 });
+        await page.waitForTimeout(200);
+        await contrastCheck(page, label + " browse+suggest");
+        await page.fill("#browseSearch", "");
+        await page.keyboard.press("Escape");
+        await page.waitForTimeout(300);   // the list re-renders 120ms after the last keystroke
+      }
       if (vp.name === "390-iPhone" && theme === "light") {
         const n = await page.locator("#browseCards .card").count();
         F("INFO", label, `browse renders ${n} cards`);
@@ -294,9 +311,23 @@ async function goto(page, view) {
         if (!lbl) F("BUG", label, "star button has no aria-label");
       }
 
-      for (const v of ["routes", "frontiers", "calendar"]) {
+      for (const v of ["routes", "frontiers", "calendar", "countries"]) {
         await goto(page, v);
         await scrollWidthCheck(page, `${label} ${v}`);
+        if (vp.name === "390-iPhone" && v === "calendar") {
+          await page.click('#dlStages .fbtn[data-st="clin"]');
+          await page.waitForTimeout(150);
+          await contrastCheck(page, label + " deadlines");
+          await tapTargetCheck(page, label + " deadlines");
+        }
+        if (vp.name === "390-iPhone" && v === "countries") {
+          await contrastCheck(page, label + " countries");
+          await tapTargetCheck(page, label + " countries");
+          await page.click('#cxGrid .cx-tile[data-cx="UK"]');
+          await page.waitForTimeout(200);
+          await scrollWidthCheck(page, `${label} countries/UK`);
+          await contrastCheck(page, label + " countries/UK");
+        }
       }
 
       await ctx.close();

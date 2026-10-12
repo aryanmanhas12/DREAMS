@@ -122,7 +122,11 @@ does, the Pages source has been switched back to a branch.
 | `node tools/make-pages.js`, `make-og.js`, `make-icons.js`, `make-fonts.js` | the individual generators (`refresh.js` runs the first two) |
 
 The browser checks live in `tools/test/`: `seo`, `font`, `console`, `survey`,
-`tour`, `intro`, `atlas`, `pages`, `sky`, `perf` and `audit`. `intro` is the
+`tour`, `intro`, `atlas`, `navigate`, `pages`, `sky`, `perf` and `audit`.
+`navigate` covers the Countries view, Deadlines for your year, the search
+box (suggestions, aliases, "did you mean", your searches, the `/` key), the
+home doors, and view addresses with a working Back button; every number it
+reads on screen it also computes from `window.DB` and compares. `intro` is the
 opening: it plays it through at four sizes and fails if it overruns, if the
 count disagrees with the page, if it plays for reduced motion, a paused sky
 or a plan link, if Skip (from the gate, mid-turn, or by Escape) does not

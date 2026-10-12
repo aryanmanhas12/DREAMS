@@ -686,6 +686,77 @@ MBBS, and every opportunity they had asked to be remembered, each judged for fea
   `the.akdn/en/international-scholarships` and its loan half carries a service charge, and
   INYAS closed on 31 August.
 
+## Finding your way: countries, your year, search (12 October 2026)
+
+The user asked for upcoming opportunities from LinkedIn and Instagram, a country-wise view,
+deadlines for the year they are in ("opportunities that will be gone after a while, and
+eligibility that will be gone"), easier navigation besides the questions, a better search bar
+with frequently searched terms, and then for the whole page to be colourful, interactive and
+smooth.
+
+- **Where leads came from, honestly.** The two connected Instagram accounts (Composio,
+  `INSTAGRAM_GET_IG_USER_MEDIA`) return only the account's OWN posts, not a feed; the one lead
+  there was AIIMS INSIGHT, whose only pages online are an unofficial mirror and a facility
+  schedule, so it was not added. No LinkedIn post-search toolkit has a live connection, and a
+  web search restricted to linkedin.com returns profiles, not calls. Leads were therefore found
+  by web search and each read on its official page from Composio's host. **Added:** IISc's
+  MBBS/MPH internship (final-years only, interns excluded, ₹35,000). **To skipList:** the
+  Vienna BioCenter Summer School (life-science undergraduates; medicine not named; call opens
+  1 November). **Not added:** TIFR's VSRP and IIT Mandi/Bhubaneswar internships (MBBS not
+  named), Janelia (international only via US universities), RSTMH early-career grants (its site
+  answers 403 to every non-browser fetch, and r.jina.ai now meets a Cloudflare challenge from
+  that host too). r.jina.ai being walled is new: read pages with direct curl first.
+- **Views have addresses now.** `#browse`, `#countries`, `#calendar`, `#routes`, `#frontiers`
+  and `#shortlist` are pushed with `history.pushState` (`syncHash` in `showView`), and
+  `popstate` routes back (`routeFromHash`), so the browser's Back walks views instead of
+  leaving the site. The category pages' "Browse all N in the app" link (`../#browse`) never
+  worked until this. The survey has no address (a half-answered form cannot be restored from
+  a link); results keep `#p=`. The `<head>` script skips the opening for these addresses as it
+  does for `#p=`, because someone arriving from a link asked for a place, not a film.
+  `restore()` still runs first, so a reader's saved year reaches Deadlines.
+- **Search is a small engine in `app.js`, not a substring.** Words AND together; each matches
+  the START of a word (`neuro` finds neuroscience, `us` does not find must). `ALIAS` folds UK,
+  USA, PhD, MPH, AI and the like; an alias of three letters or fewer must be a whole word,
+  because `ai` as a prefix found every AIIMS and AIDS entry. `PHRASES` turns "first year",
+  "fully funded", "open now" into facets, and `FACET_ONLY` words never match running text
+  ("free to apply" is not "costs nothing"). Name hits outrank country, institution, tags and
+  text, which feeds "Best match", the sort the box switches to while you type (until you pick
+  a sort yourself). No full match falls back to most-words-matched and the count says so;
+  "did you mean" appears only when nothing matched, and only if the corrected query finds
+  something.
+- **"Frequently searched" cannot be anyone else's searches here.** There is no analytics, by
+  promise. So the box shows fixed "Try" terms with their live counts, and "You often search" /
+  "Your recent searches" from `dc-searches` in this browser, with Clear (and Undo). Recorded on
+  Enter, a chip, a picked suggestion or leaving the box, never per keystroke, and a prefix
+  typed a moment earlier is replaced rather than kept beside the full word.
+- **Suggestions are an ARIA combobox**: the input carries `role="combobox"`,
+  `aria-expanded` and `aria-activedescendant`; options take `mousedown` with
+  `preventDefault`, because a `click` arrives after the input has blurred and closed the list.
+- **Countries** (`renderCountries`): one tile per `item.country` value, grouped by `ATLAS`,
+  so a region chip's count is the same number its atlas step shows and the tiles sum to every
+  programme (`navigate.js` asserts both). A tile opens the place in the same view: counts, the
+  `data-countries.js` profile where there is one, and every programme as a full card; the
+  region chips step aside while it is open and "All countries" returns focus to the tile. A
+  profiled country filtered in Browse gets a "Living in …" button across.
+- **Deadlines open on your year** (`renderYear`): the year is the one picked here
+  (`dc-year`), else the survey's answer. "Closing soon" is open now or opening in the next two
+  months for that stage, nearest first, with "Closes this month" in `--signal` when the next
+  month is not in `deadlineMonths`. "Last chance at your stage" is every entry whose stages
+  end at yours; while you are in MBBS that is everything that takes only students, because it
+  shuts the day the internship year starts. Both come from `stages` and `deadlineMonths`, so
+  they are only as right as those fields; the row's window text and official link carry the
+  real date. The month cards became `h4` under the panel's `h3`s.
+- **Region hues `--rg-*` name a part of the world and nothing else**: a tile's tint and edge,
+  a dot. Never text, never a status (status keeps `--ok`, `--warn`, `--signal` and words).
+  Added to DESIGN.md in the same change; `check.js` would have failed otherwise.
+- **A `padding` shorthand on an element that is also `.wrap` zeroes the side gutters.** The
+  new doors heading sat at x=0 on a phone, and checking every `.wrap` found `.claims` had done
+  the same from 641px up since it was written. Use `padding-block` on a `.wrap` section.
+- **Harness lessons.** The suggestions exist only while typing, so `audit.js` types into the
+  box before its contrast pass; and the list re-renders 120ms after the last keystroke, so a
+  count read straight after clearing the box saw the old 12 results instead of 191. Wait for
+  the debounce before measuring.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this

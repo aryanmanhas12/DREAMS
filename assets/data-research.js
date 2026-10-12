@@ -129,7 +129,7 @@ window.DB.research = [
     window: "PHCCO applications Jan–Feb · summer fellowship Dec–Feb",
     deadlineMonths: [12, 1, 2],
     url: "https://iisc.ac.in/",
-    why: "India's top-ranked research institution, and the computational oncology programme is one of very few places a medical student can learn real computational biology with clinical framing. IISc also runs an MBBS-to-MPH internship track.",
+    why: "India's top-ranked research institution, and the computational oncology programme is one of very few places a medical student can learn real computational biology with clinical framing. IISc's MBBS/MPH internship, for final-year students, has its own entry here.",
     reqs: ["Varies by programme — some open to MBBS from 2nd year", "Free to apply"],
     steps: [
       "Check the specific programme page in December; IISc runs several parallel schemes with different deadlines.",

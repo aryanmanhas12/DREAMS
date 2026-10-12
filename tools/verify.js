@@ -17,6 +17,8 @@
      tour      tools/test/tour.js     the tour card stays visible at every step
      intro     tools/test/intro.js    the opening: gate, 9.6s, count, exits, cost
      atlas     tools/test/atlas.js    the scroll atlas turns, counts, filters
+     navigate  tools/test/navigate.js countries, deadlines for your year, search,
+                                      the home doors, view addresses and Back
      pages     tools/test/pages.js    generated pages: scroll, AA contrast, taps
      audit     tools/test/audit.js    the app at 6 widths x 2 themes
 
@@ -38,6 +40,7 @@ const SUITES = [
   { name: "tour", file: "tools/test/tour.js" },
   { name: "intro", file: "tools/test/intro.js" },
   { name: "atlas", file: "tools/test/atlas.js" },
+  { name: "navigate", file: "tools/test/navigate.js" },
   { name: "pages", file: "tools/test/pages.js" },
   { name: "sky", file: "tools/test/sky.js" },
   { name: "perf", file: "tools/test/perf.js" },

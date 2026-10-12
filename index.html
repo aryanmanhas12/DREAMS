@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Dreams Counsellor" />
 <meta property="og:locale" content="en_IN" />
 <meta property="og:title" content="Dreams Counsellor: the world is full of opportunities. What do you want?" />
-<meta property="og:description" content="Three questions that have nothing to do with marks, then 230 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
+<meta property="og:description" content="Three questions that have nothing to do with marks, then 231 real programmes, scholarships and research placements open to Indian medical students — filtered by what you can actually afford and where you can actually live." />
 <meta property="og:url" content="https://aryanmanhas12.github.io/DREAMS/" />
 <meta property="og:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -32,7 +32,7 @@
 <meta property="og:image:alt" content="Dreams Counsellor: a career compass for Indian medical students, beside a globe marking every country with funded programmes." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Dreams Counsellor: the world is full of opportunities. What do you want?" />
-<meta name="twitter:description" content="230 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
+<meta name="twitter:description" content="231 funded programmes, scholarships and research placements open to Indian medical students. Three questions, then a plan." />
 <meta name="twitter:image" content="https://aryanmanhas12.github.io/DREAMS/assets/og-image.png" />
 
 <!-- No <link rel="preload"> for the fonts, deliberately. A font preload needs
@@ -64,7 +64,7 @@
      html.intro-on when this visit opens on the opening (assets/intro.js),
      which hides the page before it can flash. If intro.js has not taken
      over within 12 seconds (a very slow link), the page shows without it. -->
-<script>(function(d){try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")d.classList.add("sky-still")}catch(e){}var m=navigator.deviceMemory,c=navigator.connection;if((m&&m<=2)||(c&&c.saveData))d.classList.add("lite");try{if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)&&!d.classList.contains("sky-still")&&!/[#&]p=/.test(location.hash)&&!sessionStorage.getItem("dc-intro")){d.classList.add("intro-on");if(localStorage.getItem("dc-sound")!=="off")d.classList.add("intro-wait");setTimeout(function(){if(!d.classList.contains("intro-live"))d.classList.remove("intro-on","intro-wait")},12000)}}catch(e){}})(document.documentElement)</script>
+<script>(function(d){try{var t=localStorage.getItem("dc-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(localStorage.getItem("dc-sky")==="still")d.classList.add("sky-still")}catch(e){}var m=navigator.deviceMemory,c=navigator.connection;if((m&&m<=2)||(c&&c.saveData))d.classList.add("lite");try{if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)&&!d.classList.contains("sky-still")&&!/[#&]p=|^#(browse|countries|calendar|routes|frontiers|shortlist)\b/.test(location.hash)&&!sessionStorage.getItem("dc-intro")){d.classList.add("intro-on");if(localStorage.getItem("dc-sound")!=="off")d.classList.add("intro-wait");setTimeout(function(){if(!d.classList.contains("intro-live"))d.classList.remove("intro-on","intro-wait")},12000)}}catch(e){}})(document.documentElement)</script>
 
 <!-- Installable to a phone home screen. Relative paths throughout so this
      works both at the GitHub Pages sub-path and from the filesystem.
@@ -186,10 +186,11 @@
     </a>
     <nav class="topnav" id="topnav" aria-label="Primary">
       <button type="button" class="navlink" data-goto="intro">Start</button>
-      <button type="button" class="navlink" data-goto="browse">Browse all</button>
-      <button type="button" class="navlink" data-goto="routes">Specialty routes</button>
-      <button type="button" class="navlink" data-goto="frontiers">Frontier fields</button>
+      <button type="button" class="navlink" data-goto="browse">Browse</button>
+      <button type="button" class="navlink" data-goto="countries">Countries</button>
       <button type="button" class="navlink" data-goto="calendar">Deadlines</button>
+      <button type="button" class="navlink" data-goto="routes">Specialties</button>
+      <button type="button" class="navlink" data-goto="frontiers">Frontiers</button>
       <button type="button" class="navlink navlink-shortlist" data-goto="shortlist">
         Shortlist<span class="shortlist-count" id="shortlistCount" aria-live="polite"></span>
       </button>
@@ -305,7 +306,7 @@
 
         <figure class="hero-globe">
           <canvas id="globeCanvas" role="img"
-                  aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Browse all."></canvas>
+                  aria-label="A globe marking every country with programmes in this index. The same countries can be reached from Countries and from Browse."></canvas>
           <figcaption class="globe-label" id="globeLabel">Drag to spin, or tap a country</figcaption>
         </figure>
 
@@ -338,6 +339,45 @@
       </dl>
     </div>
   </div>
+
+  <!-- Ways in that do not go through the questions: a search box that lands
+       in Browse with the answer already ranked, and four doors. Every number
+       on a door is counted from the index when the page loads. These sit
+       AFTER the hero, so nothing here pushes the primary button down. -->
+  <section class="wrap doors" aria-labelledby="doors-h">
+    <h2 class="sec-h" id="doors-h">Find your own way in</h2>
+    <form class="door-search" id="quickSearch" role="search">
+      <label class="door-search-l" for="quickSearchInput">Search every programme by name, country, field or a word like free</label>
+      <div class="door-search-row">
+        <input type="search" id="quickSearchInput" name="q" class="search-input" autocomplete="off" spellcheck="false"
+               placeholder="Try ICMR or Germany…" />
+        <button type="submit" class="btn btn-ghost">Search</button>
+      </div>
+      <div class="try" id="doorTry"></div>
+    </form>
+    <div class="door-grid">
+      <button type="button" class="door" data-door="countries" style="--door: var(--rg-americas)">
+        <svg class="door-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="12"/><ellipse cx="16" cy="16" rx="5" ry="12"/><path d="M4 16h24M6 9.5h20M6 22.5h20"/></g></svg>
+        <span class="door-t">Country by country</span>
+        <span class="door-d" data-door-text="countries"></span>
+      </button>
+      <button type="button" class="door" data-door="year" style="--door: var(--signal)">
+        <svg class="door-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M5 13h22M11 4v6M21 4v6"/><path d="M16 17v4l3 2"/></g></svg>
+        <span class="door-t">Closing soon for your year</span>
+        <span class="door-d" data-door-text="year"></span>
+      </button>
+      <button type="button" class="door" data-door="free" style="--door: var(--ok)">
+        <svg class="door-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 4l3.4 7.4 8.1.8-6.1 5.4 1.8 7.9L16 21.4l-7.2 4.1 1.8-7.9-6.1-5.4 8.1-.8z"/></g></svg>
+        <span class="door-t">Costs you nothing</span>
+        <span class="door-d" data-door-text="free"></span>
+      </button>
+      <button type="button" class="door" data-door="routes" style="--door: var(--rg-asia)">
+        <svg class="door-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="25" r="2.5"/><circle cx="25" cy="7" r="2.5"/><circle cx="25" cy="25" r="2.5"/><path d="M9.2 23.4C14 19 14 13 22.8 8.6M9.5 25h13"/></g></svg>
+        <span class="door-t">Specialty maps</span>
+        <span class="door-d" data-door-text="routes"></span>
+      </button>
+    </div>
+  </section>
 
   <!-- The atlas. Scrolling through the regions turns a second globe to each
        one, so the motion on this page is the answer to "where are the doors?"
@@ -551,27 +591,61 @@
     </header>
     <div class="ooh-slot" data-ooh="browse"></div>
     <div class="browse-tools">
+      <!-- A combobox: suggestions (countries, fields, kinds and programme
+           names, each with its count) appear under the box as you type, and
+           arrow keys move through them. Press / anywhere to jump here. -->
       <div class="search-wrap">
-        <input type="search" id="browseSearch" class="search-input"
+        <input type="search" id="browseSearch" name="q" class="search-input"
                autocomplete="off" spellcheck="false"
-               placeholder="Search by name, institution or field. Try “Germany”, “psychiatry”, “free”…"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="searchSuggest"
+               placeholder="Search by name, country, field or a word like free…"
                aria-label="Search programmes" />
+        <ul class="suggest" id="searchSuggest" role="listbox" aria-label="Suggestions" hidden></ul>
       </div>
       <div class="sort-wrap">
         <label for="browseSort">Sort</label>
         <select id="browseSort" class="sort-select">
           <option value="tier">Impact tier</option>
+          <option value="match">Best match</option>
           <option value="deadline">Deadline (soonest first)</option>
           <option value="az">A–Z</option>
         </select>
       </div>
     </div>
+    <div class="try" id="browseTry"></div>
     <div class="filters" id="filters"></div>
     <div id="activeCountry"></div>
     <!-- The count changes as you type, and a screen-reader user gets no other
          signal that filtering happened. polite, so it waits for a pause. -->
     <p class="result-count" id="browseCount" role="status" aria-live="polite"></p>
     <div class="cards" id="browseCards"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ COUNTRIES ══════════════════ -->
+<section class="view" id="view-countries">
+  <div class="wrap">
+    <header class="page-head">
+      <h2>Country by country</h2>
+      <p class="page-lede">Every place in the index, with what is open there this month, what pays, and
+      what living there is honestly like for an Indian student. Pick one to see its programmes.</p>
+    </header>
+    <div class="ooh-slot" data-ooh="countries"></div>
+    <div class="cx-tools">
+      <div class="cx-regions" id="cxRegions" role="group" aria-label="Region"></div>
+      <div class="sort-wrap cx-sort">
+        <label for="cxSort">Order</label>
+        <select id="cxSort" class="sort-select">
+          <option value="count">Most routes</option>
+          <option value="open">Open this month</option>
+          <option value="funded">Funded or free</option>
+          <option value="az">A–Z</option>
+        </select>
+      </div>
+    </div>
+    <p class="result-count" id="cxCount" role="status" aria-live="polite"></p>
+    <div class="cx-grid" id="cxGrid"></div>
+    <div class="cx-detail" id="cxDetail" hidden></div>
   </div>
 </section>
 
@@ -627,7 +701,7 @@
 <section class="view" id="view-calendar">
   <div class="wrap">
     <header class="page-head">
-      <h2>Deadline calendar</h2>
+      <h2>Deadlines</h2>
       <p class="page-lede">
         Most opportunities are missed for one reason: the application window opened while you were
         revising for an exam and closed before you looked up. Deadlines shift year to year. Always
@@ -636,6 +710,25 @@
       <p class="reviewed" id="reviewedCal"></p>
     </header>
     <div class="ooh-slot" data-ooh="calendar"></div>
+
+    <!-- Your year first: what is open or about to open for someone at your
+         stage, and the doors that shut when you move on. The stage is the
+         one you gave in the questions, or the one picked here, kept in this
+         browser. Every list is filtered from the index, never typed. -->
+    <section class="dl" id="dlYear" aria-labelledby="dlYearH">
+      <h3 class="dl-h" id="dlYearH">Closing soon for your year</h3>
+      <div class="dl-stages" id="dlStages" role="group" aria-label="Your year of study"></div>
+      <div class="dl-strip" id="dlStrip"></div>
+      <p class="result-count" id="dlCount" role="status" aria-live="polite"></p>
+      <ol class="dl-list" id="dlList"></ol>
+      <div class="dl-last" id="dlLastWrap">
+        <h3 class="dl-h" id="dlLastH">Last chance at your stage</h3>
+        <p class="dl-sub" id="dlLastSub"></p>
+        <ol class="dl-list" id="dlLast"></ol>
+      </div>
+    </section>
+
+    <h3 class="dl-h dl-h-year">The whole year, month by month</h3>
     <div class="calendar" id="calendarGrid"></div>
   </div>
 </section>

@@ -35,6 +35,13 @@ colors:
     "--nebula-a": "rgba(255, 79, 168, .16)"
     "--nebula-b": "rgba(124, 77, 255, .17)"
     "--starlight": "#FFF6FF"
+    "--rg-india": "#FF6FB5"
+    "--rg-uk": "#7FA8FF"
+    "--rg-europe": "#B08CFF"
+    "--rg-americas": "#4FD8F0"
+    "--rg-anz": "#A6E86B"
+    "--rg-asia": "#F07CFF"
+    "--rg-global": "#E2D8FF"
     "--ooh-paper": "#FFF8EE"
     "--ooh-ink": "#2A1636"
     "--ooh-gold": "#FFC857"
@@ -69,6 +76,13 @@ colors:
     "--nebula-a": "rgba(255, 79, 168, .10)"
     "--nebula-b": "rgba(124, 77, 255, .10)"
     "--starlight": "#6A45D9"
+    "--rg-india": "#C2187A"
+    "--rg-uk": "#2F5FD0"
+    "--rg-europe": "#6A45D9"
+    "--rg-americas": "#0A7FA0"
+    "--rg-anz": "#4C8A12"
+    "--rg-asia": "#A324B8"
+    "--rg-global": "#6B5F99"
     "--ooh-paper": "#FFF8EE"
     "--ooh-ink": "#2A1636"
     "--ooh-gold": "#FFC857"
@@ -130,6 +144,13 @@ always means something.
 | `--nebula-a` | `rgba(255, 79, 168, .16)` | `rgba(255, 79, 168, .10)` | pink cloud behind the sky |
 | `--nebula-b` | `rgba(124, 77, 255, .17)` | `rgba(124, 77, 255, .10)` | violet cloud behind the sky |
 | `--starlight` | `#FFF6FF` | `#6A45D9` | the sky's stars |
+| `--rg-india` | `#FF6FB5` | `#C2187A` | region hue: India (a name, never a status, never text) |
+| `--rg-uk` | `#7FA8FF` | `#2F5FD0` | region hue: the UK and Ireland |
+| `--rg-europe` | `#B08CFF` | `#6A45D9` | region hue: Europe |
+| `--rg-americas` | `#4FD8F0` | `#0A7FA0` | region hue: the USA and Canada |
+| `--rg-anz` | `#A6E86B` | `#4C8A12` | region hue: Australia and New Zealand |
+| `--rg-asia` | `#F07CFF` | `#A324B8` | region hue: Asia beyond India, and Africa |
+| `--rg-global` | `#E2D8FF` | `#6B5F99` | region hue: no single country |
 | `--ooh-paper` | `#FFF8EE` | `#FFF8EE` | every speech bubble (Ooh's paper, shared with Ronak and Arun) |
 | `--ooh-ink` | `#2A1636` | `#2A1636` | bubble text, border and hard shadow |
 | `--ooh-gold` | `#FFC857` | `#FFC857` | Ooh's name plate, focus ring on Ooh's controls |
@@ -169,6 +190,17 @@ under 4.5:1.
   weight drops to a dashed outline at tier 5.
 - **Status** is a dot plus a word (open, opening soon, closed, no call), never
   colour alone.
+- **Finding your way** (October 2026): a search box and four doors under the
+  hero; a Countries view of tiles, one per place, each tinted with its
+  region's hue and carrying a two-colour bar (aurora for open this month,
+  amber for opening soon) beside the same facts in words; and Deadlines that
+  open on your year, with a six-month strip of pressable bars and rows that
+  say "Closes this month" in the signal colour. Tiles and rows are rounder
+  (14-18px) because they are things you handle, like the cards. Each list
+  deals in once (22ms apart) and is still afterwards.
+- **Search** suggests as you type (countries, fields, kinds and programmes,
+  each with its count) in a listbox under the box, offers fixed "Try" terms
+  with live counts, and keeps "Your searches" in this browser only.
 - **The opening** (intro.js): once a visit, the Earth turns once in the real
   sky, each country in the index lights as it crosses the middle and is named
   on the canvas, Ooh flies in and hops on the beat, and the turn lands on

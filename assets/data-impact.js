@@ -164,6 +164,10 @@ window.DB.skipList = [
     why: "It is a free week at IISc's Centre for Neuroscience, with train fare, food and lodging paid, and it gets passed around among medical students who want neuroscience. Its 2026 call (29 June to 3 July) asked for students in the third or final year of a BE or BTech, or pursuing a master's in science, technology or engineering. MBBS is not named, so treat it as closed to you unless the organisers say otherwise in writing. The computational schools that do name you are CAMP@Pune, which invites final-year undergraduates from all backgrounds, and IISc's own Brain, Computation and Learning workshop, which encourages clinicians; both are in this index."
   },
   {
+    name: "The Vienna BioCenter Summer School, for MBBS students",
+    why: "It is a nine-week research summer in Vienna with free student housing, a stipend of €1,400 after tax and medical insurance, it charges no application fee, and its call opens on 1 November, so it circulates widely each winter. Its own page describes it as a programme for life-science undergraduates and asks for at least two years of university study in a life-sciences-related subject. Medicine is not named. Treat it as closed to you unless the summer school confirms in writing that an MBBS counts, and ask before you spend a weekend on the form. The funded summers that do name medical students include OIST's research internship and the Science Academies' fellowship in India, and both are in this index."
+  },
+  {
     name: "Mitacs Globalink from India, for medical students",
     why: "Mitacs is fully funded and hugely popular, and for 2027 its Indian intake runs only through AICTE: the call is open to full-time BE and BTech students at eligible institutions, with at least two years completed. An MBBS student cannot apply through it, however often it appears in lists for Indian undergraduates. This index recommended it to medical students until September 2026. The funded research internships that do take MBBS students are OIST's, which needs you in your final two years, and the Science Academies' summer fellowship."
   },

@@ -871,7 +871,7 @@
               ["think", "Every card links its official page. Dates move every year, so check there before you plan."]],
       short: ["think", "Ranked from your answers. Check each official page before you plan around a date."] },
     browse: { id: "browse",
-      lines: [["hello", "This is the whole index. Filter by kind, search for a name, or sort by the nearest deadline."],
+      lines: [["hello", "Type a country, a field or a word like free. Suggestions appear as you type, and / jumps here."],
               ["think", "Tier 1 changes what you can apply for next. Most entries are lower, and that is fine."]],
       short: ["think", "Filter, search, or sort by deadline. Every card links its official page."] },
     shortlist: { id: "shortlist",
@@ -883,9 +883,14 @@
     frontiers: { id: "frontiers",
       lines: [["ooh", "Each of these is a whole field you could join. Every one ends with something to start this week."]],
       short: ["ooh", "Whole fields you could join, each with one thing to start this week."] },
+    countries: { id: "countries",
+      lines: [["hello", "Every place in the index has a tile. The bar shows what is open this month and what opens soon."],
+              ["think", "Open a country for its programmes and an honest note on winters, food and visas."]],
+      short: ["think", "Tap a country for its programmes and what living there is like."] },
     calendar: { id: "calendar",
-      lines: [["think", "Every deadline in the index, month by month. Dates move, so confirm on the official page."]],
-      short: ["think", "Deadlines by month. Confirm each date on its official page."] }
+      lines: [["think", "Pick your year and I will show what closes first, and what stops taking you once you move on."],
+              ["think", "Dates move, so confirm each one on its official page."]],
+      short: ["think", "Your year first, then the whole calendar. Confirm each date on its official page."] }
   };
 
   /* ───────────────── views ───────────────── */
@@ -907,11 +912,39 @@
     window.scrollTo(0, 0);
     if (v) focusHeading(v);
   }
+  /* Each browsing view has its own address (#browse, #countries...), so the
+     browser's Back button walks back through views instead of leaving the
+     site, and a category page's "Browse all in the app" link lands where it
+     says. The survey has none (a half-answered form cannot be restored from
+     a link), and results keep the #p= plan address persist() writes. */
+  const ROUTED = ["browse", "countries", "calendar", "routes", "frontiers", "shortlist"];
+  let fromHistory = false;
+  function syncHash(name) {
+    if (fromHistory) return;
+    try {
+      if (ROUTED.indexOf(name) !== -1) {
+        if (location.hash !== "#" + name) history.pushState({ v: name }, "", "#" + name);
+      } else if (name === "intro" && location.hash) {
+        history.pushState({ v: "intro" }, "", location.pathname + location.search);
+      }
+    } catch (e) { /* some file:// contexts refuse history writes */ }
+  }
+  function routeFromHash() {
+    const h = (location.hash || "").replace(/^#/, "");
+    fromHistory = true;
+    try {
+      if (/(^|&)p=/.test(h)) { if (restore()) { renderResults(); showView("results"); } }
+      else if (ROUTED.indexOf(h) !== -1) gotoView(h);
+      else showView("intro");
+    } finally { fromHistory = false; }
+  }
+
   function showView(name) {
     // Moving between views is a tap, and taps make Ooh's sounds now
     // (ooh-guide.js). Only arriving at your results keeps its galaxy chord.
     if (name !== currentView && name === "results") sfx("chain");
     currentView = name;
+    syncHash(name);
     if (canTransition) document.startViewTransition(function () { swapView(name); });
     else swapView(name);
   }
@@ -1338,6 +1371,9 @@
   let activeFilter = "all";
   let searchQuery = "";
   let sortMode = "tier";
+  // The sort follows the search until the reader picks one: typing switches
+  // it to "Best match", clearing the box switches it back to tier.
+  let sortAuto = true;
   // Set by picking a country on the hero globe. Kept separate from searchQuery
   // on purpose: a text search for "india" also matches every programme whose
   // description mentions Indian students, which is useful when you typed it but
@@ -1347,13 +1383,202 @@
   // matches on item.country for the same reason as countryFilter above.
   let regionFilter = null;
 
-  function matchesSearch(item, q) {
-    if (!q) return true;
-    const hay = [
-      item.name, item.org, item.why, item.money, item.country, item.city,
-      TYPE_LABEL[item.type], (item.fields || []).map((f) => FIELDS[f]).join(" ")
-    ].filter(Boolean).join(" • ").toLowerCase();
-    return hay.indexOf(q) !== -1;
+  /* ───────────────── search ─────────────────
+     The box splits what you type into words, and every word has to find
+     something in the entry: its name, institution, country, fields, window,
+     requirements or steps. A word matches the START of a word, so "neuro"
+     finds neuroscience and "psych" finds psychiatry, while "us" does not
+     find "must". Some words are facts rather than text: "free" means the
+     entry costs nothing, "open now" means its window is open this month,
+     "first year" means it takes 1st-2nd professional students. Common
+     aliases are folded in (UK, USA, PhD, MPH, AI). When no entry has every
+     word, the ones with most of them are shown, and the count says so. All
+     of it runs on this page; nothing typed is sent anywhere. */
+  const STAGE_ORDER = ["pre", "clin", "intern", "grad", "pg"];
+  const STOP = new Set(["the", "a", "an", "and", "or", "of", "for", "in", "on", "to", "with", "at", "by", "from",
+    "me", "my", "i", "want", "show", "find", "programme", "programmes", "program", "programs",
+    "opportunity", "opportunities", "mbbs", "doctor", "doctors", "medical", "student", "students"]);
+  const PHRASES = [
+    ["fully funded", "fullyfunded"], ["costs nothing", "free"], ["no cost", "free"], ["no fee", "free"],
+    ["open now", "opennow"], ["open right now", "opennow"], ["closing soon", "closingsoon"], ["closes soon", "closingsoon"],
+    ["first year", "yearpre"], ["1st year", "yearpre"], ["second year", "yearpre"], ["2nd year", "yearpre"],
+    ["pre clinical", "yearpre"], ["preclinical", "yearpre"],
+    ["third year", "yearclin"], ["3rd year", "yearclin"], ["final year", "yearclin"], ["fourth year", "yearclin"], ["4th year", "yearclin"],
+    ["internship year", "yearintern"], ["after mbbs", "yeargrad"], ["mbbs graduate", "yeargrad"], ["after md", "yearpg"],
+    ["tier 1", "tierone"], ["tier one", "tierone"],
+    ["public health", "publichealth"], ["mental health", "mentalhealth"], ["global health", "globalhealth"],
+    ["united states", "usa"], ["united kingdom", "uk"], ["great britain", "uk"],
+    ["new zealand", "newzealand"], ["hong kong", "hongkong"], ["south korea", "southkorea"], ["south africa", "southafrica"],
+    ["machine learning", "ai"], ["artificial intelligence", "ai"], ["data science", "datasci"]
+  ];
+  // A string value points at another key. Aliases of three letters or fewer
+  // must match a whole word, so "ai" never finds "aiims" or "aids".
+  const ALIAS = {
+    uk: ["uk", "united kingdom", "britain", "british", "england", "scotland", "wales", "london"],
+    usa: ["usa", "united states", "america", "american"], us: "usa", america: "usa", american: "usa",
+    phd: ["phd", "doctorate", "doctoral", "dphil", "dr med"], doctorate: "phd", doctoral: "phd",
+    masters: ["master", "msc", "mph", "mphil", "mres"], master: "masters", msc: "masters",
+    mph: ["mph", "public health"], publichealth: ["public health", "mph", "epidemiolog"],
+    mentalhealth: ["mental health", "psych"], globalhealth: ["global health"],
+    psych: ["psych", "mental health"], psychiatry: ["psychiatr", "mental health"],
+    neuroscience: ["neuroscien", "neuro"],
+    ai: ["ai", "artificial intelligence", "machine learning", "data science", "computation", "bioinformatic"],
+    datasci: ["data science", "data", "computation", "statistic", "bioinformatic"],
+    cancer: ["cancer", "onco", "tumour", "tumor"], oncology: "cancer",
+    internship: ["internship", "elective", "observership", "studentship", "traineeship", "attachment"],
+    elective: ["elective", "observership", "attachment"],
+    usmle: ["usmle", "ecfmg", "residency"], plab: ["plab", "ukmla", "gmc"], ukmla: "plab",
+    germany: ["germany", "german"], german: "germany",
+    conference: ["conference", "congress", "symposium"], course: ["course", "school", "workshop", "training"],
+    online: ["online", "remote", "virtual", "self paced"],
+    women: ["women", "woman", "female", "girl"],
+    stipend: ["stipend", "salary", "salaried", "paid", "allowance"], salary: "stipend", paid: "stipend",
+    scholarship: ["scholarship", "bursary"],
+    southkorea: ["south korea", "korea"], newzealand: ["new zealand"], hongkong: ["hong kong"], southafrica: ["south africa"]
+  };
+  const stageHas = (s) => (i) => !i.stages || i.stages.indexOf(s) !== -1;
+  const FACET = {
+    free: (i) => !!i.zeroCost || i.funding === "free",
+    fullyfunded: (i) => i.funding === "full",
+    funded: (i) => ["full", "stipend", "paid", "free"].indexOf(i.funding) !== -1,
+    opennow: (i) => urgency(i) === "open", open: (i) => urgency(i) === "open",
+    closingsoon: (i) => urgency(i) === "open" || urgency(i) === "soon",
+    soon: (i) => urgency(i) === "open" || urgency(i) === "soon",
+    yearpre: stageHas("pre"), yearclin: stageHas("clin"), yearintern: stageHas("intern"),
+    yeargrad: stageHas("grad"), yearpg: stageHas("pg"),
+    tierone: (i) => impactOf(i).t === 1,
+    phd: (i) => i.type === "phd", masters: (i) => i.type === "masters",
+    scholarship: (i) => i.type === "scholarship", fellowship: (i) => i.type === "fellowship",
+    conference: (i) => i.type === "conference", online: (i) => i.country === "Online"
+  };
+  // Words that are only a fact: "free" in running text ("free to apply") is
+  // not the same as costing nothing, so these never match text.
+  const FACET_ONLY = new Set(["free", "fullyfunded", "opennow", "open", "closingsoon", "soon",
+    "yearpre", "yearclin", "yearintern", "yeargrad", "yearpg", "tierone"]);
+
+  const norm = (s) => String(s == null ? "" : s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/['’]/g, "").replace(/[^a-z0-9₹]+/g, " ").trim();
+  function stem(w) {
+    if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + "y";
+    if (w.length > 3 && /s$/.test(w) && !/(ss|us)$/.test(w)) return w.slice(0, -1);
+    return w;
+  }
+
+  const SEARCH_INDEX = new Map();
+  function searchDoc(item) {
+    let x = SEARCH_INDEX.get(item.id);
+    if (x) return x;
+    const prof = (window.DB.countries || {})[item.country];
+    const pad = (s) => " " + norm(s) + " ";
+    x = {
+      name: pad(item.name),
+      org: pad(item.org),
+      place: pad([item.country, item.city, prof && prof.name].join(" ")),
+      tags: pad([TYPE_LABEL[item.type], (item.fields || []).map((f) => FIELDS[f]).join(" ")].join(" ")),
+      text: pad([item.why, item.money, item.window, item.duration, (item.reqs || []).join(" "),
+        (item.steps || []).join(" "), (item.stages || []).map((s) => STAGE_LABEL[s]).join(" ")].join(" "))
+    };
+    SEARCH_INDEX.set(item.id, x);
+    return x;
+  }
+
+  function parseQuery(q) {
+    let s = " " + norm(q) + " ";
+    PHRASES.forEach(function (p) { s = s.split(" " + p[0] + " ").join(" " + p[1] + " "); });
+    return s.trim().split(" ").filter((w) => w && !STOP.has(w)).map(function (w) {
+      const key = ALIAS[w] !== undefined ? w : (ALIAS[stem(w)] !== undefined ? stem(w) : null);
+      let alts = key ? ALIAS[key] : null;
+      if (typeof alts === "string") alts = ALIAS[alts];
+      const list = alts ? alts.map((a) => ({ s: a, whole: a.length <= 3 })) : [{ s: stem(w), whole: false }];
+      return { w: w, alts: FACET_ONLY.has(w) ? [] : list, facet: FACET[w] || (key && FACET[key]) || null };
+    });
+  }
+
+  // How well one word fits one entry: a hit in the name beats a hit in the
+  // country, which beats the institution, the tags and then the running text.
+  function tokenScore(x, t, item) {
+    let best = 0;
+    t.alts.forEach(function (a) {
+      const needle = " " + a.s + (a.whole ? " " : "");
+      if (x.name.indexOf(needle) !== -1) best = Math.max(best, 8);
+      else if (x.place.indexOf(needle) !== -1) best = Math.max(best, 6);
+      else if (x.org.indexOf(needle) !== -1) best = Math.max(best, 4);
+      else if (x.tags.indexOf(needle) !== -1) best = Math.max(best, 3);
+      else if (x.text.indexOf(needle) !== -1) best = Math.max(best, 1);
+    });
+    if (t.facet && t.facet(item)) best = Math.max(best, 3);
+    return best;
+  }
+
+  function runSearch(list, q) {
+    const toks = parseQuery(q);
+    if (!toks.length) return { list: list, partial: false, scores: null };
+    const scored = [];
+    list.forEach(function (item) {
+      const x = searchDoc(item);
+      let sum = 0, hit = 0;
+      toks.forEach(function (t) { const sc = tokenScore(x, t, item); if (sc) { hit++; sum += sc; } });
+      if (hit) scored.push({ item: item, hit: hit, sum: sum + (5 - impactOf(item).t) * 0.4 + (urgency(item) === "open" ? 0.6 : 0) });
+    });
+    const full = scored.filter((s) => s.hit === toks.length);
+    const use = full.length ? full : scored;
+    const scores = new Map(use.map((s) => [s.item.id, s.hit * 100 + s.sum]));
+    return { list: use.map((s) => s.item), partial: !full.length && use.length > 0, scores: scores };
+  }
+  const countFor = (q) => { const r = runSearch(allOpportunities(), q); return r.partial ? 0 : r.list.length; };
+
+  /* "Did you mean": only when nothing matched, and only for a word of four
+     letters or more that starts no word anywhere in the index. */
+  let VOCAB = null;
+  function vocab() {
+    if (VOCAB) return VOCAB;
+    const set = new Set();
+    const add = (s) => norm(s).split(" ").forEach((w) => { if (w.length >= 4 && !/\d/.test(w)) set.add(w); });
+    allOpportunities().forEach((i) => add([i.name, i.org, i.country, i.city].join(" ")));
+    Object.keys(FIELDS).forEach((k) => add(FIELDS[k]));
+    Object.keys(TYPE_LABEL).forEach((k) => add(TYPE_LABEL[k]));
+    Object.keys(window.DB.countries || {}).forEach((k) => add(window.DB.countries[k].name));
+    Object.keys(ALIAS).forEach((k) => { if (k.length >= 4) set.add(k); });
+    VOCAB = Array.from(set);
+    return VOCAB;
+  }
+  function editDistance(a, b, max) {
+    let prev = [];
+    for (let j = 0; j <= b.length; j++) prev[j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i];
+      let rowMin = i;
+      for (let j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (cur[j] < rowMin) rowMin = cur[j];
+      }
+      if (rowMin > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  function didYouMean(q) {
+    const items = allOpportunities();
+    const known = (w) => items.some(function (i) {
+      const x = searchDoc(i);
+      return (x.name + x.org + x.place + x.tags + x.text).indexOf(" " + w) !== -1;
+    });
+    let changed = false;
+    const fixed = norm(q).split(" ").filter(Boolean).map(function (w) {
+      if (w.length < 4 || STOP.has(w) || ALIAS[w] !== undefined || FACET[w] || known(w)) return w;
+      const max = w.length >= 7 ? 2 : 1;
+      let best = null, bestD = max + 1;
+      vocab().forEach(function (v) {
+        if (Math.abs(v.length - w.length) > max) return;
+        const d = editDistance(w, v, max);
+        if (d < bestD) { bestD = d; best = v; }
+      });
+      if (best) { changed = true; return best; }
+      return w;
+    });
+    if (!changed) return null;
+    const out = fixed.join(" ");
+    return countFor(out) ? out : null;
   }
 
   // Months from now until an item's nearest deadline; no fixed deadline sorts last.
@@ -1370,11 +1595,20 @@
     return best;
   }
 
+  let lastScores = null;
   function sortList(list) {
     if (sortMode === "az") return list.slice().sort((a, b) => a.name.localeCompare(b.name));
     if (sortMode === "deadline")
       return list.slice().sort((a, b) => monthsUntilDeadline(a) - monthsUntilDeadline(b) || impactOf(a).t - impactOf(b).t);
+    if (sortMode === "match" && lastScores)
+      return list.slice().sort((a, b) => (lastScores.get(b.id) || 0) - (lastScores.get(a.id) || 0) || impactOf(a).t - impactOf(b).t);
     return list.slice().sort((a, b) => impactOf(a).t - impactOf(b).t); // "tier", the default
+  }
+
+  function placeName(c) {
+    const PLACE_LABEL = { Global: "Global organisations", Any: "Anywhere", Online: "Online", Europe: "Across Europe",
+      Asia: "Across Asia", Nordics: "Nordic countries", Baltics: "Baltic states", Gulf: "Gulf states", UK: "United Kingdom", USA: "United States" };
+    return PLACE_LABEL[c] || c;
   }
 
   function renderBrowse() {
@@ -1405,47 +1639,596 @@
 
     if (countryFilter) list = list.filter((i) => i.country === countryFilter);
     else if (regionFilter) list = list.filter((i) => regionFilter.countries.indexOf(i.country) !== -1);
-    const placeLabel = countryFilter || (regionFilter && regionFilter.label) || "";
+    const placeLabel = countryFilter ? placeName(countryFilter) : (regionFilter && regionFilter.label) || "";
 
     const preSearchCount = list.length;
-    list = list.filter((i) => matchesSearch(i, searchQuery));
-    list = sortList(list);
+    const found = runSearch(list, searchQuery);
+    lastScores = found.scores;
+    list = sortList(found.list);
 
-    const SORT_LABEL = { tier: "sorted by impact tier", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
-    let countText = fmtNum(list.length) + " programme" + (list.length === 1 ? "" : "s");
+    const SORT_LABEL = { tier: "sorted by impact tier", match: "best match first", deadline: "sorted by nearest deadline", az: "sorted A–Z" };
+    let countText;
+    if (found.partial) {
+      countText = "No programme has every word of “" + searchQuery + "”. Showing the " + fmtNum(list.length) +
+        " that have the most of them";
+    } else {
+      countText = fmtNum(list.length) + " programme" + (list.length === 1 ? "" : "s");
+      if (searchQuery) countText += " matching “" + searchQuery + "” of " + fmtNum(preSearchCount);
+    }
     if (placeLabel) countText += " in " + placeLabel;
-    if (searchQuery) countText += " matching “" + searchQuery + "” of " + fmtNum(preSearchCount);
-    countText += ", " + SORT_LABEL[sortMode];
+    countText += ", " + SORT_LABEL[sortMode === "match" && !lastScores ? "tier" : sortMode];
     $("#browseCount").textContent = countText;
 
     // A country filter arrives from the globe, not from the visible controls, so
     // it needs its own visible, dismissible affordance — otherwise the list looks
-    // inexplicably short with nothing on screen explaining why.
+    // inexplicably short with nothing on screen explaining why. A country with a
+    // profile also gets a way across to what living there is like.
     const chipSlot = $("#activeCountry");
     if (chipSlot) {
+      const prof = countryFilter && (window.DB.countries || {})[countryFilter];
       chipSlot.innerHTML = placeLabel
-        ? '<button type="button" class="country-chip" id="clearCountry">' +
+        ? '<div class="chip-row"><button type="button" class="country-chip" id="clearCountry">' +
           'Showing ' + esc(placeLabel) + ' only <span aria-hidden="true">×</span>' +
-          '<span class="sr-only">, clear this filter</span></button>'
+          '<span class="sr-only">, clear this filter</span></button>' +
+          (prof ? '<button type="button" class="btn btn-ghost btn-sm" id="livingThere">Living in ' + esc(prof.name) + '</button>' : "") +
+          "</div>"
         : "";
       const clear = $("#clearCountry");
       if (clear) clear.addEventListener("click", function () { countryFilter = ""; regionFilter = null; renderBrowse(); });
+      const living = $("#livingThere");
+      if (living) living.addEventListener("click", function () { openCountry(countryFilter); });
     }
 
+    let empty = "";
+    if (!list.length) {
+      const dym = searchQuery ? didYouMean(searchQuery) : null;
+      empty = '<div class="empty"><p>Nothing matches' + (searchQuery ? ' “' + esc(searchQuery) + '”' : " that filter") +
+        (placeLabel ? " in " + esc(placeLabel) : "") + ".</p>" +
+        (dym ? '<p><button type="button" class="btn btn-ghost" data-dym="' + esc(dym) + '">Search for “' + esc(dym) + '” instead</button></p>' : "") +
+        '<p class="empty-small">Try a broader word, or clear the filters above.</p></div>';
+    }
     $("#browseCards").innerHTML = list.length
       ? list.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("")
-      : '<p class="empty">Nothing matches' + (searchQuery ? ' "' + esc(searchQuery) + '"' : " that filter") + '. Try a broader term or clear the filters.</p>';
+      : empty;
+    const dymBtn = $("#browseCards [data-dym]");
+    if (dymBtn) dymBtn.addEventListener("click", function () { setSearch(dymBtn.dataset.dym, true); $("#browseSearch").focus(); });
+    renderTry();
+  }
+
+  /* ───────────────── search box: suggestions and your searches ─────────────────
+     The suggestions under the box are a listbox driven from the input
+     (aria-activedescendant), so focus never leaves the field: arrows move,
+     Enter picks, Escape closes. Each suggestion carries its count from the
+     index. "Your searches" are kept in this browser only, like the
+     shortlist, and can be cleared; the "Try" terms are fixed starting
+     points, each with its live count, and never claim to be anyone else's
+     searches, because nothing here is measured. */
+  const TRY_TERMS = ["ICMR", "Germany", "free", "fully funded", "neuroscience", "public health", "PhD", "summer", "first year", "USMLE"];
+
+  function loadSearches() {
+    try { const v = JSON.parse(localStorage.getItem("dc-searches") || "[]"); return Array.isArray(v) ? v : []; }
+    catch (e) { return []; }
+  }
+  function saveSearches(list) {
+    try { localStorage.setItem("dc-searches", JSON.stringify(list.slice(0, 20))); } catch (e) { /* private mode */ }
+  }
+  function recordSearch(q) {
+    q = String(q || "").trim();
+    if (q.length < 2 || !countFor(q)) return;
+    const list = loadSearches(), k = norm(q), now = Date.now();
+    const same = list.find((s) => norm(s.q) === k);
+    // "neur" saved on the way to "neuroscience" is the same search, not two.
+    const prefix = !same && list.find((s) => now - s.t < 30000 && s.n === 1 && k.indexOf(norm(s.q)) === 0);
+    if (same) { same.n++; same.t = now; same.q = q; }
+    else if (prefix) { prefix.q = q; prefix.t = now; }
+    else list.push({ q: q, n: 1, t: now });
+    list.sort((a, b) => b.t - a.t);
+    saveSearches(list);
+  }
+
+  function tryChip(q, n, cls) {
+    return '<button type="button" class="try-chip' + (cls ? " " + cls : "") + '" data-q="' + esc(q) + '">' + esc(q) +
+      ' <span class="try-n">' + fmtNum(n) + '<span class="sr-only"> programmes</span></span></button>';
+  }
+  function renderTry() {
+    const slot = $("#browseTry");
+    if (!slot) return;
+    const mine = loadSearches().map((s) => ({ q: s.q, n: s.n, t: s.t, c: countFor(s.q) })).filter((s) => s.c)
+      .sort((a, b) => b.n - a.n || b.t - a.t).slice(0, 5);
+    let h = "";
+    if (mine.length) {
+      const often = mine.some((s) => s.n > 1);
+      h += '<div class="try-row"><span class="try-l">' + (often ? "You often search" : "Your recent searches") + "</span>" +
+        mine.map((s) => tryChip(s.q, s.c, "is-mine")).join("") +
+        '<button type="button" class="try-clear" id="trySearchesClear">Clear<span class="sr-only"> your searches</span></button></div>';
+    }
+    const mineKeys = new Set(mine.map((s) => norm(s.q)));
+    const terms = TRY_TERMS.filter((q) => !mineKeys.has(norm(q))).map((q) => ({ q: q, c: countFor(q) })).filter((t) => t.c);
+    h += '<div class="try-row"><span class="try-l">Try</span>' + terms.map((t) => tryChip(t.q, t.c)).join("") + "</div>";
+    slot.innerHTML = h;
+    $$(".try-chip", slot).forEach(function (b) {
+      b.addEventListener("click", function () { setSearch(b.dataset.q, true); });
+    });
+    const clr = $("#trySearchesClear");
+    if (clr) clr.addEventListener("click", function () {
+      const kept = loadSearches();
+      saveSearches([]);
+      renderTry();
+      const box = $("#browseSearch");
+      if (box) box.focus();
+      toast("Your searches are cleared from this browser.", {
+        label: "Undo", run: function () { saveSearches(kept); renderTry(); }
+      });
+    });
+  }
+
+  // Put a query in the box and run it, as if typed. `record` saves it to
+  // your searches (chips, Enter, a picked suggestion; never every keystroke).
+  function setSearch(q, record) {
+    const box = $("#browseSearch");
+    if (box) box.value = q;
+    searchQuery = String(q || "").trim();
+    syncSortToSearch();
+    if (record) recordSearch(searchQuery);
+    renderBrowse();
+  }
+  function syncSortToSearch() {
+    const sel = $("#browseSort");
+    if (!sortAuto) return;
+    sortMode = searchQuery ? "match" : "tier";
+    if (sel) sel.value = sortMode;
+  }
+
+  // From anywhere else on the site (the home search, a chip, the "/" key):
+  // land in Browse with the query run and every other filter cleared.
+  function goSearch(q) {
+    countryFilter = ""; regionFilter = null; activeFilter = "all";
+    const box = $("#browseSearch");
+    if (box) box.value = q || "";
+    searchQuery = String(q || "").trim();
+    syncSortToSearch();
+    if (searchQuery) recordSearch(searchQuery);
+    renderBrowse();
+    showView("browse");
+  }
+
+  function suggestionsFor(q) {
+    const n = norm(q);
+    if (!n) return [];
+    const starts = (label) => (" " + norm(label)).indexOf(" " + n) !== -1;
+    const items = allOpportunities();
+    const out = [];
+    const counts = {};
+    items.forEach((i) => { counts[i.country] = (counts[i.country] || 0) + 1; });
+    Object.keys(counts).filter((c) => starts(placeName(c)) || starts(c))
+      .sort((a, b) => counts[b] - counts[a]).slice(0, 3)
+      .forEach((c) => out.push({ kind: "country", label: placeName(c), value: c, n: counts[c], tag: "Country" }));
+    Object.keys(FIELDS).filter((f) => starts(FIELDS[f])).slice(0, 2).forEach(function (f) {
+      out.push({ kind: "field", label: FIELDS[f], value: FIELDS[f], n: items.filter((i) => (i.fields || []).indexOf(f) !== -1).length, tag: "Field" });
+    });
+    Object.keys(TYPE_LABEL).filter((t) => starts(TYPE_LABEL[t]) || t.indexOf(n) === 0).slice(0, 2).forEach(function (t) {
+      out.push({ kind: "kind", label: TYPE_LABEL[t], value: t, n: items.filter((i) => i.type === t).length, tag: "Kind" });
+    });
+    const r = runSearch(items, q);
+    if (!r.partial && r.scores) {
+      r.list.slice().sort((a, b) => r.scores.get(b.id) - r.scores.get(a.id)).slice(0, 8 - Math.min(out.length, 4))
+        .forEach((i) => out.push({ kind: "programme", label: i.name, value: i.id, tag: placeName(i.country) }));
+    }
+    return out.slice(0, 8);
+  }
+
+  function initSearchBox() {
+    const box = $("#browseSearch"), ul = $("#searchSuggest");
+    if (!box || !ul) return;
+    let items = [], active = -1, debounce = null;
+
+    function close() {
+      ul.hidden = true; ul.innerHTML = ""; items = []; active = -1;
+      box.setAttribute("aria-expanded", "false");
+      box.removeAttribute("aria-activedescendant");
+    }
+    function mark() {
+      $$(".sg-opt", ul).forEach((li, i) => li.setAttribute("aria-selected", String(i === active)));
+      if (active >= 0) {
+        box.setAttribute("aria-activedescendant", "sg-" + active);
+        const li = $("#sg-" + active);
+        if (li && li.scrollIntoView) li.scrollIntoView({ block: "nearest" });
+      } else box.removeAttribute("aria-activedescendant");
+    }
+    function open() {
+      items = suggestionsFor(box.value);
+      active = -1;
+      if (!items.length) { close(); return; }
+      ul.innerHTML = items.map(function (s, i) {
+        return '<li class="sg-opt" role="option" id="sg-' + i + '" aria-selected="false" data-i="' + i + '">' +
+          '<span class="sg-label">' + esc(s.label) + "</span>" +
+          '<span class="sg-tag">' + esc(s.tag) + (s.n != null ? ", " + fmtNum(s.n) : "") + "</span></li>";
+      }).join("");
+      ul.hidden = false;
+      box.setAttribute("aria-expanded", "true");
+      $$(".sg-opt", ul).forEach(function (li) {
+        // mousedown, not click: a click lands after the box has blurred.
+        li.addEventListener("mousedown", function (e) { e.preventDefault(); pick(items[Number(li.dataset.i)]); });
+      });
+    }
+    function pick(s) {
+      close();
+      if (!s) return;
+      if (s.kind === "country") {
+        recordSearch(s.label);
+        countryFilter = s.value; regionFilter = null; activeFilter = "all";
+        box.value = ""; searchQuery = ""; syncSortToSearch();
+        renderBrowse();
+      } else if (s.kind === "kind") {
+        activeFilter = s.value;
+        box.value = ""; searchQuery = ""; syncSortToSearch();
+        renderBrowse();
+      } else setSearch(s.kind === "programme" ? s.label : s.value, true);
+      box.focus();
+    }
+
+    box.addEventListener("input", function () {
+      open();
+      clearTimeout(debounce);
+      const val = box.value;
+      debounce = setTimeout(function () {
+        searchQuery = val.trim();
+        syncSortToSearch();
+        renderBrowse();
+      }, 120);
+    });
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (ul.hidden) open();
+        if (items.length) { active = (active + 1) % items.length; mark(); }
+      } else if (e.key === "ArrowUp") {
+        if (!items.length) return;
+        e.preventDefault();
+        active = active <= 0 ? items.length - 1 : active - 1; mark();
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (active >= 0) { pick(items[active]); return; }
+        close();
+        clearTimeout(debounce);
+        setSearch(box.value, true);
+      } else if (e.key === "Escape") {
+        if (!ul.hidden) { e.preventDefault(); close(); }
+      } else if (e.key === "Tab") close();
+    });
+    box.addEventListener("blur", function () {
+      setTimeout(close, 120);
+      if (box.value.trim().length >= 3) recordSearch(box.value);
+    });
+    $("#browseSort").addEventListener("change", function () {
+      sortMode = this.value;
+      sortAuto = false;
+      renderBrowse();
+    });
+
+    // "/" from anywhere (outside a field) jumps to the search box.
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (document.body.classList.contains("tour-locked") || document.documentElement.classList.contains("intro-on")) return;
+      e.preventDefault();
+      if (currentView !== "browse") gotoView("browse");
+      setTimeout(function () { box.focus(); }, 60);
+    });
+  }
+
+  /* ───────────────── countries ─────────────────
+     Every value of item.country gets a tile, grouped by the same ATLAS
+     regions as the scroll atlas, so a region's tiles add up to the number
+     its atlas step shows. A tile opens the place: its counts, the honest
+     profile from data-countries.js where there is one, and every programme
+     there as a full card. The hue on each tile is its region's (the
+     --rg-* tokens), a name and never a status: status is the open/soon bar
+     and its words. */
+  const REGION_SHORT = { india: "India", uk: "UK and Ireland", europe: "Europe", americas: "USA and Canada",
+    anz: "Australia and NZ", asia: "Asia and Africa", global: "No single country" };
+  let cxRegion = "all", cxSort = "count", cxOpen = "";
+
+  function regionOf(country) {
+    const keys = Object.keys(ATLAS);
+    for (let k = 0; k < keys.length; k++) if (ATLAS[keys[k]].countries.indexOf(country) !== -1) return keys[k];
+    return "global";
+  }
+  function placeStats(country) {
+    const list = allOpportunities().filter((i) => i.country === country);
+    return {
+      list: list, total: list.length,
+      open: list.filter((i) => urgency(i) === "open").length,
+      soon: list.filter((i) => urgency(i) === "soon").length,
+      funded: list.filter((i) => ["full", "free", "stipend", "paid"].indexOf(i.funding) !== -1 || i.zeroCost).length,
+      student: list.filter((i) => i.stages && (i.stages.indexOf("pre") !== -1 || i.stages.indexOf("clin") !== -1)).length
+    };
+  }
+  function statLine(s) {
+    const bits = [fmtNum(s.open) + " open this month"];
+    if (s.soon) bits.push(fmtNum(s.soon) + " opening soon");
+    bits.push(fmtNum(s.funded) + " funded or free");
+    return bits.join(", ");
+  }
+
+  function renderCountries() {
+    const grid = $("#cxGrid"), detail = $("#cxDetail");
+    if (!grid) return;
+    const places = {};
+    allOpportunities().forEach((i) => { if (i.country) places[i.country] = 1; });
+    const all = Object.keys(places).map((c) => ({ c: c, r: regionOf(c), s: placeStats(c) }));
+
+    // Each chip carries its number of routes, the same count its atlas step shows.
+    const regionCount = {};
+    all.forEach((p) => { regionCount[p.r] = (regionCount[p.r] || 0) + p.s.total; });
+    const everything = all.reduce((n, p) => n + p.s.total, 0);
+    let rh = '<button type="button" class="fbtn cx-rbtn" data-r="all" aria-pressed="' + (cxRegion === "all") + '">Everywhere <span class="try-n">' + fmtNum(everything) + "</span></button>";
+    Object.keys(ATLAS).forEach(function (k) {
+      if (!regionCount[k]) return;
+      rh += '<button type="button" class="fbtn cx-rbtn" data-r="' + k + '" aria-pressed="' + (cxRegion === k) +
+        '" style="--rg: var(--rg-' + k + ')"><span class="cx-dot" aria-hidden="true"></span>' + esc(REGION_SHORT[k]) +
+        ' <span class="try-n">' + fmtNum(regionCount[k]) + "</span></button>";
+    });
+    $("#cxRegions").innerHTML = rh;
+    $$("#cxRegions .cx-rbtn").forEach(function (b) {
+      b.addEventListener("click", function () { cxRegion = b.dataset.r; cxOpen = ""; renderCountries(); });
+    });
+
+    let shown = all.filter((p) => cxRegion === "all" || p.r === cxRegion);
+    const SORTS = {
+      count: (a, b) => b.s.total - a.s.total || a.c.localeCompare(b.c),
+      open: (a, b) => b.s.open - a.s.open || b.s.soon - a.s.soon || b.s.total - a.s.total,
+      funded: (a, b) => b.s.funded - a.s.funded || b.s.total - a.s.total,
+      az: (a, b) => placeName(a.c).localeCompare(placeName(b.c))
+    };
+    shown.sort(SORTS[cxSort] || SORTS.count);
+    const realCountries = shown.filter((p) => REGIONS.indexOf(p.c) === -1).length;
+    const routes = shown.reduce((n, p) => n + p.s.total, 0);
+    $("#cxCount").textContent = fmtNum(realCountries) + " countr" + (realCountries === 1 ? "y" : "ies") +
+      (shown.length > realCountries ? " and " + fmtNum(shown.length - realCountries) + " wider regions" : "") +
+      ", " + fmtNum(routes) + " routes" + (cxRegion !== "all" ? " in " + REGION_SHORT[cxRegion] : "") + ".";
+
+    grid.innerHTML = shown.map(function (p, idx) {
+      const s = p.s, w = (n) => (s.total ? (100 * n / s.total).toFixed(1) : 0) + "%";
+      return '<button type="button" class="cx-tile" data-cx="' + esc(p.c) + '" style="--rg: var(--rg-' + p.r + "); --i:" + Math.min(idx, 24) + '">' +
+        '<span class="cx-top"><span class="cx-dot" aria-hidden="true"></span><span class="cx-name">' + esc(placeName(p.c)) + "</span></span>" +
+        '<span class="cx-n">' + fmtNum(s.total) + ' <span class="cx-n-l">route' + (s.total === 1 ? "" : "s") + "</span></span>" +
+        '<span class="cx-bar" aria-hidden="true"><i class="cx-b-open" style="width:' + w(s.open) + '"></i><i class="cx-b-soon" style="width:' + w(s.soon) + '"></i></span>' +
+        '<span class="cx-meta">' + esc(statLine(s)) + "</span></button>";
+    }).join("");
+    $$(".cx-tile", grid).forEach(function (t) {
+      t.addEventListener("click", function () { openCountry(t.dataset.cx, true); });
+    });
+
+    // While one place is open its page has the screen: the region chips, the
+    // order menu and the count step aside, and "All countries" brings them back.
+    $("#view-countries").classList.toggle("cx-is-detail", !!cxOpen);
+    if (cxOpen) renderCountryDetail(cxOpen);
+    else { detail.hidden = true; detail.innerHTML = ""; grid.hidden = false; }
+  }
+
+  function renderCountryDetail(c) {
+    const grid = $("#cxGrid"), detail = $("#cxDetail");
+    const s = placeStats(c), r = regionOf(c);
+    const prof = (window.DB.countries || {})[c];
+    let h = '<button type="button" class="btn btn-ghost btn-sm cx-back" id="cxBack">All countries</button>';
+    h += '<header class="cx-d-head" style="--rg: var(--rg-' + r + ')"><p class="cx-d-region"><span class="cx-dot" aria-hidden="true"></span>' + esc(REGION_SHORT[r]) + "</p>";
+    h += '<h3 id="cxDetailH" tabindex="-1">' + esc(prof ? prof.name : placeName(c)) + "</h3></header>";
+    h += '<dl class="cx-d-stats">' +
+      "<div><dt>Routes</dt><dd>" + fmtNum(s.total) + "</dd></div>" +
+      '<div class="is-open"><dt>Open this month</dt><dd>' + fmtNum(s.open) + "</dd></div>" +
+      '<div class="is-soon"><dt>Opening soon</dt><dd>' + fmtNum(s.soon) + "</dd></div>" +
+      '<div class="is-funded"><dt>Funded or free</dt><dd>' + fmtNum(s.funded) + "</dd></div>" +
+      "<div><dt>Open while in MBBS</dt><dd>" + fmtNum(s.student) + "</dd></div></dl>";
+    if (prof) {
+      const facts = [["Winter", prof.winter], ["Daylight", prof.daylight], ["Living costs", prof.cost], ["Food", prof.food],
+        ["Mental health support", prof.mentalHealth], ["Visa and work after", [prof.visa, prof.work].filter(Boolean).join(" ")]]
+        .filter((f) => f[1]);
+      h += '<dl class="cx-facts">' + facts.map((f) => "<div><dt>" + esc(f[0]) + "</dt><dd>" + esc(f[1]) + "</dd></div>").join("") + "</dl>";
+      if (prof.honest) h += '<p class="cx-honest"><b>Honestly</b> ' + esc(prof.honest) + "</p>";
+    }
+    h += '<div class="cx-actions">' +
+      '<button type="button" class="btn btn-ghost" id="cxBrowse">Search and filter these in Browse</button>' +
+      (s.open ? '<button type="button" class="btn btn-ghost" id="cxOpenNow">Only the ' + fmtNum(s.open) + " open this month</button>" : "") +
+      "</div>";
+    const list = s.list.slice().sort(function (a, b) {
+      const ua = urgency(a) === "open" ? 0 : urgency(a) === "soon" ? 1 : 2;
+      const ub = urgency(b) === "open" ? 0 : urgency(b) === "soon" ? 1 : 2;
+      return impactOf(a).t - impactOf(b).t || ua - ub || a.name.localeCompare(b.name);
+    });
+    h += '<p class="cx-list-l">Every route here, highest graded first</p>';
+    h += '<div class="cards">' + list.map((i) => cardHTML({ item: i, urg: urgency(i), reasons: [] }, null)).join("") + "</div>";
+    detail.innerHTML = h;
+    detail.hidden = false;
+    grid.hidden = true;
+    $("#cxBack").addEventListener("click", function () {
+      const was = cxOpen;
+      cxOpen = "";
+      renderCountries();
+      const tile = $$("#cxGrid .cx-tile").find((t) => t.dataset.cx === was);
+      if (tile) { tile.focus({ preventScroll: true }); tile.scrollIntoView({ block: "center" }); }
+    });
+    $("#cxBrowse").addEventListener("click", function () { openPlace(c, null); });
+    const on = $("#cxOpenNow");
+    if (on) on.addEventListener("click", function () { openPlace(c, null); activeFilter = "open"; renderBrowse(); });
+  }
+
+  // Open one place's page. From a tile the reader is already here, so it only
+  // swaps the panel; from anywhere else it changes view first.
+  function openCountry(c, fromTile) {
+    cxOpen = c;
+    if (!fromTile) { cxRegion = "all"; renderCountries(); showView("countries"); }
+    else renderCountries();
+    const go = function () {
+      const d = $("#cxDetail"), h = $("#cxDetailH");
+      if (!d || !h) return;
+      d.scrollIntoView({ block: "start" });
+      h.focus({ preventScroll: true });
+    };
+    // From another view, wait for the view change (and its scroll to the
+    // top) to finish before moving to the place.
+    if (fromTile) go(); else setTimeout(go, 380);
+  }
+
+  /* ───────────────── deadlines for your year ─────────────────
+     Two lists the month grid cannot give. "Closing soon" is what is open
+     this month or opens in the next two, for your stage, nearest first.
+     "Last chance" is what takes you now and stops taking you when you move
+     on: an entry whose last listed stage is yours (or, while you are still
+     in MBBS, one that takes only students). Both come straight from each
+     entry's stages and deadlineMonths, so they are as right as those are,
+     and every row links its official page for the real date. */
+  const YEAR_LABEL = { pre: "1st–2nd prof", clin: "3rd–final prof", intern: "Internship", grad: "MBBS done", pg: "After MD/MS" };
+  let dlStage = null, dlMonth = 0, dlShowAll = false;
+
+  function yearDefault() {
+    let stored = null;
+    try { stored = localStorage.getItem("dc-year"); } catch (e) { /* private mode */ }
+    if (stored && STAGE_LABEL[stored]) return stored;
+    if (answers.stage && STAGE_LABEL[answers.stage]) return answers.stage;
+    return null;
+  }
+  const forStage = (i, st) => !st || !i.stages || i.stages.indexOf(st) !== -1;
+  const hasWindow = (i) => !i.noOpenCall && i.deadlineMonths && i.deadlineMonths.length && i.deadlineMonths.length < 12;
+
+  function whenText(item) {
+    const m = new Date().getMonth() + 1, u = urgency(item);
+    const dm = item.deadlineMonths || [];
+    if (u === "open") {
+      let last = m;
+      for (let k = 1; k < 12; k++) { const nx = ((m - 1 + k) % 12) + 1; if (dm.indexOf(nx) === -1) break; last = nx; }
+      return last === m ? { cls: "urg urg-open dl-closing", t: "Closes this month" }
+        : { cls: "urg urg-open", t: "Open now, through " + MONTHS[last - 1] };
+    }
+    if (u === "soon") {
+      const nm = monthsUntilDeadline(item);
+      return { cls: "urg urg-soon", t: "Opens in " + MONTHS[((m - 1 + nm) % 12)] };
+    }
+    if (u === "always") return { cls: "urg urg-always", t: URG_TEXT.always };
+    if (u === "none") return { cls: "urg urg-none", t: URG_TEXT.none };
+    const nm = monthsUntilDeadline(item);
+    return { cls: "urg urg-closed", t: nm === Infinity ? URG_TEXT.closed : "Next window: " + MONTHS[((m - 1 + nm) % 12)] };
+  }
+
+  function dlRow(item) {
+    const w = whenText(item), saved = isShortlisted(item.id);
+    return '<li class="dl-row" style="--rg: var(--rg-' + regionOf(item.country) + ')">' +
+      '<p class="dl-when"><span class="' + w.cls + '">' + esc(w.t) + "</span></p>" +
+      '<div class="dl-main"><p class="dl-name" translate="no">' + esc(item.name) + "</p>" +
+      '<p class="dl-org"><span class="cx-dot" aria-hidden="true"></span>' + esc(placeName(item.country)) +
+      ", " + esc(item.org) + ', tier ' + impactOf(item).t + "</p>" +
+      (item.window ? '<p class="dl-window">' + esc(item.window) + "</p>" : "") + "</div>" +
+      '<div class="dl-acts"><a class="card-link" href="' + esc(item.url) + '" target="_blank" rel="noopener noreferrer">Official page<span class="sr-only"> for ' + esc(item.name) + ' (new tab)</span></a>' +
+      '<button type="button" class="star-btn' + (saved ? " is-saved" : "") + '" data-star="' + esc(item.id) +
+      '" aria-pressed="' + saved + '" aria-label="' + esc((saved ? "Remove " : "Save ") + item.name + (saved ? " from" : " to") + " shortlist") +
+      '" title="' + (saved ? "Remove from shortlist" : "Save to shortlist") + '">' + starSVG(saved) + "</button></div></li>";
+  }
+
+  function lastChance(st) {
+    if (!st || st === "pg") return null;
+    const idx = STAGE_ORDER.indexOf(st);
+    // While you are in MBBS, "last chance" is everything that takes only
+    // students: it shuts the day you start the internship year.
+    const cutoff = idx <= 1 ? 1 : idx;
+    return allOpportunities().filter((i) => i.stages && i.stages.indexOf(st) !== -1 &&
+      !i.stages.some((s) => STAGE_ORDER.indexOf(s) > cutoff));
+  }
+  const LAST_SUB = {
+    pre: "These take you only while you are a student. They stop the day you start the internship year, so the earlier years are when to use them.",
+    clin: "These take you only while you are a student, and some only in the final years. They stop the day you start the internship year.",
+    intern: "These take you during the internship year and stop once it is over.",
+    grad: "These are for MBBS graduates and stop once you hold an MD, MS or DNB."
+  };
+
+  function renderYear() {
+    const slot = $("#dlStages");
+    if (!slot) return;
+    if (dlStage === null) dlStage = yearDefault();
+    const now = new Date().getMonth() + 1;
+    let sh = '<button type="button" class="fbtn" data-st="" aria-pressed="' + (!dlStage) + '">Any year</button>';
+    STAGE_ORDER.forEach(function (st) {
+      sh += '<button type="button" class="fbtn" data-st="' + st + '" aria-pressed="' + (dlStage === st) + '">' + esc(YEAR_LABEL[st]) + "</button>";
+    });
+    slot.innerHTML = sh;
+    $$("button", slot).forEach(function (b) {
+      b.addEventListener("click", function () {
+        dlStage = b.dataset.st || "";
+        dlShowAll = false;
+        try { if (dlStage) localStorage.setItem("dc-year", dlStage); else localStorage.removeItem("dc-year"); } catch (e) { /* ignore */ }
+        renderYear();
+      });
+    });
+
+    const pool = allOpportunities().filter((i) => forStage(i, dlStage));
+    // The next six months, this one first: how many windows each holds.
+    let strip = "", max = 1;
+    const months = [];
+    for (let k = 0; k < 6; k++) {
+      const m = ((now - 1 + k) % 12) + 1;
+      const n = pool.filter((i) => hasWindow(i) && i.deadlineMonths.indexOf(m) !== -1).length;
+      months.push({ m: m, n: n });
+      if (n > max) max = n;
+    }
+    months.forEach(function (x, k) {
+      strip += '<button type="button" class="dl-bar' + (k === 0 ? " is-now" : "") + '" data-m="' + x.m + '" aria-pressed="' + (dlMonth === x.m) + '">' +
+        '<span class="dl-bar-n">' + fmtNum(x.n) + "</span>" +
+        '<span class="dl-bar-col" aria-hidden="true"><i style="transform: scaleY(' + (x.n / max).toFixed(3) + ')"></i></span>' +
+        '<span class="dl-bar-m">' + esc(MONTHS[x.m - 1].slice(0, 3)) + '<span class="sr-only">' + esc(MONTHS[x.m - 1].slice(3)) + ", windows open</span></span></button>";
+    });
+    $("#dlStrip").innerHTML = strip;
+    $$("#dlStrip .dl-bar").forEach(function (b) {
+      b.addEventListener("click", function () {
+        const m = Number(b.dataset.m);
+        dlMonth = dlMonth === m ? 0 : m;
+        dlShowAll = false;
+        renderYear();
+      });
+    });
+
+    let list = dlMonth
+      ? pool.filter((i) => hasWindow(i) && i.deadlineMonths.indexOf(dlMonth) !== -1)
+      : pool.filter((i) => { const u = urgency(i); return u === "open" || u === "soon"; });
+    list = list.sort((a, b) => monthsUntilDeadline(a) - monthsUntilDeadline(b) ||
+      (whenText(b).cls.indexOf("dl-closing") !== -1) - (whenText(a).cls.indexOf("dl-closing") !== -1) ||
+      impactOf(a).t - impactOf(b).t || a.name.localeCompare(b.name));
+    const who = dlStage ? "for " + STAGE_LABEL[dlStage] : "for any year";
+    $("#dlCount").textContent = dlMonth
+      ? fmtNum(list.length) + " with a window in " + MONTHS[dlMonth - 1] + ", " + who + ". Tap the month again to see everything open or opening soon."
+      : fmtNum(list.length) + " open now or opening in the next two months, " + who + ", nearest first.";
+    const LIMIT = 12;
+    $("#dlList").innerHTML = list.slice(0, dlShowAll ? list.length : LIMIT).map(dlRow).join("") +
+      (list.length > LIMIT && !dlShowAll ? '<li class="dl-more"><button type="button" class="btn btn-ghost btn-sm" id="dlMore">Show all ' + fmtNum(list.length) + "</button></li>" : "") +
+      (!list.length ? '<li class="empty">Nothing in that window for this year. Try another month or year.</li>' : "");
+    const more = $("#dlMore");
+    if (more) more.addEventListener("click", function () { dlShowAll = true; renderYear(); });
+
+    const wrap = $("#dlLastWrap"), last = lastChance(dlStage);
+    if (!last) {
+      wrap.hidden = false;
+      $("#dlLastSub").textContent = dlStage === "pg"
+        ? "Nothing listed here stops taking you after an MD, MS or DNB."
+        : "Pick your year above to see the programmes that stop taking you once you move on.";
+      $("#dlLast").innerHTML = "";
+      return;
+    }
+    wrap.hidden = false;
+    $("#dlLastSub").textContent = LAST_SUB[dlStage] + " " + fmtNum(last.length) + " in the index.";
+    const order = { open: 0, soon: 1, closed: 2, always: 3, none: 4 };
+    $("#dlLast").innerHTML = last.sort((a, b) => order[urgency(a)] - order[urgency(b)] ||
+      monthsUntilDeadline(a) - monthsUntilDeadline(b) || impactOf(a).t - impactOf(b).t).map(dlRow).join("");
   }
 
   /* ───────────────── calendar ───────────────── */
   function renderCalendar() {
+    renderYear();
     const now = new Date().getMonth() + 1;
     const items = allOpportunities();
     let h = "";
     for (let m = 1; m <= 12; m++) {
       const inMonth = items.filter((i) => i.deadlineMonths && i.deadlineMonths.length && i.deadlineMonths.length < 12 && i.deadlineMonths.indexOf(m) !== -1);
       h += '<article class="month' + (m === now ? " is-now" : "") + '">';
-      h += "<h3>" + esc(MONTHS[m - 1]) + (m === now ? " (this month)" : "") + "</h3>";
+      h += "<h4>" + esc(MONTHS[m - 1]) + (m === now ? " (this month)" : "") + "</h4>";
       h += '<p class="m-count">' + inMonth.length + "</p>";
       h += "<ul>";
       inMonth.slice(0, 9).forEach((i) => { h += '<li title="' + esc(i.name) + '">' + esc(i.name) + "</li>"; });
@@ -1454,6 +2237,48 @@
       h += "</ul></article>";
     }
     $("#calendarGrid").innerHTML = h;
+  }
+
+  /* ───────────────── home: the doors ───────────────── */
+  function initDoors() {
+    const items = allOpportunities();
+    const places = {};
+    items.forEach((i) => { if (i.country && REGIONS.indexOf(i.country) === -1) places[i.country] = 1; });
+    const open = items.filter((i) => urgency(i) === "open").length;
+    const free = items.filter((i) => i.zeroCost).length;
+    const TEXT = {
+      countries: fmtNum(Object.keys(places).length) + " countries, each with what is open there and what living there is like",
+      year: fmtNum(open) + " windows open this month. Pick your year and see what closes first, and what you lose by waiting",
+      free: fmtNum(free) + " programmes that cost you nothing at all, from courses to funded research",
+      routes: fmtNum((window.DB.specialties || []).length) + " specialties: the day's work, the route in and where each leads"
+    };
+    $$("[data-door-text]").forEach((el) => { el.textContent = TEXT[el.dataset.doorText] || ""; });
+    $$(".door").forEach(function (d) {
+      d.addEventListener("click", function () {
+        const k = d.dataset.door;
+        if (k === "countries") { cxOpen = ""; cxRegion = "all"; gotoView("countries"); }
+        else if (k === "year") {
+          gotoView("calendar");
+          setTimeout(function () {
+            const y = $("#dlYearH");
+            if (y) { y.setAttribute("tabindex", "-1"); y.scrollIntoView({ block: "start" }); y.focus({ preventScroll: true }); }
+          }, 80);
+        } else if (k === "free") openBrowseWith("free");
+        else if (k === "routes") gotoView("routes");
+      });
+    });
+
+    const form = $("#quickSearch"), input = $("#quickSearchInput"), tryEl = $("#doorTry");
+    if (tryEl) {
+      tryEl.innerHTML = '<div class="try-row"><span class="try-l">Try</span>' +
+        TRY_TERMS.slice(0, 6).map((q) => ({ q: q, c: countFor(q) })).filter((t) => t.c).map((t) => tryChip(t.q, t.c)).join("") + "</div>";
+      $$(".try-chip", tryEl).forEach((b) => b.addEventListener("click", function () { goSearch(b.dataset.q); }));
+    }
+    if (form) form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      goSearch(input.value);
+      setTimeout(function () { const b = $("#browseSearch"); if (b) b.focus({ preventScroll: true }); }, 60);
+    });
   }
 
   /* ───────────────── motion ───────────────── */
@@ -1921,9 +2746,9 @@
       body: "Tier 1 is career-defining and the only filled badge here. It fades to a dashed outline at tier 5, meaning: do not build a plan on this. Most things are not tier 1, and this site says so."
     },
     {
-      view: "frontiers",
-      title: "Three more views worth knowing",
-      body: "Specialty routes: what each one is really like, and the thing nobody tells you. Frontier fields — these — are disciplines nobody named in five years of lectures. Deadlines lays the year out."
+      view: "countries",
+      title: "More ways in",
+      body: "Countries puts every place on one page with what is open there. Deadlines starts with your year: what closes first, and what stops taking you once you move on. Specialties and Frontiers map careers and fields."
     },
     {
       view: "intro",
@@ -1958,6 +2783,7 @@
   function tourGotoView(name) {
     if (!name) return;
     if (name === "browse") renderBrowse();
+    if (name === "countries") renderCountries();
     if (name === "calendar") renderCalendar();
     if (name === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
     if (name === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
@@ -2142,6 +2968,7 @@
   /* ───────────────── wiring ───────────────── */
   function gotoView(t) {
     if (t === "browse") renderBrowse();
+    if (t === "countries") renderCountries();
     if (t === "calendar") renderCalendar();
     if (t === "frontiers") $("#frontierGrid").innerHTML = (window.DB.frontiers || []).map(frontierHTML).join("");
     if (t === "routes") $("#routesGrid").innerHTML = (window.DB.specialties || []).map((s) => specialtyHTML(s, null)).join("");
@@ -2800,19 +3627,11 @@
     // Wired once: these inputs live in the static shell (not inside the
     // #filters/#browseCards nodes renderBrowse() replaces), so re-rendering
     // the list on every keystroke never disturbs focus or cursor position.
-    let searchDebounce;
-    $("#browseSearch").addEventListener("input", function () {
-      clearTimeout(searchDebounce);
-      const val = this.value;
-      searchDebounce = setTimeout(function () {
-        searchQuery = val.trim().toLowerCase();
-        renderBrowse();
-      }, 120);
-    });
-    $("#browseSort").addEventListener("change", function () {
-      sortMode = this.value;
-      renderBrowse();
-    });
+    initSearchBox();
+    initDoors();
+    const cxSel = $("#cxSort");
+    if (cxSel) cxSel.addEventListener("change", function () { cxSort = this.value; renderCountries(); });
+    window.addEventListener("popstate", routeFromHash);
 
     $("#nextBtn").addEventListener("click", function () {
       if (qIndex === activeQuestions().length - 1) {
@@ -2828,8 +3647,15 @@
       if (qIndex > 0) { qIndex--; renderQuestion(); }
     });
 
-    // A returning visitor, or someone opening a shared link, lands on their plan.
-    if (restore()) {
+    // An address naming a view (#countries, or #browse from a category page)
+    // opens that view. Otherwise a returning visitor, or someone opening a
+    // shared link, lands on their plan.
+    const hashView = (location.hash || "").replace(/^#/, "");
+    if (ROUTED.indexOf(hashView) !== -1) {
+      restore();   // your answers still inform Deadlines' year and the like
+      fromHistory = true;
+      try { gotoView(hashView); } finally { fromHistory = false; }
+    } else if (restore()) {
       renderResults();
       showView("results");
       const note = $("#saveNote");
