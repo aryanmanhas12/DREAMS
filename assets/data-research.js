@@ -219,27 +219,6 @@ window.DB.research = [
     zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
   },
   {
-    id: "cshl-urp",
-    name: "Undergraduate Research Program (URP)",
-    org: "Cold Spring Harbor Laboratory, USA",
-    type: "research", country: "USA", city: "New York",
-    fields: ["genomics", "neuro", "onco", "compbio", "biochem"],
-    stages: ["pre", "clin"], funding: "full",
-    money: "Stipend + travel + room and board fully covered · free to apply",
-    duration: "10 weeks, June–August",
-    window: "Applications close 15 January, 11:59 pm Pacific time, with letters of recommendation in by then. The 2027 programme runs 7 June to 7 August",
-    deadlineMonths: [12, 1],
-    url: "https://www.cshl.edu/education/undergraduate-research-program/",
-    why: "Cold Spring Harbor is where the structure of the genome was argued out, and its undergraduate programme takes roughly twenty students from the entire world each year with everything paid. It is brutally competitive and free to enter, which makes the expected value of applying very high.",
-    reqs: ["Undergraduate with at least one term remaining", "International applicants explicitly welcome", "Free to apply"],
-    steps: [
-      "Apply in December–January for the following summer.",
-      "The research statement should show you can think about a problem, not that you are enthusiastic about science.",
-      "Even an unsuccessful application forces you to articulate a research question properly, which is the exact skill your later applications need."
-    ],
-    zeroCost: true, indiaSpecific: false, competitiveness: "high", workExp: 0
-  },
-  {
     id: "amgen-scholars",
     name: "Amgen Scholars Programme (Asia)",
     org: "Amgen Foundation; Amgen India funds the IIIT Hyderabad site",

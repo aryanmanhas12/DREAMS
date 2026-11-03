@@ -2547,9 +2547,6 @@ html:not(.intro-wait) .intro-gate { opacity: 0; visibility: hidden; }
 .sg-opt[aria-selected="true"], .sg-opt:hover { background: var(--accent-wash); }
 .sg-label { min-width: 0; font-size: .95rem; overflow-wrap: anywhere; }
 .sg-tag { flex: none; font-family: var(--font-ui); font-size: .74rem; color: var(--ink-2); }
-@media (prefers-reduced-motion: no-preference) {
-  html:not(.lite) .suggest:not([hidden]) { animation: pop-down .22s var(--ease-spring) backwards; }
-}
 @keyframes pop-down { from { opacity: 0; transform: translateY(-4px); } }
 
 .chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 16px; }
@@ -2689,6 +2686,11 @@ html:not(.intro-wait) .intro-gate { opacity: 0; visibility: hidden; }
   html:not(.lite) .dl-row, html:not(.lite) .door, html:not(.lite) .cx-detail { animation: tile-in .4s var(--ease-spring) backwards; }
 }
 @keyframes tile-in { from { opacity: 0; transform: translateY(10px) scale(.985); } }
+/* Once a list has made its entrance, a re-render moves its items (FLIP in
+   app.js) instead of dealing them in again. */
+.cx-grid[data-entered] .cx-tile, .cx-grid[data-entered] .cx-bar,
+#dlList[data-entered] .dl-row, #dlLast[data-entered] .dl-row,
+#dlStrip[data-entered] .dl-bar-col i { animation: none; }
 @keyframes bar-grow { from { transform: scaleX(0); } }
 @keyframes bar-rise { from { transform: scaleY(0); } }
 

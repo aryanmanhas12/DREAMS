@@ -51,8 +51,8 @@ if (!read.length && !unchanged.length && newNote === null) {
 const note = newNote !== null ? newNote : old.noteMonth === month ? old.note || "" : "";
 const rest = items.length - read.length - unchanged.length;
 const scope = [
-  `In ${label}, ${read.length} of ${items.length} programmes were re-read on their official pages` +
-    (unchanged.length ? `, and ${unchanged.length} more were found unchanged since they were last verified.` : "."),
+  `In ${label}, ${read.length} of ${items.length} programmes ${read.length === 1 ? "was" : "were"} re-read on ${read.length === 1 ? "its official page" : "their official pages"}` +
+    (unchanged.length ? `, and ${unchanged.length} more ${unchanged.length === 1 ? "was" : "were"} found unchanged since they were last verified.` : "."),
   rest ? `The other ${rest} carry the date of their last check.` : "",
   note
 ].filter(Boolean).join(" ");

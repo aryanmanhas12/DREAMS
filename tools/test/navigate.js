@@ -256,6 +256,24 @@ const hscroll = (pg) => pg.evaluate(() => document.documentElement.scrollWidth -
   ok((await active(fp)) === "view-countries", "a #countries address did not open Countries");
   await fresh.close();
 
+  /* ── FLIP: a re-sorted list glides, then rests; reduced motion just changes ── */
+  for (const rm of ["no-preference", "reduce"]) {
+    const c = await b.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: rm });
+    await c.addInitScript(() => { try { localStorage.setItem("dc-tour-seen", "1"); sessionStorage.setItem("dc-intro", "1"); localStorage.setItem("dc-sound-told", "1"); } catch (e) {} });
+    const p = await c.newPage();
+    await p.goto(site.url + "/#countries", { waitUntil: "load" });
+    await p.waitForTimeout(1500);   // the first entrance has played
+    await p.click('#cxRegions .cx-rbtn[data-r="europe"]');
+    const moving = await p.evaluate(() => document.getAnimations().filter((a) => a.effect && a.effect.target && a.effect.target.classList && a.effect.target.classList.contains("cx-tile")).length);
+    await p.waitForTimeout(700);
+    const left = await p.evaluate(() => document.getAnimations().filter((a) => a.playState === "running" && a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest("#cxGrid")).length);
+    if (rm === "no-preference") {
+      ok(moving > 0, "changing region did not glide the country tiles");
+      ok(left === 0, `${left} tile animations still running 700ms after the change`);
+    } else ok(moving === 0, "tiles animated under reduced motion");
+    await c.close();
+  }
+
   /* ── no sideways scroll on the new views, both themes, three widths ── */
   for (const w of [320, 768, 1280]) {
     for (const theme of ["dark", "light"]) {

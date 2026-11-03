@@ -794,6 +794,60 @@ smooth.
   count read straight after clearing the box saw the old 12 results instead of 191. Wait for
   the debounce before measuring.
 
+## Four motion skills, and the November recheck (3 November 2026)
+
+The owner asked for the newly added skills to be used and the data re-updated.
+
+- **What each skill was judged to be worth here, so the next pass does not re-litigate it.**
+  - **gsap-animation:** the library is declined (about 25 KB gzipped plus a ticker, against a
+    site that already moves on the compositor with nothing running at rest). Its Flip idea was
+    ported: `flip(container, selector, key, mutate)` in `app.js` measures, mutates, then plays
+    the old-to-new offset with the Web Animations API on `transform` only (spring curve, 420ms;
+    new items scale in from .96). It runs on the Countries region chips and sort, and on the
+    Deadlines stage chips and month bars, keyed by `data-cx` and `data-id`. It is off under
+    reduced motion and `html.lite`, and `navigate.js` asserts tiles animate with motion on, do
+    not with it off, and that nothing is still running 700ms later.
+  - **lenis-smooth-scroll:** declined. Every view change jumps to the top, the atlas is driven
+    by `IntersectionObserver`, the Countries globe is sticky, and Lenis would add a permanent
+    rAF loop where `perf.js` requires zero frames at rest. The skill itself says to skip it on
+    pages people must move through quickly.
+  - **react-bits:** nothing new to port. Its text, spotlight and border effects are already
+    here as `.rise`, the card spotlight and `.btn-orbit`; its WebGL backgrounds fall under the
+    Vanta verdict.
+  - **vanta-3d-backgrounds:** declined. It needs three r134 (~120 KB gzipped) and a constant
+    GPU loop, and the sky is already painted once into one canvas with a contrast harness
+    (`sky.js`) that a WebGL layer would sit outside of.
+  - Lists that render once now enter once: `markEntered()` sets `data-entered` after the first
+    paint, and CSS turns the entrance keyframes off from then on, so a FLIP re-render never
+    replays them.
+- **The worst November finding was eligibility again.** Cold Spring Harbor's Undergraduate
+  Research Program was a tier-1 entry with "International applicants explicitly welcome". Its
+  page does say students of any nationality are eligible, and then says foreign students are
+  eligible only if enrolled full-time at a US college on a student visa, or in limited cases at
+  a foreign university with a prior agreement with CSHL. It moved to `skipList`. The sweep's
+  eligibility lines are what caught it; read them for every tier-1 entry, not just the dates.
+- **Dates fixed from the sweep:** Commonwealth Master's closed 20 October; Open Doors
+  registration closed 1 November; Eiffel's 2027 call opened (Campus France by 6 January 2027,
+  results from 12 April); NUS takes August 2027 applications 1 August to 15 December 2026;
+  Charité's EPOS window is now 2027's; FMI's interviews are 20–21 January 2027 and its spring
+  round opens 15 February; OYW's Leading Scholarship closed 31 October. TDR's clinical
+  leadership fellowship has posted no call since March 2025 and is now `noOpenCall`. IARC's
+  biennial call is due in November but was not posted, so November is out of its months and
+  the badge says opening soon rather than open.
+- **Write a closed round's window so the stale check stays meaningful.** A window whose every
+  dated date is past is flagged STALE even when it is an honest description of a round that
+  closed. Name past dates without a year where the year is obvious ("closed on 31 October"),
+  or point at the next round with a year ("expect June 2027"), and set `noOpenCall` when
+  there is no next round to point at.
+- **What could not be done from here.** This sandbox resolves almost no official hosts
+  (WebFetch answers ENOTFOUND outside the allowed list), and Composio's endpoint answered 403
+  all session. So 45 ACT NOW entries still need a browser read this month, most because the
+  sweep reads their page as a hub with no deadline lines (Erasmus Mundus, ISTA, Gates
+  Cambridge, Harvard, Karolinska and others), and the Erasmus Mundus leads (Neurasmus, IDOH) were not verified or
+  added. A machine read that returns no deadline lines proves nothing; never stamp on it.
+- **The review sentence agrees in number now.** `meta.js` wrote "1 of 191 programmes were
+  re-read on their official pages"; it now says "was" and "its official page" for one.
+
 ## Pre-launch checklist — run this before any release, every time
 
 The user asked for this list to be kept here permanently. Twenty items; this

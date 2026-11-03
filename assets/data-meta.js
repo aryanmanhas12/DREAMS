@@ -12,12 +12,12 @@
 window.DB = window.DB || {};
 
 window.DB.meta = {
-  "reviewed": "2026-10",
-  "reviewedLabel": "October 2026",
-  "read": 59,
-  "unchanged": 0,
-  "total": 192,
-  "scope": "In October 2026, 59 of 192 programmes were re-read on their official pages. The other 133 carry the date of their last check. This pass found Chevening and Knight-Hennessy still showing as open after closing on 6 October, Open Doors registration closing on 1 November rather than in November and December, and new timetables for Pasteur's PhD programme and the K.C. Mahindra and Aga Khan scholarships, all corrected. Hong Kong's PhD Fellowship, open until 1 December 2026, was added.",
-  "note": "This pass found Chevening and Knight-Hennessy still showing as open after closing on 6 October, Open Doors registration closing on 1 November rather than in November and December, and new timetables for Pasteur's PhD programme and the K.C. Mahindra and Aga Khan scholarships, all corrected. Hong Kong's PhD Fellowship, open until 1 December 2026, was added.",
-  "noteMonth": "2026-10"
+  "reviewed": "2026-11",
+  "reviewedLabel": "November 2026",
+  "read": 1,
+  "unchanged": 48,
+  "total": 191,
+  "scope": "In November 2026, 1 of 191 programmes was re-read on its official page, and 48 more were found unchanged since they were last verified. The other 142 carry the date of their last check. In November, Commonwealth Master's and Open Doors registration had closed, Eiffel's 2027 call had opened, TDR's clinical leadership fellowship had posted no call since March 2025, and Cold Spring Harbor's undergraduate programme was found to need enrolment at a US college.",
+  "note": "In November, Commonwealth Master's and Open Doors registration had closed, Eiffel's 2027 call had opened, TDR's clinical leadership fellowship had posted no call since March 2025, and Cold Spring Harbor's undergraduate programme was found to need enrolment at a US college.",
+  "noteMonth": "2026-11"
 };

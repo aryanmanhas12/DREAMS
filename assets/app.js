@@ -1955,6 +1955,47 @@
     });
   }
 
+  /* ───────────────── FLIP ─────────────────
+     The idea behind GSAP's Flip plugin, without the library: note where
+     each keyed item sits (First), re-render (Last), then play each one from
+     its old place to its new place (Invert, Play) with the Web Animations
+     API. Transform and opacity only, so the compositor runs it and nothing
+     ticks once it lands. New items fade in; items that are gone just go.
+     Off under reduced motion and on html.lite phones, where the list simply
+     changes. Checked at call time, because prefersReduced is defined later
+     in this file. */
+  const EASE_SPRING = "cubic-bezier(.32, .72, 0, 1)";
+  function canFlip() {
+    return !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) &&
+      !document.documentElement.classList.contains("lite") && typeof Element.prototype.animate === "function";
+  }
+  function flip(container, selector, key, mutate) {
+    if (!container || !canFlip()) { mutate(); return; }
+    const before = new Map();
+    $$(selector, container).forEach(function (el) {
+      const r = el.getBoundingClientRect();
+      if (r.width) before.set(el.dataset[key], r);
+    });
+    mutate();
+    if (!before.size) return;
+    $$(selector, container).forEach(function (el) {
+      const r1 = el.getBoundingClientRect(), r0 = before.get(el.dataset[key]);
+      if (!r1.width) return;
+      if (!r0) {
+        el.animate([{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "none" }], { duration: 240, easing: EASE_SPRING });
+        return;
+      }
+      const dx = r0.left - r1.left, dy = r0.top - r1.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+      el.animate([{ transform: "translate(" + dx.toFixed(1) + "px, " + dy.toFixed(1) + "px)" }, { transform: "none" }],
+        { duration: 420, easing: EASE_SPRING });
+    });
+  }
+  // The CSS entrance plays once per list; after it, re-renders FLIP instead.
+  function markEntered(el) {
+    if (el && !el.dataset.entered) setTimeout(function () { el.dataset.entered = "1"; }, 1200);
+  }
+
   /* ───────────────── countries ─────────────────
      Every value of item.country gets a tile, grouped by the same ATLAS
      regions as the scroll atlas, so a region's tiles add up to the number
@@ -2050,7 +2091,9 @@
     });
     $("#cxRegions").innerHTML = rh;
     $$("#cxRegions .cx-rbtn").forEach(function (b) {
-      b.addEventListener("click", function () { cxRegion = b.dataset.r; cxOpen = ""; renderCountries(); });
+      b.addEventListener("click", function () {
+        flip(grid, ".cx-tile", "cx", function () { cxRegion = b.dataset.r; cxOpen = ""; renderCountries(); });
+      });
     });
 
     let shown = all.filter((p) => cxRegion === "all" || p.r === cxRegion);
@@ -2078,6 +2121,7 @@
     $$(".cx-tile", grid).forEach(function (t) {
       t.addEventListener("click", function () { openCountry(t.dataset.cx, true); });
     });
+    markEntered(grid);
 
     // While one place is open its page has the screen: the region chips, the
     // order menu and the count step aside, and "All countries" brings them back.
@@ -2199,7 +2243,7 @@
 
   function dlRow(item) {
     const w = whenText(item), saved = isShortlisted(item.id);
-    return '<li class="dl-row" style="--rg: var(--rg-' + regionOf(item.country) + ')">' +
+    return '<li class="dl-row" data-id="' + esc(item.id) + '" style="--rg: var(--rg-' + regionOf(item.country) + ')">' +
       '<p class="dl-when"><span class="' + w.cls + '">' + esc(w.t) + "</span></p>" +
       '<div class="dl-main"><p class="dl-name" translate="no">' + esc(item.name) + "</p>" +
       '<p class="dl-org"><span class="cx-dot" aria-hidden="true"></span>' + esc(placeName(item.country)) +
@@ -2239,10 +2283,11 @@
     slot.innerHTML = sh;
     $$("button", slot).forEach(function (b) {
       b.addEventListener("click", function () {
-        dlStage = b.dataset.st || "";
-        dlShowAll = false;
-        try { localStorage.setItem("dc-year", dlStage || "any"); } catch (e) { /* ignore */ }
-        renderYear();
+        const st = b.dataset.st || "";
+        try { localStorage.setItem("dc-year", st || "any"); } catch (e) { /* ignore */ }
+        flip($("#dlList"), ".dl-row", "id", function () {
+          flip($("#dlLast"), ".dl-row", "id", function () { dlStage = st; dlShowAll = false; renderYear(); });
+        });
       });
     });
 
@@ -2262,13 +2307,19 @@
         '<span class="dl-bar-col" aria-hidden="true"><i style="transform: scaleY(' + (x.n / max).toFixed(3) + ')"></i></span>' +
         '<span class="dl-bar-m">' + esc(MONTHS[x.m - 1].slice(0, 3)) + '<span class="sr-only">' + esc(MONTHS[x.m - 1].slice(3)) + ", windows open</span></span></button>";
     });
+    // Each bar grows or shrinks from its old height to its new one.
+    const oldScale = {};
+    $$("#dlStrip .dl-bar").forEach(function (b) { const i = $("i", b); if (i) oldScale[b.dataset.m] = i.style.transform; });
     $("#dlStrip").innerHTML = strip;
+    if (canFlip()) $$("#dlStrip .dl-bar").forEach(function (b) {
+      const i = $("i", b), o = oldScale[b.dataset.m];
+      if (i && o && o !== i.style.transform) i.animate([{ transform: o }, { transform: i.style.transform }], { duration: 420, easing: EASE_SPRING });
+    });
+    markEntered($("#dlStrip"));
     $$("#dlStrip .dl-bar").forEach(function (b) {
       b.addEventListener("click", function () {
         const m = Number(b.dataset.m);
-        dlMonth = dlMonth === m ? 0 : m;
-        dlShowAll = false;
-        renderYear();
+        flip($("#dlList"), ".dl-row", "id", function () { dlMonth = dlMonth === m ? 0 : m; dlShowAll = false; renderYear(); });
       });
     });
 
@@ -2288,6 +2339,8 @@
       (!list.length ? '<li class="empty">Nothing in that window for this year. Try another month or year.</li>' : "");
     const more = $("#dlMore");
     if (more) more.addEventListener("click", function () { dlShowAll = true; renderYear(); });
+    markEntered($("#dlList"));
+    markEntered($("#dlLast"));
 
     const wrap = $("#dlLastWrap"), last = lastChance(dlStage);
     if (!last) {
@@ -3752,7 +3805,10 @@
     // asked for nothing to be remembered, so that list is removed outright.
     try { localStorage.removeItem("dc-searches"); } catch (e) { /* private mode */ }
     const cxSel = $("#cxSort");
-    if (cxSel) cxSel.addEventListener("change", function () { cxSort = this.value; renderCountries(); });
+    if (cxSel) cxSel.addEventListener("change", function () {
+      const v = this.value;
+      flip($("#cxGrid"), ".cx-tile", "cx", function () { cxSort = v; renderCountries(); });
+    });
     window.addEventListener("popstate", routeFromHash);
 
     $("#nextBtn").addEventListener("click", function () {

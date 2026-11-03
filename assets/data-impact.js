@@ -52,7 +52,6 @@ window.DB.impact = {
   "germany-phd-mpi":   { t: 1, odds: "~5 % at IMPRS schools", effort: "25 hrs, free to apply", note: "English-taught and paid as employment. Some schools name a medical degree in their rules and some do not, so check each one before applying." },
   "swiss-neuro":       { t: 1, odds: "~8 %", effort: "20 hrs, centralised application", note: "The highest doctoral salary in the world. You can genuinely save money while doing a PhD." },
   "khorana":           { t: 1, odds: "~5 % of applicants", effort: "20 hrs, free to apply", note: "Fully funded US summer research that a currently-enrolled MBBS student can hold, with the marks bar lowered specifically for medics. Nothing else on this list does all three." },
-  "cshl-urp":          { t: 1, odds: "~20 places worldwide", effort: "15 hrs, free to apply", note: "Brutally competitive and free to enter, which makes the expected value of applying very high even when you do not get it." },
   "weizmann-kupcinet": { t: 1, odds: "Small international cohort", effort: "15 hrs, free to apply", note: "A stipend, flight subsidy and free housing at one of the great research institutes. The page names science, maths and computing students, so confirm MBBS counts before applying." },
   "amgen-scholars":    { t: 1, odds: "~5–10 %", effort: "20 hrs per host, several hosts allowed", note: "Apply to the Asia hosts, IIIT Hyderabad included. From an Indian university they are the only ones open to you: Europe, Australia and the US each take only their own region's students." },
   "lindau":            { t: 1, odds: "16 of 223 via DST in the last medicine year", effort: "15 hrs plus a rank certificate and two references", note: "A week with Nobel laureates in medicine, fully paid by DST. Open to MD/MS residents, PhD students and young postdocs, not to MBBS students." },
@@ -166,6 +165,10 @@ window.DB.skipList = [
   {
     name: "The Vienna BioCenter Summer School, for MBBS students",
     why: "It is a nine-week research summer in Vienna with free student housing, a stipend of €1,400 after tax and medical insurance, it charges no application fee, and its call opens on 1 November, so it circulates widely each winter. Its own page describes it as a programme for life-science undergraduates and asks for at least two years of university study in a life-sciences-related subject. Medicine is not named. Treat it as closed to you unless the summer school confirms in writing that an MBBS counts, and ask before you spend a weekend on the form. The funded summers that do name medical students include OIST's research internship and the Science Academies' fellowship in India, and both are in this index."
+  },
+  {
+    name: "Cold Spring Harbor's Undergraduate Research Program, from an Indian medical college",
+    why: "It pays a $7,000 stipend with room and board for a summer at one of the great genetics labs, applications open each autumn and close on 15 January, and its page says students of any nationality are eligible, which is why it reaches Indian medical students. The same page then says foreign students are eligible only if they are enrolled full-time at a US college or university on a student visa, or, in limited cases, at a foreign university with a pre-existing agreement with CSHL. An Indian MBBS student fails the first test, and the second needs your university to hold that agreement. This index listed it as open to you until November 2026. Ask CSHL before you write the research statement; the funded summers that do take MBBS students include OIST's research internship and the Science Academies' fellowship in India."
   },
   {
     name: "Mitacs Globalink from India, for medical students",
