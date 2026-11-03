@@ -176,7 +176,13 @@ const count = (s) => items.filter((i) => st(i) === s).length;
 say(`Dreams Counsellor recheck for ${thisMonth}   (${items.length} programmes; data-meta says last reviewed ${meta.reviewed || "never"})`);
 if (!sweep) say("No sweep found: run `node tools/sweep.js --trigger` (about 4 minutes) so unchanged pages can drop out of this list.");
 else if (!fresh) say(`The latest sweep is ${sweepAge} days old, too old to trust: run \`node tools/sweep.js --trigger\` for a fresh one.`);
-else say(`Sweep of ${sweep.when.slice(0, 10)}: ${items.length - count("unreadable") - count("none")} pages read · ${items.filter(unchangedVerified).length} unchanged since verified, nothing to do · ${count("changed")} changed · ${count("dead")} dead · ${count("unreadable")} unreadable · ${count("new")} not yet baselined · ${items.filter((i) => ["same", "new", "changed"].includes(st(i)) && !(pageState(i).page.lines || []).length).length} with nothing to track (--all lists them)`);
+else {
+  // Usable but not current: the badges work by month, so a sweep from an
+  // earlier month (or two weeks old) has not seen this month's calls open.
+  if (sweepAge > 14 || sweep.when.slice(0, 7) !== thisMonth)
+    say(`! This sweep is ${sweepAge} days old (${sweep.when.slice(0, 10)}), from before this month's calls opened. A publish to main that touches data or tools starts a fresh one; making main the repository's default branch also turns on the 1st-and-15th schedule.`);
+  say(`Sweep of ${sweep.when.slice(0, 10)}: ${items.length - count("unreadable") - count("none")} pages read · ${items.filter(unchangedVerified).length} unchanged since verified, nothing to do · ${count("changed")} changed · ${count("dead")} dead · ${count("unreadable")} unreadable · ${count("new")} not yet baselined · ${items.filter((i) => ["same", "new", "changed"].includes(st(i)) && !(pageState(i).page.lines || []).length).length} with nothing to track (--all lists them)`);
+}
 
 section("LINKS", "The official URL answers 404 or 410. Find the programme's new page and set url= with tools/set.js.", dead);
 section("CHANGED", "The page's dates, money or eligibility lines moved since the entry was verified. Read the diff; fix the entry if it matters, then stamp it (or stamp --accept if the change is irrelevant).", changed);
