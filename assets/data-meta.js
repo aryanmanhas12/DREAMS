@@ -14,10 +14,10 @@ window.DB = window.DB || {};
 window.DB.meta = {
   "reviewed": "2026-11",
   "reviewedLabel": "November 2026",
-  "read": 1,
+  "read": 5,
   "unchanged": 48,
   "total": 191,
-  "scope": "In November 2026, 1 of 191 programmes was re-read on its official page, and 48 more were found unchanged since they were last verified. The other 142 carry the date of their last check. In November, Commonwealth Master's and Open Doors registration had closed, Eiffel's 2027 call had opened, TDR's clinical leadership fellowship had posted no call since March 2025, and Cold Spring Harbor's undergraduate programme was found to need enrolment at a US college.",
-  "note": "In November, Commonwealth Master's and Open Doors registration had closed, Eiffel's 2027 call had opened, TDR's clinical leadership fellowship had posted no call since March 2025, and Cold Spring Harbor's undergraduate programme was found to need enrolment at a US college.",
+  "scope": "In November 2026, 5 of 191 programmes were re-read on their official pages, and 48 more were found unchanged since they were last verified. The other 138 carry the date of their last check. In November, Commonwealth Master's and Open Doors registration closed and Eiffel's 2027 call opened. Cold Spring Harbor's undergraduate programme turned out to need enrolment at a US college, ISTA's PhD salary and Gates Cambridge's allowance were corrected, and Erasmus Mundus no longer caps applications at three.",
+  "note": "In November, Commonwealth Master's and Open Doors registration closed and Eiffel's 2027 call opened. Cold Spring Harbor's undergraduate programme turned out to need enrolment at a US college, ISTA's PhD salary and Gates Cambridge's allowance were corrected, and Erasmus Mundus no longer caps applications at three.",
   "noteMonth": "2026-11"
 };

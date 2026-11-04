@@ -847,6 +847,27 @@ The owner asked for the newly added skills to be used and the data re-updated.
   added. A machine read that returns no deadline lines proves nothing; never stamp on it.
 - **The review sentence agrees in number now.** `meta.js` wrote "1 of 191 programmes were
   re-read on their official pages"; it now says "was" and "its official page" for one.
+- **4 November: Composio answered again, and the hub pages needed one more click.** Most ACT
+  NOW entries link a hub (a school's homepage, a catalogue) whose text carries no dates, which
+  is why the sweep could not verify them. Following the hub's own "timeline", "admissions" or
+  "funding" link found the real numbers. Corrections: **ISTA's PhD salary** is €3,053 to €3,673
+  a month gross in 2026, paid 14 times a year (the entry said €31,000 to €39,000 a year), and
+  its FAQ names medicine among eligible degrees; **Gates Cambridge** pays £23,152 maintenance
+  (2026-27), tells everyone by 8 March, interviews on 22–23 March and offers by early April;
+  **Erasmus Mundus no longer caps applications at three.** That rule belonged to the EMJMD
+  generations up to 2019; EACEA told the Erasmus Mundus Association it was cancelled, and the
+  Programme Guide shows the €1,400 a month has to cover travel, visa and installation rather
+  than coming on top of them. Two entries and an impact line repeated the old cap and the old
+  money. Harvard MPH-45's deadline (1 December), tuition ($77,400) and degree rule (an MD or
+  equivalent qualifies for Global Health) were confirmed. From the publish's own sweep: the NL
+  Scholarship's 2027-28 round is open, and Stipendium Hungaricum's 2027/28 round had not
+  opened on 3 November, so November is out of its months.
+- **A 404 in the sweep is not proof of a dead link either.** OIST's internship page answered
+  404 to GitHub's runner and 200 to Composio's host the same day. Confirm from a second host
+  before you touch a URL.
+- **Still unread on 4 November:** JHU (403 to curl, and r.jina.ai returns only navigation),
+  the Max Planck doctoral page (503), Otago's scholarships (403), and the remaining tier-2
+  ACT NOW pages, because Composio calls began to need the owner's approval midway through.
 
 ## Pre-launch checklist — run this before any release, every time
 
