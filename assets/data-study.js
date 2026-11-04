@@ -216,7 +216,7 @@ window.DB.study = [
     window: "Apply through SOPHAS. One deadline, 1 December, with decisions in late February or early March",
     deadlineMonths: [9, 10, 11],
     url: "https://hsph.harvard.edu/admissions/applying-to-a-degree-program/program-eligibility-requirements/",
-    checked: "2026-09",
+    checked: "2026-11",
     why: "The 45-credit MPH is Harvard's one-year route, and its entry rule is what makes it matter to a medical graduate: a master's or a doctoral degree, or, in Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus five years of work. Harvard reads a foreign degree by its US equivalent through WES. If WES reads your MBBS as a doctoral-level medical degree, every field is open straight after internship; if it reads it as a bachelor's, the five-year route still gets you in later.",
     reqs: [
       "A master's or doctoral degree. For Global Health, Health Policy, Health Management, Health and Social Behavior and Nutrition, a bachelor's plus at least five years of work also qualifies",
@@ -590,7 +590,7 @@ window.DB.study = [
     type: "masters", country: "Europe", city: "Multi-country",
     fields: ["pubhealth", "global", "systems"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Erasmus Mundus scholarship: full tuition + €1,400/month + travel + insurance",
+    money: "Erasmus Mundus scholarship: no tuition, insurance included, and €1,400 a month that has to cover travel, visa and living costs",
     duration: "2 years across two or more countries",
     window: "Opens Oct–Nov · scholarship deadline usually Jan",
     deadlineMonths: [10, 11, 12, 1],
@@ -599,7 +599,7 @@ window.DB.study = [
     reqs: ["Bachelor's or MBBS", "English proficiency", "No work experience required for most consortia"],
     steps: [
       "Search the official EACEA catalogue for your field. There are over 200 funded joint masters and most Indian students have heard of none of them.",
-      "Apply to a maximum of three Erasmus Mundus programmes per cycle. Applying to more makes you ineligible.",
+      "The EU dropped its cap of three Erasmus Mundus applications after 2019, so apply wherever you genuinely fit, but read each consortium's own rules first.",
       "One application per consortium covers both admission and the scholarship.",
       "Deadlines cluster in December and January for an August–September start. Build the calendar backwards from there."
     ],

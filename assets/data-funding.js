@@ -128,16 +128,17 @@ window.DB.funding = [
     type: "scholarship", country: "Europe", city: "Multi-country",
     fields: ["pubhealth", "global", "neuro", "compbio", "biochem", "env", "infect"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full tuition + €1,400/month living allowance + travel + installation + insurance",
+    money: "No tuition or other participation costs, insurance included, and €1,400 a month for the whole programme, which has to cover travel, visa, installation and living costs",
     duration: "1–2 years, studied across 2–3 European countries",
     window: "Most consortia open Oct–Nov and close Dec–Jan",
     deadlineMonths: [10, 11, 12, 1, 2],
     url: "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+    checked: "2026-11",
     why: "The most under-applied major scholarship available to Indians, and the €1,400 monthly allowance is genuinely more than you need in most of Europe. There are over 200 funded joint masters covering neuroscience, public health, epidemiology, biomedical engineering and global health, and most Indian students have never opened the catalogue.",
     reqs: [
       "Any bachelor's or MBBS",
       "No work experience required for most programmes",
-      "You may apply to a MAXIMUM of three Erasmus Mundus programmes per cycle — applying to more voids all of them",
+      "No EU limit on how many programmes you apply to: the old cap of three was dropped after 2019. A consortium can still set its own rules, so read each one's page",
       "English proficiency per consortium"
     ],
     steps: [
@@ -145,7 +146,7 @@ window.DB.funding = [
       "Programmes worth knowing for a medic: Europubhealth+, IMSOGLO (global one health), Neurasmus (neuroscience), and several infectious-disease and bioinformatics consortia.",
       "One application per consortium covers admission and the scholarship together.",
       "Check that the intake you are applying to actually has a scholarship round. A consortium's EU funding runs in multi-year editions, and some intakes admit on a self-funded basis only. The course page stays up either way, so it is entirely possible to write a full application for a year in which there is no money to win.",
-      "Choose your three carefully and honestly rank fit over prestige — consortia reject people who obviously applied everywhere."
+      "Choose by fit rather than prestige. There is no cap on applications now, but each consortium reads for a specific profile, and EACEA itself asks applicants to choose carefully against each programme's selection criteria."
     ],
     indiaSpecific: false, competitiveness: "high", workExp: 0
   },
@@ -156,12 +157,12 @@ window.DB.funding = [
     type: "scholarship", country: "UK", city: "Cambridge",
     fields: ["pubhealth", "global", "neuro", "genomics", "compbio"],
     stages: ["grad", "pg"], funding: "full",
-    money: "Full cost of study + maintenance allowance + family, fieldwork and conference allowances",
+    money: "The University fee, a maintenance allowance of £23,152 a year at the 2026-27 rate, visa and health-surcharge costs, £750 to £4,000 for conferences and courses, and a child allowance. Nothing for a partner",
     duration: "Full length of an MPhil or PhD",
-    window: "Entry 2027/28: opened 11 September 2026. The deadline is your course's funding deadline, either Tuesday 8 December 2026 or Wednesday 6 January 2027, 11:59pm UK time, so check the course directory. Outcomes by 8 March; interview panels 22–23 March 2027",
+    window: "Entry 2027/28: opened 11 September 2026. The deadline is your course's funding deadline, either Tuesday 8 December 2026 or Wednesday 6 January 2027, 11:59pm UK time, so check the course directory. Everyone hears by 8 March whether they go forward; panels meet on 22–23 March and offers go out by early April 2027",
     deadlineMonths: [9, 10, 11, 12, 1],
     url: "https://www.gatescambridge.org/apply/how-to-apply/",
-    checked: "2026-09",
+    checked: "2026-11",
     why: "Around 75 scholars a year worldwide, selected on academic excellence, leadership potential, and — unusually explicit — commitment to improving the lives of others. A medical graduate working on health equity is exactly the profile it was written for.",
     reqs: [
       "Citizen of any country outside the UK",

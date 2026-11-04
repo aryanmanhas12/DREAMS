@@ -489,11 +489,12 @@ window.DB.research.push(
     type: "phd", country: "Austria", city: "Klosterneuburg, near Vienna",
     fields: ["neuro", "compbio", "biochem", "genomics"],
     stages: ["grad", "pg"], funding: "full",
-    money: "A full employment contract — roughly €31,000–39,000 a year gross, with social insurance — and no tuition at all",
+    money: "A full employment contract: €3,053 to €3,673 a month gross in 2026, depending on your degree and rising after the qualifying exam, paid 14 times a year, with social insurance. No tuition and no application fee",
     duration: "4–5 years, with rotations in the first year",
     window: "The portal for the 2027 intake opens in late October 2026 and closes on 8 January 2027 at 15:00 CET; referees by 12 January. Every PhD starts on 15 September",
     deadlineMonths: [10, 11, 12, 1],
     url: "https://ista.ac.at/en/education/graduate-school/",
+    checked: "2026-11",
     why: "Doctoral students here are employees with a salary and a pension contribution, not students paying for the privilege. Entry is open directly after a bachelor's degree, which an MBBS satisfies, and the first year is rotations across laboratories. It is small, exceptionally well funded, entirely English-speaking, and almost invisible to Indian medical students because it does not present itself as a medical institution.",
     reqs: [
       "A bachelor's or master's degree — MBBS is accepted for direct entry",
